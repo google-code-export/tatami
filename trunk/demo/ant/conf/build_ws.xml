@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- CVS History
+	  $Log: build_ws.xml,v $
+	  Revision 1.1  2007/08/14 07:55:55  tvzl8571
+	  TatamiDemo, projet demontrant les differents composants du projet Tatami
+	
+	  Revision 1.1  2007/05/25 12:27:21  beal6226
+	  Exemple d'utilisation de GWT avec :
+	  - Un menu déroulant qui fait apparaitre une popup
+	  - Un bouton qui fait apparaitre un hello world
+	  - Des champs de saisie qui modifient dynamiquement un tableau de données.
+	  - Une utilisation de GWT RPC pour récupérer des données côté serveur (après, c'est bouchonné, il n'y a pas de SGBD).
+	
+	  Revision 1.3  2006/11/07 16:07:58  beal6226
+	  version 3.1
+	  suppression du module bouchon web service
+	  couche d'echange et interface dans generated
+	  sample supprimé, accès direct dans dist/lib
+	
+	  Revision 1.2  2006/11/02 13:54:48  beal6226
+	  Synchronisation avec referentiel plateforme Eclipse
+	
+	  Revision 1.1  2006/10/10 08:10:37  ajta5630
+	  Intérgration dans la barre d'outils et le menu du workbench. Intégration de l'aide
+	
+	  Revision 1.1  2006/03/20 16:31:35  beal6226
+	  Initial plugin version
+	
+	  Revision 1.37  2006/03/17 14:03:48  beal6226
+	  Commentaire sur wsdlfile
+	
+	  Revision 1.36  2006/03/15 16:49:55  beal6226
+	  La variable TODAY doit être définie dans le projet où elle est utilisée. Le timestamp est donc placé devant chaque utilisation de TODAY.
+	  Ajout d'une description aux tâches les plus utiles pour un accès plus facile avec la vue outline d'Eclipse.
+	  Ajout de doubles traits dans les messages ant pour bien visualiser la fin de construction de chaque module
+	
+	  Revision 1.35  2006/03/06 13:41:19  beal6226
+	  Le classpath pour wsdl2java doit être positionné dans le define_axis
+	  dès la définition de la tâche, car l'élément imbriqué classpath n'est pas pris en compte.
+	
+	  Revision 1.34  2006/02/23 17:39:42  beal6226
+	  Regroupement des classpath et réorganisation des librairies dans lib
+	
+	  Revision 1.33  2006/02/23 17:12:40  beal6226
+	  Regroupement des classpath et réorganisation des librairies dans lib
+	
+	  Revision 1.32  2006/02/17 14:52:48  beal6226
+	  Factorisation de la tâche init
+	
+	  Revision 1.31  2006/01/24 10:50:08  yrka8220
+	  Ajout du module rar
+	
+	  Revision 1.30  2006/01/09 13:12:55  beal6226
+	  Suppression de axis.cp du classpath de la tâche bouchonTask
+	
+	  Revision 1.29  2005/12/15 15:29:38  beal6226
+	  Le client web service ne doit pas inclure les beans d'echange ou les exceptions
+	
+	  Revision 1.28  2005/11/15 09:48:00  beal6226
+	  Gestion de deux fichiers de mapping différents (client et serveur) pour les web services
+	
+	  Revision 1.27  2005/10/25 11:08:00  beal6226
+	  Ajout d'attributs Manifest sur jar, war, war-ws et ear
+	
+	  Revision 1.26  2005/10/21 13:50:02  beal6226
+	  Ajout de filesetmanifest=merge à la construction du war
+	
+	  Revision 1.25  2005/10/03 14:27:28  beal6226
+	  Compilation java en mode debug
+	
+	  Revision 1.24  2005/09/16 14:09:49  beal6226
+	  Copie du wsdl pour le bouchon
+	
+	  Revision 1.23  2005/09/15 14:46:34  beal6226
+	  Suppression ancienne version qui était restée dans le code
+	
+	  Revision 1.22  2005/09/05 08:56:28  beal6226
+	  Refonte complète module web services
+	
+	  Revision 1.21  2005/08/05 14:56:59  yfve7250
+	  update
+	
+	  Revision 1.20  2005/07/27 11:40:44  yfve7250
+	  modif pr inserer automatiquement la balise wsdlFile dans le fichier wsdd
+	
+	  Revision 1.19  2005/07/20 08:46:21  yfve7250
+	  ajout de la librairie mock-all.jar lors du packaging.
+	
+	  Revision 1.18  2005/07/18 14:45:05  yfve7250
+	  correctifs sur la tache generation d'un wsdl a partir d'une interface pr un ejb
+	  ajout d'un pattern pr la génération du wsdd
+	
+	  Revision 1.17  2005/07/08 15:53:02  nieh8376
+	  *** empty log message ***
+	
+	  Revision 1.16  2005/07/05 15:08:44  yfve7250
+	  correctifs pour générer les classes java à partir du wsdl suivant le fichier de  mapping des namespaces et package java
+	  ajout d'une nouvelle target recompile stub pour pouvoir recompiler les classes clientes sans relancer la tache de recréation des stubs
+	
+	  Revision 1.15  2005/06/28 14:22:27  yfve7250
+	  nouvo fichier build_ws.xml
+	  2 nouvelles targets generate_WsdlEJBFromInterface et generate_WsdlPOJOFromInterface
+	  on conserve le répertoire skeleton pour pouvoir récuppérer le wsdd
+	
+	  Revision 1.14  2005/06/28 13:54:27  beal6226
+	  Ajout historique CVS
+	
+	  -->
+<!DOCTYPE project [
+		<!ENTITY setenv SYSTEM "../conf/setenv.xml">	
+	]>
+
+<project name="build_ws" default="init" basedir="../..">
+
+	<!-- Chargement des propriétés -->
+	&setenv;
+    <property file="${ant.modules.dir}/${module.type}.${module.name}.properties" />
+	<property name="client.mapping"
+	          value="${ant.modules.dir}/${module.type}.${module.name}-client-mapping.properties" />
+	<property name="server.mapping"
+	          value="${ant.modules.dir}/${module.type}.${module.name}-server-mapping.properties" />
+
+	<property name="wsdl.output"
+	          value="${j2ee.dir}/${module.type}/${module.name}${wsdl.output.name}" />
+	
+	<!-- TARGET build_Pojo -->
+	<target name="build_Pojo" depends="init">
+		<antcall target="build_pojo_ejb" />
+	</target>
+
+	<!-- TARGET build_Ejb -->
+	<target name="build_Ejb" depends="init">
+		<antcall target="build_pojo_ejb" />
+	</target>
+
+	<!-- TARGET build (Ejb et Pojo) -->
+	<!-- Compilation, génération du wsdl (s'il n'existe pas) et des stubs/skeleton axis -->
+	<target name="build_pojo_ejb" description="build pojo et ejb">
+		<!-- Compilation -->
+		<ant antfile="${ant.conf.dir}/common.xml" target="compile_module">
+			<property name="sub.dir" value="WEB-INF/classes" />
+		</ant>
+
+		<!-- JAVA2WSDL -->
+		<!-- Il faut générer le fichier wsdl s'il n'existe pas ou si wsdl.overwrite est vrai -->
+		<condition property="wsdl.generate">
+			<or>
+				<not>
+					<available file="${wsdl.output}"
+					           type="file"
+					           property="wsdl.${module.name}.present" />
+				</not>
+				<istrue value="${wsdl.overwrite}" />
+			</or>
+		</condition>
+		<antcall target="verif_wsdl" />
+		<antcall target="generate_java2wsdl" />
+
+		<!-- WSDL2JAVA -->
+		<property name="wsdl.myname" value="${wsdl.output}" />
+		<antcall target="generate_wsdl2java_server" />
+
+	</target>
+
+	<!-- TARGET verif_wsdl -->
+	<!-- Affichage d'un message si le fichier wsdl existe déjà. -->
+	<target name="verif_wsdl" unless="wsdl.generate">
+		<echo message="##### Le fichier wsdl ${wsdl.output} existe déjà. Génération non effectuée. #####" />
+	</target>
+
+	<!-- TARGET generate_java2wsdl -->
+	<!-- Génération du fichier wsdl si celui-ci n'existe pas. -->
+	<target name="generate_java2wsdl" depends="define_axis" if="wsdl.generate" description="java2wsdl">
+		<echo message="Génération du fichier wsdl ${wsdl.output} par java2wsdl." />
+		<mkdir dir="${j2ee.dir}/${module.type}/${module.name}/wsdl" />
+		<!-- Axis a besoin d'avoir les classes du service web dans son classpath.
+		Attention, il semble que l'élément imbriqué "classpath" de la tâche 
+		axis-wsdl2java ne fonctionne pas. Le classpath est donc défini directement dans le "define_axis" -->
+		<axis-java2wsdl classname="${wsdl.classname}"
+		                methods="${wsdl.methods}"
+		                porttypename="${wsdl.porttypename}"
+		                style="${wsdl.style}"
+		                use="${wsdl.use}"
+		                namespace="${wsdl.namespace}"
+		                location="${wsdl.location}"
+		                output="${wsdl.output}">
+			<mapping file="${server.mapping}" />
+		</axis-java2wsdl>
+	</target>
+
+	<!-- TARGET generate_wsdl2java_server -->
+	<!-- Génération des fichiers java deploy.wsdd, stub et skeleton à partir du fichier wsdl. -->
+	<target name="generate_wsdl2java_server" depends="define_axis" description="wsdl2java serveur">
+		<echo message="Génération des fichiers java serveur par wsdl2java." />
+		<axis-wsdl2java output="${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_server"
+		                verbose="${verbose}"
+		                serverside="true"
+		                skeletondeploy="false"
+		                testcase="false"
+		                url="${wsdl.myname}">
+			<mapping file="${server.mapping}" />
+		</axis-wsdl2java>
+		<!-- Suppression des classes clientes -->					
+		<delete>
+			<fileset dir="${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_server">
+			    <include name="**/*Service.java"/>
+					<include name="**/*ServiceLocator.java" />
+					<include name="**/*SoapBindingStub.java" />
+			</fileset>
+		</delete>
+		<!-- Compilation des classes serveur -->
+		<javac srcdir="${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_server"
+		       destdir="${tmp.dir}/${module.type}/${module.name}/package_server/WEB-INF/classes"
+		       classpathref="project.classpath"
+		       debug="on"
+		       debuglevel="lines,vars,source"
+		       verbose="${verbose}">
+					 <exclude name="**/*SoapBindingImpl.java" />
+		</javac>
+		<condition property="wsdl.generate">
+			<istrue value="${wsdl.overwrite}" />
+		</condition>
+		<antcall target="copyToGenerated" />
+
+	</target>
+
+	<target name="copyToGenerated">
+		<echo message="Copie de la couche d'échange dans generated" />
+		<copy todir="${generated.dir}" includeEmptyDirs="false">
+			<fileset dir="${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_server" >
+				<exclude name="**/*SoapBindingImpl*" />
+				<exclude name="**/*.wsdd" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- TARGET package_Pojo -->
+	<target name="package_Pojo" depends="init">
+		<antcall target="package" />
+	</target>
+
+	<!-- TARGET package_Ejb -->
+	<target name="package_Ejb" depends="init">
+		<property name="package.ejb" value="true" />
+		<antcall target="package" />
+	</target>
+
+	<!-- TARGET package -->
+	<!-- Génération du fichier war du webservice à partir des classes compilées,
+	des librairies à inclure, et des fichiers du répertoire j2ee du module. -->
+	<target name="package" depends="init" description="packaging war ws">
+		<!-- Copie des fichiers du répertoire j2ee -->
+		<ant antfile="${ant.conf.dir}/common.xml" target="copy_j2ee" />
+		<!-- Ajout des services déployés au fichier server-config.wsdd (pas pour ejb) -->
+		<antcall target="update_wsdd_pojo" />
+		<!-- Copie des librairies -->
+		<ant antfile="${ant.conf.dir}/common.xml" target="copy_lib">
+			<property name="sub.dir" value="WEB-INF/lib" />
+		</ant>
+		<!-- Copie des librairies AXIS - On sera en mode java2-delegation-model=false -->
+		<echo message="Copie des librairies Axis" />
+		<!-- bidouille à cause d'un bug Jonas... -->
+		<condition property="is.jonas">
+			<equals arg1="${server.name}" arg2="jonas" />
+		</condition>
+		<antcall target="copy_axis_jonas" />
+		<antcall target="copy_axis_weblogic_websphere" />
+
+		<!-- Construction du war -->
+		<echo message="Construction du fichier war ${dist.dir}/${module.type}/${module.name}.war" />
+		<tstamp>
+			<format property="TODAY" pattern="d-MMM-yyyy hh:mm:ss aa" locale="en" />
+		</tstamp>
+		<war destfile="${dist.dir}/${module.type}/${module.name}.war"
+		     filesetmanifest="merge"
+		     webxml="${tmp.dir}/${module.type}/${module.name}/${package.dir}/WEB-INF/web.xml">
+			<fileset dir="${tmp.dir}/${module.type}/${module.name}/${package.dir}">
+				<exclude name="WEB-INF/web.xml" />
+			</fileset>
+			<manifest>
+				<attribute name="Release-Date" value="${TODAY}" />
+				<attribute name="Created-By"
+				           value="${java.vm.version} (${java.vm.vendor})" />
+				<attribute name="Company" value="France Telecom" />
+				<attribute name="Toolkit-Version" value="${toolkit.version}" />
+				<attribute name="Module-Name" value="${module.name}" />
+			</manifest>
+		</war>
+		<echo message="========== Packaging du module terminé, consulter ${dist.dir}/${module.type}/${module.name}.war ==========" />
+	</target>
+
+	<target name="copy_axis_jonas" if="is.jonas">
+		<copy todir="${tmp.dir}/${module.type}/${module.name}/${package.dir}/WEB-INF/lib"
+			  flatten="true">
+			<fileset dir="${lib.dir}">
+				<include name="**/axis*/*.jar" />
+				<!-- Jonas dispose déjà d'une version de commons-logging et plante si on lui en
+				ajoute une autre version, même en mode java2-delegation-model=false -->
+				<exclude name="**/axis*/*commons*.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="copy_axis_weblogic_websphere" unless="is.jonas">
+		<copy todir="${tmp.dir}/${module.type}/${module.name}/${package.dir}/WEB-INF/lib"
+			   flatten="true">
+			<fileset dir="${lib.dir}">
+				<include name="**/axis*/*.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- TARGET update_wsdd_pojo (Pas pour ejb) -->
+	<!-- Modification du fichier wsdd pour lui ajouter les services à déployer.
+	Pour cela, on génère le fichier deploy.wsdd avec wsdl2java, puis on recopie
+	les balises <service> dans le server-config.wsdd. Enfin, on renomme les
+	classes d'implémentation ainsi que le chemin du wsdl -->
+	<target name="update_wsdd_pojo"
+	        depends="define_axis,define_wsdd"
+	        unless="package.ejb"
+		    description="Mise à jour du wsdd pour pojo">
+		<property name="tmp.wsddfile"
+		          value="${tmp.dir}/${module.type}/${module.name}/${package.dir}/WEB-INF/server-config.wsdd" />
+		<available file="${tmp.wsddfile}"
+		           type="file"
+		           property="wsdd.${module.name}.present" />
+		<fail unless="wsdd.${module.name}.present"
+		      message="Attention: Le fichier ${tmp.wsddfile} n'existe pas. Packaging du serveur impossible" />
+
+		<echo message="Modification du fichier wsdd server-config.wsdd" />
+		<copy todir="${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_server"
+		      flatten="true">
+			<fileset dir="${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_server">
+				<include name="**/deploy.wsdd" />
+			</fileset>
+		</copy>
+		<!-- Cette tache ajoute au server-config.wsdd la ou les balises <service> qui se trouvent dans le deploy.wsdd -->
+		<generateWsddTask serverConfigTemplatePath="${basedir}/${tmp.wsddfile}"
+		                  deployPath="${basedir}/${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_server/deploy.wsdd"
+		                  serverConfigPath="${basedir}/${tmp.wsddfile}">
+		</generateWsddTask>
+
+		<!--remplacer la classe générée par défaut par celle qui implemente l'interface -->
+		<!-- Uniquement si SIB.package et SIB.name sont valorisés -->
+		<condition property="SIB.doModify">
+			<and>
+				<isset property="SIB.package" />
+				<isset property="SIB.name" />
+			</and>
+		</condition>
+		<antcall target="replaceSIB" />				
+		<!--remplacer le nom du fichier wsdl (WSDL_VALUE positionné par generateWsddTask) -->
+		<replaceregexp file="${tmp.wsddfile}"
+		               match="WSDL_VALUE"
+		               replace="${wsdl.output.name}" />
+	</target>
+
+	<!-- TARGET interne replaceSIB -->
+	<!-- Remplace l'implémentation si les propriétés sont positionnées -->
+	<target name="replaceSIB" if="SIB.doModify">
+		<echo message="remplacement de l'implémentation par ${SIB.package}.${SIB.name} dans le wsdd" />
+		<replaceregexp file="${tmp.wsddfile}"
+		               match='value=".*SoapBindingImpl"'
+		               replace='value="${SIB.package}.${SIB.name}"' />
+	</target>
+
+		               	
+	<!-- TARGET package_client -->
+	<!-- Génération et compilation des sources du client web service à partir 
+	du fichier wsdl du projet.
+	Génération du fichier jar des classes pour le client web service. -->
+	<target name="package_client" depends="define_axis,init" description="packaging client ws">
+		<available file="${wsdl.output}"
+		           type="file"
+		           property="wsdl.${module.name}.present" />
+		<fail unless="wsdl.${module.name}.present"
+		      message="Attention: Le fichier ${wsdl.output} n'existe pas. Packaging du client impossible" />
+		<antcall target="generate_wsdl2java_client" />
+		<javac srcdir="${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_client"
+		       destdir="${tmp.dir}/${module.type}/${module.name}/package_client/classes"
+		       classpathref="project.classpath"
+		       debug="on"
+		       debuglevel="lines,vars,source"
+		       verbose="${verbose}">
+			<exclude name="**/*SoapBindingImpl.java" />
+		</javac>
+		<jar destfile="${dist.dir}/lib/${module.name}-ws-stub.jar"
+		     basedir="${tmp.dir}/${module.type}/${module.name}/package_client/classes">
+		</jar>
+	</target>
+
+	<!-- TARGET generate_wsdl2java_client -->
+	<!-- Génération des fichiers java du client. -->
+	<target name="generate_wsdl2java_client" depends="define_axis" description="wsdl2java client">
+		<echo message="Génération des fichiers java client par wsdl2java." />
+		<axis-wsdl2java output="${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_client"
+		                verbose="${verbose}"
+		                serverside="false"
+		                skeletondeploy="false"
+		                testcase="true"
+		                url="${wsdl.output}">
+			<mapping file="${client.mapping}" />
+		</axis-wsdl2java>
+	</target>
+
+	<!-- TARGET internet init -->
+	<!-- Création des répertoires nécessaires au fonctionnement du toolkit -->
+	<target name="init">
+		<ant antfile="${ant.conf.dir}/common.xml" target="init" />
+		<mkdir dir="${j2ee.dir}/${module.type}/${module.name}/WEB-INF" />
+		<mkdir dir="${tmp.dir}/${module.type}/${module.name}/${package.dir}/WEB-INF/classes" />
+		<mkdir dir="${tmp.dir}/${module.type}/${module.name}/package_client/classes" />
+		<mkdir dir="${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_server" />
+		<mkdir dir="${tmp.dir}/${module.type}/${module.name}/src_wsdl2java_client" />
+	</target>
+
+</project>
