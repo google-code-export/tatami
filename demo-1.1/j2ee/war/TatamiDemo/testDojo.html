@@ -1,0 +1,129 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<html>
+<style type="text/css">
+  @import "com.objetdirect.tatami.demo.TatamiDemo/tatami.css";
+  @import "tatamiDemo.css";
+</style>
+
+<script type="text/javascript" src="com.objetdirect.tatami.demo.TatamiDemo/dojo/dojo.js">
+
+</script>
+
+
+<script type="text/javascript">
+	carousel = null;
+	
+	function createCarousel() {
+ 	dojo.require("oaf.widget.layout.Carousel");
+	
+	var div = dojo.doc.createElement("div");
+	div.id = "root";
+	dojo.style(div,"width","600px");
+	dojo.style(div,"height", "300px");
+	dojo.style(div,"position","absolute");
+	var main = document.getElementById("main");
+	main.appendChild(div);
+	
+	var widget  = null;
+     var params = {};
+	 try {
+	    widget=  new oaf.widget.layout.Carousel(params,dojo.byId("root"));
+     
+      //main.appendChild(widget.domNode);
+      widget.addChild(new oaf.widget.layout.CarouselItem({imageURL:"carousel/image22.jpg",linkA:"hello"}));
+      widget.addChild(new oaf.widget.layout.CarouselItem({imageURL:"carousel/image23.jpg"}));
+      widget.addChild(new oaf.widget.layout.CarouselItem({imageURL:"carousel/image24.jpg"}));      
+      widget.addChild(new oaf.widget.layout.CarouselItem({imageURL:"carousel/image25.jpg"}));      
+      widget.startup();
+	    widget.addNewCarouselItem("carousel/image26.jpg","","","","");                	  
+      widget.addNewCarouselItem("carousel/image27.jpg","","","","");                	  
+      widget.addNewCarouselItem("carousel/image28.jpg","","","","");                	  
+  
+	 } catch (e) {
+	    alert("problem : " + e); 
+	  }
+	  return widget;
+	 }
+	 
+	 
+	 function destroyCarousel() {
+	   var widget = dijit.byId("root");
+	   if ( widget ) {
+	   dojo.disconnect(widget.handleResize);
+	   widget.destroyRecursive();
+	   }
+	 
+	 }
+	 
+	 function loadCarousel() {
+	     if ( carousel != null) {
+	        destroyCarousel();
+	        carousel = null;
+	     } 
+	     if ( carousel ==null) {
+ 	       carousel = createCarousel();
+ 	     }
+	     
+	 
+	 }
+</script>
+
+
+<body class="tundra oaf">
+
+
+
+
+<table cellspacing="0" cellpadding="0" >
+  <tbody> 
+    <tr></tr>
+    <tr>
+        <td width="" height="" align="left" style="vertical-align: top;">
+             <table cellspacing="20" cellpadding="0">
+                  <tbody> 
+                        <tr>
+                            <td width="" height="" align="left" style="vertical-align: top;" rowspan="1"></td>
+                            <td width="100%" height="" align="left" style="vertical-align: top;">
+                                <table class="TatamiDemo-mainPanel" cellspacing="0" cellpadding="0">
+                                      <tbody> 
+                                            <tr>
+                                                <td align="left" style="vertical-align: top;"> 
+                                                    <table width="100%" cellspacing="20" cellpadding="0">
+                                                          <tbody> 
+                                                              <tr>
+                                                                 <td width="" height="" align="left" style="vertical-align: top;" colspan="1">
+                                                                 <form>
+                                                                   <input type="button" value="Creer Carousel"  onclick="loadCarousel();"/>
+                                                                 </form>
+         
+                                                                 </td>
+                                                              </tr>
+                                                              <tr>
+                                                                  <td width="" height="" align="left" style="vertical-align: top;">
+                                                                     <div id="main" ></div>
+                                                                   </td>
+                                                               </tr>
+                                                               <tr></tr>
+                                                           </tbody> 
+                                                     </table>
+                                              </td>
+                                            </tr>
+                                     </tbody> 
+                             </table>
+                         </td>
+                     </tr>
+                 </tbody> 
+         </table>
+       </td>
+    </tr>
+    </tbody> 
+</table> 
+
+
+
+
+</body>
+</html>
