@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<jonas-web-app id="TatamiDemo" xmlns="http://www.objectweb.org/jonas/ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.objectweb.org/jonas/ns http://www.objectweb.org/jonas/ns/jonas-web-app_4_1_2.xsd">
+	<!-- Example -->
+	<!--java2-delegation-model>false</java2-delegation-model-->
+	<!-- Example -->
+	<!--jonas-resource>
+		<res-ref-name>jdbc/mon_alias</res-ref-name>
+		<jndi-name>jdbc/jonas_alias</jndi-name>
+	</jonas-resource-->
+</jonas-web-app>
+
+
