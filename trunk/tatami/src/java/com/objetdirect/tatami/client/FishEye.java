@@ -53,7 +53,9 @@ import com.google.gwt.user.client.Event;
  * </p>
  * <p>
  * 
- * @author Henry
+ * @author Henry, Vianney
+ * 
+ * @version 1.1  the method resetLocation was added. 
  */
 public class FishEye extends AbstractDojo {
 
@@ -571,6 +573,15 @@ public class FishEye extends AbstractDojo {
 	 dojoWidget._initializePositioning();
 	 }-*/;
 
+	
+	/**
+	 * Resets the location of the fishEye menu
+	 *
+	 */
+	public void resetLocation() {
+		resetLocation(getDojoWidget());
+	}
+	
 	/**
 	 * Inner class for the FishEye. a JAVA Item corresponding to the DOJO Item.
 	 * An item  has an icon, a title, and a command (being able to be null).and a child
