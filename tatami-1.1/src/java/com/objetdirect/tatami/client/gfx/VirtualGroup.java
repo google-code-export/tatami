@@ -27,6 +27,7 @@ package com.objetdirect.tatami.client.gfx;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -40,6 +41,7 @@ public class VirtualGroup extends GraphicObject {
 
 	private List objects;
 	
+	private GraphicCanvas surface;
 	
 	
 	/**
@@ -109,11 +111,47 @@ public class VirtualGroup extends GraphicObject {
 	 * @param object  the <code>GraphicObject</code> to add
 	 */
 	public void add(GraphicObject object){
-		if ( getShape() !=null && object.getShape() !=null) {
-			objects.add(object);
-			add(getShape(),object.getShape());
+		objects.add(object);
+		if ( getShape() !=null ) {
+		    if ( surface != null) {
+		    	object.show(surface);
+		    	Collection shapes = object.getShapes();
+				surface.putEventSource(shapes,object);
+		    	add(getShape(),object.getShape());
+		    }
+			
 		}
 	}
+	
+	
+	public GraphicObject setFillColor(Color color ) {
+		super.setFillColor(color);
+	    Iterator ite = objects.iterator();
+	    while ( ite.hasNext()) {
+	    	((GraphicObject)ite.next()).setFillColor(color);
+	    }
+		return this;
+	}
+	
+	public GraphicObject setStroke(Color color,int width ) {
+		super.setStroke(color,width);
+	    Iterator ite = objects.iterator();
+	    while ( ite.hasNext()) {
+	    	((GraphicObject)ite.next()).setStroke(color,width);
+	    }
+		return this;
+	}
+	
+	
+	public GraphicObject applyPattern(Pattern pattern) {
+		super.applyPattern(pattern);
+	    Iterator ite = objects.iterator();
+	    while ( ite.hasNext()) {
+	    	((GraphicObject)ite.next()).applyPattern(pattern);
+	    }
+		return this;
+	}
+	
 	
 	
 	/**
@@ -167,7 +205,40 @@ public class VirtualGroup extends GraphicObject {
 		return objects.size();
 	}
 	
+	/**
+	 * Shows this <code>GraphicalObject</code> in the canvas.
+	 * @param surface the canvas
+	 */
+	protected void show(GraphicCanvas surface) {
+		super.show(surface);
+		this.surface = surface;
+		buildObjects();
+		
+	}
 	
 	
+	protected Collection getShapes() {
+		List list = new ArrayList();
+		list.add(getShape());
+		Iterator ite = objects.iterator();
+		while ( ite.hasNext()) {
+			GraphicObject object = (GraphicObject)ite.next();
+			list.addAll(object.getShapes());
+		}
+		return list;
+	}
 	
+	
+	private void buildObjects() {
+		Iterator ite = objects.iterator();
+		while ( ite.hasNext()) {
+			GraphicObject object = (GraphicObject)ite.next();
+			object.show(surface);
+			Collection shapes = object.getShapes();
+			surface.putEventSource(shapes,object);
+			
+			add(getShape(),object.getShape());
+		}
+		
+	}
 }
