@@ -26,6 +26,11 @@
 package com.objetdirect.tatami.client.gfx;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -113,6 +118,12 @@ public abstract class GraphicObject {
 	 */
 	protected JavaScriptObject getShape() {
 		return this.shape;
+	}
+	
+	protected Collection getShapes() {
+		List list = new ArrayList();
+		list.add(shape);
+		return list;
 	}
 	
 	/**
@@ -317,9 +328,11 @@ public abstract class GraphicObject {
 	 * Shows this <code>GraphicalObject</code> in the canvas.
 	 * @param surface the canvas
 	 */
-	protected void show(JavaScriptObject surface) {
-		shape = createGfx(surface);
+	protected void show(GraphicCanvas surface) {
+		shape = createGfx(surface.getDojoCanvas());
 		configureShape();
+		
+		
 	}
 	
 	/**
@@ -561,4 +574,13 @@ public abstract class GraphicObject {
 		this.shape = shape;
 	}
 	
+	
+	/**
+	 * returns the source of the event of the graphicObject
+	 * @param graphicObject the graphicObject
+	 * @return the source of the event
+	 */
+	protected static native JavaScriptObject getEventSource(JavaScriptObject graphicObject) /*-{
+		return graphicObject.getEventSource();
+	}-*/;
 }//end of class

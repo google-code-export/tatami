@@ -26,6 +26,7 @@
 package com.objetdirect.tatami.client.gfx;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -111,10 +112,22 @@ public class GraphicCanvas extends Widget {
 		final Iterator ite = objects.iterator();
 		while (ite.hasNext()) {
 			final GraphicObject graphicObject = (GraphicObject)ite.next();
-			graphicObject.show(surface);
-			graphicObjects.put(getEventSource(graphicObject.getShape()), graphicObject);
+			graphicObject.show(this);
+			Collection shapes = graphicObject.getShapes();
+			putEventSource(shapes,graphicObject);
+						
+			//graphicObjects.put(getEventSource(graphicObject.getShape()), graphicObject);
 		}
 	}
+	
+	/**
+	 * Returns the DOJO GFX canvas
+	 * @return the DOJO GFX canvas
+	 */
+	protected JavaScriptObject getDojoCanvas() {
+		return this.surface;
+	}
+	
 	
 	/**
 	 * Hides all the <code>GraphicObject</code> from the surface 
@@ -172,9 +185,33 @@ public class GraphicCanvas extends Widget {
 	 * @param graphicObject the <code>GraphicObject</code> to show
 	 */
 	private void attachGraphicObject(GraphicObject graphicObject) {
-		graphicObject.show(surface);
-		graphicObjects.put(getEventSource(graphicObject.getShape()), graphicObject);
+		graphicObject.show(this);
+		Collection shapes = graphicObject.getShapes();
+		putEventSource(shapes,graphicObject);
+		//graphicObjects.put(getEventSource(graphicObject.getShape()), graphicObject);
 	}
+	
+	
+	
+	protected void putEventSource(JavaScriptObject shape,GraphicObject graphicObject) {
+		graphicObjects.put(getEventSource(shape), graphicObject);		
+	}
+	
+	/**
+	 * Associates a the events sources of a collection of shapes (DOJO GFX shape) width a <code>GraphicalObject</code>.
+	 * @param shapes the collection of <code>JavaScriptObject</code> corresponding to a collection of DOJO GFX shape
+	 * @param graphicObject the <code>GraphicObject</code>  to associates the event sources
+	 */
+	protected void putEventSource(Collection shapes,GraphicObject graphicObject) {
+		Iterator ite = shapes.iterator();
+		while (ite.hasNext()) {
+			JavaScriptObject shape = (JavaScriptObject)ite.next();
+			putEventSource(shape,graphicObject);	
+		}
+				
+	}
+	
+	
 	
 	/**
 	 * Hides a <code>GraphicObject</code> to the surface
@@ -182,10 +219,16 @@ public class GraphicCanvas extends Widget {
 	 */
 	private void detachGraphicObject(GraphicObject graphicObject) {
 		graphicObject.hide();
-		final JavaScriptObject shape = graphicObject.getShape();
-		if ( shape != null) {
-		  graphicObjects.remove(getEventSource(shape));
+		Collection shapes = graphicObject.getShapes();
+		Iterator ite = shapes.iterator();
+		while (ite.hasNext()) {
+			final JavaScriptObject shape = (JavaScriptObject)ite.next();
+			if ( shape != null) {
+				  graphicObjects.remove(getEventSource(shape));
+				}
 		}
+		
+		
 	}
 
 	/**
@@ -324,7 +367,7 @@ public class GraphicCanvas extends Widget {
 	 * @param graphicObject the graphicObject
 	 * @return the source of the event
 	 */
-	private static native JavaScriptObject getEventSource(JavaScriptObject graphicObject) /*-{
+	protected static native JavaScriptObject getEventSource(JavaScriptObject graphicObject) /*-{
 		return graphicObject.getEventSource();
 	}-*/;
 	
