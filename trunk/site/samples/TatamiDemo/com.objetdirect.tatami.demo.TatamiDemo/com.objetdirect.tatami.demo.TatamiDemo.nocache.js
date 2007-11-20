@@ -199,11 +199,11 @@ function com_objetdirect_tatami_demo_TatamiDemo(){
   }
    else {
     try {
-      unflattenKeylistIntoAnswers(['gecko1_8'], '04D0F1356B2518F3BE093CB52E9FD74E');
-      unflattenKeylistIntoAnswers(['safari'], '3A59B05EF6FAD0238D395C1328E66CF8');
-      unflattenKeylistIntoAnswers(['opera'], '6D65A5EEE37B6F490D252914906954C8');
-      unflattenKeylistIntoAnswers(['ie6'], '88831DD88E3276CFB446DFE492111B14');
-      unflattenKeylistIntoAnswers(['gecko'], '9F4BA974E4A979BB41099347F2C69092');
+      unflattenKeylistIntoAnswers(['gecko1_8'], '2803D63D3E12A2F01608B0FA9D45BD44');
+      unflattenKeylistIntoAnswers(['safari'], '3E29B8E578B174177BF9CC7535C4EB14');
+      unflattenKeylistIntoAnswers(['ie6'], '576467D24BA5F9B449AEB2AF15D8284E');
+      unflattenKeylistIntoAnswers(['gecko'], '851C6A566CF04204F6175D0E00A63A6B');
+      unflattenKeylistIntoAnswers(['opera'], 'B557CF314DE6AE323626A8FE57D9C1C2');
       strongName = answers[computePropValue('user.agent')];
     }
      catch (e) {
