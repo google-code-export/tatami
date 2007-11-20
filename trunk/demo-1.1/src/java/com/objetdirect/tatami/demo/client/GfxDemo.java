@@ -23,6 +23,7 @@ import com.objetdirect.tatami.client.Slider;
 import com.objetdirect.tatami.client.gfx.Circle;
 import com.objetdirect.tatami.client.gfx.Color;
 import com.objetdirect.tatami.client.gfx.Ellipse;
+import com.objetdirect.tatami.client.gfx.Font;
 import com.objetdirect.tatami.client.gfx.GraphicCanvas;
 import com.objetdirect.tatami.client.gfx.GraphicObject;
 import com.objetdirect.tatami.client.gfx.GraphicObjectListener;
@@ -33,6 +34,8 @@ import com.objetdirect.tatami.client.gfx.Pattern;
 import com.objetdirect.tatami.client.gfx.Point;
 import com.objetdirect.tatami.client.gfx.Rect;
 import com.objetdirect.tatami.client.gfx.Text;
+import com.objetdirect.tatami.client.gfx.TextPath;
+import com.objetdirect.tatami.client.gfx.VirtualGroup;
 
 public class GfxDemo extends Composite implements GraphicObjectListener,ClickListener,ChangeListener {
 
@@ -105,11 +108,17 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 	 /**to create a path */
 	 private Image pathButton;
 	 
-	/**
+	
+	 /**to create a path */
+	 private Image textPathButton;
+	 
+	 
+	 /**
 	 * for creating a rotation of an object 
 	 */
 	private Image rotateButton;
 	
+	private Image virtualButton;
 	/**
 	 * To delete an object
 	 */
@@ -164,7 +173,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		buttonPanel.setSpacing(10);
 		popup.add(html);
 		
-		gridShape     = new Grid(4,2);
+		gridShape     = new Grid(5,2);
 		gridShape.setCellSpacing(5);
 		gridShape.setCellPadding(5);
 		gridTransform = new Grid(3,2);
@@ -203,8 +212,11 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
     	textButton    = addToGrid(gridShape,2,0,"Text","gfx/text.gif");
 		imageButton   = addToGrid(gridShape,2,1,"Image","gfx/image.gif");
 		pathButton    = addToGrid(gridShape,3,0,"Path","gfx/path.GIF");
-		deleteButton  = addToGrid(gridShape,3,1,"Delete","gfx/delete.gif");
-
+		textPathButton= addToGrid(gridShape,3,1,"Text Path","gfx/textpath.gif");
+		virtualButton = addToGrid(gridShape,4,0,"Virtual","gfx/group.gif");
+		deleteButton  = addToGrid(gridShape,4,1,"Delete","gfx/delete.gif");
+		
+		
 		colorButton      = addToGrid(gridTransform,0,0,"set color","gfx/color.gif");
 		scaleButton      = addToGrid(gridTransform,0,1,"Scale","gfx/scale.gif");
 		rotateButton     = addToGrid(gridTransform,1,0,"Rotate","gfx/rotate.gif");
@@ -332,21 +344,27 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 	 */
 	public void onClick(Widget sender) {
 		if (sender.equals(rectButton)) {
-			showGraphicObject(new Rect(300, 100));
+			Rect rect = new Rect(300, 100);
+			showGraphicObject(rect,300,300);
+			rect.setWidth(100);
+				
 		} else if (sender.equals(circleButton)) {
-			showGraphicObject(new Circle(50));
+			showGraphicObject(new Circle(50),300,300);
 		} else if (sender.equals(colorButton)) {
 			showPopupColor();
 		}  else if ( sender.equals(textButton)) {
-			showGraphicObject(new Text("Some Text"));
+			initText();
+		
 		} else if ( sender.equals(scaleButton)) {
 			this.showPopupScaler();
 		} else if ( sender.equals(rotateButton)) {
 			showPopupRotate();
 		} else if ( sender.equals(imageButton)) {
-			showGraphicObject(new ImageGfx("od-logo.jpg",105,52));
+			ImageGfx img = new  ImageGfx("od-logo.jpg",105,52); 
+			showGraphicObject(img,300,300);
+			
 		} else if ( sender.equals(ellipseButton)) {
-			showGraphicObject(new Ellipse(200,100));
+			showGraphicObject(new Ellipse(200,100),300,300);
 		} else if ( sender.equals(strokeSize[0])) {
 			this.chooseStrokeSize(0,1);
 		} else if ( sender.equals(strokeSize[1])) {
@@ -366,9 +384,14 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		} else if ( sender.equals(lineButton)) {
            final Point pointA = new Point(50,50);
            final Point pointB = new Point(200,360);
-           showGraphicObject(new Line(pointA,pointB));
+           showGraphicObject(new Line(pointA,pointB),300,300);
 		} else if ( sender.equals(pathButton)) {
 			showPath();
+		} else if ( sender.equals(virtualButton)) {
+			this.initVirtual();
+			
+		} else if ( sender.equals(textPathButton)) {
+			this.showTextPath();
 		}
  	}
 	
@@ -433,7 +456,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		dialog.addStyleName("GfxDemo-properties");
 		dialog.setWidget(panel);
 		dialog.show();
-		
+		System.out.println("bounds " + object.getBounds());
 	}
 
 	
@@ -600,12 +623,74 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		return image;
 	}
 	
+	private void initText() {
+		Text text = new Text("underline, courier 10",Text.UNDERLINE);
+		Font font = new Font("Courier",10,Font.NORMAL,Font.NORMAL,Font.NORMAL);
+		Text text2 = new Text("overline, courier bolder 10",Text.OVERLINE);
+		Font font2 = new Font("Courier",10,Font.NORMAL,Font.NORMAL,Font.BOLDER);
+		Text text3 = new Text("line through, courier lighter 10",Text.LINE_THROUGH);
+		Font font3 = new Font("Courier",10,Font.NORMAL,Font.NORMAL,Font.LIGHTER);		
+		Text text4 = new Text("Some Text Arial 24 Bold");
+		Font font4 = new Font("Arial",24,Font.ITALIC,Font.NORMAL,Font.BOLD);
+			
+		text.setFont(font);
+		text3.setFont(font3);
+		text2.setFont(font2);
+		showGraphicObject(text,10,20);
+		showGraphicObject(text2,10,40);
+		showGraphicObject(text3,10,60);
+		showGraphicObject(text4,10,100);
+		text4.setFont(font4);
+		
+		
+		
+		
+		
+		
+	}
 
-	private void showGraphicObject(GraphicObject object) {
+	
+	private void showTextPath() {
+		TextPath textPath = new TextPath("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent erat.In malesuada ultricies velit. Vestibulum tempor odio vitae diam. Morbi arcu lectus, laoreet eget, nonummy at, elementum a, quam.");
+		this.showGraphicObject(textPath, 10, 10);
+		int CPD = 30;
+		Font times = new Font("times",12,Font.NORMAL,Font.NORMAL,Font.NORMAL);
+		textPath.setFont(times);
+		textPath.moveTo(0, 100);
+		textPath.setAbsoluteMode(false);
+		textPath.curveTo(CPD, 0, 100 - CPD,  300, 100,  300);
+		textPath.curveTo(CPD, 0, 100 - CPD, -300, 100, -300);
+		textPath.curveTo(CPD, 0, 100 - CPD,  300, 100,  300);
+		textPath.curveTo(CPD, 0, 100 - CPD, -300, 100, -300);
+		textPath.curveTo(CPD, 0, 100 - CPD,  300, 100,  300);
+		
+	}
+	
+	private void initVirtual() {
+		VirtualGroup virtual = new VirtualGroup();
+		Rect r = new Rect(100,20);
+		Circle c = new Circle(20);
+		
+		c.translate(0, 15);
+		r.translate(0, 30);
+		virtual.add(c);
+		virtual.add(r);
+		this.showGraphicObject(virtual, 300, 300);
+				
+		//canvas.add(r,300, 305);
+		//canvas.add(c,300, 275);
+		//virtual.rotate(90f);
+		//virtual.translate(20, 60);
+		
+		
+	}
+	
+	
+	private void showGraphicObject(GraphicObject object,int x, int y) {
 		// this.canvas.removeAllGraphics();
 		object.setFillColor(currentFillColor);
 		object.setStroke(currentStrokeColor,currentStrokeSize);
-		this.canvas.add(object, 300, 300);
+		this.canvas.add(object, x, y);
 	}
 
 	public void mousePressed(GraphicObject graphicObject, int x, int y) {

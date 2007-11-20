@@ -27,8 +27,6 @@ package com.objetdirect.tatami.demo.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
@@ -36,6 +34,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.FishEye;
+import com.objetdirect.tatami.client.Slider;
 import com.objetdirect.tatami.client.Toaster;
 
 /**
@@ -118,6 +117,7 @@ public class TatamiDemo implements EntryPoint {
 			   
 	    RootPanel.get().add(body);
 	    RootPanel.get().add(toaster);
+	  
 	    
 	}
 
@@ -246,6 +246,7 @@ public class TatamiDemo implements EntryPoint {
 		if ( widgetDemo != null) {
 		   mainPanel.add(widgetDemo,DockPanel.CENTER);
 		}
+	
 	}
 
 	
