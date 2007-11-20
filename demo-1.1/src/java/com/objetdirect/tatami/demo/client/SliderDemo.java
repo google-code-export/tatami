@@ -51,13 +51,22 @@ public class SliderDemo extends Composite implements ChangeListener{
 		 initWidget(panel);
 	 }
 	 
+	 public Slider getSlider() {
+		 return this.horizontalSlider;
+	 }
+	 
+	 
 	 private void initComponents() {
 		 panel = new DockPanel();
 		 panel.setSpacing(10);
 		
 		 HTML html = new HTML("Move the cursor of each <b>Slider</b> to modify the size of the image below");
 		 verticalSlider = new Slider(Slider.VERTICAL, 0, 100, 100,true);
+         verticalSlider.setRuleLeft(5, "width:5px");
+		 verticalSlider.setRuleRight(10, "width:5px");
 		 horizontalSlider = new Slider(Slider.HORIZONTAL, 0, 100, 100,true);
+		 horizontalSlider.setRuleTop(10, "width:5px");
+		 horizontalSlider.setRuleBottom(25, "width:15px");
 		 cubicImage = new Image("cubic.jpg");
 		 cubicImage.setStyleName("SliderDemo-image");
 		 cubicImage.setSize("200px", "200px");
