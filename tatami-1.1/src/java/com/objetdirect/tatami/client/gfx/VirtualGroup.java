@@ -33,19 +33,25 @@ import java.util.List;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * TODO a TESTER 
+ * This call permits to gather some <code>GraphicObject</code>
+ * So when a transformation is executing, the tranformation will be applied 
+ * on all of the <code>GraphicObject</code> contained in the <code>VirtualGroup</code>.
+ * TODO Determinate bounds and the center positions 
  * @author Vianney
  *
  */
 public class VirtualGroup extends GraphicObject {
 
+	/** List of <code>GraphicObject</code> */
 	private List objects;
 	
-	private GraphicCanvas surface;
+	
+	
 	
 	
 	/**
-	 * Creates a <code>VirtualGroup</code>
+	 * Creates an empty <code>VirtualGroup</code>
+	 * 
 	 */
 	public VirtualGroup() {
 		super();
@@ -106,24 +112,28 @@ public class VirtualGroup extends GraphicObject {
 	
 	/**
 	 * Adds a <code>GraphicObject</code> to the list.
-	 * The <code>GraphicObject</code> have to added to the canvas first and 
-	 * this <code>VirtualGroup</code> also. 
-	 * @param object  the <code>GraphicObject</code> to add
+	 * The <code>GraphicObject</code> which are added, will be drawn only when this 
+	 * <code>VirutalGroup</code> is attached to the canvas.
+     * @param object  the <code>GraphicObject</code> to add
 	 */
 	public void add(GraphicObject object){
 		objects.add(object);
 		if ( getShape() !=null ) {
-		    if ( surface != null) {
-		    	object.show(surface);
+		    if ( getParent() != null) {
+		    	object.show(getParent());
 		    	Collection shapes = object.getShapes();
-				surface.putEventSource(shapes,object);
+		    	getParent().putEventSource(shapes,object);
 		    	add(getShape(),object.getShape());
 		    }
-			
 		}
 	}
 	
-	
+	/**
+	 * Sets the color of the fill for this <code>VirtualGroup</code>.
+	 * All of the <code>GraphicObject</code> will have the same color.
+	 * @param color the color to apply for the fill 
+	 * @return this <code>VirtualGroup</code>
+	 */
 	public GraphicObject setFillColor(Color color ) {
 		super.setFillColor(color);
 	    Iterator ite = objects.iterator();
@@ -133,6 +143,14 @@ public class VirtualGroup extends GraphicObject {
 		return this;
 	}
 	
+	/**
+	 * Sets the stroke color and width for this <code>VirtualGroup</code>.
+	 * All <code>GraphicObject</code> contained in this <code>VirtualGroup</code>
+	 * will have the same width and color of the stroke. 
+	 * @param color the color for the stroke
+	 * @param width the width for the stroke
+	 * @return this <code>VirtualGroup</code>
+	 */
 	public GraphicObject setStroke(Color color,int width ) {
 		super.setStroke(color,width);
 	    Iterator ite = objects.iterator();
@@ -142,7 +160,12 @@ public class VirtualGroup extends GraphicObject {
 		return this;
 	}
 	
-	
+	/**
+	 * Applies a pattern to each <code>GraphicObject</code> 
+	 * of this <code>VirtualGroup</code>
+	 * @param pattern the pattern to apply.
+	 * @return this <code>VirtualGroup</code>
+	 */
 	public GraphicObject applyPattern(Pattern pattern) {
 		super.applyPattern(pattern);
 	    Iterator ite = objects.iterator();
@@ -211,12 +234,15 @@ public class VirtualGroup extends GraphicObject {
 	 */
 	protected void show(GraphicCanvas surface) {
 		super.show(surface);
-		this.surface = surface;
 		buildObjects();
 		
 	}
 	
-	
+	/**
+	 * Returns a collection of the shapes that this <code>VirtualGroup</code> contains.
+	 * @return a collection of <code>JavaScriptObject</code> corresponding to the DOJO
+	 *         GFX shape. 
+	 */
 	protected Collection getShapes() {
 		List list = new ArrayList();
 		list.add(getShape());
@@ -228,15 +254,20 @@ public class VirtualGroup extends GraphicObject {
 		return list;
 	}
 	
-	
+	/**
+	 * Builds the <code>GraphicObject</code> of this <code>VirtualGroup</code>.
+	 * assumes that the surface is not null
+	 *
+	 */
 	private void buildObjects() {
 		Iterator ite = objects.iterator();
 		while ( ite.hasNext()) {
 			GraphicObject object = (GraphicObject)ite.next();
-			object.show(surface);
+			object.show(getParent());
 			Collection shapes = object.getShapes();
-			surface.putEventSource(shapes,object);
-			
+			//to control the event on the different shape
+			getParent().putEventSource(shapes,object);
+			// add the shape to the virtual group
 			add(getShape(),object.getShape());
 		}
 		

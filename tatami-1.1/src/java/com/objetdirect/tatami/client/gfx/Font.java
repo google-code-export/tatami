@@ -28,6 +28,8 @@ package com.objetdirect.tatami.client.gfx;
 import com.google.gwt.core.client.JavaScriptObject;
 /**
  * Represent a Font for text object
+ * TODO fix this class : 
+ *  
  */
 public class Font {
 

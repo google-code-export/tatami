@@ -31,18 +31,10 @@ import com.google.gwt.core.client.JavaScriptObject;
  * A Rectangle graphic component.
  * 
  * @author Henri, Vianney
+ * 
  *
  */
-public class Rect extends GraphicObject {
-	
-	/**
-	 * The width of the rectangle
-	 */
-	private double width;
-	/**
-	 * The height of the rectangle
-	 */
-	private double height;
+public class Rect extends RectangularShape {
 	
 	/**
 	 * Creates a rectangle specifying the width and the height
@@ -50,22 +42,7 @@ public class Rect extends GraphicObject {
 	 * @param height height of the rectangle
 	 */
 	public Rect(double width, double height) {
-		this(0,0,width,height);
-		
-		
-	}
-	
-	/**
-	 * Creates a rectangle specifying the width and the height
-	 * @param width width of the rectangle
-	 * @param height height of the rectangle
-	 */
-	public Rect(double x, double y,double width, double height) {
-		super();
-		this.width = width;
-		this.height = height;
-		setLocation(x,y);
-		
+		super(width,height);
 	}
 	
     /**
@@ -73,7 +50,7 @@ public class Rect extends GraphicObject {
      * @param rect the <code>Rectangle</code> to determinate the position, width and height
      */	
 	public Rect(Rectangle rect) {
-		this(rect.getX(),rect.getY(),rect.getWidth(),rect.getHeight());
+		super(rect);
 	}
 	
 	/**
@@ -82,7 +59,7 @@ public class Rect extends GraphicObject {
 	 * @return the DOJO rectangle
 	 */
 	protected JavaScriptObject createGfx(JavaScriptObject surface) {
-		return createGfx(surface, getX(), getY(), width, height);
+		return createGfx(surface, getWidth(), getHeight());
 	}
 
 	
@@ -96,10 +73,8 @@ public class Rect extends GraphicObject {
 	 * @param height  the height of the rectangle
 	 * @return the DOJO rectangle
 	 */
-	protected native JavaScriptObject createGfx(JavaScriptObject surface, double x, double y,double width, double height) /*-{
+	protected native JavaScriptObject createGfx(JavaScriptObject surface,double width, double height) /*-{
 		return surface.createRect({
-			x:      x,
-			y:      y, 
 			width:  width,
 			height: height
 		});
@@ -107,21 +82,7 @@ public class Rect extends GraphicObject {
 	
 
 
-	/**
-	 * Returns the width of the rectangle
-	 * @return width of the rectangle
-	 */
-    public double getWidth() {
-	  return this.width;
-    }
-
-    /**
-     * Returns the height of the rectangle
-     * @return the height of the rectangle
-     */
-    public double getHeight() {
-	  return this.height;
-    }
+	
 
 
 }//end of class

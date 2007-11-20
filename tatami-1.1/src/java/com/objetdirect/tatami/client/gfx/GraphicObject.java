@@ -102,6 +102,9 @@ public abstract class GraphicObject {
 	/** the width of the stroke	 */
 	private int strokeWidth = 1;
 			
+	
+	private GraphicCanvas parent;
+	
 	/**
 	 *The default constructor for a <code>GraphicObject</code> 
 	 *
@@ -120,6 +123,21 @@ public abstract class GraphicObject {
 		return this.shape;
 	}
 	
+	/**
+	 * Returns the <code>GraphicCanvas</code> which is the parent of this
+	 * <code>GraphicObject</code>
+	 * @return the <code>GraphicCanvas</code> containing this <code>GraphicObject</code>
+	 */
+	protected GraphicCanvas getParent() {
+		return this.parent;
+	}
+	
+	
+	/**
+	 *Returns all the shapes of this <code>GraphicObject</code>
+	 *This is used for a <code>VirtualGroup</code> for example
+	 *@return a Collection of <code>JavaScriptObject</code> corresponding to the different shapes
+	 */
 	protected Collection getShapes() {
 		List list = new ArrayList();
 		list.add(shape);
@@ -138,7 +156,7 @@ public abstract class GraphicObject {
 	 * Returns the position of this GraphicalObject
 	 * @return the position of this GraphicalObject
 	 */
-	public Point getPosition() {
+	public Point getLocation() {
 		return this.position;
 	}
 	
@@ -200,7 +218,7 @@ public abstract class GraphicObject {
 	 * @return the x coordinate of the center Location
 	 */
 	public double getCenterX() {
-		return center.getX();
+        return center.getX();
 
 	}
 	
@@ -209,7 +227,7 @@ public abstract class GraphicObject {
 	 * @return the y coordinate of the center Location
 	 */
 	public double getCenterY() {
-        return center.getY();
+		return center.getY();
 	}
 
 
@@ -273,7 +291,9 @@ public abstract class GraphicObject {
 			center.translate(xLag, yLag);
 			bounds.translate(xLag,yLag);
 			applyModification(matrixTranslated);
+			setBounds();
 		}
+		
 		return this;
 	}
 
@@ -307,28 +327,52 @@ public abstract class GraphicObject {
 			//it seem that this method is not perfect yet
 			bounds.rotate(angle);
 			applyModification(matrixRotated);
+			setBounds();
 		}
 		return this;
 	}
 
 	/**
 	 * Scales a picture using a specified point as a center of scaling
-	 * @param factor a scaling factor
+	 * @param factorX  a scaling factor for the X coordinate
+	 * @param factorY  a scaling factor for the Y coordinate
 	 * @return the <code>GraphicObject</code> itself
 	 */
-	public GraphicObject scale(float factor) {
-		if (factor!=1.0) {
-			final JavaScriptObject matrixScaled = getScalingMatrix(factor, getX(), getY());
-			applyModification(matrixScaled);
+	public GraphicObject scale(float factorX,float factorY) {
+		if (factorX!=1.0 || factorY != 1.0) {
+			final JavaScriptObject matrixScaled = getScalingMatrix(factorX,factorY, getX(), getY());
+			if ( !position.equals(center)) {
+	    	    this.bounds.setRect(bounds.getX(), bounds.getY(), bounds.getWidth()*factorX, bounds.getHeight()*factorY);
+	    	    center.setLocation(bounds.getCenter());
+ 			   
+			} else { //the center is the position of the object
+                final double newWidth =  bounds.getWidth() * factorX;
+                final double newHeight = bounds.getHeight() * factorY;
+				final double newX = center.getX() - (newWidth/2);
+                final double newY = center.getY() - (newHeight/2);
+				bounds.setRect(newX, newY, newWidth,newHeight);
+			}
+     		applyModification(matrixScaled);
+			setBounds();
 		}
 		return this;
 	}
 
 	/**
+	 * Scales a picture using a specified point as a center of scaling
+	 * @param factor
+	 * @return the <code>GraphicObject</code> itself
+	 */
+	public GraphicObject scale(float factor) {
+		return scale(factor,factor);
+	}
+	
+	/**
 	 * Shows this <code>GraphicalObject</code> in the canvas.
 	 * @param surface the canvas
 	 */
 	protected void show(GraphicCanvas surface) {
+		this.parent = surface;
 		shape = createGfx(surface.getDojoCanvas());
 		configureShape();
 		
@@ -344,6 +388,20 @@ public abstract class GraphicObject {
 		shape = null;
 	}
 	
+	
+	private native JavaScriptObject getTransformedBound(JavaScriptObject shape)/*-{
+	      	return shape.getTransformedBoundingBox();
+	}-*/;
+	
+	private void setBounds() {
+		if (shape != null) {
+			final JavaScriptObject points =getTransformedBound(getShape()); 
+			if (points!=null ) {
+			   bounds.setRectFromPoints(points);
+			}
+		}
+	}
+	
 	/**
 	 * Configures the shape. 
 	 * @see #show(JavaScriptObject)
@@ -351,7 +409,10 @@ public abstract class GraphicObject {
 	private void configureShape() {
 		JavaScriptObject jsRect = getBounds(shape);
 		if ( jsRect != null) {
+			final double dx = bounds.getX();
+			final double dy = bounds.getY(); 
 			bounds.setRect(jsRect);
+			bounds.translate(dx, dy);
 		}
 		initCenterLocation();
 		configureFill();
@@ -402,6 +463,7 @@ public abstract class GraphicObject {
 	private void configureTransform() {
 		if (matrix!=null) {
 			applyTransform(shape, matrix);
+			setBounds();
 		}
 	}
 	
@@ -479,24 +541,24 @@ public abstract class GraphicObject {
 	}
 	
 	
-	/**
-	 * Sets the location of this <code>GraphicalObject</code>
-	 * @param xCoord the x coordinate 
-	 * @param yCoord the y coordinate
-	 */
-	protected void setLocation(double xCoord, double yCoord) {
-		position.setLocation(xCoord, yCoord);
-    }
+//	/**
+//	 * Sets the location of this <code>GraphicalObject</code>
+//	 * @param xCoord the x coordinate 
+//	 * @param yCoord the y coordinate
+//	 */
+//	protected void setLocation(double xCoord, double yCoord) {
+//		position.setLocation(xCoord, yCoord);
+//    }
 	
-	/**
-	 * Sets the location of this <code>GraphicalObject</code>
-	 * @param newPosition a new position 
-	 */
-	protected void setLocation(Point newPosition) {
-		position.setLocation(newPosition);
-    }
-	
-	
+//	/**
+//	 * Sets the location of this <code>GraphicalObject</code>
+//	 * @param newPosition a new position 
+//	 */
+//	protected void setLocation(Point newPosition) {
+//		position.setLocation(newPosition);
+//    }
+//	
+//	
 	/**
 	 * Multiplies 2 matrix and return the matrix resulting 
 	 * @param mx1 a matrix
@@ -530,13 +592,14 @@ public abstract class GraphicObject {
 	
 	/**
 	 * Scales the matrix of this <code>GraphicalObject</code>
-	 * @param factor the factor for the scale
+	 * @param factorX the scaling factor for the X 
+	 * @param factory the sclaing factor for the Y
 	 * @param centerX the x coordinate of the center of this <code>GraphicalObject</code>
 	 * @param centerY the y coordinate of the center of this <code>GraphicalObject</code>
 	 * @return the matrix
 	 */
-	private static native JavaScriptObject getScalingMatrix(float factor, double centerX, double centerY) /*-{
-		return $wnd.dojox.gfx.matrix.scaleAt(factor, centerX, centerY);
+	private static native JavaScriptObject getScalingMatrix(float factorX,float factorY, double centerX, double centerY) /*-{
+		return $wnd.dojox.gfx.matrix.scaleAt(factorX,factorY, centerX, centerY);
 	}-*/;
 
 	/**
@@ -565,6 +628,10 @@ public abstract class GraphicObject {
 	public Rectangle getBounds() {
 		return this.bounds;
 	}
+
+	
+	
+	
 	
 	 /**
 	  * Experimental

@@ -41,7 +41,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * canvas.add(circle,50,50); 
  * </code> 
  * </p>
- *
+ *TODO add the setWidth and setHeight methods
  */
 public class Circle extends GraphicObject {
 	
@@ -81,7 +81,7 @@ public class Circle extends GraphicObject {
 	 * @return the DOJO circle object
 	 */
 	protected JavaScriptObject createGfx(JavaScriptObject surface) {
-		return createGfx(surface, getX(), getY(), radius);
+		return createGfx(surface, radius);
 	}
 	
 	
@@ -89,16 +89,14 @@ public class Circle extends GraphicObject {
 	/**
 	 * Creates the DOJO circle object
 	 * @param surface the Surface 
-	 * @param centerX the centerX position
-	 * @param centerY the centerY position
 	 * @param radius the radius
 	 * @return the circle JavaScriptObject
 	 */
-	protected native JavaScriptObject createGfx(JavaScriptObject surface, double centerX, double centerY, int radius) /*-{
+	protected native JavaScriptObject createGfx(JavaScriptObject surface,  int radius) /*-{
 		return surface.createCircle(
 		   {
-			cx: centerX, 
-			cy: centerY, 
+		    cx:0,
+		    cy:0,
 			r:  radius
 		   }
 		  );

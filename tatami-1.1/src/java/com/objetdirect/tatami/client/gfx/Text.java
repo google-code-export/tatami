@@ -31,7 +31,8 @@ import com.google.gwt.core.client.JavaScriptObject;
  * Represents some text in a graphical environment.
  * The text can have a specific font and a decoration. 
  * @author Vianney
- *
+ 
+ *TODO  the decoration attribute doesn't seem to work even in pur JavaScript
  */
 public class Text extends GraphicObject {
 
@@ -97,7 +98,7 @@ public class Text extends GraphicObject {
 	 * @param surface the DOJO canvas
 	 */
 	protected JavaScriptObject createGfx(JavaScriptObject surface) {
-		return createGfx(surface,text,getX(),getY(),decoration);
+		return createGfx(surface,text,decoration);
 	}
 
 	/**
@@ -108,8 +109,8 @@ public class Text extends GraphicObject {
 	 * @param yPosition  the y coordinate
 	 * @return the DOJO GFX text
 	 */
-	native private JavaScriptObject createGfx(JavaScriptObject surface, String text, double xPosition,double yPosition,String decoration) /*-{
-	   return  surface.createText({ x: xPosition, y:yPosition, text : text,decoration:decoration});
+	native private JavaScriptObject createGfx(JavaScriptObject surface, String text,String decoration) /*-{
+	   return  surface.createText({  text : text,decoration:decoration});
 	}-*/; 
 	
 	
@@ -170,9 +171,35 @@ public class Text extends GraphicObject {
 	 */
 	public Rectangle getBounds() {
 		final int fontSize = (int)getFontSize(font.getSize()+"pt");
-		final int width = text.length() * fontSize;
+		final double width = text.length() * fontSize * 0.75 ;
 		return new Rectangle(getX(),getY(),width,fontSize);
 
 	}
 	
+	
+	/**
+	 * Returns the width of this <code>Text</code> object 
+	 * @return the width of this <code>Text</code> object
+	 */
+	public double getWidth() {
+		return getBounds().getWidth();
+	}
+	
+	/**
+	 * Returns the height of this <code>Text</code> object 
+	 * @return the height of this <code>Text</code> object
+	 */
+	public double getHeight() {
+		return getBounds().getHeight();
+	}
+	
+    /**
+     * Creates the text in the canvas and set the font
+     * 
+     */
+	protected void show(GraphicCanvas canvas) {
+		super.show(canvas);
+		this.setFont(getFont());
+	}
+
 }//end of class

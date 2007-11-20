@@ -61,11 +61,11 @@ public class Pattern {
     /**
      * The with of the image
      */
-	private int width = 10;
+	private double width = 10;
 	/**
 	 * the height of the image
 	 */
-	private int height = 10;
+	private double height = 10;
 	
 	/**
 	 * Creates a <code>Pattern</code> for a <code>GraphicalObject</code>
@@ -75,7 +75,7 @@ public class Pattern {
 	 * @param width the width of the image
 	 * @param height the height of the image
 	 */
-	public Pattern(String url,int xCoord,int yCoord, int width, int height) {
+	public Pattern(String url,double xCoord,double yCoord, double width, double height) {
 		this.url = url;
 		position = new Point(xCoord,yCoord);
 		this.width = width;
@@ -88,7 +88,7 @@ public class Pattern {
 	 * @param x the x coordinate for the pattern
 	 * @param y the y coordinate for the pattern
 	 */
-	public Pattern(ImageGfx image, int xCoord, int yCoord) {
+	public Pattern(ImageGfx image, double xCoord, double yCoord) {
 		this(image.getUrl(),xCoord,yCoord,image.getWidth(),image.getHeight());
 	}
 	
@@ -99,7 +99,7 @@ public class Pattern {
 	 * @param xCoord the x coordinate for the pattern
 	 * @param yCoord the y coordinate for the pattern
 	 */
-	public Pattern(Image image, int xCoord, int yCoord) {
+	public Pattern(Image image, double xCoord, double yCoord) {
 		this(image.getUrl(),xCoord,yCoord,image.getWidth(),image.getHeight());
 	}
 	/**
@@ -119,7 +119,7 @@ public class Pattern {
 	 * @param height the height of the image
 	 * @return the DOJO GFX pattern
 	 */
-	private native JavaScriptObject createPattern(String url,double x, double y, int width, int height)/*-{
+	private native JavaScriptObject createPattern(String url,double x, double y, double width, double height)/*-{
 	    return {type:"pattern", src:url,x:x,y:y,width:width,height:height};
 	}-*/;
 	
@@ -151,14 +151,14 @@ public class Pattern {
 	 * Returns the width of the image
 	 * @return the width of the image
 	 */
-	public int getWidth() {
+	public double getWidth() {
 		return this.width;
 	}
 	/**
 	 * Returns the height of the image
 	 * @return the height of the image
 	 */
-	public int getHeight() {
+	public double getHeight() {
 		return this.height;
 	}
 }//end of class
