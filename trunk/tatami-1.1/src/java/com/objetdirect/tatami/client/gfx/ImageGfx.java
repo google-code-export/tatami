@@ -32,15 +32,11 @@ import com.google.gwt.user.client.ui.Image;
  * Represents a GFX image. 
  * A gfx is a <code>GraphicalObject</code> but some properties are not use : 
  * the color of the fill, the stroke and the pattern. 
- *
- */
-public class ImageGfx extends GraphicObject {
 
-	/** The width of the image */
-	private int width = 100;
+ */
+public class ImageGfx extends RectangularShape {
+
 	
-	/** The height of the image */
-	private int height = 100;
 	
 	/** The url of the image */
 	private String url;
@@ -51,11 +47,11 @@ public class ImageGfx extends GraphicObject {
 	 * @param width the width of the image
 	 * @param height the height of the image
 	 */
-	public ImageGfx(String url,int width, int height) {
-		super();
+	public ImageGfx(String url,double width, double height) {
+		super(width,height);
 		this.url = url;
-		this.width = width;
-		this.height = height;
+		
+		
 	}
 	
 	/**
@@ -73,42 +69,29 @@ public class ImageGfx extends GraphicObject {
 	public String getUrl() {
 		return this.url;
 	}
-	/**
-	 * Returns the width of this image
-	 * @return the width of this image
-	 */
-	public int getWidth() {
-		return this.width;
-	}
-	/**
-	 * Returns the height of this image
-	 * @return the height of this image
-	 */
-	public int getHeight() {
-		return this.height;
-	}
+	
 	
 	/**
 	 * Creates the gfx image
 	 * @param surface the canvas
 	 */
 	protected JavaScriptObject createGfx(JavaScriptObject surface) {
-      	return createImage(surface,getX(),getY(),getUrl(),getWidth(),getHeight());
+      	return createImage(surface,getUrl(),getWidth(),getHeight());
 	}
 
     /**
      * Creates the gfx Image
      * @param surface the canvas to create the image
-     * @param xPosition the x coordinate of the image 
-     * @param yPosition the y coordinate of the image 
      * @param url the url to use of the image 
      * @param width the width of the image
      * @param height the height of the image
      * @return the DOJO GFX image
      */
-	native private JavaScriptObject createImage(JavaScriptObject surface,double xPosition,double yPosition,String url, int width,int height) /*-{
-	     return  surface.createImage({ x: xPosition, y:yPosition, src : url,width:width,height:height});
+	native private JavaScriptObject createImage(JavaScriptObject surface,String url, double width,double height) /*-{
+	     return  surface.createImage({  src : url,width:width,height:height});
 	}-*/; 
+	
+	
 	
 	
 

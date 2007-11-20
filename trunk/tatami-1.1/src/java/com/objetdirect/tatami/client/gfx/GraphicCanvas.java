@@ -38,6 +38,12 @@ import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.DojoController;
 
+/**
+ * TODO fix the bug when the original size of the canvas is set to zero. 
+ * And if we add some GraphicObject and we change the size of the canvas
+ * @author tvzl8571
+ *
+ */
 public class GraphicCanvas extends Widget {
 
 	/**
@@ -113,11 +119,9 @@ public class GraphicCanvas extends Widget {
 		while (ite.hasNext()) {
 			final GraphicObject graphicObject = (GraphicObject)ite.next();
 			graphicObject.show(this);
-			Collection shapes = graphicObject.getShapes();
+			final Collection shapes = graphicObject.getShapes();
 			putEventSource(shapes,graphicObject);
-						
-			//graphicObjects.put(getEventSource(graphicObject.getShape()), graphicObject);
-		}
+     	}
 	}
 	
 	/**
@@ -134,7 +138,6 @@ public class GraphicCanvas extends Widget {
 	 *
 	 */
 	private void detachAllGraphicObjects() {
-	
 		final Iterator ite = objects.iterator();
 		while (ite.hasNext()) {
 			final GraphicObject graphicObject = (GraphicObject)ite.next();
@@ -151,7 +154,7 @@ public class GraphicCanvas extends Widget {
 	 */
 	public void add(GraphicObject graphicObject, int x, int y) {
 		if (objects.add(graphicObject)) {
-			graphicObject.setLocation(x, y);
+			graphicObject.translate(x, y);
 			
 			if (isAttached()) {
 				attachGraphicObject(graphicObject);

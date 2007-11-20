@@ -71,7 +71,7 @@ public class Ellipse extends GraphicObject {
      * @param surface the canvas
      */
     protected JavaScriptObject createGfx(JavaScriptObject surface) {
-			return createEllipse(surface,getX(),getY(),getRadiusX(),getRadiusY());
+			return createEllipse(surface,getRadiusX(),getRadiusY());
 	}
     
     /**
@@ -83,8 +83,8 @@ public class Ellipse extends GraphicObject {
      * @param radiusY the radius for the Y 
      * @return the DOJO GFX ellipse
      */
-    native private JavaScriptObject createEllipse(JavaScriptObject surface,double centerX,double centerY, int radiusX,int radiusY)/*-{
-       return surface.createEllipse({cx:centerX,cy:centerY,rx:radiusX,ry:radiusY});        
+    native private JavaScriptObject createEllipse(JavaScriptObject surface, int radiusX,int radiusY)/*-{
+       return surface.createEllipse({cx:0,cy:0,rx:radiusX,ry:radiusY});        
     }-*/;
 	
    
