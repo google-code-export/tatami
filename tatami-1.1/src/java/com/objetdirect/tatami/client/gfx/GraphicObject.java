@@ -66,6 +66,20 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public abstract class GraphicObject {
 	
+	public static final String SOLID = "Solid";
+	public static final String DOT = "Dot";
+	public static final String NONE = "none";
+	public static final String SHORTDASH =  "ShortDash";
+	public static final String SHORTDOT ="ShortDot";
+	public static final String SHORTDASHDOT ="ShortDashDot";
+	public static final String SHORTDASHDOTDOT ="ShortDashDotDot";
+	public static final String DASH = "Dash";
+	public static final String LONGDASH ="LongDash";
+	public static final String DASHDOT ="DashDot"; 
+	public static final String LONGDASHDOT ="LongDashDot";
+	public static final String LONGDASHDOTDOT ="LongDashDotDot";
+	
+	
 	/**
 	 * The position of this <code>GraphicalObject</code>
 	 */
@@ -98,6 +112,8 @@ public abstract class GraphicObject {
 	
 	/** color of the stroke */
 	private Color strokeColor = Color.BLACK;
+	
+	private String strokeStyle = SOLID;
 	
 	/** the width of the stroke	 */
 	private int strokeWidth = 1;
@@ -188,6 +204,26 @@ public abstract class GraphicObject {
 		return this.strokeWidth;
 	}
 	
+	/**
+	 * Returns the stroke style used
+	 * @return SOLID, NONE, DOT, SHORTDASH,LONGDASHDOTDOT,LONGDASHDOT,
+	 *         DASHDOT,LONGDASH, DASH, SHORTDASHDOTDOT,SHORTDASHDOT,SHORTDOT
+	 */
+	public String getStrokeStyle() {
+        return this.strokeStyle;		
+	}
+	
+	/**
+	 * Sets the stroke style for this <code>GraphicObject</code>
+	 * @param style availabled values : SOLID, NONE, DOT, SHORTDASH,LONGDASHDOTDOT,LONGDASHDOT,
+	 *         DASHDOT,LONGDASH, DASH, SHORTDASHDOTDOT,SHORTDASHDOT,SHORTDOT
+	 */
+	public void setStrokeStyle(String style) {
+		this.strokeStyle = style;
+		if (getShape() != null) {
+			configureStroke();
+		}
+	}
 	/**
 	 * Returns the color of the stroke
 	 * @return the color of the stroke
@@ -321,9 +357,13 @@ public abstract class GraphicObject {
 	 * @return the <code>GraphicObject</code> itself
 	 */
 	public GraphicObject rotate(float angle) {
+		return rotate(angle,getCenter());
+	}
+
+	public GraphicObject rotate(float angle, Point center) {
 		if (angle!=0) {
-			final JavaScriptObject matrixRotated = getRotationMatrix(angle, getCenterX(), getCenterY());
-			position.rotate(angle,getCenter());
+			final JavaScriptObject matrixRotated = getRotationMatrix(angle, center.getX(), center.getY());
+			position.rotate(angle,center);
 			//it seem that this method is not perfect yet
 			bounds.rotate(angle);
 			applyModification(matrixRotated);
@@ -331,7 +371,7 @@ public abstract class GraphicObject {
 		}
 		return this;
 	}
-
+	
 	/**
 	 * Scales a picture using a specified point as a center of scaling
 	 * @param factorX  a scaling factor for the X coordinate
@@ -442,7 +482,7 @@ public abstract class GraphicObject {
 	 *
 	 */
 	private void configureStroke() {
-		configureStroke(shape, strokeColor.getDojoColor(), strokeWidth);
+		configureStroke(shape, strokeColor.getDojoColor(), strokeWidth,strokeStyle);
 	}
 	
 
@@ -451,9 +491,10 @@ public abstract class GraphicObject {
 	 * @param shape the shape DOJO object
 	 * @param strokeColor the color for the stroke
 	 * @param strokeWidth the width for the stroke
+	 * @param style the style to use for the stroke
 	 */
-	private static native void configureStroke(JavaScriptObject shape,JavaScriptObject strokeColor,	int strokeWidth) /*-{
-		shape.setStroke({color: strokeColor, width: strokeWidth});
+	private static native void configureStroke(JavaScriptObject shape,JavaScriptObject strokeColor,	int strokeWidth,String style) /*-{
+		shape.setStroke({color: strokeColor, width: strokeWidth,style:style});
 	}-*/;
 
 	/**
