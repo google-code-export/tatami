@@ -62,13 +62,13 @@ public class Slider extends AbstractDojoFocus {
 
 	private final String BOTTOM = "bottomDecoration";
 
-	private SliderRule sliderRuleTop;
+	private RuleMark sliderRuleTop;
 
-	private SliderRule sliderRuleBottom;
+	private RuleMark sliderRuleBottom;
 
-	private SliderRule sliderLabelTop;
+	private RuleLabels labelTop;
 
-	private SliderRule sliderLabelBottom;
+	private RuleLabels labelBottom;
 
 	/** Type for the cursor position */
 	private String type = HORIZONTAL;
@@ -112,10 +112,8 @@ public class Slider extends AbstractDojoFocus {
 	/**
 	 * Sets the size if the DOJO DOM element.
 	 * 
-	 * @param width
-	 *            the width to apply
-	 * @param height
-	 *            the height to apply
+	 * @param width the width to apply
+	 * @param height the height to apply
 	 */
 	public void setSize(int width, int height) {
 		this.width = width;
@@ -307,8 +305,10 @@ public class Slider extends AbstractDojoFocus {
 		setValue(getValue()); // 
 		applySize();
 	
-		buildSliderRuleTop();
-		buildSliderRuleBottom();
+		buildRuleMark(sliderRuleTop);
+		buildRuleMark(sliderRuleBottom);
+		buildRuleMark(labelTop);
+		buildRuleMark(labelBottom);
 
 	}
 
@@ -323,7 +323,6 @@ public class Slider extends AbstractDojoFocus {
 
 	/**
 	 * Returns the width of the Slider
-	 * 
 	 * @return the width of the Slider
 	 */
 	public int getWidth() {
@@ -363,8 +362,7 @@ public class Slider extends AbstractDojoFocus {
 	 */
 	public void doAfterCreation() {
 		try {
-		
-			doSetValue(getDojoWidget(), getValue());
+		doSetValue(getDojoWidget(), getValue());
 			
 		} catch (Exception e) {
 			GWT.log("ERROR", e);
@@ -391,17 +389,29 @@ public class Slider extends AbstractDojoFocus {
 	}
 	
 	
+	public void removeLabelTop() {
+		removeDojoRule(labelTop);
+		labelTop = null;
+	}
+	
+	public void removeLabelBottom() {
+		removeDojoRule(labelBottom);
+		labelBottom = null;
+	}
+	
 	
 	public void removeRuleAndLabel() {
 		removeDojoRule(sliderRuleBottom);
 		removeDojoRule(sliderRuleTop);
+		removeDojoRule(labelTop);
+		removeDojoRule(labelBottom);
 	}
 	
 	
-	private void removeDojoRule(SliderRule rule) {
+	private void removeDojoRule(RuleMark rule) {
 		if ( rule != null) {
-		 removeChild(getDojoWidget(),rule.child);
-		 DojoController.getInstance().destroy(rule.child);
+		 removeChild(getDojoWidget(),rule.getDojoWidget());
+		 DojoController.getInstance().destroy(rule.getDojoWidget());
 		}
 		
 	}
@@ -414,13 +424,49 @@ public class Slider extends AbstractDojoFocus {
 		if ( sliderRuleTop != null) {
 			removeRuleTop();
 		}
-		this.sliderRuleTop = new SliderRule();
-		this.sliderRuleTop.count = count;
-		this.sliderRuleTop.ruleStyle = ruleStyle;
+		if (VERTICAL.equals(type)) {
+			sliderRuleTop = new RuleMark(RuleMark.VERTICAL,count,ruleStyle,LEFT);
+		} else {
+			sliderRuleTop = new RuleMark(RuleMark.HORIZONTAL,count,ruleStyle,TOP);
+		}
+			
 		if ( isAttached()) {
-			buildSliderRuleTop();
+			buildRuleMark(sliderRuleTop);
 		}
 	}
+	
+	
+	
+	public void setLabelsTop(String[] labels,String style) {
+		if ( labelTop != null) {
+			removeLabelTop();
+		}
+		if (VERTICAL.equals(type)) {
+			labelTop = new RuleLabels(RuleLabels.VERTICAL,labels,style,LEFT);
+		} else {
+			labelTop = new RuleLabels(RuleLabels.HORIZONTAL,labels,style,TOP);
+		}
+			
+		if ( isAttached()) {
+			buildRuleMark(labelTop);
+		}
+	}
+	
+	public void setLabelsBottom(String[] labels,String style) {
+		if ( labelBottom != null) {
+			removeLabelTop();
+		}
+		if (VERTICAL.equals(type)) {
+			labelBottom = new RuleLabels(RuleLabels.VERTICAL,labels,style,RIGHT);
+		} else {
+			labelBottom = new RuleLabels(RuleLabels.HORIZONTAL,labels,style,BOTTOM);
+		}
+			
+		if ( isAttached()) {
+			buildRuleMark(labelBottom);
+		}
+	}
+	
 	
 	/**
 	 * 
@@ -436,28 +482,38 @@ public class Slider extends AbstractDojoFocus {
 	 * @param count
 	 * @param ruleStyle
 	 */
-	public void setRuleBottom(int count, String ruleStyle) {
+	public void setRuleBottom(int count, String size) {
 		//if we have already a sliderrule 
 		if ( sliderRuleBottom != null) {
 			removeRuleBottom();
 		}
-		this.sliderRuleBottom = new SliderRule();
-		this.sliderRuleBottom.count = count;
-		this.sliderRuleBottom.ruleStyle = ruleStyle;
+		if (VERTICAL.equals(type)) {
+			sliderRuleBottom = new RuleMark(RuleMark.VERTICAL,count,size,RIGHT);
+		} else {
+			sliderRuleBottom = new RuleMark(RuleMark.HORIZONTAL,count,size,BOTTOM);
+		}
+		
 		if ( isAttached()) {
-			buildSliderRuleBottom();
+			buildRuleMark(sliderRuleBottom);
+			
 		}
 	}
 	
 	
-	public void setRuleLeft(int count, String ruleStyle) {
-		setRuleTop(count,ruleStyle);
+	public void setRuleLeft(int count, String size) {
+		setRuleTop(count,size);
 	}
 	
-	public void setRuleRight(int count, String ruleStyle) {
-		setRuleBottom(count,ruleStyle);
+	public void setLabelsLeft(String[] labels, String style) {
+		setLabelsTop(labels,style);
 	}
 	
+	public void setRuleRight(int count, String size) {
+		setRuleBottom(count,size);
+	}
+	public void setLabelsRight(String[] labels, String style) {
+		setLabelsBottom(labels,style);
+	}
 
 	
 	/**
@@ -503,73 +559,42 @@ public class Slider extends AbstractDojoFocus {
 		changeValue((int) value);
 	}
 
-	private class SliderRule {
-		int count = 3;
-		JavaScriptObject child;
-		String position = TOP;
-
-		String ruleStyle = "";
-	}
+	
 
 	private native void addChild(JavaScriptObject dojoWidget,JavaScriptObject child)/*-{
 	     dojoWidget.addChild(child);
 	     dojoWidget.startup();
-	     child.startup();
+	     //child.startup();
 	 }-*/;
 
 	private native void removeChild(JavaScriptObject dojoWidget,JavaScriptObject child)/*-{
 	    dojoWidget.removeChild(child);
 	}-*/;
 	
+	
+
 	/**
 	 * Assumes that the Slider is attached.
 	 * 
 	 */
-	private void buildSliderRuleTop() {
-		if (sliderRuleTop != null) {
-			if (VERTICAL.equals(type)) {
-				sliderRuleTop.position = LEFT;
-				sliderRuleTop.child = createVerticalRule(sliderRuleTop.count,sliderRuleTop.ruleStyle, sliderRuleTop.position);
-			} else {
-				sliderRuleTop.position = TOP;
-				sliderRuleTop.child = createHorizontalRule(sliderRuleTop.count,sliderRuleTop.ruleStyle, sliderRuleTop.position);
-			}
-			addChild(getDojoWidget(), sliderRuleTop.child);
+	private void buildRuleMark(RuleMark rule) {
+		if ( rule != null) {
+		  try {
+		  	rule.createDojoWidget();
+		    addChild(getDojoWidget(), rule.getDojoWidget());
+		  } catch (Exception e ) {
+			 GWT.log("ERROR", e);
+		  }
 		}
-   	    
     }
+
 	
-	private void buildSliderRuleBottom() {
-		if (sliderRuleBottom != null) {
-			if (VERTICAL.equals(type)) {
-				sliderRuleBottom.position = RIGHT;
-				sliderRuleBottom.child = createVerticalRule(sliderRuleBottom.count, sliderRuleBottom.ruleStyle,sliderRuleBottom.position);
-			} else {
-				sliderRuleBottom.position = BOTTOM;
-				sliderRuleBottom.child = createHorizontalRule(sliderRuleBottom.count, sliderRuleBottom.ruleStyle,sliderRuleBottom.position);
-			}
-		addChild(getDojoWidget(), sliderRuleBottom.child);
-   	    }
-	}
+	
 
-	/**
-	 * inner class to represent a label
-	 * 
-	 *
-	 */
-	private class SliderLabels {
-		String labels[] = new String[0];
-		String position = TOP;
-		String labelStyle = "";
-		JavaScriptObject child;
-	}
+	
+	
+	
 
-	private native JavaScriptObject createVerticalRule(int count,String ruleStyle, String position)/*-{
-	     return new $wnd.dijit.form.VerticalRule({count:count,ruleStyle:ruleStyle,container:position});
-	 }-*/;
 
-	private native JavaScriptObject createHorizontalRule(int count,String ruleStyle, String position)/*-{
-	    return new $wnd.dijit.form.HorizontalRule({count:count,ruleStyle:ruleStyle,container:position});
-	 }-*/;
 
 } // end of class
