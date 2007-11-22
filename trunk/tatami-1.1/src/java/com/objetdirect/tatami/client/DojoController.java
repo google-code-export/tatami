@@ -270,8 +270,18 @@ public class DojoController {
 	 }-*/;
 
 	
-
+     static public  JavaScriptObject createArray(String[] array) {
+    	 JavaScriptObject jsArray = JavaScriptObject.createArray();
+    	 for ( int i=0; i < array.length;i++) {
+    		 jsArray = put(jsArray,i,array[i]);
+    	 }
+    	 return jsArray;
+     }
 	
+     static private native JavaScriptObject put(JavaScriptObject array,int index, String value)/*-{
+         array[index] = value;
+         return array;
+     }-*/;
 	
 	
 	
