@@ -133,7 +133,7 @@ public class TatamiDemo implements EntryPoint {
 		logoOD.setStyleName("TatamiDemo-logoOD");
 		logoOD.setPixelSize(126, 64);
 		titlePanel.add(logoOD,DockPanel.WEST);
-		HTML title = new HTML("Tatami version 1.1 (DOJO 0.9 wrapped)");
+		HTML title = new HTML("Tatami version 1.1 (DOJO 1.0 wrapped)");
 		title.setStyleName("TatamiDemo-title");
 		Image logoFT = new Image("logo_ft.gif");
 		logoFT.setStyleName("TatamiDemo-logoFT");
