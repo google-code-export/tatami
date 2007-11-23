@@ -32,6 +32,7 @@ import com.objetdirect.tatami.client.gfx.Line;
 import com.objetdirect.tatami.client.gfx.Path;
 import com.objetdirect.tatami.client.gfx.Pattern;
 import com.objetdirect.tatami.client.gfx.Point;
+import com.objetdirect.tatami.client.gfx.Polyline;
 import com.objetdirect.tatami.client.gfx.Rect;
 import com.objetdirect.tatami.client.gfx.Text;
 import com.objetdirect.tatami.client.gfx.TextPath;
@@ -90,6 +91,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 	 */
 	private Image lineButton;
 	
+	private Image polylineButton;
 	/**
 	 * for creating an Ellipse
 	 */
@@ -173,14 +175,14 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		buttonPanel.setSpacing(10);
 		popup.add(html);
 		
-		gridShape     = new Grid(5,2);
+		gridShape     = new Grid(6,2);
 		gridShape.setCellSpacing(5);
 		gridShape.setCellPadding(5);
 		gridTransform = new Grid(3,2);
 		gridTransform.setCellSpacing(5);
 		gridTransform.setCellPadding(5);
 			
-		canvas.setPixelSize(600, 600);
+		canvas.setPixelSize(600,600);
 
 		fill = new HTML("&nbsp;&nbsp;&nbsp;");
 		DOM.setStyleAttribute(fill.getElement(),"backgroundColor",this.currentFillColor.toHex());
@@ -209,12 +211,14 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
     	ellipseButton = addToGrid(gridShape,0,1,"Ellipse","gfx/ellipse.gif");
     	rectButton    = addToGrid(gridShape,1,0,"Rect","gfx/rect.gif");
     	lineButton    = addToGrid(gridShape,1,1,"Line","gfx/line.gif");		
-    	textButton    = addToGrid(gridShape,2,0,"Text","gfx/text.gif");
-		imageButton   = addToGrid(gridShape,2,1,"Image","gfx/image.gif");
-		pathButton    = addToGrid(gridShape,3,0,"Path","gfx/path.GIF");
-		textPathButton= addToGrid(gridShape,3,1,"Text Path","gfx/textpath.gif");
-		virtualButton = addToGrid(gridShape,4,0,"Virtual","gfx/group.gif");
-		deleteButton  = addToGrid(gridShape,4,1,"Delete","gfx/delete.gif");
+    	polylineButton = addToGrid(gridShape,2,0,"Polyline","gfx/polyline.gif");
+    	textButton    = addToGrid(gridShape,2,1,"Text","gfx/text.gif");
+		
+    	imageButton   = addToGrid(gridShape,3,0,"Image","gfx/image.gif");
+		pathButton    = addToGrid(gridShape,3,1,"Path","gfx/path.GIF");
+		textPathButton= addToGrid(gridShape,4,0,"Text Path","gfx/textpath.gif");
+		virtualButton = addToGrid(gridShape,4,1,"Virtual","gfx/group.gif");
+		deleteButton  = addToGrid(gridShape,5,0,"Delete","gfx/delete.gif");
 		
 		
 		colorButton      = addToGrid(gridTransform,0,0,"set color","gfx/color.gif");
@@ -353,7 +357,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		} else if (sender.equals(colorButton)) {
 			showPopupColor();
 		}  else if ( sender.equals(textButton)) {
-			initText();
+			showText();
 		
 		} else if ( sender.equals(scaleButton)) {
 			this.showPopupScaler();
@@ -384,16 +388,38 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		} else if ( sender.equals(lineButton)) {
            final Point pointA = new Point(50,50);
            final Point pointB = new Point(200,360);
-           showGraphicObject(new Line(pointA,pointB),300,300);
+           Line line = new Line(pointA,pointB);
+           line.setStrokeStyle(Line.LONGDASH);
+           showGraphicObject(line,300,300);
 		} else if ( sender.equals(pathButton)) {
 			showPath();
 		} else if ( sender.equals(virtualButton)) {
-			this.initVirtual();
+			this.showVirtual();
 			
 		} else if ( sender.equals(textPathButton)) {
 			this.showTextPath();
+		} else if ( sender.equals(polylineButton)) {
+			showPolyline();
+			
 		}
  	}
+	
+	
+	private void showPolyline() {
+		
+        Point[] arrow = new Point[8];
+        arrow[0] = new Point(-2,15);
+        arrow[1] = new Point(2,15);
+        arrow[2] = new Point(2,-105);
+        arrow[3] = new Point(6,-105);
+        arrow[4] = new Point(0,-116);
+        arrow[5] = new Point(-6,-105);
+        arrow[6] = new Point(-2,-105);
+        arrow[7] = new Point(-2,15);
+        
+        Polyline poly = new Polyline(arrow);
+        this.showGraphicObject(poly,300,300);
+	}
 	
 	private void showPath() {
 		//start point
@@ -405,7 +431,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		Path t = new Path();
 		t.setFillColor(currentFillColor);
 		t.setStroke(currentStrokeColor,currentStrokeSize);
-		canvas.add(t, 60, 100);
+		
 		t.moveTo(p1);
 		t.lineTo(p2);
 		t.lineTo(p3);
@@ -414,8 +440,11 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		t.moveTo((p1.getX() + p4.getX()) / 2, (p1.getY() + p4.getY()) / 2);
 		t.lineTo((p2.getX() + p3.getX()) / 2, (p2.getY() + p3.getY()) / 2);
 		t.moveTo((p1.getX() + p2.getX()) / 2, (p1.getY() + p2.getY()) / 2);
+		
 		t.arcTo(20, 30, 35, true, true, p3);
 		t.lineTo((p3.getX() + p4.getX()) / 2, (p3.getY() + p4.getY()) / 2);
+		canvas.add(t, 60, 100);
+		canvas.setPixelSize(600,600);
 	}
 	
 	private void showProperties(GraphicObject object) {
@@ -468,7 +497,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		  final PopupPanel popupScaler = new PopupPanel(true);
 	   	  popupScaler.addStyleName("GfxDemo-popup");
 		  final Slider scaler = new Slider(Slider.HORIZONTAL, -10, 10, 1, true);
-
+          scaler.setRuleBottom(6, "3px");
 		  HorizontalPanel scalePanel = new HorizontalPanel();
 		  scalePanel.setSpacing(5);
 					
@@ -623,14 +652,14 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		return image;
 	}
 	
-	private void initText() {
-		Text text = new Text("underline, courier 10",Text.UNDERLINE);
-		Font font = new Font("Courier",10,Font.NORMAL,Font.NORMAL,Font.NORMAL);
-		Text text2 = new Text("overline, courier bolder 10",Text.OVERLINE);
+	private void showText() {
+		Text text  = new Text("Tatami GFX,\ncourier 10",Text.UNDERLINE);
+		Font font  = new Font("Courier",10,Font.NORMAL,Font.NORMAL,Font.NORMAL);
+		Text text2 = new Text("Tatami GFX, courier bolder 10",Text.OVERLINE);
 		Font font2 = new Font("Courier",10,Font.NORMAL,Font.NORMAL,Font.BOLDER);
-		Text text3 = new Text("line through, courier lighter 10",Text.LINE_THROUGH);
+		Text text3 = new Text("Tatami GFX, courier lighter 10",Text.LINE_THROUGH);
 		Font font3 = new Font("Courier",10,Font.NORMAL,Font.NORMAL,Font.LIGHTER);		
-		Text text4 = new Text("Some Text Arial 24 Bold");
+		Text text4 = new Text("Tatami GFX Arial 24 Bold");
 		Font font4 = new Font("Arial",24,Font.ITALIC,Font.NORMAL,Font.BOLD);
 			
 		text.setFont(font);
@@ -641,10 +670,6 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		showGraphicObject(text3,10,60);
 		showGraphicObject(text4,10,100);
 		text4.setFont(font4);
-		
-		
-		
-		
 		
 		
 	}
@@ -666,21 +691,16 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		
 	}
 	
-	private void initVirtual() {
+	private void showVirtual() {
 		VirtualGroup virtual = new VirtualGroup();
 		Rect r = new Rect(100,20);
 		Circle c = new Circle(20);
-		
 		c.translate(0, 15);
-		r.translate(0, 30);
+		r.translate(0, 25);
 		virtual.add(c);
 		virtual.add(r);
 		this.showGraphicObject(virtual, 300, 300);
 				
-		//canvas.add(r,300, 305);
-		//canvas.add(c,300, 275);
-		//virtual.rotate(90f);
-		//virtual.translate(20, 60);
 		
 		
 	}
@@ -691,6 +711,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		object.setFillColor(currentFillColor);
 		object.setStroke(currentStrokeColor,currentStrokeSize);
 		this.canvas.add(object, x, y);
+		
 	}
 
 	public void mousePressed(GraphicObject graphicObject, int x, int y) {

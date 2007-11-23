@@ -34,6 +34,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.BasePicker;
+import com.objetdirect.tatami.client.Clock;
 import com.objetdirect.tatami.client.DatePicker;
 import com.objetdirect.tatami.client.DropdownContainer;
 import com.objetdirect.tatami.client.DropdownDatePicker;
@@ -109,6 +110,8 @@ public class DateTimeDemo extends Composite {
 	  
 	  mainPanel.add(datePanel);
 	  mainPanel.add(timePanel);
+	  Clock clock = new Clock("clock_face.jpg",385);
+	  mainPanel.add(clock);
 
   }
   

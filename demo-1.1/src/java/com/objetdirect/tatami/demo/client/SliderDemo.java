@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
+import com.objetdirect.tatami.client.RuleLabels;
 import com.objetdirect.tatami.client.Slider;
 
 /**
@@ -62,11 +63,17 @@ public class SliderDemo extends Composite implements ChangeListener{
 		
 		 HTML html = new HTML("Move the cursor of each <b>Slider</b> to modify the size of the image below");
 		 verticalSlider = new Slider(Slider.VERTICAL, 0, 100, 100,true);
-         verticalSlider.setRuleLeft(5, "width:5px");
-		 verticalSlider.setRuleRight(10, "width:5px");
+         verticalSlider.setRuleLeft(6, "5px");
+		 verticalSlider.setRuleRight(12, "3px");
+		 String[] labels = {" ","20%","40%","60%","80%", " "};
+		 
+		 verticalSlider.setLabelsLeft(labels,"margin: 0px -0.5em 0px -2em;color:gray");
+		 
 		 horizontalSlider = new Slider(Slider.HORIZONTAL, 0, 100, 100,true);
-		 horizontalSlider.setRuleTop(10, "width:5px");
-		 horizontalSlider.setRuleBottom(25, "width:15px");
+		 
+		 horizontalSlider.setRuleBottom(6, "5px");
+		 horizontalSlider.setLabelsTop(labels,"margin: -0.5em 0px -3.5em 0px;color:gray");
+		 horizontalSlider.setWidth("205px");
 		 cubicImage = new Image("cubic.jpg");
 		 cubicImage.setStyleName("SliderDemo-image");
 		 cubicImage.setSize("200px", "200px");
@@ -77,14 +84,14 @@ public class SliderDemo extends Composite implements ChangeListener{
 		 horizontalSlider.addChangeListener(this);
          panel.add(html,DockPanel.NORTH);
 		 panel.add(cubicImage,DockPanel.CENTER);
-		
- 		panel.setCellVerticalAlignment(cubicImage,DockPanel.ALIGN_MIDDLE);
- 		
+		 		
  		panel.setCellWidth(cubicImage, "205px");
 		panel.setCellHeight(cubicImage, "205px");
 		panel.add(verticalSlider,DockPanel.WEST);
 		panel.setCellHorizontalAlignment(verticalSlider,DockPanel.ALIGN_RIGHT);	
 		panel.add(horizontalSlider,DockPanel.SOUTH);
+		panel.setCellVerticalAlignment(cubicImage,DockPanel.ALIGN_MIDDLE);
+		panel.setCellHorizontalAlignment(horizontalSlider,DockPanel.ALIGN_LEFT);
             
 	 }
 

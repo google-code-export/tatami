@@ -33,8 +33,8 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.objetdirect.tatami.client.Clock;
 import com.objetdirect.tatami.client.FishEye;
-import com.objetdirect.tatami.client.Slider;
 import com.objetdirect.tatami.client.Toaster;
 
 /**
@@ -108,16 +108,21 @@ public class TatamiDemo implements EntryPoint {
 	    welcome.setHTML("<p>The project aims to integrate the Google Web Toolkit (GWT) and the DOJO framework. Indeed the DOJO framework is very rich in term of widgets and utilities (fisheye, slider, drag and drop functionality) and the main interest is to take benefits of the huge work which has been already done by the DOJO community. In other words, it means: <b>the DOJO widgets become GWT widgets, the DOJO utilities become GWT helper.</b></p><br><p> The project is on the Google code community : <a href=\"http://code.google.com/p/tatami\">Tatami</a></p><p> Click on an item of the menu at the left to see the widgets that Tatami proposes.</p>");
 	  
 	    mainPanel.add(welcome,DockPanel.CENTER);
+	   
+	   
+	 
 	    root.add(mainPanel,DockPanel.CENTER);
 	    root.setCellWidth(mainPanel,"100%");
 	    root.add(menuPanel,DockPanel.WEST);
 	    root.setSpacing(20);
+	  
 	    body.add(titlePanel,DockPanel.NORTH);
 	    body.add(root,DockPanel.CENTER);
 			   
 	    RootPanel.get().add(body);
 	    RootPanel.get().add(toaster);
-	  
+	    
+	    
 	    
 	}
 
@@ -147,9 +152,12 @@ public class TatamiDemo implements EntryPoint {
 	   fishEye = new FishEye(FishEye.VERTICAL);
 	   labelMenu = new HTML("Menu");
 	   
+	   Clock clock = new Clock(null,77);
+	   
 	   menuPanel.setStyleName("TatamiDemo-menu");
 	   menuPanel.setSpacing(20);
   
+	   menuPanel.add(clock);
 	   menuPanel.add(labelMenu);
 	   menuPanel.add(fishEye);
 	   	 
