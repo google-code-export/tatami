@@ -93,7 +93,7 @@ public class TimePicker extends BasePicker {
      * @return "TimePicker"
      */
 	public String getDojoName() {
-		return "dijit.form._TimePicker";
+		return "dijit._TimePicker";
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class TimePicker extends BasePicker {
 	/*-{
 	  if (startDate==null) startDate="1492-10-12";
 	  if (endDate==null) endDate="2492-10-12";
-	  var widget = new $wnd.dijit.form._TimePicker({
+	  var widget = new $wnd.dijit._TimePicker({
 		 clickableIncrement: clickableIncrement,
 		 visibleIncrement :  visibleIncrement,
 		 visibleRange     :visibleRange,
