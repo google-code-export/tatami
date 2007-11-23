@@ -135,6 +135,15 @@ public class Text extends GraphicObject {
 		}
 	}
 	
+	/**
+	 * Experimental 
+	 * Returns the height of a line in this <code>Text</code>
+	 * @return the height of a line  in this <code>Text</code>
+	 */
+	public double getLineHeight() {
+		return this.getFontSize(font.getSize()+"pt");
+	}
+	
 	
 	/**
 	 * Returns the Font used for the text
@@ -170,9 +179,16 @@ public class Text extends GraphicObject {
 	 * @return a <code>Rectangle</code> 
 	 */
 	public Rectangle getBounds() {
-		final int fontSize = (int)getFontSize(font.getSize()+"pt");
-		final double width = text.length() * fontSize * 0.75 ;
-		return new Rectangle(getX(),getY(),width,fontSize);
+		
+	    String[] lines = text.split("\n|\r");
+	    int maxWidth = 0;
+	    for ( int i = 0 ; i < lines.length;i++) {
+	    	maxWidth = Math.max(maxWidth,lines[i].length());
+	    	
+	    }
+	    final double width = maxWidth * getLineHeight()* 0.75 ;
+		final double height = lines.length * getLineHeight();
+		return new Rectangle(getX(),getY(),width,height*1.5);
 
 	}
 	

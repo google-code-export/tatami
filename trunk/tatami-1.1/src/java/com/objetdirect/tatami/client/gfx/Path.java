@@ -1,5 +1,8 @@
 package com.objetdirect.tatami.client.gfx;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -32,6 +35,17 @@ public class Path extends GraphicObject {
 
 	private boolean absoluteMode = true;
 	
+	private ArrayList commands ;
+	
+	/**
+	 * Creates a <code>Path</code> component
+	 *
+	 */
+	public Path() {
+		super();
+		this.commands = new ArrayList(); 
+	}
+	
 	/**
 	 * Creates an empty Path DOJO GFX 
 	 * @param surface the canvas
@@ -48,10 +62,10 @@ public class Path extends GraphicObject {
 	 * @param mode the mode to use 
 	 */
 	public void setAbsoluteMode(boolean mode) {
-		if (getShape() !=null) {
-			this.absoluteMode = mode;
-		    setAbsoluteMode(getShape(),mode);
-		}
+		Command com = new Command(Command.ABSOLUTE);
+		com.addBoolean(mode);
+		register(com);
+		
 	}
 	
 	/*
@@ -120,9 +134,11 @@ public class Path extends GraphicObject {
 	 *
 	 */
 	public void moveTo(double x, double y) {
-		if ( getShape()!=null) {
-			moveTo(getShape(),x,y);
-		}
+		Command com = new Command(Command.MOVETO);
+		com.addDouble(x);
+		com.addDouble(y);
+		register(com);
+
 	}
 	
 	
@@ -155,9 +171,11 @@ public class Path extends GraphicObject {
 	 *@param y the y coordinate 
 	 */
 	public void lineTo(double x, double y) {
-		if ( getShape()!=null) {
-			lineTo(getShape(),x,y);
-		}
+		Command com = new Command(Command.LINETO);
+		com.addDouble(x);
+		com.addDouble(y);
+		register(com);
+
 	}
 	
 	/**
@@ -186,9 +204,10 @@ public class Path extends GraphicObject {
 	 * @param x an x coordinate
 	 */
 	public void hLineTo(double x) {
-		if ( getShape()!=null) {
-			hLineTo(getShape(),x);
-		}
+		Command com = new Command(Command.H_LINETO);
+		com.addDouble(x);
+		register(com);
+
 	}
 	/*
 	 * see the java method #hLineTo(double)
@@ -204,9 +223,10 @@ public class Path extends GraphicObject {
 	 * @param y an y coordinate
 	 */
 	public void vLineTo(double y) {
-		if ( getShape() != null) {
-			vLineTo(getShape(),y);
-		}
+		Command com = new Command(Command.V_LINETO);
+		com.addDouble(y);
+		register(com);
+
 	}
 	
 	/*
@@ -231,9 +251,15 @@ public class Path extends GraphicObject {
 	 * @param y the y coordinate of the point to curve
 	 */
 	public void curveTo(double x1,double y1, double x2,double y2, double x, double y) {
-		if ( getShape() != null) {
-			curveTo(getShape(),x1,y1,x2,y2,x,y);
-		}
+		Command com = new Command(Command.CURVETO);
+		com.addDouble(x1);
+		com.addDouble(y1);
+		com.addDouble(x2);
+		com.addDouble(y2);
+		com.addDouble(x);
+		com.addDouble(y);
+		register(com);
+
 	}
 	
 	/*
@@ -276,9 +302,13 @@ public class Path extends GraphicObject {
 	 *
 	 */ 
 	public void smoothCurveTo(double x2,double y2, double x,double y) {
-		if ( getShape() != null) {
-			smoothCurveTo(getShape(),x2,y2,x,y);
-		}
+		Command com = new Command(Command.SMOOTHCURVE);
+		com.addDouble(x2);
+		com.addDouble(y2);
+		com.addDouble(x);
+		com.addDouble(y);
+		register(com);
+
 	}
 	/*
 	 * see the java method #smoothCurveTo(double,double,double,double)
@@ -319,9 +349,13 @@ public class Path extends GraphicObject {
 	 * @param y the y coordinate of the point
 	 */
 	public void qCurveTo(double x1,double y1, double x, double y) {
-		if ( getShape() != null) {
-			qCurveTo(getShape(),x1,y1,x,y);
-		}
+		Command com = new Command(Command.Q_CURVETO);
+		com.addDouble(x1);
+		com.addDouble(y1);
+		com.addDouble(x);
+		com.addDouble(y);
+		
+
 	}
 	
 	/*
@@ -355,9 +389,11 @@ public class Path extends GraphicObject {
 	 * @param y the y coordinate of the point 
 	 */
 	public void qSmoothCurveTo(double x,double y) {
-		if ( getShape() != null) {
-			qSmoothCurveTo(getShape(),x,y);
-		}
+		Command com = new Command(Command.Q_SMOOTHCURVE);
+		com.addDouble(x);
+		com.addDouble(y);
+		register(com);
+
 	}
 	/*
 	 * See the java method #qSmoothCurveTo(double,double)
@@ -436,9 +472,18 @@ public class Path extends GraphicObject {
 	 *
 	 */
 	public void arcTo(int rx, int ry,int xAxisRot,boolean largeArcFlag, boolean sweepFlag, double x, double y) {
-		if ( getShape() != null) {
-			arcTo(getShape(),rx,ry,xAxisRot,largeArcFlag,sweepFlag,x,y);
-		}
+		Command com = new Command(Command.ARCTO);
+		com.addInt(rx);
+		com.addInt(ry);
+		com.addInt(xAxisRot);
+		com.addBoolean(largeArcFlag);
+		com.addBoolean(sweepFlag);
+		com.addDouble(x);
+		com.addDouble(y);
+		register(com);
+//		if ( getShape() != null) {
+//			arcTo(getShape(),rx,ry,xAxisRot,largeArcFlag,sweepFlag,x,y);
+//		}
 	}
 	/*
 	 * see the java method #arcTo(int,int,double,boolean,boolean,double,double)
@@ -472,9 +517,9 @@ public class Path extends GraphicObject {
 	 * line from the current point to current subpath's initial point.
 	 */
 	public void closePath() {
-		if ( getShape()!= null) {
-		  closePath(getShape());
-		}
+		Command com = new Command(Command.CLOSEPATH);
+		register(com);
+		
 	}
 	
     /*
@@ -485,6 +530,227 @@ public class Path extends GraphicObject {
 	}-*/; 
 	
 	
+	/**
+	 * The show method is re-writting in order to execute some 
+	 * path command in the case that this <code>Path</code> was not 
+	 * be attached on a canvas
+	 * @param canvas the <code>GraphicCanvas</code> which creates 
+	 *        the DOJO GFX shape of this <code>Path</code>
+	 */
+	protected void show(GraphicCanvas canvas) {
+		super.show(canvas);
+		Iterator ite = commands.iterator();
+		while ( ite.hasNext()) {
+			Command com = (Command)ite.next();
+			execute(com);
+		}
+		
+	}
+	
+	/**
+	 * Registers a command, if the shape of this <code>Path</code> 
+	 * is already created, then the command is executed. If not 
+	 * the command will be executed during the {@link #show(GraphicCanvas)} method
+	 * @param command the command to register
+	 */
+	private void register(Command command) {
+		this.commands.add(command);
+		if ( getShape()!= null) {
+			execute(command);
+		}
+	}
+	
+	/**
+	 * Assumes that the shape of the path was created.
+	 * Executes the given command
+	 * @param command the command to execute
+	 */
+	private void execute(Command command) {
+		switch( command.getId()) {
+		  default: {
+			   break;
+		  }
+		  case Command.CURVETO: {
+			  this.curveTo(getShape(),command.getDouble(0),command.getDouble(1),
+					       command.getDouble(2), command.getDouble(3), 
+					       command.getDouble(4), command.getDouble(5));
+			  break;
+		  }
+		  case Command.ARCTO: {
+			 this.arcTo(getShape(), command.getInt(0), command.getInt(1), command.getInt(2), command.getBoolean(3), command.getBoolean(4), command.getDouble(5), command.getDouble(6));
+			  break;
+		  }
+		  case Command.LINETO: {
+			  this.lineTo(getShape(), command.getDouble(0),  command.getDouble(1));
+			  break;
+		  }
+		  case Command.H_LINETO: {
+			  this.hLineTo(getShape(), command.getDouble(0));
+			  break;
+		  }
+		  case Command.V_LINETO: {
+			  this.vLineTo(getShape(),command.getDouble(0));
+			  break;
+		  }
+		  case Command.MOVETO: {
+			  this.moveTo(getShape(),command.getDouble(0), command.getDouble(1));
+			  break;
+		  }
+		  case Command.Q_CURVETO: {
+			  this.qCurveTo(getShape(), command.getDouble(0),command.getDouble(1),command.getDouble(2),command.getDouble(3));
+			  break;
+		  }
+		  case Command.Q_SMOOTHCURVE: {
+              this.qSmoothCurveTo(getShape(), command.getDouble(0), command.getDouble(1));
+			  break;
+		  }
+		  case Command.SMOOTHCURVE: {
+			  this.smoothCurveTo(getShape(),  command.getDouble(0), command.getDouble(0),  command.getDouble(0),  command.getDouble(0));
+			  break;
+		  }
+		case Command.ABSOLUTE: {
+			this.setAbsoluteMode(getShape(),command.getBoolean(0));
+			break;
+		}
+		case Command.CLOSEPATH: {
+			this.closePath(getShape());
+			break;
+		}
+		}
+	}
+	
+	/**
+	 * A Command for the <code>Path</code>
+	 *
+	 */
+	private class Command {
+	
+		public static final int CURVETO = 0;
+		public static final int SMOOTHCURVE = 1;
+		public static final int ARCTO = 2;
+		public static final int MOVETO = 3;
+		public static final int LINETO = 4;
+		public static final int Q_CURVETO = 5;
+		public static final int Q_SMOOTHCURVE = 6;
+		public static final int H_LINETO = 7;
+		public static final int V_LINETO = 8;
+		public static final int CLOSEPATH = 9;
+		public static final int ABSOLUTE = 10;
+		
+		private int id; //id of the command
+		private ArrayList parameters; //list of parameters to use 
+		
+		/**
+		 * Creates a new Command
+		 * @param id the id of the command to execute
+		 */
+		public Command(int id) {
+			this.id = id;
+			parameters = new ArrayList();
+		}
+		
+		/**
+		 * Returns the id of this<code>Command</code>
+		 * @return the id of this<code>Command</code>
+		 */
+		public int getId() {
+			return this.id;
+		}
+	
+		/**
+		 * Returns the parameters of the <code>Command</code>
+		 * @return the parameters of the <code>Command</code>
+		 */
+	    public ArrayList getParameters() {
+	    	return this.parameters;
+	    }
+	    
+	    /**
+	     * Adds a double value as parameter
+	     * @param param a double value
+	     */
+	    public void addDouble(double param) {
+	    	Double d = new Double(param);
+	    	this.parameters.add(d);
+	    }
+	    /**
+	     * Adds a parameter 
+	     * @param param an <code>Object</code>
+	     */
+	    public void addParam(Object param) {
+	    	this.parameters.add(param);
+	    }
+	    
+	    /**
+	     * Adds an integer value as parameter
+	     * @param param a integer
+	     */
+	    public void addInt(int param) {
+	    	Integer i = new Integer(param);
+	    	this.parameters.add(i);
+	    }
+	    
+	    /**
+	     * Returns a double value at the specified index
+	     * @param i index of the value in the list of parameters
+	     * @return the double value or 0.0 parameter was not a double 
+	     */
+	    public double getDouble(int i) {
+	    	Object o = parameters.get(i);
+	    	double res = 0.0;
+	    	if ( o instanceof Double) {
+	    		res = ((Double)o).doubleValue();
+	    	}
+	    	return res;
+	    }
+	    
+	    /**
+	     * Returns an integer value at the specified index
+	     * @param i index of the value in the list of parameters
+	     * @return the integer value or 0.0 parameter was not an integer 
+	     */
+	    public int getInt(int i) {
+	    	Object o = parameters.get(i);
+	    	int res = 0;
+	    	if ( o instanceof Integer) {
+	    		res = ((Integer)o).intValue();
+	    	}
+	    	return res;
+	    }
+	    
+	    /**
+	     * Returns a boolean value at the specified index
+	     * @param i index of the value in the list of parameters
+	     * @return the boolean value or 0.0 parameter was not a boolean 
+	     */
+	    public boolean getBoolean(int i) {
+	    	Object o = parameters.get(i);
+	    	boolean res = true;
+	    	if ( o instanceof Boolean) {
+	    		res = ((Boolean)o).booleanValue();
+	    	}
+	    	return res;
+	    }
+	    
+	    /**
+	     * Returns a parameter at the specified index
+	     * @param i index of the parameter to get
+	     * @return the parameter as an <code>Object</code>
+	     */
+	    public Object getParam(int i) {
+	    	return parameters.get(i);
+	    }
+	
+	    /**
+	     * adds a boolean value as parameter
+	     * @param param a boolean value
+	     */
+	     public void addBoolean(boolean param) {
+	    	 Boolean b = new Boolean(param);
+	    	 parameters.add(b);
+	     }
+	
+	}
 	
 	
 }//end of class
