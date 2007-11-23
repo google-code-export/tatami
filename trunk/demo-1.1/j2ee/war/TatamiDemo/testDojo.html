@@ -14,33 +14,46 @@
 
 
 <script type="text/javascript">
-	carousel = null;
 	
-	function createCarousel() {
- 	dojo.require("oaf.widget.layout.Carousel");
+	widget_ = null;
 	
-	var div = dojo.doc.createElement("div");
-	div.id = "root";
-	dojo.style(div,"width","600px");
-	dojo.style(div,"height", "300px");
-	dojo.style(div,"position","absolute");
-	var main = document.getElementById("main");
-	main.appendChild(div);
-	
-	var widget  = null;
-     var params = {};
-	 try {
-	    widget=  new oaf.widget.layout.Carousel(params,dojo.byId("root"));
-     
-      //main.appendChild(widget.domNode);
-      widget.addChild(new oaf.widget.layout.CarouselItem({imageURL:"carousel/image22.jpg",linkA:"hello"}));
-      widget.addChild(new oaf.widget.layout.CarouselItem({imageURL:"carousel/image23.jpg"}));
-      widget.addChild(new oaf.widget.layout.CarouselItem({imageURL:"carousel/image24.jpg"}));      
-      widget.addChild(new oaf.widget.layout.CarouselItem({imageURL:"carousel/image25.jpg"}));      
-      widget.startup();
-	    widget.addNewCarouselItem("carousel/image26.jpg","","","","");                	  
-      widget.addNewCarouselItem("carousel/image27.jpg","","","","");                	  
-      widget.addNewCarouselItem("carousel/image28.jpg","","","","");                	  
+	function createWidget() {
+    	dojo.require("dijit.form.Slider");
+	    var div = dojo.doc.createElement("div");
+        var div2 = dojo.doc.createElement("div");
+     	div.id = "root";
+     	div2.id = "root2";
+    	dojo.style(div,"width","600px");
+     	dojo.style(div,"height", "300px");
+    	var main = document.getElementById("main");
+     	main.appendChild(div);
+        div.appendChild(div2);
+		var widget  = null;
+        var params = {	 
+             	 minimum: 0,
+                 maximum: 100,
+               	 showButtons :  true,
+               	 value:0,
+	  	         discreteValues: 100,
+                 intermediateChanges: true};
+        try {
+	        widget=  new dijit.form.HorizontalSlider(params,dojo.byId("root"));
+            //main.appendChild(widget.domNode);
+            var labels = new Array();
+            for (i=0; i < 10;i++) {
+              labels[i] = ""+i;
+            }
+            
+
+            var rule  = {labels:labels,labelStyle:"font-family:Arial;margin:-1em 0px 0px -.35em",container:"topDecoration"};
+            var rule2  = {count:10,ruleStyle:"height:5px;",container:"topDecoration"};
+            var sliderRule = new dijit.form.HorizontalRuleLabels(rule,dojo.doc.createElement("div"));
+            var sliderRule2 = new dijit.form.HorizontalRule(rule2);
+           // var sliderRule2 = new dijit.form.HorizontalRuleLabels(rule2);
+            //sliderRule.startup(); 
+            widget.addChild(sliderRule);
+            widget.addChild(sliderRule2);
+            widget.startup();
   
 	 } catch (e) {
 	    alert("problem : " + e); 
@@ -49,22 +62,22 @@
 	 }
 	 
 	 
-	 function destroyCarousel() {
+	 function destroyWidget() {
 	   var widget = dijit.byId("root");
 	   if ( widget ) {
-	   dojo.disconnect(widget.handleResize);
-	   widget.destroyRecursive();
+  	    // dojo.disconnect(widget.handleResize);
+	     widget.destroyRecursive();
 	   }
 	 
 	 }
 	 
-	 function loadCarousel() {
-	     if ( carousel != null) {
-	        destroyCarousel();
-	        carousel = null;
+	 function loadWidget() {
+	     if ( widget_ != null) {
+	        destroyWidget();
+            widget_ = null;
 	     } 
-	     if ( carousel ==null) {
- 	       carousel = createCarousel();
+	     if ( widget_ ==null) {
+ 	       widget = createWidget();
  	     }
 	     
 	 
@@ -72,55 +85,16 @@
 </script>
 
 
-<body class="tundra oaf">
+<body class="tundra">
 
+<div>
+ <form>
+   <input type="button" value="Creer Widget"  onclick="loadWidget();"/>
+  </form>
+  <br><br><br>
+  </div>
+ <div id="main" style="width:300px;"></div>
 
-
-
-<table cellspacing="0" cellpadding="0" >
-  <tbody> 
-    <tr></tr>
-    <tr>
-        <td width="" height="" align="left" style="vertical-align: top;">
-             <table cellspacing="20" cellpadding="0">
-                  <tbody> 
-                        <tr>
-                            <td width="" height="" align="left" style="vertical-align: top;" rowspan="1"></td>
-                            <td width="100%" height="" align="left" style="vertical-align: top;">
-                                <table class="TatamiDemo-mainPanel" cellspacing="0" cellpadding="0">
-                                      <tbody> 
-                                            <tr>
-                                                <td align="left" style="vertical-align: top;"> 
-                                                    <table width="100%" cellspacing="20" cellpadding="0">
-                                                          <tbody> 
-                                                              <tr>
-                                                                 <td width="" height="" align="left" style="vertical-align: top;" colspan="1">
-                                                                 <form>
-                                                                   <input type="button" value="Creer Carousel"  onclick="loadCarousel();"/>
-                                                                 </form>
-         
-                                                                 </td>
-                                                              </tr>
-                                                              <tr>
-                                                                  <td width="" height="" align="left" style="vertical-align: top;">
-                                                                     <div id="main" ></div>
-                                                                   </td>
-                                                               </tr>
-                                                               <tr></tr>
-                                                           </tbody> 
-                                                     </table>
-                                              </td>
-                                            </tr>
-                                     </tbody> 
-                             </table>
-                         </td>
-                     </tr>
-                 </tbody> 
-         </table>
-       </td>
-    </tr>
-    </tbody> 
-</table> 
 
 
 

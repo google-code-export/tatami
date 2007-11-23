@@ -114,6 +114,12 @@ a:visited {
 }
 
 
+
+SliderDemo-vSlider {
+  margin-left:10px;
+}
+
+
 .gwt-HorizontalSplitPanel {
 	border: 2px ridge #bbbbbd;
     background-color:#ffffff;
