@@ -118,6 +118,7 @@ public class VirtualGroup extends GraphicObject {
 	 */
 	public void add(GraphicObject object){
 		objects.add(object);
+		object.setGroup(this);
 		if ( getShape() !=null ) {
 		    if ( getParent() != null) {
 		    	object.show(getParent());
