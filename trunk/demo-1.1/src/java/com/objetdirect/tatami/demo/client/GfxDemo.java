@@ -1,6 +1,7 @@
 package com.objetdirect.tatami.demo.client;
 
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ChangeListener;
@@ -38,7 +39,8 @@ import com.objetdirect.tatami.client.gfx.Text;
 import com.objetdirect.tatami.client.gfx.TextPath;
 import com.objetdirect.tatami.client.gfx.VirtualGroup;
 
-public class GfxDemo extends Composite implements GraphicObjectListener,ClickListener,ChangeListener {
+public class GfxDemo extends Composite implements GraphicObjectListener,
+		ClickListener, ChangeListener {
 
 	/** factor for scaling */
 	float scaleFactor = 1;
@@ -49,13 +51,12 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 	private DockPanel panel;
 
 	/** the last position of the last widget which had been moved */
-	private int[]  lastPosition ={0,0};
-	
-	
+	private int[] lastPosition = { 0, 0 };
+
 	private Grid gridShape;
-	
+
 	private Grid gridTransform;
-	
+
 	/** the canvas */
 	private GraphicCanvas canvas;
 
@@ -67,93 +68,102 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 	 */
 	private boolean movable = false;
 
-	
-	
-    /**
-     * for creating a circle 
-     */
+	/**
+	 * for creating a circle
+	 */
 	private Image circleButton;
+
 	/**
 	 * for creating a rectangle
 	 */
 	private Image rectButton;
+
 	/**
 	 * for creating some text
 	 */
 	private Image textButton;
-    /**
-     * for creating a GFX image
-     */
+
+	/**
+	 * for creating a GFX image
+	 */
 	private Image imageButton;
-	
+
 	/**
 	 * for creating lineButton
 	 */
 	private Image lineButton;
-	
+
 	private Image polylineButton;
+
 	/**
 	 * for creating an Ellipse
 	 */
 	private Image ellipseButton;
+
 	/**
-     * for creating a graphical object
-     */
+	 * for creating a graphical object
+	 */
 	private Image scaleButton;
-  
-	/** for moving an object to the back*/
+
+	/** for moving an object to the back */
 	private Image backButton;
+
 	/**
-	 * for moving an object to the front */
-	 private Image frontButton;
-	
-	 /**to create a path */
-	 private Image pathButton;
-	 
-	
-	 /**to create a path */
-	 private Image textPathButton;
-	 
-	 
-	 /**
-	 * for creating a rotation of an object 
+	 * for moving an object to the front
+	 */
+	private Image frontButton;
+
+	/** to create a path */
+	private Image pathButton;
+
+	/** to create a path */
+	private Image textPathButton;
+
+	/**
+	 * for creating a rotation of an object
 	 */
 	private Image rotateButton;
-	
+
 	private Image virtualButton;
+
 	/**
 	 * To delete an object
 	 */
-    private Image deleteButton;	
+	private Image deleteButton;
+
 	/**
 	 * To change color
 	 */
 	private Image colorButton;
+
 	/**
-	 *  The popup panels
+	 * The popup panels
 	 */
 
 	private Image propertiesButton;
-	private PopupPanel popup = new PopupPanel(true);
-	
 
-	private  Slider opacity;
-	
+	private PopupPanel popup = new PopupPanel(true);
+
+	private Slider opacity;
+
 	private HTML html = new HTML("X,Y");
 
 	private GraphicObject current = null;
 
 	private Color currentFillColor = Color.WHITE;
+
 	private Color currentStrokeColor = Color.BLACK;
-	
+
 	private Color lastStrokeColor = currentStrokeColor;
-	
 
 	private HTML fill;
+
 	private HTML[] strokeSize;
-	
+
 	private int currentStrokeSize = 1;
+
 	private int lastStrokeSize = currentStrokeSize;
+
 	/**
 	 * 
 	 * 
@@ -174,121 +184,131 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		buttonPanel = new VerticalPanel();
 		buttonPanel.setSpacing(10);
 		popup.add(html);
-		
-		gridShape     = new Grid(6,2);
+
+		gridShape = new Grid(6, 2);
 		gridShape.setCellSpacing(5);
 		gridShape.setCellPadding(5);
-		gridTransform = new Grid(3,2);
+		gridTransform = new Grid(3, 2);
 		gridTransform.setCellSpacing(5);
 		gridTransform.setCellPadding(5);
-			
-		canvas.setPixelSize(600,600);
+
+		canvas.setPixelSize(600, 600);
 
 		fill = new HTML("&nbsp;&nbsp;&nbsp;");
-		DOM.setStyleAttribute(fill.getElement(),"backgroundColor",this.currentFillColor.toHex());
-		DOM.setStyleAttribute(fill.getElement(),"border","solid");
-		DOM.setStyleAttribute(fill.getElement(),"borderWidth","thin");
-		DOM.setStyleAttribute(fill.getElement(),"borderColor",this.currentStrokeColor.toHex());
-		fill.setSize("25px","25px");
+		DOM.setStyleAttribute(fill.getElement(), "backgroundColor",
+				this.currentFillColor.toHex());
+		DOM.setStyleAttribute(fill.getElement(), "border", "solid");
+		DOM.setStyleAttribute(fill.getElement(), "borderWidth", "thin");
+		DOM.setStyleAttribute(fill.getElement(), "borderColor",
+				this.currentStrokeColor.toHex());
+		fill.setSize("25px", "25px");
 		fill.addClickListener(this);
 		buttonPanel.add(gridShape);
 		buttonPanel.add(fill);
-		buttonPanel.setCellHorizontalAlignment(fill,VerticalPanel.ALIGN_CENTER);
-		
+		buttonPanel
+				.setCellHorizontalAlignment(fill, VerticalPanel.ALIGN_CENTER);
+
 		strokeSize = new HTML[4];
-		strokeSize[0] = this.createSrokeSize(1);		
+		strokeSize[0] = this.createSrokeSize(1);
 		strokeSize[1] = this.createSrokeSize(2);
 		strokeSize[2] = this.createSrokeSize(3);
 		strokeSize[3] = this.createSrokeSize(5);
-				
+
 		buttonPanel.add(gridTransform);
-		
+
 		opacity = new Slider(Slider.HORIZONTAL, 0, 255, 255, true);
-	    opacity.addChangeListener(this);
-			   
-		
-    	circleButton  = addToGrid(gridShape,0,0,"Circle","gfx/circle.gif");
-    	ellipseButton = addToGrid(gridShape,0,1,"Ellipse","gfx/ellipse.gif");
-    	rectButton    = addToGrid(gridShape,1,0,"Rect","gfx/rect.gif");
-    	lineButton    = addToGrid(gridShape,1,1,"Line","gfx/line.gif");		
-    	polylineButton = addToGrid(gridShape,2,0,"Polyline","gfx/polyline.gif");
-    	textButton    = addToGrid(gridShape,2,1,"Text","gfx/text.gif");
-		
-    	imageButton   = addToGrid(gridShape,3,0,"Image","gfx/image.gif");
-		pathButton    = addToGrid(gridShape,3,1,"Path","gfx/path.GIF");
-		textPathButton= addToGrid(gridShape,4,0,"Text Path","gfx/textpath.gif");
-		virtualButton = addToGrid(gridShape,4,1,"Virtual","gfx/group.gif");
-		deleteButton  = addToGrid(gridShape,5,0,"Delete","gfx/delete.gif");
-		
-		
-		colorButton      = addToGrid(gridTransform,0,0,"set color","gfx/color.gif");
-		scaleButton      = addToGrid(gridTransform,0,1,"Scale","gfx/scale.gif");
-		rotateButton     = addToGrid(gridTransform,1,0,"Rotate","gfx/rotate.gif");
-		backButton       = addToGrid(gridTransform,1,1,"Move to back","gfx/back.gif");
-		frontButton      = addToGrid(gridTransform,2,0,"Move to front","gfx/front.gif");
-		propertiesButton = addToGrid(gridTransform,2,1,"Properties","gfx/properties.gif");
-		
+		opacity.addChangeListener(this);
+
+		circleButton = addToGrid(gridShape, 0, 0, "Circle", "gfx/circle.gif");
+		ellipseButton = addToGrid(gridShape, 0, 1, "Ellipse", "gfx/ellipse.gif");
+		rectButton = addToGrid(gridShape, 1, 0, "Rect", "gfx/rect.gif");
+		lineButton = addToGrid(gridShape, 1, 1, "Line", "gfx/line.gif");
+		polylineButton = addToGrid(gridShape, 2, 0, "Polyline",
+				"gfx/polyline.gif");
+		textButton = addToGrid(gridShape, 2, 1, "Text", "gfx/text.gif");
+
+		imageButton = addToGrid(gridShape, 3, 0, "Image", "gfx/image.gif");
+		pathButton = addToGrid(gridShape, 3, 1, "Path", "gfx/path.GIF");
+		textPathButton = addToGrid(gridShape, 4, 0, "Text Path",
+				"gfx/textpath.gif");
+		virtualButton = addToGrid(gridShape, 4, 1, "Virtual", "gfx/group.gif");
+		deleteButton = addToGrid(gridShape, 5, 0, "Delete", "gfx/delete.gif");
+
+		colorButton = addToGrid(gridTransform, 0, 0, "set color",
+				"gfx/color.gif");
+		scaleButton = addToGrid(gridTransform, 0, 1, "Scale", "gfx/scale.gif");
+		rotateButton = addToGrid(gridTransform, 1, 0, "Rotate",
+				"gfx/rotate.gif");
+		backButton = addToGrid(gridTransform, 1, 1, "Move to back",
+				"gfx/back.gif");
+		frontButton = addToGrid(gridTransform, 2, 0, "Move to front",
+				"gfx/front.gif");
+		propertiesButton = addToGrid(gridTransform, 2, 1, "Properties",
+				"gfx/properties.gif");
+
 		panel.add(canvas, DockPanel.CENTER);
 		panel.add(buttonPanel, DockPanel.WEST);
 		canvas.addGraphicObjectListener(this);
-		
 
 	}
 
-	
-	
 	private HTML createSrokeSize(int size) {
 		HTML strokeSize = new HTML("&nbsp;&nbsp;&nbsp;");
-		strokeSize.setSize("32px","8px");
+		strokeSize.setSize("32px", "8px");
 		strokeSize.setTitle("Size of stroke " + size);
-		DOM.setStyleAttribute(strokeSize.getElement(),"borderTop" ,"solid");
-		DOM.setStyleAttribute(strokeSize.getElement(),"borderWidth",""+size);
+		DOM.setStyleAttribute(strokeSize.getElement(), "borderTop", "solid");
+		DOM
+				.setStyleAttribute(strokeSize.getElement(), "borderWidth", ""
+						+ size);
 		buttonPanel.add(strokeSize);
-		buttonPanel.setCellHorizontalAlignment(strokeSize,VerticalPanel.ALIGN_CENTER);
+		buttonPanel.setCellHorizontalAlignment(strokeSize,
+				VerticalPanel.ALIGN_CENTER);
 		strokeSize.addClickListener(this);
 		return strokeSize;
 	}
-	
-	
-	
+
 	/**
 	 * 
 	 * @param index
 	 * @param size
 	 */
-	private void chooseStrokeSize(int index,int size) {
-		for (int i=0; i< strokeSize.length; i++) {
-			if ( i == index) {
-				DOM.setStyleAttribute(strokeSize[i].getElement(),"borderColor","red");
+	private void chooseStrokeSize(int index, int size) {
+		for (int i = 0; i < strokeSize.length; i++) {
+			if (i == index) {
+				DOM.setStyleAttribute(strokeSize[i].getElement(),
+						"borderColor", "red");
 				currentStrokeSize = size;
 			} else {
-				DOM.setStyleAttribute(strokeSize[i].getElement(),"borderColor","black");
+				DOM.setStyleAttribute(strokeSize[i].getElement(),
+						"borderColor", "black");
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
 	public void onChange(Widget sender) {
-		if ( sender.equals(opacity)) {
-			 if ( current != null) {
-					int value = opacity.getValue();
-					final Color color = current.getFillColor();
-					Color newColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),value);
-					current.setFillColor(newColor);
-				}
+		if (sender.equals(opacity)) {
+			if (current != null) {
+				int value = opacity.getValue();
+				final Color color = current.getFillColor();
+				Color newColor = new Color(color.getRed(), color.getGreen(),
+						color.getBlue(), value);
+				current.setFillColor(newColor);
+			}
 
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param title
 	 * @param icon
 	 * @return
 	 */
-	private Image addToGrid(Grid grid,int row, int col,String title,String icon) {
+	private Image addToGrid(Grid grid, int row, int col, String title,
+			String icon) {
 		Image button = new Image(icon);
 		button.setTitle(title);
 		button.setSize("29px", "29px");
@@ -297,49 +317,54 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		return button;
 	}
 
-	
-
-	
-	
-	
-	
 	/**
 	 * 
 	 */
-	public void mouseClicked(GraphicObject graphicObject, int x, int y) {
+	public void mouseClicked(GraphicObject graphicObject, Event evt) {
 		if (graphicObject == null) {
 			unSelectAll();
-	     }
+		}
 	}
 
 	private void unSelectAll() {
-		if ( current != null ) {
+		if (current != null) {
 			this.current.setStroke(lastStrokeColor, lastStrokeSize);
 		}
 		current = null;
 	}
-	
-	
-	public void mouseMoved(GraphicObject graphicObject, int x, int y) {
-		if (graphicObject != null) {
-			int newX = x - canvas.getAbsoluteLeft() + Window.getScrollLeft() ;
-			int newY = y - canvas.getAbsoluteTop() +  Window.getScrollTop();
+
+	public void mouseMoved(GraphicObject graphicObject,Event evt) {
+		if (current != null) {
+            int x = DOM.eventGetClientX(evt);
+            int y = DOM.eventGetClientY(evt);
+			int newX = x - canvas.getAbsoluteLeft() + Window.getScrollLeft();
+			int newY = y - canvas.getAbsoluteTop() + Window.getScrollTop();
 			html.setHTML(newX + "," + newY + " [" + x + "," + y + "]");
-			popup.setPopupPosition(10 + newX+ canvas.getAbsoluteLeft(), newY + canvas.getAbsoluteTop());
-			Color color = graphicObject.getFillColor();
+			popup.setPopupPosition(10 + newX + canvas.getAbsoluteLeft(), newY
+					+ canvas.getAbsoluteTop());
+			Color color = current.getFillColor();
 			Color reverseColor = color.reverse();
 			reverseColor.setAlpha(255);
-			DOM.setStyleAttribute(html.getElement(), "color", reverseColor.toHex());
+			DOM.setStyleAttribute(html.getElement(), "color", reverseColor
+					.toHex());
 			popup.show();
-			if (current != null && movable) {
-				current.translate(newX-lastPosition[0], newY - lastPosition[1]);
+			if ( movable) {
+				
+				if ( current.getGroup() != null) {
+					  GraphicObject object = this.current.getGroup();
+					  object.translate(newX - lastPosition[0], newY- lastPosition[1]);
+							
+				} else {
+					current.translate(newX - lastPosition[0], newY- lastPosition[1]);
+					}
+				
+				
 				lastPosition[0] = newX;
 				lastPosition[1] = newY;
 			}
 		} else {
 			popup.hide();
 		}
-	
 
 	}
 
@@ -349,89 +374,88 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 	public void onClick(Widget sender) {
 		if (sender.equals(rectButton)) {
 			Rect rect = new Rect(300, 100);
-			showGraphicObject(rect,300,300);
+			showGraphicObject(rect, 300, 300);
 			rect.setWidth(100);
-				
+
 		} else if (sender.equals(circleButton)) {
-			showGraphicObject(new Circle(50),300,300);
+			showGraphicObject(new Circle(50), 300, 300);
 		} else if (sender.equals(colorButton)) {
 			showPopupColor();
-		}  else if ( sender.equals(textButton)) {
+		} else if (sender.equals(textButton)) {
 			showText();
-		
-		} else if ( sender.equals(scaleButton)) {
+
+		} else if (sender.equals(scaleButton)) {
 			this.showPopupScaler();
-		} else if ( sender.equals(rotateButton)) {
+		} else if (sender.equals(rotateButton)) {
 			showPopupRotate();
-		} else if ( sender.equals(imageButton)) {
-			ImageGfx img = new  ImageGfx("od-logo.jpg",105,52); 
-			showGraphicObject(img,300,300);
-			
-		} else if ( sender.equals(ellipseButton)) {
-			showGraphicObject(new Ellipse(200,100),300,300);
-		} else if ( sender.equals(strokeSize[0])) {
-			this.chooseStrokeSize(0,1);
-		} else if ( sender.equals(strokeSize[1])) {
-			this.chooseStrokeSize(1,2);
-		} else if ( sender.equals(strokeSize[2])) {
-			this.chooseStrokeSize(2,3);
-		} else if ( sender.equals(strokeSize[3])) {
-			this.chooseStrokeSize(3,5);
-		} else if ( sender.equals(propertiesButton) && current != null) {
+		} else if (sender.equals(imageButton)) {
+			ImageGfx img = new ImageGfx("od-logo.jpg", 105, 52);
+			showGraphicObject(img, 300, 300);
+
+		} else if (sender.equals(ellipseButton)) {
+			showGraphicObject(new Ellipse(200, 100), 300, 300);
+		} else if (sender.equals(strokeSize[0])) {
+			this.chooseStrokeSize(0, 1);
+		} else if (sender.equals(strokeSize[1])) {
+			this.chooseStrokeSize(1, 2);
+		} else if (sender.equals(strokeSize[2])) {
+			this.chooseStrokeSize(2, 3);
+		} else if (sender.equals(strokeSize[3])) {
+			this.chooseStrokeSize(3, 5);
+		} else if (sender.equals(propertiesButton) && current != null) {
 			showProperties(current);
-		} else if ( sender.equals(frontButton) && current != null) {
+		} else if (sender.equals(frontButton) && current != null) {
 			this.current.moveToFront();
-		}  else if ( sender.equals(backButton) && current != null) {
+		} else if (sender.equals(backButton) && current != null) {
 			this.current.moveToBack();
-		} else if ( sender.equals(deleteButton) && current != null) {
+		} else if (sender.equals(deleteButton) && current != null) {
 			canvas.remove(current);
-		} else if ( sender.equals(lineButton)) {
-           final Point pointA = new Point(50,50);
-           final Point pointB = new Point(200,360);
-           Line line = new Line(pointA,pointB);
-           line.setStrokeStyle(Line.LONGDASH);
-           showGraphicObject(line,300,300);
-		} else if ( sender.equals(pathButton)) {
+		} else if (sender.equals(lineButton)) {
+			final Point pointA = new Point(50, 50);
+			final Point pointB = new Point(200, 360);
+			Line line = new Line(pointA, pointB);
+			line.setStrokeStyle(Line.LONGDASH);
+			showGraphicObject(line, 300, 300);
+		} else if (sender.equals(pathButton)) {
 			showPath();
-		} else if ( sender.equals(virtualButton)) {
+		} else if (sender.equals(virtualButton)) {
 			this.showVirtual();
-			
-		} else if ( sender.equals(textPathButton)) {
+
+		} else if (sender.equals(textPathButton)) {
 			this.showTextPath();
-		} else if ( sender.equals(polylineButton)) {
+		} else if (sender.equals(polylineButton)) {
 			showPolyline();
-			
+
 		}
- 	}
-	
-	
-	private void showPolyline() {
-		
-        Point[] arrow = new Point[8];
-        arrow[0] = new Point(-2,15);
-        arrow[1] = new Point(2,15);
-        arrow[2] = new Point(2,-105);
-        arrow[3] = new Point(6,-105);
-        arrow[4] = new Point(0,-116);
-        arrow[5] = new Point(-6,-105);
-        arrow[6] = new Point(-2,-105);
-        arrow[7] = new Point(-2,15);
-        
-        Polyline poly = new Polyline(arrow);
-        this.showGraphicObject(poly,300,300);
 	}
-	
+
+	private void showPolyline() {
+
+		Point[] arrow = new Point[8];
+		arrow[0] = new Point(-2, 15);
+		arrow[1] = new Point(2, 15);
+		arrow[2] = new Point(2, -105);
+		arrow[3] = new Point(6, -105);
+		arrow[4] = new Point(0, -116);
+		arrow[5] = new Point(-6, -105);
+		arrow[6] = new Point(-2, -105);
+		arrow[7] = new Point(-2, 15);
+
+		Polyline poly = new Polyline(arrow);
+		this.showGraphicObject(poly, 300, 300);
+	}
+
 	private void showPath() {
-		//start point
-		Point p1 = new Point(50,50);
-   	    Point p2 = new Point(80,50);
-		Point p3 = new Point(50,100);
-		Point p4 = new Point(80,100);
-		
+		// start point
+		Point p1 = new Point(50, 50);
+		Point p2 = new Point(80, 50);
+		Point p3 = new Point(50, 100);
+		Point p4 = new Point(80, 100);
+
 		Path t = new Path();
 		t.setFillColor(currentFillColor);
-		t.setStroke(currentStrokeColor,currentStrokeSize);
-		
+		t.setStroke(currentStrokeColor, currentStrokeSize);
+
 		t.moveTo(p1);
 		t.lineTo(p2);
 		t.lineTo(p3);
@@ -440,140 +464,153 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		t.moveTo((p1.getX() + p4.getX()) / 2, (p1.getY() + p4.getY()) / 2);
 		t.lineTo((p2.getX() + p3.getX()) / 2, (p2.getY() + p3.getY()) / 2);
 		t.moveTo((p1.getX() + p2.getX()) / 2, (p1.getY() + p2.getY()) / 2);
-		
+
 		t.arcTo(20, 30, 35, true, true, p3);
 		t.lineTo((p3.getX() + p4.getX()) / 2, (p3.getY() + p4.getY()) / 2);
 		canvas.add(t, 60, 100);
-		canvas.setPixelSize(600,600);
+		canvas.setPixelSize(600, 600);
 	}
-	
+
 	private void showProperties(GraphicObject object) {
 		final DialogBox dialog = new DialogBox(false);
-		Grid panel = new Grid(5,4);
-	    panel.setCellPadding(5);
-	    panel.setCellSpacing(10);
-		panel.setWidget(0,0, new HTML("<b>Position</b>"));
-		panel.setWidget(0,1, new Label(object.getX()+","+object.getY()));
-		panel.setWidget(0,2, new HTML("<b>Center</b>"));
-		panel.setWidget(0,3, new Label(object.getCenterX()+","+object.getCenterY()));
-		panel.setWidget(1,0, new HTML("<b>Size</b>"));
-		panel.setWidget(1,1, new Label("? x ? px"));
-		panel.setWidget(2,0, new HTML("<b>Color of the stroke</b>"));
-		final String color =lastStrokeColor.toHex();
+		Grid panel = new Grid(5, 4);
+		panel.setCellPadding(5);
+		panel.setCellSpacing(10);
+		panel.setWidget(0, 0, new HTML("<b>Position</b>"));
+		panel.setWidget(0, 1, new Label(object.getX() + "," + object.getY()));
+		panel.setWidget(0, 2, new HTML("<b>Center</b>"));
+		panel.setWidget(0, 3, new Label(object.getCenterX() + ","
+				+ object.getCenterY()));
+		panel.setWidget(1, 0, new HTML("<b>Size</b>"));
+		panel.setWidget(1, 1, new Label("? x ? px"));
+		panel.setWidget(2, 0, new HTML("<b>Color of the stroke</b>"));
+		final String color = lastStrokeColor.toHex();
 		final Label label = new Label(color);
 		label.setTitle(color);
-		DOM.setStyleAttribute(label.getElement(),"color",color);
-		panel.setWidget(2,1,label );
-		panel.setWidget(2,2, new HTML("<b>Size of the stroke</b>"));
-		panel.setWidget(2,3, new Label(lastStrokeSize + "px"));
-		panel.setWidget(3,0, new HTML("<b>Fill color</b>"));
-		final String fillColor =object.getFillColor().toHex();
+		DOM.setStyleAttribute(label.getElement(), "color", color);
+		panel.setWidget(2, 1, label);
+		panel.setWidget(2, 2, new HTML("<b>Size of the stroke</b>"));
+		panel.setWidget(2, 3, new Label(lastStrokeSize + "px"));
+		panel.setWidget(3, 0, new HTML("<b>Fill color</b>"));
+		final String fillColor = object.getFillColor().toHex();
 		final Label labelFill = new Label(fillColor);
 		labelFill.setTitle(fillColor);
-		panel.setWidget(3,1, labelFill);
-		DOM.setStyleAttribute(labelFill.getElement(),"color",fillColor);
-		
+		panel.setWidget(3, 1, labelFill);
+		DOM.setStyleAttribute(labelFill.getElement(), "color", fillColor);
+
 		Button close = new Button("Close");
-		close.addClickListener( new ClickListener() {
+		close.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
-				 dialog.hide();
+				dialog.hide();
 			}
 		});
 		panel.setWidget(4, 0, close);
-		
-		dialog.setPopupPosition(Window.getClientWidth()/2, Window.getClientHeight()/2);
+
+		dialog.setPopupPosition(Window.getClientWidth() / 2, Window
+				.getClientHeight() / 2);
 		dialog.addStyleName("GfxDemo-properties");
 		dialog.setWidget(panel);
 		dialog.show();
 		System.out.println("bounds " + object.getBounds());
 	}
 
-	
-	
 	/** show a popup to scale a graphical Object */
 	private void showPopupScaler() {
-		if ( current != null) {
-		  scaleFactor = 1;
-		  final PopupPanel popupScaler = new PopupPanel(true);
-	   	  popupScaler.addStyleName("GfxDemo-popup");
-		  final Slider scaler = new Slider(Slider.HORIZONTAL, -10, 10, 1, true);
-          scaler.setRuleBottom(6, "3px");
-		  HorizontalPanel scalePanel = new HorizontalPanel();
-		  scalePanel.setSpacing(5);
-					
-		
-		  final Label labelScaler = new Label();
-		  scalePanel.add(scaler);
-		  scalePanel.add(labelScaler);
+		if (current != null) {
+			scaleFactor = 1;
+			final PopupPanel popupScaler = new PopupPanel(true);
+			popupScaler.addStyleName("GfxDemo-popup");
+			final Slider scaler = new Slider(Slider.HORIZONTAL, -10, 10, 1,
+					true);
+			scaler.setRuleBottom(6, "3px");
+			HorizontalPanel scalePanel = new HorizontalPanel();
+			scalePanel.setSpacing(5);
 
-	      labelScaler.setText("x" + scaleFactor);
-			
-		  
-		  ChangeListener scaleChange = new ChangeListener() {
-			public void onChange(Widget sender) {
-				int value = scaler.getValue();
-				if (current != null && value != 0) {
-				     if (value < 0) {
-						  final float minus = (scaler.getMinimum() - value) * (-1);
-						  float factor = (minus / (float) scaler.getMaximum()) /scaleFactor;
-						  current.scale(factor);
-						  scaleFactor = (minus / (float) scaler.getMaximum());
-						
-					  } else {
-					  	 float factor = (float) value / scaleFactor; 
-						 current.scale(factor);
-						 scaleFactor = (float) value;
-					  }
-					
+			final Label labelScaler = new Label();
+			scalePanel.add(scaler);
+			scalePanel.add(labelScaler);
 
+			labelScaler.setText("x" + scaleFactor);
+
+			ChangeListener scaleChange = new ChangeListener() {
+				public void onChange(Widget sender) {
+					int value = scaler.getValue();
+					if (current != null && value != 0) {
+						if (value < 0) {
+							final float minus = (scaler.getMinimum() - value)
+									* (-1);
+							float factor = (minus / (float) scaler.getMaximum())
+									/ scaleFactor;
+							if ( current.getGroup() != null) {
+								current.getGroup().scale(factor);
+							} else {
+							current.scale(factor);
+							}
+							scaleFactor = (minus / (float) scaler.getMaximum());
+
+						} else {
+							float factor = (float) value / scaleFactor;
+							if ( current.getGroup() != null) {
+								current.getGroup().scale(factor);
+							} else {
+							current.scale(factor);
+							}
+							scaleFactor = (float) value;
+						}
+
+					}
+					labelScaler.setText("x" + scaleFactor);
 				}
-				labelScaler.setText("x" + scaleFactor);
-			}
-		};
-		  scaler.addChangeListener(scaleChange);
-		  popupScaler.add(scalePanel);
-		  popupScaler.setPopupPosition(scaleButton.getAbsoluteLeft(),scaleButton.getAbsoluteTop());
-		  popupScaler.show();
+			};
+			scaler.addChangeListener(scaleChange);
+			popupScaler.add(scalePanel);
+			popupScaler.setPopupPosition(scaleButton.getAbsoluteLeft(),
+					scaleButton.getAbsoluteTop());
+			popupScaler.show();
 		}
 	}
-	
-	
-	
+
 	private void showPopupRotate() {
-		if ( current != null) {
+		if (current != null) {
 			rotateDegree = 0;
 			final PopupPanel popupRotate = new PopupPanel(true);
 			popupRotate.addStyleName("GfxDemo-popup");
 			final Slider rotate = new Slider(Slider.HORIZONTAL, 0, 360, 0, true);
-  		    HorizontalPanel rotatePanel = new HorizontalPanel();
-  		    rotatePanel.setSpacing(5);
-						
-  		    final Label label = new Label();
+			HorizontalPanel rotatePanel = new HorizontalPanel();
+			rotatePanel.setSpacing(5);
+
+			final Label label = new Label();
 			rotatePanel.add(rotate);
 			rotatePanel.add(label);
-		    label.setText("" + rotateDegree);
-   		    ChangeListener rotateChange = new ChangeListener() {
+			label.setText("" + rotateDegree);
+			ChangeListener rotateChange = new ChangeListener() {
 				public void onChange(Widget sender) {
 					int value = rotate.getValue();
 					if (current != null && value != 0) {
-					    int degree = value - rotateDegree;
-					    current.rotate(degree);
-					    rotateDegree =  value;
+						int degree = value - rotateDegree;
+						
+						if ( current.getGroup() != null) {
+						   current.getGroup().rotate(degree);
+						} else {
+							current.rotate(degree);
+						}
+						
+						rotateDegree = value;
 					}
 					label.setText(rotateDegree + "");
-					
+
 				}
 			};
-			  rotate.addChangeListener(rotateChange);
-			  popupRotate.add(rotatePanel);
-			  popupRotate.setPopupPosition(rotateButton.getAbsoluteLeft(),rotateButton.getAbsoluteTop());
-			  popupRotate.show();
+			rotate.addChangeListener(rotateChange);
+			popupRotate.add(rotatePanel);
+			popupRotate.setPopupPosition(rotateButton.getAbsoluteLeft(),
+					rotateButton.getAbsoluteTop());
+			popupRotate.show();
 		}
 	}
-	
-	
+
 	private void showPopupColor() {
-		
+
 		final PopupPanel popupColor = new PopupPanel(true);
 		popupColor.addStyleName("GfxDemo-popupColor");
 		TabPanel tabPanel = new TabPanel();
@@ -582,68 +619,70 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		final CheckBox checkFill = new CheckBox("Background");
 		checkFill.setChecked(true);
 		colPanel.add(checkFill);
-		
+
 		final ColorChooser colorChooser = new ColorChooser();
-		
+
 		colPanel.add(colorChooser);
-		
-		tabPanel.add(colPanel,new Label("Color"));
-		
+
+		tabPanel.add(colPanel, new Label("Color"));
+
 		ChangeListener colorChange = new ChangeListener() {
-			 public void onChange(Widget sender) {
-				 String color = colorChooser.getColor();
-			     Color colorSelected = Color.getColor(color);
-				 if ( checkFill.isChecked() ) {
-				   currentFillColor = colorSelected;
-				   DOM.setStyleAttribute(fill.getElement(), "backgroundColor",color);
-				   currentFillColor.setAlpha(opacity.getValue());
-				   if (current != null) {
-					  current.setFillColor(currentFillColor);
-				   }
- 				 } else {
- 					   currentStrokeColor = colorSelected;
- 					   lastStrokeColor = currentStrokeColor;
- 					   DOM.setStyleAttribute(fill.getElement(), "borderColor",color);
- 					   if ( current != null) {
- 					       System.out.println(currentStrokeColor);
- 						   current.setStroke(currentStrokeColor,1);
- 					   }
-			     }
-			 }
+			public void onChange(Widget sender) {
+				String color = colorChooser.getColor();
+				Color colorSelected = Color.getColor(color);
+				if (checkFill.isChecked()) {
+					currentFillColor = colorSelected;
+					DOM.setStyleAttribute(fill.getElement(), "backgroundColor",
+							color);
+					currentFillColor.setAlpha(opacity.getValue());
+					if (current != null) {
+						current.setFillColor(currentFillColor);
+					}
+				} else {
+					currentStrokeColor = colorSelected;
+					lastStrokeColor = currentStrokeColor;
+					DOM.setStyleAttribute(fill.getElement(), "borderColor",
+							color);
+					if (current != null) {
+						System.out.println(currentStrokeColor);
+						current.setStroke(currentStrokeColor, 1);
+					}
+				}
+			}
 		};
 		colorChooser.addChangeListener(colorChange);
-		
-		Grid grid = new Grid(2,3);
+
+		Grid grid = new Grid(2, 3);
 		grid.setCellSpacing(10);
 		grid.setCellPadding(10);
-		grid.setWidget(0,0,createImagePattern("gfx/none.gif"));
-		grid.setWidget(0,1,createImagePattern("littleNero.png"));
-		grid.setWidget(0,2,createImagePattern("littleTrajan.png"));
-		grid.setWidget(1,0,createImagePattern("cubic.jpg"));
-		grid.setWidget(1,1,createImagePattern("logo_ft.gif"));
-		grid.setWidget(1,2,createImagePattern("od-logo.jpg"));
-		tabPanel.add(grid,new Label("Pattern"));
-		
-		tabPanel.add(this.opacity,new Label("Opacity"));
-		
+		grid.setWidget(0, 0, createImagePattern("gfx/none.gif"));
+		grid.setWidget(0, 1, createImagePattern("littleNero.png"));
+		grid.setWidget(0, 2, createImagePattern("littleTrajan.png"));
+		grid.setWidget(1, 0, createImagePattern("cubic.jpg"));
+		grid.setWidget(1, 1, createImagePattern("logo_ft.gif"));
+		grid.setWidget(1, 2, createImagePattern("od-logo.jpg"));
+		tabPanel.add(grid, new Label("Pattern"));
+
+		tabPanel.add(this.opacity, new Label("Opacity"));
+
 		tabPanel.selectTab(0);
 		popupColor.add(tabPanel);
-		popupColor.setPopupPosition(colorButton.getAbsoluteLeft(),colorButton.getAbsoluteTop());
+		popupColor.setPopupPosition(colorButton.getAbsoluteLeft(), colorButton
+				.getAbsoluteTop());
 		popupColor.show();
 	}
-	
-	
+
 	private Image createImagePattern(final String url) {
 		final Image image = new Image(url);
 		image.setSize("32px", "32px");
 		image.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
-				if ( current != null) {
+				if (current != null) {
 					Pattern pattern = null;
-					if ( url == "gfx/none.gif") {
-						  pattern = Pattern.DEFAULT_PATTERN;	
+					if (url == "gfx/none.gif") {
+						pattern = Pattern.DEFAULT_PATTERN;
 					} else {
-						pattern = new Pattern(new Image(url),0,0);
+						pattern = new Pattern(new Image(url), 0, 0);
 					}
 					current.applyPattern(pattern);
 				}
@@ -651,82 +690,85 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		});
 		return image;
 	}
-	
+
 	private void showText() {
-		Text text  = new Text("Tatami GFX,\ncourier 10",Text.UNDERLINE);
-		Font font  = new Font("Courier",10,Font.NORMAL,Font.NORMAL,Font.NORMAL);
-		Text text2 = new Text("Tatami GFX, courier bolder 10",Text.OVERLINE);
-		Font font2 = new Font("Courier",10,Font.NORMAL,Font.NORMAL,Font.BOLDER);
-		Text text3 = new Text("Tatami GFX, courier lighter 10",Text.LINE_THROUGH);
-		Font font3 = new Font("Courier",10,Font.NORMAL,Font.NORMAL,Font.LIGHTER);		
+		Text text = new Text("Tatami GFX,\ncourier 10", Text.UNDERLINE);
+		Font font = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
+				Font.NORMAL);
+		Text text2 = new Text("Tatami GFX, courier bolder 10", Text.OVERLINE);
+		Font font2 = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
+				Font.BOLDER);
+		Text text3 = new Text("Tatami GFX, courier lighter 10",
+				Text.LINE_THROUGH);
+		Font font3 = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
+				Font.LIGHTER);
 		Text text4 = new Text("Tatami GFX Arial 24 Bold");
-		Font font4 = new Font("Arial",24,Font.ITALIC,Font.NORMAL,Font.BOLD);
-			
+		Font font4 = new Font("Arial", 24, Font.ITALIC, Font.NORMAL, Font.BOLD);
+
 		text.setFont(font);
 		text3.setFont(font3);
 		text2.setFont(font2);
-		showGraphicObject(text,10,20);
-		showGraphicObject(text2,10,40);
-		showGraphicObject(text3,10,60);
-		showGraphicObject(text4,10,100);
+		showGraphicObject(text, 10, 20);
+		showGraphicObject(text2, 10, 40);
+		showGraphicObject(text3, 10, 60);
+		showGraphicObject(text4, 10, 100);
 		text4.setFont(font4);
-		
-		
+
 	}
 
-	
 	private void showTextPath() {
-		TextPath textPath = new TextPath("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent erat.In malesuada ultricies velit. Vestibulum tempor odio vitae diam. Morbi arcu lectus, laoreet eget, nonummy at, elementum a, quam.");
+		TextPath textPath = new TextPath(
+				"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent erat.In malesuada ultricies velit. Vestibulum tempor odio vitae diam. Morbi arcu lectus, laoreet eget, nonummy at, elementum a, quam.");
 		this.showGraphicObject(textPath, 10, 10);
 		int CPD = 30;
-		Font times = new Font("times",12,Font.NORMAL,Font.NORMAL,Font.NORMAL);
+		Font times = new Font("times", 12, Font.NORMAL, Font.NORMAL,
+				Font.NORMAL);
 		textPath.setFont(times);
 		textPath.moveTo(0, 100);
 		textPath.setAbsoluteMode(false);
-		textPath.curveTo(CPD, 0, 100 - CPD,  300, 100,  300);
+		textPath.curveTo(CPD, 0, 100 - CPD, 300, 100, 300);
 		textPath.curveTo(CPD, 0, 100 - CPD, -300, 100, -300);
-		textPath.curveTo(CPD, 0, 100 - CPD,  300, 100,  300);
+		textPath.curveTo(CPD, 0, 100 - CPD, 300, 100, 300);
 		textPath.curveTo(CPD, 0, 100 - CPD, -300, 100, -300);
-		textPath.curveTo(CPD, 0, 100 - CPD,  300, 100,  300);
-		
+		textPath.curveTo(CPD, 0, 100 - CPD, 300, 100, 300);
+
 	}
-	
+
 	private void showVirtual() {
 		VirtualGroup virtual = new VirtualGroup();
-		Rect r = new Rect(100,20);
+		Rect r = new Rect(100, 20);
 		Circle c = new Circle(20);
 		c.translate(0, 15);
 		r.translate(0, 25);
 		virtual.add(c);
 		virtual.add(r);
 		this.showGraphicObject(virtual, 300, 300);
-				
-		
-		
+
 	}
-	
-	
-	private void showGraphicObject(GraphicObject object,int x, int y) {
+
+	private void showGraphicObject(GraphicObject object, int x, int y) {
 		// this.canvas.removeAllGraphics();
 		object.setFillColor(currentFillColor);
-		object.setStroke(currentStrokeColor,currentStrokeSize);
+		object.setStroke(currentStrokeColor, currentStrokeSize);
 		this.canvas.add(object, x, y);
-		
+
 	}
 
-	public void mousePressed(GraphicObject graphicObject, int x, int y) {
+	public void mousePressed(GraphicObject graphicObject,Event evt) {
 		if (graphicObject != null) {
+			int x = DOM.eventGetClientX(evt);
+			int y = DOM.eventGetClientY(evt);
 			selectObject(graphicObject);
 			movable = true;
-			this.lastPosition[0] = x-canvas.getAbsoluteLeft() + Window.getScrollLeft();
-			this.lastPosition[1] = y-canvas.getAbsoluteTop() + Window.getScrollTop();
-			
+			this.lastPosition[0] = x - canvas.getAbsoluteLeft()
+					+ Window.getScrollLeft();
+			this.lastPosition[1] = y - canvas.getAbsoluteTop()
+					+ Window.getScrollTop();
+
 		}
-		
-		
+
 	}
 
-	
 	/**
 	 * 
 	 * @param object
@@ -735,7 +777,8 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		if (current != null) {
 			current.setStroke(lastStrokeColor, lastStrokeSize);
 		} 
-		this.current = object;
+		current = object;
+		
 		lastStrokeColor = current.getStrokeColor();
 		lastStrokeSize  = current.getStrokeWidth();
 		current.setStroke(Color.RED, 2);
@@ -746,13 +789,16 @@ public class GfxDemo extends Composite implements GraphicObjectListener,ClickLis
 		
 		
 	}
-		
-	
-	
-	
-	public void mouseReleased(GraphicObject graphicObject, int x, int y) {
+
+	public void mouseReleased(GraphicObject graphicObject,Event evt) {
 		movable = false;
-		
-		
+
+	}
+	
+	public void mouseDblClicked(GraphicObject graphicObject,Event evt) {
+		if ( graphicObject != null) {
+			showProperties(graphicObject);
+			
+		}
 	}
 }// end of class
