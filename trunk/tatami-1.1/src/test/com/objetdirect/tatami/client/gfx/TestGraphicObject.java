@@ -44,10 +44,10 @@ abstract public class TestGraphicObject extends DefaultTatamiTest {
   public void testScale() {
 	  initGraphics();
 	  Rectangle bounds = component.getBounds();
-	  final Point before = component.getPosition(); 
+	  final Point before = component.getLocation(); 
 	  component.scale(1.5f);
 	  assertFalse(bounds.isEmpty());
-	  assertEquals(before,component.getPosition());
+	  assertEquals(before,component.getLocation());
 	  //assertFalse(bounds.equals(component.getBounds()));
   }
   
@@ -73,9 +73,9 @@ abstract public class TestGraphicObject extends DefaultTatamiTest {
 	  assertEquals(position.getX(),component.getX(),0.001);
 	  assertEquals(position.getY(),component.getY(),0.001);
 	  Point pt = new Point(89,102);
-	  component.setLocation(pt);
-	  assertEquals(pt,component.getPosition());
-	  component.setLocation(pt.getX(), pt.getY());
+	  //component.setLocation(pt);
+	  assertEquals(pt,component.getLocation());
+	  //component.setLocation(pt.getX(), pt.getY());
 	  assertEquals(pt.getX(),component.getX(),0.001);
 	  assertEquals(pt.getY(),component.getY(),0.001);
   }

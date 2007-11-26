@@ -25,34 +25,39 @@
  */
 package com.objetdirect.tatami.client.gfx;
 
+import com.google.gwt.user.client.Event;
+
 public interface GraphicObjectListener {
 	/**
 	 * Invoked when the mouse button has been clicked (pressed and released) on a graphicObject.
-	 * @param graphicObject
-	 * @param x the x coordinate of the mouse
-	 * @param y the y coordinate of the mouse
+	 * @param graphicObject the <code>GraphicObject</code> which launches the event
+     * @param evt the event mouse
 	 */
-	void mouseClicked(GraphicObject graphicObject, int x, int y);
+	void mouseClicked(GraphicObject graphicObject, Event event);
 	/**
 	 * Invoked when a mouse button has been pressed on a graphicObject.
-	 * @param graphicObject
-	 * @param x the x coordinate of the mouse
-	 * @param y the y coordinate of the mouse
+	 * @param graphicObject the <code>GraphicObject</code> which launches the event
+	 * @param evt the event mouse
 	 */
-	void mousePressed(GraphicObject graphicObject, int x, int y);
+	void mousePressed(GraphicObject graphicObject, Event event);
 	/**
 	 * Invoked when the mouse cursor has been moved
-	 * @param graphicObject
-	 * @param x the x coordinate of the mouse
-	 * @param y the y coordinate of the mouse
+	 * @param graphicObject the <code>GraphicObject</code> which launches the event
+	 *@param evt the event mouse
 	 */
-	void mouseMoved(GraphicObject graphicObject, int x, int y);
+	void mouseMoved(GraphicObject graphicObject, Event event);
 	
 	/**
 	 * Invoked when a mouse button has been released on a graphicObject.
-	 * @param graphicObject
-	 * @param x the x coordinate of the mouse
-	 * @param y the y coordinate of the mouse
+	 * @param graphicObject the <code>GraphicObject</code> which launches the event
+	 * @param evt the mouse event.
 	 */
-	void mouseReleased(GraphicObject graphicObject, int x, int y);
+	void mouseReleased(GraphicObject graphicObject, Event event);
+	
+	/**
+	 * Invoked when a mouse button has been double clicked on a graphicObject.
+	 * @param graphicObject the <code>GraphicObject</code> which launches the event
+	 * @param evt the mouse event.
+	 */
+	public void mouseDblClicked(GraphicObject graphicObject,Event event);
 }

@@ -1,5 +1,6 @@
 package com.objetdirect.tatami.client.gfx;
 
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.objetdirect.tatami.client.DefaultTatamiTest;
@@ -87,23 +88,27 @@ public class GraphicCanvasTest extends DefaultTatamiTest implements GraphicObjec
 
   
   
-  public void mouseClicked(GraphicObject graphicObject, int x, int y) {
+  public void mouseClicked(GraphicObject graphicObject,Event evt) {
 	  clicked = true;
 	}
 
 
-  public void mouseMoved(GraphicObject graphicObject, int x, int y) {
+  public void mouseMoved(GraphicObject graphicObject, Event evt) {
 	  moved = true;
 	}
 
 
-  public void mousePressed(GraphicObject graphicObject, int x, int y) {
+  public void mousePressed(GraphicObject graphicObject,Event evt) {
        pressed = true;
 	}
 
 
-  public void mouseReleased(GraphicObject graphicObject, int x, int y) {
+  public void mouseReleased(GraphicObject graphicObject,Event evt) {
 	   released = true;
+	}
+  
+  public void mouseDblClicked(GraphicObject graphicObject,Event evt) {
+	  
 	}
 
 

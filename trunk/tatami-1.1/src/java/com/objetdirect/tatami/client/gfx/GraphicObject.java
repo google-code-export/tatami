@@ -121,6 +121,8 @@ public abstract class GraphicObject {
 	
 	private GraphicCanvas parent;
 	
+	private GraphicObject groupParent;
+	
 	/**
 	 *The default constructor for a <code>GraphicObject</code> 
 	 *
@@ -129,6 +131,20 @@ public abstract class GraphicObject {
 		position = new Point();
 		center   = new Point();
 		bounds = new Rectangle();
+	}
+	
+	/**
+	 * Returns the group which it contains this <code>GraphicObject</code>
+	 * @return returns the <code>VirtualGroup</code>parent of this <code>GraphicObject</code>
+	 *         can return <code>null</code>
+	 */
+	public GraphicObject getGroup() {
+		return this.groupParent;
+	}
+	
+	
+	protected void setGroup(GraphicObject group) {
+		this.groupParent = group;
 	}
 	
 	/**

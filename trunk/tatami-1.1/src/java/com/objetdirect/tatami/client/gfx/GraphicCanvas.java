@@ -35,6 +35,7 @@ import java.util.Map;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.DojoController;
 
@@ -79,6 +80,10 @@ public class GraphicCanvas extends Widget {
 		setElement(el);
 	    DojoController controller = DojoController.getInstance();
 	    controller.require("dojox.gfx");
+	    //to catch mouse events
+	    this.sinkEvents(Event.ONCLICK);
+	    this.sinkEvents(Event.ONDBLCLICK);
+	    this.sinkEvents(Event.MOUSEEVENTS);
 	 }
 
 	/**
@@ -190,7 +195,7 @@ public class GraphicCanvas extends Widget {
 	private void attachGraphicObject(GraphicObject graphicObject) {
 		graphicObject.show(this);
 		Collection shapes = graphicObject.getShapes();
-		putEventSource(shapes,graphicObject);
+		putEventSource(graphicObject.getShape(),graphicObject);
 		//graphicObjects.put(getEventSource(graphicObject.getShape()), graphicObject);
 	}
 	
@@ -237,63 +242,77 @@ public class GraphicCanvas extends Widget {
 	/**
 	 * Performs a click event
 	 * @param evtSource the JavaScriptObject source of the event
-	 * @param x the x coordinate of the mouse
-	 * @param y the y coordinate of the mouse
+	 * @param evt the event itself
 	 */
-	protected void doClick(JavaScriptObject evtSource, int x, int y) {
+	protected void doClick(JavaScriptObject evtSource, Event evt) {
 		GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
 		final Iterator ite = getCurrentListeners().iterator();
 		while (ite.hasNext()) {
 			final GraphicObjectListener listener = (GraphicObjectListener)ite.next();
-			listener.mouseClicked(graphicObject, x, y);
+			listener.mouseClicked(graphicObject,evt);
 		}
 	}
 	
+	
 	/**
-	 * Performs a mouse down event
+	 * Performs a double click event
 	 * @param evtSource the JavaScriptObject source of the event
-	 * @param x the x coordinate of the mouse
-	 * @param y the y coordinate of the mouse
+	 * @param evt the event itself
 	 */
-	protected void doMouseDown(JavaScriptObject evtSource, int x, int y) {
+	protected void doDoubleClick(JavaScriptObject evtSource, Event evt) {
 		GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
 		final Iterator ite = getCurrentListeners().iterator();
 		while (ite.hasNext()) {
 			final GraphicObjectListener listener = (GraphicObjectListener)ite.next();
-			listener.mousePressed(graphicObject, x, y);
+			listener.mouseDblClicked(graphicObject,evt);
+			
+		}
+	}
+	/**
+	 * Performs a mouse down event
+	 * @param evtSource the JavaScriptObject source of the event
+	 * @param evt the event itself
+	 */
+	protected void doMouseDown(JavaScriptObject evtSource, Event evt) {
+		GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
+		final Iterator ite = getCurrentListeners().iterator();
+		while (ite.hasNext()) {
+			final GraphicObjectListener listener = (GraphicObjectListener)ite.next();
+			listener.mousePressed(graphicObject, evt);
 		}
 	}
 
 	/**
 	 * Performs a mouse move event
 	 * @param evtSource the JavaScriptObject source of the event
-	 * @param x the x coordinate of the mouse
-	 * @param y the y coordinate of the mouse
+	 * @param evt the event itself
 	 */
-	protected void doMouseMove(JavaScriptObject evtSource, int x, int y) {
+	protected void doMouseMove(JavaScriptObject evtSource, Event evt) {
 		final GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
 		Iterator ite = getCurrentListeners().iterator();
 		while (ite.hasNext()) {
 			final GraphicObjectListener listener = (GraphicObjectListener)ite.next();
-			listener.mouseMoved(graphicObject, x, y);
+			listener.mouseMoved(graphicObject,evt);
 		}
 	}
 
 	/**
 	 * Performs a mouse released event
 	 * @param evtSource the JavaScriptObject source of the event
-	 * @param x the x coordinate of the mouse
-	 * @param y the y coordinate of the mouse
+	 * @param evt the event itself
 	 */
-	protected void doMouseUp(JavaScriptObject evtSource, int x, int y) {
+	protected void doMouseUp(JavaScriptObject evtSource,  Event evt) {
 		final GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
 		final Iterator ite = getCurrentListeners().iterator();
 		while (ite.hasNext()) {
 			final GraphicObjectListener listener = (GraphicObjectListener)ite.next();
-			listener.mouseReleased(graphicObject, x, y);
+			listener.mouseReleased(graphicObject,evt);
 		}
 	}
 
+	
+	
+	
 	/**
 	 * Returns the current listeners, 
 	 * If there are no listeners, a new list (empty) is created
@@ -324,6 +343,32 @@ public class GraphicCanvas extends Widget {
 		currentListeners = null;
 	}
 	
+	
+	/**
+	 *Manages the event from the browser  
+	 *@param event
+	 */
+	public void onBrowserEvent(Event event) {
+	    super.onBrowserEvent(event);
+
+	    int type = DOM.eventGetType(event);
+
+	    if (type == Event.ONCLICK) {
+            this.doClick(DOM.eventGetTarget(event),event);
+	    } else if ( type == Event.ONDBLCLICK) {
+	    	this.doDoubleClick(DOM.eventGetTarget(event),event);
+	    } else if ( type == Event.ONMOUSEDOWN) {
+	       this.doMouseDown(DOM.eventGetTarget(event),event);	
+	    }else if ( type == Event.ONMOUSEUP) {
+           this.doMouseUp(DOM.eventGetTarget(event), event);	    	
+	    }else if ( type == Event.ONMOUSEMOVE) {
+           this.doMouseMove(DOM.eventGetTarget(event),event);	    	
+	    }
+	  }
+	
+	
+	
+	
 	/**
 	 * Returns the number of <code>GraphicObject</code>
 	 * in this <code> GraphicCanvas</code>
@@ -343,23 +388,7 @@ public class GraphicCanvas extends Widget {
 	private static native JavaScriptObject initGraphics(Element node, GraphicCanvas canvas, int width, int height) /*-{
 		var surface = $wnd.dojox.gfx.createSurface(node, width, height);
 		surface.canvas = canvas;
-		surface.handleMouseClick = function(event) {
-			surface.canvas.@com.objetdirect.tatami.client.gfx.GraphicCanvas::doClick(Lcom/google/gwt/core/client/JavaScriptObject;II)(event.target, event.clientX, event.clientY);
-		}
-		surface.handleMouseDown = function(event) {
-			surface.canvas.@com.objetdirect.tatami.client.gfx.GraphicCanvas::doMouseDown(Lcom/google/gwt/core/client/JavaScriptObject;II)(event.target, event.clientX, event.clientY);
-		}
-		surface.handleMouseMove = function(event) {
-			surface.canvas.@com.objetdirect.tatami.client.gfx.GraphicCanvas::doMouseMove(Lcom/google/gwt/core/client/JavaScriptObject;II)(event.target, event.clientX, event.clientY);
-		}
-		surface.handleMouseUp = function(event) {
-			surface.canvas.@com.objetdirect.tatami.client.gfx.GraphicCanvas::doMouseUp(Lcom/google/gwt/core/client/JavaScriptObject;II)(event.target, event.clientX, event.clientY);
-		}
-		surface.handleEventClick     = $wnd.dojo.connect(node, 'onclick',     surface.handleMouseClick);
-		surface.handleEventMouseDown = $wnd.dojo.connect(node, 'onmousedown', surface.handleMouseDown);
-		surface.handleEventMouseMove = $wnd.dojo.connect(node, 'onmousemove', surface.handleMouseMove);
-		surface.handleEventMouseUp   = $wnd.dojo.connect(node, 'onmouseup',   surface.handleMouseUp);
-		surface.handleDragStart      = $wnd.dojo.connect(node,'ondragstart',$wnd.dojo, 'stopEvent');
+    	surface.handleDragStart      = $wnd.dojo.connect(node,'ondragstart',$wnd.dojo, 'stopEvent');
 	    surface.handleSelectStart    = $wnd.dojo.connect(node,'onselectstart',$wnd.dojo, 'stopEvent');
 		
 		return surface;
@@ -394,12 +423,9 @@ public class GraphicCanvas extends Widget {
 	 * @param s
 	 */
 	private static native void releaseCanvas(JavaScriptObject surface) /*-{
-		$wnd.dojo.disconnect(surface.handleEventClick);
-		$wnd.dojo.disconnect(surface.handleEventMouseUp);
-		$wnd.dojo.disconnect(surface.handleEventMouseDown);
-		$wnd.dojo.disconnect(surface.handleEventMouseMove);
 		$wnd.dojo.disconnect(surface.handleDragStart);
 		$wnd.dojo.disconnect(surface.handleSelectStart);
+		
 		surface.canvas=null;
 	}-*/;
 	
