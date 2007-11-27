@@ -137,6 +137,14 @@ public class GraphicCanvas extends Widget {
 		return this.surface;
 	}
 	
+	/**
+	 * Returns all the <code>GraphicObject</code> containing by this
+	 * <code>GraphicCanvas</code>
+	 * @return a collection of <code>GraphicObject</code>
+	 */
+	public Collection getGraphicObjects() {
+		return this.objects;
+	}
 	
 	/**
 	 * Hides all the <code>GraphicObject</code> from the surface 
@@ -170,6 +178,7 @@ public class GraphicCanvas extends Widget {
 	/**
 	 * Removes the <code>GraphicObject</code> from the canvas
 	 * @param graphicObject the <code>GraphicObject</code> to remove
+	 * @see #clear()
 	 */
 	public void remove(GraphicObject graphicObject) {
 		if (objects.remove(graphicObject) && isAttached()) {
@@ -178,15 +187,33 @@ public class GraphicCanvas extends Widget {
 	}
 	
 	/**
-	 * 
+	 * Removes all the <code>GraphicObject</code> in this 
+	 * <code>GraphicCanvas</code>
+	 * @see #remove(GraphicObject)
 	 *
 	 */
-	public void removeAllGraphics() {
-		final Iterator ite = objects.iterator();
-		while (ite.hasNext()) {
-			remove((GraphicObject)ite.next());
+	public void clear() {
+		Iterator ite = objects.iterator();
+		while ( ite.hasNext()) {
+			if ( isAttached()) { 
+				detachGraphicObject((GraphicObject)ite.next());
+			}
 		}
+		objects.clear();
 	}
+	
+	
+	
+	
+	/**
+	 * Returns the nth <code>GraphicObject</code> in this <code>GraphicCanvas</code>
+	 * @param n the index of the component to get.
+	 * @return the nth component in this <code>GraphicCanvas</code>
+	 */
+	public GraphicObject getGraphicObject(int n) {
+		return (GraphicObject)this.objects.get(n);
+	}
+	
 	
 	/**
 	 * Shows a <code>GraphicObject</code> to the surface
@@ -372,7 +399,8 @@ public class GraphicCanvas extends Widget {
 	/**
 	 * Returns the number of <code>GraphicObject</code>
 	 * in this <code> GraphicCanvas</code>
-	 * @return
+	 * @return Returns the number of <code>GraphicObject</code>
+	 * in this <code> GraphicCanvas</code>
 	 */
 	public int countGraphicObject() {
 		return this.objects.size();
