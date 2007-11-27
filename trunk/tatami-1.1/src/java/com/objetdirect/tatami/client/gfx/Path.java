@@ -610,6 +610,7 @@ public class Path extends GraphicObject {
 		  }
 		case Command.ABSOLUTE: {
 			this.setAbsoluteMode(getShape(),command.getBoolean(0));
+			this.absoluteMode = command.getBoolean(0);
 			break;
 		}
 		case Command.CLOSEPATH: {
