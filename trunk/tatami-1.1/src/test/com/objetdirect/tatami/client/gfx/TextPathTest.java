@@ -4,7 +4,11 @@ public class TextPathTest extends PathTest {
 
 	private final String text = "TestGFX"; 
 	
-	
+	/**
+	 * Returns a new instance of a <code>TextPath</code> with 
+	 * non decoration
+	 * @return a new instance of a <code>TextPath</code>
+	 */
 	protected GraphicObject createInstance() {
 		return new TextPath(text);
 	}
@@ -32,7 +36,10 @@ public class TextPathTest extends PathTest {
 		assertEquals(Text.UNDERLINE,text3.getDecoration());
 	}
 	
-	
+	/**
+	 * Applies some commands to <code>TextPath</code> 
+	 * @param path the <code>TextPath</code> which will execute the commands
+	 */
 	private void applyCommands(TextPath path) {
 		  path.moveTo(20,20);
 		  path.lineTo(95,20);
@@ -41,6 +48,11 @@ public class TextPathTest extends PathTest {
 		  path.lineTo(20,20);
 	}
 	
+	/**
+	 * Casts the <code>GraphicObject</code> component 
+	 * to a <code>TextPath</code>
+	 * @return an instance of <code>TextPath</code>
+	 */
 	public TextPath toTextPath() {
 		return (TextPath)component;
 	}

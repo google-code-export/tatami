@@ -14,6 +14,7 @@ public class GraphicCanvasTest extends DefaultTatamiTest implements GraphicObjec
   private boolean moved = false;
   private boolean pressed = false;
   private boolean released = false;
+  private boolean doubleClicked = false;
   
 
   private GraphicCanvas getCanvas() {
@@ -26,10 +27,25 @@ public class GraphicCanvasTest extends DefaultTatamiTest implements GraphicObjec
 	  return canvas;
   }
 
-
+  /**
+   * Tests the adding of some <code>GraphicObject</code>
+   *  and the removing of its.
+   *
+   */
   public void testAddGraphicObject() {
-	  
+	   Circle circle = new Circle(50);
+	   Rect rect = new Rect(15,30);
+	   canvas = getCanvas();
+	   canvas.add(circle, 50, 50);
+	   canvas.add(rect, 80, 80);
+	   assertSame(rect,canvas.getGraphicObject(1));
+	   canvas.remove(circle);
+	   assertSame(rect,canvas.getGraphicObject(0));
+	   canvas.add(circle, 50, 50);
+	   canvas.clear();
+	   assertEquals(0,canvas.countGraphicObject());
   }
+  
   
   public void tearDown() {
 	  canvas = null;
@@ -37,6 +53,7 @@ public class GraphicCanvasTest extends DefaultTatamiTest implements GraphicObjec
 	  pressed = false;
 	  clicked = false;
 	  released = false;
+	  doubleClicked = false;
 		  
   }
   
@@ -51,6 +68,14 @@ public class GraphicCanvasTest extends DefaultTatamiTest implements GraphicObjec
 				assertTrue("No click event",clicked);
 			}
 	  };
+	  
+	  final Task taskDblClick = new Task() {
+			public void run() {
+            	System.out.println("mouse double clicked on canvas");
+				assertTrue("No double click event",doubleClicked);
+			}
+	  };
+	  
 	  final Task taskPressed = new Task() {
 			public void run() {
 				System.out.println("mouse pressed on canvas");
@@ -75,6 +100,7 @@ public class GraphicCanvasTest extends DefaultTatamiTest implements GraphicObjec
 	  Timer timer = new Timer() {
 			public void run(){
 			    TestUtil.fireEvent("click", 75,75,TestUtil.MOUSE_BUTTON_1,1,taskClick);
+			    TestUtil.fireEvent("dblclick", 75,75,TestUtil.MOUSE_BUTTON_1,1,taskDblClick);
 			    TestUtil.fireEvent("mouseup", 75,75,TestUtil.MOUSE_BUTTON_1,1,taskPressed);
 			    TestUtil.fireEvent("mousedown", 75,75,TestUtil.MOUSE_BUTTON_1,1,taskReleased);
 			    TestUtil.fireEvent("mousemove", 75,75,TestUtil.MOUSE_BUTTON_1,1,taskMove);
@@ -108,7 +134,7 @@ public class GraphicCanvasTest extends DefaultTatamiTest implements GraphicObjec
 	}
   
   public void mouseDblClicked(GraphicObject graphicObject,Event evt) {
-	  
+	  doubleClicked = true;
 	}
 
 

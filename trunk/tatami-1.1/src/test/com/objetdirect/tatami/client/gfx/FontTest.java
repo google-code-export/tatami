@@ -14,13 +14,21 @@ public class FontTest extends DefaultTatamiTest {
 		font = Font.DEFAULT_FONT;
 	}
 	
+	/**
+	 * Tests the family property
+	 *
+	 */
+	
 	public void testFamily() {
 		font.setFamily("Arial");
 		assertEquals("The family should be Arial","Arial",font.getFamily());
 	}
 	
 	
-	
+	/**
+	 * Tests the contructor
+	 *
+	 */
 	public void testFontContructor() {
 		assertEquals("Arial",font.getFamily());
 		assertEquals(10,font.getSize());
@@ -29,11 +37,19 @@ public class FontTest extends DefaultTatamiTest {
 		assertEquals(Font.NORMAL,font.getWeight());
 	}
 	
+	/**
+	 * Tests the size property
+	 *
+	 */
 	public void testSize() {
 		font.setSize(15);
 		assertEquals(15,font.getSize());
 	}
 	
+	/**
+	 * Tests the weight property
+	 *
+	 */
 	public void testAllWeight() {
 		String[] tab = { Font.BOLD,Font.BOLDER,Font.NORMAL,Font.LIGHTER};
 		for (int i = 0 ; i<tab.length ; i++) {
@@ -41,11 +57,21 @@ public class FontTest extends DefaultTatamiTest {
 		}
 	}
 	
+	/**
+	 * Tests a weight property
+	 * @param weight a value of a weight property to test
+	 *
+	 */
 	private void testWeight(String weight) {
 		font.setWeight(weight);
 		assertEquals(weight,font.getWeight());
 		
 	}
+	
+	/**
+	 * Tests the style property
+	 *
+	 */
 	
 	public void testStyle() {
 		font.setStyle(Font.NORMAL);
@@ -57,10 +83,14 @@ public class FontTest extends DefaultTatamiTest {
 	}
 	
 	
+	/**
+	 * Tests the variant property
+	 *
+	 */
 	public void testVariant() {
 		font.setVariant(Font.NORMAL);
 		assertEquals(Font.NORMAL,font.getVariant());
-		font.setStyle(Font.SMALL_CAPS);
+		font.setVariant(Font.SMALL_CAPS);
 		assertEquals(Font.SMALL_CAPS,font.getVariant());
 	}
 	
@@ -71,6 +101,11 @@ public class FontTest extends DefaultTatamiTest {
 		font = null;
 	}
 	
+	/**
+	 * Tests if the JavaScipt Font object is well
+	 * created
+	 *
+	 */
 	public void testJSFont() {
 		assertNotNull(font.createFont());
 	}
