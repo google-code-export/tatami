@@ -185,6 +185,7 @@ public class VirtualGroup extends GraphicObject {
 	 */
 	public void remove(GraphicObject object, boolean silently) {
 		this.objects.remove(object);
+		object.setGroup(null);
 		if ( object.getShape() != null ) {
 			remove(getShape(),object.getShape(),silently);
 		}
@@ -205,6 +206,11 @@ public class VirtualGroup extends GraphicObject {
 	 * <code>VirtualGroup</code>
 	 */
 	public void clear() {
+		Iterator ite = objects.iterator();
+		while (ite.hasNext()) {
+			GraphicObject gObject = (GraphicObject)ite.next();
+			gObject.setGroup(null);
+		}
 		this.objects.clear();
 		if ( getShape() != null) {
 			clear(getShape());
