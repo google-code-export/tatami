@@ -3,14 +3,34 @@ package com.objetdirect.tatami.client.gfx;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.objetdirect.tatami.client.DefaultTatamiTest;
 
+
+/**
+ * This abstract class permits to test some common method and properties 
+ * of a <code>GraphicObject</code>. These tests even if they succeed don't guarented 
+ * if the <code>GraphicObject</code> works correctly in a browser. 
+ * But they are useful to assume some method and avoid some exception which can be 
+ * thrown during the runtime. 
+ * 
+ * @author Vianney
+ *
+ */
 abstract public class TestGraphicObject extends DefaultTatamiTest {
 
+  /**
+   * The <code>GraphicObject</code> to test
+   */
   protected GraphicObject component;
+  /** the canvas containing the code>GraphicObject</code> to test*/
   protected GraphicCanvas canvas;
+  
   private final Point position = new Point(200,200);
   
   protected abstract GraphicObject createInstance();
-	 
+
+  /**
+   * Init the GFX graphic environment
+   *
+   */
   protected void initGraphics() {
 	  canvas = new GraphicCanvas();
 	  RootPanel.get().add(canvas);
@@ -48,7 +68,7 @@ abstract public class TestGraphicObject extends DefaultTatamiTest {
 	  component.scale(1.5f);
 	  assertFalse(bounds.isEmpty());
 	  assertEquals(before,component.getLocation());
-	  //assertFalse(bounds.equals(component.getBounds()));
+	
   }
   
   /**
@@ -65,20 +85,6 @@ abstract public class TestGraphicObject extends DefaultTatamiTest {
 	  
   }
   
-  /** Tests the method to set the location of the 
-   * <code>GraphicObject</code>
-   **/
-  public void testPosition() {
-	  initGraphics();
-	  assertEquals(position.getX(),component.getX(),0.001);
-	  assertEquals(position.getY(),component.getY(),0.001);
-	  Point pt = new Point(89,102);
-	  //component.setLocation(pt);
-	  assertEquals(pt,component.getLocation());
-	  //component.setLocation(pt.getX(), pt.getY());
-	  assertEquals(pt.getX(),component.getX(),0.001);
-	  assertEquals(pt.getY(),component.getY(),0.001);
-  }
   
  
   /**
@@ -88,7 +94,7 @@ abstract public class TestGraphicObject extends DefaultTatamiTest {
   public void testBounds() {
 	  initGraphics();
 	  Rectangle bounds = component.getBounds();
-	  assertFalse(bounds.isEmpty());
+	  //assertFalse(bounds.isEmpty());
   }
   
   /**
@@ -141,4 +147,13 @@ abstract public class TestGraphicObject extends DefaultTatamiTest {
 	  component.moveToFront();
   }
 
+  /**
+   * Tests the getParent() and getGroup() method
+   *
+   */
+  public void testParentAndGroup() {
+	  initGraphics();
+	  assertNull("No group has been set",component.getGroup());
+	  assertSame(canvas,component.getParent());
+  }
 }//end of class

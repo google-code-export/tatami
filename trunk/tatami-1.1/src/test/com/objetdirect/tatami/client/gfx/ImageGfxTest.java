@@ -17,7 +17,7 @@ public class ImageGfxTest extends TestGraphicObject {
 	public void testImageGfx() {
 		ImageGfx img = (ImageGfx)component;
 		assertEquals(url,img.getUrl());
-		assertEquals(width,img.getWidth());
-		assertEquals(height,img.getHeight());
+		assertEquals(width,img.getWidth(),0.001);
+		assertEquals(height,img.getHeight(),0.001);
 	}
 }
