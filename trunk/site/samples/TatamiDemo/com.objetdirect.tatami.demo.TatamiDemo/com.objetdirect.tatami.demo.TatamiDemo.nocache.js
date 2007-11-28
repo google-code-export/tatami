@@ -1,3 +1,4 @@
+alert("coucou");
 function com_objetdirect_tatami_demo_TatamiDemo(){
   var $wnd = window, $doc = document, external = $wnd.external, scriptsDone, loadDone, bodyDone, base = '', metaProps = {}, values = [], providers = [], answers = [], onLoadErrorFunc, propertyErrorFunc;
   if (!$wnd.__gwt_stylesLoaded) {
