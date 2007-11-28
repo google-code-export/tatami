@@ -97,8 +97,7 @@ public class Slider extends AbstractDojoFocus {
 	 * @param initialValue the initial value
 	 * @param showButtons  Show increment/decrement buttons at the ends of the slider
 	 */
-	public Slider(String type, int minimum, int maximum, int initialValue,
-			boolean showButtons) {
+	public Slider(String type, int minimum, int maximum, int initialValue,boolean showButtons) {
 		super();
 		this.maximum = maximum;
 		this.minimum = minimum;
@@ -135,9 +134,7 @@ public class Slider extends AbstractDojoFocus {
 
 	/**
 	 * Sets enabled or not the Slider bar
-	 * 
-	 * @param enabled
-	 *            true to set the slider enabled
+	 * @param enabled <code>true</code> to set the slider enabled
 	 */
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
@@ -148,11 +145,8 @@ public class Slider extends AbstractDojoFocus {
 
 	/**
 	 * Sets enabled or not the Slider bar
-	 * 
-	 * @param dojoWidget
-	 *            the DOJO slider
-	 * @param enabled
-	 *            true to set enabled
+	 * @param dojoWidget the DOJO slider
+	 * @param enabled <code>true</code> to set enabled
 	 */
 	native private void setEnabled(JavaScriptObject dojoWidget, boolean enabled) /*-{
 	 dojoWidget.setDisabled(!enabled);
@@ -160,8 +154,7 @@ public class Slider extends AbstractDojoFocus {
 
 	/**
 	 * Returns the name of the DOJO widget
-	 * 
-	 * @return "Slider"
+	 * @return "dijit.form.Slider"
 	 */
 	public String getDojoName() {
 		return "dijit.form.Slider";
@@ -169,11 +162,8 @@ public class Slider extends AbstractDojoFocus {
 
 	/**
 	 * Sets the type position for the cursor.
-	 * 
-	 * @param type
-	 *            the position for the cursor : VERTICAL || HORIZONTAL
-	 * @throws IllegalArgumentException
-	 *             if the given type is not valid.
+	 * @param type  the position for the cursor : VERTICAL || HORIZONTAL
+	 * @throws IllegalArgumentException  if the given type is not valid.
 	 */
 	private void setType(String type) {
 		if (HORIZONTAL.equals(type) || VERTICAL.equals(type)) {
@@ -186,7 +176,6 @@ public class Slider extends AbstractDojoFocus {
 	/**
 	 * Returns the max value for the cursor. The value is defined during the
 	 * creation.
-	 * 
 	 * @return an integer.
 	 */
 	public int getMaximum() {
@@ -224,25 +213,22 @@ public class Slider extends AbstractDojoFocus {
 	 * Creates a Slider DOJO widgte in a vertical position.
 	 * 
 	 * @parma minimum the min value for the cursor.
-	 * @param maximum
-	 *            the max value for the cursor.
-	 * @param initialValue
-	 *            the intial value for the cursor.
-	 * @param showButtons
-	 *            Show increment/decrement buttons at the ends of the slider
+	 * @param maximum the max value for the cursor.
+	 * @param initialValue  the intial value for the cursor.
+	 * @param showButtons Show increment/decrement buttons at the ends of the slider
 	 * @return the Slider DOJO widget
 	 */
 	private native JavaScriptObject createVerticalSlider(int minimum,
 			int maximum, int initialValue, boolean showButtons)
 	/*-{
 	 var widget = new $wnd.dijit.form.VerticalSlider( 	 {
-	 minimum: minimum,
-	 maximum: maximum,
-	 showButtons :  showButtons,
-	 value:initialValue,
-	 style:"height:200px;",
-	 discreteValues: maximum,
-	 intermediateChanges: true
+	   minimum: minimum,
+	   maximum: maximum,
+	   showButtons :  showButtons,
+	   value:initialValue,
+	   style:"height:200px;",
+	   discreteValues: maximum,
+	   intermediateChanges: true
 	 }
 	 );
 	 
@@ -251,14 +237,10 @@ public class Slider extends AbstractDojoFocus {
 
 	/**
 	 * Creates a Slider DOJO widgte in a horinzontal position.
-	 * 
 	 * @parma minimum the min value for the cursor.
-	 * @param maximum
-	 *            the max value for the cursor.
-	 * @param initialValue
-	 *            the intial value for the cursor.
-	 * @param showButtons
-	 *            Show increment/decrement buttons at the ends of the slider
+	 * @param maximum the max value for the cursor.
+	 * @param initialValue the intial value for the cursor.
+	 * @param showButtons  Show increment/decrement buttons at the ends of the slider
 	 * @return the Slider DOJO widget
 	 */
 	static native JavaScriptObject createHorizontalSlider(int minimum,
@@ -282,9 +264,7 @@ public class Slider extends AbstractDojoFocus {
 	 * Arms a callbakc on the call of the method <code>onValueChanged</code>
 	 * of the DOJO widget. This one gives the hand to the method
 	 * <code> onValueChanged</code> of the GWT widget.
-	 * 
-	 * @param dojoWidget
-	 *            the DOJO widget fulfilling the cursor.
+	 * @param dojoWidget the DOJO widget fulfilling the cursor.
 	 */
 	private native void setEventCallback(JavaScriptObject dojoWidget)
 	/*-{
@@ -314,7 +294,6 @@ public class Slider extends AbstractDojoFocus {
 
 	/**
 	 * Returns the height of the Slider
-	 * 
 	 * @return the height of the Slider
 	 */
 	public int getHeight() {
@@ -371,7 +350,7 @@ public class Slider extends AbstractDojoFocus {
 
 	
 	/**
-	 * 
+	 * Removes the rule mark at the top of this <code>Slider</code>
 	 *
 	 */
 	public void removeRuleTop() {
@@ -380,7 +359,7 @@ public class Slider extends AbstractDojoFocus {
 	}
 	
     /**
-     * 
+     * * Removes the rule mark at the bottom of this <code>Slider</code>
      *
      */
 	public void removeRuleBottom() {
@@ -388,46 +367,66 @@ public class Slider extends AbstractDojoFocus {
 		sliderRuleBottom = null;
 	}
 	
-	
+	/**
+	 * Removes the labels at the top of this <code>Slider</code>
+	 *
+	 */
 	public void removeLabelTop() {
 		removeDojoRule(labelTop);
 		labelTop = null;
 	}
 	
+	/**
+	 * Removes the labels at the bottom of this <code>Slider</code>
+	 *
+	 */
 	public void removeLabelBottom() {
 		removeDojoRule(labelBottom);
 		labelBottom = null;
 	}
 	
-	
+	/**
+	 *Removes all rule mark and labels from this <code>Slider</code>
+	 *@see #removeLabelBottom()
+	 *@see #removeLabelTop()
+	 *@see #removeRuleBottom()
+	 *@see #removeRuleTop()
+	 */
 	public void removeRuleAndLabel() {
-		removeDojoRule(sliderRuleBottom);
-		removeDojoRule(sliderRuleTop);
-		removeDojoRule(labelTop);
-		removeDojoRule(labelBottom);
+		removeLabelBottom();
+		removeLabelTop();
+		removeRuleBottom();
+		removeRuleTop();
 	}
 	
-	
+	/**
+	 * Removes a <code>RuleMark</code> from this <code>Slider</code>
+	 * @param rule a <code>RuleMark</code> 
+	 */
 	private void removeDojoRule(RuleMark rule) {
 		if ( rule != null) {
-		 removeChild(getDojoWidget(),rule.getDojoWidget());
-		 DojoController.getInstance().destroy(rule.getDojoWidget());
+		 DojoController controller = DojoController.getInstance();
+		 controller.removeChild(this,rule.getDojoWidget());
+		 controller.destroy(rule.getDojoWidget());
 		}
 		
 	}
-    /**
-     * 
-     * @param count
-     * @param ruleStyle
+    
+	/**
+     * Sets the <code>RuleMark</code> at the top of this <code>slider</code> 
+     * If this <code>Slider</code> is vertical then the  <code>RuleMark</code>
+     * will position at the left.
+     * @param count the number of mark to print 
+     * @param size the size for the mark in pixel, em etc...
      */
-	public void setRuleTop(int count, String ruleStyle) {
+	public void setRuleTop(int count, String size) {
 		if ( sliderRuleTop != null) {
 			removeRuleTop();
 		}
 		if (VERTICAL.equals(type)) {
-			sliderRuleTop = new RuleMark(RuleMark.VERTICAL,count,ruleStyle,LEFT);
+			sliderRuleTop = new RuleMark(RuleMark.VERTICAL,count,size,LEFT);
 		} else {
-			sliderRuleTop = new RuleMark(RuleMark.HORIZONTAL,count,ruleStyle,TOP);
+			sliderRuleTop = new RuleMark(RuleMark.HORIZONTAL,count,size,TOP);
 		}
 			
 		if ( isAttached()) {
@@ -436,7 +435,13 @@ public class Slider extends AbstractDojoFocus {
 	}
 	
 	
-	
+	/**
+	 * Sets the <code>RuleLabels</code> to print at the top of this <code>Slider</code>
+	 * If this <code>Slider</code> is vertical then the  <code>RuleLabels</code>
+     * will position at the left.
+	 * @param labels the labels to print 
+	 * @param style the style to use for the label (color, font etc...)
+	 */
 	public void setLabelsTop(String[] labels,String style) {
 		if ( labelTop != null) {
 			removeLabelTop();
@@ -452,6 +457,13 @@ public class Slider extends AbstractDojoFocus {
 		}
 	}
 	
+	/**
+	 * Sets the <code>RuleLabels</code> to print at the bottom of this <code>Slider</code>
+	 * If this <code>Slider</code> is vertical then the  <code>RuleLabels</code>
+     * will position at the right.
+	 * @param labels the labels to print 
+	 * @param style the style to use for the label (color, font etc...)
+	 */
 	public void setLabelsBottom(String[] labels,String style) {
 		if ( labelBottom != null) {
 			removeLabelTop();
@@ -469,19 +481,20 @@ public class Slider extends AbstractDojoFocus {
 	
 	
 	/**
-	 * 
+	 *Removes all <code>RuleMark</code> and <code>RuleLabel</code> 
 	 */
 	public void doBeforeDestruction() {
 		this.removeRuleAndLabel();
-		
-	}
+    }
 	
 	
 	/**
-	 * 
-	 * @param count
-	 * @param ruleStyle
-	 */
+     * Sets the <code>RuleMark</code> at the bottom of this <code>slider</code>.
+     * If this <code>Slider</code> is vertical then the  <code>RuleMark</code>
+     * will position at the right. 
+     * @param count the number of mark to print 
+     * @param size the size for the mark in pixel, em etc...
+     */
 	public void setRuleBottom(int count, String size) {
 		//if we have already a sliderrule 
 		if ( sliderRuleBottom != null) {
@@ -499,18 +512,46 @@ public class Slider extends AbstractDojoFocus {
 		}
 	}
 	
-	
+	/**
+     * Sets the <code>RuleMark</code> at the left of this <code>slider</code> 
+     * If this <code>Slider</code> is horizontal then the  <code>RuleMark</code>
+     * will position at the top.
+     * @param count the number of mark to print 
+     * @param size the size for the mark in pixel, em etc...
+     */
 	public void setRuleLeft(int count, String size) {
 		setRuleTop(count,size);
 	}
 	
+	/**
+	 * Sets the <code>RuleLabels</code> to print at the left of this <code>Slider</code>
+	 * If this <code>Slider</code> is horizontal then the <code>RuleLabels</code>
+     * will position at the top.
+	 * @param labels the labels to print 
+	 * @param style the style to use for the label (color, font etc...)
+	 */
 	public void setLabelsLeft(String[] labels, String style) {
 		setLabelsTop(labels,style);
 	}
 	
+	/**
+     * Sets the <code>RuleMark</code> at the right of this <code>slider</code> 
+     * If this <code>Slider</code> is horizontal then the  <code>RuleMark</code>
+     * will position at the bottom.
+     * @param count the number of mark to print 
+     * @param size the size for the mark in pixel, em etc...
+     */
 	public void setRuleRight(int count, String size) {
 		setRuleBottom(count,size);
 	}
+	
+	/**
+	 * Sets the <code>RuleLabels</code> to print at the right of this <code>Slider</code>
+	 * If this <code>Slider</code> is vertical then the  <code>RuleLabels</code>
+     * will position at the bottom.
+	 * @param labels the labels to print 
+	 * @param style the style to use for the label (color, font etc...)
+	 */
 	public void setLabelsRight(String[] labels, String style) {
 		setLabelsBottom(labels,style);
 	}
@@ -518,11 +559,8 @@ public class Slider extends AbstractDojoFocus {
 	
 	/**
 	 * Asks to the widget DOJO to set the value of the cursor
-	 * 
-	 * @param dojoWidget
-	 *            the DOJO widget
-	 * @param value
-	 *            the value for the cursor
+	 * @param dojoWidget the DOJO widget
+	 * @param value the value for the cursor
 	 */
 	private native void doSetValue(JavaScriptObject dojoWidget, int value)
 	/*-{
@@ -533,9 +571,7 @@ public class Slider extends AbstractDojoFocus {
 	/**
 	 * Change the value of cursor for the GWT widget. If the value is a new
 	 * value then a notification of a chaning state is thrown.
-	 * 
-	 * @param value
-	 *            the new value.
+	 * @param value the new value.
 	 */
 	private void changeValue(int value) {
 		if (this.value != value) {
@@ -550,51 +586,30 @@ public class Slider extends AbstractDojoFocus {
 	 * Callback method invoked by the DOJO widget when the cursor has changed.
 	 * This method change the value for the cursor of the GWT widget to
 	 * correspond with the value of the DOJO widget.
-	 * 
-	 * @param value
-	 *            the new value.
+	 * @param value the new value.
 	 * 
 	 */
 	public void onValueChanged(double value) {
 		changeValue((int) value);
 	}
-
-	
-
-	private native void addChild(JavaScriptObject dojoWidget,JavaScriptObject child)/*-{
-	     dojoWidget.addChild(child);
-	     dojoWidget.startup();
-	     //child.startup();
-	 }-*/;
-
-	private native void removeChild(JavaScriptObject dojoWidget,JavaScriptObject child)/*-{
-	    dojoWidget.removeChild(child);
-	}-*/;
-	
-	
+		
 
 	/**
 	 * Assumes that the Slider is attached.
+	 * @param rule a <code>RuleMark</code>
 	 * 
 	 */
 	private void buildRuleMark(RuleMark rule) {
 		if ( rule != null) {
 		  try {
 		  	rule.createDojoWidget();
-		    addChild(getDojoWidget(), rule.getDojoWidget());
+		    DojoController.getInstance().addChild(this, rule.getDojoWidget());
+		  	
 		  } catch (Exception e ) {
 			 GWT.log("ERROR", e);
 		  }
 		}
     }
-
-	
-	
-
-	
-	
-	
-
 
 
 } // end of class

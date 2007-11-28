@@ -218,12 +218,18 @@ public class DojoController {
 	 }-*/;
 
 
-	
+	/**
+	 * see {@link #startup(HasDojo)}
+	 * @param dojoWidget the DOJO widget
+	 */
 	static private native void startup(JavaScriptObject dojoWidget) /*-{
 		dojoWidget.startup();
 	}-*/;
 	
-	
+	/**
+	 * Calls the startup method on a widget which contains a DOJO widget
+	 * @param widget a widget wrapping a DOJO widget
+	 */
 	static public void startup(HasDojo widget) {
 		startup(widget.getDojoWidget());
 	}
@@ -269,7 +275,11 @@ public class DojoController {
 	     $wnd.alert(object);
 	 }-*/;
 
-	
+	/**
+	 * Creates a JavaScrtip Array of String object from a Java String array.
+	 * @param array the Java array
+	 * @return the JavaScript array corresponding to the given Java array
+	 */
      static public  JavaScriptObject createArray(String[] array) {
     	 JavaScriptObject jsArray = JavaScriptObject.createArray();
     	 for ( int i=0; i < array.length;i++) {
@@ -278,12 +288,50 @@ public class DojoController {
     	 return jsArray;
      }
 	
+     /**
+      * Puts a string at the specified index in a JavaScript array
+      * @param array the JavaScript array
+      * @param index the index to put the value
+      * @param value the string value to put at the specified index
+      * @return the JavaScript array
+      */
      static private native JavaScriptObject put(JavaScriptObject array,int index, String value)/*-{
          array[index] = value;
          return array;
      }-*/;
 	
+     /**
+      * Removes a <code>JavaScriptObject</code> from the DOJO widget
+      * @param widget the GWT widget containing the DOJO widget
+      * @param child the <code>JavaScriptObject</code> to remove
+      */
+     public void removeChild(HasDojo widget,JavaScriptObject child) {
+    	 removeChild(widget.getDojoWidget(),child);
+     }
+     
+     /**
+      * Adds a <code>JavaScriptObject</code> as a child for the DOJO widget
+      * @param widget the GWT widget containing the DOJO widget 
+      * @param child the <code>JavaScriptObject</code> to add
+      */
+     public void addChild(HasDojo widget,JavaScriptObject child) {
+    	 addChild(widget.getDojoWidget(),child);
+     }
+     
+     /*
+      * @see #removeChild(HasDojo,JavaScriptObject)
+      */ 
+     private native void removeChild(JavaScriptObject dojoWidget, JavaScriptObject child)/*-{
+        dojoWidget.removeChild(child);
+     }-*/;
 	
+     /*
+      * @see #addChild(HasDojo,JavaScriptObject)
+      */ 
+      private native void addChild(JavaScriptObject dojoWidget, JavaScriptObject child) /*-{
+        dojoWidget.addChild(child);
+	    dojoWidget.startup();
+      }-*/;
 	
 
 }//end of class
