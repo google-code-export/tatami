@@ -359,10 +359,8 @@ public Point getCenter() {
 
 
 /**
- * Sets the diagonal of the framing rectangle of this <code>Shape</code>
- * based on the two specified coordinates.  The framing rectangle is
- * used by the subclasses of <code>RectangularShape</code> to define
- * their geometry.
+ * Sets the diagonal of the framing rectangle of this <code>Rectangle</code>
+ * based on the two specified coordinates. 
  * @param x1,&nbsp;y1 the first specified coordinates
  * @param x2,&nbsp;y2 the second specified coordinates
  */
@@ -505,8 +503,19 @@ public void translate(double dx, double dy) {
  * @param angle the angle of the rotation in degree
  */
 public void rotate(double angle) {
-	point.rotate(angle,getCenter());
+	rotate(angle,getCenter());
 	
 }
+
+/**
+ * Executes a rotation of this <code>Rectangle</code>
+ * @param angle the angle of the rotation in degree
+ * @param center the center of the rotation
+ */
+public void rotate(double angle,Point center) {
+	point.rotate(angle,center);
+	
+}
+
 
 }//end of class
