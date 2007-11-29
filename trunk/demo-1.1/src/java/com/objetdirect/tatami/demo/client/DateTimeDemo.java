@@ -89,7 +89,7 @@ public class DateTimeDemo extends Composite {
 	  datePanel.add(inputDate);
 	  datePanel.add(htmlDatePicker);
 	  datePanel.add(datePicker);
-	  datePanel.add(new HTML("If you modify the <b>DatePicker</b>, the <b>DropdowDatePicker</b> will be modify too and vice-versa"));
+	  datePanel.add(new HTML("If you modify the <b>DatePicker</b>, the <b>DropdowDatePicker</b> will be modified too and vice-versa"));
 	  
 	  linkDropdownAndPicker(inputDate, datePicker);
 	  
@@ -101,16 +101,18 @@ public class DateTimeDemo extends Composite {
 	  constraints.clickableIncrement = TimePickerConstraints.EVERY_HALF_HOUR;
 
 	  timePicker = new TimePicker(constraints);
+	 
 	  timePanel.add(htmlInputTime);
 	  timePanel.add(inputTime);
 	  timePanel.add(htmlTimePicker);
 	  timePanel.add(timePicker);
-	  timePanel.add(new HTML("If you modify the <b>TimePicker</b>, the <b>DropdowTimePicker</b> will be modify too and vice-versa"));
+	  timePanel.add(new HTML("If you modify the <b>TimePicker</b>, the <b>DropdowTimePicker</b> will be modified too and vice-versa"));
 	  this.linkDropdownAndPicker(inputTime, timePicker);
 	  
 	  mainPanel.add(datePanel);
 	  mainPanel.add(timePanel);
 	  Clock clock = new Clock("clock_face.jpg",385);
+	  
 	  mainPanel.add(clock);
 
   }

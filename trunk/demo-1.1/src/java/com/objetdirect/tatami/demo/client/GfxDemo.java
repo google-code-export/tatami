@@ -246,6 +246,8 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		propertiesButton = addToGrid(gridTransform, 2, 1, "Properties",
 				"gfx/properties.gif");
 
+		HTML html = new HTML("<p>The <b>GFX</b> package permits to draw some graphic components. You can draw circles, rectangles, ellipses... You can also apply some affine transformation like translation, rotation... on these graphic components.<b>Click on an icon to create a graphic component in the canvas.</p>");
+		panel.add(html, DockPanel.NORTH);
 		panel.add(canvas, DockPanel.CENTER);
 		panel.add(buttonPanel, DockPanel.WEST);
 		canvas.addGraphicObjectListener(this);
