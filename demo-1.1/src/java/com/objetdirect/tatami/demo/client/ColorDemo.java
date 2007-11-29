@@ -53,7 +53,7 @@ public class ColorDemo extends Composite implements ChangeListener{
 		panel = new DockPanel();
 		panel.setSpacing(30);
 		
-		colorLabel = new HTML("<b>No color Selected.</b>");
+		colorLabel = new HTML("<b>No color selected.</b>");
 		big = new ColorChooser();
 		big.setTitle("70 colors");
 		big.addChangeListener(this);

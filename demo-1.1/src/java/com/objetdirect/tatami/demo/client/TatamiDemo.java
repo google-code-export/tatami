@@ -149,7 +149,9 @@ public class TatamiDemo implements EntryPoint {
 	 */
 	private void initMenuPanel() {
 	   menuPanel = new VerticalPanel();
-	   fishEye = new FishEye(FishEye.VERTICAL);
+	   fishEye = new FishEye(50, 50, 200, 200, FishEye.VERTICAL, 2, 10, FishEye.CENTER, FishEye.RIGHT, false);
+	    
+
 	   labelMenu = new HTML("Menu");
 	   
 	   Clock clock = new Clock(null,77);
@@ -183,7 +185,7 @@ public class TatamiDemo implements EntryPoint {
 	 * @return The HTML code corresponding to a message
 	 */
 	private String getMessage(String icon) {
-		return "<table><tr><td>Vous avez s&#233;lectionn&#233;: </td><td><img src=\""
+		return "<table><tr><td>You have selected : </td><td><img src=\""
 				+ icon + "\"></td></tr></table>";
 	}
 
