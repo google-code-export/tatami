@@ -11,6 +11,22 @@ body {
 	margin: 0px;
 }
 
+
+
+/*.tundra .dijitToasterMessage {
+	  padding:1em;
+	  padding-top:0.25em;
+	  background:blue;
+     }*/
+
+.tundra .dijitToasterMessage .dijitToasterContent{
+	background:blue;
+}
+
+
+
+ 
+
 a {
 	color: darkblue;
 }
