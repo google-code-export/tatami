@@ -60,9 +60,7 @@ public abstract class DropdownContainer extends TextBox implements HasDojo {
     /** the max date available in the selector*/
 	private Date max;
 	
-	/** Id for the input element*/
-	private String id;
-
+	
 	private String promptMessage = null;
 	
 	private String invalidMessage = null;
@@ -90,22 +88,14 @@ public abstract class DropdownContainer extends TextBox implements HasDojo {
 	 * Creates a editor of temporal information.
 	 * @param element  <code>Element</code> The DOM element for the GWT widget
 	 * the DOJO widget will be adde to this element
-	 * @param id  an Id for this widget (an id for the dom Element of the DOJO widget), note :  this is 
-	 *        not the id of the given element of the GWT widget
 	 * @param startDate the first date that we can select in the calendar.
 	 * @param endDate the last date that we can select in the calendar.
 	 */
-	protected DropdownContainer(Element element,String id,Date startDate, Date endDate) {
+	protected DropdownContainer(Element element,Date startDate, Date endDate) {
 		super();
-		this.id = id;
+		
 		setElement(element);
-		//we need to create a sub-element with the given id, otherwise
-		//the DOJO DateTextBox cannot be created the TypeError : pn has no properties is thrown.
-		//this sub-element will be replace by the DOM node of the DOJO DateTextBox.
-		//so it's not necessary to keep it the class but its id yes. 
-		Element subElement = DOM.createDiv();
-		DOM.setElementProperty(subElement,"id",id);
-   	    DOM.appendChild(element,subElement);
+		
 	    
    	    this.max = endDate;
 		this.min = startDate;
@@ -116,12 +106,12 @@ public abstract class DropdownContainer extends TextBox implements HasDojo {
 	/**
 	 * Creates an editor of temporal information. The GWT widget 
 	 * will have a 'DIV' for the DOM element.
-	 * @param id an Id for this widget (an id for the dom Element of the DOJO widget)
+	 
  	 * @param startDate the first date that we can select in the calendar. can be <code>null</code>
 	 * @param endDate the last date that we can select in the calendar.<code>null</code>
 	 */
-	protected DropdownContainer(String id,Date startDate, Date endDate) {
-		this(DOM.createDiv(),id,startDate,endDate);
+	protected DropdownContainer(Date startDate, Date endDate) {
+		this(DOM.createDiv(),startDate,endDate);
 	}
 
 	
@@ -456,13 +446,7 @@ public abstract class DropdownContainer extends TextBox implements HasDojo {
 		setDojoDate(getDojoWidget(), date);
 	}
 	
-	/**
-	 * Returns the id of the DOM element representing the DOJO widget. 
-	 * @return an id of a DOM element.
-	 */
-	public String getId() {
-		return this.id;
-	}
+	
 	
 	/**
 	 * Modifies the selected date on the DOJO widget

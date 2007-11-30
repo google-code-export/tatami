@@ -80,7 +80,7 @@ public class DateTimeDemo extends Composite {
 	
 	  
 	  
-	  inputDate = new DropdownDatePicker("inputDate");
+	  inputDate = new DropdownDatePicker();
 	  inputDate.setInvalidMessage("the date is incorrect");
 
 	  datePicker = new DatePicker();
@@ -94,7 +94,7 @@ public class DateTimeDemo extends Composite {
 	  linkDropdownAndPicker(inputDate, datePicker);
 	  
 	  
-	  inputTime = new DropdownTimePicker("inputTime");
+	  inputTime = new DropdownTimePicker();
 	  inputTime.setPromptMessage("HH:mm");
 		
 	  TimePickerConstraints constraints= new TimePickerConstraints();

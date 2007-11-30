@@ -41,8 +41,8 @@ public class DropdownDatePicker extends DropdownContainer {
 	 * Creates the from input.
 	 * 
 	 */
-	public DropdownDatePicker(String id) {
-		this(id,null, null);
+	public DropdownDatePicker() {
+		this(null, null);
 
 	}
 
@@ -50,8 +50,8 @@ public class DropdownDatePicker extends DropdownContainer {
 	 * Creates DropdownDatePicker specifying some options
 	 * 
 	 */
-	public DropdownDatePicker(String id,Date startDate, Date endDate) {
-		super(id,startDate,endDate);
+	public DropdownDatePicker(Date startDate, Date endDate) {
+		super(startDate,endDate);
 	}
 
 	/**
@@ -67,18 +67,17 @@ public class DropdownDatePicker extends DropdownContainer {
 	 * {@link getDojoName()}
 	 */
 	public void createDojoWidget() {
-		this.dojoWidget = createDateTextBox(getId(),getMinJavaScriptDate(), getMaxJavaScriptDate());
+		this.dojoWidget = createDateTextBox(getMinJavaScriptDate(), getMaxJavaScriptDate());
 	
 	}
 
 	/**
 	 * Creates the DOJO widget DateTextBox
-	 * @param id the id of the DOM element for the DateTextBox
 	 * @param startDate the first date selectable in the calendar.
 	 * @param endDate the last date selectable in the calendar.
 	 * @return the DOJO widget or <code>null</code> if there was a problem
 	 */
-	private native JavaScriptObject createDateTextBox(String id,JavaScriptObject startDate, JavaScriptObject endDate)
+	private native JavaScriptObject createDateTextBox(JavaScriptObject startDate, JavaScriptObject endDate)
 	/*-{
 	 if (startDate==null) startDate="1492-10-12";
 	 if (endDate==null) endDate="2492-10-12";
@@ -90,7 +89,7 @@ public class DropdownDatePicker extends DropdownContainer {
 	          min: startDate,
 	          max: endDate
 	       }
-	     },$wnd.dojo.byId(id)
+	     },$wnd.dojo.doc.createElement("div")
 	 );
     
 	 } catch (e) {

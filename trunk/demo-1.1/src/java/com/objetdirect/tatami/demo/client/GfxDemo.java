@@ -524,7 +524,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 			popupScaler.addStyleName("GfxDemo-popup");
 			final Slider scaler = new Slider(Slider.HORIZONTAL, -10, 10, 1,
 					true);
-			scaler.setRuleBottom(6, "3px");
+			scaler.setRuleMarkBottom(6, "3px");
 			HorizontalPanel scalePanel = new HorizontalPanel();
 			scalePanel.setSpacing(5);
 

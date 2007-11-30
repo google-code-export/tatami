@@ -88,7 +88,7 @@ public class Clock extends SimplePanel {
 	 * Creates a clock component. 
 	 * An image can be used to fill the clock component. 
 	 * @param url an url of an image to use for background if null no image will be set
-	 * @param width the width for the image.
+	 * @param width the width for the image and so for the clock.
 	 */
 	public Clock(String url,int width) {
 	  setElement(DOM.createDiv());

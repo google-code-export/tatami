@@ -60,23 +60,23 @@ public class DropdownTimePicker extends DropdownContainer {
 	/**
 	 * Creates  DropDownTimePicker component.
 	 */
-	public DropdownTimePicker(String id) {
-		this(id,DEFAULT_PATTERN);
+	public DropdownTimePicker() {
+		this(DEFAULT_PATTERN);
 	}
 
 	/**
 	 * Creates  DropDownTimePicker component.
 	 */
-	public DropdownTimePicker(String id,String timePattern) {
-		this(id,null,null,timePattern);
+	public DropdownTimePicker(String timePattern) {
+		this(null,null,timePattern);
 		
 	}
 	
 	/**
 	 * Creates  DropDownTimePicker component.
 	 */
-	public DropdownTimePicker(String id,Date startDate, Date endDate,String timePattern) {
-		super(id,startDate,endDate);
+	public DropdownTimePicker(Date startDate, Date endDate,String timePattern) {
+		super(startDate,endDate);
 		this.timePattern = timePattern;
 	}
 		
@@ -133,7 +133,7 @@ public class DropdownTimePicker extends DropdownContainer {
 	 * {@link getDojoName()}
 	 */
 	public void createDojoWidget() {
-		this.dojoWidget = createTimeTextBox(getId(),timePattern,getMinJavaScriptDate(),getMaxJavaScriptDate());
+		this.dojoWidget = createTimeTextBox(timePattern,getMinJavaScriptDate(),getMaxJavaScriptDate());
 	}
 
 	
@@ -141,7 +141,7 @@ public class DropdownTimePicker extends DropdownContainer {
 
 	
 	
-	private native JavaScriptObject createTimeTextBox(String id,String timePattern,JavaScriptObject startDate, JavaScriptObject endDate)
+	private native JavaScriptObject createTimeTextBox(String timePattern,JavaScriptObject startDate, JavaScriptObject endDate)
 	/*-{
 	    if (startDate==null) startDate="1492-10-12";
 	    if (endDate==null) endDate="2492-10-12";
@@ -153,7 +153,7 @@ public class DropdownTimePicker extends DropdownContainer {
 	       max:endDate,
 	       
 	     }
-	    },$wnd.dojo.byId(id)
+	    },$wnd.dojo.doc.createElement("div")
 	  );
 	   return widget;
 	 }-*/;
