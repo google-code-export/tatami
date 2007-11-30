@@ -353,7 +353,7 @@ public class Slider extends AbstractDojoFocus {
 	 * Removes the rule mark at the top of this <code>Slider</code>
 	 *
 	 */
-	public void removeRuleTop() {
+	public void removeRuleMarkTop() {
 		removeDojoRule(sliderRuleTop);
 		sliderRuleTop = null;
 	}
@@ -362,7 +362,7 @@ public class Slider extends AbstractDojoFocus {
      * * Removes the rule mark at the bottom of this <code>Slider</code>
      *
      */
-	public void removeRuleBottom() {
+	public void removeRuleMarkBottom() {
     	removeDojoRule(sliderRuleBottom);
 		sliderRuleBottom = null;
 	}
@@ -376,6 +376,14 @@ public class Slider extends AbstractDojoFocus {
 		labelTop = null;
 	}
 	
+	
+	public void removeRuleMarkLeft() {
+		removeRuleMarkTop();
+	}
+	
+	public void removeRuleMarkRight() {
+		removeRuleMarkBottom();
+	}
 	/**
 	 * Removes the labels at the bottom of this <code>Slider</code>
 	 *
@@ -389,14 +397,14 @@ public class Slider extends AbstractDojoFocus {
 	 *Removes all rule mark and labels from this <code>Slider</code>
 	 *@see #removeLabelBottom()
 	 *@see #removeLabelTop()
-	 *@see #removeRuleBottom()
-	 *@see #removeRuleTop()
+	 *@see #removeRuleMarkBottom()
+	 *@see #removeRuleMarkTop()
 	 */
 	public void removeRuleAndLabel() {
 		removeLabelBottom();
 		removeLabelTop();
-		removeRuleBottom();
-		removeRuleTop();
+		removeRuleMarkBottom();
+		removeRuleMarkTop();
 	}
 	
 	/**
@@ -419,9 +427,9 @@ public class Slider extends AbstractDojoFocus {
      * @param count the number of mark to print 
      * @param size the size for the mark in pixel, em etc...
      */
-	public void setRuleTop(int count, String size) {
+	public void setRuleMarkTop(int count, String size) {
 		if ( sliderRuleTop != null) {
-			removeRuleTop();
+			removeRuleMarkTop();
 		}
 		if (VERTICAL.equals(type)) {
 			sliderRuleTop = new RuleMark(RuleMark.VERTICAL,count,size,LEFT);
@@ -495,10 +503,10 @@ public class Slider extends AbstractDojoFocus {
      * @param count the number of mark to print 
      * @param size the size for the mark in pixel, em etc...
      */
-	public void setRuleBottom(int count, String size) {
+	public void setRuleMarkBottom(int count, String size) {
 		//if we have already a sliderrule 
 		if ( sliderRuleBottom != null) {
-			removeRuleBottom();
+			removeRuleMarkBottom();
 		}
 		if (VERTICAL.equals(type)) {
 			sliderRuleBottom = new RuleMark(RuleMark.VERTICAL,count,size,RIGHT);
@@ -519,8 +527,8 @@ public class Slider extends AbstractDojoFocus {
      * @param count the number of mark to print 
      * @param size the size for the mark in pixel, em etc...
      */
-	public void setRuleLeft(int count, String size) {
-		setRuleTop(count,size);
+	public void setRuleMarkLeft(int count, String size) {
+		setRuleMarkTop(count,size);
 	}
 	
 	/**
@@ -541,8 +549,8 @@ public class Slider extends AbstractDojoFocus {
      * @param count the number of mark to print 
      * @param size the size for the mark in pixel, em etc...
      */
-	public void setRuleRight(int count, String size) {
-		setRuleBottom(count,size);
+	public void setRuleMarkRight(int count, String size) {
+		setRuleMarkBottom(count,size);
 	}
 	
 	/**

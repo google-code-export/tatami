@@ -36,9 +36,9 @@ public class DropdownDatePickerTest extends TestDropdownContainer {
 	protected DropdownContainer createInstance(Date min, Date max) {
 		DropdownContainer container = null;
 		if ( min == null || max == null) {
-			container =new DropdownDatePicker(ID); 
+			container =new DropdownDatePicker(); 
 		} else {
-			container = new DropdownDatePicker(ID,min,max);
+			container = new DropdownDatePicker(min,max);
 		}
 		return container;
 	}

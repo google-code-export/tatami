@@ -42,7 +42,7 @@ public abstract class TestDropdownContainer extends DefaultTatamiTest {
     private boolean textChanged = false;
 	private int yClickPicker = 75;
    
-	protected final String ID = "ID";
+	
 	
 	
 
@@ -142,14 +142,6 @@ public abstract class TestDropdownContainer extends DefaultTatamiTest {
 		assertTrue(dropdownContainer.isValid());
 	}
 	
-	/**
-	 * Tests the getID method
-	 *
-	 */
-	public void testGetID() {
-		dropdownContainer = getDropdownContainer();
-		assertSame(ID,dropdownContainer.getId());
-	}
 	
 	/**
 	 * Tests the mouse event on the component

@@ -63,15 +63,15 @@ public class SliderDemo extends Composite implements ChangeListener{
 		
 		 HTML html = new HTML("Move the cursor of each <b>Slider</b> to modify the size of the image below");
 		 verticalSlider = new Slider(Slider.VERTICAL, 0, 100, 100,true);
-         verticalSlider.setRuleLeft(6, "5px");
-		 verticalSlider.setRuleRight(12, "3px");
+         verticalSlider.setRuleMarkLeft(6, "5px");
+		 verticalSlider.setRuleMarkRight(12, "3px");
 		 String[] labels = {" ","20%","40%","60%","80%", " "};
 		 
 		 verticalSlider.setLabelsLeft(labels,"margin: 0px -0.5em 0px -2em;color:gray");
 		 
 		 horizontalSlider = new Slider(Slider.HORIZONTAL, 0, 100, 100,true);
 		 
-		 horizontalSlider.setRuleBottom(6, "5px");
+		 horizontalSlider.setRuleMarkBottom(6, "5px");
 		 horizontalSlider.setLabelsTop(labels,"margin: -0.5em 0px -3.5em 0px;color:gray");
 		 horizontalSlider.setWidth("205px");
 		 cubicImage = new Image("cubic.jpg");

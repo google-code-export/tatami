@@ -40,6 +40,9 @@ public class TimePicker extends BasePicker {
 	
 	/**
 	 * Creates a selector of hour and minutes 
+	 * @param startDate the first date that a user can select
+	 * @param endDate the last date that a use can select
+	 * @param _constraints constraints to format the time to select
 	 */
 	public TimePicker(Date startDate, Date endDate,TimePickerConstraints _constraints) {
 		super(startDate,endDate);

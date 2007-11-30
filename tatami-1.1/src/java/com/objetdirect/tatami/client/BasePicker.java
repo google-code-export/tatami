@@ -79,13 +79,22 @@ public abstract class BasePicker extends AbstractDojoFocus {
 		this.max = endDate;
 	}
 
+	/**
+	 * Returns the minimum date selectable
+	 * @return the minimum date selectable, null if not defined
+	 */
 	public Date getMinDate() {
 		return this.min;
 	}
 	
+	/**
+	 * Returns the maximal date selectable
+	 * @return the maximal date selectable, null if not defined
+	 */
 	public Date getMaxDate() {
 		return this.max;
 	}
+	
 	
 	protected JavaScriptObject getMinJavaScriptDate() {
 		return min == null ? null : DateUtil.getJSDate(min);

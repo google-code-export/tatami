@@ -41,9 +41,9 @@ public class DropdownTimePickerTest extends TestDropdownContainer {
 	protected DropdownContainer createInstance(Date min, Date max) {
 		DropdownContainer container = null;
 		if ( min == null || max == null) {
-			container =new DropdownTimePicker(ID); 
+			container =new DropdownTimePicker(); 
 		} else {
-			container = new DropdownTimePicker(ID,min,max,DropdownTimePicker.DEFAULT_PATTERN);
+			container = new DropdownTimePicker(min,max,DropdownTimePicker.DEFAULT_PATTERN);
 		}
 		return container;
 	}
@@ -59,7 +59,7 @@ public class DropdownTimePickerTest extends TestDropdownContainer {
 	
 	
 	public void testTimePattern() {
-		DropdownTimePicker container  =new DropdownTimePicker(ID);
+		DropdownTimePicker container  =new DropdownTimePicker();
 		RootPanel.get().add(container);
 		assertEquals(container.getTimePattern(),DropdownTimePicker.DEFAULT_PATTERN);
 	}
@@ -69,7 +69,7 @@ public class DropdownTimePickerTest extends TestDropdownContainer {
 	 *
 	 */
 	public void testSetTime() {
-		DropdownTimePicker container  =new DropdownTimePicker(ID);
+		DropdownTimePicker container  =new DropdownTimePicker();
 		container.setTime(new Date());
 		assertNotNull(container.getTime());
 	}
