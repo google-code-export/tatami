@@ -363,4 +363,92 @@ public class Clock extends SimplePanel {
 	private void placeHand(GraphicObject shape,double  angle){
 		 shape.rotate((float)angle,center);
 	}
-}
+
+    /**
+     * Returns the image used for the background of this <code>Clock</code>
+     * @return the url of an image or null if no image used
+     */
+    public String getImage() {
+    	return this.image;
+    }
+
+    /**
+     * Returns the color of the needle of the minutes.
+     * @return the color of the needle of the minutes.
+     */
+    public Color getMinuteColor() {
+    	return this.minute_hand.getFillColor();
+    }
+    
+    /**
+     * Returns the color of the needle of the hours.
+     * @return the color of the needle of the hours.
+     */
+    public Color getHourColor() {
+    	return this.hour_hand.getFillColor();
+    }
+    
+    
+    /**
+     * Returns the color of the needle of the seconds.
+     * @return the color of the needle of the seconds.
+     */
+    public Color getSecondColor() {
+    	return this.second_hand.getFillColor();
+    }
+    
+    /**
+     * Returns the color of the stroke of the needle of the minutes.
+     * @return the color of the stroke of the needle of the minutes.
+     */
+    public Color getMinuteStokeColor() {
+    	return this.minute_hand.getStrokeColor();
+    }
+    
+    /**
+     * Returns the color of the stroke of the needle of the hours.
+     * @return the color of the stroke of the needle of the hours.
+     */
+    public Color getHourStokeColor() {
+    	return this.hour_hand.getStrokeColor();
+    }
+    
+    
+    /**
+     * Returns the color of the stroke of the needle of the seconds.
+     * @return the color of the stroke of the needle of the seconds.
+     */
+    public Color getSecondStokeColor() {
+    	return this.second_hand.getStrokeColor();
+    }
+    
+    
+    /**
+     * Returns the size of the stroke of the needle of the minutes.
+     * @return the size of the stroke of the needle of the minutes.
+     */
+    public int getMinuteStokeWidth() {
+    	return this.minute_hand.getStrokeWidth();
+    }
+    
+    /**
+     * Returns the size of the stroke of the needle of the hours.
+     * @return the size of the stroke of the needle of the hours.
+     */
+    public int getHourStokeWidth() {
+    	return this.hour_hand.getStrokeWidth();
+    }
+    
+    /**
+     * Returns the size of the stroke of the needle of the seconds.
+     * @return the size of the stroke of the needle of the seconds.
+     */
+    public int getSecondStokeWidth() {
+    	return this.second_hand.getStrokeWidth();
+    }
+    
+  
+    
+    
+    
+}//end of class
