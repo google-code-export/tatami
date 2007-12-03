@@ -105,4 +105,95 @@ public class SliderTest extends DefaultTatamiTest {
 	   return slider;
    }
 	
+	/**
+	 * Tests rule marl at the top and bottom positions
+	 *
+	 */
+   public void testRuleMarkHorinzontal() {
+	   slider = getSlider(true,0,100,0);
+	   slider.setRuleMarkBottom(6, "5");
+	   slider.setRuleMarkTop(7, "3");
+	   assertEquals(6,slider.countRuleMarkBottom());
+	   assertEquals(7,slider.countRuleMarkTop());
+	   assertEquals("3",slider.getSizeRuleMarkTop());
+	   assertEquals("5",slider.getSizeRuleMarkBottom());
+	   slider.removeRuleMarkBottom();
+	   assertEquals(0,slider.countRuleMarkBottom());
+	   assertEquals("0",slider.getSizeRuleMarkBottom());
+	   slider.removeRuleMarkTop();
+	   assertEquals(0,slider.countRuleMarkTop());
+	   assertEquals("0",slider.getSizeRuleMarkTop());
+   }
+
+   /**
+	 * Tests rule marl at the left and right positions
+	 *
+	 */
+   public void testRuleMarkVertical() {
+	   slider = getSlider(false,0,100,0);
+	   slider.setRuleMarkLeft(6, "5");
+	   slider.setRuleMarkRight(7, "3");
+	   assertEquals(6,slider.countRuleMarkLeft());
+	   assertEquals(7,slider.countRuleMarkRight());
+	   assertEquals("3",slider.getSizeRuleMarkRight());
+	   assertEquals("5",slider.getSizeRuleMarkLeft());
+	   slider.removeRuleMarkLeft();
+	   assertEquals(0,slider.countRuleMarkLeft());
+	   assertEquals("0",slider.getSizeRuleMarkLeft());
+	   slider.removeRuleMarkRight();
+	   assertEquals(0,slider.countRuleMarkRight());
+	   assertEquals("0",slider.getSizeRuleMarkRight());
+   }
+
+   /**
+	 * Tests labels at the left and right positions
+	 *
+	 */
+   public void testRuleLabelsVertical() {
+	   slider = getSlider(false,0,100,0);
+	   String[] labels1 = {"0","1","2","3"};
+	   String style1 = "color:red";
+	   String[] labels2 = {"zero","one","two","three"};
+	   String style2 = "color:green";
+	   slider.setLabelsLeft(labels1,style1);
+	   slider.setLabelsRight(labels2, style2);
+	   assertEquals(labels1,slider.getLabelsLeft());
+	   assertEquals(labels2,slider.getLabelsRight());
+	   assertEquals(style1,slider.getLabelsLeftStyle());
+	   assertEquals(style2,slider.getLabelsRightStyle());
+	   slider.removeLabelsLeft();
+	   assertEquals(null,slider.getLabelsLeft());
+	   assertEquals(null,slider.getLabelsLeftStyle());
+	   slider.removeLabelsRight();
+	   assertEquals(null,slider.getLabelsRight());
+	   assertEquals(null,slider.getLabelsRightStyle());
+	   
+   }
+   
+    /**
+	 * Tests rule marl at the right and left positions
+	 *
+	 */
+   public void testRuleLabelsHorizontal() {
+	   slider = getSlider(false,0,100,0);
+	   String[] labels1 = {"0","1","2","3"};
+	   String style1 = "color:red";
+	   String[] labels2 = {"zero","one","two","three"};
+	   String style2 = "color:green";
+	   slider.setLabelsTop(labels1,style1);
+	   slider.setLabelsBottom(labels2, style2);
+	   assertEquals(labels1,slider.getLabelsTop());
+	   assertEquals(labels2,slider.getLabelsBottom());
+	   assertEquals(style1,slider.getLabelsTopStyle());
+	   assertEquals(style2,slider.getLabelsBottomStyle());
+	   slider.removeLabelsTop();
+	   assertEquals(null,slider.getLabelsTop());
+	   assertEquals(null,slider.getLabelsTopStyle());
+	   slider.removeLabelsBottom();
+	   assertEquals(null,slider.getLabelsBottom());
+	   assertEquals(null,slider.getLabelsBottomStyle());
+	   
+   }
+
+
 }
