@@ -2,7 +2,7 @@
  * Tatami: 
  * Copyright (C) 2007 Objet Direct
  * Copyright (C) 2007 France Telecom
- * Contact: tatami@objectweb.org
+ * Contact: tatami@googlegroups.com
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
