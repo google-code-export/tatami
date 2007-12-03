@@ -189,11 +189,12 @@ public class Clock extends SimplePanel {
 	public void onAttach() {
 		super.onAttach();
 		add(canvas);
-		
+		current_time = new Date();
 		Timer timer = new Timer() {
 			public void run() {
 				reflectTime();
-				current_time.setSeconds(current_time.getSeconds()+1);
+				current_time.setTime(current_time.getTime()+1000);
+				//current_time.setSeconds(current_time.getSeconds()+1);
 				
 			}
 		};
