@@ -39,7 +39,7 @@ import com.objetdirect.tatami.client.gfx.Point;
 import com.objetdirect.tatami.client.gfx.Polyline;
 
 /**
- * A clock component with nipples
+ * A clock component with needles
  * 
  * @author Vianney
  *
@@ -108,7 +108,7 @@ public class Clock extends SimplePanel {
 	}
 	
 	/**
-	 * Sets the color of the stroke for the minute nipples.
+	 * Sets the color of the stroke for the minutes needle.
 	 * @param color a color to apply
 	 */
 	public void setMinuteStrokeColor(Color color) {
@@ -116,15 +116,23 @@ public class Clock extends SimplePanel {
 	}
 	
 	/**
-	 * Sets the width of the stroke for the minutes nipple
+	 * Sets the width of the stroke for the minutes needle
 	 * @param width a width for the stroke
 	 */
 	public void setMinuteStrokeWidth(int width) {
 		this.minute_hand.setStrokeWidth(width);
 	}
 	
+	
 	/**
-	 * Sets the color for the stroke for the hours nipple
+	 * Sets the width of the stroke for the seconds needle
+	 * @param width a width for the stroke
+	 */
+	public void setSecondStrokeWidth(int width) {
+		this.second_hand.setStrokeWidth(width);
+	}
+	/**
+	 * Sets the color for the stroke for the hours needle
 	 * @param color
 	 */
 	public void setHourStrokeColor(Color color) {
@@ -132,7 +140,7 @@ public class Clock extends SimplePanel {
 	}
 	
 	/**
-	 * Sets the width of the strohe for the hours nipple
+	 * Sets the width of the strohe for the hours needle
 	 * @param width the width of the stroke
 	 */
 	public void setHourStrokeWidth(int width) {
@@ -140,7 +148,7 @@ public class Clock extends SimplePanel {
 	}
 	
 	/**
-	 * Sets the color of the stroke for the seconds nipple
+	 * Sets the color of the stroke for the seconds needle
 	 * @param color a color
 	 */
 	public void setSecondStrokeColor(Color color) {
@@ -148,7 +156,7 @@ public class Clock extends SimplePanel {
 	}
 	
 	/**
-	 * Sets the fill color for the minutes nipple
+	 * Sets the fill color for the minutes needle
 	 * @param color a color
 	 */
 	public void setMinuteColor(Color color) {
@@ -157,7 +165,7 @@ public class Clock extends SimplePanel {
 	
 	
 	/**
-	 * Sets the fill color for the hours nipple
+	 * Sets the fill color for the hours needle
 	 * @param color a color
 	 */
 	public void setHourColor(Color color) {
@@ -166,7 +174,7 @@ public class Clock extends SimplePanel {
 	
 
 	/**
-	 * Sets the second color for the seconds nipple
+	 * Sets the second color for the seconds needle
 	 * @param color a color
 	 */
 	public void setSecondColor(Color color) {
@@ -195,8 +203,8 @@ public class Clock extends SimplePanel {
 
 	/**
 	 * Makes the clock width GFX component
-	 * The clock has 3 nipples (hour, minute and second). Each nipple 
-	 * has also a shadow. So there 6 nipples to rotate. 
+	 * The clock has 3 needles (hour, minute and second). Each needles 
+	 * has also a shadow. So there 6 needles to rotate. 
 	 * An image is set in background, if it is null a circle is created instead.
 	 * 
 	 */
@@ -277,8 +285,8 @@ public class Clock extends SimplePanel {
 	
 	/**
 	 * Sets properties for a shadow and add the shadow to the clock.
-	 * Note the shadow is smally translated from the original nipple. 
-	 * @param shadow a <code>GraphicObject</code> representing a shadow for a nipple
+	 * Note the shadow is smally translated from the original needle. 
+	 * @param shadow a <code>GraphicObject</code> representing a shadow for a needle
 	 * @param dx the lag for the x coordinate of the shadow 
 	 * @param dy the lag for the y coordinate of the shadow
 	 */
@@ -291,8 +299,8 @@ public class Clock extends SimplePanel {
     }
 	
 	/**
-	 * Resizes a nipple with the specified size given in the constructor
-	 * @param shape the nipple a <code>GraphicObject</code> to resize
+	 * Resizes a needle with the specified size given in the constructor
+	 * @param shape the needle a <code>GraphicObject</code> to resize
 	 */
     private void resizeShape(GraphicObject shape) {
     	float factor =  (float)width/defaultWidth;
@@ -302,7 +310,7 @@ public class Clock extends SimplePanel {
     }
     
     /**
-     * Places the nipples in the clock to represent
+     * Places the needles in the clock to represent
      * the current time.
      *
      */
@@ -318,7 +326,7 @@ public class Clock extends SimplePanel {
 	
 	
    /**
-    * Places the hour nipple
+    * Places the hour needle
     * @param h the hour time
     * @param m the minute time
     * @param s the second time
@@ -332,7 +340,7 @@ public class Clock extends SimplePanel {
 	};
 
 	/**
-	 * Places the minute nipple
+	 * Places the minute needle
 	 * @param m the minute time
 	 * @param s the second time
 	 */
@@ -344,7 +352,7 @@ public class Clock extends SimplePanel {
 		
 	};
 /**
- * Places the second nipple
+ * Places the second needle
  * @param s the time of the seconds
  */
 	private void placeSecondHand(int s){
@@ -355,8 +363,8 @@ public class Clock extends SimplePanel {
 	};
 	
 	/**
-	 * Rotates a nipple to represent its time.
-	 * @param shape the nipple to rotate
+	 * Rotates a needle to represent its time.
+	 * @param shape the needle to rotate
 	 * @param angle the angle for the rotation
 	 
 	 */
@@ -401,7 +409,7 @@ public class Clock extends SimplePanel {
      * Returns the color of the stroke of the needle of the minutes.
      * @return the color of the stroke of the needle of the minutes.
      */
-    public Color getMinuteStokeColor() {
+    public Color getMinuteStrokeColor() {
     	return this.minute_hand.getStrokeColor();
     }
     
@@ -409,7 +417,7 @@ public class Clock extends SimplePanel {
      * Returns the color of the stroke of the needle of the hours.
      * @return the color of the stroke of the needle of the hours.
      */
-    public Color getHourStokeColor() {
+    public Color getHourStrokeColor() {
     	return this.hour_hand.getStrokeColor();
     }
     
@@ -418,7 +426,7 @@ public class Clock extends SimplePanel {
      * Returns the color of the stroke of the needle of the seconds.
      * @return the color of the stroke of the needle of the seconds.
      */
-    public Color getSecondStokeColor() {
+    public Color getSecondStrokeColor() {
     	return this.second_hand.getStrokeColor();
     }
     
@@ -427,7 +435,7 @@ public class Clock extends SimplePanel {
      * Returns the size of the stroke of the needle of the minutes.
      * @return the size of the stroke of the needle of the minutes.
      */
-    public int getMinuteStokeWidth() {
+    public int getMinuteStrokeWidth() {
     	return this.minute_hand.getStrokeWidth();
     }
     
@@ -435,7 +443,7 @@ public class Clock extends SimplePanel {
      * Returns the size of the stroke of the needle of the hours.
      * @return the size of the stroke of the needle of the hours.
      */
-    public int getHourStokeWidth() {
+    public int getHourStrokeWidth() {
     	return this.hour_hand.getStrokeWidth();
     }
     
@@ -443,11 +451,17 @@ public class Clock extends SimplePanel {
      * Returns the size of the stroke of the needle of the seconds.
      * @return the size of the stroke of the needle of the seconds.
      */
-    public int getSecondStokeWidth() {
+    public int getSecondStrokeWidth() {
     	return this.second_hand.getStrokeWidth();
     }
-    
-  
+
+    /**
+     * Returns the width of this <code>Clock</code>
+     * @return the width of this <code>Clock</code>
+     */
+    public int getWidth() {
+    	return this.width;
+    }
     
     
     
