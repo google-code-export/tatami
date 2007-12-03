@@ -41,7 +41,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  * canvas.add(circle,50,50); 
  * </code> 
  * </p>
- *TODO add the setWidth and setHeight methods
+ *
  */
 public class Circle extends GraphicObject {
 	
