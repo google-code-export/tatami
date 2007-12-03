@@ -371,9 +371,25 @@ public class Slider extends AbstractDojoFocus {
 	 * Removes the labels at the top of this <code>Slider</code>
 	 *
 	 */
-	public void removeLabelTop() {
+	public void removeLabelsTop() {
 		removeDojoRule(labelTop);
 		labelTop = null;
+	}
+	
+	/**
+	 * Removes the labels at the left of this <code>Slider</code>
+	 *
+	 */
+	public void removeLabelsLeft() {
+		removeLabelsTop();
+	}
+	
+	/**
+	 * Removes the labels at the right of this <code>Slider</code>
+	 *
+	 */
+	public void removeLabelsRight() {
+		removeLabelsBottom();
 	}
 	
 	
@@ -388,21 +404,21 @@ public class Slider extends AbstractDojoFocus {
 	 * Removes the labels at the bottom of this <code>Slider</code>
 	 *
 	 */
-	public void removeLabelBottom() {
+	public void removeLabelsBottom() {
 		removeDojoRule(labelBottom);
 		labelBottom = null;
 	}
 	
 	/**
 	 *Removes all rule mark and labels from this <code>Slider</code>
-	 *@see #removeLabelBottom()
-	 *@see #removeLabelTop()
+	 *@see #removeLabelsBottom()
+	 *@see #removeLabelsTop()
 	 *@see #removeRuleMarkBottom()
 	 *@see #removeRuleMarkTop()
 	 */
 	public void removeRuleAndLabel() {
-		removeLabelBottom();
-		removeLabelTop();
+		removeLabelsBottom();
+		removeLabelsTop();
 		removeRuleMarkBottom();
 		removeRuleMarkTop();
 	}
@@ -452,7 +468,7 @@ public class Slider extends AbstractDojoFocus {
 	 */
 	public void setLabelsTop(String[] labels,String style) {
 		if ( labelTop != null) {
-			removeLabelTop();
+			removeLabelsTop();
 		}
 		if (VERTICAL.equals(type)) {
 			labelTop = new RuleLabels(RuleLabels.VERTICAL,labels,style,LEFT);
@@ -474,7 +490,7 @@ public class Slider extends AbstractDojoFocus {
 	 */
 	public void setLabelsBottom(String[] labels,String style) {
 		if ( labelBottom != null) {
-			removeLabelTop();
+			removeLabelsTop();
 		}
 		if (VERTICAL.equals(type)) {
 			labelBottom = new RuleLabels(RuleLabels.VERTICAL,labels,style,RIGHT);
@@ -619,5 +635,190 @@ public class Slider extends AbstractDojoFocus {
 		}
     }
 
+	
+	/**
+	 * Returns the number of marks at the top of this <code>Slider</code>
+	 * @return the number of marks at the top of this <code>Slider</code>
+	 */
+	public int countRuleMarkTop() {
+		return countRuleMark(sliderRuleTop);
+	}
+	
+	/**
+	 * Returns the number of marks at the left of this <code>Slider</code>
+	 * @return the number of marks at the left of this <code>Slider</code>
+	 */
 
+	public int countRuleMarkLeft() {
+		return countRuleMarkTop();
+	}
+	
+	/**
+	 * Returns the number of marks of <code>RuleMark</code>
+	 * @param rule a <code>RuleMark</code> of this <code>Slider</code>
+	 * @return the number of marks of <code>RuleMark</code>
+	 */
+
+	private int countRuleMark(RuleMark rule) {
+		int count = 0;
+		if ( rule != null) {
+			count = rule.getCount();
+		}
+		return count;
+	}
+	
+	/**
+	 * Returns the size of marks of <code>RuleMark</code>
+	 * @param rule a <code>RuleMark</code> of this <code>Slider</code>
+	 * @return the size of marks of <code>RuleMark</code>
+	 */
+	private String getSizeRuleMark(RuleMark rule) {
+		String size = "0";
+		if ( rule != null) {
+			size = rule.getSize();
+		}
+		return size;
+	}
+	
+	
+	/**
+	 * Returns the number of marks at the bottom of this <code>Slider</code>
+	 * @return the number of marks at the bottom of this <code>Slider</code>
+	 */
+	public int countRuleMarkBottom() {
+		return countRuleMark(sliderRuleBottom);
+	}
+	
+	/**
+	 * Returns the number of marks at the right of this <code>Slider</code>
+	 * @return the number of marks at the riuht of this <code>Slider</code>
+	 */
+	public int countRuleMarkRight() {
+		return countRuleMarkBottom();
+	}
+	
+	/**
+	 * Returns the size of the marks at the top of this <code>Slider</code>
+	 * @return the size of the marks at the top of this <code>Slider</code>
+	 */
+	public String getSizeRuleMarkTop() {
+		return getSizeRuleMark(sliderRuleTop);
+	}
+	/**
+	 * Returns the size of the marks at the bottom of this <code>Slider</code>
+	 * @return the size of the marks at the bottom of this <code>Slider</code>
+	 */
+	public String getSizeRuleMarkBottom() {
+		return getSizeRuleMark(sliderRuleBottom);
+	}
+	
+	/**
+	 * Returns the size of the marks at the left of this <code>Slider</code>
+	 * @return the size of the marks at the left of this <code>Slider</code>
+	 */
+		public String getSizeRuleMarkLeft() {
+		return getSizeRuleMarkTop();
+	}
+	
+	/**
+	 * Returns the size of the marks at the right of this <code>Slider</code>
+	 * @return the size of the marks at the right of this <code>Slider</code>
+	 */
+	public String getSizeRuleMarkRight() {
+		return getSizeRuleMarkBottom();
+	}
+	
+	/**
+	 * Returns the labels of a <code>RuleLabels</code> of the <code>Slider</code>
+	 * @param labels a <code>RuleLabels</code> of the <code>Slider</code> 
+	 * @return an array of <code>String</code> null if no labels
+	 */
+	private String[] getLabels(RuleLabels labels) {
+		String[] array = null;
+		if ( labels != null) {
+             array = labels.getLabels();
+			
+		}
+		return array;
+	}
+	
+	/**
+	 * Returns the labels at the top of this <code>Slider</code>
+	 * @return an array of <code>String</code> or null if no labels
+	 */
+	public String[] getLabelsTop() {
+		return this.getLabels(labelTop);
+	}
+	
+	/**
+	 * Returns the labels at the bottom of this <code>Slider</code>
+	 * @return an array of <code>String</code> or null if no labels
+	 */
+	public String[] getLabelsBottom() {
+		return this.getLabels(labelBottom);
+	}
+	
+	/**
+	 * Returns the labels at the left of this <code>Slider</code>
+	 * @return an array of <code>String</code> or null if no labels
+	 */
+	public String[] getLabelsLeft() {
+		return getLabelsTop();
+	}
+	
+	/**
+	 * Returns the labels at the right of this <code>Slider</code>
+	 * @return an array of <code>String</code> or null if no labels
+	 */
+	public String[] getLabelsRight() {
+		return getLabelsBottom();
+	}
+	
+	/**
+	 * Returns the style of a <code>RuleLabels</code> of the <code>Slider</code>
+	 * @param labels a <code>RuleLabels</code> of the <code>Slider</code> 
+	 * @return the style for the labelsor  null if no labels
+	 */
+	private String getStyle(RuleLabels labels) {
+		String style = null;
+		if ( labels != null) {
+             style = labels.getStyle();
+			
+		}
+		return style;
+	}
+	
+	/**
+	 * Returns the style of the labels at the top of this <code>Slider</code>
+	 * @return the style of the labels at the top of this <code>Slider</code>
+	 */
+	public String getLabelsTopStyle() {
+		return getStyle(this.labelTop);
+	}
+	/**
+	 * Returns the style of the labels at the bottom of this <code>Slider</code>
+	 * @return the style of the labels at the bottom of this <code>Slider</code>
+	 */
+	public String getLabelsBottomStyle() {
+		return getStyle(this.labelBottom);
+	}
+
+	/**
+	 * Returns the style of the labels at the left of this <code>Slider</code>
+	 * @return the style of the labels at the left of this <code>Slider</code>
+	 */
+	public String getLabelsLeftStyle() {
+		return getLabelsTopStyle();
+	}
+	
+	/**
+	 * Returns the style of the labels at the right of this <code>Slider</code>
+	 * @return the style of the labels at the right of this <code>Slider</code>
+	 */
+	public String getLabelsRightStyle() {
+		return getLabelsBottomStyle();
+	}
+	
+	
+	
 } // end of class

@@ -1,3 +1,28 @@
+/*
+ * Tatami: 
+ * Copyright (C) 2007 Objet Direct
+ * Copyright (C) 2007 France Telecom
+ * Contact: tatami@objectweb.org
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+ * USA
+ *
+ * Authors: Henri Darmet, Vianney Grassaud
+ * Initial developer(s):
+ * Contributor(s):
+ */
 package com.objetdirect.tatami.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -16,11 +41,11 @@ public class RuleMark extends AbstractDojo {
 
             
     /**
-     * 
-     * @param type
-     * @param count
-     * @param style
-     * @param position
+     * Creates a <code>RuleMark</code>
+     * @param type the type of marks <code>VERTICAL,HORIZONTAL</code>   
+     * @param count the number of mark to display
+     * @param size the size for the mark in pixel, em... 
+     * @param position the position for a parent container see <code>Slider</code>
      */
 	public  RuleMark(String type,int count, String size,String position) {
 		super();
@@ -34,10 +59,10 @@ public class RuleMark extends AbstractDojo {
 	}
 	
 	/**
-	 * 
-	 * @param type
-	 * @param count
-	 * @param size
+	 * Creates a <code>RuleMark</code>
+     * @param type the type of marks <code>VERTICAL,HORIZONTAL</code>
+	 * @param count the number of mark to display
+     * @param size the size for the mark in pixel, em...
 	 */
 	public RuleMark(String type,int count,String size) {
 		this(type,count,size,"containerNode");
@@ -51,6 +76,16 @@ public class RuleMark extends AbstractDojo {
 	public String getSize() {
 		return this.size;
 	}
+	
+	
+	/**
+	 * Returns the position of this <code>RuleMark</code>
+	 * @return the position of this <code>RuleMark</code>
+	 */
+	public String getPosition() {
+		return this.position;
+	}
+	
 	
 	/**
 	 * Returns the number of mark displayed
