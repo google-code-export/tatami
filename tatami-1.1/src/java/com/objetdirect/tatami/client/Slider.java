@@ -392,11 +392,18 @@ public class Slider extends AbstractDojoFocus {
 		removeLabelsBottom();
 	}
 	
-	
+	/**
+	 * Removes the labels at the left of this <code>Slider</code>
+	 *
+	 */
 	public void removeRuleMarkLeft() {
 		removeRuleMarkTop();
 	}
 	
+	/**
+	 * Removes the labels at the right of this <code>Slider</code>
+	 *
+	 */
 	public void removeRuleMarkRight() {
 		removeRuleMarkBottom();
 	}

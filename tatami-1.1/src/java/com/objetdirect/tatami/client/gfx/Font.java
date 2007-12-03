@@ -76,7 +76,7 @@ public class Font {
 	private String weight;
 
 	/** the default font used (serif 10)*/
-	public static final Font DEFAULT_FONT = new Font("serif",10,NORMAL,NORMAL,NORMAL);
+	public static final Font DEFAULT_FONT = new Font("Arial",10,NORMAL,NORMAL,NORMAL);
 /**
  * Creates a Font object for text object
  * @param family the family to use
