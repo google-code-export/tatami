@@ -2,7 +2,7 @@
  * Tatami: 
  * Copyright (C) 2007 Objet Direct
  * Copyright (C) 2007 France Telecom
- * Contact: tatami@objectweb.org
+ * Contact: tatami@googlegroups.com
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
  * USA
  *
- * Authors: Henri Darmet, Vianney Grassaud
- * Initial developer(s):
+ * Authors:  Vianney Grassaud
+ * Initial developer(s): Vianney Grassaud
  * Contributor(s):
  */
 package com.objetdirect.tatami.demo.client;
@@ -42,13 +42,22 @@ public class ColorDemo extends Composite implements ChangeListener{
 	private HTML colorLabel;
 	private DockPanel panel;
 	
-	
+	/**
+	 * Creates the color demo
+	 *
+	 */
 	public ColorDemo() {
 		initComponents();
 		initWidget(panel);
 	}
 	
-	
+	/**
+	 * Inits the components.
+	 * Show the <code>ColorChooser</code> and the 
+	 * <code>ColorPicker</code> which is experimental in Tatami-1.1. 
+	 * 
+	 *
+	 */
 	private void initComponents() {
 		panel = new DockPanel();
 		panel.setSpacing(30);
@@ -76,6 +85,11 @@ public class ColorDemo extends Composite implements ChangeListener{
 		panel.add(vPanel2,DockPanel.EAST);
 	}
 	
+	
+	
+	/**
+	 * Changes the color of the label when a the select color of the <code>ColorChooser</code> change
+	 */
 	public void onChange(Widget sender) {
 		String color = null;
 		if ( sender.equals(big)) {

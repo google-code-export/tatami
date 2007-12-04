@@ -2,7 +2,7 @@
  * Tatami: 
  * Copyright (C) 2007 Objet Direct
  * Copyright (C) 2007 France Telecom
- * Contact: tatami@objectweb.org
+ * Contact: tatami@googlegroups.com
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
  * USA
  *
- * Authors: Henri Darmet, Vianney Grassaud
- * Initial developer(s):
+ * Authors:  Vianney Grassaud
+ * Initial developer(s): Vianney Grassaud
  * Contributor(s):
  */
 package com.objetdirect.tatami.demo.client;
@@ -56,7 +56,11 @@ public class DateTimeDemo extends Composite {
   private DropdownTimePicker inputTime;
   private HorizontalPanel mainPanel ;
 	
-	
+
+  /**
+   * Creates the DateTimeDemo 
+   *
+   */
   public DateTimeDemo() {
 	  initComponents();
 	  inputDate.setDate(new Date());
@@ -65,6 +69,13 @@ public class DateTimeDemo extends Composite {
 	  
   }
 
+  
+  /**
+   * Inits the components
+   * Creates panel with <code>DropdownContainer</code>,
+   * <code>BasePicker</code> and <code>Clock</code> 
+   * 
+   */
   private void initComponents() {
 	  mainPanel = new HorizontalPanel();  
 	  mainPanel.setSpacing(50);
@@ -77,7 +88,6 @@ public class DateTimeDemo extends Composite {
 	  HTML htmlDatePicker= new HTML("<b>DatePicker</b> : <br>   A Calendar object to help user to choose a date and work with this date.");
 	  HTML htmlInputTime = new HTML("<b>DropdownTimePicker</b> : <br>To Help a user to write a well formed time with a pciker object.");
 	  HTML htmlTimePicker= new HTML("<b>TimePicker</b> : <br>   A Picker object to help user to choose a time and work with this time.");
-	
 	  
 	  
 	  inputDate = new DropdownDatePicker();
@@ -153,7 +163,7 @@ public class DateTimeDemo extends Composite {
 	}
 	
 	/**
-	 * 
+	 * Checks if two object are equals
 	 * @param o1
 	 * @param o2
 	 * @return
