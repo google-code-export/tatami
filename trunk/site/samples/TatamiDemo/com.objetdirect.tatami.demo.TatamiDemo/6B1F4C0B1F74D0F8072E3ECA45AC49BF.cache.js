@@ -260,10 +260,10 @@ function narrow_int(x){
 }
 
 function round_int(x){
-  if (x > ($clinit_176() , MAX_VALUE))
-    return $clinit_176() , MAX_VALUE;
-  if (x < ($clinit_176() , MIN_VALUE))
-    return $clinit_176() , MIN_VALUE;
+  if (x > ($clinit_177() , MAX_VALUE))
+    return $clinit_177() , MAX_VALUE;
+  if (x < ($clinit_177() , MIN_VALUE))
+    return $clinit_177() , MIN_VALUE;
   return x >= 0?Math.floor(x):Math.ceil(x);
 }
 
@@ -3111,7 +3111,7 @@ function $realizeTable(this$static){
       ++colCount;
     }
   }
-  rows = initDims_0('[Lcom.google.gwt.user.client.ui.DockPanel$TmpRow;', [163], [43], [rowCount], null);
+  rows = initDims_0('[Lcom.google.gwt.user.client.ui.DockPanel$TmpRow;', [170], [43], [rowCount], null);
   for (i = 0; i < rowCount; ++i) {
     rows[i] = new DockPanel$TmpRow();
     rows[i].tr = createTR();
@@ -4872,7 +4872,7 @@ _.typeName$ = package_com_google_gwt_user_client_ui_ + 'VerticalPanel';
 _.typeId$ = 72;
 function $WidgetCollection(this$static, parent){
   this$static.parent_0 = parent;
-  this$static.array = initDims_0('[Lcom.google.gwt.user.client.ui.Widget;', [167], [10], [4], null);
+  this$static.array = initDims_0('[Lcom.google.gwt.user.client.ui.Widget;', [165], [10], [4], null);
   return this$static;
 }
 
@@ -4903,7 +4903,7 @@ function $insert_3(this$static, w, beforeIndex){
     throw new IndexOutOfBoundsException();
   }
   if (this$static.size == this$static.array.length_0) {
-    newArray = initDims_0('[Lcom.google.gwt.user.client.ui.Widget;', [167], [10], [this$static.array.length_0 * 2], null);
+    newArray = initDims_0('[Lcom.google.gwt.user.client.ui.Widget;', [165], [10], [this$static.array.length_0 * 2], null);
     for (i = 0; i < this$static.array.length_0; ++i) {
       setCheck(newArray, i, this$static.array[i]);
     }
@@ -5296,7 +5296,7 @@ function $makeClock(this$static){
     border.setFillColor(($clinit_129() , WHITE));
     $add_10(this$static.canvas_0, border, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
   }
-  hour_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [164], [40], [4], null);
+  hour_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [169], [40], [4], null);
   hour_hand_points[0] = $Point_1(new Point(), (-7), 15);
   hour_hand_points[1] = $Point_1(new Point(), 7, 15);
   hour_hand_points[2] = $Point_1(new Point(), 0, (-60));
@@ -5309,7 +5309,7 @@ function $makeClock(this$static){
   this$static.hour_shadow = $Polyline(new Polyline(), hour_hand_points);
   $resizeShape(this$static, this$static.hour_shadow);
   $setShadow(this$static, this$static.hour_shadow, 3, 3);
-  minute_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [164], [40], [4], null);
+  minute_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [169], [40], [4], null);
   minute_hand_points[0] = $Point_1(new Point(), (-5), 15);
   minute_hand_points[1] = $Point_1(new Point(), 5, 15);
   minute_hand_points[2] = $Point_1(new Point(), 0, (-100));
@@ -5321,7 +5321,7 @@ function $makeClock(this$static){
   this$static.minute_shadow = $Polyline(new Polyline(), minute_hand_points);
   $resizeShape(this$static, this$static.minute_shadow);
   $setShadow(this$static, this$static.minute_shadow, 3, 3);
-  second_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [164], [40], [8], null);
+  second_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [169], [40], [8], null);
   second_hand_points[0] = $Point_1(new Point(), (-2), 15);
   second_hand_points[1] = $Point_1(new Point(), 2, 15);
   second_hand_points[2] = $Point_1(new Point(), 2, (-105));
@@ -5400,6 +5400,7 @@ function onAttach_3(){
   var timer;
   $onAttach(this);
   $add_4(this, this.canvas_0);
+  this.current_time = $Date(new Date_0());
   timer = $Clock$1(new Clock$1(), this);
   $scheduleRepeating(timer, 1000);
 }
@@ -5440,7 +5441,7 @@ function $Clock$1(this$static, this$0){
 
 function run(){
   $reflectTime(this.this$0);
-  $setSeconds(this.this$0.current_time, $getSeconds(this.this$0.current_time) + 1);
+  $setTime(this.this$0.current_time, $getTime(this.this$0.current_time) + 1000);
 }
 
 function Clock$1(){
@@ -5738,7 +5739,7 @@ function $require(this$static, widgetDojo){
     if (!ok) {
       throw $IllegalArgumentException(new IllegalArgumentException(), 'bad widget : ' + widgetDojo);
     }
-    $put_0(this$static.mapWidget, widgetDojo, ($clinit_166() , TRUE));
+    $put_0(this$static.mapWidget, widgetDojo, ($clinit_167() , TRUE));
   }
   return !loaded;
 }
@@ -6211,22 +6212,17 @@ function $clinit_116(){
   $clinit_101() , implWidget;
 }
 
-function $DropdownContainer(this$static, element, id, startDate, endDate){
-  var subElement;
+function $DropdownContainer(this$static, element, startDate, endDate){
   $clinit_101() , implWidget;
   $TextBox(this$static);
-  this$static.id_0 = id;
   $setElement(this$static, element);
-  subElement = createDiv();
-  setElementProperty(subElement, 'id', id);
-  appendChild(element, subElement);
   $loadDojoWidget(getInstance(), this$static);
   return this$static;
 }
 
-function $DropdownContainer_0(this$static, id, startDate, endDate){
+function $DropdownContainer_0(this$static, startDate, endDate){
   $clinit_101() , implWidget;
-  $DropdownContainer(this$static, createDiv(), id, startDate, endDate);
+  $DropdownContainer(this$static, createDiv(), startDate, endDate);
   return this$static;
 }
 
@@ -6399,7 +6395,6 @@ _.typeId$ = 90;
 _.changeListeners = null;
 _.date = null;
 _.dojoWidget = null;
-_.id_0 = null;
 _.invalidMessage_0 = null;
 _.promptMessage_0 = null;
 _.text = '';
@@ -6408,26 +6403,26 @@ function $clinit_117(){
   $clinit_101() , implWidget;
 }
 
-function $DropdownDatePicker(this$static, id){
+function $DropdownDatePicker(this$static){
   $clinit_101() , implWidget;
-  $DropdownDatePicker_0(this$static, id, null, null);
+  $DropdownDatePicker_0(this$static, null, null);
   return this$static;
 }
 
-function $DropdownDatePicker_0(this$static, id, startDate, endDate){
+function $DropdownDatePicker_0(this$static, startDate, endDate){
   $clinit_101() , implWidget;
-  $DropdownContainer_0(this$static, id, startDate, endDate);
+  $DropdownContainer_0(this$static, startDate, endDate);
   return this$static;
 }
 
-function $createDateTextBox(this$static, id, startDate, endDate){
+function $createDateTextBox(this$static, startDate, endDate){
   if (startDate == null)
     startDate = '1492-10-12';
   if (endDate == null)
     endDate = '2492-10-12';
   var dateTextBox = null;
   try {
-    dateTextBox = new ($wnd.dijit.form.DateTextBox)({'constraints':{'min':startDate, 'max':endDate}}, $wnd.dojo.byId(id));
+    dateTextBox = new ($wnd.dijit.form.DateTextBox)({'constraints':{'min':startDate, 'max':endDate}}, $wnd.dojo.doc.createElement('div'));
   }
    catch (e) {
   }
@@ -6435,7 +6430,7 @@ function $createDateTextBox(this$static, id, startDate, endDate){
 }
 
 function createDojoWidget_2(){
-  this.dojoWidget = $createDateTextBox(this, this.id_0, null, null);
+  this.dojoWidget = $createDateTextBox(this, null, null);
 }
 
 function getDojoName_2(){
@@ -6462,21 +6457,21 @@ function $clinit_118(){
   $clinit_101() , implWidget;
 }
 
-function $DropdownTimePicker(this$static, id){
+function $DropdownTimePicker(this$static){
   $clinit_101() , implWidget;
-  $DropdownTimePicker_0(this$static, id, 'HH:mm');
+  $DropdownTimePicker_0(this$static, 'HH:mm');
   return this$static;
 }
 
-function $DropdownTimePicker_0(this$static, id, timePattern){
+function $DropdownTimePicker_0(this$static, timePattern){
   $clinit_101() , implWidget;
-  $DropdownTimePicker_1(this$static, id, null, null, timePattern);
+  $DropdownTimePicker_1(this$static, null, null, timePattern);
   return this$static;
 }
 
-function $DropdownTimePicker_1(this$static, id, startDate, endDate, timePattern){
+function $DropdownTimePicker_1(this$static, startDate, endDate, timePattern){
   $clinit_101() , implWidget;
-  $DropdownContainer_0(this$static, id, startDate, endDate);
+  $DropdownContainer_0(this$static, startDate, endDate);
   this$static.timePattern = timePattern;
   return this$static;
 }
@@ -6485,17 +6480,17 @@ function $adjust(this$static, date){
   return $Date_0(new Date_0(), $getTime(date) - $getTime(date) % 60000);
 }
 
-function $createTimeTextBox(this$static, id, timePattern, startDate, endDate){
+function $createTimeTextBox(this$static, timePattern, startDate, endDate){
   if (startDate == null)
     startDate = '1492-10-12';
   if (endDate == null)
     endDate = '2492-10-12';
-  var widget = new ($wnd.dijit.form.TimeTextBox)({'constraints':{'timePattern':timePattern, 'min':startDate, 'max':endDate}}, $wnd.dojo.byId(id));
+  var widget = new ($wnd.dijit.form.TimeTextBox)({'constraints':{'timePattern':timePattern, 'min':startDate, 'max':endDate}}, $wnd.dojo.doc.createElement('div'));
   return widget;
 }
 
 function createDojoWidget_3(){
-  this.dojoWidget = $createTimeTextBox(this, this.id_0, this.timePattern, null, null);
+  this.dojoWidget = $createTimeTextBox(this, this.timePattern, null, null);
 }
 
 function getDojoName_3(){
@@ -6542,11 +6537,6 @@ function $FishEye(this$static, itemWidth, itemHeight, itemMaxWidth, itemMaxHeigh
   this$static.conservativeTrigger = conservativeTrigger;
   sinkEvents(this$static.getElement(), 16);
   setEventListener(this$static.getElement(), this$static);
-  return this$static;
-}
-
-function $FishEye_0(this$static, orientation){
-  $FishEye(this$static, 50, 50, 200, 200, orientation, 2, 10, 'center', 'bottom', false);
   return this$static;
 }
 
@@ -6709,12 +6699,10 @@ _.child = null;
 _.command = null;
 _.icon = null;
 function $RuleMark(this$static, type, count, size, position){
-  var el;
   $AbstractDojo(this$static);
   if (!$equals_1('horizontal', type)) {
     this$static.type_0 = 'vertical';
   }
-  el = this$static.getElement();
   this$static.count = count;
   this$static.size = size;
   this$static.position_0 = position;
@@ -6758,7 +6746,7 @@ _.position_0 = 'containerNode';
 _.size = '5px';
 _.type_0 = 'horizontal';
 function $$init_15(this$static){
-  this$static.labels = initDims_0('[Ljava.lang.String;', [165], [1], [0], null);
+  this$static.labels = initDims_0('[Ljava.lang.String;', [164], [1], [0], null);
 }
 
 function $RuleLabels(this$static, type, labels, style, position){
@@ -6864,29 +6852,29 @@ function $removeDojoRule(this$static, rule){
   }
 }
 
-function $removeLabelBottom(this$static){
+function $removeLabelsBottom(this$static){
   $removeDojoRule(this$static, this$static.labelBottom);
   this$static.labelBottom = null;
 }
 
-function $removeLabelTop(this$static){
+function $removeLabelsTop(this$static){
   $removeDojoRule(this$static, this$static.labelTop);
   this$static.labelTop = null;
 }
 
 function $removeRuleAndLabel(this$static){
-  $removeLabelBottom(this$static);
-  $removeLabelTop(this$static);
-  $removeRuleBottom(this$static);
-  $removeRuleTop(this$static);
+  $removeLabelsBottom(this$static);
+  $removeLabelsTop(this$static);
+  $removeRuleMarkBottom(this$static);
+  $removeRuleMarkTop(this$static);
 }
 
-function $removeRuleBottom(this$static){
+function $removeRuleMarkBottom(this$static){
   $removeDojoRule(this$static, this$static.sliderRuleBottom);
   this$static.sliderRuleBottom = null;
 }
 
-function $removeRuleTop(this$static){
+function $removeRuleMarkTop(this$static){
   $removeDojoRule(this$static, this$static.sliderRuleTop);
   this$static.sliderRuleTop = null;
 }
@@ -6915,7 +6903,7 @@ function $setLabelsLeft(this$static, labels, style){
 
 function $setLabelsTop(this$static, labels, style){
   if (this$static.labelTop !== null) {
-    $removeLabelTop(this$static);
+    $removeLabelsTop(this$static);
   }
   if ($equals_1('vertical', this$static.type_0)) {
     this$static.labelTop = $RuleLabels(new RuleLabels(), 'vertical', labels, style, 'leftDecoration');
@@ -6928,9 +6916,9 @@ function $setLabelsTop(this$static, labels, style){
   }
 }
 
-function $setRuleBottom(this$static, count, size){
+function $setRuleMarkBottom(this$static, count, size){
   if (this$static.sliderRuleBottom !== null) {
-    $removeRuleBottom(this$static);
+    $removeRuleMarkBottom(this$static);
   }
   if ($equals_1('vertical', this$static.type_0)) {
     this$static.sliderRuleBottom = $RuleMark(new RuleMark(), 'vertical', count, size, 'rightDecoration');
@@ -6943,17 +6931,17 @@ function $setRuleBottom(this$static, count, size){
   }
 }
 
-function $setRuleLeft(this$static, count, size){
-  $setRuleTop(this$static, count, size);
+function $setRuleMarkLeft(this$static, count, size){
+  $setRuleMarkTop(this$static, count, size);
 }
 
-function $setRuleRight(this$static, count, size){
-  $setRuleBottom(this$static, count, size);
+function $setRuleMarkRight(this$static, count, size){
+  $setRuleMarkBottom(this$static, count, size);
 }
 
-function $setRuleTop(this$static, count, size){
+function $setRuleMarkTop(this$static, count, size){
   if (this$static.sliderRuleTop !== null) {
-    $removeRuleTop(this$static);
+    $removeRuleMarkTop(this$static);
   }
   if ($equals_1('vertical', this$static.type_0)) {
     this$static.sliderRuleTop = $RuleMark(new RuleMark(), 'vertical', count, size, 'leftDecoration');
@@ -8525,7 +8513,11 @@ function $getRectY(this$static, rect){
 }
 
 function $rotate_2(this$static, angle){
-  $rotate_1(this$static.point, angle, $getCenter(this$static));
+  $rotate_3(this$static, angle, $getCenter(this$static));
+}
+
+function $rotate_3(this$static, angle, center){
+  $rotate_1(this$static.point, angle, center);
 }
 
 function $setRect(this$static, x, y, w, h){
@@ -8540,7 +8532,7 @@ function $setRect_0(this$static, rect){
 
 function $setRectFromPoints(this$static, points){
   var i, javaPoints;
-  javaPoints = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [164], [40], [4], null);
+  javaPoints = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [169], [40], [4], null);
   for (i = 0; i < javaPoints.length_0; i++) {
     javaPoints[i] = $Point(new Point());
     $setPoint(javaPoints[i], $getPoint(this$static, points, i));
@@ -8818,7 +8810,7 @@ function $initComponents(this$static){
   var vPanel, vPanel2;
   this$static.panel = $DockPanel(new DockPanel());
   $setSpacing(this$static.panel, 30);
-  this$static.colorLabel = $HTML_0(new HTML(), '<b>No color Selected.<\/b>');
+  this$static.colorLabel = $HTML_0(new HTML(), '<b>No color selected.<\/b>');
   this$static.big = $ColorChooser(new ColorChooser());
   this$static.big.setTitle('70 colors');
   $addChangeListener(this$static.big, this$static);
@@ -8896,7 +8888,7 @@ function $initComponents_0(this$static){
   htmlDatePicker = $HTML_0(new HTML(), '<b>DatePicker<\/b> : <br>   A Calendar object to help user to choose a date and work with this date.');
   htmlInputTime = $HTML_0(new HTML(), '<b>DropdownTimePicker<\/b> : <br>To Help a user to write a well formed time with a pciker object.');
   htmlTimePicker = $HTML_0(new HTML(), '<b>TimePicker<\/b> : <br>   A Picker object to help user to choose a time and work with this time.');
-  this$static.inputDate = $DropdownDatePicker(new DropdownDatePicker(), 'inputDate');
+  this$static.inputDate = $DropdownDatePicker(new DropdownDatePicker());
   $setInvalidMessage(this$static.inputDate, 'the date is incorrect');
   this$static.datePicker = $DatePicker(new DatePicker());
   $setDate(this$static.datePicker, $Date(new Date_0()));
@@ -8904,9 +8896,9 @@ function $initComponents_0(this$static){
   $add_6(datePanel, this$static.inputDate);
   $add_6(datePanel, htmlDatePicker);
   $add_6(datePanel, this$static.datePicker);
-  $add_6(datePanel, $HTML_0(new HTML(), 'If you modify the <b>DatePicker<\/b>, the <b>DropdowDatePicker<\/b> will be modify too and vice-versa'));
+  $add_6(datePanel, $HTML_0(new HTML(), 'If you modify the <b>DatePicker<\/b>, the <b>DropdowDatePicker<\/b> will be modified too and vice-versa'));
   $linkDropdownAndPicker(this$static, this$static.inputDate, this$static.datePicker);
-  this$static.inputTime = $DropdownTimePicker(new DropdownTimePicker(), 'inputTime');
+  this$static.inputTime = $DropdownTimePicker(new DropdownTimePicker());
   $setPromptMessage(this$static.inputTime, 'HH:mm');
   constraints = new TimePickerConstraints();
   constraints.clickableIncrement = 'T00:30:00';
@@ -8915,7 +8907,7 @@ function $initComponents_0(this$static){
   $add_6(timePanel, this$static.inputTime);
   $add_6(timePanel, htmlTimePicker);
   $add_6(timePanel, this$static.timePicker);
-  $add_6(timePanel, $HTML_0(new HTML(), 'If you modify the <b>TimePicker<\/b>, the <b>DropdowTimePicker<\/b> will be modify too and vice-versa'));
+  $add_6(timePanel, $HTML_0(new HTML(), 'If you modify the <b>TimePicker<\/b>, the <b>DropdowTimePicker<\/b> will be modified too and vice-versa'));
   $linkDropdownAndPicker(this$static, this$static.inputTime, this$static.timePicker);
   $add_3(this$static.mainPanel, datePanel);
   $add_3(this$static.mainPanel, timePanel);
@@ -9041,7 +9033,7 @@ _.romeoPanel = null;
 _.tristan = null;
 _.tristanPanel = null;
 function $$init_20(this$static){
-  this$static.lastPosition = initValues('[I', 168, (-1), [0, 0]);
+  this$static.lastPosition = initValues('[I', 167, (-1), [0, 0]);
   this$static.popup = $PopupPanel_0(new PopupPanel(), true);
   this$static.html = $HTML_0(new HTML(), 'X,Y');
   this$static.currentFillColor = ($clinit_129() , WHITE);
@@ -9102,6 +9094,7 @@ function $createSrokeSize(this$static, size){
 }
 
 function $initComponents_2(this$static){
+  var html;
   this$static.panel = $DockPanel(new DockPanel());
   this$static.canvas_0 = $GraphicCanvas(new GraphicCanvas());
   $setStyleName(this$static.canvas_0, 'GfxDemo-canvas');
@@ -9125,7 +9118,7 @@ function $initComponents_2(this$static){
   $add_6(this$static.buttonPanel, this$static.gridShape);
   $add_6(this$static.buttonPanel, this$static.fill);
   this$static.buttonPanel.setCellHorizontalAlignment(this$static.fill, ($clinit_53() , ALIGN_CENTER));
-  this$static.strokeSize = initDims_0('[Lcom.google.gwt.user.client.ui.HTML;', [169], [16], [4], null);
+  this$static.strokeSize = initDims_0('[Lcom.google.gwt.user.client.ui.HTML;', [168], [16], [4], null);
   this$static.strokeSize[0] = $createSrokeSize(this$static, 1);
   this$static.strokeSize[1] = $createSrokeSize(this$static, 2);
   this$static.strokeSize[2] = $createSrokeSize(this$static, 3);
@@ -9150,6 +9143,8 @@ function $initComponents_2(this$static){
   this$static.backButton = $addToGrid(this$static, this$static.gridTransform, 1, 1, 'Move to back', 'gfx/back.gif');
   this$static.frontButton = $addToGrid(this$static, this$static.gridTransform, 2, 0, 'Move to front', 'gfx/front.gif');
   this$static.propertiesButton = $addToGrid(this$static, this$static.gridTransform, 2, 1, 'Properties', 'gfx/properties.gif');
+  html = $HTML_0(new HTML(), '<p>The <b>GFX<\/b> package permits to draw some graphic components. You can draw circles, rectangles, ellipses... You can also apply some affine transformation like translation, rotation... on these graphic components.<b>Click on an icon to create a graphic component in the canvas.<\/p>');
+  $add_2(this$static.panel, html, ($clinit_36() , NORTH));
   $add_2(this$static.panel, this$static.canvas_0, ($clinit_36() , CENTER));
   $add_2(this$static.panel, this$static.buttonPanel, ($clinit_36() , WEST));
   $addGraphicObjectListener(this$static.canvas_0, this$static);
@@ -9199,7 +9194,7 @@ function $showPath(this$static){
 
 function $showPolyline(this$static){
   var arrow, poly;
-  arrow = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [164], [40], [8], null);
+  arrow = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [169], [40], [8], null);
   arrow[0] = $Point_1(new Point(), (-2), 15);
   arrow[1] = $Point_1(new Point(), 2, 15);
   arrow[2] = $Point_1(new Point(), 2, (-105));
@@ -9272,7 +9267,7 @@ function $showPopupScaler(this$static){
     popupScaler = $PopupPanel_0(new PopupPanel(), true);
     $addStyleName(popupScaler, 'GfxDemo-popup');
     scaler = $Slider(new Slider(), 'horizontal', (-10), 10, 1, true);
-    $setRuleBottom(scaler, 6, '3px');
+    $setRuleMarkBottom(scaler, 6, '3px');
     scalePanel = $HorizontalPanel(new HorizontalPanel());
     $setSpacing(scalePanel, 5);
     labelScaler = $Label(new Label());
@@ -9320,7 +9315,7 @@ function $showProperties(this$static, object){
   $addStyleName(dialog, 'GfxDemo-properties');
   $setWidget(dialog, panel);
   $show(dialog);
-  $clinit_184() , out_0 , 'bounds ' + object.getBounds();
+  $clinit_185() , out_0 , 'bounds ' + object.getBounds();
 }
 
 function $showText(this$static){
@@ -9500,7 +9495,12 @@ function onClick_2(sender){
     $moveToBack(this.current);
   }
    else if (sender.equals$(this.deleteButton) && this.current !== null) {
-    $remove_7(this.canvas_0, this.current);
+    if (this.current.groupParent !== null) {
+      $remove_7(this.canvas_0, this.current.groupParent);
+    }
+     else {
+      $remove_7(this.canvas_0, this.current);
+    }
   }
    else if (sender.equals$(this.lineButton)) {
     pointA = $Point_1(new Point(), 50, 50);
@@ -9679,7 +9679,7 @@ function onChange_4(sender){
     this.this$0.lastStrokeColor = this.this$0.currentStrokeColor;
     setStyleAttribute(this.this$0.fill.getElement(), 'borderColor', color);
     if (this.this$0.current !== null) {
-      $clinit_184() , out_0;
+      $clinit_185() , out_0;
       this.this$0.current.setStroke_0(this.this$0.currentStrokeColor, 1);
     }
   }
@@ -9731,12 +9731,12 @@ function $initComponents_3(this$static){
   $setSpacing(this$static.panel, 10);
   html = $HTML_0(new HTML(), 'Move the cursor of each <b>Slider<\/b> to modify the size of the image below');
   this$static.verticalSlider = $Slider(new Slider(), 'vertical', 0, 100, 100, true);
-  $setRuleLeft(this$static.verticalSlider, 6, '5px');
-  $setRuleRight(this$static.verticalSlider, 12, '3px');
-  labels = initValues('[Ljava.lang.String;', 165, 1, [' ', '20%', '40%', '60%', '80%', ' ']);
+  $setRuleMarkLeft(this$static.verticalSlider, 6, '5px');
+  $setRuleMarkRight(this$static.verticalSlider, 12, '3px');
+  labels = initValues('[Ljava.lang.String;', 164, 1, [' ', '20%', '40%', '60%', '80%', ' ']);
   $setLabelsLeft(this$static.verticalSlider, labels, 'margin: 0px -0.5em 0px -2em;color:gray');
   this$static.horizontalSlider = $Slider(new Slider(), 'horizontal', 0, 100, 100, true);
-  $setRuleBottom(this$static.horizontalSlider, 6, '5px');
+  $setRuleMarkBottom(this$static.horizontalSlider, 6, '5px');
   $setLabelsTop(this$static.horizontalSlider, labels, 'margin: -0.5em 0px -3.5em 0px;color:gray');
   this$static.horizontalSlider.setWidth('205px');
   this$static.cubicImage = $Image(new Image_0(), 'cubic.jpg');
@@ -9782,14 +9782,18 @@ function $addItem(this$static, icon, page, title){
 }
 
 function $getMessage(this$static, icon){
-  return '<table><tr><td>Vous avez s&#233;lectionn&#233;: <\/td><td><img src="' + icon + '"><\/td><\/tr><\/table>';
+  return '<table><tr><td>You have selected : <\/td><td><img src="' + icon + '"><\/td><\/tr><\/table>';
 }
 
 function $initMenuPanel(this$static){
   var clock;
   this$static.menuPanel = $VerticalPanel(new VerticalPanel());
-  this$static.fishEye = $FishEye_0(new FishEye(), 'vertical');
+  this$static.fishEye = $FishEye(new FishEye(), 50, 50, 200, 200, 'vertical', 2, 10, 'center', 'right', false);
   this$static.labelMenu = $HTML_0(new HTML(), 'Menu');
+  this$static.labelMenu.setTitle('Go Home');
+  $setStyleName(this$static.labelMenu, 'TatamiDemo-labelMenu');
+  setStyleAttribute(this$static.labelMenu.getElement(), 'cursor', 'pointer');
+  $addClickListener_0(this$static.labelMenu, $TatamiDemo$1(new TatamiDemo$1(), this$static));
   clock = $Clock(new Clock(), null, 77);
   $setStyleName(this$static.menuPanel, 'TatamiDemo-menu');
   $setSpacing(this$static.menuPanel, 20);
@@ -9800,7 +9804,7 @@ function $initMenuPanel(this$static){
   $addItem(this$static, 'kalarm.png', 2, 'date-time');
   $addItem(this$static, 'icoColorPic.gif', 7, 'color tools');
   $addItem(this$static, 'amor.png', 6, "drap'n'drop");
-  $addItem(this$static, 'blackboard.png', 1, 'GFX');
+  $addItem(this$static, 'blackboard.png', 1, 'draw with GFX');
 }
 
 function $initTitlePanel(this$static){
@@ -9823,7 +9827,14 @@ function $loadPage(this$static){
   var widgetDemo;
   widgetDemo = null;
   switch (this$static.page) {
-    default:case 3:
+    default:{
+        widgetDemo = $HTML(new HTML());
+        $setStyleName(widgetDemo, 'TatamiDemo-welcome');
+        $setHTML(dynamicCast(widgetDemo, 16), '<p>The project aims to integrate the Google Web Toolkit (GWT) and the DOJO framework. Indeed the DOJO framework is very rich in term of widgets and utilities (fisheye, slider, drag and drop functionality) and the main interest is to take benefits of the huge work which has been already done by the DOJO community. In other words, it means: <b>the DOJO widgets become GWT widgets, the DOJO utilities become GWT helper.<\/b><\/p><br><p> The project is on the Google code community : <a href="http://code.google.com/p/tatami">Tatami<\/a><\/p><p> Click on an item of the menu at the left to see the widgets that Tatami proposes.<\/p>');
+        break;
+      }
+
+    case 3:
       {
         widgetDemo = $SliderDemo(new SliderDemo());
         break;
@@ -9869,10 +9880,6 @@ function $onModuleLoad(this$static){
   $add_2(body, this$static.root, ($clinit_36() , CENTER));
   $initMenuPanel(this$static);
   $initTitlePanel(this$static);
-  this$static.welcome = $HTML(new HTML());
-  $setStyleName(this$static.welcome, 'TatamiDemo-welcome');
-  $setHTML(this$static.welcome, '<p>The project aims to integrate the Google Web Toolkit (GWT) and the DOJO framework. Indeed the DOJO framework is very rich in term of widgets and utilities (fisheye, slider, drag and drop functionality) and the main interest is to take benefits of the huge work which has been already done by the DOJO community. In other words, it means: <b>the DOJO widgets become GWT widgets, the DOJO utilities become GWT helper.<\/b><\/p><br><p> The project is on the Google code community : <a href="http://code.google.com/p/tatami">Tatami<\/a><\/p><p> Click on an item of the menu at the left to see the widgets that Tatami proposes.<\/p>');
-  $add_2(this$static.mainPanel, this$static.welcome, ($clinit_36() , CENTER));
   $add_2(this$static.root, this$static.mainPanel, ($clinit_36() , CENTER));
   $setCellWidth(this$static.root, this$static.mainPanel, '100%');
   $add_2(this$static.root, this$static.menuPanel, ($clinit_36() , WEST));
@@ -9881,6 +9888,7 @@ function $onModuleLoad(this$static){
   $add_2(body, this$static.root, ($clinit_36() , CENTER));
   $add(get(), body);
   $add(get(), this$static.toaster);
+  $setPage(this$static, 0);
 }
 
 function $setPage(this$static, page){
@@ -9907,7 +9915,22 @@ _.page = 0;
 _.root = null;
 _.titlePanel = null;
 _.toaster = null;
-_.welcome = null;
+function $TatamiDemo$1(this$static, this$0){
+  this$static.this$0 = this$0;
+  return this$static;
+}
+
+function onClick_3(sender){
+  $setPage(this.this$0, 0);
+}
+
+function TatamiDemo$1(){
+}
+
+_ = TatamiDemo$1.prototype = new Object_0();
+_.onClick = onClick_3;
+_.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'TatamiDemo$1';
+_.typeId$ = 133;
 function $TatamiDemo$DemoCommand(this$static, icon, page, this$0){
   this$static.this$0 = this$0;
   this$static.icon = icon;
@@ -9925,7 +9948,7 @@ function TatamiDemo$DemoCommand(){
 
 _ = TatamiDemo$DemoCommand.prototype = new Object_0();
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'TatamiDemo$DemoCommand';
-_.typeId$ = 133;
+_.typeId$ = 134;
 _.icon = '';
 _.page = 0;
 function OutputStream(){
@@ -9933,33 +9956,33 @@ function OutputStream(){
 
 _ = OutputStream.prototype = new Object_0();
 _.typeName$ = package_java_io_ + 'OutputStream';
-_.typeId$ = 134;
+_.typeId$ = 135;
 function FilterOutputStream(){
 }
 
 _ = FilterOutputStream.prototype = new OutputStream();
 _.typeName$ = package_java_io_ + 'FilterOutputStream';
-_.typeId$ = 135;
+_.typeId$ = 136;
 function PrintStream(){
 }
 
 _ = PrintStream.prototype = new FilterOutputStream();
 _.typeName$ = package_java_io_ + 'PrintStream';
-_.typeId$ = 136;
+_.typeId$ = 137;
 function ArrayStoreException(){
 }
 
 _ = ArrayStoreException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'ArrayStoreException';
-_.typeId$ = 137;
-function $clinit_166(){
-  $clinit_166 = nullMethod;
+_.typeId$ = 138;
+function $clinit_167(){
+  $clinit_167 = nullMethod;
   FALSE = $Boolean(new Boolean_0(), false);
   TRUE = $Boolean(new Boolean_0(), true);
 }
 
 function $Boolean(this$static, value){
-  $clinit_166();
+  $clinit_167();
   this$static.value = value;
   return this$static;
 }
@@ -9980,7 +10003,7 @@ function toString_8(){
 }
 
 function valueOf(b){
-  $clinit_166();
+  $clinit_167();
   return b?TRUE:FALSE;
 }
 
@@ -9992,7 +10015,7 @@ _.equals$ = equals_5;
 _.hashCode$ = hashCode_3;
 _.toString$ = toString_8;
 _.typeName$ = package_java_lang_ + 'Boolean';
-_.typeId$ = 138;
+_.typeId$ = 139;
 _.value = false;
 var FALSE, TRUE;
 function ClassCastException(){
@@ -10000,21 +10023,21 @@ function ClassCastException(){
 
 _ = ClassCastException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'ClassCastException';
-_.typeId$ = 139;
-function $clinit_179(){
-  $clinit_179 = nullMethod;
+_.typeId$ = 140;
+function $clinit_180(){
+  $clinit_180 = nullMethod;
   {
     initNative();
   }
 }
 
 function $Number(this$static){
-  $clinit_179();
+  $clinit_180();
   return this$static;
 }
 
 function initNative(){
-  $clinit_179();
+  $clinit_180();
   floatRegex = /^[+-]?\d*\.?\d*(e[+-]?\d+)?$/i;
 }
 
@@ -10023,15 +10046,15 @@ function Number_0(){
 
 _ = Number_0.prototype = new Object_0();
 _.typeName$ = package_java_lang_ + 'Number';
-_.typeId$ = 140;
+_.typeId$ = 141;
 var floatRegex = null;
-function $clinit_171(){
-  $clinit_171 = nullMethod;
-  $clinit_179();
+function $clinit_172(){
+  $clinit_172 = nullMethod;
+  $clinit_180();
 }
 
 function $Double(this$static, value){
-  $clinit_171();
+  $clinit_172();
   $Number(this$static);
   this$static.value = value;
   return this$static;
@@ -10046,7 +10069,7 @@ function hashCode_4(){
 }
 
 function toString_10(b){
-  $clinit_171();
+  $clinit_172();
   return valueOf_0(b);
 }
 
@@ -10062,7 +10085,7 @@ _.equals$ = equals_6;
 _.hashCode$ = hashCode_4;
 _.toString$ = toString_9;
 _.typeName$ = package_java_lang_ + 'Double';
-_.typeId$ = 141;
+_.typeId$ = 142;
 _.value = 0.0;
 function $IllegalArgumentException(this$static, message){
   $RuntimeException(this$static, message);
@@ -10074,7 +10097,7 @@ function IllegalArgumentException(){
 
 _ = IllegalArgumentException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'IllegalArgumentException';
-_.typeId$ = 142;
+_.typeId$ = 143;
 function $IllegalStateException(this$static, s){
   $RuntimeException(this$static, s);
   return this$static;
@@ -10085,7 +10108,7 @@ function IllegalStateException(){
 
 _ = IllegalStateException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'IllegalStateException';
-_.typeId$ = 143;
+_.typeId$ = 144;
 function $IndexOutOfBoundsException(this$static, message){
   $RuntimeException(this$static, message);
   return this$static;
@@ -10096,14 +10119,14 @@ function IndexOutOfBoundsException(){
 
 _ = IndexOutOfBoundsException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'IndexOutOfBoundsException';
-_.typeId$ = 144;
-function $clinit_176(){
-  $clinit_176 = nullMethod;
-  $clinit_179();
+_.typeId$ = 145;
+function $clinit_177(){
+  $clinit_177 = nullMethod;
+  $clinit_180();
 }
 
 function $Integer(this$static, value){
-  $clinit_176();
+  $clinit_177();
   $Number(this$static);
   this$static.value = value;
   return this$static;
@@ -10118,7 +10141,7 @@ function hashCode_5(){
 }
 
 function toString_12(b){
-  $clinit_176();
+  $clinit_177();
   return valueOf_1(b);
 }
 
@@ -10134,7 +10157,7 @@ _.equals$ = equals_7;
 _.hashCode$ = hashCode_5;
 _.toString$ = toString_11;
 _.typeName$ = package_java_lang_ + 'Integer';
-_.typeId$ = 145;
+_.typeId$ = 146;
 _.value = 0;
 var MAX_VALUE = 2147483647, MIN_VALUE = (-2147483648);
 function cos(x){
@@ -10162,7 +10185,7 @@ function NegativeArraySizeException(){
 
 _ = NegativeArraySizeException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'NegativeArraySizeException';
-_.typeId$ = 146;
+_.typeId$ = 147;
 function $charAt(this$static, index){
   return this$static.charCodeAt(index);
 }
@@ -10244,7 +10267,7 @@ function $trim(this$static){
 }
 
 function __createArray(numElements){
-  return initDims_0('[Ljava.lang.String;', [165], [1], [numElements], null);
+  return initDims_0('[Ljava.lang.String;', [164], [1], [numElements], null);
 }
 
 function __equals(me, other){
@@ -10352,14 +10375,14 @@ _ = StringBuffer.prototype = new Object_0();
 _.normalize = normalize;
 _.toString$ = toString_14;
 _.typeName$ = package_java_lang_ + 'StringBuffer';
-_.typeId$ = 147;
-function $clinit_184(){
-  $clinit_184 = nullMethod;
+_.typeId$ = 148;
+function $clinit_185(){
+  $clinit_185 = nullMethod;
   out_0 = new PrintStream();
 }
 
 function identityHashCode(o){
-  $clinit_184();
+  $clinit_185();
   return getHashCode_0(o);
 }
 
@@ -10374,7 +10397,7 @@ function UnsupportedOperationException(){
 
 _ = UnsupportedOperationException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'UnsupportedOperationException';
-_.typeId$ = 148;
+_.typeId$ = 149;
 function $AbstractList$IteratorImpl(this$static, this$0){
   this$static.this$0 = this$0;
   return this$static;
@@ -10420,7 +10443,7 @@ _.hasNext = hasNext_2;
 _.next_0 = next_3;
 _.remove = remove_16;
 _.typeName$ = package_java_util_ + 'AbstractList$IteratorImpl';
-_.typeId$ = 149;
+_.typeId$ = 150;
 _.i = 0;
 _.last = (-1);
 function $implFindEntry(this$static, key, remove){
@@ -10529,7 +10552,7 @@ _.hashCode$ = hashCode_9;
 _.keySet = keySet;
 _.toString$ = toString_18;
 _.typeName$ = package_java_util_ + 'AbstractMap';
-_.typeId$ = 150;
+_.typeId$ = 151;
 function $equals_2(this$static, o){
   var iter, other, otherItem;
   if (o === this$static) {
@@ -10574,7 +10597,7 @@ _ = AbstractSet.prototype = new AbstractCollection();
 _.equals$ = equals_12;
 _.hashCode$ = hashCode_10;
 _.typeName$ = package_java_util_ + 'AbstractSet';
-_.typeId$ = 151;
+_.typeId$ = 152;
 function $AbstractMap$1(this$static, this$0, val$entrySet){
   this$static.this$0 = this$0;
   this$static.val$entrySet = val$entrySet;
@@ -10607,7 +10630,7 @@ _.contains = contains_0;
 _.iterator = iterator_4;
 _.size_0 = size_0;
 _.typeName$ = package_java_util_ + 'AbstractMap$1';
-_.typeId$ = 152;
+_.typeId$ = 153;
 function $AbstractMap$2(this$static, this$1, val$outerIter){
   this$static.val$outerIter = val$outerIter;
   return this$static;
@@ -10643,7 +10666,7 @@ _.hasNext = hasNext_3;
 _.next_0 = next_4;
 _.remove = remove_18;
 _.typeName$ = package_java_util_ + 'AbstractMap$2';
-_.typeId$ = 153;
+_.typeId$ = 154;
 function $AbstractMap$3(this$static, this$0, val$entrySet){
   this$static.this$0 = this$0;
   this$static.val$entrySet = val$entrySet;
@@ -10676,7 +10699,7 @@ _.contains = contains_1;
 _.iterator = iterator_5;
 _.size_0 = size_1;
 _.typeName$ = package_java_util_ + 'AbstractMap$3';
-_.typeId$ = 154;
+_.typeId$ = 155;
 function $AbstractMap$4(this$static, this$1, val$outerIter){
   this$static.val$outerIter = val$outerIter;
   return this$static;
@@ -10712,21 +10735,21 @@ _.hasNext = hasNext_4;
 _.next_0 = next_5;
 _.remove = remove_19;
 _.typeName$ = package_java_util_ + 'AbstractMap$4';
-_.typeId$ = 155;
-function $clinit_198(){
-  $clinit_198 = nullMethod;
-  DAYS = initValues('[Ljava.lang.String;', 165, 1, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
-  MONTHS = initValues('[Ljava.lang.String;', 165, 1, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+_.typeId$ = 156;
+function $clinit_199(){
+  $clinit_199 = nullMethod;
+  DAYS = initValues('[Ljava.lang.String;', 164, 1, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+  MONTHS = initValues('[Ljava.lang.String;', 164, 1, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
 }
 
 function $Date(this$static){
-  $clinit_198();
+  $clinit_199();
   $init_0(this$static);
   return this$static;
 }
 
 function $Date_0(this$static, date){
-  $clinit_198();
+  $clinit_199();
   $init_1(this$static, date);
   return this$static;
 }
@@ -10759,12 +10782,12 @@ function $init_1(this$static, date){
   this$static.jsdate = new Date(date);
 }
 
-function $setSeconds(this$static, seconds){
-  this$static.jsdate.setSeconds(seconds);
+function $setTime(this$static, time){
+  this$static.jsdate.setTime(time);
 }
 
 function dayToString(day){
-  $clinit_198();
+  $clinit_199();
   return DAYS[day];
 }
 
@@ -10777,12 +10800,12 @@ function hashCode_11(){
 }
 
 function monthToString(month){
-  $clinit_198();
+  $clinit_199();
   return MONTHS[month];
 }
 
 function padTwo_0(number){
-  $clinit_198();
+  $clinit_199();
   if (number < 10) {
     return '0' + number;
   }
@@ -10810,10 +10833,10 @@ _.equals$ = equals_14;
 _.hashCode$ = hashCode_11;
 _.toString$ = toString_19;
 _.typeName$ = package_java_util_ + 'Date';
-_.typeId$ = 156;
+_.typeId$ = 157;
 var DAYS, MONTHS;
-function $clinit_203(){
-  $clinit_203 = nullMethod;
+function $clinit_204(){
+  $clinit_204 = nullMethod;
   UNDEFINED = createUndefinedValue();
 }
 
@@ -10824,7 +10847,7 @@ function $$init_22(this$static){
 }
 
 function $HashMap(this$static){
-  $clinit_203();
+  $clinit_204();
   $$init_22(this$static);
   return this$static;
 }
@@ -10926,7 +10949,7 @@ function $remove_12(this$static, key){
 }
 
 function addAllHashEntries(hashCodeMap, dest){
-  $clinit_203();
+  $clinit_204();
   for (var hashCode in hashCodeMap) {
     if (hashCode == parseInt(hashCode)) {
       var array = hashCodeMap[hashCode];
@@ -10938,7 +10961,7 @@ function addAllHashEntries(hashCodeMap, dest){
 }
 
 function addAllStringEntries(stringMap, dest){
-  $clinit_203();
+  $clinit_204();
   for (var key in stringMap) {
     if (key.charCodeAt(0) == 58) {
       var value = stringMap[key];
@@ -10949,7 +10972,7 @@ function addAllStringEntries(stringMap, dest){
 }
 
 function containsHashValue(hashCodeMap, value){
-  $clinit_203();
+  $clinit_204();
   for (var hashCode in hashCodeMap) {
     if (hashCode == parseInt(hashCode)) {
       var array = hashCodeMap[hashCode];
@@ -10970,7 +10993,7 @@ function containsKey_0(key){
 }
 
 function containsStringValue(stringMap, value){
-  $clinit_203();
+  $clinit_204();
   for (var key in stringMap) {
     if (key.charCodeAt(0) == 58) {
       var entryValue = stringMap[key];
@@ -10983,7 +11006,7 @@ function containsStringValue(stringMap, value){
 }
 
 function createUndefinedValue(){
-  $clinit_203();
+  $clinit_204();
 }
 
 function entrySet_0(){
@@ -10991,7 +11014,7 @@ function entrySet_0(){
 }
 
 function equalsWithNullCheck(a, b){
-  $clinit_203();
+  $clinit_204();
   if (a === b) {
     return true;
   }
@@ -11008,7 +11031,7 @@ function get_3(key){
 }
 
 function getHashValue(hashCodeMap, key, hashCode){
-  $clinit_203();
+  $clinit_204();
   var array = hashCodeMap[hashCode];
   if (array) {
     for (var i = 0, c = array.length; i < c; ++i) {
@@ -11022,12 +11045,12 @@ function getHashValue(hashCodeMap, key, hashCode){
 }
 
 function getStringValue(stringMap, key){
-  $clinit_203();
+  $clinit_204();
   return stringMap[':' + key];
 }
 
 function putHashValue(hashCodeMap, key, value, hashCode){
-  $clinit_203();
+  $clinit_204();
   var array = hashCodeMap[hashCode];
   if (array) {
     for (var i = 0, c = array.length; i < c; ++i) {
@@ -11048,7 +11071,7 @@ function putHashValue(hashCodeMap, key, value, hashCode){
 }
 
 function putStringValue(stringMap, key, value){
-  $clinit_203();
+  $clinit_204();
   key = ':' + key;
   var result = stringMap[key];
   stringMap[key] = value;
@@ -11056,7 +11079,7 @@ function putStringValue(stringMap, key, value){
 }
 
 function removeHashValue(hashCodeMap, key, hashCode){
-  $clinit_203();
+  $clinit_204();
   var array = hashCodeMap[hashCode];
   if (array) {
     for (var i = 0, c = array.length; i < c; ++i) {
@@ -11076,7 +11099,7 @@ function removeHashValue(hashCodeMap, key, hashCode){
 }
 
 function removeStringValue(stringMap, key){
-  $clinit_203();
+  $clinit_204();
   key = ':' + key;
   var result = stringMap[key];
   delete stringMap[key];
@@ -11091,7 +11114,7 @@ _.containsKey = containsKey_0;
 _.entrySet = entrySet_0;
 _.get_0 = get_3;
 _.typeName$ = package_java_util_ + 'HashMap';
-_.typeId$ = 157;
+_.typeId$ = 158;
 _.hashCodeMap = null;
 _.nullSlot = null;
 _.size = 0;
@@ -11161,7 +11184,7 @@ _.hashCode$ = hashCode_12;
 _.setValue_0 = setValue;
 _.toString$ = toString_20;
 _.typeName$ = package_java_util_ + 'HashMap$EntryImpl';
-_.typeId$ = 158;
+_.typeId$ = 159;
 _.key = null;
 _.value = null;
 function $HashMap$EntrySet(this$static, this$0){
@@ -11217,12 +11240,12 @@ _.iterator = iterator_6;
 _.remove_2 = remove_23;
 _.size_0 = size_3;
 _.typeName$ = package_java_util_ + 'HashMap$EntrySet';
-_.typeId$ = 159;
+_.typeId$ = 160;
 function $HashMap$EntrySetIterator(this$static, this$0){
   var list;
   this$static.this$0 = this$0;
   list = $ArrayList(new ArrayList());
-  if (this$static.this$0.nullSlot !== ($clinit_203() , UNDEFINED)) {
+  if (this$static.this$0.nullSlot !== ($clinit_204() , UNDEFINED)) {
     $add_13(list, $HashMap$EntryImpl(new HashMap$EntryImpl(), null, this$static.this$0.nullSlot));
   }
   addAllStringEntries(this$static.this$0.stringMap, list);
@@ -11270,7 +11293,7 @@ _.hasNext = hasNext_5;
 _.next_0 = next_6;
 _.remove = remove_22;
 _.typeName$ = package_java_util_ + 'HashMap$EntrySetIterator';
-_.typeId$ = 160;
+_.typeId$ = 161;
 _.iter = null;
 _.last = null;
 function $HashSet(this$static){
@@ -11320,14 +11343,14 @@ _.remove_2 = remove_24;
 _.size_0 = size_4;
 _.toString$ = toString_21;
 _.typeName$ = package_java_util_ + 'HashSet';
-_.typeId$ = 161;
+_.typeId$ = 162;
 _.map = null;
 function NoSuchElementException(){
 }
 
 _ = NoSuchElementException.prototype = new RuntimeException();
 _.typeName$ = package_java_util_ + 'NoSuchElementException';
-_.typeId$ = 162;
+_.typeId$ = 163;
 function init_0(){
   $onModuleLoad(new TatamiDemo());
 }
@@ -11347,7 +11370,7 @@ function gwtOnLoad(errFn, modName, modBase){
   }
 }
 
-var typeIdArray = [{}, {15:1}, {1:1, 15:1, 44:1, 45:1}, {3:1, 15:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {2:1, 15:1}, {15:1}, {15:1}, {15:1}, {2:1, 5:1, 15:1}, {2:1, 15:1}, {6:1, 15:1}, {7:1, 15:1}, {15:1}, {15:1}, {15:1}, {15:1, 17:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1}, {15:1, 46:1}, {15:1, 46:1}, {15:1, 46:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {15:1, 46:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {4:1, 10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {4:1, 10:1, 11:1, 14:1, 15:1, 17:1, 18:1, 24:1, 26:1, 31:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {15:1}, {15:1}, {15:1, 43:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 19:1, 20:1, 21:1, 22:1, 23:1, 24:1, 25:1}, {10:1, 15:1, 16:1, 17:1, 18:1, 19:1, 20:1, 21:1, 22:1, 23:1, 24:1, 25:1, 26:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 21:1, 22:1, 42:1}, {15:1}, {15:1}, {15:1, 46:1}, {10:1, 12:1, 14:1, 15:1, 17:1, 18:1}, {7:1, 15:1}, {15:1}, {9:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {15:1, 46:1}, {10:1, 13:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {9:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {6:1, 15:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1, 30:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 33:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1}, {15:1, 34:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 36:1}, {15:1}, {15:1, 40:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 41:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {8:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1}, {8:1, 15:1}, {8:1, 15:1}, {10:1, 15:1, 17:1, 18:1, 32:1}, {8:1, 9:1, 10:1, 15:1, 17:1, 18:1, 35:1}, {9:1, 15:1}, {8:1, 15:1}, {8:1, 15:1}, {8:1, 15:1}, {9:1, 15:1}, {8:1, 10:1, 15:1, 17:1, 18:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {3:1, 15:1, 28:1}, {15:1, 39:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1, 37:1, 44:1}, {3:1, 15:1, 27:1, 28:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {15:1, 38:1, 44:1}, {3:1, 15:1, 28:1}, {15:1, 45:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1, 47:1}, {15:1, 29:1}, {15:1, 29:1}, {15:1}, {15:1}, {15:1}, {15:1, 44:1, 48:1}, {15:1, 47:1}, {15:1, 49:1}, {15:1, 29:1}, {15:1}, {15:1, 29:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}];
+var typeIdArray = [{}, {15:1}, {1:1, 15:1, 44:1, 45:1}, {3:1, 15:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {2:1, 15:1}, {15:1}, {15:1}, {15:1}, {2:1, 5:1, 15:1}, {2:1, 15:1}, {6:1, 15:1}, {7:1, 15:1}, {15:1}, {15:1}, {15:1}, {15:1, 17:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1}, {15:1, 46:1}, {15:1, 46:1}, {15:1, 46:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {15:1, 46:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {4:1, 10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {4:1, 10:1, 11:1, 14:1, 15:1, 17:1, 18:1, 24:1, 26:1, 31:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {15:1}, {15:1}, {15:1, 43:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 19:1, 20:1, 21:1, 22:1, 23:1, 24:1, 25:1}, {10:1, 15:1, 16:1, 17:1, 18:1, 19:1, 20:1, 21:1, 22:1, 23:1, 24:1, 25:1, 26:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 21:1, 22:1, 42:1}, {15:1}, {15:1}, {15:1, 46:1}, {10:1, 12:1, 14:1, 15:1, 17:1, 18:1}, {7:1, 15:1}, {15:1}, {9:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {15:1, 46:1}, {10:1, 13:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {9:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {6:1, 15:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1, 30:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 33:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1}, {15:1, 34:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 36:1}, {15:1}, {15:1, 40:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 41:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {8:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1}, {8:1, 15:1}, {8:1, 15:1}, {10:1, 15:1, 17:1, 18:1, 32:1}, {8:1, 9:1, 10:1, 15:1, 17:1, 18:1, 35:1}, {9:1, 15:1}, {8:1, 15:1}, {8:1, 15:1}, {8:1, 15:1}, {9:1, 15:1}, {8:1, 10:1, 15:1, 17:1, 18:1}, {15:1}, {9:1, 15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {3:1, 15:1, 28:1}, {15:1, 39:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1, 37:1, 44:1}, {3:1, 15:1, 27:1, 28:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {15:1, 38:1, 44:1}, {3:1, 15:1, 28:1}, {15:1, 45:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1, 47:1}, {15:1, 29:1}, {15:1, 29:1}, {15:1}, {15:1}, {15:1}, {15:1, 44:1, 48:1}, {15:1, 47:1}, {15:1, 49:1}, {15:1, 29:1}, {15:1}, {15:1, 29:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}];
 
 if (com_objetdirect_tatami_demo_TatamiDemo) {
   var __gwt_initHandlers = com_objetdirect_tatami_demo_TatamiDemo.__gwt_initHandlers;  com_objetdirect_tatami_demo_TatamiDemo.onScriptLoad(gwtOnLoad);
