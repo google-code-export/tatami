@@ -1,4 +1,29 @@
-
+/*
+ * Tatami: 
+ * Copyright (C) 2007 Objet Direct
+ * Copyright (C) 2007 France Telecom
+ * Contact: tatami@googlegroups.com
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+ * USA
+ *
+ * Authors:  Vianney Grassaud
+ * Initial developer(s): Vianney Grassaud
+ * Contributor(s):
+ */
+ 
 body {
 	background-color: white;
 /*	background-image: url(background.jpg);*/
@@ -11,6 +36,22 @@ body {
 	margin: 0px;
 }
 
+
+
+/*.tundra .dijitToasterMessage {
+	  padding:1em;
+	  padding-top:0.25em;
+	  background:blue;
+     }*/
+
+.tundra .dijitToasterMessage .dijitToasterContent{
+	background:blue;
+}
+
+
+
+ 
+
 a {
 	color: darkblue;
 }
@@ -19,26 +60,9 @@ a:visited {
 	color: darkblue;
 }
 
-.metaDataLabel {
-  color:orange;
-  
-}
 
-.DataGridDemo-rowDetails {
-  background-image: url(gray_gradient.gif);
-  background-position:top left;
-  background-repeat:repeat-x;
-  color:#ff7f17;
-  width:100%;
-  height:100%;
-}
 
-.DataGridDemo-metaData {
-  background-image: url(blue_gradient.gif);
-  background-position:top left;
-  background-repeat:repeat-x;
-  color:#ff7f17;
-}
+
 
 
 .TatamiDemo-menu {
@@ -99,6 +123,13 @@ a:visited {
   margin:10px;
   background-color:white;
 }	
+
+
+.TatamiDemo-labelMenu {
+  background-image:url(home.gif);
+  background-repeat:no-repeat;
+  background-position:right;
+}
 
 
 .TatamiDemo-welcome {
