@@ -47,32 +47,69 @@ import com.objetdirect.tatami.client.gfx.Polyline;
 public class Clock extends SimplePanel {
 
 	/** 
-	 * 
+	 * Canvas to display the needles
 	 */
 	private GraphicCanvas canvas;
 	
+	/**
+	 * shadow of the hour needle
+	 */
 	private Polyline hour_shadow;
+	/**
+	 * The needle of the hours
+	 */
 	private Polyline hour_hand;
+	/**
+	 * shadow for the minute needle
+	 */
 	private Polyline minute_shadow;
+	/**
+	 * The needle of the minutes
+	 */
 	private Polyline minute_hand;
+	
+	/**
+	 * the needle of the seconds
+	 */
 	private Polyline second_hand;
+	/**
+	 * shadow for the second needle
+	 */
 	private Polyline second_shadow;
 	
+	/**
+	 * Background image for the clock
+	 */
 	private String image = null;
+	
+	/**
+	 * the size of the clock
+	 */
 	private int width = 385;
 	
 	
 	/** Color of the shadow */ 
 	private final Color shadowColor = new Color(0,0,0,15);
 	
+	/**
+	 * The current time to display
+	 */
 	private Date current_time;
 	
+	/* last angles  calculated for the needles */ 
 	private double angleMinute = 0.0;
 	private double angleHour = 0.0;
 	private double angleSecond = 0.0;
 	
+	/**
+	 * The default size of the Clock
+	 */
 	private int defaultWidth = 385;
-    private  Point center;
+    
+	/**
+	 * The center point of the clock
+	 */
+	private  Point center;
    
 	
 	/**

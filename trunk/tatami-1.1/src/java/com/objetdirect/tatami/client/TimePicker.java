@@ -49,16 +49,23 @@ public class TimePicker extends BasePicker {
 		this.constraints = _constraints;
 	}
 
+	
+	/**
+	 * Creates a <code>TimePicker</code> with <code>TimePickerConstraints</code>.
+	 * @param constraints the constraint to set
+	 */
 	public TimePicker(TimePickerConstraints constraints) {
 		this(null,null,constraints);
 	}
 	
+	/**
+	 * Creates a <code>TimePicker</code> with default <code>TimePickerConstraints</code>.
+	 */
 	public TimePicker() {
 		this(new TimePickerConstraints());
 	}
 	
-	
-    
+	    
 	
 	/**
 	
@@ -75,18 +82,36 @@ public class TimePicker extends BasePicker {
 	 };
 	 }-*/;
 	
+	
+	
+	/**
+	 * Returns the Time pattern used
+	 * @return the Time pattern used
+	 */
 	public String getTimePattern() {
 		return this.constraints.timePattern;
 	}
 	
+	/**
+	 * Returns the visible increment constraint
+	 * @return the visible increment constraint
+	 */
 	public String getVisibleIncrement() {
 		return this.constraints.visibleIncrement;
 	}
 	
+	/**
+	 * Returns the clickable increment constraint
+	 * @return the clickable increment constraint
+	 */
 	public String getClickableIncrement() {
 		return this.constraints.clickableIncrement;
 	}
 	
+	/**
+	 * Returns the visible range constraint
+	 * @return the visible range constraint
+	 */
 	public String getVisibleRange() {
 		return this.constraints.visibleRange;
 	}
@@ -106,6 +131,15 @@ public class TimePicker extends BasePicker {
 		this.dojoWidget = createDojoTimePicker(getMinJavaScriptDate(),getMaxJavaScriptDate(),constraints.timePattern,constraints.clickableIncrement,constraints.visibleIncrement,constraints.visibleRange);
 	}
 
+	
+	/**
+	 * Creates the DOJO TimePicker object
+	 * @param startDate  the minimum date selectable
+	 * @param endDate the maximum date selectable
+	 * @param timePattern,clickableIncrement, visibleIncrement
+	 *  visibleRange see the <code>TimePickerConstraints</code> for more details.
+	 * @return the DOJO  TimePicke widget
+	 */
 	private native JavaScriptObject createDojoTimePicker(JavaScriptObject startDate,JavaScriptObject endDate,
 			                                             String timePattern,String clickableIncrement,String visibleIncrement,String visibleRange) 
 	/*-{

@@ -54,20 +54,25 @@ public class Slider extends AbstractDojoFocus {
 	/** The cursor is in a VERTICAL position */
 	static public final String VERTICAL = "vertical";
 
+	/** Position for <code>RuleMark, RuleLabels</code> */
 	private final String LEFT = "leftDecoration";
-
+	/** Position for <code>RuleMark, RuleLabels</code> */
 	private final String RIGHT = "rightDecoration";
-
+	/** Position for <code>RuleMark, RuleLabels</code> */
 	private final String TOP = "topDecoration";
-
+	/** Position for <code>RuleMark, RuleLabels</code> */
 	private final String BOTTOM = "bottomDecoration";
 
+	/** The <code>RuleMark</code> at the top or the left */
 	private RuleMark sliderRuleTop;
 
+	/** The RuleMark at the bottom or the right */
 	private RuleMark sliderRuleBottom;
 
+	/** The <code>RuleLabels</code> at the top or the left */
 	private RuleLabels labelTop;
-
+	
+	/** The <code>RuleLabels</code> at the bottom or the right */
 	private RuleLabels labelBottom;
 
 	/** Type for the cursor position */
@@ -81,8 +86,14 @@ public class Slider extends AbstractDojoFocus {
 
 	private boolean showButtons = true;
 
+	/**
+	 * Width of this <code>Slider</code>
+	 */
 	private int width = 200;
 
+	/**
+	 * Height of this <code>Slider</code>
+	 */
 	private int height = 10;
 
 	/** value choose by the user */
@@ -319,9 +330,7 @@ public class Slider extends AbstractDojoFocus {
 
 	/**
 	 * Sets the value for the cursor.
-	 * 
-	 * @param value
-	 *            the new value to choose.
+	 * @param value the new value to choose.
 	 * 
 	 */
 	public void setValue(int value) {

@@ -28,7 +28,6 @@ package com.objetdirect.tatami.client.gfx;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -66,17 +65,30 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public abstract class GraphicObject {
 	
+	/** Style for the stroke, a solid stroke*/
 	public static final String SOLID = "Solid";
+	/** Style for the stroke, a suite of dots */
 	public static final String DOT = "Dot";
+	/** Style for the stroke */
 	public static final String NONE = "none";
+	/** Style for the stroke, a suite a shot dashes*/
 	public static final String SHORTDASH =  "ShortDash";
+	/** Style for the stroke a suite of a short dots */
 	public static final String SHORTDOT ="ShortDot";
+	/** Style for the stroke a suite of a short dash follow by a dot */
 	public static final String SHORTDASHDOT ="ShortDashDot";
+	/** Style for the stroke a suite of a short dash follow by 2 dots */
 	public static final String SHORTDASHDOTDOT ="ShortDashDotDot";
+	/** Style for the stroke a suite of dash */
 	public static final String DASH = "Dash";
+	/** Style for the stroke, a suite of long dash  */
 	public static final String LONGDASH ="LongDash";
+	
+	/** Style for the stroke  a suite of dash follow by a dot*/
 	public static final String DASHDOT ="DashDot"; 
+	/** Style for the stroke   a suite of a long dash follow by a dot*/
 	public static final String LONGDASHDOT ="LongDashDot";
+	/** Style for the stroke  a suite of a long dash follow by 2 dots */
 	public static final String LONGDASHDOTDOT ="LongDashDotDot";
 	
 	
@@ -118,8 +130,14 @@ public abstract class GraphicObject {
 	/** the width of the stroke	 */
 	private int strokeWidth = 1;
 			
-	
+	/**
+	 * The <code>GraphicCanvas</code> containing this <code>GraphicObject</code>
+	 */
 	private GraphicCanvas parent;
+	
+	/**
+	 * The <code>VituralGroup</code> containing this <code>GraphicObject</code>
+	 */
 	
 	private GraphicObject groupParent;
 	
@@ -142,7 +160,10 @@ public abstract class GraphicObject {
 		return this.groupParent;
 	}
 	
-	
+	/**
+	 * Sets the <code>VirtualGroup</code> containing this <code>GraphicObject</code>
+	 * @param group a <code>VirtualGroup</code>
+	 */
 	protected void setGroup(GraphicObject group) {
 		this.groupParent = group;
 	}
@@ -444,11 +465,21 @@ public abstract class GraphicObject {
 		shape = null;
 	}
 	
-	
+	/**
+	 * Returns the transformed bound of the DOJO GFX shape
+	 * @param shape the DOjo gfx shape of this <code>GraphicObject</code>
+	 * @return 
+	 */
 	private native JavaScriptObject getTransformedBound(JavaScriptObject shape)/*-{
 	      	return shape.getTransformedBoundingBox();
 	}-*/;
 	
+	
+	
+	/**
+	 * Sets the bound of this <code>GraphicObject</code>
+	 *
+	 */
 	private void setBounds() {
 		if (shape != null) {
 			final JavaScriptObject points =getTransformedBound(getShape()); 
@@ -598,24 +629,6 @@ public abstract class GraphicObject {
 	}
 	
 	
-//	/**
-//	 * Sets the location of this <code>GraphicalObject</code>
-//	 * @param xCoord the x coordinate 
-//	 * @param yCoord the y coordinate
-//	 */
-//	protected void setLocation(double xCoord, double yCoord) {
-//		position.setLocation(xCoord, yCoord);
-//    }
-	
-//	/**
-//	 * Sets the location of this <code>GraphicalObject</code>
-//	 * @param newPosition a new position 
-//	 */
-//	protected void setLocation(Point newPosition) {
-//		position.setLocation(newPosition);
-//    }
-//	
-//	
 	/**
 	 * Multiplies 2 matrix and return the matrix resulting 
 	 * @param mx1 a matrix
