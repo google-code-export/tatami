@@ -2,7 +2,7 @@
  * Tatami: 
  * Copyright (C) 2007 Objet Direct
  * Copyright (C) 2007 France Telecom
- * Contact: tatami@objectweb.org
+ * Contact: tatami@googlegroups.com
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
  * USA
  *
- * Authors: Henri Darmet, Vianney Grassaud
- * Initial developer(s):
+ * Authors:  Vianney Grassaud
+ * Initial developer(s): Vianney Grassaud
  * Contributor(s):
  */
 package com.objetdirect.tatami.demo.client;
@@ -51,6 +51,13 @@ public class DragAndDropDemo extends Composite implements DragAndDropListener {
 		initWidget(mainPanel);
 	}
 	
+	
+	/**
+	 * Inits all the components. 
+	 * only two images are draggable and can be droped to one image
+	 * 
+	 *
+	 */
 	private void initComponents() {
 		mainPanel = new DockPanel();
 		mainPanel.setSpacing(20);
@@ -86,7 +93,9 @@ public class DragAndDropDemo extends Composite implements DragAndDropListener {
 		
 	}
 	
-	
+	/**
+	 * Change the image when the onDrop event is fired
+	 */
 	public void onDrop(Widget draggable, Widget target) {
 		Image dulcinee = (Image) target;
 		Image couple = new Image("couple_" + dulcinee.getTitle()+ ".png");
@@ -95,6 +104,9 @@ public class DragAndDropDemo extends Composite implements DragAndDropListener {
 				amoursCelebres.getWidgetTop(target) - 25);
 	}
 	
+	/**
+	 * Accepts the drop
+	 */
 	public boolean acceptDrop(Widget draggable, Widget target) {
 		return true;
 	}

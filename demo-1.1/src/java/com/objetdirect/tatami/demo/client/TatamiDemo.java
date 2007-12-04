@@ -2,7 +2,7 @@
  * Tatami: 
  * Copyright (C) 2007 Objet Direct
  * Copyright (C) 2007 France Telecom
- * Contact: tatami@objectweb.org
+ * Contact: tatami@googlegroups.com
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,14 +19,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
  * USA
  *
- * Authors: Henri Darmet, Vianney Grassaud
- * Initial developer(s):
+ * Authors:  Vianney Grassaud
+ * Initial developer(s): Vianney Grassaud
  * Contributor(s):
  */
 package com.objetdirect.tatami.demo.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Command;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
@@ -65,20 +67,16 @@ public class TatamiDemo implements EntryPoint {
 	private DockPanel titlePanel;
 	
 	private HTML labelMenu;
-	private HTML welcome;
+	
 
 	/*-- other --*/
 	private int page = 0;
 
+	//the different page 
 	private final int GFX  = 1;
 	private final int SLIDERS = 3;
-
 	private final int DATE_TIME = 2;
-
-
-
-	private final int DRAG_N_DROP = 6;
-	
+    private final int DRAG_N_DROP = 6;
 	private final int COLOR = 7;
 
 	
@@ -88,9 +86,21 @@ public class TatamiDemo implements EntryPoint {
 	 * Loads the demo module
 	 * The module aims to present the components of Tatami. 
 	 * each class or component (it depends) are demonstrated by clicking on the FishEye menu a component of Tatami.
+	 * The panel of TatamiDemo is split like this : 
+	 * <pre> 
+	 *  ----------------
+	 *  | Title        |
+	 *  |--------------
+	 *  |menu |        |
+	 *  |     | main   |
+	 *  |     |        |
+	 *  |     |        |
+	 *  ----------------
+	 * </pre>
 	 */
 	public void onModuleLoad() {
 		DockPanel body = new DockPanel();
+		
 		root = new DockPanel();
 	    
 	    mainPanel = new DockPanel();
@@ -101,15 +111,9 @@ public class TatamiDemo implements EntryPoint {
 	       
 	    //create and init the menuPanel
 	    initMenuPanel();
+	    //creates the title panel
 	    initTitlePanel();
 	    
-	    welcome = new HTML();
-	    welcome.setStyleName("TatamiDemo-welcome");
-	    welcome.setHTML("<p>The project aims to integrate the Google Web Toolkit (GWT) and the DOJO framework. Indeed the DOJO framework is very rich in term of widgets and utilities (fisheye, slider, drag and drop functionality) and the main interest is to take benefits of the huge work which has been already done by the DOJO community. In other words, it means: <b>the DOJO widgets become GWT widgets, the DOJO utilities become GWT helper.</b></p><br><p> The project is on the Google code community : <a href=\"http://code.google.com/p/tatami\">Tatami</a></p><p> Click on an item of the menu at the left to see the widgets that Tatami proposes.</p>");
-	  
-	    mainPanel.add(welcome,DockPanel.CENTER);
-	   
-	   
 	 
 	    root.add(mainPanel,DockPanel.CENTER);
 	    root.setCellWidth(mainPanel,"100%");
@@ -121,12 +125,16 @@ public class TatamiDemo implements EntryPoint {
 			   
 	    RootPanel.get().add(body);
 	    RootPanel.get().add(toaster);
-	    
-	    
-	    
+	    //the first page
+	    setPage(0);
+	   	    
 	}
 
-	
+	/**
+	 * Inits the title panel for the Demo. 
+	 * Shows two logos ObjetDirect and France Telecom. 
+	 * The title is between these 2 logos. 
+	 */
 	private void initTitlePanel() {
 		titlePanel = new DockPanel();
 		Image logoOD = new Image("od-logo.gif");
@@ -144,8 +152,10 @@ public class TatamiDemo implements EntryPoint {
 	
 	
 	/**
-	 * Creates a menu with a FishEye widget
-	 *
+	 * Creates a menu with a FishEye widget.
+	 * Each item of the menu present a demo of a component or a category of components, 
+	 * like Date- time, gfx, slider, color tools 
+	 * 
 	 */
 	private void initMenuPanel() {
 	   menuPanel = new VerticalPanel();
@@ -153,6 +163,14 @@ public class TatamiDemo implements EntryPoint {
 	    
 
 	   labelMenu = new HTML("Menu");
+	   labelMenu.setTitle("Go Home");
+	   labelMenu.setStyleName("TatamiDemo-labelMenu");
+	   DOM.setStyleAttribute(labelMenu.getElement(),"cursor","pointer");
+	   labelMenu.addClickListener(new ClickListener() {
+		  public void onClick(Widget sender) {
+			  setPage(0);
+		  }
+	   });
 	   
 	   Clock clock = new Clock(null,77);
 	   
@@ -162,18 +180,12 @@ public class TatamiDemo implements EntryPoint {
 	   menuPanel.add(clock);
 	   menuPanel.add(labelMenu);
 	   menuPanel.add(fishEye);
-	   	 
-	   
-	 
-	   
-	 	   
+ 	   
 	   addItem("browser.png", SLIDERS, "sliders");
 	   addItem("kalarm.png", DATE_TIME, "date-time");
-   
-	   addItem("icoColorPic.gif", COLOR, "color tools");
+   	   addItem("icoColorPic.gif", COLOR, "color tools");
 	   addItem("amor.png", DRAG_N_DROP, "drap'n'drop");
-
-	   addItem("blackboard.png",GFX, "GFX");
+	   addItem("blackboard.png",GFX, "draw with GFX");
 	  
 	}
 	
@@ -222,11 +234,14 @@ public class TatamiDemo implements EntryPoint {
 	 * 
 	 */
 	private void loadPage() {
-		// on decharge la page courante :
+		
 		Widget widgetDemo = null;
 		switch (getPage()) {
 		default: {
-			// on ne fait rien
+			widgetDemo = new HTML();
+			widgetDemo.setStyleName("TatamiDemo-welcome");
+			((HTML)widgetDemo).setHTML("<p>The project aims to integrate the Google Web Toolkit (GWT) and the DOJO framework. Indeed the DOJO framework is very rich in term of widgets and utilities (fisheye, slider, drag and drop functionality) and the main interest is to take benefits of the huge work which has been already done by the DOJO community. In other words, it means: <b>the DOJO widgets become GWT widgets, the DOJO utilities become GWT helper.</b></p><br><p> The project is on the Google code community : <a href=\"http://code.google.com/p/tatami\">Tatami</a></p><p> Click on an item of the menu at the left to see the widgets that Tatami proposes.</p>");
+			break;
 		}
 		case SLIDERS: {
 			widgetDemo = new SliderDemo();

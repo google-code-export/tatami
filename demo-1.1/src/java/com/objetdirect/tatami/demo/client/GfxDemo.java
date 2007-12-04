@@ -1,3 +1,28 @@
+/*
+ * Tatami: 
+ * Copyright (C) 2007 Objet Direct
+ * Copyright (C) 2007 France Telecom
+ * Contact: tatami@googlegroups.com
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+ * USA
+ *
+ * Authors:  Vianney Grassaud
+ * Initial developer(s): Vianney Grassaud
+ * Contributor(s):
+ */
 package com.objetdirect.tatami.demo.client;
 
 import com.google.gwt.user.client.DOM;
@@ -39,6 +64,12 @@ import com.objetdirect.tatami.client.gfx.Text;
 import com.objetdirect.tatami.client.gfx.TextPath;
 import com.objetdirect.tatami.client.gfx.VirtualGroup;
 
+
+/**
+ * Demo for the GFX package
+ * @author Vianney
+ *
+ */
 public class GfxDemo extends Composite implements GraphicObjectListener,
 		ClickListener, ChangeListener {
 
@@ -166,7 +197,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 
 	/**
 	 * 
-	 * 
+	 * Creates the GFXDemo
 	 */
 	public GfxDemo() {
 		initComponents();
@@ -174,7 +205,9 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * 
+	 * Create an canvas (at the right) and a toolbar containg some actions.
+	 * The actions are : creates a new gfx component, like <code>Rect</code>..., 
+	 * changes the color, the width of the stroke, does some rotation, scaling. 
 	 * 
 	 */
 	private void initComponents() {
@@ -254,6 +287,11 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 
 	}
 
+	/**
+	 * 
+	 * @param size
+	 * @return
+	 */
 	private HTML createSrokeSize(int size) {
 		HTML strokeSize = new HTML("&nbsp;&nbsp;&nbsp;");
 		strokeSize.setSize("32px", "8px");
@@ -270,9 +308,9 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * 
-	 * @param index
-	 * @param size
+	 * Chooses a width for the stroke of the <code>GraphicObject</code>
+	 * @param index an index of the array <code>strokeSize</code>
+	 * @param size  the size to apply
 	 */
 	private void chooseStrokeSize(int index, int size) {
 		for (int i = 0; i < strokeSize.length; i++) {
@@ -288,7 +326,8 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * 
+	 * Changes the opacity of a <code>GraphicObject</code>
+	 * @param sender the <code>Slider</code> to change the alpha property of <code>Color</code> 
 	 */
 	public void onChange(Widget sender) {
 		if (sender.equals(opacity)) {
@@ -304,10 +343,10 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * 
-	 * @param title
-	 * @param icon
-	 * @return
+	 * Adds a "button" it means a clickable image to the toolbar (the <code>Grid</code>).
+	 * @param title the title for the image
+	 * @param icon the image (url) to load. 
+	 * @return a clickable <code>Image</code>.  
 	 */
 	private Image addToGrid(Grid grid, int row, int col, String title,
 			String icon) {
@@ -320,7 +359,8 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * 
+	 * When a user clicks on the canvas and, no <code>GraphicObject</code> intersect with
+	 * the coordinate of the mouse, the current <code>GraphicObject</code> will be unselected.
 	 */
 	public void mouseClicked(GraphicObject graphicObject, Event evt) {
 		if (graphicObject == null) {
@@ -328,6 +368,10 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		}
 	}
 
+	/**
+	 * Unselects the current <code>GraphicObject</code>
+	 *
+	 */
 	private void unSelectAll() {
 		if (current != null) {
 			this.current.setStroke(lastStrokeColor, lastStrokeSize);
@@ -335,6 +379,10 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		current = null;
 	}
 
+	/**
+	 * translates a <code>GraphicObject</code> if the current <code>GraphicObject</code>
+	 * is not null. Shows also the coordinate of the mouse
+	 */
 	public void mouseMoved(GraphicObject graphicObject,Event evt) {
 		if (current != null) {
             int x = DOM.eventGetClientX(evt);
@@ -371,7 +419,8 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * 
+	 * Performs some action when a click event is fired. 
+	 * @param sender the widget which fired a click event
 	 */
 	public void onClick(Widget sender) {
 		if (sender.equals(rectButton)) {
@@ -431,6 +480,10 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		}
 	}
 
+	/**
+	 * Shows an example of a <code>Polyline</code> object
+	 *
+	 */
 	private void showPolyline() {
 
 		Point[] arrow = new Point[8];
@@ -447,6 +500,11 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		this.showGraphicObject(poly, 300, 300);
 	}
 
+	
+	/**
+	 * Shows an example of a <code>Path</code> object
+	 *
+	 */
 	private void showPath() {
 		// start point
 		Point p1 = new Point(50, 50);
@@ -473,6 +531,12 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		canvas.setPixelSize(600, 600);
 	}
 
+	
+	/**
+	 * Show some properties about a <code>GraphicObjectw</code>
+	 * @param object the <code>GraphicObject</code> to show the properties
+	 * TODO change the layout of the dialog
+	 */
 	private void showProperties(GraphicObject object) {
 		final DialogBox dialog = new DialogBox(false);
 		Grid panel = new Grid(5, 4);
@@ -516,7 +580,9 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		System.out.println("bounds " + object.getBounds());
 	}
 
-	/** show a popup to scale a graphical Object */
+	/** 
+	 * shows a popup to scale a graphical Object 
+	 **/
 	private void showPopupScaler() {
 		if (current != null) {
 			scaleFactor = 1;
@@ -572,6 +638,11 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		}
 	}
 
+	/**
+	 * Show a popup with a <code>Slider</code> to 
+	 * perform some rotation of the current <code>GraphicObject</code>
+	 *
+	 */
 	private void showPopupRotate() {
 		if (current != null) {
 			rotateDegree = 0;
@@ -611,6 +682,12 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		}
 	}
 
+	/**
+	 * Shows a popup to select a color for the background or the stroke.
+	 * The popup contains a TabPanel with 3 tab, a <code>ColorChooser</code>,
+	 *  a <code>Slider</code> to change the opacity of the <code>Color</code>,
+	 *  some <code>Pattern</code> to apply  
+	 */
 	private void showPopupColor() {
 
 		final PopupPanel popupColor = new PopupPanel(true);
@@ -674,6 +751,12 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		popupColor.show();
 	}
 
+	/**
+	 * Creates a clickable <code>Image</code> when a click event is fired, a pattern correpsonding to 
+	 * the image is applied.
+	 * @param url the url of the image 
+	 * @return the <code>Image</code> created
+	 */
 	private Image createImagePattern(final String url) {
 		final Image image = new Image(url);
 		image.setSize("32px", "32px");
@@ -693,6 +776,9 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		return image;
 	}
 
+	/**
+	 * Shows an example of a <code>Text</code> object
+	 */
 	private void showText() {
 		Text text = new Text("Tatami GFX,\ncourier 10", Text.UNDERLINE);
 		Font font = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
@@ -718,6 +804,10 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 
 	}
 
+	/**
+	 * Shows an example of a <code>TextPath</code> object
+	 *
+	 */
 	private void showTextPath() {
 		TextPath textPath = new TextPath(
 				"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent erat.In malesuada ultricies velit. Vestibulum tempor odio vitae diam. Morbi arcu lectus, laoreet eget, nonummy at, elementum a, quam.");
@@ -736,6 +826,11 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 
 	}
 
+	
+	/**
+	 * Shows an example of a <code>VirtualGroup</code> object
+	 *
+	 */
 	private void showVirtual() {
 		VirtualGroup virtual = new VirtualGroup();
 		Rect r = new Rect(100, 20);
@@ -748,6 +843,13 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 
 	}
 
+	/**
+	 * Adds a <code>GraphicObject</code> to the <code>GraphicCanvas</code>
+	 * @param object the <code>GraphicObject</code> to add
+	 * @param int x the X coordinate
+	 * @param int y the Y coordinate
+	 *
+	 */
 	private void showGraphicObject(GraphicObject object, int x, int y) {
 		// this.canvas.removeAllGraphics();
 		object.setFillColor(currentFillColor);
@@ -756,6 +858,11 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 
 	}
 
+	/**
+	 * Selects a <code>GraphicObject</code> when a mouse is pressed on a <code>GraphicObject</code>
+	 * in the canvas. Keeps also the postion of the mouse. The <code>GraphicObject</code>
+	 *  is also movable.
+	 */
 	public void mousePressed(GraphicObject graphicObject,Event evt) {
 		if (graphicObject != null) {
 			int x = DOM.eventGetClientX(evt);
@@ -772,8 +879,9 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * 
-	 * @param object
+	 * Selects the given <code>GraphicObject</code>. The current <code>GraphicObject</code>
+	 * will become the given <code>GraphicObject</code>
+	 * @param object <code>GraphicObject</code>
 	 */
 	private void selectObject(GraphicObject object) {	
 		if (current != null) {
@@ -792,11 +900,19 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		
 	}
 
+	
+	/**
+	 * When the mouse is released no translation is possible
+	 */
 	public void mouseReleased(GraphicObject graphicObject,Event evt) {
 		movable = false;
 
 	}
 	
+	/**
+	 * When a double clik is fired on a <code>GraphicObject</code> in the canvas, 
+	 * we show the properties of it. 
+	 */
 	public void mouseDblClicked(GraphicObject graphicObject,Event evt) {
 		if ( graphicObject != null) {
 			showProperties(graphicObject);

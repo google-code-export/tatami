@@ -2,7 +2,7 @@
  * Tatami: 
  * Copyright (C) 2007 Objet Direct
  * Copyright (C) 2007 France Telecom
- * Contact: tatami@objectweb.org
+ * Contact: tatami@googlegroups.com
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,8 +19,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
  * USA
  *
- * Authors: Henri Darmet, Vianney Grassaud
- * Initial developer(s):
+ * Authors:  Vianney Grassaud
+ * Initial developer(s): Vianney Grassaud
  * Contributor(s):
  */
 package com.objetdirect.tatami.demo.client;
@@ -31,7 +31,6 @@ import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
-import com.objetdirect.tatami.client.RuleLabels;
 import com.objetdirect.tatami.client.Slider;
 
 /**
@@ -47,16 +46,23 @@ public class SliderDemo extends Composite implements ChangeListener{
 	 private DockPanel panel;
 	 private Image cubicImage;
 	
+	/**
+	 * Creates the SliderDemo
+	 *
+	 */
 	 public SliderDemo() {
 		 initComponents();
 		 initWidget(panel);
 	 }
 	 
-	 public Slider getSlider() {
-		 return this.horizontalSlider;
-	 }
 	 
-	 
+	  
+	 /**
+	  * Creates 2 <code>Slider</code> components with marks an labels.
+	  * When the position of the cursor of this <code>Slider</code> is changing the size of the 
+	  * image is also changing in function of the values of the <code>Slider</code>.  
+	  *
+	  */
 	 private void initComponents() {
 		 panel = new DockPanel();
 		 panel.setSpacing(10);
@@ -95,6 +101,9 @@ public class SliderDemo extends Composite implements ChangeListener{
             
 	 }
 
+	 /**
+	  * Changes the size image when a <code>Slider</code> fired a change value.
+	  */
 	 public void onChange(Widget sender) {
 		 if (sender.equals(verticalSlider) &&  verticalSlider.getValue() != -1) {
 				cubicImage.setHeight((verticalSlider.getValue()*2) + "px");
