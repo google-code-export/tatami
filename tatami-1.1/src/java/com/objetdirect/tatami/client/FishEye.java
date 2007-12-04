@@ -209,7 +209,10 @@ public class FishEye extends AbstractDojo {
 				2, 10, CENTER, BOTTOM, false);
 	}
 
-	
+	/**
+	 * Creates a default FishEye menu specifying the orientation.
+	 * @param orientation HORIZONTAL | VERTICAL
+	 */
 	public FishEye(String orientation) {
 		this(50, 50, 200, 200, orientation, 2, 10, CENTER, BOTTOM, false);
 	}

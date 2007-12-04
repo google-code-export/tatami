@@ -42,7 +42,7 @@ import com.objetdirect.tatami.client.DojoController;
 /**
  * TODO fix the bug when the original size of the canvas is set to zero. 
  * And if we add some GraphicObject and we change the size of the canvas
- * @author tvzl8571
+ * @author Vianney
  *
  */
 public class GraphicCanvas extends Widget {
@@ -227,7 +227,11 @@ public class GraphicCanvas extends Widget {
 	}
 	
 	
-	
+	/**
+	 * Associates the event source of a DOJO GFX shape to a <code>GraphicObject</code>
+	 * @param shape a DOJO gfx shape of a <code>GraphicObject</code>
+	 * @param graphicObject a <code>GraphicObject</code>
+	 */
 	protected void putEventSource(JavaScriptObject shape,GraphicObject graphicObject) {
 		graphicObjects.put(getEventSource(shape), graphicObject);		
 	}
