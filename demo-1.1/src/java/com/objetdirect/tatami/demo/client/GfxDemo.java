@@ -460,7 +460,11 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		} else if (sender.equals(backButton) && current != null) {
 			this.current.moveToBack();
 		} else if (sender.equals(deleteButton) && current != null) {
-			canvas.remove(current);
+			if ( current.getGroup() != null) {
+				canvas.remove(current.getGroup());
+			} else {
+			   canvas.remove(current);
+			}
 		} else if (sender.equals(lineButton)) {
 			final Point pointA = new Point(50, 50);
 			final Point pointB = new Point(200, 360);
