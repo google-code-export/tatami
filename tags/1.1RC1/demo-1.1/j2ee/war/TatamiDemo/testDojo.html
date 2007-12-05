@@ -1,0 +1,103 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<html>
+<style type="text/css">
+  @import "com.objetdirect.tatami.demo.TatamiDemo/tatami.css";
+  @import "tatamiDemo.css";
+</style>
+
+<script type="text/javascript" src="com.objetdirect.tatami.demo.TatamiDemo/dojo/dojo.js">
+
+</script>
+
+
+<script type="text/javascript">
+	
+	widget_ = null;
+	
+	function createWidget() {
+    	dojo.require("dijit.form.Slider");
+	    var div = dojo.doc.createElement("div");
+        var div2 = dojo.doc.createElement("div");
+     	div.id = "root";
+     	div2.id = "root2";
+    	dojo.style(div,"width","600px");
+     	dojo.style(div,"height", "300px");
+    	var main = document.getElementById("main");
+     	main.appendChild(div);
+        div.appendChild(div2);
+		var widget  = null;
+        var params = {	 
+             	 minimum: 0,
+                 maximum: 100,
+               	 showButtons :  true,
+               	 value:0,
+	  	         discreteValues: 100,
+                 intermediateChanges: true};
+        try {
+	        widget=  new dijit.form.HorizontalSlider(params,dojo.byId("root"));
+            //main.appendChild(widget.domNode);
+            var labels = new Array();
+            for (i=0; i < 10;i++) {
+              labels[i] = ""+i;
+            }
+            
+
+            var rule  = {labels:labels,labelStyle:"font-family:Arial;margin:-1em 0px 0px -.35em",container:"topDecoration"};
+            var rule2  = {count:10,ruleStyle:"height:5px;",container:"topDecoration"};
+            var sliderRule = new dijit.form.HorizontalRuleLabels(rule,dojo.doc.createElement("div"));
+            var sliderRule2 = new dijit.form.HorizontalRule(rule2);
+           // var sliderRule2 = new dijit.form.HorizontalRuleLabels(rule2);
+            //sliderRule.startup(); 
+            widget.addChild(sliderRule);
+            widget.addChild(sliderRule2);
+            widget.startup();
+  
+	 } catch (e) {
+	    alert("problem : " + e); 
+	  }
+	  return widget;
+	 }
+	 
+	 
+	 function destroyWidget() {
+	   var widget = dijit.byId("root");
+	   if ( widget ) {
+  	    // dojo.disconnect(widget.handleResize);
+	     widget.destroyRecursive();
+	   }
+	 
+	 }
+	 
+	 function loadWidget() {
+	     if ( widget_ != null) {
+	        destroyWidget();
+            widget_ = null;
+	     } 
+	     if ( widget_ ==null) {
+ 	       widget = createWidget();
+ 	     }
+	     
+	 
+	 }
+</script>
+
+
+<body class="tundra">
+
+<div>
+ <form>
+   <input type="button" value="Creer Widget"  onclick="loadWidget();"/>
+  </form>
+  <br><br><br>
+  </div>
+ <div id="main" style="width:300px;"></div>
+
+
+
+
+
+</body>
+</html>
