@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE project [
+		<!ENTITY setenv SYSTEM "conf/setenv.xml">	
+	]>
+<project name="TatamiDemo-1.1" default="help" basedir="..">
+
+	<!-- L'environnement complet est chargé dans setenv.xml -->
+	&setenv;
+
+	<!-- TARGET all -->
+	<!-- Adapter cette target en fonction des modules à générer.
+	 Pour la génération d'un seul module, utiliser directement les fichiers ant 
+	 disponibles dans le répertoire module -->
+	<target name="all" description="Création et déploiement des archives">
+ 		<ant antfile="${ant.modules.dir}/war.TatamiDemo.xml" target="all" />
+ 		<ant antfile="${ant.modules.dir}/ear.TatamiDemo.xml" target="all" />
+	</target>
+
+	<!-- TARGET report -->
+	<!-- Adapter cette target en fonction des rapports à générer.
+	 Les rapports disponibles sont la javadoc du projet, le rapport de tests junit
+	 et le rapport PMD -->
+	<target name="report" description="Génération des rapports du projet">
+		<antcall target="javadoc" />
+		<antcall target="test" />
+		<antcall target="pmd" />
+	</target>
+
+	<!-- TARGET javadoc -->
+	<target name="javadoc" description="Génération de la javadoc du projet">
+		<!-- Génération de la javadoc du projet -->
+		<ant antfile="${ant.conf.dir}/report_javadoc.xml" target="doc" />
+	</target>
+
+	<!-- TARGET test -->
+	<!-- Adapter cette tache pour exécuter les tests unitaires de tous les modules -->
+	<target name="test"
+	        description="Exécution des tests unitaires et génération du rapport">
+		<echo message="Execution des tests unitaires" />
+		<!-- Par exemple :
+		<ant antfile="${ant.modules.dir}/lib.monModuleLib.xml" target="test_lib" />
+		<ant antfile="${ant.modules.dir}/ejb.monModuleEjb.xml" target="test_ejb" />
+		<ant antfile="${ant.modules.dir}/war.monModuleWar.xml" target="test_war" />
+		-->
+		<echo message="Génération du rapport d'exécution des tests unitaires" />
+		<ant antfile="${ant.conf.dir}/report_junit.xml" target="report" />
+	</target>
+
+	<!-- TARGET PMD -->
+	<!-- Génération du rapport PMD vérifiant les règles Clara de niveau 2 à 4 -->
+	<target name="pmd"
+	        description="Génération du rapport PMD">
+		<echo message="Génération du rapport PMD" />
+		<ant antfile="${ant.conf.dir}/report_pmd.xml" target="report" />
+	</target>
+
+
+	<!-- TARGET help-->
+	<target name="help" description="Affiche la liste des tâches disponibles">
+		<echo message="Liste des propriétés définies" />
+		<echoproperties />
+		<echo message="Tâches disponibles: all, clean" />
+		<echo message="all: Construction de tous les packages, déploiement des ear" />
+		<echo message="report: Génération de tous les rapports du projet" />
+		<echo message="javadoc,test,pmd: Génération de la javadoc, du rapport de test ou du rapport PMD du projet" />
+		<echo message="clean: Suppression des répertoires de génération" />
+	</target>
+
+	<!-- TARGET clean -->
+	<!-- Utiliser cette tâche pour provoquer une regénération complète -->
+	<target name="clean"
+	        description="Suppression des répertoires de génération">
+		<echo message="Suppression des répertoires de génération" />
+		<delete includeemptydirs="true">
+			<fileset dir="${generated.dir}" includes="**/*" excludes="readme.txt" />
+		</delete>
+		<delete dir="${tmp.dir}" />
+	</target>
+
+</project>
