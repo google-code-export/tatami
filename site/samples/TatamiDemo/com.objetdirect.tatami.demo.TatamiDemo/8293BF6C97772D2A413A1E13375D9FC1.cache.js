@@ -1,11 +1,7 @@
-<html>
-<head><script>
-var $wnd = parent;
+(function(){
+var $wnd = window;
 var $doc = $wnd.document;
 var $moduleName, $moduleBase;
-</script></head>
-<body>
-<script><!--
 var _, package_com_google_gwt_core_client_ = 'com.google.gwt.core.client.', package_com_google_gwt_lang_ = 'com.google.gwt.lang.', package_com_google_gwt_user_client_ = 'com.google.gwt.user.client.', package_com_google_gwt_user_client_impl_ = 'com.google.gwt.user.client.impl.', package_com_google_gwt_user_client_ui_ = 'com.google.gwt.user.client.ui.', package_com_google_gwt_user_client_ui_impl_ = 'com.google.gwt.user.client.ui.impl.', package_com_objetdirect_tatami_client_ = 'com.objetdirect.tatami.client.', package_com_objetdirect_tatami_client_gfx_ = 'com.objetdirect.tatami.client.gfx.', package_com_objetdirect_tatami_demo_client_ = 'com.objetdirect.tatami.demo.client.', package_java_io_ = 'java.io.', package_java_lang_ = 'java.lang.', package_java_util_ = 'java.util.';
 function nullMethod(){
 }
@@ -264,10 +260,10 @@ function narrow_int(x){
 }
 
 function round_int(x){
-  if (x > ($clinit_177() , MAX_VALUE))
-    return $clinit_177() , MAX_VALUE;
-  if (x < ($clinit_177() , MIN_VALUE))
-    return $clinit_177() , MIN_VALUE;
+  if (x > ($clinit_178() , MAX_VALUE))
+    return $clinit_178() , MAX_VALUE;
+  if (x < ($clinit_178() , MIN_VALUE))
+    return $clinit_178() , MIN_VALUE;
   return x >= 0?Math.floor(x):Math.ceil(x);
 }
 
@@ -314,14 +310,14 @@ function $clinit_8(){
   $clinit_8 = nullMethod;
   sEventPreviewStack = $ArrayList(new ArrayList());
   {
-    impl = new DOMImplIE6();
+    impl = new DOMImplSafari();
     $init(impl);
   }
 }
 
 function addEventPreview(preview){
   $clinit_8();
-  $add_13(sEventPreviewStack, preview);
+  $add_14(sEventPreviewStack, preview);
 }
 
 function appendChild(parent, child){
@@ -541,6 +537,11 @@ function getImgSrc(img){
   return $getImgSrc(impl, img);
 }
 
+function getNextSibling(elem){
+  $clinit_8();
+  return $getNextSibling(impl, elem);
+}
+
 function getParent(elem){
   $clinit_8();
   return $getParent(impl, elem);
@@ -665,15 +666,11 @@ function windowGetClientWidth(){
 }
 
 var currentEvent = null, impl = null, sCaptureElem = null, sEventPreviewStack;
-function $equals_0(this$static, other){
-  if (instanceOf(other, 5)) {
-    return compare(this$static, dynamicCast(other, 5));
-  }
-  return $equals(wrapJSO(this$static, Element), other);
-}
-
 function equals_1(other){
-  return $equals_0(this, other);
+  if (instanceOf(other, 5)) {
+    return compare(this, dynamicCast(other, 5));
+  }
+  return $equals(wrapJSO(this, Element), other);
 }
 
 function hashCode_1(){
@@ -751,7 +748,7 @@ function $scheduleRepeating(this$static, periodMillis){
   $cancel(this$static);
   this$static.isRepeating = true;
   this$static.timerId = createInterval(this$static, periodMillis);
-  $add_13(timers, this$static);
+  $add_14(timers, this$static);
 }
 
 function clearInterval(id){
@@ -824,7 +821,7 @@ function $clinit_16(){
 
 function addWindowCloseListener(listener){
   $clinit_16();
-  $add_13(closingListeners, listener);
+  $add_14(closingListeners, listener);
 }
 
 function fireClosedImpl(){
@@ -1026,6 +1023,10 @@ function $getEventsSunk(this$static, elem){
   return elem.__eventBits || 0;
 }
 
+function $getImgSrc(this$static, img){
+  return img.src;
+}
+
 function $removeChild(this$static, parent, child){
   parent.removeChild(child);
 }
@@ -1054,11 +1055,24 @@ function $setEventListener(this$static, elem, listener){
   elem.__listener = listener;
 }
 
+function $setImgSrc(this$static, img, src){
+  img.src = src;
+}
+
 function $setInnerHTML(this$static, elem, html){
   if (!html) {
     html = '';
   }
   elem.innerHTML = html;
+}
+
+function $setInnerText(this$static, elem, text){
+  while (elem.firstChild) {
+    elem.removeChild(elem.firstChild);
+  }
+  if (text != null) {
+    elem.appendChild($doc.createTextNode(text));
+  }
 }
 
 function $setStyleAttribute(this$static, elem, attr, value){
@@ -1069,14 +1083,6 @@ function $toString(this$static, elem){
   return elem.outerHTML;
 }
 
-function $windowGetClientHeight(this$static){
-  return $doc.body.clientHeight;
-}
-
-function $windowGetClientWidth(this$static){
-  return $doc.body.clientWidth;
-}
-
 function DOMImpl(){
 }
 
@@ -1084,148 +1090,160 @@ _ = DOMImpl.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_impl_ + 'DOMImpl';
 _.typeId$ = 15;
 function $compare(this$static, elem1, elem2){
-  if (!elem1 && !elem2)
-    return true;
-  else if (!elem1 || !elem2)
-    return false;
-  return elem1.uniqueID == elem2.uniqueID;
-}
-
-function $eventGetClientX(this$static, evt){
-  return evt.clientX - getBodyClientLeft();
-}
-
-function $eventGetClientY(this$static, evt){
-  return evt.clientY - getBodyClientTop();
+  return elem1 == elem2;
 }
 
 function $eventGetFromElement(this$static, evt){
-  return evt.fromElement?evt.fromElement:null;
+  return evt.relatedTarget?evt.relatedTarget:null;
 }
 
 function $eventGetTarget(this$static, evt){
-  return evt.srcElement || null;
+  return evt.target || null;
 }
 
 function $eventGetToElement(this$static, evt){
-  return evt.toElement || null;
+  return evt.relatedTarget || null;
 }
 
 function $eventPreventDefault(this$static, evt){
-  evt.returnValue = false;
+  evt.preventDefault();
 }
 
 function $eventToString(this$static, evt){
-  if (evt.toString)
-    return evt.toString();
-  return '[object Event]';
-}
-
-function $getAbsoluteLeft(this$static, elem){
-  var scrollLeft = $doc.documentElement.scrollLeft || $doc.body.scrollLeft;
-  return elem.getBoundingClientRect().left + scrollLeft - getBodyClientLeft();
-}
-
-function $getAbsoluteTop(this$static, elem){
-  var scrollTop = $doc.documentElement.scrollTop || $doc.body.scrollTop;
-  return elem.getBoundingClientRect().top + scrollTop - getBodyClientTop();
+  return evt.toString();
 }
 
 function $getChild(this$static, elem, index){
-  var child = elem.children[index];
-  return child || null;
+  var count = 0, child = elem.firstChild;
+  while (child) {
+    var next = child.nextSibling;
+    if (child.nodeType == 1) {
+      if (index == count)
+        return child;
+      ++count;
+    }
+    child = next;
+  }
+  return null;
 }
 
 function $getChildCount(this$static, elem){
-  return elem.children.length;
+  var count = 0, child = elem.firstChild;
+  while (child) {
+    if (child.nodeType == 1)
+      ++count;
+    child = child.nextSibling;
+  }
+  return count;
 }
 
 function $getFirstChild(this$static, elem){
   var child = elem.firstChild;
+  while (child && child.nodeType != 1)
+    child = child.nextSibling;
   return child || null;
 }
 
-function $getImgSrc(this$static, img){
-  return getImgSrc_0(img);
+function $getNextSibling(this$static, elem){
+  var sib = elem.nextSibling;
+  while (sib && sib.nodeType != 1)
+    sib = sib.nextSibling;
+  return sib || null;
 }
 
 function $getParent(this$static, elem){
-  var parent = elem.parentElement;
+  var parent = elem.parentNode;
+  if (parent == null) {
+    return null;
+  }
+  if (parent.nodeType != 1)
+    parent = null;
   return parent || null;
 }
 
 function $init(this$static){
-  try {
-    $doc.execCommand('BackgroundImageCache', false, true);
-  }
-   catch (e) {
-  }
-  $wnd.__dispatchEvent = function(){
-    var oldEventTarget = currentEventTarget;
-    currentEventTarget = this;
-    if ($wnd.event.returnValue == null) {
-      $wnd.event.returnValue = true;
-      if (!previewEvent($wnd.event)) {
-        currentEventTarget = oldEventTarget;
-        return;
+  $wnd.__dispatchCapturedMouseEvent = function(evt){
+    if ($wnd.__dispatchCapturedEvent(evt)) {
+      var cap = $wnd.__captureElem;
+      if (cap && cap.__listener) {
+        dispatchEvent(evt, cap, cap.__listener);
+        evt.stopPropagation();
       }
     }
+  }
+  ;
+  $wnd.__dispatchCapturedEvent = function(evt){
+    if (!previewEvent(evt)) {
+      evt.stopPropagation();
+      evt.preventDefault();
+      return false;
+    }
+    return true;
+  }
+  ;
+  $wnd.addEventListener('click', $wnd.__dispatchCapturedMouseEvent, true);
+  $wnd.addEventListener('dblclick', $wnd.__dispatchCapturedMouseEvent, true);
+  $wnd.addEventListener('mousedown', $wnd.__dispatchCapturedMouseEvent, true);
+  $wnd.addEventListener('mouseup', $wnd.__dispatchCapturedMouseEvent, true);
+  $wnd.addEventListener('mousemove', $wnd.__dispatchCapturedMouseEvent, true);
+  $wnd.addEventListener('mousewheel', $wnd.__dispatchCapturedMouseEvent, true);
+  $wnd.addEventListener('keydown', $wnd.__dispatchCapturedEvent, true);
+  $wnd.addEventListener('keyup', $wnd.__dispatchCapturedEvent, true);
+  $wnd.addEventListener('keypress', $wnd.__dispatchCapturedEvent, true);
+  $wnd.__dispatchEvent = function(evt){
     var listener, curElem = this;
     while (curElem && !(listener = curElem.__listener))
-      curElem = curElem.parentElement;
+      curElem = curElem.parentNode;
+    if (curElem && curElem.nodeType != 1)
+      curElem = null;
     if (listener)
-      dispatchEvent($wnd.event, curElem, listener);
-    currentEventTarget = oldEventTarget;
+      dispatchEvent(evt, curElem, listener);
   }
   ;
-  $wnd.__dispatchDblClickEvent = function(){
-    var newEvent = $doc.createEventObject();
-    this.fireEvent('onclick', newEvent);
-    if (this.__eventBits & 2)
-      $wnd.__dispatchEvent.call(this);
-  }
-  ;
-  $doc.body.onclick = $doc.body.onmousedown = $doc.body.onmouseup = $doc.body.onmousemove = $doc.body.onmousewheel = $doc.body.onkeydown = $doc.body.onkeypress = $doc.body.onkeyup = $doc.body.onfocus = $doc.body.onblur = $doc.body.ondblclick = $wnd.__dispatchEvent;
+  $wnd.__captureElem = null;
 }
 
-function $insertChild(this$static, parent, child, index){
-  if (index >= parent.children.length)
-    parent.appendChild(child);
-  else 
-    parent.insertBefore(child, parent.children[index]);
+function $insertChild(this$static, parent, toAdd, index){
+  var count = 0, child = parent.firstChild, before = null;
+  while (child) {
+    if (child.nodeType == 1) {
+      if (count == index) {
+        before = child;
+        break;
+      }
+      ++count;
+    }
+    child = child.nextSibling;
+  }
+  parent.insertBefore(toAdd, before);
 }
 
 function $isOrHasChild(this$static, parent, child){
   while (child) {
-    if (parent.uniqueID == child.uniqueID)
+    if (parent == child) {
       return true;
-    child = child.parentElement;
+    }
+    child = child.parentNode;
+    if (child && child.nodeType != 1) {
+      child = null;
+    }
   }
   return false;
 }
 
 function $releaseCapture(this$static, elem){
-  elem.releaseCapture();
+  if (elem == $wnd.__captureElem)
+    $wnd.__captureElem = null;
 }
 
 function $setCapture(this$static, elem){
-  elem.setCapture();
-}
-
-function $setImgSrc(this$static, img, src){
-  setImgSrc_0(img, src);
-}
-
-function $setInnerText(this$static, elem, text){
-  if (!text)
-    text = '';
-  elem.innerText = text;
+  $wnd.__captureElem = elem;
 }
 
 function $sinkEvents(this$static, elem, bits){
   elem.__eventBits = bits;
   elem.onclick = bits & 1?$wnd.__dispatchEvent:null;
-  elem.ondblclick = bits & (1 | 2)?$wnd.__dispatchDblClickEvent:null;
+  elem.ondblclick = bits & 2?$wnd.__dispatchEvent:null;
   elem.onmousedown = bits & 4?$wnd.__dispatchEvent:null;
   elem.onmouseup = bits & 8?$wnd.__dispatchEvent:null;
   elem.onmouseover = bits & 16?$wnd.__dispatchEvent:null;
@@ -1244,145 +1262,80 @@ function $sinkEvents(this$static, elem, bits){
   elem.onmousewheel = bits & 131072?$wnd.__dispatchEvent:null;
 }
 
-function getBodyClientLeft(){
-  return $doc.documentElement.clientLeft || $doc.body.clientLeft;
+function DOMImplStandard(){
 }
 
-function getBodyClientTop(){
-  return $doc.documentElement.clientTop || $doc.body.clientTop;
-}
-
-function DOMImplIE6(){
-}
-
-_ = DOMImplIE6.prototype = new DOMImpl();
-_.typeName$ = package_com_google_gwt_user_client_impl_ + 'DOMImplIE6';
+_ = DOMImplStandard.prototype = new DOMImpl();
+_.typeName$ = package_com_google_gwt_user_client_impl_ + 'DOMImplStandard';
 _.typeId$ = 16;
-var currentEventTarget = null;
-function addChild(parent, child){
-  parent.__kids.push(child);
-  child.__pendingSrc = parent.__pendingSrc;
+function $eventGetClientX(this$static, evt){
+  return evt.pageX - $doc.body.scrollLeft || -1;
 }
 
-function addTop(srcImgMap, img, src){
-  img.src = src;
-  if (img.complete) {
-    return;
-  }
-  img.__kids = [];
-  img.__pendingSrc = src;
-  srcImgMap[src] = img;
-  var _onload = img.onload, _onerror = img.onerror, _onabort = img.onabort;
-  function finish(_originalHandler){
-    var kids = img.__kids;
-    img.__cleanup();
-    window.setTimeout(function(){
-      for (var i = 0; i < kids.length; ++i) {
-        var kid = kids[i];
-        if (kid.__pendingSrc == src) {
-          kid.src = src;
-          kid.__pendingSrc = null;
-        }
-      }
-    }
-    , 0);
-    _originalHandler && _originalHandler.call(img);
-  }
-
-  img.onload = function(){
-    finish(_onload);
-  }
-  ;
-  img.onerror = function(){
-    finish(_onerror);
-  }
-  ;
-  img.onabort = function(){
-    finish(_onabort);
-  }
-  ;
-  img.__cleanup = function(){
-    img.onload = _onload;
-    img.onerror = _onerror;
-    img.onabort = _onabort;
-    img.__cleanup = img.__pendingSrc = img.__kids = null;
-    delete srcImgMap[src];
-  }
-  ;
+function $eventGetClientY(this$static, evt){
+  return evt.pageY - $doc.body.scrollTop || -1;
 }
 
-function getImgSrc_0(img){
-  return img.__pendingSrc || img.src;
-}
-
-function getPendingSrc(img){
-  return img.__pendingSrc || null;
-}
-
-function getTop(srcImgMap, src){
-  return srcImgMap[src] || null;
-}
-
-function removeChild_0(parent, child){
-  var uniqueID = child.uniqueID;
-  var kids = parent.__kids;
-  for (var i = 0, c = kids.length; i < c; ++i) {
-    if (kids[i].uniqueID == uniqueID) {
-      kids.splice(i, 1);
-      child.__pendingSrc = null;
-      return;
+function $getAbsoluteLeft(this$static, elem){
+  if (elem.offsetLeft == null) {
+    return 0;
+  }
+  var left = 0;
+  var curr = elem.parentNode;
+  if (curr) {
+    while (curr.offsetParent) {
+      left -= curr.scrollLeft;
+      curr = curr.parentNode;
     }
   }
+  while (elem) {
+    left += elem.offsetLeft;
+    var parent = elem.offsetParent;
+    if (parent && (parent.tagName == 'BODY' && elem.style.position == 'absolute')) {
+      break;
+    }
+    elem = parent;
+  }
+  return left;
 }
 
-function removeTop(srcImgMap, img){
-  var src = img.__pendingSrc;
-  var kids = img.__kids;
-  img.__cleanup();
-  if (img = kids[0]) {
-    img.__pendingSrc = null;
-    addTop(srcImgMap, img, src);
-    if (img.__pendingSrc) {
-      kids.splice(0, 1);
-      img.__kids = kids;
-    }
-     else {
-      for (var i = 1, c = kids.length; i < c; ++i) {
-        kids[i].src = src;
-        kids[i].__pendingSrc = null;
-      }
+function $getAbsoluteTop(this$static, elem){
+  if (elem.offsetTop == null) {
+    return 0;
+  }
+  var top = 0;
+  var curr = elem.parentNode;
+  if (curr) {
+    while (curr.offsetParent) {
+      top -= curr.scrollTop;
+      curr = curr.parentNode;
     }
   }
+  while (elem) {
+    top += elem.offsetTop;
+    var parent = elem.offsetParent;
+    if (parent && (parent.tagName == 'BODY' && elem.style.position == 'absolute')) {
+      break;
+    }
+    elem = parent;
+  }
+  return top;
 }
 
-function setImgSrc_0(img, src){
-  var oldSrc, top;
-  if ($equals_2(getImgSrc_0(img), src)) {
-    return;
-  }
-  if (srcImgMap_0 === null) {
-    srcImgMap_0 = createObject();
-  }
-  oldSrc = getPendingSrc(img);
-  if (oldSrc !== null) {
-    top = getTop(srcImgMap_0, oldSrc);
-    if ($equals_0(top, wrapJSO(img, Element))) {
-      removeTop(srcImgMap_0, top);
-    }
-     else {
-      removeChild_0(top, img);
-    }
-  }
-  top = getTop(srcImgMap_0, src);
-  if (top === null) {
-    addTop(srcImgMap_0, img, src);
-  }
-   else {
-    addChild(top, img);
-  }
+function $windowGetClientHeight(this$static){
+  return $wnd.innerHeight;
 }
 
-var srcImgMap_0 = null;
+function $windowGetClientWidth(this$static){
+  return $wnd.innerWidth;
+}
+
+function DOMImplSafari(){
+}
+
+_ = DOMImplSafari.prototype = new DOMImplStandard();
+_.typeName$ = package_com_google_gwt_user_client_impl_ + 'DOMImplSafari';
+_.typeId$ = 17;
 function $addStyleName(this$static, style){
   setStyleName_0(this$static.getStyleElement(), style, true);
 }
@@ -1600,7 +1553,7 @@ _.setWidth = setWidth_1;
 _.sinkEvents = sinkEvents_0;
 _.toString$ = toString_4;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'UIObject';
-_.typeId$ = 17;
+_.typeId$ = 18;
 _.element = null;
 function $onAttach(this$static){
   if (this$static.isAttached()) {
@@ -1714,7 +1667,7 @@ _.onLoad = onLoad_1;
 _.onUnload = onUnload_1;
 _.setElement = setElement_0;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'Widget';
-_.typeId$ = 18;
+_.typeId$ = 19;
 _.attached = false;
 _.layoutData = null;
 _.parent_0 = null;
@@ -1724,15 +1677,6 @@ function $adopt(this$static, child){
 
 function $orphan(this$static, child){
   $setParent(child, null);
-}
-
-function clear_0(){
-  var it;
-  it = this.iterator();
-  while (it.hasNext()) {
-    it.next_0();
-    it.remove();
-  }
 }
 
 function doAttachChildren(){
@@ -1761,15 +1705,14 @@ function Panel(){
 }
 
 _ = Panel.prototype = new Widget();
-_.clear = clear_0;
 _.doAttachChildren = doAttachChildren;
 _.doDetachChildren = doDetachChildren;
 _.onLoad = onLoad_0;
 _.onUnload = onUnload_0;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'Panel';
-_.typeId$ = 19;
+_.typeId$ = 20;
 function $$init(this$static){
-  this$static.children_0 = $WidgetCollection(new WidgetCollection(), this$static);
+  this$static.children = $WidgetCollection(new WidgetCollection(), this$static);
 }
 
 function $ComplexPanel(this$static){
@@ -1779,7 +1722,7 @@ function $ComplexPanel(this$static){
 
 function $add_1(this$static, child, container){
   $removeFromParent(child);
-  $add_7(this$static.children_0, child);
+  $add_8(this$static.children, child);
   appendChild(container, child.getElement());
   $adopt(this$static, child);
 }
@@ -1797,29 +1740,29 @@ function $adjustIndex(this$static, child, beforeIndex){
 }
 
 function $checkIndexBoundsForAccess(this$static, index){
-  if (index < 0 || index >= this$static.children_0.size) {
+  if (index < 0 || index >= this$static.children.size) {
     throw new IndexOutOfBoundsException();
   }
 }
 
 function $checkIndexBoundsForInsertion(this$static, index){
-  if (index < 0 || index > this$static.children_0.size) {
+  if (index < 0 || index > this$static.children.size) {
     throw new IndexOutOfBoundsException();
   }
 }
 
 function $getWidget(this$static, index){
-  return $get(this$static.children_0, index);
+  return $get(this$static.children, index);
 }
 
 function $getWidgetIndex(this$static, child){
-  return $indexOf(this$static.children_0, child);
+  return $indexOf(this$static.children, child);
 }
 
 function $insert(this$static, child, container, beforeIndex, domInsert){
   beforeIndex = $adjustIndex(this$static, child, beforeIndex);
   $removeFromParent(child);
-  $insert_3(this$static.children_0, child, beforeIndex);
+  $insert_3(this$static.children, child, beforeIndex);
   if (domInsert) {
     insertChild(container, child.getElement(), beforeIndex);
   }
@@ -1830,7 +1773,7 @@ function $insert(this$static, child, container, beforeIndex, domInsert){
 }
 
 function $iterator(this$static){
-  return $iterator_0(this$static.children_0);
+  return $iterator_0(this$static.children);
 }
 
 function $remove_0(this$static, w){
@@ -1841,7 +1784,7 @@ function $remove_0(this$static, w){
   $orphan(this$static, w);
   elem = w.getElement();
   removeChild(getParent(elem), elem);
-  $remove_6(this$static.children_0, w);
+  $remove_6(this$static.children, w);
   return true;
 }
 
@@ -1860,7 +1803,7 @@ _ = ComplexPanel.prototype = new Panel();
 _.iterator = iterator;
 _.remove_1 = remove_1;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'ComplexPanel';
-_.typeId$ = 20;
+_.typeId$ = 21;
 function $AbsolutePanel(this$static){
   $ComplexPanel(this$static);
   this$static.setElement(createDiv());
@@ -1933,14 +1876,14 @@ function AbsolutePanel(){
 _ = AbsolutePanel.prototype = new ComplexPanel();
 _.remove_1 = remove_0;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'AbsolutePanel';
-_.typeId$ = 21;
+_.typeId$ = 22;
 function $clinit_39(){
   $clinit_39 = nullMethod;
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
 }
 
 function $FocusWidget(this$static, elem){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $setElement(this$static, elem);
   return this$static;
 }
@@ -1976,7 +1919,7 @@ function addClickListener(listener){
   if (this.clickListeners_0 === null) {
     this.clickListeners_0 = $ClickListenerCollection(new ClickListenerCollection());
   }
-  $add_13(this.clickListeners_0, listener);
+  $add_14(this.clickListeners_0, listener);
 }
 
 function isEnabled_0(){
@@ -2000,15 +1943,15 @@ _.isEnabled = isEnabled_0;
 _.onBrowserEvent = onBrowserEvent;
 _.setElement = setElement;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'FocusWidget';
-_.typeId$ = 22;
+_.typeId$ = 23;
 _.clickListeners_0 = null;
 function $clinit_21(){
   $clinit_21 = nullMethod;
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
 }
 
 function $ButtonBase(this$static, elem){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $FocusWidget(this$static, elem);
   return this$static;
 }
@@ -2023,14 +1966,14 @@ function ButtonBase(){
 _ = ButtonBase.prototype = new FocusWidget();
 _.setHTML = setHTML;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'ButtonBase';
-_.typeId$ = 23;
+_.typeId$ = 24;
 function $clinit_22(){
   $clinit_22 = nullMethod;
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
 }
 
 function $Button(this$static){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $ButtonBase(this$static, createButton());
   adjustType(this$static.getElement());
   $setStyleName(this$static, 'gwt-Button');
@@ -2038,7 +1981,7 @@ function $Button(this$static){
 }
 
 function $Button_0(this$static, html){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $Button(this$static);
   this$static.setHTML(html);
   return this$static;
@@ -2060,7 +2003,7 @@ function Button(){
 
 _ = Button.prototype = new ButtonBase();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'Button';
-_.typeId$ = 24;
+_.typeId$ = 25;
 function $CellPanel(this$static){
   $ComplexPanel(this$static);
   this$static.table = createTable();
@@ -2117,7 +2060,7 @@ _.setCellHeight = setCellHeight;
 _.setCellHorizontalAlignment = setCellHorizontalAlignment;
 _.setCellWidth = setCellWidth;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'CellPanel';
-_.typeId$ = 25;
+_.typeId$ = 26;
 _.body_0 = null;
 _.table = null;
 function $advanceToFind(this$static, iter, o){
@@ -2158,7 +2101,7 @@ function remove_15(o){
 }
 
 function toArray(){
-  return this.toArray_0(initDims_0('[Ljava.lang.Object;', [165], [15], [this.size_0()], null));
+  return this.toArray_0(initDims_0('[Ljava.lang.Object;', [167], [15], [this.size_0()], null));
 }
 
 function toArray_0(a){
@@ -2208,7 +2151,7 @@ _.toArray = toArray;
 _.toArray_0 = toArray_0;
 _.toString$ = toString_17;
 _.typeName$ = package_java_util_ + 'AbstractCollection';
-_.typeId$ = 26;
+_.typeId$ = 27;
 function $indexOutOfBounds(this$static, i){
   throw $IndexOutOfBoundsException(new IndexOutOfBoundsException(), 'Index: ' + i + ', Size: ' + this$static.size);
 }
@@ -2281,25 +2224,25 @@ _.hashCode$ = hashCode_8;
 _.iterator = iterator_3;
 _.remove_0 = remove_17;
 _.typeName$ = package_java_util_ + 'AbstractList';
-_.typeId$ = 27;
-function $$init_20(this$static){
+_.typeId$ = 28;
+function $$init_21(this$static){
   {
     $clearImpl(this$static);
   }
 }
 
 function $ArrayList(this$static){
-  $$init_20(this$static);
+  $$init_21(this$static);
   return this$static;
 }
 
 function $ArrayList_0(this$static, c){
-  $$init_20(this$static);
+  $$init_21(this$static);
   $addAll(this$static, c);
   return this$static;
 }
 
-function $add_13(this$static, o){
+function $add_14(this$static, o){
   setImpl(this$static.array, this$static.size++, o);
   return true;
 }
@@ -2376,7 +2319,7 @@ function add_3(index, o){
 }
 
 function add_4(o){
-  return $add_13(this, o);
+  return $add_14(this, o);
 }
 
 function addImpl(array, index, o){
@@ -2451,7 +2394,7 @@ _.remove_2 = remove_21;
 _.size_0 = size_2;
 _.toArray_0 = toArray_1;
 _.typeName$ = package_java_util_ + 'ArrayList';
-_.typeId$ = 28;
+_.typeId$ = 29;
 _.array = null;
 _.size = 0;
 function $ChangeListenerCollection(this$static){
@@ -2472,21 +2415,21 @@ function ChangeListenerCollection(){
 
 _ = ChangeListenerCollection.prototype = new ArrayList();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'ChangeListenerCollection';
-_.typeId$ = 29;
+_.typeId$ = 30;
 function $clinit_26(){
   $clinit_26 = nullMethod;
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
 }
 
 function $CheckBox(this$static){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $CheckBox_0(this$static, createInputCheck());
   $setStyleName(this$static, 'gwt-CheckBox');
   return this$static;
 }
 
 function $CheckBox_1(this$static, label){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $CheckBox(this$static);
   $setText(this$static, label);
   return this$static;
@@ -2494,7 +2437,7 @@ function $CheckBox_1(this$static, label){
 
 function $CheckBox_0(this$static, elem){
   var uid;
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $ButtonBase(this$static, createSpan());
   this$static.inputElem = elem;
   this$static.labelElem = createLabel();
@@ -2549,7 +2492,7 @@ _.onLoad = onLoad;
 _.onUnload = onUnload;
 _.setHTML = setHTML_0;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'CheckBox';
-_.typeId$ = 30;
+_.typeId$ = 31;
 _.inputElem = null;
 _.labelElem = null;
 var uniqueId = 0;
@@ -2571,7 +2514,7 @@ function ClickListenerCollection(){
 
 _ = ClickListenerCollection.prototype = new ArrayList();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'ClickListenerCollection';
-_.typeId$ = 31;
+_.typeId$ = 32;
 function $initWidget(this$static, widget){
   if (this$static.widget_0 !== null) {
     throw $IllegalStateException(new IllegalStateException(), 'Composite.initWidget() may only be called once.');
@@ -2619,7 +2562,7 @@ _.isAttached = isAttached;
 _.onAttach = onAttach;
 _.onDetach = onDetach;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'Composite';
-_.typeId$ = 32;
+_.typeId$ = 33;
 _.widget_0 = null;
 function $DeckPanel(this$static){
   $ComplexPanel(this$static);
@@ -2677,7 +2620,7 @@ function DeckPanel(){
 _ = DeckPanel.prototype = new ComplexPanel();
 _.remove_1 = remove_2;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'DeckPanel';
-_.typeId$ = 33;
+_.typeId$ = 34;
 _.visibleWidget = null;
 function $SimplePanel(this$static){
   $SimplePanel_0(this$static, createDiv());
@@ -2689,7 +2632,7 @@ function $SimplePanel_0(this$static, elem){
   return this$static;
 }
 
-function $add_4(this$static, w){
+function $add_5(this$static, w){
   if (this$static.widget_0 !== null) {
     throw $IllegalStateException(new IllegalStateException(), 'SimplePanel can only contain one child widget');
   }
@@ -2744,29 +2687,29 @@ _.iterator = iterator_1;
 _.remove_1 = remove_9;
 _.setWidget = setWidget_1;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'SimplePanel';
-_.typeId$ = 34;
+_.typeId$ = 35;
 _.widget_0 = null;
-function $clinit_70(){
-  $clinit_70 = nullMethod;
-  impl_0 = new PopupImplIE6();
+function $clinit_71(){
+  $clinit_71 = nullMethod;
+  impl_0 = new PopupImpl();
 }
 
 function $PopupPanel(this$static){
-  $clinit_70();
+  $clinit_71();
   $SimplePanel_0(this$static, $createElement_0(impl_0));
   $setPopupPosition(this$static, 0, 0);
   return this$static;
 }
 
 function $PopupPanel_0(this$static, autoHide){
-  $clinit_70();
+  $clinit_71();
   $PopupPanel(this$static);
   this$static.autoHide = autoHide;
   return this$static;
 }
 
 function $PopupPanel_1(this$static, autoHide, modal){
-  $clinit_70();
+  $clinit_71();
   $PopupPanel_0(this$static, autoHide);
   this$static.modal = modal;
   return this$static;
@@ -2792,7 +2735,7 @@ function $hide_0(this$static, autoClosed){
   }
   this$static.showing = false;
   get().remove_1(this$static);
-  $onHide(impl_0, this$static.getElement());
+  this$static.getElement();
 }
 
 function $maybeUpdateSize(this$static){
@@ -2899,7 +2842,7 @@ function $show(this$static){
     $setPopupPosition(this$static, this$static.leftPosition, this$static.topPosition);
   }
   $add(get(), this$static);
-  $onShow(impl_0, this$static.getElement());
+  this$static.getElement();
 }
 
 function getContainerElement(){
@@ -2952,7 +2895,7 @@ function setTitle(title){
 
 function setVisible(visible){
   setStyleAttribute(this.getElement(), 'visibility', visible?'visible':'hidden');
-  $setVisible(impl_0, this.getElement(), visible);
+  this.getElement();
 }
 
 function setWidget_0(w){
@@ -2980,7 +2923,7 @@ _.setVisible = setVisible;
 _.setWidget = setWidget_0;
 _.setWidth = setWidth_0;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'PopupPanel';
-_.typeId$ = 35;
+_.typeId$ = 36;
 _.autoHide = false;
 _.desiredHeight = null;
 _.desiredWidth = null;
@@ -2991,7 +2934,7 @@ _.topPosition = (-1);
 var impl_0;
 function $clinit_32(){
   $clinit_32 = nullMethod;
-  $clinit_70();
+  $clinit_71();
 }
 
 function $$init_0(this$static){
@@ -3016,7 +2959,7 @@ function $DialogBox_0(this$static, autoHide, modal){
   $setCellSpacing(this$static.panel, 0);
   $setHeight(this$static.panel.cellFormatter, 1, 0, '100%');
   $setWidth(this$static.panel.cellFormatter, 1, 0, '100%');
-  $setAlignment(this$static.panel.cellFormatter, 1, 0, ($clinit_53() , ALIGN_CENTER), ($clinit_57() , ALIGN_MIDDLE));
+  $setAlignment(this$static.panel.cellFormatter, 1, 0, ($clinit_54() , ALIGN_CENTER), ($clinit_58() , ALIGN_MIDDLE));
   $setWidget_1(this$static, this$static.panel);
   $setStyleName(this$static, 'gwt-DialogBox');
   $setStyleName(this$static.caption, 'Caption');
@@ -3101,7 +3044,7 @@ _.remove_1 = remove_3;
 _.setWidget = setWidget;
 _.setWidth = setWidth;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'DialogBox';
-_.typeId$ = 36;
+_.typeId$ = 37;
 _.child = null;
 _.dragStartX = 0;
 _.dragStartY = 0;
@@ -3116,8 +3059,8 @@ function $clinit_36(){
 }
 
 function $$init_1(this$static){
-  this$static.horzAlign = ($clinit_53() , ALIGN_LEFT);
-  this$static.vertAlign = ($clinit_57() , ALIGN_TOP);
+  this$static.horzAlign = ($clinit_54() , ALIGN_LEFT);
+  this$static.vertAlign = ($clinit_58() , ALIGN_TOP);
 }
 
 function $DockPanel(this$static){
@@ -3140,7 +3083,7 @@ function $add_2(this$static, widget, direction){
     }
   }
   $removeFromParent(widget);
-  $add_7(this$static.children_0, widget);
+  $add_8(this$static.children, widget);
   if (direction === CENTER) {
     this$static.center = widget;
   }
@@ -3160,7 +3103,7 @@ function $realizeTable(this$static){
   }
   rowCount = 1;
   colCount = 1;
-  for (it = $iterator_0(this$static.children_0); $hasNext_0(it);) {
+  for (it = $iterator_0(this$static.children); $hasNext_0(it);) {
     child = $next(it);
     dir = child.layoutData.direction;
     if (dir === NORTH || dir === SOUTH) {
@@ -3170,7 +3113,7 @@ function $realizeTable(this$static){
       ++colCount;
     }
   }
-  rows = initDims_0('[Lcom.google.gwt.user.client.ui.DockPanel$TmpRow;', [169], [43], [rowCount], null);
+  rows = initDims_0('[Lcom.google.gwt.user.client.ui.DockPanel$TmpRow;', [171], [43], [rowCount], null);
   for (i = 0; i < rowCount; ++i) {
     rows[i] = new DockPanel$TmpRow();
     rows[i].tr = createTR();
@@ -3181,7 +3124,7 @@ function $realizeTable(this$static){
   northRow = 0;
   southRow = rowCount - 1;
   centerTd = null;
-  for (it = $iterator_0(this$static.children_0); $hasNext_0(it);) {
+  for (it = $iterator_0(this$static.children); $hasNext_0(it);) {
     child = $next(it);
     layout = child.layoutData;
     td = createTD();
@@ -3296,7 +3239,7 @@ _.setCellHeight = setCellHeight_0;
 _.setCellHorizontalAlignment = setCellHorizontalAlignment_0;
 _.setCellWidth = setCellWidth_0;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'DockPanel';
-_.typeId$ = 37;
+_.typeId$ = 38;
 _.center = null;
 var CENTER, EAST, NORTH, SOUTH, WEST;
 function DockPanel$DockLayoutConstant(){
@@ -3304,7 +3247,7 @@ function DockPanel$DockLayoutConstant(){
 
 _ = DockPanel$DockLayoutConstant.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'DockPanel$DockLayoutConstant';
-_.typeId$ = 38;
+_.typeId$ = 39;
 function $DockPanel$LayoutData(this$static, dir){
   this$static.direction = dir;
   return this$static;
@@ -3315,7 +3258,7 @@ function DockPanel$LayoutData(){
 
 _ = DockPanel$LayoutData.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'DockPanel$LayoutData';
-_.typeId$ = 39;
+_.typeId$ = 40;
 _.direction = null;
 _.hAlign = 'left';
 _.height_0 = '';
@@ -3327,7 +3270,7 @@ function DockPanel$TmpRow(){
 
 _ = DockPanel$TmpRow.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'DockPanel$TmpRow';
-_.typeId$ = 40;
+_.typeId$ = 41;
 _.center = 0;
 _.tr = null;
 function $$init_4(this$static){
@@ -3385,18 +3328,6 @@ function $getDOMRowCount(this$static){
 
 function $getDOMRowCount_0(this$static, elem){
   return elem.rows.length;
-}
-
-function $getWidgetImpl(this$static, row, column){
-  var child, e;
-  e = $getRawElement(this$static.cellFormatter, row, column);
-  child = getFirstChild(e);
-  if (child === null) {
-    return null;
-  }
-   else {
-    return $getWidget_0(this$static.widgetMap, child);
-  }
 }
 
 function $insertCell(this$static, row, column){
@@ -3501,18 +3432,6 @@ function $setWidget_0(this$static, row, column, widget){
   }
 }
 
-function clear(){
-  var child, col, row;
-  for (row = 0; row < this.getRowCount(); ++row) {
-    for (col = 0; col < this.getCellCount(row); ++col) {
-      child = $getWidgetImpl(this, row, col);
-      if (child !== null) {
-        $remove_2(this, child);
-      }
-    }
-  }
-}
-
 function createCell_0(){
   return $createCell(this);
 }
@@ -3551,7 +3470,6 @@ function HTMLTable(){
 }
 
 _ = HTMLTable.prototype = new Panel();
-_.clear = clear;
 _.createCell = createCell_0;
 _.insertCell = insertCell_0;
 _.iterator = iterator_0;
@@ -3560,7 +3478,7 @@ _.remove_1 = remove_6;
 _.removeCell = removeCell_0;
 _.removeRow = removeRow_0;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HTMLTable';
-_.typeId$ = 41;
+_.typeId$ = 42;
 _.bodyElem = null;
 _.cellFormatter = null;
 _.columnFormatter = null;
@@ -3650,7 +3568,7 @@ _.prepareCell = prepareCell;
 _.removeCell = removeCell;
 _.removeRow = removeRow;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'FlexTable';
-_.typeId$ = 42;
+_.typeId$ = 43;
 function $HTMLTable$CellFormatter(this$static, this$0){
   this$static.this$0 = this$0;
   return this$static;
@@ -3699,7 +3617,7 @@ function HTMLTable$CellFormatter(){
 
 _ = HTMLTable$CellFormatter.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HTMLTable$CellFormatter';
-_.typeId$ = 43;
+_.typeId$ = 44;
 function $FlexTable$FlexCellFormatter(this$static, this$0){
   $HTMLTable$CellFormatter(this$static, this$0);
   return this$static;
@@ -3710,7 +3628,7 @@ function FlexTable$FlexCellFormatter(){
 
 _ = FlexTable$FlexCellFormatter.prototype = new HTMLTable$CellFormatter();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'FlexTable$FlexCellFormatter';
-_.typeId$ = 44;
+_.typeId$ = 45;
 function $Grid(this$static){
   $HTMLTable(this$static);
   $setCellFormatter(this$static, $HTMLTable$CellFormatter(new HTMLTable$CellFormatter(), this$static));
@@ -3830,7 +3748,7 @@ _.getCellCount = getCellCount_0;
 _.getRowCount = getRowCount_0;
 _.prepareCell = prepareCell_0;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'Grid';
-_.typeId$ = 45;
+_.typeId$ = 46;
 _.numColumns = 0;
 _.numRows = 0;
 function $Label(this$static){
@@ -3850,14 +3768,14 @@ function $addClickListener_0(this$static, listener){
   if (this$static.clickListeners === null) {
     this$static.clickListeners = $ClickListenerCollection(new ClickListenerCollection());
   }
-  $add_13(this$static.clickListeners, listener);
+  $add_14(this$static.clickListeners, listener);
 }
 
 function $addMouseListener(this$static, listener){
   if (this$static.mouseListeners === null) {
     this$static.mouseListeners = $MouseListenerCollection(new MouseListenerCollection());
   }
-  $add_13(this$static.mouseListeners, listener);
+  $add_14(this$static.mouseListeners, listener);
 }
 
 function $setText_0(this$static, text){
@@ -3897,7 +3815,7 @@ function Label(){
 _ = Label.prototype = new Widget();
 _.onBrowserEvent = onBrowserEvent_2;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'Label';
-_.typeId$ = 46;
+_.typeId$ = 47;
 _.clickListeners = null;
 _.mouseListeners = null;
 function $HTML(this$static){
@@ -3929,7 +3847,46 @@ function HTML(){
 
 _ = HTML.prototype = new Label();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HTML';
-_.typeId$ = 47;
+_.typeId$ = 48;
+function $HTMLPanel(this$static, html){
+  $ComplexPanel(this$static);
+  this$static.setElement(createDiv());
+  setInnerHTML(this$static.getElement(), html);
+  return this$static;
+}
+
+function $add_3(this$static, widget, id){
+  var elem;
+  elem = $getElementById(this$static, this$static.getElement(), id);
+  if (elem === null) {
+    throw $NoSuchElementException(new NoSuchElementException(), id);
+  }
+  $add_1(this$static, widget, elem);
+}
+
+function $getElementById(this$static, elem, id){
+  var child, elemId, ret;
+  elemId = getElementProperty(elem, 'id');
+  if (elemId !== null && $equals_1(elemId, id)) {
+    return elem;
+  }
+  child = getFirstChild(elem);
+  while (child !== null) {
+    ret = $getElementById(this$static, child, id);
+    if (ret !== null) {
+      return ret;
+    }
+    child = getNextSibling(child);
+  }
+  return null;
+}
+
+function HTMLPanel(){
+}
+
+_ = HTMLPanel.prototype = new ComplexPanel();
+_.typeName$ = package_com_google_gwt_user_client_ui_ + 'HTMLPanel';
+_.typeId$ = 49;
 function $$init_2(this$static){
   {
     $findNext(this$static);
@@ -3987,7 +3944,7 @@ _.hasNext = hasNext;
 _.next_0 = next_0;
 _.remove = remove_5;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HTMLTable$1';
-_.typeId$ = 48;
+_.typeId$ = 50;
 _.lastIndex_0 = (-1);
 _.nextIndex = (-1);
 function $HTMLTable$ColumnFormatter(this$static, this$0){
@@ -4008,7 +3965,7 @@ function HTMLTable$ColumnFormatter(){
 
 _ = HTMLTable$ColumnFormatter.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HTMLTable$ColumnFormatter';
-_.typeId$ = 49;
+_.typeId$ = 51;
 _.columnGroup = null;
 function $getRow(this$static, elem, row){
   return elem.rows[row];
@@ -4019,7 +3976,7 @@ function HTMLTable$RowFormatter(){
 
 _ = HTMLTable$RowFormatter.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HTMLTable$RowFormatter';
-_.typeId$ = 50;
+_.typeId$ = 52;
 function $$init_3(this$static){
   this$static.widgetList = $ArrayList(new ArrayList());
 }
@@ -4042,7 +3999,7 @@ function $putWidget(this$static, widget){
   var index;
   if (this$static.freeList === null) {
     index = this$static.widgetList.size;
-    $add_13(this$static.widgetList, widget);
+    $add_14(this$static.widgetList, widget);
   }
    else {
     index = this$static.freeList.index_0;
@@ -4086,7 +4043,7 @@ function HTMLTable$WidgetMapper(){
 
 _ = HTMLTable$WidgetMapper.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HTMLTable$WidgetMapper';
-_.typeId$ = 51;
+_.typeId$ = 53;
 _.freeList = null;
 function $HTMLTable$WidgetMapper$FreeNode(this$static, index, next){
   this$static.index_0 = index;
@@ -4099,11 +4056,11 @@ function HTMLTable$WidgetMapper$FreeNode(){
 
 _ = HTMLTable$WidgetMapper$FreeNode.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HTMLTable$WidgetMapper$FreeNode';
-_.typeId$ = 52;
+_.typeId$ = 54;
 _.index_0 = 0;
 _.next = null;
-function $clinit_53(){
-  $clinit_53 = nullMethod;
+function $clinit_54(){
+  $clinit_54 = nullMethod;
   ALIGN_CENTER = $HasHorizontalAlignment$HorizontalAlignmentConstant(new HasHorizontalAlignment$HorizontalAlignmentConstant(), 'center');
   ALIGN_LEFT = $HasHorizontalAlignment$HorizontalAlignmentConstant(new HasHorizontalAlignment$HorizontalAlignmentConstant(), 'left');
   ALIGN_RIGHT = $HasHorizontalAlignment$HorizontalAlignmentConstant(new HasHorizontalAlignment$HorizontalAlignmentConstant(), 'right');
@@ -4120,10 +4077,10 @@ function HasHorizontalAlignment$HorizontalAlignmentConstant(){
 
 _ = HasHorizontalAlignment$HorizontalAlignmentConstant.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HasHorizontalAlignment$HorizontalAlignmentConstant';
-_.typeId$ = 53;
+_.typeId$ = 55;
 _.textAlignString = null;
-function $clinit_57(){
-  $clinit_57 = nullMethod;
+function $clinit_58(){
+  $clinit_58 = nullMethod;
   ALIGN_BOTTOM = $HasVerticalAlignment$VerticalAlignmentConstant(new HasVerticalAlignment$VerticalAlignmentConstant(), 'bottom');
   ALIGN_MIDDLE = $HasVerticalAlignment$VerticalAlignmentConstant(new HasVerticalAlignment$VerticalAlignmentConstant(), 'middle');
   ALIGN_TOP = $HasVerticalAlignment$VerticalAlignmentConstant(new HasVerticalAlignment$VerticalAlignmentConstant(), 'top');
@@ -4140,11 +4097,11 @@ function HasVerticalAlignment$VerticalAlignmentConstant(){
 
 _ = HasVerticalAlignment$VerticalAlignmentConstant.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HasVerticalAlignment$VerticalAlignmentConstant';
-_.typeId$ = 54;
+_.typeId$ = 56;
 _.verticalAlignString = null;
 function $$init_5(this$static){
-  this$static.horzAlign = ($clinit_53() , ALIGN_LEFT);
-  this$static.vertAlign = ($clinit_57() , ALIGN_TOP);
+  this$static.horzAlign = ($clinit_54() , ALIGN_LEFT);
+  this$static.vertAlign = ($clinit_58() , ALIGN_TOP);
 }
 
 function $HorizontalPanel(this$static){
@@ -4157,7 +4114,7 @@ function $HorizontalPanel(this$static){
   return this$static;
 }
 
-function $add_3(this$static, w){
+function $add_4(this$static, w){
   var td;
   td = $createAlignedTd(this$static);
   appendChild(this$static.tableRow, td);
@@ -4204,15 +4161,15 @@ function HorizontalPanel(){
 _ = HorizontalPanel.prototype = new CellPanel();
 _.remove_1 = remove_7;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'HorizontalPanel';
-_.typeId$ = 55;
+_.typeId$ = 57;
 _.tableRow = null;
-function $clinit_63(){
-  $clinit_63 = nullMethod;
+function $clinit_64(){
+  $clinit_64 = nullMethod;
   $HashMap(new HashMap());
 }
 
 function $Image(this$static, url){
-  $clinit_63();
+  $clinit_64();
   $changeState(this$static, $Image$UnclippedState_0(new Image$UnclippedState(), this$static, url));
   $setStyleName(this$static, 'gwt-Image');
   return this$static;
@@ -4222,7 +4179,7 @@ function $addClickListener(this$static, listener){
   if (this$static.clickListeners === null) {
     this$static.clickListeners = $ClickListenerCollection(new ClickListenerCollection());
   }
-  $add_13(this$static.clickListeners, listener);
+  $add_14(this$static.clickListeners, listener);
 }
 
 function $changeState(this$static, newState){
@@ -4281,7 +4238,7 @@ function Image_0(){
 _ = Image_0.prototype = new Widget();
 _.onBrowserEvent = onBrowserEvent_1;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'Image';
-_.typeId$ = 56;
+_.typeId$ = 58;
 _.clickListeners = null;
 _.state = null;
 function Image$State(){
@@ -4289,7 +4246,7 @@ function Image$State(){
 
 _ = Image$State.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'Image$State';
-_.typeId$ = 57;
+_.typeId$ = 59;
 function $Image$UnclippedState(this$static, image){
   image.setElement(createImg());
   image.sinkEvents(229501);
@@ -4323,7 +4280,7 @@ function Image$UnclippedState(){
 
 _ = Image$UnclippedState.prototype = new Image$State();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'Image$UnclippedState';
-_.typeId$ = 58;
+_.typeId$ = 60;
 function getKeyboardModifiers(event_0){
   return (eventGetShiftKey(event_0)?1:0) | (eventGetMetaKey(event_0)?8:0) | (eventGetCtrlKey(event_0)?2:0) | (eventGetAltKey(event_0)?4:0);
 }
@@ -4410,14 +4367,14 @@ function MouseListenerCollection(){
 
 _ = MouseListenerCollection.prototype = new ArrayList();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'MouseListenerCollection';
-_.typeId$ = 59;
-function $clinit_72(){
-  $clinit_72 = nullMethod;
+_.typeId$ = 61;
+function $clinit_73(){
+  $clinit_73 = nullMethod;
   rootPanels = $HashMap(new HashMap());
 }
 
 function $RootPanel(this$static, elem){
-  $clinit_72();
+  $clinit_73();
   $AbsolutePanel(this$static);
   if (elem === null) {
     elem = getBodyElement();
@@ -4428,12 +4385,12 @@ function $RootPanel(this$static, elem){
 }
 
 function get(){
-  $clinit_72();
+  $clinit_73();
   return get_0(null);
 }
 
 function get_0(id){
-  $clinit_72();
+  $clinit_73();
   var elem, gwt;
   gwt = dynamicCast($get_1(rootPanels, id), 12);
   if (gwt !== null) {
@@ -4448,12 +4405,12 @@ function get_0(id){
 }
 
 function getBodyElement(){
-  $clinit_72();
+  $clinit_73();
   return $doc.body;
 }
 
 function hookWindowClosing_0(){
-  $clinit_72();
+  $clinit_73();
   addWindowCloseListener(new RootPanel$1());
 }
 
@@ -4462,11 +4419,11 @@ function RootPanel(){
 
 _ = RootPanel.prototype = new AbsolutePanel();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'RootPanel';
-_.typeId$ = 60;
+_.typeId$ = 62;
 var rootPanels;
 function onWindowClosed_0(){
   var gwt, it;
-  for (it = $iterator_3($values(($clinit_72() , rootPanels))); $hasNext_3(it);) {
+  for (it = $iterator_3($values(($clinit_73() , rootPanels))); $hasNext_3(it);) {
     gwt = dynamicCast($next_2(it), 12);
     if (gwt.isAttached()) {
       gwt.onDetach();
@@ -4485,7 +4442,7 @@ _ = RootPanel$1.prototype = new Object_0();
 _.onWindowClosed = onWindowClosed_0;
 _.onWindowClosing = onWindowClosing_0;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'RootPanel$1';
-_.typeId$ = 61;
+_.typeId$ = 63;
 function $$init_6(this$static){
   this$static.hasElement = this$static.this$0.widget_0 !== null;
 }
@@ -4522,7 +4479,7 @@ _.hasNext = hasNext_0;
 _.next_0 = next_1;
 _.remove = remove_8;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'SimplePanel$1';
-_.typeId$ = 62;
+_.typeId$ = 64;
 _.returned = null;
 function $$init_7(this$static){
   this$static.panel = $HorizontalPanel(new HorizontalPanel());
@@ -4534,15 +4491,15 @@ function $TabBar(this$static){
   $initWidget(this$static, this$static.panel);
   this$static.sinkEvents(1);
   $setStyleName(this$static, 'gwt-TabBar');
-  $setVerticalAlignment_0(this$static.panel, ($clinit_57() , ALIGN_BOTTOM));
+  $setVerticalAlignment_0(this$static.panel, ($clinit_58() , ALIGN_BOTTOM));
   first = $HTML_1(new HTML(), '&nbsp;', true);
   rest = $HTML_1(new HTML(), '&nbsp;', true);
   $setStyleName(first, 'gwt-TabBarFirst');
   $setStyleName(rest, 'gwt-TabBarRest');
   first.setHeight('100%');
   rest.setHeight('100%');
-  $add_3(this$static.panel, first);
-  $add_3(this$static.panel, rest);
+  $add_4(this$static.panel, first);
+  $add_4(this$static.panel, rest);
   first.setHeight('100%');
   this$static.panel.setCellHeight(first, '100%');
   this$static.panel.setCellWidth(rest, '100%');
@@ -4553,7 +4510,7 @@ function $addTabListener(this$static, listener){
   if (this$static.tabListeners === null) {
     this$static.tabListeners = $TabListenerCollection(new TabListenerCollection());
   }
-  $add_13(this$static.tabListeners, listener);
+  $add_14(this$static.tabListeners, listener);
 }
 
 function $checkInsertBeforeTabIndex(this$static, beforeIndex){
@@ -4569,7 +4526,7 @@ function $checkTabIndex(this$static, index){
 }
 
 function $getTabCount(this$static){
-  return this$static.panel.children_0.size - 2;
+  return this$static.panel.children.size - 2;
 }
 
 function $insertTab(this$static, widget, beforeIndex){
@@ -4582,7 +4539,7 @@ function $insertTab(this$static, widget, beforeIndex){
 
 function $onClick(this$static, sender){
   var i;
-  for (i = 1; i < this$static.panel.children_0.size - 1; ++i) {
+  for (i = 1; i < this$static.panel.children.size - 1; ++i) {
     if ($getWidget(this$static.panel, i) === sender) {
       $selectTab(this$static, i - 1);
       return;
@@ -4641,7 +4598,7 @@ function TabBar(){
 _ = TabBar.prototype = new Composite();
 _.onClick = onClick;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'TabBar';
-_.typeId$ = 63;
+_.typeId$ = 65;
 _.selectedTab = null;
 _.tabListeners = null;
 function $TabBar$ClickDecoratorPanel(this$static, child, delegate){
@@ -4665,7 +4622,7 @@ function TabBar$ClickDecoratorPanel(){
 _ = TabBar$ClickDecoratorPanel.prototype = new SimplePanel();
 _.onBrowserEvent = onBrowserEvent_3;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'TabBar$ClickDecoratorPanel';
-_.typeId$ = 64;
+_.typeId$ = 66;
 _.delegate = null;
 function $TabListenerCollection(this$static){
   $ArrayList(this$static);
@@ -4696,7 +4653,7 @@ function TabListenerCollection(){
 
 _ = TabListenerCollection.prototype = new ArrayList();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'TabListenerCollection';
-_.typeId$ = 65;
+_.typeId$ = 67;
 function $$init_8(this$static){
   this$static.tabBar = $TabPanel$UnmodifiableTabBar(new TabPanel$UnmodifiableTabBar());
   this$static.deck = $TabPanel$TabbedDeckPanel(new TabPanel$TabbedDeckPanel(), this$static.tabBar);
@@ -4706,8 +4663,8 @@ function $TabPanel(this$static){
   var panel;
   $$init_8(this$static);
   panel = $VerticalPanel(new VerticalPanel());
-  $add_6(panel, this$static.tabBar);
-  $add_6(panel, this$static.deck);
+  $add_7(panel, this$static.tabBar);
+  $add_7(panel, this$static.deck);
   panel.setCellHeight(this$static.deck, '100%');
   this$static.tabBar.setWidth('100%');
   $addTabListener(this$static.tabBar, this$static);
@@ -4717,8 +4674,8 @@ function $TabPanel(this$static){
   return this$static;
 }
 
-function $add_5(this$static, w, tabWidget){
-  $insert_2(this$static, w, tabWidget, this$static.deck.children_0.size);
+function $add_6(this$static, w, tabWidget){
+  $insert_2(this$static, w, tabWidget, this$static.deck.children.size);
 }
 
 function $insert_2(this$static, widget, tabWidget, beforeIndex){
@@ -4754,7 +4711,7 @@ _.onBeforeTabSelected = onBeforeTabSelected;
 _.onTabSelected = onTabSelected;
 _.remove_1 = remove_11;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'TabPanel';
-_.typeId$ = 66;
+_.typeId$ = 68;
 function $TabPanel$TabbedDeckPanel(this$static, tabBar){
   $DeckPanel(this$static);
   this$static.tabBar = tabBar;
@@ -4784,10 +4741,6 @@ function $remove_4(this$static, w){
   return false;
 }
 
-function clear_1(){
-  throw $UnsupportedOperationException(new UnsupportedOperationException(), 'Use TabPanel.clear() to alter the DeckPanel');
-}
-
 function remove_10(w){
   return $remove_4(this, w);
 }
@@ -4796,10 +4749,9 @@ function TabPanel$TabbedDeckPanel(){
 }
 
 _ = TabPanel$TabbedDeckPanel.prototype = new DeckPanel();
-_.clear = clear_1;
 _.remove_1 = remove_10;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'TabPanel$TabbedDeckPanel';
-_.typeId$ = 67;
+_.typeId$ = 69;
 _.tabBar = null;
 function $TabPanel$UnmodifiableTabBar(this$static){
   $TabBar(this$static);
@@ -4819,14 +4771,14 @@ function TabPanel$UnmodifiableTabBar(){
 
 _ = TabPanel$UnmodifiableTabBar.prototype = new TabBar();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'TabPanel$UnmodifiableTabBar';
-_.typeId$ = 68;
-function $clinit_92(){
-  $clinit_92 = nullMethod;
-  $clinit_100() , implWidget;
+_.typeId$ = 70;
+function $clinit_93(){
+  $clinit_93 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $TextBoxBase(this$static, elem){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $FocusWidget(this$static, elem);
   return this$static;
 }
@@ -4848,7 +4800,7 @@ function addClickListener_0(listener){
   if (this.clickListeners === null) {
     this.clickListeners = $ClickListenerCollection(new ClickListenerCollection());
   }
-  $add_13(this.clickListeners, listener);
+  $add_14(this.clickListeners, listener);
 }
 
 function onBrowserEvent_4(event_0){
@@ -4862,15 +4814,15 @@ _ = TextBoxBase.prototype = new FocusWidget();
 _.addClickListener = addClickListener_0;
 _.onBrowserEvent = onBrowserEvent_4;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'TextBoxBase';
-_.typeId$ = 69;
+_.typeId$ = 71;
 _.clickListeners = null;
-function $clinit_93(){
-  $clinit_93 = nullMethod;
-  $clinit_100() , implWidget;
+function $clinit_94(){
+  $clinit_94 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $TextBox(this$static){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $TextBoxBase(this$static, createInputText());
   $setStyleName(this$static, 'gwt-TextBox');
   return this$static;
@@ -4881,10 +4833,10 @@ function TextBox(){
 
 _ = TextBox.prototype = new TextBoxBase();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'TextBox';
-_.typeId$ = 70;
+_.typeId$ = 72;
 function $$init_9(this$static){
-  this$static.horzAlign = ($clinit_53() , ALIGN_LEFT);
-  this$static.vertAlign = ($clinit_57() , ALIGN_TOP);
+  this$static.horzAlign = ($clinit_54() , ALIGN_LEFT);
+  this$static.vertAlign = ($clinit_58() , ALIGN_TOP);
 }
 
 function $VerticalPanel(this$static){
@@ -4895,7 +4847,7 @@ function $VerticalPanel(this$static){
   return this$static;
 }
 
-function $add_6(this$static, w){
+function $add_7(this$static, w){
   var td, tr;
   tr = createTR();
   td = $createAlignedTd_0(this$static);
@@ -4928,14 +4880,14 @@ function VerticalPanel(){
 _ = VerticalPanel.prototype = new CellPanel();
 _.remove_1 = remove_12;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'VerticalPanel';
-_.typeId$ = 71;
+_.typeId$ = 73;
 function $WidgetCollection(this$static, parent){
   this$static.parent_0 = parent;
-  this$static.array = initDims_0('[Lcom.google.gwt.user.client.ui.Widget;', [164], [10], [4], null);
+  this$static.array = initDims_0('[Lcom.google.gwt.user.client.ui.Widget;', [165], [10], [4], null);
   return this$static;
 }
 
-function $add_7(this$static, w){
+function $add_8(this$static, w){
   $insert_3(this$static, w, this$static.size);
 }
 
@@ -4962,7 +4914,7 @@ function $insert_3(this$static, w, beforeIndex){
     throw new IndexOutOfBoundsException();
   }
   if (this$static.size == this$static.array.length_0) {
-    newArray = initDims_0('[Lcom.google.gwt.user.client.ui.Widget;', [164], [10], [this$static.array.length_0 * 2], null);
+    newArray = initDims_0('[Lcom.google.gwt.user.client.ui.Widget;', [165], [10], [this$static.array.length_0 * 2], null);
     for (i = 0; i < this$static.array.length_0; ++i) {
       setCheck(newArray, i, this$static.array[i]);
     }
@@ -5005,7 +4957,7 @@ function WidgetCollection(){
 
 _ = WidgetCollection.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'WidgetCollection';
-_.typeId$ = 72;
+_.typeId$ = 74;
 _.array = null;
 _.parent_0 = null;
 _.size = 0;
@@ -5048,16 +5000,16 @@ _.hasNext = hasNext_1;
 _.next_0 = next_2;
 _.remove = remove_13;
 _.typeName$ = package_com_google_gwt_user_client_ui_ + 'WidgetCollection$WidgetIterator';
-_.typeId$ = 73;
+_.typeId$ = 75;
 _.index_0 = (-1);
-function $clinit_100(){
-  $clinit_100 = nullMethod;
-  implPanel = $FocusImplIE6(new FocusImplIE6());
-  implWidget = implPanel;
+function $clinit_102(){
+  $clinit_102 = nullMethod;
+  implPanel = $FocusImplSafari(new FocusImplSafari());
+  implWidget = implPanel !== null?$FocusImpl(new FocusImpl()):implPanel;
 }
 
 function $FocusImpl(this$static){
-  $clinit_100();
+  $clinit_102();
   return this$static;
 }
 
@@ -5066,25 +5018,78 @@ function FocusImpl(){
 
 _ = FocusImpl.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_impl_ + 'FocusImpl';
-_.typeId$ = 74;
+_.typeId$ = 76;
 var implPanel, implWidget;
-function $clinit_99(){
-  $clinit_99 = nullMethod;
-  $clinit_100();
+function $clinit_100(){
+  $clinit_100 = nullMethod;
+  $clinit_102();
 }
 
-function $FocusImplIE6(this$static){
-  $clinit_99();
+function $$init_10(this$static){
+  $createBlurHandler(this$static);
+  $createFocusHandler(this$static);
+  $createMouseHandler(this$static);
+}
+
+function $FocusImplOld(this$static){
+  $clinit_100();
   $FocusImpl(this$static);
+  $$init_10(this$static);
   return this$static;
 }
 
-function FocusImplIE6(){
+function $createBlurHandler(this$static){
+  return function(evt){
+    if (this.parentNode.onblur) {
+      this.parentNode.onblur(evt);
+    }
+  }
+  ;
 }
 
-_ = FocusImplIE6.prototype = new FocusImpl();
-_.typeName$ = package_com_google_gwt_user_client_ui_impl_ + 'FocusImplIE6';
-_.typeId$ = 75;
+function $createFocusHandler(this$static){
+  return function(evt){
+    if (this.parentNode.onfocus) {
+      this.parentNode.onfocus(evt);
+    }
+  }
+  ;
+}
+
+function FocusImplOld(){
+}
+
+_ = FocusImplOld.prototype = new FocusImpl();
+_.typeName$ = package_com_google_gwt_user_client_ui_impl_ + 'FocusImplOld';
+_.typeId$ = 77;
+function $clinit_101(){
+  $clinit_101 = nullMethod;
+  $clinit_100();
+}
+
+function $FocusImplSafari(this$static){
+  $clinit_101();
+  $FocusImplOld(this$static);
+  return this$static;
+}
+
+function $createMouseHandler(this$static){
+  return function(){
+    var firstChild = this.firstChild;
+    $wnd.setTimeout(function(){
+      firstChild.focus();
+    }
+    , 0);
+  }
+  ;
+}
+
+function FocusImplSafari(){
+}
+
+_ = FocusImplSafari.prototype = new FocusImplOld();
+_.typeName$ = package_com_google_gwt_user_client_ui_impl_ + 'FocusImplSafari';
+_.typeId$ = 78;
 function $createElement_0(this$static){
   return createDiv();
 }
@@ -5094,48 +5099,7 @@ function PopupImpl(){
 
 _ = PopupImpl.prototype = new Object_0();
 _.typeName$ = package_com_google_gwt_user_client_ui_impl_ + 'PopupImpl';
-_.typeId$ = 76;
-function $onHide(this$static, popup){
-  var frame = popup.__frame;
-  frame.parentElement.removeChild(frame);
-  popup.__frame = null;
-  frame.__popup = null;
-}
-
-function $onShow(this$static, popup){
-  var frame = $doc.createElement('iframe');
-  frame.src = "javascript:''";
-  frame.scrolling = 'no';
-  frame.frameBorder = 0;
-  popup.__frame = frame;
-  frame.__popup = popup;
-  var style = frame.style;
-  style.position = 'absolute';
-  style.filter = 'alpha(opacity=0)';
-  style.visibility = popup.style.visibility;
-  style.left = popup.offsetLeft;
-  style.top = popup.offsetTop;
-  style.width = popup.offsetWidth;
-  style.height = popup.offsetHeight;
-  style.setExpression('left', 'this.__popup.offsetLeft');
-  style.setExpression('top', 'this.__popup.offsetTop');
-  style.setExpression('width', 'this.__popup.offsetWidth');
-  style.setExpression('height', 'this.__popup.offsetHeight');
-  popup.parentElement.insertBefore(frame, popup);
-}
-
-function $setVisible(this$static, popup, visible){
-  if (popup.__frame) {
-    popup.__frame.style.visibility = visible?'visible':'hidden';
-  }
-}
-
-function PopupImplIE6(){
-}
-
-_ = PopupImplIE6.prototype = new PopupImpl();
-_.typeName$ = package_com_google_gwt_user_client_ui_impl_ + 'PopupImplIE6';
-_.typeId$ = 77;
+_.typeId$ = 79;
 function $AbstractDojo(this$static){
   $AbstractDojo_0(this$static, createDiv());
   return this$static;
@@ -5186,22 +5150,22 @@ _.onAttach = onAttach_2;
 _.onDetach = onDetach_3;
 _.onDojoLoad = onDojoLoad_0;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'AbstractDojo';
-_.typeId$ = 78;
+_.typeId$ = 80;
 _.dojoWidget = null;
-function $clinit_103(){
-  $clinit_103 = nullMethod;
-  $clinit_100() , implWidget;
+function $clinit_104(){
+  $clinit_104 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $AbstractDojoFocus_0(this$static, element){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $FocusWidget(this$static, element);
   $loadDojoWidget(getInstance(), this$static);
   return this$static;
 }
 
 function $AbstractDojoFocus(this$static){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $AbstractDojoFocus_0(this$static, createDiv());
   return this$static;
 }
@@ -5210,7 +5174,7 @@ function $addChangeListener(this$static, listener){
   if (this$static.changeListeners === null) {
     this$static.changeListeners = $ChangeListenerCollection(new ChangeListenerCollection());
   }
-  $add_13(this$static.changeListeners, listener);
+  $add_14(this$static.changeListeners, listener);
 }
 
 function $removeChangeListener(this$static, listener){
@@ -5258,22 +5222,22 @@ _.onAttach = onAttach_1;
 _.onDetach = onDetach_2;
 _.onDojoLoad = onDojoLoad;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'AbstractDojoFocus';
-_.typeId$ = 79;
+_.typeId$ = 81;
 _.changeListeners = null;
 _.dojoWidget = null;
-function $clinit_105(){
-  $clinit_105 = nullMethod;
-  $clinit_100() , implWidget;
+function $clinit_106(){
+  $clinit_106 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $BasePicker(this$static, startDate, endDate){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $AbstractDojoFocus(this$static);
   return this$static;
 }
 
 function $setDate(this$static, date){
-  if (this$static.date === null && date !== null || this$static.date !== null && date === null || this$static.date !== null && !$equals_4(this$static.date, date)) {
+  if (this$static.date === null && date !== null || this$static.date !== null && date === null || this$static.date !== null && !$equals_3(this$static.date, date)) {
     this$static.date = date;
     if (this$static.isAttached()) {
       $setDateOnPicker(this$static, getJSDate_0(date));
@@ -5312,15 +5276,15 @@ _ = BasePicker.prototype = new AbstractDojoFocus();
 _.doAfterCreation = doAfterCreation_1;
 _.onValueChanged_0 = onValueChanged;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'BasePicker';
-_.typeId$ = 80;
+_.typeId$ = 82;
 _.date = null;
-function $$init_10(this$static){
+function $$init_11(this$static){
   this$static.shadowColor = $Color(new Color(), 0, 0, 0, 15);
 }
 
 function $Clock(this$static, url, width){
   $SimplePanel(this$static);
-  $$init_10(this$static);
+  $$init_11(this$static);
   this$static.setElement(createDiv());
   this$static.current_time = $Date(new Date_0());
   this$static.width_0 = width;
@@ -5336,27 +5300,27 @@ function $makeClock(this$static){
   $setPixelSize(this$static.canvas_0, this$static.width_0, this$static.width_0);
   if (this$static.image !== null) {
     clock = $ImageGfx(new ImageGfx(), this$static.image, this$static.width_0, this$static.width_0);
-    $add_10(this$static.canvas_0, clock, 0, 0);
+    $add_11(this$static.canvas_0, clock, 0, 0);
   }
    else {
     border = $Circle(new Circle(), round_int(this$static.width_0 / 3));
-    border.setFillColor(($clinit_129() , WHITE));
-    $add_10(this$static.canvas_0, border, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
+    border.setFillColor(($clinit_130() , WHITE));
+    $add_11(this$static.canvas_0, border, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
   }
-  hour_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [168], [40], [4], null);
+  hour_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [170], [40], [4], null);
   hour_hand_points[0] = $Point_1(new Point(), (-7), 15);
   hour_hand_points[1] = $Point_1(new Point(), 7, 15);
   hour_hand_points[2] = $Point_1(new Point(), 0, (-60));
   hour_hand_points[3] = $Point_1(new Point(), (-7), 15);
   this$static.hour_hand = $Polyline(new Polyline(), hour_hand_points);
   $setStrokeWidth(this$static.hour_hand, 2);
-  this$static.hour_hand.setFillColor(($clinit_129() , SILVER));
+  this$static.hour_hand.setFillColor(($clinit_130() , SILVER));
   $resizeShape(this$static, this$static.hour_hand);
-  $add_10(this$static.canvas_0, this$static.hour_hand, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
+  $add_11(this$static.canvas_0, this$static.hour_hand, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
   this$static.hour_shadow = $Polyline(new Polyline(), hour_hand_points);
   $resizeShape(this$static, this$static.hour_shadow);
   $setShadow(this$static, this$static.hour_shadow, 3, 3);
-  minute_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [168], [40], [4], null);
+  minute_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [170], [40], [4], null);
   minute_hand_points[0] = $Point_1(new Point(), (-5), 15);
   minute_hand_points[1] = $Point_1(new Point(), 5, 15);
   minute_hand_points[2] = $Point_1(new Point(), 0, (-100));
@@ -5364,11 +5328,11 @@ function $makeClock(this$static){
   this$static.minute_hand = $Polyline(new Polyline(), minute_hand_points);
   $resizeShape(this$static, this$static.minute_hand);
   this$static.minute_hand.setFillColor($Color(new Color(), 127, 127, 127, 255));
-  $add_10(this$static.canvas_0, this$static.minute_hand, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
+  $add_11(this$static.canvas_0, this$static.minute_hand, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
   this$static.minute_shadow = $Polyline(new Polyline(), minute_hand_points);
   $resizeShape(this$static, this$static.minute_shadow);
   $setShadow(this$static, this$static.minute_shadow, 3, 3);
-  second_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [168], [40], [8], null);
+  second_hand_points = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [170], [40], [8], null);
   second_hand_points[0] = $Point_1(new Point(), (-2), 15);
   second_hand_points[1] = $Point_1(new Point(), 2, 15);
   second_hand_points[2] = $Point_1(new Point(), 2, (-105));
@@ -5379,14 +5343,14 @@ function $makeClock(this$static){
   second_hand_points[7] = $Point_1(new Point(), (-2), 15);
   this$static.second_hand = $Polyline(new Polyline(), second_hand_points);
   $resizeShape(this$static, this$static.second_hand);
-  this$static.second_hand.setFillColor(($clinit_129() , RED));
-  $setStrokeColor(this$static.second_hand, ($clinit_129() , PURPLE));
-  $add_10(this$static.canvas_0, this$static.second_hand, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
+  this$static.second_hand.setFillColor(($clinit_130() , RED));
+  $setStrokeColor(this$static.second_hand, ($clinit_130() , PURPLE));
+  $add_11(this$static.canvas_0, this$static.second_hand, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
   this$static.second_shadow = $Polyline(new Polyline(), second_hand_points);
   $resizeShape(this$static, this$static.second_shadow);
   $setShadow(this$static, this$static.second_shadow, 4, 4);
   circle = $Circle(new Circle(), 1);
-  $add_10(this$static.canvas_0, circle, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
+  $add_11(this$static.canvas_0, circle, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
 }
 
 function $placeHand(this$static, shape, angle){
@@ -5439,14 +5403,14 @@ function $setShadow(this$static, shadow, dx, dy){
   shadow.setFillColor(this$static.shadowColor);
   $setStrokeStyle(shadow, 'none');
   $setStrokeColor(shadow, this$static.shadowColor);
-  $add_10(this$static.canvas_0, shadow, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
+  $add_11(this$static.canvas_0, shadow, round_int(this$static.center.x_0), round_int(this$static.center.y_0));
   $translate(shadow, dx, dy);
 }
 
 function onAttach_3(){
   var timer;
   $onAttach(this);
-  $add_4(this, this.canvas_0);
+  $add_5(this, this.canvas_0);
   this.current_time = $Date(new Date_0());
   timer = $Clock$1(new Clock$1(), this);
   $scheduleRepeating(timer, 1000);
@@ -5458,7 +5422,7 @@ function Clock(){
 _ = Clock.prototype = new SimplePanel();
 _.onAttach = onAttach_3;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'Clock';
-_.typeId$ = 81;
+_.typeId$ = 83;
 _.angleHour = 0.0;
 _.angleMinute = 0.0;
 _.angleSecond = 0.0;
@@ -5474,13 +5438,13 @@ _.minute_shadow = null;
 _.second_hand = null;
 _.second_shadow = null;
 _.width_0 = 385;
-function $clinit_106(){
-  $clinit_106 = nullMethod;
+function $clinit_107(){
+  $clinit_107 = nullMethod;
   $clinit_14();
 }
 
 function $Clock$1(this$static, this$0){
-  $clinit_106();
+  $clinit_107();
   this$static.this$0 = this$0;
   $Timer(this$static);
   return this$static;
@@ -5497,14 +5461,14 @@ function Clock$1(){
 _ = Clock$1.prototype = new Timer();
 _.run = run;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'Clock$1';
-_.typeId$ = 82;
-function $clinit_108(){
-  $clinit_108 = nullMethod;
-  $clinit_100() , implWidget;
+_.typeId$ = 84;
+function $clinit_109(){
+  $clinit_109 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $ColorChooser_0(this$static, size){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $AbstractDojoFocus(this$static);
   setElementProperty(this$static.getElement(), 'id', 'colorP');
   this$static.size = size;
@@ -5512,7 +5476,7 @@ function $ColorChooser_0(this$static, size){
 }
 
 function $ColorChooser(this$static){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $ColorChooser_0(this$static, '7x10');
   return this$static;
 }
@@ -5523,7 +5487,7 @@ function $createColorPalette(this$static, size){
 }
 
 function $setColor(this$static, color){
-  if (this$static.color === null && color !== null || this$static.color !== null && color === null || this$static.color !== null && !$equals_2(this$static.color, color)) {
+  if (this$static.color === null && color !== null || this$static.color !== null && color === null || this$static.color !== null && !$equals_1(this$static.color, color)) {
     this$static.color = color;
     if (this$static.changeListeners !== null) {
       $fireChange(this$static.changeListeners, this$static);
@@ -5563,16 +5527,16 @@ _.getDojoName = getDojoName;
 _.onLoad = onLoad_2;
 _.onValueChanged_1 = onValueChanged_0;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'ColorChooser';
-_.typeId$ = 83;
+_.typeId$ = 85;
 _.color = '#000000';
 _.size = '7x10';
-function $clinit_109(){
-  $clinit_109 = nullMethod;
-  $clinit_100() , implWidget;
+function $clinit_110(){
+  $clinit_110 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $ColorPicker_0(this$static, showHsv, showRgb, showHex, animatePoint){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $AbstractDojoFocus(this$static);
   this$static.showHex = showHex;
   this$static.showRgb = showRgb;
@@ -5582,7 +5546,7 @@ function $ColorPicker_0(this$static, showHsv, showRgb, showHex, animatePoint){
 }
 
 function $ColorPicker(this$static){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $ColorPicker_0(this$static, true, true, true, true);
   return this$static;
 }
@@ -5612,24 +5576,24 @@ _.createDojoWidget = createDojoWidget_0;
 _.getDojoName = getDojoName_0;
 _.onLoad = onLoad_3;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'ColorPicker';
-_.typeId$ = 84;
+_.typeId$ = 86;
 _.animatePoint = true;
 _.showHex = true;
 _.showHsv = true;
 _.showRgb = true;
-function $clinit_110(){
-  $clinit_110 = nullMethod;
-  $clinit_100() , implWidget;
+function $clinit_111(){
+  $clinit_111 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $DatePicker(this$static){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $DatePicker_0(this$static, null, null);
   return this$static;
 }
 
 function $DatePicker_0(this$static, startDate, endDate){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $BasePicker(this$static, startDate, endDate);
   return this$static;
 }
@@ -5671,7 +5635,7 @@ _.createDojoWidget = createDojoWidget_1;
 _.getDojoName = getDojoName_1;
 _.setEventCallback = setEventCallback;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'DatePicker';
-_.typeId$ = 85;
+_.typeId$ = 87;
 function getJSDate_0(date){
   return getJSDate($getTime(date));
 }
@@ -5786,7 +5750,7 @@ function $require(this$static, widgetDojo){
     if (!ok) {
       throw $IllegalArgumentException(new IllegalArgumentException(), 'bad widget : ' + widgetDojo);
     }
-    $put_0(this$static.mapWidget, widgetDojo, ($clinit_167() , TRUE));
+    $put_0(this$static.mapWidget, widgetDojo, ($clinit_168() , TRUE));
   }
   return !loaded;
 }
@@ -5849,10 +5813,10 @@ function DojoController(){
 
 _ = DojoController.prototype = new Object_0();
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'DojoController';
-_.typeId$ = 86;
+_.typeId$ = 88;
 _.mapWidget = null;
 var controller_0 = null;
-function $$init_12(this$static){
+function $$init_13(this$static){
   this$static.draggables = $HashMap(new HashMap());
   this$static.targets = $HashMap(new HashMap());
   this$static.draggableAffordances = $HashMap(new HashMap());
@@ -5864,12 +5828,12 @@ function $$init_12(this$static){
 
 function $DragAndDropPanel(this$static){
   $AbsolutePanel(this$static);
-  $$init_12(this$static);
+  $$init_13(this$static);
   initDragAndDrop();
   return this$static;
 }
 
-function $add_8(this$static, widget, left, top){
+function $add_9(this$static, widget, left, top){
   var base;
   base = dynamicCast($get_1(this$static.bases, widget), 31);
   if (base !== null) {
@@ -5878,7 +5842,7 @@ function $add_8(this$static, widget, left, top){
    else {
     base = $SimplePanel(new SimplePanel());
     $put_0(this$static.bases, widget, base);
-    $add_4(base, widget);
+    $add_5(base, widget);
     $add_0(this$static, base, left, top);
     initId(base.getElement(), this$static.counter++);
     $put_0(this$static.widgets, wrapJSO(base.getElement(), Element), widget);
@@ -5898,14 +5862,14 @@ function $addAffordance(this$static, widget, ddr, affordances, affordance){
   }
    else {
     widgetSet.add_1(widget);
-    $add_13(ddr.affordances, affordance);
+    $add_14(ddr.affordances, affordance);
     result = true;
   }
   return result;
 }
 
 function $addDragDropListener(this$static, listener){
-  $add_13(this$static.listeners, listener);
+  $add_14(this$static.listeners, listener);
 }
 
 function $addDraggableSlot(this$static, widget, affordance){
@@ -5922,7 +5886,7 @@ function $addDraggableWidget(this$static, widget, left, top, affordance){
     throw $IllegalStateException(new IllegalStateException(), 'Widget already registered in panel');
   }
    else {
-    $add_8(this$static, widget, left, top);
+    $add_9(this$static, widget, left, top);
     $setDraggable(this$static, widget, affordance);
   }
 }
@@ -5941,7 +5905,7 @@ function $addTargetWidget(this$static, widget, left, top, affordance){
     throw $IllegalStateException(new IllegalStateException(), 'Widget already registered in panel');
   }
    else {
-    $add_8(this$static, widget, left, top);
+    $add_9(this$static, widget, left, top);
     $setTarget(this$static, widget, affordance);
   }
 }
@@ -6235,15 +6199,15 @@ _.onAttach = onAttach_4;
 _.onDetach = onDetach_4;
 _.remove_1 = remove_14;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'DragAndDropPanel';
-_.typeId$ = 87;
+_.typeId$ = 89;
 _.counter = 0;
 var dragAndDropLoaded = false;
-function $$init_11(this$static){
+function $$init_12(this$static){
   this$static.affordances = $ArrayList(new ArrayList());
 }
 
 function $DragAndDropPanel$DDRecord(this$static){
-  $$init_11(this$static);
+  $$init_12(this$static);
   return this$static;
 }
 
@@ -6252,15 +6216,15 @@ function DragAndDropPanel$DDRecord(){
 
 _ = DragAndDropPanel$DDRecord.prototype = new Object_0();
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'DragAndDropPanel$DDRecord';
-_.typeId$ = 88;
+_.typeId$ = 90;
 _.dd = null;
-function $clinit_116(){
-  $clinit_116 = nullMethod;
-  $clinit_100() , implWidget;
+function $clinit_117(){
+  $clinit_117 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $DropdownContainer(this$static, element, startDate, endDate){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $TextBox(this$static);
   $setElement(this$static, element);
   $loadDojoWidget(getInstance(), this$static);
@@ -6268,7 +6232,7 @@ function $DropdownContainer(this$static, element, startDate, endDate){
 }
 
 function $DropdownContainer_0(this$static, startDate, endDate){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $DropdownContainer(this$static, createDiv(), startDate, endDate);
   return this$static;
 }
@@ -6277,7 +6241,7 @@ function $addChangeListener_0(this$static, listener){
   if (this$static.changeListeners === null) {
     this$static.changeListeners = $ChangeListenerCollection(new ChangeListenerCollection());
   }
-  $add_13(this$static.changeListeners, listener);
+  $add_14(this$static.changeListeners, listener);
 }
 
 function $setBrowserEventCallback(this$static, dojoWidget){
@@ -6302,7 +6266,7 @@ function $setCallBackForDropDown(this$static, dojoWidget){
 }
 
 function $setDate_0(this$static, date){
-  if (this$static.date === null && date !== null || this$static.date !== null && date === null || this$static.date !== null && !$equals_4(this$static.date, date)) {
+  if (this$static.date === null && date !== null || this$static.date !== null && date === null || this$static.date !== null && !$equals_3(this$static.date, date)) {
     this$static.date = date;
     if (this$static.isAttached()) {
       $setDateOnContainer(this$static, getJSDate_0(date));
@@ -6338,7 +6302,7 @@ function $setEnabled_0(this$static, enabled){
 }
 
 function $setInternDate(this$static, date){
-  if (this$static.date === null && date !== null || this$static.date !== null && date === null || this$static.date !== null && !$equals_4(this$static.date, date)) {
+  if (this$static.date === null && date !== null || this$static.date !== null && date === null || this$static.date !== null && !$equals_3(this$static.date, date)) {
     this$static.date = date;
     if (this$static.changeListeners !== null) {
       $fireChange(this$static.changeListeners, this$static);
@@ -6438,26 +6402,26 @@ _.onDojoLoad = onDojoLoad_1;
 _.setDate = setDate;
 _.sinkEvents = sinkEvents_1;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'DropdownContainer';
-_.typeId$ = 89;
+_.typeId$ = 91;
 _.changeListeners = null;
 _.date = null;
 _.dojoWidget = null;
 _.invalidMessage_0 = null;
 _.promptMessage_0 = null;
 _.text = '';
-function $clinit_117(){
-  $clinit_117 = nullMethod;
-  $clinit_100() , implWidget;
+function $clinit_118(){
+  $clinit_118 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $DropdownDatePicker(this$static){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $DropdownDatePicker_0(this$static, null, null);
   return this$static;
 }
 
 function $DropdownDatePicker_0(this$static, startDate, endDate){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $DropdownContainer_0(this$static, startDate, endDate);
   return this$static;
 }
@@ -6498,26 +6462,26 @@ _.createDojoWidget = createDojoWidget_2;
 _.getDojoName = getDojoName_2;
 _.onValueChanged_0 = onValueChanged_1;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'DropdownDatePicker';
-_.typeId$ = 90;
-function $clinit_118(){
-  $clinit_118 = nullMethod;
-  $clinit_100() , implWidget;
+_.typeId$ = 92;
+function $clinit_119(){
+  $clinit_119 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $DropdownTimePicker(this$static){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $DropdownTimePicker_0(this$static, 'HH:mm');
   return this$static;
 }
 
 function $DropdownTimePicker_0(this$static, timePattern){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $DropdownTimePicker_1(this$static, null, null, timePattern);
   return this$static;
 }
 
 function $DropdownTimePicker_1(this$static, startDate, endDate, timePattern){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $DropdownContainer_0(this$static, startDate, endDate);
   this$static.timePattern = timePattern;
   return this$static;
@@ -6563,15 +6527,15 @@ _.getDojoName = getDojoName_3;
 _.onValueChanged_0 = onValueChanged_2;
 _.setDate = setDate_0;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'DropdownTimePicker';
-_.typeId$ = 91;
+_.typeId$ = 93;
 _.timePattern = 'HH:mm';
-function $$init_13(this$static){
+function $$init_14(this$static){
   this$static.items = $ArrayList(new ArrayList());
 }
 
 function $FishEye(this$static, itemWidth, itemHeight, itemMaxWidth, itemMaxHeight, orientation, effectUnits, itemPadding, attachEdge, labelEdge, conservativeTrigger){
   $AbstractDojo(this$static);
-  $$init_13(this$static);
+  $$init_14(this$static);
   this$static.itemWidth = itemWidth;
   this$static.itemHeight = itemHeight;
   this$static.itemMaxWidth = itemMaxWidth;
@@ -6587,10 +6551,10 @@ function $FishEye(this$static, itemWidth, itemHeight, itemMaxWidth, itemMaxHeigh
   return this$static;
 }
 
-function $add_9(this$static, icon, caption, command){
+function $add_10(this$static, icon, caption, command){
   var item;
   item = $FishEye$Item(new FishEye$Item(), icon, caption, command, this$static);
-  $add_13(this$static.items, item);
+  $add_14(this$static.items, item);
   if (this$static.isAttached()) {
     $buildItem(this$static, item);
   }
@@ -6669,7 +6633,7 @@ function dispatchClick(icon){
   var i, item;
   for (i = 0; i < this.items.size; i++) {
     item = dynamicCast($get_0(this.items, i), 33);
-    if ($equals_2(item.icon, icon)) {
+    if ($equals_1(item.icon, icon)) {
       if (item.command !== null) {
         $execute_0(item.command);
       }
@@ -6715,7 +6679,7 @@ _.getDojoName = getDojoName_4;
 _.onBrowserEvent = onBrowserEvent_7;
 _.onDojoLoad = onDojoLoad_2;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'FishEye';
-_.typeId$ = 92;
+_.typeId$ = 94;
 _.attachEdge = 'center';
 _.conservativeTrigger = true;
 _.effectUnits = 2;
@@ -6740,14 +6704,14 @@ function FishEye$Item(){
 
 _ = FishEye$Item.prototype = new Object_0();
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'FishEye$Item';
-_.typeId$ = 93;
+_.typeId$ = 95;
 _.caption = null;
 _.child = null;
 _.command = null;
 _.icon = null;
 function $RuleMark(this$static, type, count, size, position){
   $AbstractDojo(this$static);
-  if (!$equals_2('horizontal', type)) {
+  if (!$equals_1('horizontal', type)) {
     this$static.type_0 = 'vertical';
   }
   this$static.count = count;
@@ -6766,7 +6730,7 @@ function $createVerticalRule(this$static, count, ruleStyle, position){
 
 function createDojoWidget_6(){
   var style;
-  if ($equals_2('vertical', this.type_0)) {
+  if ($equals_1('vertical', this.type_0)) {
     style = 'width:' + this.size;
     this.dojoWidget = $createVerticalRule(this, this.count, style, this.position_0);
   }
@@ -6787,18 +6751,18 @@ _ = RuleMark.prototype = new AbstractDojo();
 _.createDojoWidget = createDojoWidget_6;
 _.getDojoName = getDojoName_5;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'RuleMark';
-_.typeId$ = 94;
+_.typeId$ = 96;
 _.count = 3;
 _.position_0 = 'containerNode';
 _.size = '5px';
 _.type_0 = 'horizontal';
-function $$init_14(this$static){
-  this$static.labels = initDims_0('[Ljava.lang.String;', [163], [1], [0], null);
+function $$init_15(this$static){
+  this$static.labels = initDims_0('[Ljava.lang.String;', [166], [1], [0], null);
 }
 
 function $RuleLabels(this$static, type, labels, style, position){
   $RuleMark(this$static, type, labels.length_0, '0px', position);
-  $$init_14(this$static);
+  $$init_15(this$static);
   this$static.labels = labels;
   this$static.style_0 = style;
   return this$static;
@@ -6813,7 +6777,7 @@ function $createVerticalLabels(this$static, labels, style, position){
 }
 
 function createDojoWidget_5(){
-  if ($equals_2('vertical', this.type_0)) {
+  if ($equals_1('vertical', this.type_0)) {
     this.dojoWidget = $createVerticalLabels(this, createArray_0(this.labels), this.style_0, this.position_0);
   }
    else {
@@ -6827,15 +6791,15 @@ function RuleLabels(){
 _ = RuleLabels.prototype = new RuleMark();
 _.createDojoWidget = createDojoWidget_5;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'RuleLabels';
-_.typeId$ = 95;
+_.typeId$ = 97;
 _.style_0 = '';
-function $clinit_124(){
-  $clinit_124 = nullMethod;
-  $clinit_100() , implWidget;
+function $clinit_125(){
+  $clinit_125 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $Slider(this$static, type, minimum, maximum, initialValue, showButtons){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $AbstractDojoFocus(this$static);
   this$static.maximum = maximum;
   this$static.minimum = minimum;
@@ -6952,7 +6916,7 @@ function $setLabelsTop(this$static, labels, style){
   if (this$static.labelTop !== null) {
     $removeLabelsTop(this$static);
   }
-  if ($equals_2('vertical', this$static.type_0)) {
+  if ($equals_1('vertical', this$static.type_0)) {
     this$static.labelTop = $RuleLabels(new RuleLabels(), 'vertical', labels, style, 'leftDecoration');
   }
    else {
@@ -6967,7 +6931,7 @@ function $setRuleMarkBottom(this$static, count, size){
   if (this$static.sliderRuleBottom !== null) {
     $removeRuleMarkBottom(this$static);
   }
-  if ($equals_2('vertical', this$static.type_0)) {
+  if ($equals_1('vertical', this$static.type_0)) {
     this$static.sliderRuleBottom = $RuleMark(new RuleMark(), 'vertical', count, size, 'rightDecoration');
   }
    else {
@@ -6990,7 +6954,7 @@ function $setRuleMarkTop(this$static, count, size){
   if (this$static.sliderRuleTop !== null) {
     $removeRuleMarkTop(this$static);
   }
-  if ($equals_2('vertical', this$static.type_0)) {
+  if ($equals_1('vertical', this$static.type_0)) {
     this$static.sliderRuleTop = $RuleMark(new RuleMark(), 'vertical', count, size, 'leftDecoration');
   }
    else {
@@ -7008,7 +6972,7 @@ function $setSize_0(this$static, width, height){
 }
 
 function $setType(this$static, type){
-  if ($equals_2('horizontal', type) || $equals_2('vertical', type)) {
+  if ($equals_1('horizontal', type) || $equals_1('vertical', type)) {
     this$static.type_0 = type;
   }
    else {
@@ -7034,7 +6998,7 @@ function $setValue(this$static, value){
 }
 
 function createDojoWidget_7(){
-  if ($equals_2('horizontal', this.type_0)) {
+  if ($equals_1('horizontal', this.type_0)) {
     this.dojoWidget = createHorizontalSlider(this.minimum, this.maximum, this.value, this.showButtons);
   }
    else {
@@ -7044,7 +7008,7 @@ function createDojoWidget_7(){
 }
 
 function createHorizontalSlider(minimum, maximum, initialValue, showButtons){
-  $clinit_124();
+  $clinit_125();
   var widget = new ($wnd.dijit.form.HorizontalSlider)({'minimum':minimum, 'maximum':maximum, 'showButtons':showButtons, 'value':initialValue, 'discreteValues':maximum, 'intermediateChanges':true});
   return widget;
 }
@@ -7097,7 +7061,7 @@ _.getDojoName = getDojoName_6;
 _.onLoad = onLoad_4;
 _.onValueChanged = onValueChanged_3;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'Slider';
-_.typeId$ = 96;
+_.typeId$ = 98;
 _.height_0 = 10;
 _.labelBottom = null;
 _.labelTop = null;
@@ -7109,20 +7073,20 @@ _.sliderRuleTop = null;
 _.type_0 = 'horizontal';
 _.value = 0;
 _.width_0 = 200;
-function $clinit_126(){
-  $clinit_126 = nullMethod;
-  $clinit_100() , implWidget;
+function $clinit_127(){
+  $clinit_127 = nullMethod;
+  $clinit_102() , implWidget;
 }
 
 function $TimePicker_0(this$static, startDate, endDate, _constraints){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $BasePicker(this$static, startDate, endDate);
   this$static.constraints = _constraints;
   return this$static;
 }
 
 function $TimePicker(this$static, constraints){
-  $clinit_100() , implWidget;
+  $clinit_102() , implWidget;
   $TimePicker_0(this$static, null, null, constraints);
   return this$static;
 }
@@ -7164,14 +7128,14 @@ _.createDojoWidget = createDojoWidget_8;
 _.getDojoName = getDojoName_7;
 _.setEventCallback = setEventCallback_0;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'TimePicker';
-_.typeId$ = 97;
+_.typeId$ = 99;
 _.constraints = null;
 function TimePickerConstraints(){
 }
 
 _ = TimePickerConstraints.prototype = new Object_0();
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'TimePickerConstraints';
-_.typeId$ = 98;
+_.typeId$ = 100;
 _.clickableIncrement = 'T00:15:00';
 _.timePattern = 'HH:mm';
 _.visibleIncrement = 'T01:00:00';
@@ -7211,16 +7175,16 @@ _ = Toaster.prototype = new AbstractDojo();
 _.createDojoWidget = createDojoWidget_9;
 _.getDojoName = getDojoName_8;
 _.typeName$ = package_com_objetdirect_tatami_client_ + 'Toaster';
-_.typeId$ = 99;
+_.typeId$ = 101;
 _.messageTopic = null;
 _.position_0 = null;
-function $$init_16(this$static){
-  this$static.fillColor = ($clinit_129() , BLACK);
-  this$static.strokeColor = ($clinit_129() , BLACK);
+function $$init_17(this$static){
+  this$static.fillColor = ($clinit_130() , BLACK);
+  this$static.strokeColor = ($clinit_130() , BLACK);
 }
 
 function $GraphicObject(this$static){
-  $$init_16(this$static);
+  $$init_17(this$static);
   this$static.position_0 = $Point(new Point());
   this$static.center = $Point(new Point());
   this$static.bounds = $Rectangle(new Rectangle());
@@ -7337,7 +7301,7 @@ function $scale_0(this$static, factorX, factorY){
   var matrixScaled, newHeight, newWidth, newX, newY;
   if (factorX != 1.0 || factorY != 1.0) {
     matrixScaled = getScalingMatrix(factorX, factorY, this$static.position_0.x_0, this$static.position_0.y_0);
-    if (!$equals_1(this$static.position_0, this$static.center)) {
+    if (!$equals_0(this$static.position_0, this$static.center)) {
       $setRect(this$static.bounds, this$static.bounds.point.x_0, this$static.bounds.point.y_0, this$static.bounds.width_0 * factorX, this$static.bounds.height_0 * factorY);
       $setLocation_0(this$static.center, $getCenter(this$static.bounds));
     }
@@ -7454,7 +7418,7 @@ function getScalingMatrix(factorX, factorY, centerX, centerY){
 function getShapes(){
   var list;
   list = $ArrayList(new ArrayList());
-  $add_13(list, wrapJSO(this.shape, JavaScriptObject));
+  $add_14(list, wrapJSO(this.shape, JavaScriptObject));
   return list;
 }
 
@@ -7489,7 +7453,7 @@ _.setFillColor = setFillColor;
 _.setStroke_0 = setStroke;
 _.show = show;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'GraphicObject';
-_.typeId$ = 100;
+_.typeId$ = 102;
 _.bounds = null;
 _.center = null;
 _.groupParent = null;
@@ -7523,10 +7487,10 @@ function Circle(){
 _ = Circle.prototype = new GraphicObject();
 _.createGfx = createGfx;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Circle';
-_.typeId$ = 101;
+_.typeId$ = 103;
 _.radius = 0;
-function $clinit_129(){
-  $clinit_129 = nullMethod;
+function $clinit_130(){
+  $clinit_130 = nullMethod;
   BLACK = $Color(new Color(), 0, 0, 0, 255);
   SILVER = $Color(new Color(), 192, 192, 192, 255);
   $Color(new Color(), 128, 128, 128, 255);
@@ -7546,7 +7510,7 @@ function $clinit_129(){
 }
 
 function $Color(this$static, red, green, blue, alpha){
-  $clinit_129();
+  $clinit_130();
   $setRed(this$static, red);
   $setGreen(this$static, green);
   $setBlue(this$static, blue);
@@ -7608,39 +7572,39 @@ function $toHex(this$static){
 }
 
 function getBlue(color){
-  $clinit_129();
+  $clinit_130();
   return color.b;
 }
 
 function getColor(hex){
-  $clinit_129();
+  $clinit_130();
   var color;
   color = getColorFromHex(hex);
   return $Color(new Color(), getRed(color), getGreen(color), getBlue(color), 255);
 }
 
 function getColorFromHex(hex){
-  $clinit_129();
+  $clinit_130();
   return $wnd.dojo.colorFromHex(hex);
 }
 
 function getGreen(color){
-  $clinit_129();
+  $clinit_130();
   return color.g;
 }
 
 function getRed(color){
-  $clinit_129();
+  $clinit_130();
   return color.r;
 }
 
 function toCss(color, includeAlpha){
-  $clinit_129();
+  $clinit_130();
   return color.toCss(includeAlpha);
 }
 
 function toHex(color){
-  $clinit_129();
+  $clinit_130();
   return color.toHex();
 }
 
@@ -7654,7 +7618,7 @@ function Color(){
 _ = Color.prototype = new Object_0();
 _.toString$ = toString_5;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Color';
-_.typeId$ = 102;
+_.typeId$ = 104;
 _.alpha = 0;
 _.blue = 0;
 _.green = 0;
@@ -7681,16 +7645,16 @@ function Ellipse(){
 _ = Ellipse.prototype = new GraphicObject();
 _.createGfx = createGfx_0;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Ellipse';
-_.typeId$ = 103;
+_.typeId$ = 105;
 _.radiusX = 0;
 _.radiusY = 0;
-function $clinit_131(){
-  $clinit_131 = nullMethod;
+function $clinit_132(){
+  $clinit_132 = nullMethod;
   DEFAULT_FONT = $Font(new Font(), 'Arial', 10, 'normal', 'normal', 'normal');
 }
 
 function $Font(this$static, family, size, style, variant, weight){
-  $clinit_131();
+  $clinit_132();
   this$static.family = family;
   this$static.size = size;
   this$static.style_0 = style;
@@ -7713,14 +7677,14 @@ function Font(){
 
 _ = Font.prototype = new Object_0();
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Font';
-_.typeId$ = 104;
+_.typeId$ = 106;
 _.family = null;
 _.size = 0;
 _.style_0 = null;
 _.variant = null;
 _.weight = null;
 var DEFAULT_FONT;
-function $$init_15(this$static){
+function $$init_16(this$static){
   this$static.objects = $ArrayList(new ArrayList());
   this$static.listeners = $ArrayList(new ArrayList());
   this$static.graphicObjects = $HashMap(new HashMap());
@@ -7728,7 +7692,7 @@ function $$init_15(this$static){
 
 function $GraphicCanvas_0(this$static, el){
   var controller;
-  $$init_15(this$static);
+  $$init_16(this$static);
   this$static.setElement(el);
   controller = getInstance();
   $require(controller, 'dojox.gfx');
@@ -7743,8 +7707,8 @@ function $GraphicCanvas(this$static){
   return this$static;
 }
 
-function $add_10(this$static, graphicObject, x, y){
-  if ($add_13(this$static.objects, graphicObject)) {
+function $add_11(this$static, graphicObject, x, y){
+  if ($add_14(this$static.objects, graphicObject)) {
     $translate(graphicObject, x, y);
     if (this$static.isAttached()) {
       $attachGraphicObject(this$static, graphicObject);
@@ -7753,7 +7717,7 @@ function $add_10(this$static, graphicObject, x, y){
 }
 
 function $addGraphicObjectListener(this$static, listener){
-  $add_13(this$static.listeners, listener);
+  $add_14(this$static.listeners, listener);
   this$static.currentListeners = null;
 }
 
@@ -7940,7 +7904,7 @@ _.onAttach = onAttach_6;
 _.onBrowserEvent = onBrowserEvent_8;
 _.onDetach = onDetach_6;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'GraphicCanvas';
-_.typeId$ = 105;
+_.typeId$ = 107;
 _.currentListeners = null;
 _.surface = null;
 function $RectangularShape(this$static, width, height){
@@ -7964,7 +7928,7 @@ function RectangularShape(){
 
 _ = RectangularShape.prototype = new GraphicObject();
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'RectangularShape';
-_.typeId$ = 106;
+_.typeId$ = 108;
 _.height_0 = 0.0;
 _.width_0 = 0.0;
 function $ImageGfx(this$static, url, width, height){
@@ -7987,7 +7951,7 @@ function ImageGfx(){
 _ = ImageGfx.prototype = new RectangularShape();
 _.createGfx = createGfx_1;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'ImageGfx';
-_.typeId$ = 107;
+_.typeId$ = 109;
 _.url = null;
 function $Line(this$static, a, b){
   $GraphicObject(this$static);
@@ -8010,7 +7974,7 @@ function Line(){
 _ = Line.prototype = new GraphicObject();
 _.createGfx = createGfx_2;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Line';
-_.typeId$ = 108;
+_.typeId$ = 110;
 _.pointA = null;
 _.pointB = null;
 function $Path(this$static){
@@ -8185,7 +8149,7 @@ function $qSmoothCurveTo(this$static, path, x, y){
 }
 
 function $register(this$static, command){
-  $add_13(this$static.commands, command);
+  $add_14(this$static.commands, command);
   if (this$static.shape !== null) {
     $execute(this$static, command);
   }
@@ -8235,7 +8199,7 @@ _ = Path.prototype = new GraphicObject();
 _.createGfx = createGfx_3;
 _.show = show_0;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Path';
-_.typeId$ = 109;
+_.typeId$ = 111;
 _.commands = null;
 function $Path$Command(this$static, id, this$0){
   this$static.id_0 = id;
@@ -8246,19 +8210,19 @@ function $Path$Command(this$static, id, this$0){
 function $addBoolean(this$static, param){
   var b;
   b = $Boolean(new Boolean_0(), param);
-  $add_13(this$static.parameters, b);
+  $add_14(this$static.parameters, b);
 }
 
 function $addDouble(this$static, param){
   var d;
   d = $Double(new Double(), param);
-  $add_13(this$static.parameters, d);
+  $add_14(this$static.parameters, d);
 }
 
 function $addInt(this$static, param){
   var i;
   i = $Integer(new Integer(), param);
-  $add_13(this$static.parameters, i);
+  $add_14(this$static.parameters, i);
 }
 
 function $getBoolean(this$static, i){
@@ -8296,16 +8260,16 @@ function Path$Command(){
 
 _ = Path$Command.prototype = new Object_0();
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Path$Command';
-_.typeId$ = 110;
+_.typeId$ = 112;
 _.id_0 = 0;
 _.parameters = null;
-function $clinit_139(){
-  $clinit_139 = nullMethod;
+function $clinit_140(){
+  $clinit_140 = nullMethod;
   DEFAULT_PATTERN = $Pattern_0(new Pattern(), ' ', 0, 0, 0, 0);
 }
 
 function $Pattern_0(this$static, url, xCoord, yCoord, width, height){
-  $clinit_139();
+  $clinit_140();
   this$static.url = url;
   this$static.position_0 = $Point_0(new Point(), xCoord, yCoord);
   this$static.width_0 = width;
@@ -8314,7 +8278,7 @@ function $Pattern_0(this$static, url, xCoord, yCoord, width, height){
 }
 
 function $Pattern(this$static, image, xCoord, yCoord){
-  $clinit_139();
+  $clinit_140();
   $Pattern_0(this$static, $getUrl_0(image), xCoord, yCoord, $getWidth_0(image), $getHeight_0(image));
   return this$static;
 }
@@ -8332,7 +8296,7 @@ function Pattern(){
 
 _ = Pattern.prototype = new Object_0();
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Pattern';
-_.typeId$ = 111;
+_.typeId$ = 113;
 _.height_0 = 10;
 _.position_0 = null;
 _.url = '';
@@ -8372,7 +8336,7 @@ function $distance(this$static, b){
   return sqrt(squarred);
 }
 
-function $equals_1(this$static, object){
+function $equals_0(this$static, object){
   var equals, point;
   equals = false;
   if (instanceOf(object, 40)) {
@@ -8442,7 +8406,7 @@ function $translate_0(this$static, dx, dy){
 }
 
 function equals_3(object){
-  return $equals_1(this, object);
+  return $equals_0(this, object);
 }
 
 function toString_6(){
@@ -8456,7 +8420,7 @@ _ = Point.prototype = new Object_0();
 _.equals$ = equals_3;
 _.toString$ = toString_6;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Point';
-_.typeId$ = 112;
+_.typeId$ = 114;
 _.x_0 = 0;
 _.y_0 = 0;
 function $Polyline(this$static, points){
@@ -8495,7 +8459,7 @@ function Polyline(){
 _ = Polyline.prototype = new GraphicObject();
 _.createGfx = createGfx_4;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Polyline';
-_.typeId$ = 113;
+_.typeId$ = 115;
 _.points = null;
 function $Rect(this$static, width, height){
   $RectangularShape(this$static, width, height);
@@ -8516,7 +8480,7 @@ function Rect(){
 _ = Rect.prototype = new RectangularShape();
 _.createGfx = createGfx_5;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Rect';
-_.typeId$ = 114;
+_.typeId$ = 116;
 function $Rectangle_0(this$static, x, y, width, height){
   $setRect(this$static, x, y, width, height);
   return this$static;
@@ -8579,7 +8543,7 @@ function $setRect_0(this$static, rect){
 
 function $setRectFromPoints(this$static, points){
   var i, javaPoints;
-  javaPoints = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [168], [40], [4], null);
+  javaPoints = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [170], [40], [4], null);
   for (i = 0; i < javaPoints.length_0; i++) {
     javaPoints[i] = $Point(new Point());
     $setPoint(javaPoints[i], $getPoint(this$static, points, i));
@@ -8615,12 +8579,12 @@ _ = Rectangle.prototype = new Object_0();
 _.equals$ = equals_4;
 _.toString$ = toString_7;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Rectangle';
-_.typeId$ = 115;
+_.typeId$ = 117;
 _.height_0 = 0;
 _.point = null;
 _.width_0 = 0;
-function $$init_18(this$static){
-  this$static.font = ($clinit_131() , DEFAULT_FONT);
+function $$init_19(this$static){
+  this$static.font = ($clinit_132() , DEFAULT_FONT);
 }
 
 function $Text(this$static, text){
@@ -8630,7 +8594,7 @@ function $Text(this$static, text){
 
 function $Text_0(this$static, text, decoration){
   $GraphicObject(this$static);
-  $$init_18(this$static);
+  $$init_19(this$static);
   this$static.text = text;
   this$static.decoration = decoration;
   return this$static;
@@ -8688,16 +8652,16 @@ _.createGfx = createGfx_7;
 _.getBounds = getBounds_0;
 _.show = show_2;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'Text';
-_.typeId$ = 116;
+_.typeId$ = 118;
 _.decoration = null;
 _.text = null;
-function $$init_17(this$static){
-  this$static.font = ($clinit_131() , DEFAULT_FONT);
+function $$init_18(this$static){
+  this$static.font = ($clinit_132() , DEFAULT_FONT);
 }
 
 function $TextPath_0(this$static, text, decoration){
   $Path(this$static);
-  $$init_17(this$static);
+  $$init_18(this$static);
   this$static.text = text;
   this$static.decoration = decoration;
   return this$static;
@@ -8740,7 +8704,7 @@ _ = TextPath.prototype = new Path();
 _.createGfx = createGfx_6;
 _.show = show_1;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'TextPath';
-_.typeId$ = 117;
+_.typeId$ = 119;
 _.decoration = 'none';
 _.text = '';
 function $VirtualGroup(this$static){
@@ -8749,20 +8713,20 @@ function $VirtualGroup(this$static){
   return this$static;
 }
 
-function $add_11(this$static, group, shape){
+function $add_12(this$static, group, shape){
   group.add(shape);
 }
 
-function $add_12(this$static, object){
+function $add_13(this$static, object){
   var shapes;
-  $add_13(this$static.objects, object);
+  $add_14(this$static.objects, object);
   $setGroup(object, this$static);
   if (this$static.shape !== null) {
     if (this$static.parent_0 !== null) {
       object.show(this$static.parent_0);
       shapes = object.getShapes();
       $putEventSource_0(this$static.parent_0, shapes, object);
-      $add_11(this$static, this$static.shape, object.shape);
+      $add_12(this$static, this$static.shape, object.shape);
     }
   }
 }
@@ -8775,7 +8739,7 @@ function $buildObjects(this$static){
     object.show(this$static.parent_0);
     shapes = object.getShapes();
     $putEventSource_0(this$static.parent_0, shapes, object);
-    $add_11(this$static, this$static.shape, object.shape);
+    $add_12(this$static, this$static.shape, object.shape);
   }
 }
 
@@ -8800,7 +8764,7 @@ function createGfx_8(surface){
 function getShapes_0(){
   var ite, list, object;
   list = $ArrayList(new ArrayList());
-  $add_13(list, wrapJSO(this.shape, JavaScriptObject));
+  $add_14(list, wrapJSO(this.shape, JavaScriptObject));
   ite = $iterator_1(this.objects);
   while ($hasNext_1(ite)) {
     object = dynamicCast($next_0(ite), 34);
@@ -8845,7 +8809,7 @@ _.setFillColor = setFillColor_0;
 _.setStroke_0 = setStroke_0;
 _.show = show_3;
 _.typeName$ = package_com_objetdirect_tatami_client_gfx_ + 'VirtualGroup';
-_.typeId$ = 118;
+_.typeId$ = 120;
 _.objects = null;
 function $ColorDemo(this$static){
   $initComponents(this$static);
@@ -8867,14 +8831,14 @@ function $initComponents(this$static){
   this$static.picker = $ColorPicker(new ColorPicker());
   vPanel = $VerticalPanel(new VerticalPanel());
   $setSpacing(vPanel, 20);
-  $add_6(vPanel, $HTML_0(new HTML(), '<b>ColorChooser<\/b>: 2 sizes available, click on color to change the color of text.'));
-  $add_6(vPanel, this$static.big);
-  $add_6(vPanel, this$static.colorLabel);
-  $add_6(vPanel, this$static.small);
+  $add_7(vPanel, $HTML_0(new HTML(), '<b>ColorChooser<\/b>: 2 sizes available, click on color to change the color of text.'));
+  $add_7(vPanel, this$static.big);
+  $add_7(vPanel, this$static.colorLabel);
+  $add_7(vPanel, this$static.small);
   $add_2(this$static.panel, vPanel, ($clinit_36() , WEST));
   vPanel2 = $VerticalPanel(new VerticalPanel());
-  $add_6(vPanel2, $HTML_0(new HTML(), "<b>ColorPicker<\/b> : Provides an interactive HSV ColorPicker similar to PhotoShop's color selction tool. Will eventually mixin FormWidget and be used as a suplement or a\t'more interactive' replacement for ColorChooser"));
-  $add_6(vPanel2, this$static.picker);
+  $add_7(vPanel2, $HTML_0(new HTML(), "<b>ColorPicker<\/b> : Provides an interactive HSV ColorPicker similar to PhotoShop's color selction tool. Will eventually mixin FormWidget and be used as a suplement or a\t'more interactive' replacement for ColorChooser"));
+  $add_7(vPanel2, this$static.picker);
   $add_2(this$static.panel, vPanel2, ($clinit_36() , EAST));
 }
 
@@ -8898,7 +8862,7 @@ function ColorDemo(){
 _ = ColorDemo.prototype = new Composite();
 _.onChange_0 = onChange;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'ColorDemo';
-_.typeId$ = 119;
+_.typeId$ = 121;
 _.big = null;
 _.colorLabel = null;
 _.panel = null;
@@ -8919,7 +8883,7 @@ function $equalsObj(this$static, o1, o2){
     return false;
   }
    else {
-    return $equals_4(o1, o2);
+    return $equals_3(o1, o2);
   }
 }
 
@@ -8932,34 +8896,38 @@ function $initComponents_0(this$static){
   $setSpacing(datePanel, 20);
   $setSpacing(timePanel, 20);
   htmlInputDate = $HTML_0(new HTML(), '<b>DropdownDatePicker<\/b> : <br>To Help a user to write a well formed Date with a calendar.');
+  $setStyleName(htmlInputDate, 'DateTimeDemo-label');
   htmlDatePicker = $HTML_0(new HTML(), '<b>DatePicker<\/b> : <br>   A Calendar object to help user to choose a date and work with this date.');
+  $setStyleName(htmlDatePicker, 'DateTimeDemo-label');
   htmlInputTime = $HTML_0(new HTML(), '<b>DropdownTimePicker<\/b> : <br>To Help a user to write a well formed time with a pciker object.');
+  $setStyleName(htmlInputTime, 'DateTimeDemo-label');
   htmlTimePicker = $HTML_0(new HTML(), '<b>TimePicker<\/b> : <br>   A Picker object to help user to choose a time and work with this time.');
+  $setStyleName(htmlTimePicker, 'DateTimeDemo-label');
   this$static.inputDate = $DropdownDatePicker(new DropdownDatePicker());
   $setInvalidMessage(this$static.inputDate, 'the date is incorrect');
   this$static.datePicker = $DatePicker(new DatePicker());
   $setDate(this$static.datePicker, $Date(new Date_0()));
-  $add_6(datePanel, htmlInputDate);
-  $add_6(datePanel, this$static.inputDate);
-  $add_6(datePanel, htmlDatePicker);
-  $add_6(datePanel, this$static.datePicker);
-  $add_6(datePanel, $HTML_0(new HTML(), 'If you modify the <b>DatePicker<\/b>, the <b>DropdowDatePicker<\/b> will be modified too and vice-versa'));
-  $linkDropdownAndPicker(this$static, this$static.inputDate, this$static.datePicker);
   this$static.inputTime = $DropdownTimePicker(new DropdownTimePicker());
   $setPromptMessage(this$static.inputTime, 'HH:mm');
   constraints = new TimePickerConstraints();
   constraints.clickableIncrement = 'T00:30:00';
   this$static.timePicker = $TimePicker(new TimePicker(), constraints);
-  $add_6(timePanel, htmlInputTime);
-  $add_6(timePanel, this$static.inputTime);
-  $add_6(timePanel, htmlTimePicker);
-  $add_6(timePanel, this$static.timePicker);
-  $add_6(timePanel, $HTML_0(new HTML(), 'If you modify the <b>TimePicker<\/b>, the <b>DropdowTimePicker<\/b> will be modified too and vice-versa'));
+  $add_7(datePanel, htmlInputDate);
+  $add_7(datePanel, this$static.inputDate);
+  $add_7(datePanel, htmlDatePicker);
+  $add_7(datePanel, this$static.datePicker);
+  $add_7(datePanel, $HTML_0(new HTML(), 'If you modify the <b>DatePicker<\/b>, the <b>DropdowDatePicker<\/b> will be modified too and vice-versa'));
+  $linkDropdownAndPicker(this$static, this$static.inputDate, this$static.datePicker);
+  $add_7(timePanel, htmlInputTime);
+  $add_7(timePanel, this$static.inputTime);
+  $add_7(timePanel, htmlTimePicker);
+  $add_7(timePanel, this$static.timePicker);
+  $add_7(timePanel, $HTML_0(new HTML(), 'If you modify the <b>TimePicker<\/b>, the <b>DropdowTimePicker<\/b> will be modified too and vice-versa'));
   $linkDropdownAndPicker(this$static, this$static.inputTime, this$static.timePicker);
-  $add_3(this$static.mainPanel, datePanel);
-  $add_3(this$static.mainPanel, timePanel);
+  $add_4(this$static.mainPanel, datePanel);
+  $add_4(this$static.mainPanel, timePanel);
   clock = $Clock(new Clock(), 'clock_face.jpg', 385);
-  $add_3(this$static.mainPanel, clock);
+  $add_4(this$static.mainPanel, clock);
 }
 
 function $linkDropdownAndPicker(this$static, container, picker){
@@ -8972,7 +8940,7 @@ function DateTimeDemo(){
 
 _ = DateTimeDemo.prototype = new Composite();
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'DateTimeDemo';
-_.typeId$ = 120;
+_.typeId$ = 122;
 _.datePicker = null;
 _.inputDate = null;
 _.inputTime = null;
@@ -8997,7 +8965,7 @@ function DateTimeDemo$1(){
 _ = DateTimeDemo$1.prototype = new Object_0();
 _.onChange_0 = onChange_0;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'DateTimeDemo$1';
-_.typeId$ = 121;
+_.typeId$ = 123;
 function $DateTimeDemo$2(this$static, this$0, val$container, val$picker){
   this$static.this$0 = this$0;
   this$static.val$container = val$container;
@@ -9017,7 +8985,7 @@ function DateTimeDemo$2(){
 _ = DateTimeDemo$2.prototype = new Object_0();
 _.onChange_0 = onChange_1;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'DateTimeDemo$2';
-_.typeId$ = 122;
+_.typeId$ = 124;
 function $DragAndDropDemo(this$static){
   $initComponents_1(this$static);
   $initWidget(this$static, this$static.mainPanel);
@@ -9033,7 +9001,7 @@ function $initComponents_1(this$static){
   this$static.romeo = $Image(new Image_0(), 'romeo.png');
   setStyleAttribute(this$static.romeo.getElement(), 'cursor', 'pointer');
   this$static.romeo.setTitle('romeo');
-  $add_4(this$static.romeoPanel, this$static.romeo);
+  $add_5(this$static.romeoPanel, this$static.romeo);
   this$static.juliette = $Image(new Image_0(), 'juliette.png');
   this$static.juliette.setTitle('juliette');
   $addDraggableWidget(this$static.amoursCelebres, this$static.romeoPanel, 100, 20, 'romeo_et_juliette');
@@ -9041,7 +9009,7 @@ function $initComponents_1(this$static){
   this$static.tristanPanel = $SimplePanel(new SimplePanel());
   this$static.tristan = $Image(new Image_0(), 'tristan.png');
   setStyleAttribute(this$static.tristan.getElement(), 'cursor', 'pointer');
-  $add_4(this$static.tristanPanel, this$static.tristan);
+  $add_5(this$static.tristanPanel, this$static.tristan);
   this$static.tristan.setTitle('tristan');
   this$static.iseult = $Image(new Image_0(), 'iseult.png');
   this$static.iseult.setTitle('iseult');
@@ -9060,7 +9028,7 @@ function onDrop(draggable, target){
   var couple, dulcinee;
   dulcinee = dynamicCast(target, 42);
   couple = $Image(new Image_0(), 'couple_' + dulcinee.getTitle() + '.png');
-  $add_8(this.amoursCelebres, couple, $getWidgetLeft_0(this.amoursCelebres, target) - 50, $getWidgetTop_0(this.amoursCelebres, target) - 25);
+  $add_9(this.amoursCelebres, couple, $getWidgetLeft_0(this.amoursCelebres, target) - 50, $getWidgetTop_0(this.amoursCelebres, target) - 25);
 }
 
 function DragAndDropDemo(){
@@ -9070,7 +9038,7 @@ _ = DragAndDropDemo.prototype = new Composite();
 _.acceptDrop_0 = acceptDrop_0;
 _.onDrop = onDrop;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'DragAndDropDemo';
-_.typeId$ = 123;
+_.typeId$ = 125;
 _.amoursCelebres = null;
 _.iseult = null;
 _.juliette = null;
@@ -9079,18 +9047,18 @@ _.romeo = null;
 _.romeoPanel = null;
 _.tristan = null;
 _.tristanPanel = null;
-function $$init_19(this$static){
-  this$static.lastPosition = initValues('[I', 166, (-1), [0, 0]);
+function $$init_20(this$static){
+  this$static.lastPosition = initValues('[I', 168, (-1), [0, 0]);
   this$static.popup = $PopupPanel_0(new PopupPanel(), true);
   this$static.html = $HTML_0(new HTML(), 'X,Y');
-  this$static.currentFillColor = ($clinit_129() , WHITE);
-  this$static.currentStrokeColor = ($clinit_129() , BLACK);
+  this$static.currentFillColor = ($clinit_130() , WHITE);
+  this$static.currentStrokeColor = ($clinit_130() , BLACK);
   this$static.lastStrokeColor = this$static.currentStrokeColor;
   this$static.lastStrokeSize = this$static.currentStrokeSize;
 }
 
 function $GfxDemo(this$static){
-  $$init_19(this$static);
+  $$init_20(this$static);
   $initComponents_2(this$static);
   $initWidget(this$static, this$static.panel);
   return this$static;
@@ -9134,8 +9102,8 @@ function $createSrokeSize(this$static, size){
   strokeSize.setTitle('Size of stroke ' + size);
   setStyleAttribute(strokeSize.getElement(), 'borderTop', 'solid');
   setStyleAttribute(strokeSize.getElement(), 'borderWidth', '' + size);
-  $add_6(this$static.buttonPanel, strokeSize);
-  this$static.buttonPanel.setCellHorizontalAlignment(strokeSize, ($clinit_53() , ALIGN_CENTER));
+  $add_7(this$static.buttonPanel, strokeSize);
+  this$static.buttonPanel.setCellHorizontalAlignment(strokeSize, ($clinit_54() , ALIGN_CENTER));
   $addClickListener_0(strokeSize, this$static);
   return strokeSize;
 }
@@ -9147,7 +9115,7 @@ function $initComponents_2(this$static){
   $setStyleName(this$static.canvas_0, 'GfxDemo-canvas');
   this$static.buttonPanel = $VerticalPanel(new VerticalPanel());
   $setSpacing(this$static.buttonPanel, 10);
-  $add_4(this$static.popup, this$static.html);
+  $add_5(this$static.popup, this$static.html);
   this$static.gridShape = $Grid_0(new Grid(), 6, 2);
   $setCellSpacing(this$static.gridShape, 5);
   $setCellPadding(this$static.gridShape, 5);
@@ -9162,15 +9130,15 @@ function $initComponents_2(this$static){
   setStyleAttribute(this$static.fill.getElement(), 'borderColor', $toHex(this$static.currentStrokeColor));
   $setSize(this$static.fill, '25px', '25px');
   $addClickListener_0(this$static.fill, this$static);
-  $add_6(this$static.buttonPanel, this$static.gridShape);
-  $add_6(this$static.buttonPanel, this$static.fill);
-  this$static.buttonPanel.setCellHorizontalAlignment(this$static.fill, ($clinit_53() , ALIGN_CENTER));
-  this$static.strokeSize = initDims_0('[Lcom.google.gwt.user.client.ui.HTML;', [167], [16], [4], null);
+  $add_7(this$static.buttonPanel, this$static.gridShape);
+  $add_7(this$static.buttonPanel, this$static.fill);
+  this$static.buttonPanel.setCellHorizontalAlignment(this$static.fill, ($clinit_54() , ALIGN_CENTER));
+  this$static.strokeSize = initDims_0('[Lcom.google.gwt.user.client.ui.HTML;', [169], [16], [4], null);
   this$static.strokeSize[0] = $createSrokeSize(this$static, 1);
   this$static.strokeSize[1] = $createSrokeSize(this$static, 2);
   this$static.strokeSize[2] = $createSrokeSize(this$static, 3);
   this$static.strokeSize[3] = $createSrokeSize(this$static, 5);
-  $add_6(this$static.buttonPanel, this$static.gridTransform);
+  $add_7(this$static.buttonPanel, this$static.gridTransform);
   this$static.opacity = $Slider(new Slider(), 'horizontal', 0, 255, 255, true);
   $addChangeListener(this$static.opacity, this$static);
   this$static.circleButton = $addToGrid(this$static, this$static.gridShape, 0, 0, 'Circle', 'gfx/circle.gif');
@@ -9204,7 +9172,7 @@ function $selectObject(this$static, object){
   this$static.current = object;
   this$static.lastStrokeColor = this$static.current.strokeColor;
   this$static.lastStrokeSize = this$static.current.strokeWidth;
-  this$static.current.setStroke_0(($clinit_129() , RED), 2);
+  this$static.current.setStroke_0(($clinit_130() , RED), 2);
   $removeChangeListener(this$static.opacity, this$static);
   $setValue(this$static.opacity, this$static.current.fillColor.alpha);
   $addChangeListener(this$static.opacity, this$static);
@@ -9213,7 +9181,7 @@ function $selectObject(this$static, object){
 function $showGraphicObject(this$static, object, x, y){
   object.setFillColor(this$static.currentFillColor);
   object.setStroke_0(this$static.currentStrokeColor, this$static.currentStrokeSize);
-  $add_10(this$static.canvas_0, object, x, y);
+  $add_11(this$static.canvas_0, object, x, y);
 }
 
 function $showPath(this$static){
@@ -9235,13 +9203,13 @@ function $showPath(this$static){
   $moveTo(t, (p1.x_0 + p2.x_0) / 2, (p1.y_0 + p2.y_0) / 2);
   $arcTo_0(t, 20, 30, 35, true, true, p3);
   $lineTo(t, (p3.x_0 + p4.x_0) / 2, (p3.y_0 + p4.y_0) / 2);
-  $add_10(this$static.canvas_0, t, 60, 100);
+  $add_11(this$static.canvas_0, t, 60, 100);
   $setPixelSize(this$static.canvas_0, 600, 600);
 }
 
 function $showPolyline(this$static){
   var arrow, poly;
-  arrow = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [168], [40], [8], null);
+  arrow = initDims_0('[Lcom.objetdirect.tatami.client.gfx.Point;', [170], [40], [8], null);
   arrow[0] = $Point_1(new Point(), (-2), 15);
   arrow[1] = $Point_1(new Point(), 2, 15);
   arrow[2] = $Point_1(new Point(), 2, (-105));
@@ -9263,10 +9231,10 @@ function $showPopupColor(this$static){
   $setSpacing(colPanel, 5);
   checkFill = $CheckBox_1(new CheckBox(), 'Background');
   $setChecked(checkFill, true);
-  $add_6(colPanel, checkFill);
+  $add_7(colPanel, checkFill);
   colorChooser = $ColorChooser(new ColorChooser());
-  $add_6(colPanel, colorChooser);
-  $add_5(tabPanel, colPanel, $Label_0(new Label(), 'Color'));
+  $add_7(colPanel, colorChooser);
+  $add_6(tabPanel, colPanel, $Label_0(new Label(), 'Color'));
   colorChange = $GfxDemo$4(new GfxDemo$4(), this$static, colorChooser, checkFill);
   $addChangeListener(colorChooser, colorChange);
   grid = $Grid_0(new Grid(), 2, 3);
@@ -9278,10 +9246,10 @@ function $showPopupColor(this$static){
   $setWidget_0(grid, 1, 0, $createImagePattern(this$static, 'cubic.jpg'));
   $setWidget_0(grid, 1, 1, $createImagePattern(this$static, 'logo_ft.gif'));
   $setWidget_0(grid, 1, 2, $createImagePattern(this$static, 'od-logo.jpg'));
-  $add_5(tabPanel, grid, $Label_0(new Label(), 'Pattern'));
-  $add_5(tabPanel, this$static.opacity, $Label_0(new Label(), 'Opacity'));
+  $add_6(tabPanel, grid, $Label_0(new Label(), 'Pattern'));
+  $add_6(tabPanel, this$static.opacity, $Label_0(new Label(), 'Opacity'));
   $selectTab_0(tabPanel, 0);
-  $add_4(popupColor, tabPanel);
+  $add_5(popupColor, tabPanel);
   $setPopupPosition(popupColor, $getAbsoluteLeft_0(this$static.colorButton), $getAbsoluteTop_0(this$static.colorButton));
   $show(popupColor);
 }
@@ -9296,12 +9264,12 @@ function $showPopupRotate(this$static){
     rotatePanel = $HorizontalPanel(new HorizontalPanel());
     $setSpacing(rotatePanel, 5);
     label = $Label(new Label());
-    $add_3(rotatePanel, rotate);
-    $add_3(rotatePanel, label);
+    $add_4(rotatePanel, rotate);
+    $add_4(rotatePanel, label);
     $setText_0(label, '' + this$static.rotateDegree);
     rotateChange = $GfxDemo$3(new GfxDemo$3(), this$static, rotate, label);
     $addChangeListener(rotate, rotateChange);
-    $add_4(popupRotate, rotatePanel);
+    $add_5(popupRotate, rotatePanel);
     $setPopupPosition(popupRotate, $getAbsoluteLeft_0(this$static.rotateButton), $getAbsoluteTop_0(this$static.rotateButton));
     $show(popupRotate);
   }
@@ -9318,12 +9286,12 @@ function $showPopupScaler(this$static){
     scalePanel = $HorizontalPanel(new HorizontalPanel());
     $setSpacing(scalePanel, 5);
     labelScaler = $Label(new Label());
-    $add_3(scalePanel, scaler);
-    $add_3(scalePanel, labelScaler);
+    $add_4(scalePanel, scaler);
+    $add_4(scalePanel, labelScaler);
     $setText_0(labelScaler, 'x' + this$static.scaleFactor);
     scaleChange = $GfxDemo$2(new GfxDemo$2(), this$static, scaler, labelScaler);
     $addChangeListener(scaler, scaleChange);
-    $add_4(popupScaler, scalePanel);
+    $add_5(popupScaler, scalePanel);
     $setPopupPosition(popupScaler, $getAbsoluteLeft_0(this$static.scaleButton), $getAbsoluteTop_0(this$static.scaleButton));
     $show(popupScaler);
   }
@@ -9362,27 +9330,13 @@ function $showProperties(this$static, object){
   $addStyleName(dialog, 'GfxDemo-properties');
   $setWidget(dialog, panel);
   $show(dialog);
-  $clinit_185() , out_0 , 'bounds ' + object.getBounds();
+  $clinit_186() , out_0 , 'bounds ' + object.getBounds();
 }
 
 function $showText(this$static){
-  var font, font2, font3, font4, text, text2, text3, text4;
-  text = $Text_0(new Text(), 'Tatami GFX,\ncourier 10', 'underline');
-  font = $Font(new Font(), 'Courier', 10, 'normal', 'normal', 'normal');
-  text2 = $Text_0(new Text(), 'Tatami GFX, courier bolder 10', 'overline');
-  font2 = $Font(new Font(), 'Courier', 10, 'normal', 'normal', 'bolder');
-  text3 = $Text_0(new Text(), 'Tatami GFX, courier lighter 10', 'line-through');
-  font3 = $Font(new Font(), 'Courier', 10, 'normal', 'normal', 'lighter');
-  text4 = $Text(new Text(), 'Tatami GFX Arial 24 Bold');
-  font4 = $Font(new Font(), 'Arial', 24, 'italic', 'normal', 'bold');
-  $setFont_2(text, font);
-  $setFont_2(text3, font3);
-  $setFont_2(text2, font2);
+  var text;
+  text = $Text(new Text(), 'Tatami GFX,\n default font');
   $showGraphicObject(this$static, text, 10, 20);
-  $showGraphicObject(this$static, text2, 10, 40);
-  $showGraphicObject(this$static, text3, 10, 60);
-  $showGraphicObject(this$static, text4, 10, 100);
-  $setFont_2(text4, font4);
 }
 
 function $showTextPath(this$static){
@@ -9408,8 +9362,8 @@ function $showVirtual(this$static){
   c = $Circle(new Circle(), 20);
   $translate(c, 0, 15);
   $translate(r, 0, 25);
-  $add_12(virtual, c);
-  $add_12(virtual, r);
+  $add_13(virtual, c);
+  $add_13(virtual, r);
   $showGraphicObject(this$static, virtual, 300, 300);
 }
 
@@ -9582,7 +9536,7 @@ _.mouseReleased = mouseReleased;
 _.onChange_0 = onChange_5;
 _.onClick = onClick_2;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'GfxDemo';
-_.typeId$ = 124;
+_.typeId$ = 126;
 _.backButton = null;
 _.buttonPanel = null;
 _.canvas_0 = null;
@@ -9628,7 +9582,7 @@ function GfxDemo$1(){
 _ = GfxDemo$1.prototype = new Object_0();
 _.onClick = onClick_0;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'GfxDemo$1';
-_.typeId$ = 125;
+_.typeId$ = 127;
 function $GfxDemo$2(this$static, this$0, val$scaler, val$labelScaler){
   this$static.this$0 = this$0;
   this$static.val$scaler = val$scaler;
@@ -9671,7 +9625,7 @@ function GfxDemo$2(){
 _ = GfxDemo$2.prototype = new Object_0();
 _.onChange_0 = onChange_2;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'GfxDemo$2';
-_.typeId$ = 126;
+_.typeId$ = 128;
 function $GfxDemo$3(this$static, this$0, val$rotate, val$label){
   this$static.this$0 = this$0;
   this$static.val$rotate = val$rotate;
@@ -9701,7 +9655,7 @@ function GfxDemo$3(){
 _ = GfxDemo$3.prototype = new Object_0();
 _.onChange_0 = onChange_3;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'GfxDemo$3';
-_.typeId$ = 127;
+_.typeId$ = 129;
 function $GfxDemo$4(this$static, this$0, val$colorChooser, val$checkFill){
   this$static.this$0 = this$0;
   this$static.val$colorChooser = val$colorChooser;
@@ -9726,7 +9680,7 @@ function onChange_4(sender){
     this.this$0.lastStrokeColor = this.this$0.currentStrokeColor;
     setStyleAttribute(this.this$0.fill.getElement(), 'borderColor', color);
     if (this.this$0.current !== null) {
-      $clinit_185() , out_0;
+      $clinit_186() , out_0;
       this.this$0.current.setStroke_0(this.this$0.currentStrokeColor, 1);
     }
   }
@@ -9738,7 +9692,7 @@ function GfxDemo$4(){
 _ = GfxDemo$4.prototype = new Object_0();
 _.onChange_0 = onChange_4;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'GfxDemo$4';
-_.typeId$ = 128;
+_.typeId$ = 130;
 function $GfxDemo$5(this$static, this$0, val$url){
   this$static.this$0 = this$0;
   this$static.val$url = val$url;
@@ -9750,7 +9704,7 @@ function onClick_1(sender){
   if (this.this$0.current !== null) {
     pattern = null;
     if (this.val$url === 'gfx/none.gif') {
-      pattern = ($clinit_139() , DEFAULT_PATTERN);
+      pattern = ($clinit_140() , DEFAULT_PATTERN);
     }
      else {
       pattern = $Pattern(new Pattern(), $Image(new Image_0(), this.val$url), 0, 0);
@@ -9765,7 +9719,7 @@ function GfxDemo$5(){
 _ = GfxDemo$5.prototype = new Object_0();
 _.onClick = onClick_1;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'GfxDemo$5';
-_.typeId$ = 129;
+_.typeId$ = 131;
 function $SliderDemo(this$static){
   $initComponents_3(this$static);
   $initWidget(this$static, this$static.panel);
@@ -9780,7 +9734,7 @@ function $initComponents_3(this$static){
   this$static.verticalSlider = $Slider(new Slider(), 'vertical', 0, 100, 100, true);
   $setRuleMarkLeft(this$static.verticalSlider, 6, '5px');
   $setRuleMarkRight(this$static.verticalSlider, 12, '3px');
-  labels = initValues('[Ljava.lang.String;', 163, 1, [' ', '20%', '40%', '60%', '80%', ' ']);
+  labels = initValues('[Ljava.lang.String;', 166, 1, [' ', '20%', '40%', '60%', '80%', ' ']);
   $setLabelsLeft(this$static.verticalSlider, labels, 'margin: 0px -0.5em 0px -2em;color:gray');
   this$static.horizontalSlider = $Slider(new Slider(), 'horizontal', 0, 100, 100, true);
   $setRuleMarkBottom(this$static.horizontalSlider, 6, '5px');
@@ -9798,10 +9752,10 @@ function $initComponents_3(this$static){
   $setCellWidth(this$static.panel, this$static.cubicImage, '205px');
   $setCellHeight(this$static.panel, this$static.cubicImage, '205px');
   $add_2(this$static.panel, this$static.verticalSlider, ($clinit_36() , WEST));
-  $setCellHorizontalAlignment_0(this$static.panel, this$static.verticalSlider, ($clinit_53() , ALIGN_RIGHT));
+  $setCellHorizontalAlignment_0(this$static.panel, this$static.verticalSlider, ($clinit_54() , ALIGN_RIGHT));
   $add_2(this$static.panel, this$static.horizontalSlider, ($clinit_36() , SOUTH));
-  $setCellVerticalAlignment_0(this$static.panel, this$static.cubicImage, ($clinit_57() , ALIGN_MIDDLE));
-  $setCellHorizontalAlignment_0(this$static.panel, this$static.horizontalSlider, ($clinit_53() , ALIGN_LEFT));
+  $setCellVerticalAlignment_0(this$static.panel, this$static.cubicImage, ($clinit_58() , ALIGN_MIDDLE));
+  $setCellHorizontalAlignment_0(this$static.panel, this$static.horizontalSlider, ($clinit_54() , ALIGN_LEFT));
 }
 
 function onChange_6(sender){
@@ -9819,13 +9773,13 @@ function SliderDemo(){
 _ = SliderDemo.prototype = new Composite();
 _.onChange_0 = onChange_6;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'SliderDemo';
-_.typeId$ = 130;
+_.typeId$ = 132;
 _.cubicImage = null;
 _.horizontalSlider = null;
 _.panel = null;
 _.verticalSlider = null;
 function $addItem(this$static, icon, page, title){
-  $add_9(this$static.fishEye, icon, title, $TatamiDemo$DemoCommand(new TatamiDemo$DemoCommand(), icon, page, this$static));
+  $add_10(this$static.fishEye, icon, title, $TatamiDemo$DemoCommand(new TatamiDemo$DemoCommand(), icon, page, this$static));
 }
 
 function $getMessage(this$static, icon){
@@ -9834,19 +9788,16 @@ function $getMessage(this$static, icon){
 
 function $initMenuPanel(this$static){
   var clock;
-  this$static.menuPanel = $VerticalPanel(new VerticalPanel());
   this$static.fishEye = $FishEye(new FishEye(), 50, 50, 200, 200, 'vertical', 2, 10, 'center', 'right', false);
   this$static.labelMenu = $HTML_0(new HTML(), 'Menu');
+  setElementProperty(this$static.labelMenu.getElement(), 'id', 'labelMenu');
   this$static.labelMenu.setTitle('Go Home');
-  $setStyleName(this$static.labelMenu, 'TatamiDemo-labelMenu');
   setStyleAttribute(this$static.labelMenu.getElement(), 'cursor', 'pointer');
   $addClickListener_0(this$static.labelMenu, $TatamiDemo$1(new TatamiDemo$1(), this$static));
   clock = $Clock(new Clock(), null, 77);
-  $setStyleName(this$static.menuPanel, 'TatamiDemo-menu');
-  $setSpacing(this$static.menuPanel, 20);
-  $add_6(this$static.menuPanel, clock);
-  $add_6(this$static.menuPanel, this$static.labelMenu);
-  $add_6(this$static.menuPanel, this$static.fishEye);
+  $add_3(this$static.menu, clock, 'clock');
+  $add_3(this$static.menu, this$static.labelMenu, 'labelMenu');
+  $add_3(this$static.menu, this$static.fishEye, 'fishEye');
   $addItem(this$static, 'browser.png', 3, 'sliders');
   $addItem(this$static, 'kalarm.png', 2, 'date-time');
   $addItem(this$static, 'icoColorPic.gif', 7, 'color tools');
@@ -9856,85 +9807,76 @@ function $initMenuPanel(this$static){
 
 function $initTitlePanel(this$static){
   var logoFT, logoOD, title;
-  this$static.titlePanel = $DockPanel(new DockPanel());
-  logoOD = $Image(new Image_0(), 'od-logo.gif');
-  $setStyleName(logoOD, 'TatamiDemo-logoOD');
-  $setPixelSize(logoOD, 126, 64);
-  $add_2(this$static.titlePanel, logoOD, ($clinit_36() , WEST));
-  title = $HTML_0(new HTML(), 'Tatami version 1.1 (DOJO 1.0 wrapped)');
-  $setStyleName(title, 'TatamiDemo-title');
-  logoFT = $Image(new Image_0(), 'logo_ft.gif');
-  $setStyleName(logoFT, 'TatamiDemo-logoFT');
-  $add_2(this$static.titlePanel, title, ($clinit_36() , CENTER));
-  $setCellWidth(this$static.titlePanel, title, '100%');
-  $add_2(this$static.titlePanel, logoFT, ($clinit_36() , EAST));
+  title = $HTML_0(new HTML(), '<div><h1>Tatami version 1.1<\/h1><h2>Dojo 1.0 wrapped<\/h2><\/div>');
+  logoOD = $HTML_0(new HTML(), 'Objet Direct');
+  logoFT = $HTML_0(new HTML(), 'France Telecom');
+  $add_3(this$static.header, logoOD, 'logoOD');
+  $add_3(this$static.header, title, 'title');
+  $add_3(this$static.header, logoFT, 'logoFT');
 }
 
 function $loadPage(this$static){
-  var widgetDemo;
-  widgetDemo = null;
   switch (this$static.page) {
     default:{
-        widgetDemo = $HTML(new HTML());
-        $setStyleName(widgetDemo, 'TatamiDemo-welcome');
-        $setHTML(dynamicCast(widgetDemo, 16), '<p>The project aims to integrate the Google Web Toolkit (GWT) and the DOJO framework. Indeed the DOJO framework is very rich in term of widgets and utilities (fisheye, slider, drag and drop functionality) and the main interest is to take benefits of the huge work which has been already done by the DOJO community. In other words, it means: <b>the DOJO widgets become GWT widgets, the DOJO utilities become GWT helper.<\/b><\/p><br><p> The project is on the Google code community : <a href="http://code.google.com/p/tatami">Tatami<\/a><\/p><p> Click on an item of the menu at the left to see the widgets that Tatami proposes.<\/p>');
+        this$static.widgetDemo = $HTML(new HTML());
+        $setStyleName(this$static.widgetDemo, 'TatamiDemo-welcome');
+        $setHTML(dynamicCast(this$static.widgetDemo, 16), '<p>The project aims to integrate the Google Web Toolkit (GWT) and the DOJO framework. Indeed the DOJO framework is very rich in term of widgets and utilities (fisheye, slider, drag and drop functionality) and the main interest is to take benefits of the huge work which has been already done by the DOJO community. In other words, it means: <b>the DOJO widgets become GWT widgets, the DOJO utilities become GWT helper.<\/b><\/p><br><p> The project is on the Google code community : <a href="http://code.google.com/p/tatami">Tatami<\/a><\/p><p> Click on an item of the menu at the left to see the widgets that Tatami proposes.<\/p>');
         break;
       }
 
     case 3:
       {
-        widgetDemo = $SliderDemo(new SliderDemo());
+        this$static.widgetDemo = $SliderDemo(new SliderDemo());
         break;
       }
 
     case 2:
       {
-        widgetDemo = $DateTimeDemo(new DateTimeDemo());
+        this$static.widgetDemo = $DateTimeDemo(new DateTimeDemo());
         break;
       }
 
     case 6:
       {
-        widgetDemo = $DragAndDropDemo(new DragAndDropDemo());
+        this$static.widgetDemo = $DragAndDropDemo(new DragAndDropDemo());
         break;
       }
 
     case 7:
       {
-        widgetDemo = $ColorDemo(new ColorDemo());
+        this$static.widgetDemo = $ColorDemo(new ColorDemo());
         break;
       }
 
     case 1:
       {
-        widgetDemo = $GfxDemo(new GfxDemo());
+        this$static.widgetDemo = $GfxDemo(new GfxDemo());
         break;
       }
 
   }
-  if (widgetDemo !== null) {
-    $add_2(this$static.mainPanel, widgetDemo, ($clinit_36() , CENTER));
+  if (this$static.widgetDemo !== null) {
+    $add_5(this$static.sp, this$static.widgetDemo);
   }
 }
 
 function $onModuleLoad(this$static){
   var body;
   body = $DockPanel(new DockPanel());
-  this$static.root = $DockPanel(new DockPanel());
-  this$static.mainPanel = $DockPanel(new DockPanel());
-  $setStyleName(this$static.mainPanel, 'TatamiDemo-mainPanel');
+  this$static.header = $HTMLPanel(new HTMLPanel(), "<div id='logoOD'><\/div> <div id='title'><\/div><div id='logoFT'><\/div>");
+  this$static.menu = $HTMLPanel(new HTMLPanel(), "<div id='clock'><\/div><div id='labelMenu'><\/div><div id='fishEye'><\/div>");
+  this$static.sp = $SimplePanel(new SimplePanel());
+  $add_2(body, this$static.header, ($clinit_36() , NORTH));
+  $add_2(body, this$static.menu, ($clinit_36() , WEST));
+  $add_2(body, this$static.sp, ($clinit_36() , CENTER));
+  setElementProperty(this$static.sp.getElement(), 'id', 'content');
+  setElementProperty(this$static.menu.getElement(), 'id', 'menu');
+  setElementProperty(this$static.header.getElement(), 'id', 'header');
   this$static.toaster = $Toaster(new Toaster(), 'message', 'bl-up');
-  $add_2(body, this$static.root, ($clinit_36() , CENTER));
-  $initMenuPanel(this$static);
-  $initTitlePanel(this$static);
-  $add_2(this$static.root, this$static.mainPanel, ($clinit_36() , CENTER));
-  $setCellWidth(this$static.root, this$static.mainPanel, '100%');
-  $add_2(this$static.root, this$static.menuPanel, ($clinit_36() , WEST));
-  $setSpacing(this$static.root, 20);
-  $add_2(body, this$static.titlePanel, ($clinit_36() , NORTH));
-  $add_2(body, this$static.root, ($clinit_36() , CENTER));
   $add(get(), body);
   $add(get(), this$static.toaster);
+  $initMenuPanel(this$static);
+  $initTitlePanel(this$static);
   $setPage(this$static, 0);
 }
 
@@ -9945,7 +9887,9 @@ function $setPage(this$static, page){
 }
 
 function $unLoadPage(this$static){
-  this$static.mainPanel.clear();
+  if (this$static.widgetDemo !== null) {
+    this$static.sp.remove_1(this$static.widgetDemo);
+  }
 }
 
 function TatamiDemo(){
@@ -9953,15 +9897,15 @@ function TatamiDemo(){
 
 _ = TatamiDemo.prototype = new Object_0();
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'TatamiDemo';
-_.typeId$ = 131;
+_.typeId$ = 133;
 _.fishEye = null;
+_.header = null;
 _.labelMenu = null;
-_.mainPanel = null;
-_.menuPanel = null;
+_.menu = null;
 _.page = 0;
-_.root = null;
-_.titlePanel = null;
+_.sp = null;
 _.toaster = null;
+_.widgetDemo = null;
 function $TatamiDemo$1(this$static, this$0){
   this$static.this$0 = this$0;
   return this$static;
@@ -9977,7 +9921,7 @@ function TatamiDemo$1(){
 _ = TatamiDemo$1.prototype = new Object_0();
 _.onClick = onClick_3;
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'TatamiDemo$1';
-_.typeId$ = 132;
+_.typeId$ = 134;
 function $TatamiDemo$DemoCommand(this$static, icon, page, this$0){
   this$static.this$0 = this$0;
   this$static.icon = icon;
@@ -9995,7 +9939,7 @@ function TatamiDemo$DemoCommand(){
 
 _ = TatamiDemo$DemoCommand.prototype = new Object_0();
 _.typeName$ = package_com_objetdirect_tatami_demo_client_ + 'TatamiDemo$DemoCommand';
-_.typeId$ = 133;
+_.typeId$ = 135;
 _.icon = '';
 _.page = 0;
 function OutputStream(){
@@ -10003,33 +9947,33 @@ function OutputStream(){
 
 _ = OutputStream.prototype = new Object_0();
 _.typeName$ = package_java_io_ + 'OutputStream';
-_.typeId$ = 134;
+_.typeId$ = 136;
 function FilterOutputStream(){
 }
 
 _ = FilterOutputStream.prototype = new OutputStream();
 _.typeName$ = package_java_io_ + 'FilterOutputStream';
-_.typeId$ = 135;
+_.typeId$ = 137;
 function PrintStream(){
 }
 
 _ = PrintStream.prototype = new FilterOutputStream();
 _.typeName$ = package_java_io_ + 'PrintStream';
-_.typeId$ = 136;
+_.typeId$ = 138;
 function ArrayStoreException(){
 }
 
 _ = ArrayStoreException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'ArrayStoreException';
-_.typeId$ = 137;
-function $clinit_167(){
-  $clinit_167 = nullMethod;
+_.typeId$ = 139;
+function $clinit_168(){
+  $clinit_168 = nullMethod;
   FALSE = $Boolean(new Boolean_0(), false);
   TRUE = $Boolean(new Boolean_0(), true);
 }
 
 function $Boolean(this$static, value){
-  $clinit_167();
+  $clinit_168();
   this$static.value = value;
   return this$static;
 }
@@ -10050,7 +9994,7 @@ function toString_8(){
 }
 
 function valueOf(b){
-  $clinit_167();
+  $clinit_168();
   return b?TRUE:FALSE;
 }
 
@@ -10062,7 +10006,7 @@ _.equals$ = equals_5;
 _.hashCode$ = hashCode_3;
 _.toString$ = toString_8;
 _.typeName$ = package_java_lang_ + 'Boolean';
-_.typeId$ = 138;
+_.typeId$ = 140;
 _.value = false;
 var FALSE, TRUE;
 function ClassCastException(){
@@ -10070,21 +10014,21 @@ function ClassCastException(){
 
 _ = ClassCastException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'ClassCastException';
-_.typeId$ = 139;
-function $clinit_180(){
-  $clinit_180 = nullMethod;
+_.typeId$ = 141;
+function $clinit_181(){
+  $clinit_181 = nullMethod;
   {
     initNative();
   }
 }
 
 function $Number(this$static){
-  $clinit_180();
+  $clinit_181();
   return this$static;
 }
 
 function initNative(){
-  $clinit_180();
+  $clinit_181();
   floatRegex = /^[+-]?\d*\.?\d*(e[+-]?\d+)?$/i;
 }
 
@@ -10093,15 +10037,15 @@ function Number_0(){
 
 _ = Number_0.prototype = new Object_0();
 _.typeName$ = package_java_lang_ + 'Number';
-_.typeId$ = 140;
+_.typeId$ = 142;
 var floatRegex = null;
-function $clinit_172(){
-  $clinit_172 = nullMethod;
-  $clinit_180();
+function $clinit_173(){
+  $clinit_173 = nullMethod;
+  $clinit_181();
 }
 
 function $Double(this$static, value){
-  $clinit_172();
+  $clinit_173();
   $Number(this$static);
   this$static.value = value;
   return this$static;
@@ -10116,7 +10060,7 @@ function hashCode_4(){
 }
 
 function toString_10(b){
-  $clinit_172();
+  $clinit_173();
   return valueOf_0(b);
 }
 
@@ -10132,7 +10076,7 @@ _.equals$ = equals_6;
 _.hashCode$ = hashCode_4;
 _.toString$ = toString_9;
 _.typeName$ = package_java_lang_ + 'Double';
-_.typeId$ = 141;
+_.typeId$ = 143;
 _.value = 0.0;
 function $IllegalArgumentException(this$static, message){
   $RuntimeException(this$static, message);
@@ -10144,7 +10088,7 @@ function IllegalArgumentException(){
 
 _ = IllegalArgumentException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'IllegalArgumentException';
-_.typeId$ = 142;
+_.typeId$ = 144;
 function $IllegalStateException(this$static, s){
   $RuntimeException(this$static, s);
   return this$static;
@@ -10155,7 +10099,7 @@ function IllegalStateException(){
 
 _ = IllegalStateException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'IllegalStateException';
-_.typeId$ = 143;
+_.typeId$ = 145;
 function $IndexOutOfBoundsException(this$static, message){
   $RuntimeException(this$static, message);
   return this$static;
@@ -10166,14 +10110,14 @@ function IndexOutOfBoundsException(){
 
 _ = IndexOutOfBoundsException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'IndexOutOfBoundsException';
-_.typeId$ = 144;
-function $clinit_177(){
-  $clinit_177 = nullMethod;
-  $clinit_180();
+_.typeId$ = 146;
+function $clinit_178(){
+  $clinit_178 = nullMethod;
+  $clinit_181();
 }
 
 function $Integer(this$static, value){
-  $clinit_177();
+  $clinit_178();
   $Number(this$static);
   this$static.value = value;
   return this$static;
@@ -10188,7 +10132,7 @@ function hashCode_5(){
 }
 
 function toString_12(b){
-  $clinit_177();
+  $clinit_178();
   return valueOf_1(b);
 }
 
@@ -10204,7 +10148,7 @@ _.equals$ = equals_7;
 _.hashCode$ = hashCode_5;
 _.toString$ = toString_11;
 _.typeName$ = package_java_lang_ + 'Integer';
-_.typeId$ = 145;
+_.typeId$ = 147;
 _.value = 0;
 var MAX_VALUE = 2147483647, MIN_VALUE = (-2147483648);
 function cos(x){
@@ -10232,12 +10176,12 @@ function NegativeArraySizeException(){
 
 _ = NegativeArraySizeException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'NegativeArraySizeException';
-_.typeId$ = 146;
+_.typeId$ = 148;
 function $charAt(this$static, index){
   return this$static.charCodeAt(index);
 }
 
-function $equals_2(this$static, other){
+function $equals_1(this$static, other){
   if (!instanceOf(other, 1))
     return false;
   return __equals(this$static, other);
@@ -10314,7 +10258,7 @@ function $trim(this$static){
 }
 
 function __createArray(numElements){
-  return initDims_0('[Ljava.lang.String;', [163], [1], [numElements], null);
+  return initDims_0('[Ljava.lang.String;', [166], [1], [numElements], null);
 }
 
 function __equals(me, other){
@@ -10322,7 +10266,7 @@ function __equals(me, other){
 }
 
 function equals_9(other){
-  return $equals_2(this, other);
+  return $equals_1(this, other);
 }
 
 function hashCode_7(){
@@ -10422,14 +10366,14 @@ _ = StringBuffer.prototype = new Object_0();
 _.normalize = normalize;
 _.toString$ = toString_14;
 _.typeName$ = package_java_lang_ + 'StringBuffer';
-_.typeId$ = 147;
-function $clinit_185(){
-  $clinit_185 = nullMethod;
+_.typeId$ = 149;
+function $clinit_186(){
+  $clinit_186 = nullMethod;
   out_0 = new PrintStream();
 }
 
 function identityHashCode(o){
-  $clinit_185();
+  $clinit_186();
   return getHashCode_0(o);
 }
 
@@ -10444,7 +10388,7 @@ function UnsupportedOperationException(){
 
 _ = UnsupportedOperationException.prototype = new RuntimeException();
 _.typeName$ = package_java_lang_ + 'UnsupportedOperationException';
-_.typeId$ = 148;
+_.typeId$ = 150;
 function $AbstractList$IteratorImpl(this$static, this$0){
   this$static.this$0 = this$0;
   return this$static;
@@ -10490,7 +10434,7 @@ _.hasNext = hasNext_2;
 _.next_0 = next_3;
 _.remove = remove_16;
 _.typeName$ = package_java_util_ + 'AbstractList$IteratorImpl';
-_.typeId$ = 149;
+_.typeId$ = 151;
 _.i = 0;
 _.last = (-1);
 function $implFindEntry(this$static, key, remove){
@@ -10535,7 +10479,7 @@ function equals_11(obj){
   otherMap = dynamicCast(obj, 47);
   keys = $keySet(this);
   otherKeys = otherMap.keySet();
-  if (!$equals_3(keys, otherKeys)) {
+  if (!$equals_2(keys, otherKeys)) {
     return false;
   }
   for (iter = $iterator_2(keys); $hasNext_2(iter);) {
@@ -10599,8 +10543,8 @@ _.hashCode$ = hashCode_9;
 _.keySet = keySet;
 _.toString$ = toString_18;
 _.typeName$ = package_java_util_ + 'AbstractMap';
-_.typeId$ = 150;
-function $equals_3(this$static, o){
+_.typeId$ = 152;
+function $equals_2(this$static, o){
   var iter, other, otherItem;
   if (o === this$static) {
     return true;
@@ -10622,7 +10566,7 @@ function $equals_3(this$static, o){
 }
 
 function equals_12(o){
-  return $equals_3(this, o);
+  return $equals_2(this, o);
 }
 
 function hashCode_10(){
@@ -10644,7 +10588,7 @@ _ = AbstractSet.prototype = new AbstractCollection();
 _.equals$ = equals_12;
 _.hashCode$ = hashCode_10;
 _.typeName$ = package_java_util_ + 'AbstractSet';
-_.typeId$ = 151;
+_.typeId$ = 153;
 function $AbstractMap$1(this$static, this$0, val$entrySet){
   this$static.this$0 = this$0;
   this$static.val$entrySet = val$entrySet;
@@ -10677,7 +10621,7 @@ _.contains = contains_0;
 _.iterator = iterator_4;
 _.size_0 = size_0;
 _.typeName$ = package_java_util_ + 'AbstractMap$1';
-_.typeId$ = 152;
+_.typeId$ = 154;
 function $AbstractMap$2(this$static, this$1, val$outerIter){
   this$static.val$outerIter = val$outerIter;
   return this$static;
@@ -10713,7 +10657,7 @@ _.hasNext = hasNext_3;
 _.next_0 = next_4;
 _.remove = remove_18;
 _.typeName$ = package_java_util_ + 'AbstractMap$2';
-_.typeId$ = 153;
+_.typeId$ = 155;
 function $AbstractMap$3(this$static, this$0, val$entrySet){
   this$static.this$0 = this$0;
   this$static.val$entrySet = val$entrySet;
@@ -10746,7 +10690,7 @@ _.contains = contains_1;
 _.iterator = iterator_5;
 _.size_0 = size_1;
 _.typeName$ = package_java_util_ + 'AbstractMap$3';
-_.typeId$ = 154;
+_.typeId$ = 156;
 function $AbstractMap$4(this$static, this$1, val$outerIter){
   this$static.val$outerIter = val$outerIter;
   return this$static;
@@ -10782,26 +10726,26 @@ _.hasNext = hasNext_4;
 _.next_0 = next_5;
 _.remove = remove_19;
 _.typeName$ = package_java_util_ + 'AbstractMap$4';
-_.typeId$ = 155;
-function $clinit_199(){
-  $clinit_199 = nullMethod;
-  DAYS = initValues('[Ljava.lang.String;', 163, 1, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
-  MONTHS = initValues('[Ljava.lang.String;', 163, 1, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
+_.typeId$ = 157;
+function $clinit_200(){
+  $clinit_200 = nullMethod;
+  DAYS = initValues('[Ljava.lang.String;', 166, 1, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+  MONTHS = initValues('[Ljava.lang.String;', 166, 1, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']);
 }
 
 function $Date(this$static){
-  $clinit_199();
+  $clinit_200();
   $init_0(this$static);
   return this$static;
 }
 
 function $Date_0(this$static, date){
-  $clinit_199();
+  $clinit_200();
   $init_1(this$static, date);
   return this$static;
 }
 
-function $equals_4(this$static, obj){
+function $equals_3(this$static, obj){
   return instanceOf(obj, 48) && $getTime(this$static) == $getTime(dynamicCast(obj, 48));
 }
 
@@ -10834,12 +10778,12 @@ function $setTime(this$static, time){
 }
 
 function dayToString(day){
-  $clinit_199();
+  $clinit_200();
   return DAYS[day];
 }
 
 function equals_14(obj){
-  return $equals_4(this, obj);
+  return $equals_3(this, obj);
 }
 
 function hashCode_11(){
@@ -10847,12 +10791,12 @@ function hashCode_11(){
 }
 
 function monthToString(month){
-  $clinit_199();
+  $clinit_200();
   return MONTHS[month];
 }
 
 function padTwo_0(number){
-  $clinit_199();
+  $clinit_200();
   if (number < 10) {
     return '0' + number;
   }
@@ -10880,22 +10824,22 @@ _.equals$ = equals_14;
 _.hashCode$ = hashCode_11;
 _.toString$ = toString_19;
 _.typeName$ = package_java_util_ + 'Date';
-_.typeId$ = 156;
+_.typeId$ = 158;
 var DAYS, MONTHS;
-function $clinit_204(){
-  $clinit_204 = nullMethod;
+function $clinit_205(){
+  $clinit_205 = nullMethod;
   UNDEFINED = createUndefinedValue();
 }
 
-function $$init_21(this$static){
+function $$init_22(this$static){
   {
     $clearImpl_0(this$static);
   }
 }
 
 function $HashMap(this$static){
-  $clinit_204();
-  $$init_21(this$static);
+  $clinit_205();
+  $$init_22(this$static);
   return this$static;
 }
 
@@ -10996,7 +10940,7 @@ function $remove_12(this$static, key){
 }
 
 function addAllHashEntries(hashCodeMap, dest){
-  $clinit_204();
+  $clinit_205();
   for (var hashCode in hashCodeMap) {
     if (hashCode == parseInt(hashCode)) {
       var array = hashCodeMap[hashCode];
@@ -11008,7 +10952,7 @@ function addAllHashEntries(hashCodeMap, dest){
 }
 
 function addAllStringEntries(stringMap, dest){
-  $clinit_204();
+  $clinit_205();
   for (var key in stringMap) {
     if (key.charCodeAt(0) == 58) {
       var value = stringMap[key];
@@ -11019,7 +10963,7 @@ function addAllStringEntries(stringMap, dest){
 }
 
 function containsHashValue(hashCodeMap, value){
-  $clinit_204();
+  $clinit_205();
   for (var hashCode in hashCodeMap) {
     if (hashCode == parseInt(hashCode)) {
       var array = hashCodeMap[hashCode];
@@ -11040,7 +10984,7 @@ function containsKey_0(key){
 }
 
 function containsStringValue(stringMap, value){
-  $clinit_204();
+  $clinit_205();
   for (var key in stringMap) {
     if (key.charCodeAt(0) == 58) {
       var entryValue = stringMap[key];
@@ -11053,7 +10997,7 @@ function containsStringValue(stringMap, value){
 }
 
 function createUndefinedValue(){
-  $clinit_204();
+  $clinit_205();
 }
 
 function entrySet_0(){
@@ -11061,7 +11005,7 @@ function entrySet_0(){
 }
 
 function equalsWithNullCheck(a, b){
-  $clinit_204();
+  $clinit_205();
   if (a === b) {
     return true;
   }
@@ -11078,7 +11022,7 @@ function get_3(key){
 }
 
 function getHashValue(hashCodeMap, key, hashCode){
-  $clinit_204();
+  $clinit_205();
   var array = hashCodeMap[hashCode];
   if (array) {
     for (var i = 0, c = array.length; i < c; ++i) {
@@ -11092,12 +11036,12 @@ function getHashValue(hashCodeMap, key, hashCode){
 }
 
 function getStringValue(stringMap, key){
-  $clinit_204();
+  $clinit_205();
   return stringMap[':' + key];
 }
 
 function putHashValue(hashCodeMap, key, value, hashCode){
-  $clinit_204();
+  $clinit_205();
   var array = hashCodeMap[hashCode];
   if (array) {
     for (var i = 0, c = array.length; i < c; ++i) {
@@ -11118,7 +11062,7 @@ function putHashValue(hashCodeMap, key, value, hashCode){
 }
 
 function putStringValue(stringMap, key, value){
-  $clinit_204();
+  $clinit_205();
   key = ':' + key;
   var result = stringMap[key];
   stringMap[key] = value;
@@ -11126,7 +11070,7 @@ function putStringValue(stringMap, key, value){
 }
 
 function removeHashValue(hashCodeMap, key, hashCode){
-  $clinit_204();
+  $clinit_205();
   var array = hashCodeMap[hashCode];
   if (array) {
     for (var i = 0, c = array.length; i < c; ++i) {
@@ -11146,7 +11090,7 @@ function removeHashValue(hashCodeMap, key, hashCode){
 }
 
 function removeStringValue(stringMap, key){
-  $clinit_204();
+  $clinit_205();
   key = ':' + key;
   var result = stringMap[key];
   delete stringMap[key];
@@ -11161,7 +11105,7 @@ _.containsKey = containsKey_0;
 _.entrySet = entrySet_0;
 _.get_0 = get_3;
 _.typeName$ = package_java_util_ + 'HashMap';
-_.typeId$ = 157;
+_.typeId$ = 159;
 _.hashCodeMap = null;
 _.nullSlot = null;
 _.size = 0;
@@ -11231,7 +11175,7 @@ _.hashCode$ = hashCode_12;
 _.setValue_0 = setValue;
 _.toString$ = toString_20;
 _.typeName$ = package_java_util_ + 'HashMap$EntryImpl';
-_.typeId$ = 158;
+_.typeId$ = 160;
 _.key = null;
 _.value = null;
 function $HashMap$EntrySet(this$static, this$0){
@@ -11287,13 +11231,13 @@ _.iterator = iterator_6;
 _.remove_2 = remove_23;
 _.size_0 = size_3;
 _.typeName$ = package_java_util_ + 'HashMap$EntrySet';
-_.typeId$ = 159;
+_.typeId$ = 161;
 function $HashMap$EntrySetIterator(this$static, this$0){
   var list;
   this$static.this$0 = this$0;
   list = $ArrayList(new ArrayList());
-  if (this$static.this$0.nullSlot !== ($clinit_204() , UNDEFINED)) {
-    $add_13(list, $HashMap$EntryImpl(new HashMap$EntryImpl(), null, this$static.this$0.nullSlot));
+  if (this$static.this$0.nullSlot !== ($clinit_205() , UNDEFINED)) {
+    $add_14(list, $HashMap$EntryImpl(new HashMap$EntryImpl(), null, this$static.this$0.nullSlot));
   }
   addAllStringEntries(this$static.this$0.stringMap, list);
   addAllHashEntries(this$static.this$0.hashCodeMap, list);
@@ -11340,7 +11284,7 @@ _.hasNext = hasNext_5;
 _.next_0 = next_6;
 _.remove = remove_22;
 _.typeName$ = package_java_util_ + 'HashMap$EntrySetIterator';
-_.typeId$ = 160;
+_.typeId$ = 162;
 _.iter = null;
 _.last = null;
 function $HashSet(this$static){
@@ -11390,14 +11334,19 @@ _.remove_2 = remove_24;
 _.size_0 = size_4;
 _.toString$ = toString_21;
 _.typeName$ = package_java_util_ + 'HashSet';
-_.typeId$ = 161;
+_.typeId$ = 163;
 _.map = null;
+function $NoSuchElementException(this$static, s){
+  $RuntimeException(this$static, s);
+  return this$static;
+}
+
 function NoSuchElementException(){
 }
 
 _ = NoSuchElementException.prototype = new RuntimeException();
 _.typeName$ = package_java_util_ + 'NoSuchElementException';
-_.typeId$ = 162;
+_.typeId$ = 164;
 function init_0(){
   $onModuleLoad(new TatamiDemo());
 }
@@ -11417,7 +11366,9 @@ function gwtOnLoad(errFn, modName, modBase){
   }
 }
 
-var typeIdArray = [{}, {15:1}, {1:1, 15:1, 44:1, 45:1}, {3:1, 15:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {2:1, 15:1}, {15:1}, {15:1}, {15:1}, {2:1, 5:1, 15:1}, {2:1, 15:1}, {6:1, 15:1}, {7:1, 15:1}, {15:1}, {15:1}, {15:1, 17:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1}, {15:1, 46:1}, {15:1, 46:1}, {15:1, 46:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {15:1, 46:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {4:1, 10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {4:1, 10:1, 11:1, 14:1, 15:1, 17:1, 18:1, 24:1, 26:1, 31:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {15:1}, {15:1}, {15:1, 43:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 19:1, 20:1, 21:1, 22:1, 23:1, 24:1, 25:1}, {10:1, 15:1, 16:1, 17:1, 18:1, 19:1, 20:1, 21:1, 22:1, 23:1, 24:1, 25:1, 26:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 21:1, 22:1, 42:1}, {15:1}, {15:1}, {15:1, 46:1}, {10:1, 12:1, 14:1, 15:1, 17:1, 18:1}, {7:1, 15:1}, {15:1}, {9:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {15:1, 46:1}, {10:1, 13:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {9:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {6:1, 15:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1, 30:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 33:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1}, {15:1, 34:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 36:1}, {15:1}, {15:1, 40:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 41:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {8:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1}, {8:1, 15:1}, {8:1, 15:1}, {10:1, 15:1, 17:1, 18:1, 32:1}, {8:1, 9:1, 10:1, 15:1, 17:1, 18:1, 35:1}, {9:1, 15:1}, {8:1, 15:1}, {8:1, 15:1}, {8:1, 15:1}, {9:1, 15:1}, {8:1, 10:1, 15:1, 17:1, 18:1}, {15:1}, {9:1, 15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {3:1, 15:1, 28:1}, {15:1, 39:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1, 37:1, 44:1}, {3:1, 15:1, 27:1, 28:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {15:1, 38:1, 44:1}, {3:1, 15:1, 28:1}, {15:1, 45:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1, 47:1}, {15:1, 29:1}, {15:1, 29:1}, {15:1}, {15:1}, {15:1}, {15:1, 44:1, 48:1}, {15:1, 47:1}, {15:1, 49:1}, {15:1, 29:1}, {15:1}, {15:1, 29:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}];
+var typeIdArray = [{}, {15:1}, {1:1, 15:1, 44:1, 45:1}, {3:1, 15:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {2:1, 15:1}, {15:1}, {15:1}, {15:1}, {2:1, 5:1, 15:1}, {2:1, 15:1}, {6:1, 15:1}, {7:1, 15:1}, {15:1}, {15:1}, {15:1}, {15:1, 17:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1}, {15:1, 46:1}, {15:1, 46:1}, {15:1, 46:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1, 26:1}, {15:1, 46:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {4:1, 10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {4:1, 10:1, 11:1, 14:1, 15:1, 17:1, 18:1, 24:1, 26:1, 31:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {15:1}, {15:1}, {15:1, 43:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 19:1, 20:1, 21:1, 22:1, 23:1, 24:1, 25:1}, {10:1, 15:1, 16:1, 17:1, 18:1, 19:1, 20:1, 21:1, 22:1, 23:1, 24:1, 25:1, 26:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 21:1, 22:1, 42:1}, {15:1}, {15:1}, {15:1, 46:1}, {10:1, 12:1, 14:1, 15:1, 17:1, 18:1}, {7:1, 15:1}, {15:1}, {9:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {15:1, 46:1}, {10:1, 13:1, 14:1, 15:1, 17:1, 18:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {9:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 23:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 14:1, 15:1, 17:1, 18:1, 31:1}, {6:1, 15:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {15:1}, {10:1, 14:1, 15:1, 17:1, 18:1}, {15:1, 30:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1, 20:1, 24:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 33:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {10:1, 15:1, 17:1, 18:1, 20:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1}, {15:1, 34:1}, {15:1}, {10:1, 15:1, 17:1, 18:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 36:1}, {15:1}, {15:1, 40:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 41:1}, {15:1, 34:1}, {15:1, 34:1}, {15:1, 34:1}, {8:1, 10:1, 15:1, 17:1, 18:1}, {10:1, 15:1, 17:1, 18:1}, {8:1, 15:1}, {8:1, 15:1}, {10:1, 15:1, 17:1, 18:1, 32:1}, {8:1, 9:1, 10:1, 15:1, 17:1, 18:1, 35:1}, {9:1, 15:1}, {8:1, 15:1}, {8:1, 15:1}, {8:1, 15:1}, {9:1, 15:1}, {8:1, 10:1, 15:1, 17:1, 18:1}, {15:1}, {9:1, 15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {3:1, 15:1, 28:1}, {15:1, 39:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1, 37:1, 44:1}, {3:1, 15:1, 27:1, 28:1}, {3:1, 15:1, 28:1}, {3:1, 15:1, 28:1}, {15:1, 38:1, 44:1}, {3:1, 15:1, 28:1}, {15:1, 45:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1, 47:1}, {15:1, 29:1}, {15:1, 29:1}, {15:1}, {15:1}, {15:1}, {15:1, 44:1, 48:1}, {15:1, 47:1}, {15:1, 49:1}, {15:1, 29:1}, {15:1}, {15:1, 29:1}, {3:1, 15:1, 28:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}, {15:1}];
 
-if ($wnd.com_objetdirect_tatami_demo_TatamiDemo) $wnd.com_objetdirect_tatami_demo_TatamiDemo.onScriptLoad();
---></script></body></html>
+if (com_objetdirect_tatami_demo_TatamiDemo) {
+  var __gwt_initHandlers = com_objetdirect_tatami_demo_TatamiDemo.__gwt_initHandlers;  com_objetdirect_tatami_demo_TatamiDemo.onScriptLoad(gwtOnLoad);
+}
+})();
