@@ -367,13 +367,13 @@ public abstract class DropdownContainer extends TextBox implements HasDojo {
 	   dojoWidget.setDisabled(!enabled);
 	 }-*/;
 
-	/**
-	 * This method is overrided and does nothint to avoir some surprises
-	 * 
-	 */
-	public void sinkEvents(int eventBitsToAdd) {
-	
-	}
+//	/**
+//	 * This method is overrided and does nothint to avoir some surprises
+//	 * 
+//	 */
+//	public void sinkEvents(int eventBitsToAdd) {
+//	
+//	}
 
 	/**
 	 * Indicates to DOJO that an event have to be  
