@@ -261,7 +261,9 @@ public abstract class DropdownContainer extends TextBox implements HasDojo {
 		setEnabled(isEnabled());
 		setInvalidMessage(invalidMessage);
 		setPromptMessage(promptMessage);
-		setText(text);
+		if ( text !=null && !"".equals(text) ) {
+		  setText(text);
+		}
      }
 
 	
@@ -456,7 +458,7 @@ public abstract class DropdownContainer extends TextBox implements HasDojo {
 	private native void setDojoDate(JavaScriptObject dojoWidget,JavaScriptObject date)
 	/*-{
 	    dojoWidget.setValue(date);
-	    
+	    dojoWidget._onBlur();
 	 }-*/;
 	
 
