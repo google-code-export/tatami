@@ -458,7 +458,7 @@ public abstract class DropdownContainer extends TextBox implements HasDojo {
 	private native void setDojoDate(JavaScriptObject dojoWidget,JavaScriptObject date)
 	/*-{
 	    dojoWidget.setValue(date);
-	    dojoWidget._onBlur();
+	    
 	 }-*/;
 	
 
