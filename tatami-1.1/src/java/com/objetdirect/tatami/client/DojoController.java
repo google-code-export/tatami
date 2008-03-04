@@ -101,8 +101,9 @@ public class DojoController {
 	/*-{
 	    try {
 	     dojoWidget.destroyRecursive();
+	      
 	     } catch (e) {
-	    //  $wnd.alert(e);
+	      
 	     }
 	 }-*/;
 
