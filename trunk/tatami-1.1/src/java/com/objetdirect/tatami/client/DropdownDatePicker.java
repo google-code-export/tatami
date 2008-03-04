@@ -37,21 +37,49 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public class DropdownDatePicker extends DropdownContainer {
 
+	
+	
+   
+	
+	private String datePattern = null;
+	
 	/**
-	 * Creates the from input.
+	 * Creates the form input with a default date pattern to dd/MM/yyyy
 	 * 
 	 */
 	public DropdownDatePicker() {
-		this(null, null);
+		this(null,null, null);
 
 	}
 
 	/**
+	 * Creates the form input specifying a  date pattern.
+	 * @param datePattern
+	 */
+	public DropdownDatePicker(String datePattern) {
+		this(datePattern,null, null);
+
+	}
+	
+	
+	/**
+	 * 
+	 * @param startDate
+	 * @param endDate
+	 */
+	public DropdownDatePicker(Date startDate, Date endDate) {
+		this(null,startDate,endDate);
+		
+	}
+	
+	
+	/**
 	 * Creates DropdownDatePicker specifying some options
 	 * 
 	 */
-	public DropdownDatePicker(Date startDate, Date endDate) {
+	public DropdownDatePicker(String datePattern,Date startDate, Date endDate) {
 		super(startDate,endDate);
+		this.datePattern = datePattern;
 	}
 
 	/**
@@ -63,11 +91,20 @@ public class DropdownDatePicker extends DropdownContainer {
 	}
 
 	/**
+	 * Returns the date pattern used to display the date in the text box
+	 * @return a date pattern, see <a href="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">http://www.unicode.org/reports/tr35/#Date_Format_Patterns</a>
+	 */
+	public String getDatePattern() {
+		return this.datePattern;
+	}
+	
+	
+	/**
 	 * Creates the DOJO widget which the type is given by the method
 	 * {@link getDojoName()}
 	 */
 	public void createDojoWidget() {
-		this.dojoWidget = createDateTextBox(getMinJavaScriptDate(), getMaxJavaScriptDate());
+		this.dojoWidget = createDateTextBox(this.datePattern,getMinJavaScriptDate(), getMaxJavaScriptDate());
 	
 	}
 
@@ -77,7 +114,7 @@ public class DropdownDatePicker extends DropdownContainer {
 	 * @param endDate the last date selectable in the calendar.
 	 * @return the DOJO widget or <code>null</code> if there was a problem
 	 */
-	private native JavaScriptObject createDateTextBox(JavaScriptObject startDate, JavaScriptObject endDate)
+	private native JavaScriptObject createDateTextBox(String datePattern,JavaScriptObject startDate, JavaScriptObject endDate)
 	/*-{
 	 if (startDate==null) startDate="1492-10-12";
 	 if (endDate==null) endDate="2492-10-12";
@@ -86,6 +123,8 @@ public class DropdownDatePicker extends DropdownContainer {
 	  dateTextBox =  new $wnd.dijit.form.DateTextBox(
 	     {
 	       constraints: { 
+	          datePattern : datePattern,
+	          
 	          min: startDate,
 	          max: endDate
 	       }
