@@ -165,8 +165,14 @@ public class DropdownTimePicker extends DropdownContainer {
 	 * @return the date whitout seconds and millisecond information.
 	 */
 	protected Date adjust(Date date) {
-		//return  new Date(date.getTime() - (date.getTime() % 60000));
-		return  date;
+		Date originalDate = getDate();
+        if (originalDate != null) {
+            Date newDate = new Date(originalDate.getTime());
+            newDate.setHours(date.getHours());
+            newDate.setMinutes(date.getMinutes());
+            date = newDate;    
+        }
+        return  date;
 		
 	}
 
