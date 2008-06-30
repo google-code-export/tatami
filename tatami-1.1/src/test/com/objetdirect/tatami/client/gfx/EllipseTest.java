@@ -37,8 +37,9 @@ public class EllipseTest extends TestGraphicObject {
 	 *
 	 */
 	public void testRadius() {
+		  initGraphics();
 		Ellipse e = (Ellipse)component;
 		assertEquals(70,e.getRadiusX());
-		assertEquals(70,e.getRadiusY());
+		assertEquals(100,e.getRadiusY());
 	}
 }

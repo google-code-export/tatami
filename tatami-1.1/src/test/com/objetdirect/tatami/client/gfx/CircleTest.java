@@ -35,6 +35,7 @@ public class CircleTest extends TestGraphicObject {
 
 	/** Tests the radius */
 	public void testRadius() {
+	    initGraphics();
 		Circle c = (Circle)component;
 		assertEquals(50,c.getRadius());
 	}
