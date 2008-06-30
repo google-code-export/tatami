@@ -93,6 +93,21 @@ public Font(String family,int size,String style,String variant,String weight) {
    this.weight = weight;
 }
 
+
+/**
+ * Creates a new Font from a given font.
+ * @param font the font to copy
+ */
+public  Font(Font font) {
+	this(font.getFamily(),
+		font.getSize(),
+ 		font.getStyle(),
+			font.getVariant(),
+			font.getWeight()
+);
+}
+
+
 /**
  * Returns the family of the font
  * @return the family of the font
