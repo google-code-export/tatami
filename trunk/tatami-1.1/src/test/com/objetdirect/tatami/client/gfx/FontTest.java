@@ -36,7 +36,8 @@ public class FontTest extends DefaultTatamiTest {
 	 * Creates a point
 	 */
 	public void setUp() {
-		font = Font.DEFAULT_FONT;
+		font = new Font(Font.DEFAULT_FONT);
+		
 	}
 	
 	/**

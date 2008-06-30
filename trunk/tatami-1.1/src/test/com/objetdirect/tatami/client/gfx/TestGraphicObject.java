@@ -57,6 +57,7 @@ abstract public class TestGraphicObject extends DefaultTatamiTest {
    *
    */
   protected void initGraphics() {
+	  RootPanel.get().clear();
 	  canvas = new GraphicCanvas();
 	  RootPanel.get().add(canvas);
 	  canvas.setSize("600px", "500px");

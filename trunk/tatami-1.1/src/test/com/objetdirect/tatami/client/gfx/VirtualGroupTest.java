@@ -86,5 +86,20 @@ public class VirtualGroupTest extends TestGraphicObject {
     public VirtualGroup getGroup() {
     	return (VirtualGroup)component;
     }
+    
+    
+    
+    public void testScale() {
+    	initGraphics();
+    	Rect  r = new Rect(10,60);
+		Circle circle = new Circle(50);
+		getGroup().add(r);
+		getGroup().add(circle);
+		Rectangle bounds =r.getBounds();
+		final Point before = component.getLocation(); 
+		component.scale(1.5f);
+		assertFalse(bounds.isEmpty());
+		assertEquals(before,component.getLocation());
+    }
 
 }//end of class

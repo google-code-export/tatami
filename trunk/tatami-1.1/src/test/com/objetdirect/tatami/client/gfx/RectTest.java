@@ -39,6 +39,7 @@ public class RectTest extends TestGraphicObject {
 	 *
 	 */
 	public void testRect() {
+		  initGraphics();
 		Rect rect = (Rect)component;
 		assertTrue(width == rect.getWidth());
 		assertTrue(height == rect.getHeight());
