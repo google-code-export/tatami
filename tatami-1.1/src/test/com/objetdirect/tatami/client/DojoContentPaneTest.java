@@ -49,6 +49,7 @@ public class DojoContentPaneTest extends DefaultTatamiTest {
 		assertSame(pane.getWidget(1),label);
 		pane.remove(label);
 		assertEquals(count,pane.getWidgetCount());
+		assertSame(pane.getId(),ID);
 	}
 
 	
@@ -66,6 +67,7 @@ public class DojoContentPaneTest extends DefaultTatamiTest {
 	 */
 	public void tearDown() {
 		this.image = null;
+		
 		this.pane = null;
 	}
 	
@@ -74,9 +76,11 @@ public class DojoContentPaneTest extends DefaultTatamiTest {
 	 * @return an instance of DojoContentPane, a new instance if created if it was not existed
 	 */
 	private DojoContentPane getPane() {
+		RootPanel.get().clear();
 		if ( pane == null) {
 			this.pane = new DojoContentPane(ID);
             this.pane.add(getImage());
+            
             RootPanel.get().add(pane);
 		}
 		return this.pane;
