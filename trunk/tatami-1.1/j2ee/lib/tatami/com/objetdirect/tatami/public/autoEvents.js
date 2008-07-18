@@ -1,14 +1,14 @@
 
 
 /**
- Cette methode cree un évènement souris sur un element de l'arbre DOM. 
- Util pour simuler un comportement des objets javascript intéractifs. 
- @param e Element de l'arbre DOM où l'on doit déclancher l'évènement souris
- @param eventType le type de l'évènement souris : onclick, onmousemove
+ Cette methode cree un evenement souris sur un element de l'arbre DOM.
+ Util pour simuler un comportement des objets javascript interactifs.
+ @param e Element de l'arbre DOM où l'on doit déclancher l'evenement souris
+ @param eventType le type de l'evenement souris : onclick, onmousemove
  @param x position de la souris en abscisse
  @param y position de la souris en ordonnées
- @param button le bouton de la souris emetteur de l'evènement pour un click, mouse pressed, mouse released
- @param click le nombre de click 
+ @param button le bouton de la souris emetteur de l'evenement pour un click, mouse pressed, mouse released
+ @param click le nombre de click
 */
 
  function fireMouseEvent (e,eventType, x,y, button, click) {
@@ -24,17 +24,17 @@
 	  y,          // screenY
 	  x,          // clientX
 	  y,          // clientY
-   	  false,      // est-ce que la touche Ctrl est pressée?
-	  false,      // est-ce que la touche Alt est pressée?
-	  false,      // est-ce que la touche Shift est pressée?
-	  false,      // est-ce que la touche Meta est pressée?
-	  button,          // quel est le bouton préssé
-	  e      // l'élement source de cet evenement
+   	  false,      // est-ce que la touche Ctrl est pressee?
+	  false,      // est-ce que la touche Alt est pressee?
+	  false,      // est-ce que la touche Shift est pressee?
+	  false,      // est-ce que la touche Meta est pressee?
+	  button,          // quel est le bouton presse
+	  e      // l'element source de cet evenement
 	 );
 
 
 	 e.dispatchEvent(evObj);
- 	 } else {	 
+ 	 } else {
 	 var evObj = document.createEventObject();
 
 	 evObj.screenX = x;
@@ -48,8 +48,8 @@
 }
 
 /*
-vérifie que ce fichier est bien chergé dans un browser, 
-méthode obsolète pour une version supérieur à 1.3 de GWT
+verifie que ce fichier est bien charge dans un browser,
+methode obsolete pour une version superieur a 1.3 de GWT
 */
 function autoEventsIsOk() {
  //ne fait rien

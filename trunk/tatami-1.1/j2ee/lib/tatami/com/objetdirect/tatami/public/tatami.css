@@ -1,3 +1,4 @@
+
 @import	"./dijit/themes/tundra/tundra.css"	;
 @import "./dijit/themes/tundra/tundra_rtl.css";
 @import "./dijit/themes/dijit.css";
@@ -13,13 +14,5 @@ body {
 	font-family: Arial, sans-serif;
 	font-size: small;
 	margin: 5px;
-}
-
-a {
-	color: darkblue;
-}
-
-a:visited {
-	color: darkblue;
 }
 
