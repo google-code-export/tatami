@@ -33,12 +33,12 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 		// TODO
 		// fix really long labels in vertical mode
 		//
-	
+
 		this.pos = {'x': -1, 'y': -1};	// current cursor position, relative to the grid
-		
+
 		// for conservative trigger mode, when triggered, timerScale is gradually increased from 0 to 1
 		this.timerScale = 1.0;
-	
+
 	},
 
 	EDGE: {
@@ -52,25 +52,25 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 	templateString: '<div class="dojoxFisheyeListBar" dojoAttachPoint="containerNode"></div>',
 
 	snarfChildDomOutput: true,
-	
+
 	// itemWidth: Integer
 	//	width of menu item (in pixels) in it's dormant state (when the mouse is far away)
 	itemWidth: 40,
-	
+
 	// itemHeight: Integer
 	//	height of menu item (in pixels) in it's dormant state (when the mouse is far away)
 	itemHeight: 40,
-	
+
 	// itemMaxWidth: Integer
 	//	width of menu item (in pixels) in it's fully enlarged state (when the mouse is directly over it)
 	itemMaxWidth: 150,
-	
+
 	// itemMaxHeight: Integer
 	//	height of menu item (in pixels) in it's fully enlarged state (when the mouse is directly over it)
 	itemMaxHeight: 150,
 
 	imgNode: null,
-	
+
 	// orientation: String
 	//	orientation of the menu, either "horizontal" or "vertical"
 	orientation: 'horizontal',
@@ -78,20 +78,20 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 	// isFixed: Boolean
 	//	toggle to enable additional listener (window scroll) if FisheyeList is in a fixed postion
 	isFixed: false,
-	
+
 	// conservativeTrigger: Boolean
 	//	if true, don't start enlarging menu items until mouse is over an image;
 	//	if false, start enlarging menu items as the mouse moves near them.
 	conservativeTrigger: false,
-	
+
 	// effectUnits: Number
 	//	controls how much reaction the menu makes, relative to the distance of the mouse from the menu
 	effectUnits: 2,
-		
+
 	// itemPadding: Integer
 	//	padding (in pixels) betweeen each menu item
 	itemPadding: 10,
-	
+
 	// attachEdge: String
 	//	controls the border that the menu items don't expand past;
 	//	for example, if set to "top", then the menu items will drop downwards as they expand.
@@ -146,7 +146,7 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 		this.proximityRight  = this.itemWidth  * (effectUnits - 0.5);
 		this.proximityTop    = this.itemHeight * (effectUnits - 0.5);
 		this.proximityBottom = this.itemHeight * (effectUnits - 0.5);
-	
+
 		if(this.anchorEdge == e.LEFT){
 			this.proximityLeft = 0;
 		}
@@ -166,13 +166,13 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 			this.proximityBottom /= 2;
 		}
 	},
-	
+
 	startup: function(){
 		// summary: create our connections and setup our FisheyeList
 		this.children = this.getChildren();
 		//original postCreate() --tk
 		this._initializePositioning();
-	
+
 		//
 		// in liberal trigger mode, activate menu whenever mouse is close
 		//
@@ -180,24 +180,28 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 			this._onMouseMoveHandle = dojo.connect(document.documentElement, "onmousemove", this, "_onMouseMove");
 		}
 		if (this.isFixed){
-			this._onScrollHandle = dojo.connect(document,"onscroll",this,"_onScroll");
+			//this  handle is remove because with GWT the disconnect method doesn't work
+			//it's replaced in the GWT side
+			//this._onScrollHandle = dojo.connect(document,"onscroll",this,"_onScroll");
 		}
-			
+
 		// Deactivate the menu if mouse is moved off screen (doesn't work for FF?)
 		this._onMouseOutHandle = dojo.connect(document.documentElement, "onmouseout", this, "_onBodyOut");
 		this._addChildHandle = dojo.connect(this, "addChild", this, "_initializePositioning");
-		this._onResizeHandle = dojo.connect(window,"onresize", this, "_initializePositioning");
+        //this  handle is remove because with GWT the disconnect method doesn't work
+			//it's replaced in the GWT side
+		//this._onResizeHandle = dojo.connect(window,"onresize", this, "_initializePositioning");
 	},
-	
+
 	_initializePositioning: function(){
 		this.itemCount = this.children.length;
-	
+
 		this.barWidth  = (this.isHorizontal ? this.itemCount : 1) * this.itemWidth;
 		this.barHeight = (this.isHorizontal ? 1 : this.itemCount) * this.itemHeight;
-	
+
 		this.totalWidth  = this.proximityLeft + this.proximityRight  + this.barWidth;
 		this.totalHeight = this.proximityTop  + this.proximityBottom + this.barHeight;
-	
+
 		//
 		// calculate effect ranges for each item
 		//
@@ -245,7 +249,7 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 			elm.style.top    = itm.posY + 'px';
 			elm.style.width  = this.itemWidth + 'px';
 			elm.style.height = this.itemHeight + 'px';
-			
+
 			itm.imgNode.style.left = this.itemPadding+'%';
 			itm.imgNode.style.top = this.itemPadding+'%';
 			itm.imgNode.style.width = (100 - 2 * this.itemPadding) + '%';
@@ -337,7 +341,7 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 	},
 
 	_onScroll: function(){
-		this._calcHitGrid();	
+		this._calcHitGrid();
 	},
 
 	onResized: function(){
@@ -362,7 +366,7 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 		var pos = this.isHorizontal ? x : y;
 		var prx = this.isHorizontal ? this.proximityLeft : this.proximityTop;
 		var siz = this.isHorizontal ? this.itemWidth : this.itemHeight;
-		var sim = this.isHorizontal ? 
+		var sim = this.isHorizontal ?
 			(1.0-this.timerScale)*this.itemWidth + this.timerScale*this.itemMaxWidth :
 			(1.0-this.timerScale)*this.itemHeight + this.timerScale*this.itemMaxHeight ;
 
@@ -543,7 +547,7 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 	_positionLabel: function(itm){
 		var x = 0;
 		var y = 0;
-		
+
 		var mb = dojo.marginBox(itm.lblNode);
 
 		if(this.labelEdge == this.EDGE.TOP){
@@ -601,7 +605,7 @@ dojo.declare("dojox.widget.FisheyeList", [dijit._Widget, dijit._Templated, dijit
 		dojo.disconnect(this._onMouseMoveHandle);
 		dojo.disconnect(this._addChildHandle);
 		if (this.isFixed) { dojo.disconnect(this._onScrollHandle); }
-		dojo.disconnect(this._onResizeHandle); 
+		dojo.disconnect(this._onResizeHandle);
 		this.inherited("destroyRecursive",arguments);
 	}
 });
@@ -682,7 +686,7 @@ dojo.declare("dojox.widget.FisheyeListItem", [dijit._Widget, dijit._Templated, d
 	startup: function(){
 		this.parent = this.getParent();
 	},
-	
+
 	onMouseOver: function(/*Event*/ e){
 		// summary: callback when user moves mouse over this menu item
 		// in conservative mode, don't activate the menu until user mouses over an icon
@@ -694,7 +698,7 @@ dojo.declare("dojox.widget.FisheyeListItem", [dijit._Widget, dijit._Templated, d
 			this.parent._positionLabel(this);
 		}
 	},
-	
+
 	onMouseOut: function(/*Event*/ e){
 		// summary: callback when user moves mouse off of this menu item
 		dojo.removeClass(this.lblNode, "dojoxFishSelected");
