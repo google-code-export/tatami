@@ -342,7 +342,7 @@ public class FishEye extends AbstractDojo implements WindowResizeListener {
 	 */
 	private void removeItem(Item item) {
 		removeChildWidget(getDojoWidget(), item.child);
-		DojoController.getInstance().destroy(item.child);
+		//DojoController.getInstance().destroy(item.child);
 		item.child = null;
 	}
 
@@ -356,7 +356,6 @@ public class FishEye extends AbstractDojo implements WindowResizeListener {
     	removeItems();
 
 	}
-
 
 
 
