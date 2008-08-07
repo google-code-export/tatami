@@ -99,11 +99,11 @@ public class DojoController {
 	 */
 	public native void destroy(JavaScriptObject dojoWidget)
 	/*-{
-	    try {
+	   // try {
 	     dojoWidget.destroyRecursive();
-        } catch (e) {
-	      $wnd.alert("error " + e);
-	     }
+       // } catch (e) {
+	     // $wnd.alert("error " + e.toString());
+	    // }
 	 }-*/;
 
 	/**
