@@ -1,0 +1,25 @@
+.tundra .myTreeOpened {
+	background-image: url('folder-open.png');
+	background-position: top;
+	top: 1px;
+	height: 32px;
+	width: 32px;
+}
+
+.tundra .myTreeClosed {
+	background-image: url('folder.png');
+	background-position: top;
+	top: 1px;
+	height: 32px;
+	width: 32px;
+}
+
+.tundra .noIcon{
+	background-image: none;
+	height: 32px;
+	width: 32px;
+}
+
+.myLabelClass{
+	color: red;
+}
