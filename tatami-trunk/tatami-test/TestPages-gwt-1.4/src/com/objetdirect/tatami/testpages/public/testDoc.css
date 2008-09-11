@@ -1,0 +1,12 @@
+.tundra .dojoxGrid-header .red {
+	color: red !important;
+}
+
+.red{
+	color: red;	
+}
+
+.tundra .dojoxGrid-header .favorite{
+	background-image: url("emblem-favorite.png");
+	background-repeat : no-repeat;
+}
