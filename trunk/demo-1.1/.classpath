@@ -6,5 +6,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/gwt-user.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Tatami-1.1"/>
+	<classpathentry kind="lib" path="lib/gwt-dev-windows.jar"/>
+	<classpathentry kind="lib" path="lib/toolkit/test-tools/junit.jar"/>
 	<classpathentry kind="output" path="classes/java"/>
 </classpath>
