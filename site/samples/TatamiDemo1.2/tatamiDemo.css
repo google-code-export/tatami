@@ -303,8 +303,9 @@ a:visited {
 	top: 0px;
 	left: 0px;
 	height : 140px;
-	display: block;
+	display: inline;
 	margin-left: 15px;
+	overflow: visible;
 }
 
 .DateTimeDemo-label {
@@ -337,7 +338,6 @@ a:visited {
    background-position:top left;
    background-repeat:repeat-x;
    text-decoration : underline ;
-   display: inline;
    position: relative;
    float: left;
    margin-left: 15px;
@@ -347,21 +347,21 @@ a:visited {
 .TatamiDemo-title {
    margin:50px;
    font-size: 32px;
-   float: left;
+   display: inline;
 }
 
 
 .TatamiDemo-logoFT {
    margin-left:50px;
    margin-top:40px;
-   float: left;   
+   display: inline;
 }
 
 .TatamiDemo-logoOD {
    margin-right:5px;
    margin-top:25px;
-   float: left;
    height: 100px;
+   display: inline;
 }
 
 .TatamiDemo-content{
@@ -375,9 +375,8 @@ a:visited {
   background-repeat:repeat-x;
   border: solid 1px #C3D9FF;
   margin:0px;
+  margin-left : 140px;
   position: relative;
-  width: 90%;
-  float: right;
 }
 
 .GfxDemo-popup {
