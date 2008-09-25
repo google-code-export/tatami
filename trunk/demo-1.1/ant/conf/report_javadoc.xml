@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- CVS History
 	  $Log: report_javadoc.xml,v $
-	  Revision 1.1  2007/10/24 13:35:32  tvzl8571
-	  *** empty log message ***
-	
-	  Revision 1.1  2007/08/14 07:55:55  tvzl8571
-	  TatamiDemo, projet demontrant les differents composants du projet Tatami
-	
-	  Revision 1.1  2007/05/25 12:27:21  beal6226
-	  Exemple d'utilisation de GWT avec :
-	  - Un menu déroulant qui fait apparaitre une popup
-	  - Un bouton qui fait apparaitre un hello world
-	  - Des champs de saisie qui modifient dynamiquement un tableau de données.
-	  - Une utilisation de GWT RPC pour récupérer des données côté serveur (après, c'est bouchonné, il n'y a pas de SGBD).
+	  Revision 1.3  2007/12/18 13:13:27  beal6226
+	  Version G3R2C0
 	
 	  Revision 1.2  2006/11/02 13:54:48  beal6226
 	  Synchronisation avec referentiel plateforme Eclipse
@@ -70,6 +60,7 @@
 		<tag name="ejb.interface-method" enabled="false" />
 		<tag name="ejb.ejb-external-ref" enabled="false" />
 	</javadoc>
+		<echo message="========== Rapport javadoc terminé, consulter ${dist.dir}/reports/javadoc ==========" />
 	</target>
 
 	<!-- TARGET internet init -->

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- CVS History
   $Log: common.xml,v $
-  Revision 1.1  2007/10/24 13:35:33  tvzl8571
-  *** empty log message ***
+  Revision 1.3  2007/12/18 13:13:27  beal6226
+  Version G3R2C0
 
-  Revision 1.1  2007/08/14 07:55:55  tvzl8571
-  TatamiDemo, projet demontrant les differents composants du projet Tatami
+  Revision 1.3  2007/12/11 10:23:55  beal6226
+  Synchronisation avec le toolkit G3R2
+
+  Revision 1.5  2007/08/13 12:24:28  beal6226
+  compilation GWT en obfuscated
+
+  Revision 1.4  2007/08/10 14:02:56  beal6226
+  module lib et pas jar pour gwt
 
   Revision 1.3  2007/08/10 12:16:07  beal6226
   Modif pour permettre la compilation de jar GWT avec les sources
@@ -19,15 +25,6 @@
   - Un bouton qui fait apparaitre un hello world
   - Des champs de saisie qui modifient dynamiquement un tableau de données.
   - Une utilisation de GWT RPC pour récupérer des données côté serveur (après, c'est bouchonné, il n'y a pas de SGBD).
-
-  Revision 1.2  2006/11/02 13:54:48  beal6226
-  Synchronisation avec referentiel plateforme Eclipse
-
-  Revision 1.1  2006/10/10 08:10:37  ajta5630
-  Intérgration dans la barre d'outils et le menu du workbench. Intégration de l'aide
-
-  Revision 1.1  2006/03/20 16:31:35  beal6226
-  Initial plugin version
 
   Revision 1.28  2006/03/17 11:28:37  beal6226
   Exclusion des fichiers CVS et recopie des fichiers non java de generated
@@ -110,52 +107,22 @@
 ]>
 <project name="common" default="compile_module" basedir="../..">
 	&setenv;
-	
+
 	<!-- TARGET copy_j2ee -->
 	<!-- On recopie tous les fichiers du module présents dans le répertoire j2ee vers
-	le répertoire temporaire ${tmp.dir}/${module.type}/${module.name}/package.
-	Au passage on remplace, dans les fichiers *.template.*, les tokens du type @variable@
-	par leur véritable valeur, trouvée dans le fichier de propriétés du projet. Cette
-	substitution s'avère intéressante dans le cas où on	déploie vers des environnements 
-	différents, ou dans le cas des web services, car il suffit alors de modifier ces
-	variables dans le fichier de propriété. -->
+	le répertoire destination, sauf les fichiers templates et les fichiers spécifiques
+	au serveur d'application.
+	 -->
 	<target name="copy_j2ee">
 		<echo message="Copie des fichiers de ${j2ee.dir}/${module.type}/${module.name}" />
-		<!-- Copie de tous les fichiers J2EE du module common, puis du module en cours,
-		dans le répertoire temporaire -->
-		<copy todir="${tmp.dir}/${module.type}/${module.name}/${package.dir}">
-			<fileset dir="${j2ee.dir}/${module.type}/common" />
-		</copy>
-		<copy todir="${tmp.dir}/${module.type}/${module.name}/${package.dir}"
-		      overwrite="yes">
-			<fileset dir="${j2ee.dir}/${module.type}/${module.name}" />
-		</copy>
-
 		<!-- Copie du fichier de propriétés du projet, et création s'il n'existe pas -->
 		<copy file="${ant.modules.dir}/${module.type}.${module.name}.properties"
 		      tofile="${tmp.dir}/${module.type}/${module.name}/${module.name}.arobase"
-			failonerror="false"/>
+			failonerror="false" verbose="${verbose}"/>
+		<mkdir dir="${tmp.dir}/${module.type}/${module.name}" />
 		<touch file="${tmp.dir}/${module.type}/${module.name}/${module.name}.arobase" />
-		<!-- Remplacement des variables sous la forme @variable@ dans tous les fichiers 
-		de la forme *.template.* présents dans le répertoire temporaire. En même temps,
-		renommage des fichiers en supprimant .template -->
-		<copy todir="${tmp.dir}/${module.type}/${module.name}/${package.dir}">
-			<fileset dir="${tmp.dir}/${module.type}/${module.name}/${package.dir}">
-				<include name="**/*.template.*" />
-			</fileset>
-			<filterset>
-				<filtersfile file="${tmp.dir}/${module.type}/${module.name}/${module.name}.arobase" />
-			</filterset>
-			<mapper type="regexp" from="^(.*)\.template\.(.*)$$" to="\1.\2" />
-		</copy>
-		<!-- Suppression des fichiers .template -->
-		<delete>
-			<fileset dir="${tmp.dir}/${module.type}/${module.name}/${package.dir}">
-				<include name="**/*.template.*" />
-			</fileset>
-		</delete>
-		<!-- Suppression des fichiers de déploiement qui ne correspondent pas 
-		au serveur d'application en cours -->
+
+		<!-- Copie conditionnelle suivant le serveur d'application en cours -->
 		<condition property="is.jonas">
 			<equals arg1="${server.name}" arg2="jonas" />
 		</condition>
@@ -165,32 +132,163 @@
 		<condition property="is.websphere">
 			<equals arg1="${server.name}" arg2="websphere" />
 		</condition>
-		<antcall target="delete_jonas" />
-		<antcall target="delete_weblogic" />
-		<antcall target="delete_websphere" />
+		<antcall target="copy_jonas" />
+		<antcall target="copy_weblogic" />
+		<antcall target="copy_websphere" />
 	</target>
 
+
 	<!-- TARGETs conditionnelles -->
-	<target name="delete_jonas" unless="is.jonas">
-		<delete>
-			<fileset dir="${tmp.dir}/${module.type}/${module.name}/${package.dir}">
-				<include name="**/jonas*" />
+	<target name="copy_jonas" if="is.jonas">
+		<!-- Copie de tous les fichiers J2EE du module common, puis du module en cours,
+		dans le répertoire destination -->
+		<copy todir="${dest.dir}" failonerror="false" verbose="${verbose}" >
+			<fileset dir="${j2ee.dir}/${module.type}/common">
+				<exclude name="**/*.template.*" />
+				<exclude name="**/weblogic*" />
+				<exclude name="**/ibm*" />
 			</fileset>
-		</delete>
+		</copy>
+		<copy todir="${dest.dir}" verbose="${verbose}">
+			<fileset dir="${j2ee.dir}/${module.type}/${module.name}">
+				<exclude name="**/*.template.*" />
+				<exclude name="**/weblogic*" />
+				<exclude name="**/ibm*" />
+			</fileset>
+		</copy>
+
+		<!-- On remplace, dans les fichiers *.template.*, les tokens du type @variable@
+		par leur véritable valeur, trouvée dans le fichier de propriétés du projet. Cette
+		substitution s'avère intéressante dans le cas où on	déploie vers des environnements
+		différents, ou dans le cas des web services, car il suffit alors de modifier ces
+		variables dans le fichier de propriété.
+		-->
+		<!-- Remplacement des variables sous la forme @variable@ dans tous les fichiers
+		de la forme *.template.* présents dans le répertoire j2ee. En même temps,
+		renommage des fichiers en supprimant .template -->
+		<copy todir="${dest.dir}" failonerror="false" verbose="${verbose}">
+			<fileset dir="${j2ee.dir}/${module.type}/common">
+				<include name="**/*.template.*" />
+				<exclude name="**/weblogic*" />
+				<exclude name="**/ibm*" />
+			</fileset>
+			<filterset>
+				<filtersfile file="${tmp.dir}/${module.type}/${module.name}/${module.name}.arobase" />
+			</filterset>
+			<mapper type="regexp" from="^(.*)\.template\.(.*)$$" to="\1.\2" />
+		</copy>
+		<copy todir="${dest.dir}" verbose="${verbose}">
+			<fileset dir="${j2ee.dir}/${module.type}/${module.name}">
+				<include name="**/*.template.*" />
+				<exclude name="**/weblogic*" />
+				<exclude name="**/ibm*" />
+			</fileset>
+			<filterset>
+				<filtersfile file="${tmp.dir}/${module.type}/${module.name}/${module.name}.arobase" />
+			</filterset>
+			<mapper type="regexp" from="^(.*)\.template\.(.*)$$" to="\1.\2" />
+		</copy>
 	</target>
-	<target name="delete_weblogic" unless="is.weblogic">
-		<delete>
-			<fileset dir="${tmp.dir}/${module.type}/${module.name}/${package.dir}">
-				<include name="**/weblogic*" />
+
+	<target name="copy_weblogic" if="is.weblogic">
+		<!-- Copie de tous les fichiers J2EE du module common, puis du module en cours,
+		dans le répertoire destination -->
+		<copy todir="${dest.dir}" failonerror="false" verbose="${verbose}" >
+			<fileset dir="${j2ee.dir}/${module.type}/common">
+				<exclude name="**/*.template.*" />
+				<exclude name="**/jonas*" />
+				<exclude name="**/ibm*" />
 			</fileset>
-		</delete>
+		</copy>
+		<copy todir="${dest.dir}" verbose="${verbose}">
+			<fileset dir="${j2ee.dir}/${module.type}/${module.name}">
+				<exclude name="**/*.template.*" />
+				<exclude name="**/jonas*" />
+				<exclude name="**/ibm*" />
+			</fileset>
+		</copy>
+
+		<!-- On remplace, dans les fichiers *.template.*, les tokens du type @variable@
+		par leur véritable valeur, trouvée dans le fichier de propriétés du projet. Cette
+		substitution s'avère intéressante dans le cas où on	déploie vers des environnements
+		différents, ou dans le cas des web services, car il suffit alors de modifier ces
+		variables dans le fichier de propriété.
+		-->
+		<!-- Remplacement des variables sous la forme @variable@ dans tous les fichiers
+		de la forme *.template.* présents dans le répertoire j2ee. En même temps,
+		renommage des fichiers en supprimant .template -->
+		<copy todir="${dest.dir}" failonerror="false" verbose="${verbose}">
+			<fileset dir="${j2ee.dir}/${module.type}/common">
+				<include name="**/*.template.*" />
+				<exclude name="**/jonas*" />
+				<exclude name="**/ibm*" />
+			</fileset>
+			<filterset>
+				<filtersfile file="${tmp.dir}/${module.type}/${module.name}/${module.name}.arobase" />
+			</filterset>
+			<mapper type="regexp" from="^(.*)\.template\.(.*)$$" to="\1.\2" />
+		</copy>
+		<copy todir="${dest.dir}" verbose="${verbose}">
+			<fileset dir="${j2ee.dir}/${module.type}/${module.name}">
+				<include name="**/*.template.*" />
+				<exclude name="**/jonas*" />
+				<exclude name="**/ibm*" />
+			</fileset>
+			<filterset>
+				<filtersfile file="${tmp.dir}/${module.type}/${module.name}/${module.name}.arobase" />
+			</filterset>
+			<mapper type="regexp" from="^(.*)\.template\.(.*)$$" to="\1.\2" />
+		</copy>
 	</target>
-	<target name="delete_websphere" unless="is.websphere">
-		<delete>
-			<fileset dir="${tmp.dir}/${module.type}/${module.name}/${package.dir}">
-				<include name="**/ibm*" />
+	<target name="copy_websphere" if="is.websphere">
+		<!-- Copie de tous les fichiers J2EE du module common, puis du module en cours,
+		dans le répertoire destination -->
+		<copy todir="${dest.dir}" failonerror="false" verbose="${verbose}" >
+			<fileset dir="${j2ee.dir}/${module.type}/common">
+				<exclude name="**/*.template.*" />
+				<exclude name="**/weblogic*" />
+				<exclude name="**/jonas*" />
 			</fileset>
-		</delete>
+		</copy>
+		<copy todir="${dest.dir}" verbose="${verbose}">
+			<fileset dir="${j2ee.dir}/${module.type}/${module.name}">
+				<exclude name="**/*.template.*" />
+				<exclude name="**/weblogic*" />
+				<exclude name="**/jonas*" />
+			</fileset>
+		</copy>
+
+		<!-- On remplace, dans les fichiers *.template.*, les tokens du type @variable@
+		par leur véritable valeur, trouvée dans le fichier de propriétés du projet. Cette
+		substitution s'avère intéressante dans le cas où on	déploie vers des environnements
+		différents, ou dans le cas des web services, car il suffit alors de modifier ces
+		variables dans le fichier de propriété.
+		-->
+		<!-- Remplacement des variables sous la forme @variable@ dans tous les fichiers
+		de la forme *.template.* présents dans le répertoire j2ee. En même temps,
+		renommage des fichiers en supprimant .template -->
+		<copy todir="${dest.dir}" failonerror="false" verbose="${verbose}">
+			<fileset dir="${j2ee.dir}/${module.type}/common">
+				<include name="**/*.template.*" />
+				<exclude name="**/weblogic*" />
+				<exclude name="**/jonas*" />
+			</fileset>
+			<filterset>
+				<filtersfile file="${tmp.dir}/${module.type}/${module.name}/${module.name}.arobase" />
+			</filterset>
+			<mapper type="regexp" from="^(.*)\.template\.(.*)$$" to="\1.\2" />
+		</copy>
+		<copy todir="${dest.dir}" verbose="${verbose}">
+			<fileset dir="${j2ee.dir}/${module.type}/${module.name}">
+				<include name="**/*.template.*" />
+				<exclude name="**/weblogic*" />
+				<exclude name="**/jonas*" />
+			</fileset>
+			<filterset>
+				<filtersfile file="${tmp.dir}/${module.type}/${module.name}/${module.name}.arobase" />
+			</filterset>
+			<mapper type="regexp" from="^(.*)\.template\.(.*)$$" to="\1.\2" />
+		</copy>
 	</target>
 
 	<!-- TARGET copy_lib -->
@@ -219,8 +317,8 @@
 		<echo message="Copie des librairies listées dans ${module.type}.${module.name}.lib.include" />
 		<!-- dummy_file est nécessaire pour le cas où le includeslibraries est vide, sinon on copie tout -->
 		<!-- flatten permet d'ignorer l'arborescence en entrée et de tout placer dans WEB-INF/lib ou dans lib pour les ejb -->
-		<copy todir="${tmp.dir}/${module.type}/${module.name}/${package.dir}/${sub.dir}"
-		      flatten="true">
+		<copy todir="${dest.dir}/${sub.dir}"
+		      flatten="true" verbose="${verbose}">
 			<fileset dir="${lib.dir}"
 			         includesfile="${includeslibraries}"
 			         includes="dummy_file" />
@@ -232,7 +330,7 @@
 
 
 	<!-- TARGET compile_module -->
-	<!-- On compile tous les fichiers du module dans le répertoire temporaire qui se trouve 
+	<!-- On compile tous les fichiers du module dans le répertoire temporaire qui se trouve
 	sous ${tmp.dir}/${module.type}/${module.name}/${package.dir}/${sub.dir}. Ce répertoire est différent de
 	celui d'Eclipse pour éviter les interférences et permettre d'utiliser éventuellement
 	un autre JDK. -->
@@ -250,7 +348,7 @@
 		<property name="output.dir"
 		          value="${tmp.dir}/${module.type}/${module.name}/${package.dir}/${sub.dir}" />
 		<mkdir dir="${output.dir}" />
-		<!-- dummy_file est nécessaire pour le cas où le includesfiles est vide, 
+		<!-- dummy_file est nécessaire pour le cas où le includesfiles est vide,
 		 sinon javac prend tout src/java et tout generated. -->
 		<mkdir dir="${generated.dir}" />
 		<javac srcdir="${src.dir}:${generated.dir}"
@@ -267,7 +365,7 @@
 		${tmp.dir}/${module.type}/${module.name}/${package.dir}/${sub.dir}, comme le ferait Eclipse.
 		On utilise le fichier includesfiles sans les fichiers java. dummy_file est nécessaire si
 		le includesfile est vide -->
-		<copy todir="${output.dir}">
+		<copy todir="${output.dir}" verbose="${verbose}">
 			<fileset dir="${src.dir}"
 			         includesfile="${includesfiles}"
 			         includes="dummy_file"
@@ -279,10 +377,13 @@
 		</copy>
 
 		<!-- On lance l'enhancement jdo si le projet est de type versant VOA JDO -->
+		<!-- Supprimé en version 3.2.0 -->
+		<!--
 		<available file="${versant.filename}"
 		           type="file"
 		           property="versant.filename.present" />
 		<antcall target="enhance_jdo" />
+		-->
 
 		<!-- On lance la compilation java-javascript si le projet est GWT -->
 		<condition property="is.lib">
@@ -294,6 +395,8 @@
 		<antcall target="compile_gwt" />
 	</target>
 
+	<!-- JDO supprimé en version 3.2.0 -->
+	<!--
 	<target name="enhance_jdo" if="versant.filename.present" depends="define_jdo">
 		<echo message="Enhancement JDO du module ${module.type} : ${module.name}" />
 		<copy file="${versant.filename}" todir="${output.dir}" />
@@ -301,12 +404,13 @@
 			<persistentaware dir="${output.dir}" />
 		</jdo-enhance>
 	</target>
+ 	-->
 
 	<target name="compile_gwt" if="gwt.compile" >
 		<antcall target="compile_gwt_lib" />
 		<antcall target="compile_gwt_war" />
 	</target>
-	
+
 	<target name="compile_gwt_lib" if="is.lib">
 		<echo message="Copie GWT des fichiers sources du module ${module.type} : ${module.name}" />
 		<!-- Il faut mettre les sources java dans le jar pour GWT -->
@@ -323,10 +427,11 @@
 	<target name="compile_gwt_war" if="is.war" depends="define_gwt">
 		<echo message="Compilation GWT du module ${module.type} : ${module.name}" />
 		<!-- Chemin absolu car dans certains cas Eclipse positionne le working directory dans ant -->
+		<!-- Le style peut prendre les valeurs obfuscated, pretty et detailed -->
 		<gwtcompile destdir="${basedir}/${tmp.dir}/${module.type}/${module.name}/${package.dir}"
 		            optimize="true"
 					verbose="${verbose}"
-					style="pretty">
+					style="obfuscated">
 			<fileset dir="${src.dir}" includesfile="${includesfiles}">
 			</fileset>
 		</gwtcompile>

@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- CVS History
   $Log: build_ejb.xml,v $
-  Revision 1.1  2007/10/24 13:35:33  tvzl8571
-  *** empty log message ***
+  Revision 1.7  2007/12/20 17:15:14  beal6226
+  Adaptation pour Java 1.4 et Eclipse 3.2
 
-  Revision 1.1  2007/08/14 07:55:55  tvzl8571
-  TatamiDemo, projet demontrant les differents composants du projet Tatami
-
-  Revision 1.1  2007/05/25 12:27:21  beal6226
-  Exemple d'utilisation de GWT avec :
-  - Un menu déroulant qui fait apparaitre une popup
-  - Un bouton qui fait apparaitre un hello world
-  - Des champs de saisie qui modifient dynamiquement un tableau de données.
-  - Une utilisation de GWT RPC pour récupérer des données côté serveur (après, c'est bouchonné, il n'y a pas de SGBD).
+  Revision 1.6  2007/12/18 13:13:27  beal6226
+  Version G3R2C0
 
   Revision 1.5  2006/11/10 16:45:52  beal6226
   exclusion META-INF dans jonas-ejbjar
@@ -31,9 +24,6 @@
 
   Revision 1.1  2006/10/10 08:10:37  ajta5630
   Intérgration dans la barre d'outils et le menu du workbench. Intégration de l'aide
-
-  Revision 1.1  2006/03/20 16:31:35  beal6226
-  Initial plugin version
 
   Revision 1.29  2006/03/15 16:49:55  beal6226
   La variable TODAY doit être définie dans le projet où elle est utilisée. Le timestamp est donc placé devant chaque utilisation de TODAY.
@@ -130,7 +120,9 @@
 	leur valeur pour les fichiers *.template.*.	Ensuite, on package le tout dans un jar 
 	destiné à weblogic ou à jonas, en fonction de la variable ${server.name} -->
 	<target name="package" depends="init" description="packaging ejb">
-		<ant antfile="${ant.conf.dir}/common.xml" target="copy_j2ee" />
+		<ant antfile="${ant.conf.dir}/common.xml" target="copy_j2ee">
+			<property name="dest.dir" value="${tmp.dir}/${module.type}/${module.name}/${package.dir}" />
+		</ant>
 		<antcall target="${server.name}_ejbjar" />
 		<antcall target="package_client" />
 		<echo message="========== Packaging du module terminé, consulter ${dist.dir}/${module.type}/${module.name}.jar ==========" />
@@ -147,7 +139,7 @@
 		<echo message="Attention: Le fichier ${xdocletfiles} n'existe pas. Pas de génération xdoclet sur ce projet" />
 	</target>
 
-	<target name="run_ejbdoclet" depends="define_xdoclet" if="xdoclet.${module.name}.present" description="Lancement ejbdoclet">
+	<target name="run_ejbdoclet" depends="define_xdoclet_java14,define_xdoclet_java5" if="xdoclet.${module.name}.present" description="Lancement ejbdoclet">
 		<echo message="Génération des fichiers sources ejb par xdoclet" />
 
 		<!-- Les sources EJB à traiter par Xdoclet sont recherchés par cette propriété -->
@@ -167,7 +159,7 @@
 		<ejbdoclet destdir="${tmp.dir}/${module.type}/${module.name}/xdoclet"
 		           excludedtags="@version,@author"
 		           addedtags="@xdoclet-generated at ${TODAY}"
-		           ejbspec="2.0"
+		           ejbspec="2.1"
 		           verbose="true">
 			<fileset dir="${src.dir}">
 				<includesfile name="${xdocletfiles}" />
@@ -240,6 +232,7 @@
 		</delete>
 		<!-- Aucune dépendance de classe n'est recherchée. Utiliser le fichier 
 		${module.type}.${module.name}.class.include d'include pour ajouter d'autres classes à l'EJB -->
+		<!-- Ajouter invokecmd="true" sous <jonas> si la compilation ne passe pas à cause d'une commande trop longue -->
 		<jonas-ejbjar srcdir="${tmp.dir}/${module.type}/${module.name}/${package.dir}"
 		              manifest="${tmp.dir}/${module.type}/${module.name}/${package.dir}/META-INF/MANIFEST.MF"
 		              descriptordir="${tmp.dir}/${module.type}/${module.name}/${package.dir}/META-INF"

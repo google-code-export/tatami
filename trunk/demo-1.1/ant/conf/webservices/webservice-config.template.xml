@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--
+	Pour que ce fichier soit pris en compte, il faut qu'il soit integre a la configuration spring,
+	par exemple, en etant reference depuis le web.xml :
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			...
+			/WEB-INF/webservices/@WS.NAME@.xml
+		</param-value>
+	</context-param>
+	
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:wsa="http://cxf.apache.org/ws/addressing"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xmlns:http="http://cxf.apache.org/transports/http/configuration"
+	xsi:schemaLocation="
+http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<!--  Declaration de l'IMPLEMENTATION du service @WS.NAME@ -->
+	
+	<bean id="impl-@WS.NAME@" class="@WS.IMPL@" >
+	
+		<!--  c'est ici qu'il faut faire le lien entre l'implementation du web service et le reste de l'application -->
+		<!--  ex :
+		
+		<property name="businessLayer" ref="businessLayer" />
+		
+		 -->
+	</bean>
+
+
+	<!--  Declaration d'un ENDPOINT Pour @WS.NAME@ -->
+
+	<jaxws:endpoint id="endpoint-@WS.NAME@"
+		implementor="#impl-@WS.NAME@"
+		address="/@WS.NAME@">
+
+	</jaxws:endpoint>
+
+
+</beans>
