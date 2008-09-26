@@ -1,19 +1,19 @@
 /*
- * Tatami: 
+ * Tatami:
  * Copyright (C) 2007 Objet Direct
  * Copyright (C) 2007 France Telecom
  * Contact: tatami@googlegroups.com
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
@@ -26,79 +26,79 @@
 package com.objetdirect.tatami.demo.client;
 
 import com.google.gwt.user.client.ui.ChangeListener;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DockPanel;
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.Slider;
+import com.objetdirect.tatamix.client.hmvc.CompositeView;
+import com.objetdirect.tatamix.client.widget.Paragraph;
 
 /**
- * Demo page for the Slider component. When the cursor of the Slider is changed then 
+ * Demo page for the Slider component. When the cursor of the Slider is changed then
  * the dimension of an image is also modify according to the values of the cursor.
- * 
+ *
  */
 
-public class SliderDemo extends Composite implements ChangeListener{
+public class SliderDemo extends CompositeView implements ChangeListener{
 
 	 private Slider horizontalSlider;
 	 private Slider verticalSlider;
-	 private DockPanel panel;
+	 private FlowPanel layout;
+
 	 private Image cubicImage;
-	
+
 	/**
 	 * Creates the SliderDemo
 	 *
 	 */
 	 public SliderDemo() {
+		 super();
+		 layout = new FlowPanel();
+		 initWidget(layout);
 		 initComponents();
-		 initWidget(panel);
+         setStylePrimaryName("block");
 	 }
-	 
-	 
-	  
+
+
+
 	 /**
 	  * Creates 2 <code>Slider</code> components with marks an labels.
-	  * When the position of the cursor of this <code>Slider</code> is changing the size of the 
-	  * image is also changing in function of the values of the <code>Slider</code>.  
+	  * When the position of the cursor of this <code>Slider</code> is changing the size of the
+	  * image is also changing in function of the values of the <code>Slider</code>.
 	  *
 	  */
 	 private void initComponents() {
-		 panel = new DockPanel();
-		 panel.setSpacing(10);
-		
-		 HTML html = new HTML("Move the cursor of each <b>Slider</b> to modify the size of the image below");
+		 Paragraph intro = new Paragraph();
+		 intro.setHTML(TatamiDemo.getMessages().slider_intro());
+		 layout.add(intro);
+
 		 verticalSlider = new Slider(Slider.VERTICAL, 0, 100, 100,true);
+		 verticalSlider.setStylePrimaryName("verticalSlider");
          verticalSlider.setRuleMarkLeft(6, "5px");
 		 verticalSlider.setRuleMarkRight(12, "3px");
 		 String[] labels = {" ","20%","40%","60%","80%", " "};
-		 
+
 		 verticalSlider.setLabelsLeft(labels,"margin: 0px -0.5em 0px -2em;color:gray");
-		 
+		 layout.add(verticalSlider);
+
+
+		 FlowPanel wrapper = new FlowPanel();
+		 cubicImage = new Image(TatamiDemo.getIconURL("cubic.jpg"));
+		 cubicImage.setStylePrimaryName("sliderImage");
+		 wrapper.add(cubicImage);
+
 		 horizontalSlider = new Slider(Slider.HORIZONTAL, 0, 100, 100,true);
-		 
-		 horizontalSlider.setRuleMarkBottom(6, "5px");
-		 horizontalSlider.setLabelsTop(labels,"margin: -0.5em 0px -3.5em 0px;color:gray");
-		 horizontalSlider.setWidth("205px");
-		 cubicImage = new Image("cubic.jpg");
-		 cubicImage.setStyleName("SliderDemo-image");
-		 cubicImage.setSize("200px", "200px");
-		 
-		 verticalSlider.addChangeListener(this);
-		 verticalSlider.setValue(100);
-		 verticalSlider.setStylePrimaryName("SliderDemo-vSlider");
+		 horizontalSlider.setStylePrimaryName("horizontalSlider");
+		// horizontalSlider.setRuleMarkBottom(6, "5px");
+	//	 horizontalSlider.setLabelsTop(labels,"margin: -0.5em 0px -3.5em 0px;color:gray");
 		 horizontalSlider.addChangeListener(this);
-         panel.add(html,DockPanel.NORTH);
-		 panel.add(cubicImage,DockPanel.CENTER);
-		 		
- 		panel.setCellWidth(cubicImage, "205px");
-		panel.setCellHeight(cubicImage, "205px");
-		panel.add(verticalSlider,DockPanel.WEST);
-		panel.setCellHorizontalAlignment(verticalSlider,DockPanel.ALIGN_RIGHT);	
-		panel.add(horizontalSlider,DockPanel.SOUTH);
-		panel.setCellVerticalAlignment(cubicImage,DockPanel.ALIGN_MIDDLE);
-		panel.setCellHorizontalAlignment(horizontalSlider,DockPanel.ALIGN_LEFT);
-            
+		 wrapper.add(horizontalSlider);
+
+         layout.add(wrapper);
+         verticalSlider.addChangeListener(this);
+		 verticalSlider.setValue(100);
+
+
 	 }
 
 	 /**

@@ -22,7 +22,7 @@ public abstract class AbstractAction implements Command,Enablable {
 
 	/**
 	 * Properties of this action
-	 * @gwt.typeArgs <java.lang.String,java.lang.Object>
+	 *
 	 */
 	private Map properties;
 

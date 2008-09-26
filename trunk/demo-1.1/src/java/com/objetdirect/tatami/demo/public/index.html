@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+
+
+ * Tatami:
+ * Copyright (C) 2007 Objet Direct
+ * Copyright (C) 2007 France Telecom
+ * Contact: tatami@googlegroups.com
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+ * USA
+ *
+ * Authors:  Vianney Grassaud
+ * Initial developer(s): Vianney Grassaud
+ * Contributor(s):
+
+  -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Tatami Demo hosted</title>
+
+ <style type="text/css">
+
+ #loading-container {
+    position:relative;
+    top:-8px;
+    left:-8px;
+	margin:3px;
+	padding: 0px;
+	z-index: 20001;
+	height: auto;
+
+ }
+
+#loading-message {
+  padding-left:10px;
+  background-color: #F5F5F5;
+  height:auto;
+  border: 1px solid #FF6600;
+}
+
+  #loading-content {
+
+    background-image:url(images/loading.gif);
+    background-repeat:no-repeat;
+    background-position:left center;
+ 	color: #999;
+	font: bold 13px tahoma, arial, helvetica;
+	padding: 42px;
+	margin: 0px 0px 0px 0px;
+	height: auto;
+  }
+
+
+	#loading-content span {
+		font-weight: normal;
+	}
+
+
+
+
+#loading-shadow {
+   position: absolute;
+   left: 45%;
+   top: 40%;
+   background-color:#aaa;
+}
+</style>
+
+</head>
+
+<body class="tundra">
+    <div id="loading-shadow">
+  	<div id="loading-container">
+       <div id="loading-message">
+	    <div id="loading-content">
+		    Tatami Demo<br />
+	        <span>Loading...</span>
+       </div>
+       </div>
+	</div>
+	</div>
+
+
+	  <script type="text/javascript" src="com.objetdirect.tatami.demo.TatamiDemo.nocache.js"> </script>
+
+
+</body>
+</html>

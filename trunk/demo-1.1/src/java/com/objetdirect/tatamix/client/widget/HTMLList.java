@@ -53,7 +53,6 @@ public class HTMLList extends Panel implements SourcesClickEvents, SourcesMouseE
 		sinkEvents(Event.ONCLICK);
 		sinkEvents(Event.ONMOUSEWHEEL | Event.MOUSEEVENTS);
 
-
 	}
 
 

@@ -60,11 +60,20 @@ public class Title extends FocusWidget implements HasHTML, 	SourcesMouseEvents, 
 	 * Create an empty title with the level to 1 (h1)
 	 *
 	 */
-	public Title() {
+	public Title(int level) {
 		super();
 		initTitle(level);
 
 
+	}
+
+
+	/**
+	 * Create an empty title with the level to 1 (h1)
+	 *
+	 */
+	public Title() {
+		this(H1);
 	}
 
 	/**
@@ -74,8 +83,8 @@ public class Title extends FocusWidget implements HasHTML, 	SourcesMouseEvents, 
 	 *            the text according to the <code>Title</code>. The text will
 	 *            be not recognized as HTML code
 	 */
-	public Title(String text) {
-		this(text,false);
+	public Title(int level,String text) {
+		this(level,text,false);
 
 	}
 
@@ -84,8 +93,8 @@ public class Title extends FocusWidget implements HasHTML, 	SourcesMouseEvents, 
 	 * @param text the content
 	 * @param asHTML if true, the content will be read as HTML code
 	 */
-	public Title(String text, boolean asHTML) {
-		this();
+	public Title(int level,String text, boolean asHTML) {
+		this(level);
 		this.asHTML = asHTML;
 		if (asHTML) {
 			setHTML(text);
@@ -101,8 +110,14 @@ public class Title extends FocusWidget implements HasHTML, 	SourcesMouseEvents, 
 	 *            the level to apply
 	 */
 	private void initTitle(int level) {
-
-
+		int levelTemp  = level;
+		if ( levelTemp < 1 ) {
+			levelTemp = 1;
+		}
+		if ( levelTemp > 6) {
+			levelTemp = 6;
+		}
+        this.level = levelTemp;
 		setElement(DOM.createElement("H" + level));
 		sinkEvents( Event.MOUSEEVENTS | Event.ONMOUSEWHEEL);
 
@@ -114,25 +129,9 @@ public class Title extends FocusWidget implements HasHTML, 	SourcesMouseEvents, 
 
 	}
 
-	/**
-	 * Sets the level for this <code>Title</code>.
-	 * @param level the new level to apply. If level is greater than 6 so the level will be set to 6. And
-	 * if the level is lesser than 1, the level will be set to 1.
-	 */
-	public void setLevel(final int level) {
-		int levelTemp  = level;
-		if ( levelTemp < 1 ) {
-			levelTemp = 1;
-		}
-		if ( levelTemp > 6) {
-			levelTemp = 6;
-		}
-		if (this.level != levelTemp) {
-			initTitle(levelTemp);
-		}
-		this.level = levelTemp;
 
-	}
+
+
 
 	/**
 	 * Returns the level of this <code>Title</code>

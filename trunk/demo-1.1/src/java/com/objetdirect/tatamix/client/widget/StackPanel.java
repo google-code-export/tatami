@@ -10,14 +10,14 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class StackPanel extends Composite  {
- 
+
 	private FlowPanel layout;
 	public static final String CSS_ITEM = "item";
 	public static final String CSS = "MyStackPanel";
 	private Map map;
 	private Title selectedItem;
 	private ClickListener titleListener;
-	
+
 	/**
 	 *Creates an empty <code>MyStackPanel</code>
 	 */
@@ -27,21 +27,21 @@ public class StackPanel extends Composite  {
 		map = new HashMap();
 		titleListener = new ClickListener() {
 			public void onClick(Widget sender) {
-			    
+
 				selectTitle((Title)sender);
 			}
-			
+
 		};
 		initWidget(layout);
 		setStylePrimaryName(CSS);
-		
+
     }
-	
+
 	/**
 	 * Selects the given <code>Title</code> in the stack. If the given
 	 * <code>Title</code> is found, then the associated <code>Widget</code> is show, and the ohter widgets are hidden.
-	 * The selected <code>Title</code> has the dependent style CSS "selected". 
-	 * 
+	 * The selected <code>Title</code> has the dependent style CSS "selected".
+	 *
 	 * @param title the <code>Title</code> to select
 	 */
 	private void selectTitle(Title title) {
@@ -56,33 +56,33 @@ public class StackPanel extends Composite  {
       		if ( selected) {
 				key.addStyleDependentName("selected");
 				selectedItem = key;
-			
+
 			} else {
 				key.removeStyleDependentName("selected");
-				
+
 			}
-			  
+
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public int countItems() {
 		return map.size();
-		
+
 	}
-	
-	
-	
+
+
+
 	/**
-	 * Creates the item it means the couple (<code>Title,Widget</code>) for the stack. 
+	 * Creates the item it means the couple (<code>Title,Widget</code>) for the stack.
 	 * <p>The <code>Title</code> of an item has the CSS style  <code>CSS_ITEM</code>. Also, a <code>ClickListener</code> is adding to the <code>Title</code>
 	 * in order to show the associated <code>Widget</code> when it receive a clik event.
 	 * The item is  representing in a <code>FlowPanel</code>
 	 * </p>
-	 * @param title the <code>Title</code> for the item 
+	 * @param title the <code>Title</code> for the item
      * @param widget the <code>Widget</code> associated to the <code>Title</code>
 	 * @return the <code>Title</code> and the <code>Widget</code> in a <code>FlowPanel</code>
 	 */
@@ -99,29 +99,29 @@ public class StackPanel extends Composite  {
     	item.add(widget);
     	return item;
 	}
-	
-	
+
+
 	/**
 	 * Adds an item to the stack, it means a couple (<code>Title,Widget</code>)
-	 * @param title the <code>Title</code> for the item 
+	 * @param title the <code>Title</code> for the item
      * @param widget the <code>Widget</code> associated to the <code>Title</code>
 	 */
     public void add(Title title,Widget widget) {
     	layout.add(prepareItem(title,widget));
-    	
+
     }
-    
+
     /**
      * Inserts a new item to the stack at the specified index
-     * @param title the <code>Title</code> for the item 
+     * @param title the <code>Title</code> for the item
      * @param widget the <code>Widget</code> associated to the <code>Title</code>
      * @param index index to insert in the stack
      */
     public void insert(Title title,Widget widget ,int index) {
     	layout.insert(prepareItem(title,widget),index);
-    	
+
     }
-    
+
     /**
      * Removes the given item from the stack
      * @param item the item to remove
@@ -132,19 +132,19 @@ public class StackPanel extends Composite  {
     	map.remove(t);
     	layout.remove(item);
     }
-    
+
     /**
      * Removes the <code>Title</code> and so the <code>Widget</code> at the specified index in the stack
      * @param index index of the item (the couple (<code>Title,Widget</code>) in the stack
-     * @throws ArrayIndexOutOfBoundsException 
+     * @throws ArrayIndexOutOfBoundsException
      */
     public void remove(int index) {
     	FlowPanel item = (FlowPanel)layout.getWidget(index);
     	removeItem(item);
-    	
-    	
+
+
     }
-    
+
     /**
      * Removes the given <code>Widget</code> in the stack
      * @param widget the <code>Widget to remove
@@ -158,13 +158,13 @@ public class StackPanel extends Composite  {
     		if ( index != -1 ) {
     			stop = true;
     			removeItem(item);
-    			
+
     		}
     	}
     	return stop;
-    	
+
     }
-    
+
     /**
      * Select the <code>Widget</code> to show in the stack
      * @param index index of the <code>Widget</code> to show
@@ -180,48 +180,39 @@ public class StackPanel extends Composite  {
      public Widget getSelectedItem() {
     	 Widget res = null;
     	 if ( selectedItem != null) {
-    		res = (Widget) map.get(selectedItem); 
+    		res = (Widget) map.get(selectedItem);
     	 }
     	 return res;
-    	 
+
      }
-	
+
      /**
       * Returns the <code>Title</code> widget at the specified index in the stack
       * @param index the index of the <code>Title</code>
       * @return the <code>Title</code> widget at the specified index
-      * @throws ArrayIndexOutOfBoundsException 
+      * @throws ArrayIndexOutOfBoundsException
       */
     public Title getTitleAt(int index) {
     	FlowPanel item = (FlowPanel)layout.getWidget(index);
     	return  (Title)item.getWidget(0);
-    	
-    	
+
+
     }
-   
+
     /**
      * Sets the text of the <code>Title</code> at the specified index in the stack
      * @param text the new text for the <code>Title</code>
      * @param index index of the <code>Title</code> in the stack
-     * @throws ArrayIndexOutOfBoundsException 
+     * @throws ArrayIndexOutOfBoundsException
      */
     public void setTitleTextAt(String text,int index) {
     	  	Title t = getTitleAt(index);
     	    t.setHTML(text);
     }
-    
-    /**
-     * Sets the level of the <code>Title</code> at the specified index in the stack
-     * @param level the new level to apply
-     * @param index the index of the <code>Title</code> in the stack
-     * @throws ArrayIndexOutOfBoundsException 
-     */
-    public void setTitleLevelAt(int level,int index) {
-	  	Title t = getTitleAt(index);
-	    t.setLevel(level);
-   }
-    
-    
-    
+
+
+
+
+
 
 }//end of class
