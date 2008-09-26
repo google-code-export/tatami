@@ -22,4 +22,6 @@
 package com.objetdirect.tatamix.client.hmvc;
 
 public interface View extends MVCComponent {
+
+
 }

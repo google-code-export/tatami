@@ -1,19 +1,19 @@
 /*
- * Tatami: 
+ * Tatami:
  * Copyright (C) 2007 Objet Direct
  * Copyright (C) 2007 France Telecom
  * Contact: tatami@googlegroups.com
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
@@ -25,82 +25,94 @@
  */
 package com.objetdirect.tatami.demo.client;
 
-import com.google.gwt.user.client.ui.ChangeListener;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DockPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.objetdirect.tatami.client.ColorChooser;
 import com.objetdirect.tatami.client.ColorPicker;
+import com.objetdirect.tatamix.client.hmvc.CompositeView;
+import com.objetdirect.tatamix.client.widget.ColorEditor;
+import com.objetdirect.tatamix.client.widget.FieldSet;
+import com.objetdirect.tatamix.client.widget.FormLabel;
+import com.objetdirect.tatamix.client.widget.Paragraph;
+import com.objetdirect.tatamix.client.widget.RoundedContainer;
 
-public class ColorDemo extends Composite implements ChangeListener{
+public class ColorDemo extends CompositeView {
 
-	private ColorChooser small;
-	private ColorChooser big;
+	private ColorEditor small;
+	private ColorEditor big;
 	private ColorPicker picker;
-	private HTML colorLabel;
-	private DockPanel panel;
-	
+
+	private FlowPanel layout;
+
 	/**
 	 * Creates the color demo
 	 *
 	 */
 	public ColorDemo() {
+		layout = new FlowPanel();
+		initWidget(layout);
 		initComponents();
-		initWidget(panel);
+        setStylePrimaryName("color");
 	}
-	
+
 	/**
 	 * Inits the components.
-	 * Show the <code>ColorChooser</code> and the 
-	 * <code>ColorPicker</code> which is experimental in Tatami-1.1. 
-	 * 
+	 * Show the <code>ColorChooser</code> and the
+	 * <code>ColorPicker</code> which is experimental in Tatami-1.1.
+	 *
 	 *
 	 */
 	private void initComponents() {
-		panel = new DockPanel();
-		panel.setSpacing(30);
-		
-		colorLabel = new HTML("<b>No color selected.</b>");
-		big = new ColorChooser();
+		big = new ColorEditor(ColorChooser.SEVENTY_COLORS);
 		big.setTitle("70 colors");
-		big.addChangeListener(this);
-		small = new ColorChooser(ColorChooser.TWELVE_COLORS);
-		small.addChangeListener(this);
+
+		small = new ColorEditor(ColorChooser.TWELVE_COLORS);
 		small.setTitle("12 colors");
+
+		RoundedContainer left = new RoundedContainer();
+
+		Paragraph intro1 = new Paragraph();
+		intro1.setHTML(TatamiDemo.getMessages().color_intro1());
+		left.addWidget(intro1);
+
+		FieldSet fieldset = new FieldSet();
+		fieldset.setLegend("Color edition");
+		left.addWidget(fieldset);
+
+		FlowPanel entry1 = new FlowPanel();
+		FormLabel label = new FormLabel();
+		label.setText(TatamiDemo.getMessages().color_label1());
+        label.setFor("colorBig", big.getInput());
+        entry1.add(label);
+        entry1.add(big);
+
+
+        FlowPanel entry2 = new FlowPanel();
+		FormLabel label2 = new FormLabel();
+		label2.setText(TatamiDemo.getMessages().color_label2());
+        label2.setFor("colorSmall", small.getInput());
+        entry2.add(label2);
+        entry2.add(small);
+
+        fieldset.add(entry1);
+        fieldset.add(entry2);
+
+        layout.add(left);
+
+        RoundedContainer right = new RoundedContainer();
+
+
 		picker = new ColorPicker();
-		
-		VerticalPanel vPanel = new VerticalPanel();
-		vPanel.setSpacing(20);
-		vPanel.add(new HTML("<b>ColorChooser</b>: 2 sizes available, click on color to change the color of text."));
-		vPanel.add(big);
-		vPanel.add(colorLabel);
-		vPanel.add(small);
-		panel.add(vPanel,DockPanel.WEST);
-		VerticalPanel vPanel2 = new VerticalPanel();
-		vPanel2.add(new HTML("<b>ColorPicker</b> : Provides an interactive HSV ColorPicker similar to PhotoShop's color selction tool. Will eventually mixin FormWidget and be used as a suplement or a	'more interactive' replacement for ColorChooser"));
-		vPanel2.add(picker);
-		
-		panel.add(vPanel2,DockPanel.EAST);
+
+		Paragraph intro2 = new Paragraph();
+		intro2.setHTML(TatamiDemo.getMessages().color_intro2());
+		right.addWidget(intro2);
+		right.addWidget(picker);
+		layout.add(right);
+
+
 	}
-	
-	
-	
-	/**
-	 * Changes the color of the label when a the select color of the <code>ColorChooser</code> change
-	 */
-	public void onChange(Widget sender) {
-		String color = null;
-		if ( sender.equals(big)) {
-			color = big.getColor();
-		} else {
-			color = small.getColor();
-		}
-		
-		if (color != null) {
-			colorLabel.setHTML("<font color=\""+ color +"\">The color selected : " + color + "</font>");
-		}
-		
-	}
+
+
+
+
 }

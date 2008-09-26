@@ -16,6 +16,7 @@ public class ImageLink extends FocusWidget implements Enablable {
 
 	private String imageSrc;
 	private String alt;
+	private String href=null;
     private Element image;
     private Element anchorElem;
     private String targetHistoryToken;
@@ -142,7 +143,9 @@ public class ImageLink extends FocusWidget implements Enablable {
 	    if (DOM.eventGetType(event) == Event.ONCLICK) {
 
 	      History.newItem(targetHistoryToken);
-	      DOM.eventPreventDefault(event);
+	      if ( href.startsWith("#")) {
+	       DOM.eventPreventDefault(event);
+	      }
 	    }
 
 	    if ( listenerCollection != null) {
@@ -181,10 +184,21 @@ public class ImageLink extends FocusWidget implements Enablable {
 	   * @param targetHistoryToken the new target history token
 	   */
 	  public void setTargetHistoryToken(String targetHistoryToken) {
-	    this.targetHistoryToken = targetHistoryToken;
-	    DOM.setElementProperty(anchorElem, "href", "#" + targetHistoryToken);
+	    href = "#" + targetHistoryToken;
+		this.targetHistoryToken = targetHistoryToken;
+	    DOM.setElementProperty(anchorElem, "href", href);
 	  }
 
+
+	  public void setHref(String href) {
+          this.href = href;
+          targetHistoryToken = null;
+          DOM.setElementProperty(anchorElem, "href", href);
+	  }
+
+	  public String getHref() {
+		  return this.href;
+	  }
 
 	  /**
 	   * Sets the command associated to this <code>ImageLink</code>

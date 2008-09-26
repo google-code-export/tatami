@@ -1,19 +1,19 @@
 /*
- * Tatami: 
+ * Tatami:
  * Copyright (C) 2007 Objet Direct
  * Copyright (C) 2007 France Telecom
  * Contact: tatami@googlegroups.com
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
@@ -25,6 +25,7 @@
  */
 package com.objetdirect.tatami.demo.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
@@ -32,7 +33,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.Grid;
@@ -63,6 +63,7 @@ import com.objetdirect.tatami.client.gfx.Rect;
 import com.objetdirect.tatami.client.gfx.Text;
 import com.objetdirect.tatami.client.gfx.TextPath;
 import com.objetdirect.tatami.client.gfx.VirtualGroup;
+import com.objetdirect.tatamix.client.hmvc.CompositeView;
 
 
 /**
@@ -70,7 +71,7 @@ import com.objetdirect.tatami.client.gfx.VirtualGroup;
  * @author Vianney
  *
  */
-public class GfxDemo extends Composite implements GraphicObjectListener,
+public class GfxDemo extends CompositeView implements GraphicObjectListener,
 		ClickListener, ChangeListener {
 
 	/** factor for scaling */
@@ -196,7 +197,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	private int lastStrokeSize = currentStrokeSize;
 
 	/**
-	 * 
+	 *
 	 * Creates the GFXDemo
 	 */
 	public GfxDemo() {
@@ -206,9 +207,9 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 
 	/**
 	 * Create an canvas (at the right) and a toolbar containg some actions.
-	 * The actions are : creates a new gfx component, like <code>Rect</code>..., 
-	 * changes the color, the width of the stroke, does some rotation, scaling. 
-	 * 
+	 * The actions are : creates a new gfx component, like <code>Rect</code>...,
+	 * changes the color, the width of the stroke, does some rotation, scaling.
+	 *
 	 */
 	private void initComponents() {
 		panel = new DockPanel();
@@ -288,7 +289,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * 
+	 *
 	 * @param size
 	 * @return
 	 */
@@ -327,7 +328,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 
 	/**
 	 * Changes the opacity of a <code>GraphicObject</code>
-	 * @param sender the <code>Slider</code> to change the alpha property of <code>Color</code> 
+	 * @param sender the <code>Slider</code> to change the alpha property of <code>Color</code>
 	 */
 	public void onChange(Widget sender) {
 		if (sender.equals(opacity)) {
@@ -345,12 +346,12 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	/**
 	 * Adds a "button" it means a clickable image to the toolbar (the <code>Grid</code>).
 	 * @param title the title for the image
-	 * @param icon the image (url) to load. 
-	 * @return a clickable <code>Image</code>.  
+	 * @param icon the image (url) to load.
+	 * @return a clickable <code>Image</code>.
 	 */
 	private Image addToGrid(Grid grid, int row, int col, String title,
 			String icon) {
-		Image button = new Image(icon);
+		Image button = new Image(GWT.getModuleBaseURL() + "images/"+icon);
 		button.setTitle(title);
 		button.setSize("29px", "29px");
 		grid.setWidget(row, col, button);
@@ -399,16 +400,16 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 					.toHex());
 			popup.show();
 			if ( movable) {
-				
+
 				if ( current.getGroup() != null) {
 					  GraphicObject object = this.current.getGroup();
 					  object.translate(newX - lastPosition[0], newY- lastPosition[1]);
-							
+
 				} else {
 					current.translate(newX - lastPosition[0], newY- lastPosition[1]);
 					}
-				
-				
+
+
 				lastPosition[0] = newX;
 				lastPosition[1] = newY;
 			}
@@ -419,7 +420,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * Performs some action when a click event is fired. 
+	 * Performs some action when a click event is fired.
 	 * @param sender the widget which fired a click event
 	 */
 	public void onClick(Widget sender) {
@@ -504,7 +505,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		this.showGraphicObject(poly, 300, 300);
 	}
 
-	
+
 	/**
 	 * Shows an example of a <code>Path</code> object
 	 *
@@ -535,7 +536,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		canvas.setPixelSize(600, 600);
 	}
 
-	
+
 	/**
 	 * Show some properties about a <code>GraphicObjectw</code>
 	 * @param object the <code>GraphicObject</code> to show the properties
@@ -584,8 +585,8 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		System.out.println("bounds " + object.getBounds());
 	}
 
-	/** 
-	 * shows a popup to scale a graphical Object 
+	/**
+	 * shows a popup to scale a graphical Object
 	 **/
 	private void showPopupScaler() {
 		if (current != null) {
@@ -643,7 +644,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * Show a popup with a <code>Slider</code> to 
+	 * Show a popup with a <code>Slider</code> to
 	 * perform some rotation of the current <code>GraphicObject</code>
 	 *
 	 */
@@ -665,13 +666,13 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 					int value = rotate.getValue();
 					if (current != null && value != 0) {
 						int degree = value - rotateDegree;
-						
+
 						if ( current.getGroup() != null) {
 						   current.getGroup().rotate(degree);
 						} else {
 							current.rotate(degree);
 						}
-						
+
 						rotateDegree = value;
 					}
 					label.setText(rotateDegree + "");
@@ -690,7 +691,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	 * Shows a popup to select a color for the background or the stroke.
 	 * The popup contains a TabPanel with 3 tab, a <code>ColorChooser</code>,
 	 *  a <code>Slider</code> to change the opacity of the <code>Color</code>,
-	 *  some <code>Pattern</code> to apply  
+	 *  some <code>Pattern</code> to apply
 	 */
 	private void showPopupColor() {
 
@@ -756,9 +757,9 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	}
 
 	/**
-	 * Creates a clickable <code>Image</code> when a click event is fired, a pattern correpsonding to 
+	 * Creates a clickable <code>Image</code> when a click event is fired, a pattern correpsonding to
 	 * the image is applied.
-	 * @param url the url of the image 
+	 * @param url the url of the image
 	 * @return the <code>Image</code> created
 	 */
 	private Image createImagePattern(final String url) {
@@ -784,27 +785,29 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	 * Shows an example of a <code>Text</code> object
 	 */
 	private void showText() {
-		Text text = new Text("Tatami GFX,\ncourier 10", Text.UNDERLINE);
-		Font font = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
-				Font.NORMAL);
-		Text text2 = new Text("Tatami GFX, courier bolder 10", Text.OVERLINE);
-		Font font2 = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
-				Font.BOLDER);
-		Text text3 = new Text("Tatami GFX, courier lighter 10",
-				Text.LINE_THROUGH);
-		Font font3 = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
-				Font.LIGHTER);
-		Text text4 = new Text("Tatami GFX Arial 24 Bold");
-		Font font4 = new Font("Arial", 24, Font.ITALIC, Font.NORMAL, Font.BOLD);
+		Text text = new Text("Tatami GFX,\n default font");
 
-		text.setFont(font);
-		text3.setFont(font3);
-		text2.setFont(font2);
+		//it seems that to set a font bug in FF
+//		Font font = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
+//				Font.NORMAL);
+//		Text text2 = new Text("Tatami GFX, courier bolder 10");
+//		Font font2 = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
+//				Font.BOLDER);
+//		Text text3 = new Text("Tatami GFX, courier lighter 10");
+//		Font font3 = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
+//				Font.LIGHTER);
+//		Text text4 = new Text("Tatami GFX Arial 24 Bold");
+		Font font4 = new Font("Arial", 24, Font.ITALIC, Font.NORMAL, Font.LIGHTER);
+
+		//text.setFont(font);
+//		text3.setFont(font3);
+		text.setFont(font4);
 		showGraphicObject(text, 10, 20);
-		showGraphicObject(text2, 10, 40);
-		showGraphicObject(text3, 10, 60);
-		showGraphicObject(text4, 10, 100);
-		text4.setFont(font4);
+
+//		showGraphicObject(text2, 10, 40);
+//		showGraphicObject(text3, 10, 60);
+//		showGraphicObject(text4, 10, 100);
+//		text4.setFont(font4);
 
 	}
 
@@ -830,7 +833,7 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 
 	}
 
-	
+
 	/**
 	 * Shows an example of a <code>VirtualGroup</code> object
 	 *
@@ -887,24 +890,24 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 	 * will become the given <code>GraphicObject</code>
 	 * @param object <code>GraphicObject</code>
 	 */
-	private void selectObject(GraphicObject object) {	
+	private void selectObject(GraphicObject object) {
 		if (current != null) {
 			current.setStroke(lastStrokeColor, lastStrokeSize);
-		} 
+		}
 		current = object;
-		
+
 		lastStrokeColor = current.getStrokeColor();
 		lastStrokeSize  = current.getStrokeWidth();
 		current.setStroke(Color.RED, 2);
-		
+
 		opacity.removeChangeListener(this);
         opacity.setValue(current.getFillColor().getAlpha());
         opacity.addChangeListener(this);
-		
-		
+
+
 	}
 
-	
+
 	/**
 	 * When the mouse is released no translation is possible
 	 */
@@ -912,15 +915,15 @@ public class GfxDemo extends Composite implements GraphicObjectListener,
 		movable = false;
 
 	}
-	
+
 	/**
-	 * When a double clik is fired on a <code>GraphicObject</code> in the canvas, 
-	 * we show the properties of it. 
+	 * When a double clik is fired on a <code>GraphicObject</code> in the canvas,
+	 * we show the properties of it.
 	 */
 	public void mouseDblClicked(GraphicObject graphicObject,Event evt) {
 		if ( graphicObject != null) {
 			showProperties(graphicObject);
-			
+
 		}
 	}
 }// end of class

@@ -11,10 +11,12 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.Widget;
 
-public class PaginationBar extends Composite implements Enablable {
+
+
+  public class PaginationBar extends Composite implements Enablable {
     //UI components
 	private FlowPanel layout;
-	private FlowPanel pagesPanel;
+	private SpanPanel pagesPanel;
 	private ImageLink firstPage;
 	private ImageLink previousPage;
 	private ImageLink lastPage;
@@ -62,7 +64,7 @@ public class PaginationBar extends Composite implements Enablable {
 		previousPage = new ImageLink();
 
 
-		FlowPanel buttonBackPanel = new SpanPanel();
+		SpanPanel buttonBackPanel = new SpanPanel();
 		buttonBackPanel.add(firstPage);
 		buttonBackPanel.add(previousPage);
 		layout.add(buttonBackPanel);
@@ -70,7 +72,7 @@ public class PaginationBar extends Composite implements Enablable {
 		pagesPanel.setStylePrimaryName("pages");
 		layout.add(pagesPanel);
 		generatePages();
-		FlowPanel buttonNextPanel = new SpanPanel();
+		SpanPanel buttonNextPanel = new SpanPanel();
 		buttonNextPanel.add(nextPage);
 		buttonNextPanel.add(lastPage);
 		layout.add(buttonNextPanel);
@@ -333,4 +335,4 @@ public class PaginationBar extends Composite implements Enablable {
     	}
     }
 
-}
+}//end of class

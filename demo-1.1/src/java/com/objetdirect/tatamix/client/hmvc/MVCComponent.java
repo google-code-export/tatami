@@ -26,19 +26,19 @@ import java.util.EventListener;
 public interface MVCComponent extends EventListener {
 
 	/**
-	 * 
+	 *
 	 */
 	void addListener(MVCComponent _sl);
 
 	/**
-	 * 
+	 *
 	 * @param e
 	 *            com.crionics.fw.ui.Event
 	 */
 	void fire(Event e);
 
 	/**
-	 * 
+	 *
 	 * @return java.lang.Object
 	 * @param _e
 	 *            com.crionics.fw.ui.Event
@@ -46,7 +46,7 @@ public interface MVCComponent extends EventListener {
 	boolean process(Event _e);
 
 	/**
-	 * 
+	 *
 	 * @param _t
 	 *            com.crionics.fw.ui.EventType
 	 * @param _processor
@@ -55,7 +55,7 @@ public interface MVCComponent extends EventListener {
 	void register(int _t, EventProcessor _processor);
 
 	/**
-	 * 
+	 *
 	 */
 	void removeListener(MVCComponent _sl);
 }
