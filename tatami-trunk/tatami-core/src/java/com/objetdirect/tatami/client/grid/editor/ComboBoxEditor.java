@@ -36,7 +36,7 @@ import java.util.Map;
  */
 public class ComboBoxEditor implements GridEditor{
 
-	private final String dojoName = "ComboBox";
+	private final String dojoName = "dojox.grid.cells.ComboBox";
 	
 	private Map attributes ;
 	

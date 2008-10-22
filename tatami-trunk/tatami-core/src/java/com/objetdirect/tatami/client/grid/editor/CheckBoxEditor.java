@@ -38,7 +38,7 @@ import com.google.gwt.core.client.JavaScriptObject;
  */
 public class CheckBoxEditor implements GridEditor{
 
-	private final String dojoName = "CheckBox";
+	private final String dojoName = "dojox.grid.cells.CheckBox";
 	
 	
 	public CheckBoxEditor(){

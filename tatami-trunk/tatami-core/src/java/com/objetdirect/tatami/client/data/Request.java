@@ -77,8 +77,45 @@ public class Request implements ConvertibleToJSObject{
 	 */
 	private List sortFields = new ArrayList();
 	
-	private JavaScriptObject dojoCallback;
+	private JavaScriptObject onCompleteCallback;
 	
+	public JavaScriptObject getOnCompleteCallback() {
+		return onCompleteCallback;
+	}
+
+	public JavaScriptObject getOnErrorCallback() {
+		return onErrorCallback;
+	}
+
+	public void setOnErrorCallback(JavaScriptObject onErrorCallback) {
+		this.onErrorCallback = onErrorCallback;
+	}
+
+	public JavaScriptObject getOnItemCallback() {
+		return onItemCallback;
+	}
+
+	public void setOnItemCallback(JavaScriptObject onItemCallback) {
+		this.onItemCallback = onItemCallback;
+	}
+
+	public JavaScriptObject getOnBeginCallback() {
+		return onBeginCallback;
+	}
+
+	public void setOnBeginCallback(JavaScriptObject onBeginCallback) {
+		this.onBeginCallback = onBeginCallback;
+	}
+
+	public void setOnCompleteCallback(JavaScriptObject onCompleteCallback) {
+		this.onCompleteCallback = onCompleteCallback;
+	}
+
+	private JavaScriptObject onErrorCallback;
+	
+	private JavaScriptObject onItemCallback;
+	
+	private JavaScriptObject onBeginCallback;
 	
 	/**
 	 * Constructor which is used to construct a Request object
@@ -122,14 +159,27 @@ public class Request implements ConvertibleToJSObject{
 			this.@com.objetdirect.tatami.client.data.Request::sortFields.@java.util.List::clear()();
 			for(prop in sortFields){
 				var value = sortFields[prop];
-				this.@com.objetdirect.tatami.client.data.Request::addSortParameter(Ljava/lang/String;Z)(sortFields[prop].attribute,sortFields[prop].descending);
+				this.@com.objetdirect.tatami.client.data.Request::addSortParameter(Ljava/lang/String;Z)(value.attribute,value.descending);
 			}
 		}
 		if(jsRequest.queryOptions != undefined){
 		}
 		if(jsRequest.onComplete != undefined){
-			this.@com.objetdirect.tatami.client.data.Request::setDojoCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(jsRequest.onComplete);
+			this.@com.objetdirect.tatami.client.data.Request::setOnCompleteCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(jsRequest.onComplete);
 		}
+		if(jsRequest.onBegin != undefined){
+			this.@com.objetdirect.tatami.client.data.Request::setOnBeginCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(jsRequest.onBegin);
+		}
+		if(jsRequest.onError != undefined){
+			this.@com.objetdirect.tatami.client.data.Request::setOnErrorCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(jsRequest.onError);
+		}
+		if(jsRequest.onItem != undefined){
+			this.@com.objetdirect.tatami.client.data.Request::setOnItemCallback(Lcom/google/gwt/core/client/JavaScriptObject;)(jsRequest.onItem);
+		}
+		if(jsRequest.identity != undefined){
+			this.@com.objetdirect.tatami.client.data.Request::addQueryParameter(Ljava/lang/String;Ljava/lang/Object;)("identity",jsRequest.identity);
+		}
+		
 	}-*/;
 
 	
@@ -220,8 +270,8 @@ public class Request implements ConvertibleToJSObject{
 	 * @param sortField : the field name on which the items should be fetched
 	 * @param ascending : whether  it is sorted in ascending or descending order
 	 */
-	public void addSortParameter(String sortField , boolean ascending){
-		this.sortFields.add(new SortField(sortField ,ascending));
+	public void addSortParameter(String sortField , boolean descending){
+		this.sortFields.add(new SortField(sortField ,descending));
 	}
 
 	public void clearSortOptions(){
@@ -247,21 +297,12 @@ public class Request implements ConvertibleToJSObject{
 		this.sortFields = sortFields;
 	}
 
-	public JavaScriptObject getDojoCallback() {
-		return dojoCallback;
-	}
-
-	public void setDojoCallback(JavaScriptObject dojoCallBack) {
-		this.dojoCallback = dojoCallBack;
-	}
-
-	
 
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.ConvertibleToJSObject#toJSObject()
 	 */
 	public JavaScriptObject toJSObject() {
-		return createJSRequest(startItemNumber, nbItemToReturn, JSHelper.convertObjectToJSObject(query) , JSHelper.convertObjectToJSObject(sortFields));
+		return createJSRequest(startItemNumber, nbItemToReturn, JSHelper.convertObjectToJSObject(query) , JSHelper.convertObjectToJSObject(sortFields) , onCompleteCallback , onBeginCallback , onItemCallback , onErrorCallback);
 	}
 	
 	/**
@@ -274,12 +315,16 @@ public class Request implements ConvertibleToJSObject{
 	 * @param sort
 	 * @return
 	 */
-	private native JavaScriptObject createJSRequest(int start , int count , JavaScriptObject query , JavaScriptObject sort)/*-{
+	private native JavaScriptObject createJSRequest(int start , int count , JavaScriptObject query , JavaScriptObject sort , JavaScriptObject onCompleteCallback , JavaScriptObject onBeginCallback,JavaScriptObject onItemCallback,JavaScriptObject onErrorCallback)/*-{
 		var toReturn = {};
 		toReturn.start = start;
 		toReturn.count = count;
 		toReturn.query = query;
 		toReturn.sort = sort;
+		toReturn.onComplete = onCompleteCallback;
+		toReturn.onBegin = onBeginCallback;
+		toReturn.onItem = onItemCallback;
+		toReturn.onError = onErrorCallback;
 		return toReturn;
 	}-*/;
 	

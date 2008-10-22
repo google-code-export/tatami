@@ -110,7 +110,7 @@ public class Item  implements ConvertibleToJSObject{
 		int i = 0;
 		for (Iterator iterator = values.iterator(); iterator.hasNext();) {
 			Object object = (Object) iterator.next();
-			toReturn[i] = object.toString();
+			toReturn[i] = object != null ? object.toString() : "";
 			i++;
 		}
 		return (String[]) toReturn;

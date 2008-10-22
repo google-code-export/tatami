@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.data.AbstractDataStore;
 import com.objetdirect.tatami.client.data.FetchListener;
@@ -83,7 +84,7 @@ public class GridDataStore extends AbstractDataStore{
 		//Saves the request to keep filtering and sorting parameter for later use
 		// (for example, to fetch multiple pages)
 		lastRequest = request;
-		
+		GWT.log("FETCHING "+ request.getNbItemToReturn() +" ITEMS FROM " + request.getStartItemNumber() ,null);
 		
 		//Gets the items matching the query , and sorts them according to the
 		//request
@@ -92,9 +93,6 @@ public class GridDataStore extends AbstractDataStore{
 		
 		int size = itemsSortedAndMatchingQuery.size();
 		
-		// Count is the number of items returned : if it is -1 , we return as many items 
-		// as possible.
-		// Else , we conform to this request parameter 
 		
 		// We notify the fetch listeners that the request is being performed
 		//(it should include a grid , since this store is designed to be used by  
@@ -139,10 +137,5 @@ public class GridDataStore extends AbstractDataStore{
 		return false;
 	}
 
-	
-	
-	
-	
-	
 	
 }

@@ -51,6 +51,7 @@ public class NumberSpinnerEditor implements GridEditor {
 	 * Default NumberSpinner editor, with no constraints
 	 */
 	public NumberSpinnerEditor(){
+		DojoController.getInstance().require("dojox.grid.cells.dijit");
 		declareEditor();
 	}
 	
@@ -156,12 +157,12 @@ public class NumberSpinnerEditor implements GridEditor {
 	 * Declares the dojo class corresponding to this editor
 	 */
 	private native void declareDojoEditor()/*-{
-	$wnd.dojo.declare("dojox.grid.editors.TatamiNumberSpinner", $wnd.dojox.grid.editors.Dijit, {
-		editorClass: "dijit.form.NumberSpinner",
+	$wnd.dojo.declare("dojox.grid.cells.TatamiNumberSpinner", $wnd.dojox.grid.cells._Widget, {
+		widgetClass: "dijit.form.NumberSpinner",
 		getValue: function(inRowIndex){
 			return this.editor.getValue();
 		},
-		getEditorProps: function(inDatum){
+		getWidgetProps: function(inDatum){
 			return $wnd.dojo.mixin(this.inherited(arguments), {
 				value: inDatum,
 				constraints: (this.cell.constraints == undefined ? {} : this.cell.constraints),
@@ -185,7 +186,7 @@ public class NumberSpinnerEditor implements GridEditor {
 	 * @see com.objetdirect.tatami.client.grid.editor.GridEditor#getDojoGridEditorName()
 	 */
 	public String getDojoGridEditorName() {
-		return "TatamiNumberSpinner";
+		return "dojox.grid.cells.TatamiNumberSpinner";
 	}
 
 

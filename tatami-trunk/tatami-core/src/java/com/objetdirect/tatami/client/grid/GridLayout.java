@@ -51,12 +51,6 @@ public class GridLayout implements ConvertibleToJSObject{
 	private List views = new ArrayList();
 
 	/**
-	 * JavaScript row bar object, to be added to 
-	 * the layout if hasRowBar == true
-	 */
-	private JavaScriptObject rowBar = createRowBar();
-	
-	/**
 	 * Determines wether a row selection bar 
 	 * should be displayed
 	 */
@@ -74,13 +68,13 @@ public class GridLayout implements ConvertibleToJSObject{
 	 * @see com.objetdirect.tatami.client.ConvertibleToJSObject#toJSObject()
 	 */
 	public JavaScriptObject toJSObject() {
-		if(hasRowBar){
-			views.add(0,rowBar);
-		}
 		JavaScriptObject jsLayout = JSHelper.convertObjectToJSObject(views);
-		views.remove(rowBar);
 		return jsLayout;
 	}
+	
+	private native void debugLayout(JavaScriptObject jsLayout)/*-{
+		$wnd.console.log(jsLayout);
+	}-*/;
 
 	/**
 	 * @param index: the index where the view should be added
@@ -139,16 +133,6 @@ public class GridLayout implements ConvertibleToJSObject{
 	public boolean hasRowBar(){
 		return hasRowBar;
 	}
-	
-	/**
-	 * @return a javascriptObject representing a "rowbar" 
-	 */
-	private native JavaScriptObject createRowBar()/*-{
-		var rowBar = {
-		         type: 'dojox.GridRowView', width: '20px'
-		};
-		return rowBar;
-	}-*/;
 	
 	/**
 	 * @return : the total number of cells among all views

@@ -61,7 +61,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * The DataStore items : the key is the item's idAttribute value, 
 	 * 	while the item itself is an {@link Item}.
 	 */
-	protected Map items = new HashMap();
+	protected Map<Object,Item> items = new HashMap<Object,Item>();
 	
 	
 	/**
@@ -164,6 +164,9 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 			 fetch: function(keywordArgs){
 			 	this.gwtStore.@com.objetdirect.tatami.client.data.AbstractDataStore::fetch(Lcom/google/gwt/core/client/JavaScriptObject;)(keywordArgs);
 			 },
+			 fetchItemByIdentity: function(keywordArgs){
+			 	this.gwtStore.@com.objetdirect.tatami.client.data.AbstractDataStore::dojoFetchItemByIdentity(Lcom/google/gwt/core/client/JavaScriptObject;)(keywordArgs);
+			 },
 			 getFeatures: function(){
 			 	return { 'dojo.data.api.Read' : true ,
 			 			 'dojo.data.api.Identity' : true ,
@@ -192,15 +195,18 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 			 },
 			 onSet : function(item, attribute, oldValue, newValue){
 			 },
-			 onNew : function(item){
+			 onNew : function(item , parentInfo){
 			 },
 			 onDelete : function(item){
 			 },
 			 newItem : function(item , parentInfo){
-			 	return this.gwtStore.@com.objetdirect.tatami.client.data.AbstractDataStore::dojoAdd(Lcom/objetdirect/tatami/client/data/Item;)(item);
+			 	var item = this.gwtStore.@com.objetdirect.tatami.client.data.AbstractDataStore::dojoAdd(Lcom/objetdirect/tatami/client/data/Item;)(item);
+				this.onNew(item, parentInfo);
+			 	return item;
 			 },
 			 deleteItem : function(item){
-			 	this.gwtStore.@com.objetdirect.tatami.client.data.AbstractDataStore::remove(Lcom/objetdirect/tatami/client/data/Item;)(item);
+			 	this.gwtStore.@com.objetdirect.tatami.client.data.AbstractDataStore::dojoRemove(Lcom/objetdirect/tatami/client/data/Item;)(item);
+			 	this.onDelete(item);
 			 }
 	 });
 	}-*/;
@@ -381,6 +387,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	public Item getItemByIdentity(Object id){
 		return (Item) items.get(id);
 	}
+	
 
 	/**
 	 * @param item : the item to get the label from
@@ -495,7 +502,20 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 */
 	public abstract void fetch(Request request);
 	
+	public void fetchItemByIdentity(Request request){
+		Object id = request.getQuery().get("identity");
+		Item item = getItemByIdentity(id);
+		callOnItem(request.getOnItemCallback(), item);
+	}
 	
+	private native void callOnItem(JavaScriptObject onItemCallback , Item item)/*-{
+		onItemCallback(item);
+	}-*/;
+	
+	private  void dojoFetchItemByIdentity(JavaScriptObject object){
+		Request request = new Request(object);
+		fetchItemByIdentity(request);
+	}
 
 	/**
 	 * Simple wrapper around {@link #fetch(Request)} to be called by dojo
@@ -530,9 +550,12 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param item
 	 */
 	public void add(Item item) {
+		add(item,null);
+	}
+	
+	public void add(Item item, JavaScriptObject parentInfo){
 		Object id = getIdentity(item);
 		Item oldItem = (Item) items.get(id);
-		items.put( id , item);
 		if(oldItem != null){
 			String[] attributes = oldItem.getAttributes();
 			for (int i = 0; i < attributes.length; i++) {
@@ -540,9 +563,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 				onSet(item , attr , oldItem.getValue(attr, null) , item.getValue(attr, null));
 			}
 		}else{
-			notifyOnNewListeners(item);
 			if(dojoStore != null){
-				callJSOnNew(item);
+				callJSOnNew(item , parentInfo);
+			}else{
+				notifyOnNewListeners(item);
 			}
 		}
 	}
@@ -554,10 +578,14 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @return
 	 */
 	private Item dojoAdd(Item item){
-		Object id = getIdentity(item);
-		items.put( id , item);
-		Item oldItem = (Item) items.get(id); 
+		items.put(getIdentity(item),item);
 		notifyOnNewListeners(item);
+		return item;
+	}
+	
+	private Item dojoRemove(Item item){
+		items.remove(getIdentity(item));
+		notifyOnDeleteListeners(item);
 		return item;
 	}
 	
@@ -580,11 +608,13 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * to propagate the event.
 	 * @param item : the javascript item to pass to dojo
 	 */
-	protected native void callJSOnNew(Item item)/*-{
-		this.@com.objetdirect.tatami.client.data.AbstractDataStore::dojoStore.onNew(item);
+	protected native void callJSOnNew(Item item , JavaScriptObject parentInfo)/*-{
+		this.@com.objetdirect.tatami.client.data.AbstractDataStore::dojoStore.newItem(item,parentInfo);
 	}-*/;
 	
-	
+	protected  void callJSOnNew(Item item){
+		callJSOnNew(item,null);
+	}
 	
 	/**
 	 * Fires an onSet event.
@@ -638,7 +668,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param item
 	 */
 	protected native void callJSOnDelete(Item item)/*-{
-		this.@com.objetdirect.tatami.client.data.AbstractDataStore::dojoStore.onDelete(item);
+		this.@com.objetdirect.tatami.client.data.AbstractDataStore::dojoStore.deleteItem(item);
 	}-*/;
 	
 	
@@ -650,10 +680,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param item
 	 */
 	public void remove(Item item) {
-		if(isItem(item)){
-			Object id = getIdentity(item);
-			onDelete(item);
-			items.remove(id);
+		if(dojoStore != null){
+			callJSOnDelete(item);
+		}else{
+			dojoRemove(item);
 		}
 	}
 
@@ -933,6 +963,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 		items.clear();
 	}
 	
+	
 	/**
 	 * Execute the given request against the given collection of items
 	 * 
@@ -992,7 +1023,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 				}else{
 					result = value1.toString().compareTo(value2.toString()); 
 				}
-				if(!sortField.isDescending()){
+				if(sortField.isDescending()){
 					result = -result;
 				}
 				if(result != 0){
@@ -1025,7 +1056,11 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 					result = false;
 				}else if(actualProperty instanceof Comparable && expectedProperty instanceof Comparable){
 					try{
-						result = ((Comparable)actualProperty).compareTo(expectedProperty) == 0 ? true : false;
+						if(actualProperty instanceof Boolean || expectedProperty instanceof Boolean){
+							result = actualProperty.toString().compareTo(expectedProperty.toString()) == 0 ? true : false;
+						}else{
+							result = ((Comparable)actualProperty).compareTo((Comparable)expectedProperty) == 0 ? true : false;
+						}
 					}catch(ClassCastException e){
 						result = actualProperty.toString().compareTo(expectedProperty.toString()) == 0 ? true : false;
 					}

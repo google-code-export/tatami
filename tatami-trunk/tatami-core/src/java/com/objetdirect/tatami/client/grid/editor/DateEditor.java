@@ -39,7 +39,7 @@ import com.objetdirect.tatami.client.grid.formatters.DateFormatter;
  */
 public class DateEditor implements GridEditor{
 
-	private final String dojoName = "DateTextBox";
+	private final String dojoName = "dojox.grid.cells.DateTextBox";
 	
 	private Map attributes = new HashMap();
 	

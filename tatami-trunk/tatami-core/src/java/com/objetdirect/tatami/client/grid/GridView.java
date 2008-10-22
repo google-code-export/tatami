@@ -267,7 +267,7 @@ public class GridView implements ConvertibleToJSObject {
 	 */
 	private native JavaScriptObject createJSObject(JavaScriptObject cells)/*-{
 		var toReturn = @com.google.gwt.core.client.JavaScriptObject::createObject()();
-		toReturn['cells'] = cells;
+		toReturn.cells = cells;
 		return toReturn;
 	}-*/;
 

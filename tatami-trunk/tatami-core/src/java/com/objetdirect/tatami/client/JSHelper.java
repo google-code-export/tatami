@@ -88,8 +88,8 @@ public class JSHelper {
 		return array[index];
 	}-*/;
 	
-	private static native int getArraySize(JavaScriptObject array)/*-{
-		return array.length;
+	public static native int getArraySize(JavaScriptObject array)/*-{
+		return array ? array.length : 0;
 	}-*/;
 	
  	private  static JavaScriptObject convertArrayToJSObject(Object[] collec){

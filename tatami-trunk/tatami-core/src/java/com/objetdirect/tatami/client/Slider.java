@@ -215,7 +215,6 @@ public class Slider extends AbstractDojoFocus {
 		} else {
 			this.dojoWidget = createVerticalSlider(minimum, maximum, value,
 					showButtons);
-			setSize(10, 200);
 		}
 
 	}
@@ -237,7 +236,6 @@ public class Slider extends AbstractDojoFocus {
 	   maximum: maximum,
 	   showButtons :  showButtons,
 	   value:initialValue,
-	   style:"height:200px;",
 	   discreteValues: maximum,
 	   intermediateChanges: true
 	 }

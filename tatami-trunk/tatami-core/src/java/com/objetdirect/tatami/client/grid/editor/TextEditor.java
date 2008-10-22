@@ -25,6 +25,7 @@
  */
 package com.objetdirect.tatami.client.grid.editor;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -35,13 +36,20 @@ import java.util.Map;
  */
 public class TextEditor implements GridEditor{
 
-	private final String dojoName = "Input";
+	private final String dojoName = "dojox.grid.cells.Editor";
+	
+	private Map<String,Object> attributes = new HashMap<String, Object>();
+	
+	public TextEditor(boolean hasToolBar){
+		attributes.put("editorToolbar",hasToolBar);
+	}
 	
 	public TextEditor(){
+		this(false);
 	}
 	
 	public Map getAttributes() {
-		return null;
+		return attributes;
 	}
 
 	public String getDojoGridEditorName() {
@@ -49,5 +57,12 @@ public class TextEditor implements GridEditor{
 	}
 	
 
+	public void setEditorToolbarVisible(boolean hasToolBar){
+		attributes.put("editorToolbar",hasToolBar);
+	}
+	
+	public boolean getEditorToolbarVisible(){
+		return (Boolean) attributes.get("editorToolbar");
+	}
 
 }

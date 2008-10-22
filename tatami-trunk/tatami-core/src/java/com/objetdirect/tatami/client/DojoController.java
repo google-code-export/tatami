@@ -61,7 +61,24 @@ public class DojoController {
 	 **/
 	private DojoController() {
 		mapWidget = new HashMap();
+		//TODO remove this as soon as its corrected in Dojo
+		overrideDojoGetComputedStyle();
 	}
+	
+	private native void overrideDojoGetComputedStyle()/*-{
+		if($wnd.dojo.isSafari){
+			$wnd.dojo.getComputedStyle = function(node){
+				var s;
+				var dv = node.ownerDocument.defaultView;
+				s = dv.getComputedStyle(node, null);
+				if(!s && node.style){ 
+					node.style.display = ""; 
+					s = dv.getComputedStyle(node, null);
+				}
+				return s || {};
+			}; 
+		}
+	}-*/;
 
 	/**
 	 * Returns the instance of the singleton <code>DojoController</code>
@@ -116,17 +133,11 @@ public class DojoController {
 	/*-{
 	 var ok = true;
 	 try {
-
 	    $wnd.dojo.require(widget);
      } catch (e) {
-	   ok =false;
+	   ok = false;
 	 }
-
      return ok;
-
-
-
-
 	 }-*/;
 
 	/**

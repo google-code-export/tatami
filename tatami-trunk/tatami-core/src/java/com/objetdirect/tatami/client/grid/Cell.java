@@ -144,26 +144,16 @@ public class Cell implements ConvertibleToJSObject{
 			}
 		}
 		if(editor != null){
-			jsRepresentation = addAttribute(jsRepresentation, "editor" , getEditor(editor.getDojoGridEditorName()));
+			jsRepresentation = addAttribute(jsRepresentation, "editable" , "true");
+			//jsRepresentation = addAttribute(jsRepresentation, "editor" , editor.getDojoGridEditorName());
+			Set<String> editorProperties = editor.getAttributes().keySet();
+			for (String attr : editorProperties) {
+				addAttribute(jsRepresentation,attr, JSHelper.convertObjectToJSObject(editor.getAttributes().get(attr)));
+			}
 		}
 		return jsRepresentation;
 	}
 	
-	/**
-	 * Internal method used to construct the dojo editor. 
-	 * 
-	 * @param editorName
-	 * @return
-	 */
-	private native JavaScriptObject getEditor(String editorName)/*-{
-		var editor =  $wnd.dojox.grid.editors[editorName];
-		if(editor == null || editor == undefined){
-			eval("var editor = $wnd.dojox.grid.editors."+editorName+";");
-		}
-		return editor;
-	}-*/;
-	
-
 	/**
 	 * Internal method helping to construct the javascript cell object 
 	 * 

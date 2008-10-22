@@ -46,7 +46,7 @@ public interface  GridEditor   {
 	/**
 	 * @return editor's options
 	 */
-	public  Map getAttributes();
+	public  Map<String, Object> getAttributes();
 	
 	
 }
