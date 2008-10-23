@@ -28,9 +28,10 @@ public class TestLayoutGridPage extends TestPage{
 	protected TestLayoutGridPage() {
 		super("com.objetdirect.tatami.testpages.client.TestLayoutGridPage", "Test Layout Grid");
 	}
-	final Grid grid = new Grid();
+	Grid grid;
 	
 	public Widget getTestPage() {
+		grid = new Grid();
 		VerticalPanel panel = new VerticalPanel();
 		GridDataStore store = new GridDataStore("myidAttr");
 		grid.setStore(store);
@@ -63,6 +64,8 @@ public class TestLayoutGridPage extends TestPage{
 		store.add(itemJane);
 		
 		
+		
+		
 		GridLayout layout = new GridLayout();
 		
 		//Creating the first (left) view
@@ -75,8 +78,8 @@ public class TestLayoutGridPage extends TestPage{
 		cell.setIsNotResizable(Boolean.FALSE);
 		cell.setWidth("100px");
 		view.addCellToLastRow(cell);
-		view.setScrollable(false);
-		view.setWidth("100px");
+		//view.setScrollable(false);
+		//view.setWidth("100px");
 		
 		//Creating the second (right) view
 		//This view has 2 rows
@@ -95,7 +98,7 @@ public class TestLayoutGridPage extends TestPage{
 		salaryCell.setWidth("50px");
 		view2.addCellToLastRow(salaryCell);
 		
-		//We define a cell containt the date attribute, and add it to
+		//We define a cell containing the date attribute, and add it to
 		//the row.
 		//This cell is also editable (with a DateEditor)
 		//and is formatted as a date. 
@@ -129,13 +132,6 @@ public class TestLayoutGridPage extends TestPage{
 		imageCell.setDefaultValue("<img src='./mail-message-new.png' alt='send mail'></img>");
 		imageCell.setRowSpan(new Integer(2));
 		view2.addCellToRow(imageCell,0);
-		
-		
-		view2.setScrollable(true);
-		view2.setWidth("500px");
-		
-		
-		
 		//We add the views to the layout
 		layout.addView(view);
 		layout.addView(view2);
@@ -149,13 +145,8 @@ public class TestLayoutGridPage extends TestPage{
 		grid.updateView();
 		grid.setRowBar(true);
 		DOM.setElementAttribute(grid.getElement(),"id","GridContainer");
-		//layout.addView(view3);
-		//Object[] row1 = {"John Doe" , "0123456789" , new Integer("500") , new Date("03/25/1981") , "CEO" , Boolean.FALSE , "I m John Doe and i cant describe myself since nobody knows me"};
-		//Object[] row2 = {"Jane Doe" , "9876543210" ,  new Integer("1200") , new Date("11/12/1978") , "Developer" , Boolean.TRUE , "I m Jane Doe and this is my description"};
-		//grid.addRow(row1);
-		//grid.addRow(row2);
 		grid.setHeight("200px");
-		
+		grid.setSortIndex(0, true);
 		panel.add(grid);
 		class myGridListener implements GridListener{
 
@@ -171,11 +162,11 @@ public class TestLayoutGridPage extends TestPage{
 			private String selectedIndexesCellContent;
 
 
-			//What should be displayed when an itemís value change
+			//What should be displayed when an item‚Äôs value change
 			private String itemChangedContent;
 
 
-			//The constructor takes an ìHTMLî object in which
+			//The constructor takes an ‚ÄúHTML‚Äù object in which
 			// it will write the cell content.
 			public myGridListener(HTML html){
 				this.html = html;

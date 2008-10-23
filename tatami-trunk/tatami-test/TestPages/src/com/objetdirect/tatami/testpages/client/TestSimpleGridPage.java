@@ -23,12 +23,16 @@ public class TestSimpleGridPage extends TestPage{
 
 	protected TestSimpleGridPage() {
 		super("com.objetdirect.tatami.testpages.client.TestSimpleGridPage", "Test Grid");
+		
 	}
-	final Grid grid = new Grid();
+	Grid grid;
+	Panel panel;
 	
 	public Widget getTestPage() {
-		Panel panel = new VerticalPanel();
-		grid.addColumn("First Column","1",new TextEditor());
+		grid = new Grid();
+		panel = new VerticalPanel();
+		panel.add(grid);
+		grid.addColumn("First Column","1" , new TextEditor());
 		grid.addColumn("Second Column","2");
 		grid.addColumn("Third Column","3");
 		Object[] row1 = {"A" , "b" , "3"};
@@ -40,7 +44,7 @@ public class TestSimpleGridPage extends TestPage{
 		grid.setUserSortable(true);
 		grid.setAutoHeight(false);
 		grid.setAutoWidth(false);
-		grid.setSortIndex(2,true);
+		grid.setSortIndex(1,false);
 		DOM.setElementAttribute(grid.getElement(), "id", "GridContainer");
 		panel.add(grid);
 		Button sortBySecondColumnButton = new Button("Sort by second column" , new ClickListener() {
@@ -50,6 +54,14 @@ public class TestSimpleGridPage extends TestPage{
 		});
 		DOM.setElementAttribute(sortBySecondColumnButton.getElement(),"id","SetSecondColumnOrderButton");
 		panel.add(sortBySecondColumnButton);
+		
+		Button clearGridButton = new Button("Clear Grid" , new ClickListener() {
+			public void onClick(Widget sender) {
+				grid.clearGrid();
+			}
+		});
+		DOM.setElementAttribute(clearGridButton.getElement(),"id","ClearGridButton");
+		panel.add(clearGridButton);
 		
 		Button addRowButton = new Button("Add a row" , new ClickListener(){
 			public void onClick(Widget sender) {

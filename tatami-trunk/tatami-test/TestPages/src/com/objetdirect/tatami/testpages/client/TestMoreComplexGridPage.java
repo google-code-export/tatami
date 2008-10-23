@@ -28,6 +28,9 @@ import com.objetdirect.tatami.client.grid.GridDataStore;
 import com.objetdirect.tatami.client.grid.GridLayout;
 import com.objetdirect.tatami.client.grid.GridListener;
 import com.objetdirect.tatami.client.grid.GridView;
+import com.objetdirect.tatami.client.grid.editor.ComboBoxEditor;
+import com.objetdirect.tatami.client.grid.editor.DateEditor;
+import com.objetdirect.tatami.client.grid.editor.NumberSpinnerEditor;
 import com.objetdirect.tatami.client.grid.editor.TextEditor;
 import com.objetdirect.tatami.client.grid.formatters.BooleanFormatter;
 import com.objetdirect.tatami.client.grid.formatters.DateFormatter;
@@ -44,8 +47,6 @@ public class TestMoreComplexGridPage extends TestPage{
 		
 		personalInfoPanel = new PersonalInfoPanel();
 		Grid grid = initGrid();
-		grid.setRenderGridOnLoad(true);
-		grid.setSortIndex(0, true);
 		FormGridListener formGridListener = new FormGridListener();
 		grid.addGridListener(formGridListener);
 		
@@ -128,10 +129,9 @@ public class TestMoreComplexGridPage extends TestPage{
 			public void onCellClick(Grid sendingrid, int rowIndex, int colIndex,
 					String colField) {
 				if(colIndex == 2){
-					System.out.println("REMOVING FILTER : " + sendingrid.getDataAt(rowIndex, 0));
 					grid.removeFilter((String) sendingrid.getDataAt(rowIndex, 0));
 					sendingrid.removeRow(rowIndex);
-					grid.updateData();
+					grid.updateGrid();
 				}
 			}
 
@@ -156,10 +156,10 @@ public class TestMoreComplexGridPage extends TestPage{
 			public void onClick(Widget sender) {
 				String field = filterListBox.getValue(filterListBox.getSelectedIndex());
 				String value = filterTextBox.getText();
-				grid.addFilter(field, value );
-				String[] newRow = {field, value};
+				Object[] newRow = {field, value};
 				filterListGrid.addRow(newRow);
-				grid.updateData();
+				grid.addFilter(field, value );
+				grid.updateGrid();
 			};
 		});
 		
@@ -170,7 +170,6 @@ public class TestMoreComplexGridPage extends TestPage{
 	
 	private Panel initPageNavigatorPanel(){
 		class PageNavigatorListener implements ClickListener, ChangeListener{
-
 			public void onClick(Widget sender) {
 				if(sender == previousPageButton){
 					grid.previousPage();
@@ -179,13 +178,11 @@ public class TestMoreComplexGridPage extends TestPage{
 					grid.nextPage();
 				}
 			}
-
 			public void onChange(Widget sender) {
 				if( sender == pageSelector){
 					grid.goToPage(pageSelector.getValue().intValue());
 				}
 			}
-			
 		}
 		PageNavigatorListener navigatorListener = new PageNavigatorListener();
 		HorizontalPanel panel = new HorizontalPanel();
@@ -228,9 +225,7 @@ public class TestMoreComplexGridPage extends TestPage{
 				}
 				if(sender == removeEmployeeButton){
 					grid.removeSelectedRows();
-					System.out.println("ROW COUNT : " + grid.getRowCount());
 				}
-				
 			}
 		}
 		ButtonPanelListener listener = new ButtonPanelListener();
@@ -385,7 +380,6 @@ public class TestMoreComplexGridPage extends TestPage{
 		
 		Cell idCell = new Cell(idAttr , "Unique Id");
 		Cell firstNameCell = new Cell(firstNameAttr , "First Name ");
-		firstNameCell.setEditor(new TextEditor());
 		Cell lastNameCell = new Cell(lastNameAttr , "Last Name ");
 		Cell birthDateCell = new Cell(birthDateAttr , "Birthdate");
 		birthDateCell.setFormatter(new DateFormatter(DateFormatter.displayDateOnly));
@@ -408,14 +402,14 @@ public class TestMoreComplexGridPage extends TestPage{
 		GridDataStore store = new GridDataStore(idAttr); 
 		grid = new Grid(store , view);
 		grid.setRenderGridOnLoad(true);
+		grid.setRowsPerPage(50);
+		grid.setMaximumFetchCountAtAtime(10);
 		grid.setSortIndex(0, true);
 		grid.setUserSortable(true);
 		grid.setAutoHeight(false);
 		grid.setAutoWidth(false);
 		grid.setHeight("260px");
 		grid.setWidth("600px");
-		grid.setRowsPerPage(50);
-		grid.setMaximumFetchCountAtAtime(10);
 		DOM.setElementAttribute(grid.getElement(), "id", "GridContainer");
 		Object[] row1 = {null, firstNames[0], lastNames[0], new Date(38 + 50 , 5 , 22) ,new Integer(3000 + 1000), fonctions[0] , Boolean.TRUE};
 		Object[] row2 = {null, firstNames[1], lastNames[0], new Date(38 + 40 , 5 , 22) ,new Integer(2000 + 1000), fonctions[1] , Boolean.TRUE};
@@ -430,21 +424,6 @@ public class TestMoreComplexGridPage extends TestPage{
 		return grid;
 	}
 	
-	private native JavaScriptObject getFormatter()/*-{
-		var dateFormatter = function(date){
-			var options = {};
-			options.selector = 'date';
-			if(date instanceof Date){
-				return $wnd.dojo.date.locale.format(date , options);
-			}else{
-				var tempDate = new Date(date.toString());
-				return $wnd.dojo.date.locale.format(tempDate, options);
-			}
-			
-			
-		};
-		return dateFormatter;
-	}-*/;
 	
 	
 	private class FormGridListener implements GridListener{
