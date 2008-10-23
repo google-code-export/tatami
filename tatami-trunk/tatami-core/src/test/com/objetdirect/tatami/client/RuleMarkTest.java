@@ -48,8 +48,9 @@ public class RuleMarkTest extends DefaultTatamiTest {
 	  return ruleMark;
    }
 
-   public void gwtTearDown() {
+   public void gwtTearDown() throws Exception{
 	   ruleMark = null;
+	   super.gwtTearDown();
    }
 
    /**

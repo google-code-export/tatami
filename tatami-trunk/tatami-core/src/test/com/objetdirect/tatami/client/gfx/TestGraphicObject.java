@@ -66,10 +66,10 @@ abstract public class TestGraphicObject extends DefaultTatamiTest {
   }
   
   
-  public void gwtTearDown() {
-	 
-	  canvas = null;
-	  component = null;
+  public void gwtTearDown() throws Exception{
+	canvas = null;
+	component = null;
+	super.gwtTearDown();
   }
   
   /** Tests the translating transformation */

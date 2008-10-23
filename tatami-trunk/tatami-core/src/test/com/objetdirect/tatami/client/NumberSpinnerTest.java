@@ -58,12 +58,14 @@ public class NumberSpinnerTest extends DefaultTatamiTest {
 				assertEquals(true, changed);
 				changed = false;
 				spinner.removeChangeListener(listener);
+				finishTest();
 			}
 		};
 		
 		spinner.addChangeListener(listener);
 		spinner.setValue(new Float(7.4f));
 		timer.schedule(100);
+		delayTestFinish(500);
 	}
 	
 }

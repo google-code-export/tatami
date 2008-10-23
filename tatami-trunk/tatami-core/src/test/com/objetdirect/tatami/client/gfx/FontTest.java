@@ -37,6 +37,7 @@ public class FontTest extends DefaultTatamiTest {
 	 */
 	protected void gwtSetUp() throws Exception {
 		font = new Font(Font.DEFAULT_FONT);
+		super.gwtSetUp();
 	}
 	
 	/**
@@ -122,8 +123,9 @@ public class FontTest extends DefaultTatamiTest {
 	/**
 	 * Destroys the point
 	 */
-	public void gwtTearDown() {
+	public void gwtTearDown() throws Exception{
 		font = null;
+		super.gwtTearDown();
 	}
 	
 	/**

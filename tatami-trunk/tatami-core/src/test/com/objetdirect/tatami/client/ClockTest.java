@@ -105,7 +105,7 @@ public class ClockTest extends DefaultTatamiTest {
 	 * @return ans instance of <code>Clock</code>
 	 */ 
 	public Clock getClock(String image, int size) {
-		if ( clock == null) {
+		if (clock == null) {
 			clock = new Clock(image,size);
 	        RootPanel.get().add(clock);		
 		}
@@ -127,8 +127,9 @@ public class ClockTest extends DefaultTatamiTest {
 	}
 	
 	
-	public void gwtTearDown() {
+	public void gwtTearDown() throws Exception{
 		this.clock = null;
+		super.gwtTearDown(); 
 	}
 	
 	

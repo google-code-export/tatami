@@ -115,9 +115,10 @@ public class ColorChooserTest extends DefaultTatamiTest {
 	}
 	
 	
-	public void gwtTearDown() {
+	public void gwtTearDown() throws Exception{
 		this.clicked = false;
 		chooser = null;
+		super.gwtTearDown();
 	}
 
 }//end of class

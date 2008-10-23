@@ -234,10 +234,11 @@ public abstract class TestDropdownContainer extends DefaultTatamiTest {
 	/**
 	 * 
 	 */
-	public void gwtTearDown() {
+	public void gwtTearDown() throws Exception{
 		this.dropdownContainer = null;
 		this.clicked = false;
 		this.textChanged = false;
+		super.gwtTearDown();
 	}
 
 }//end of class

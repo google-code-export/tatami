@@ -98,8 +98,9 @@ public class ToasterTest extends DefaultTatamiTest {
 	}
 
 	
-	public void gwtTearDown() {
+	public void gwtTearDown() throws Exception{
 		this.toaster =null;
+		super.gwtTearDown();
 	}
 	
 	

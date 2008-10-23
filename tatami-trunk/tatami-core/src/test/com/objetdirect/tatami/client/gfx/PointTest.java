@@ -37,15 +37,17 @@ public class PointTest extends DefaultTatamiTest {
 	/**
 	 * Creates a point
 	 */
-	public void gwtSetUp() {
+	public void gwtSetUp() throws Exception {
+		super.gwtSetUp();
 		point = new Point(15,45);
 	}
 	
 	/**
 	 * Destroys the point
 	 */
-	public void gwtTearDown() {
+	public void gwtTearDown() throws Exception{
 		point = null;
+		super.gwtTearDown();
 	}
 	
 	/**

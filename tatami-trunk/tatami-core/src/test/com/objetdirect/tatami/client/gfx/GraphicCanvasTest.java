@@ -72,13 +72,14 @@ public class GraphicCanvasTest extends DefaultTatamiTest implements GraphicObjec
   }
   
   
-  public void gwtTearDown() {
+  public void gwtTearDown() throws Exception{
 	  canvas = null;
 	  moved = false;
 	  pressed = false;
 	  clicked = false;
 	  released = false;
 	  doubleClicked = false;
+	  super.gwtTearDown();
 		  
   }
   

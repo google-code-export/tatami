@@ -32,7 +32,6 @@ public class GridTest extends DefaultTatamiTest {
 		Object[] row3 = { "Still Here !" , "John" , "Doe"};
 		grid.addRow(row1);
 		grid.addRow(row2);
-		
 		RootPanel.get().add(grid);
 		grid.updateGrid();
 		grid.addRow(row3);

@@ -32,7 +32,8 @@ public class RectangleTest extends DefaultTatamiTest {
 
   private Rectangle rect;
   
-  public void gwtSetUp() {
+  public void gwtSetUp() throws Exception{
+	  super.gwtSetUp();
 	  rect = new Rectangle(50,60,100,200);
   }
 
@@ -135,8 +136,9 @@ public class RectangleTest extends DefaultTatamiTest {
   }-*/;
   
   
-  public void gwtTearDown() {
+  public void gwtTearDown() throws Exception{
 	  rect = null;
+	  super.gwtTearDown();
   }
   
   /**

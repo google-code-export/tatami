@@ -38,12 +38,14 @@ public class ColorTest extends DefaultTatamiTest {
 
   /** creates a color */
   protected void gwtSetUp() throws Exception {
+	  super.gwtSetUp();
 	  color = new Color(127,255,233,127);  
   }
 
   
-  public void gwtTearDown() {
+  public void gwtTearDown() throws Exception{
 	  color = null;
+	  super.gwtTearDown();
   }
 
   /** Tests  color */

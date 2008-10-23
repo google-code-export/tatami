@@ -196,7 +196,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		Request request = new Request();
 		request.setNbItemToReturn(2);
 		request.setStartItemNumber(2);
-		request.addSortParameter("id", true);
+		request.addSortParameter("id", false);
 		store.fetch(request);
 		assertEquals(5, listener.lastOnBeginSize);
 		assertEquals(request, listener.lastOnBeginRequest);
@@ -229,7 +229,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		Request request = new Request();
 		request.setNbItemToReturn(2);
 		request.setStartItemNumber(2);
-		request.addSortParameter("id", true);
+		request.addSortParameter("id", false);
 		store.fetch(request);
 		List fetcheditems = listener.lastOnCompleteItems;
 
@@ -245,7 +245,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		}
 		request.clearQueryParameters();
 		request.clearSortOptions();
-		request.addSortParameter("id", false);
+		request.addSortParameter("id", true);
 		request.setStartItemNumber(1);
 		request.setNbItemToReturn(3);
 		
@@ -270,8 +270,8 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		}
 		request.clearQueryParameters();
 		request.clearSortOptions();
-		request.addSortParameter("name", true);
-		request.addSortParameter("age", false);
+		request.addSortParameter("name", false);
+		request.addSortParameter("age", true);
 		request.setStartItemNumber(0);
 		request.setNbItemToReturn(5);
 		store.fetch(request);

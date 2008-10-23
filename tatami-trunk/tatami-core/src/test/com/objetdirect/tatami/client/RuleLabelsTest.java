@@ -47,8 +47,9 @@ public class RuleLabelsTest extends DefaultTatamiTest {
 	  return ruleLabels;
    }
 
-   public void gwtTearDown() {
+   public void gwtTearDown() throws Exception{
 	   ruleLabels = null;
+	   super.gwtTearDown();
    }
 
    /**

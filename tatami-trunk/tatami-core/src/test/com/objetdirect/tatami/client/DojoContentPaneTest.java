@@ -65,10 +65,11 @@ public class DojoContentPaneTest extends DefaultTatamiTest {
 	/**
 	 * 
 	 */
-	public void gwtTearDown() {
+	@Override
+	public void gwtTearDown() throws Exception{
 		this.image = null;
-		
 		this.pane = null;
+		super.gwtTearDown();
 	}
 	
 	/**

@@ -31,7 +31,8 @@ public class PatternTest extends DefaultTatamiTest {
 
 	private Pattern pattern;
 	
-	public void gwtSetUp() {
+	public void gwtSetUp() throws Exception{
+		super.gwtSetUp();
 		pattern = new Pattern("/tatami/gfx/icon.gif",-5,15,50,150);
 	}
 	
@@ -67,8 +68,9 @@ public class PatternTest extends DefaultTatamiTest {
 		assertNotNull(pattern.getGFXPattern());
 	}
 	
-	public void gwtTearDown() {
+	public void gwtTearDown() throws Exception{
 		pattern = null;
+		super.gwtTearDown();
 	}
 	
 }//end of class

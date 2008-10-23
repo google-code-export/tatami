@@ -80,8 +80,9 @@ public class SliderTest extends DefaultTatamiTest {
 		
 	}
 	
-	public void gwtTearDown() {
+	public void gwtTearDown() throws Exception {
 		this.slider = null;
+		super.gwtTearDown();
 	}
 	
 	/**
