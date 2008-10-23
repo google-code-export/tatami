@@ -26,10 +26,7 @@ final private WebWindow window;
 	
 	public static final int BUTTON_RIGHT = MouseEvent.BUTTON_RIGHT;
 
-	boolean isLoggingAlert = false;
-	
 	AlertHandler alertHandler = new AlertHandler() {
-		@Override
 		public void handleAlert(Page arg0, String arg1) {
 			System.out.println("Alert : " + arg1);
 		}
@@ -83,6 +80,30 @@ final private WebWindow window;
 		elem.fireEvent(event);
 	}
 	
+	public void dragElementTo(HtmlElement toDrag , HtmlElement toDropOn , boolean ctrlKey ){
+		HtmlElement fromNeighbor = getNeighbor(toDrag);
+		HtmlElement toNeighbor = getNeighbor(toDropOn);
+		toDrag.mouseOver(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		toDrag.mouseDown(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		toDrag.mouseMove(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		fromNeighbor.mouseOver(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		fromNeighbor.mouseMove(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		fromNeighbor.mouseOut(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		toNeighbor.mouseOver(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		toNeighbor.mouseMove(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		toNeighbor.mouseOut(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		toDropOn.mouseOver(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		toDropOn.mouseMove(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
+		toDropOn.mouseUp(false , ctrlKey , false, MouseEvent.BUTTON_LEFT);
+	}
+	
+	private HtmlElement getNeighbor(HtmlElement element){
+		HtmlElement neighbor = (HtmlElement) element.getNextSibling();
+		neighbor = (HtmlElement) (neighbor == null ? element.getPreviousSibling() : neighbor);
+		neighbor = (HtmlElement) (neighbor == null ? getNeighbor((HtmlElement) element.getParentNode()) : neighbor);
+		return neighbor;
+	}
+	
 	public void waitForBackgroundTasksToComplete(int timeout){
 		window.getThreadManager().joinAll(timeout);
 	}
@@ -109,13 +130,11 @@ final private WebWindow window;
 		return focusedElement;
 	}
 	
-	private void toggleJSAlertLogging(){
-			if(isLoggingAlert){
-				window.getWebClient().setAlertHandler(null);
-				isLoggingAlert = false;
-			}else{
+	public void toggleJSAlertLogging(boolean toggle){
+			if(toggle){
 				window.getWebClient().setAlertHandler(alertHandler);
-				isLoggingAlert = true;
+			}else{
+				window.getWebClient().setAlertHandler(null);
 			}
 	}
 	
