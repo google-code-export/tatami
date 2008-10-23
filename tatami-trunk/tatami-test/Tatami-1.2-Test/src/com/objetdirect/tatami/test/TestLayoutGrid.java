@@ -16,8 +16,7 @@ public class TestLayoutGrid extends TatamiTestCase{
 	protected String getTestPageId() {
 		return "com.objetdirect.tatami.testpages.client.TestLayoutGridPage";
 	}
-	
-	
+
 	protected void setUp() throws Exception {
 		super.setUp();
 		testGwt.waitForBackgroundTasksToComplete(5000);
@@ -25,7 +24,7 @@ public class TestLayoutGrid extends TatamiTestCase{
 	}
 	
 	public void testLayoutIsCorrectlyRendered(){
-		assertEquals("Name",grid.getCellHeader(0).getTextContent());
+		assertEquals("▲Name",grid.getCellHeader(0).getTextContent());
 		assertEquals("Phone Number",grid.getCellHeader(1).getTextContent());
 		assertEquals("Salary",grid.getCellHeader(2).getTextContent());
 		assertEquals("Birthdate",grid.getCellHeader(3).getTextContent());

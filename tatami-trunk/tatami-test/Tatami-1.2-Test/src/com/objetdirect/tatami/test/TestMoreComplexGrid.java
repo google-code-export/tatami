@@ -62,7 +62,6 @@ public class TestMoreComplexGrid extends TatamiTestCase {
 	}
 	
 	public void testNextPagePreviousPage(){	
-		grid.clickOnCellHeader(0);
 		assertEquals("1", grid.getCell(0, 0).getTextContent());
 		testGwt.mouseClick(nextPageButton, TestGWT.BUTTON_LEFT, false, false, false);
 		assertEquals("51", grid.getCell(0, 0).getTextContent());
@@ -87,7 +86,10 @@ public class TestMoreComplexGrid extends TatamiTestCase {
 		page.tabToNextElement();
 		testGwt.typeOnFocusedElement("Mickey" , true);
 		page.tabToNextElement();
+		HtmlElement focusedElement = page.getFocusedElement();
 		testGwt.typeOnElement(dateTextBox,  "04/09/1982" , true);
+		testGwt.waitForBackgroundTasksToComplete(200);
+		page.tabToNextElement();
 		page.setFocusedElement(salarySpinner.getInput());
 		testGwt.typeOnFocusedElement("100000000" , true);
 		page.setFocusedElement(positionElement);
@@ -96,6 +98,7 @@ public class TestMoreComplexGrid extends TatamiTestCase {
 		assertEquals("3" , grid.getCell(2, 0).getTextContent());
 		assertEquals("Mickey" , grid.getCell(2, 1).getTextContent());
 		assertEquals("Mouse" , grid.getCell(2, 2).getTextContent());
+		
 		assertEquals("4/9/82" , grid.getCell(2, 3).getTextContent());
 		assertEquals("100000000" , grid.getCell(2, 4).getTextContent());
 		assertEquals("DHR" , grid.getCell(2, 5).getTextContent());
@@ -146,7 +149,7 @@ public class TestMoreComplexGrid extends TatamiTestCase {
 		filterListBox.setSelectedAttribute("firstName", true);
 		testGwt.typeOnElement(filterTextBox, "John",true);
 		testGwt.mouseClick(filterButton , TestGWT.BUTTON_LEFT, false, false, false);
-		testGwt.waitForBackgroundTasksToComplete(1000);
+		testGwt.waitForBackgroundTasksToComplete(2000);
 		count = grid.getRowCount();
 		for(int i = 0; i < count ; i++){
 			assertEquals("Poe", grid.getCell(i, 2).getTextContent());

@@ -42,14 +42,14 @@ public class TestNumberSpinner extends TatamiTestCase{
 	}
 	
 	public void testIntermediateChanges() throws Exception{
-		testGwt.mouseClick(toggleChangesButton.getHtmlElementsByTagName("div").get(0), TestGWT.BUTTON_LEFT, false, false, false);
+		testGwt.mouseClick(toggleChangesButton.getHtmlElementsByTagName("button").get(0), TestGWT.BUTTON_LEFT, false, false, false);
 		testGwt.waitForBackgroundTasksToComplete(1000);
 		testGwt.mouseDown(spinner.getUpArrow(), TestGWT.BUTTON_LEFT, false, false, false);
 		Thread.sleep(813);
 		testGwt.mouseUp(spinner.getUpArrow(), TestGWT.BUTTON_LEFT, false, false, false);
 		testGwt.waitForBackgroundTasksToComplete(1000);
 		assertEquals("3", value.getTextContent());
-		testGwt.mouseClick(toggleChangesButton.getHtmlElementsByTagName("div").get(0), TestGWT.BUTTON_LEFT, false, false, false);
+		testGwt.mouseClick(toggleChangesButton.getHtmlElementsByTagName("button").get(0), TestGWT.BUTTON_LEFT, false, false, false);
 		testGwt.mouseDown(spinner.getUpArrow(), TestGWT.BUTTON_LEFT, false, false, false);
 		Thread.sleep(813);
 		testGwt.mouseUp(spinner.getUpArrow(), TestGWT.BUTTON_LEFT, false, false, false);

@@ -11,6 +11,7 @@ import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.objetdirect.tatami.unit.TatamiTestCase;
 import com.objetdirect.tatami.unit.TestGWT;
 import com.objetdirect.tatami.unit.wrappers.GridWrapper;
@@ -32,6 +33,7 @@ public class TestSimplestGrid extends TatamiTestCase{
 	HtmlElement removeSelectedRows;
 	HtmlElement addColumnButton;
 	HtmlElement removeColumnButton;
+	HtmlElement clearGridButton;
 	
 	protected String getPageName() {
 		return "http://localhost:8888/com.objetdirect.tatami.testpages.TestMainPage/TestMainPage.html";
@@ -57,7 +59,7 @@ public class TestSimplestGrid extends TatamiTestCase{
 		removeSelectedRows = (HtmlElement) page.getElementById("RemoveSelectedRowsButton");
 		addColumnButton = (HtmlElement) page.getElementById("AddColumnButton");
 		removeColumnButton = (HtmlElement) page.getElementById("RemoveColumnButton");
-		
+		clearGridButton = (HtmlElement) page.getElementById("ClearGridButton");
 	}
 	
 	
@@ -105,10 +107,12 @@ public class TestSimplestGrid extends TatamiTestCase{
 	public void testAddAndRemoveRow(){
 		testGwt.mouseClick(addRowButton, TestGWT.BUTTON_LEFT, false, false, false);
 		assertEquals(4, grid.getRowCount());
+		assertEquals("D", grid.getCell(3, 0).getTextContent());
 		testGwt.mouseClick(removeRow1Button, TestGWT.BUTTON_LEFT, false, false, false);
 		assertEquals(3, grid.getRowCount());
-		HtmlElement cell1 = grid.getCell(1, 0);
-		assertEquals("A", cell1.getTextContent());
+		HtmlElement cell1 = grid.getCell(2, 0);
+		assertEquals("D", cell1.getTextContent());
+		assertEquals("B", grid.getCell(0, 0).getTextContent());
 	}
 	
 	public void testSelectRows(){
@@ -123,7 +127,7 @@ public class TestSimplestGrid extends TatamiTestCase{
 		assertEquals("0-1", lastRowSelection.getTextContent());
 		testGwt.mouseClick(removeSelectedRows, TestGWT.BUTTON_LEFT, false, false, false);
 		assertEquals(1 , grid.getRowCount());
-		assertEquals("A", grid.getCell(0,0).getTextContent());
+		assertEquals("C", grid.getCell(0,0).getTextContent());
 	}
 	
 	public void testAddRemoveColumns(){
@@ -131,6 +135,12 @@ public class TestSimplestGrid extends TatamiTestCase{
 		assertEquals("c" , grid.getCell(0,2).getTextContent());
 		testGwt.mouseClick(removeColumnButton, TestGWT.BUTTON_LEFT, false, false, false);
 		assertEquals("1" , grid.getCell(0,2).getTextContent());
+	}
+	
+	public void testClearGrid(){
+		assertEquals(3,grid.getRowCount());
+		testGwt.mouseClick(clearGridButton, TestGWT.BUTTON_LEFT, false, false, false);
+		assertEquals(0,grid.getRowCount());
 	}
 	
 	
