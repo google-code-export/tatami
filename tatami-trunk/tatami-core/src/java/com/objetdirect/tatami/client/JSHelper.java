@@ -34,7 +34,7 @@ public class JSHelper {
  	 			newvalue = value;
  	 		}
  	 		else if(@com.objetdirect.tatami.client.JSHelper::isNumber(Ljava/lang/Object;)(value)){
- 	 			newvalue = value;
+ 	 			newvalue = value.@java.lang.Number::doubleValue()();
  	 		}else if(@com.objetdirect.tatami.client.JSHelper::isDate(Ljava/lang/Object;)(value)){
  	 			newvalue = @com.objetdirect.tatami.client.DateUtil::getJSDate(Ljava/util/Date;)(value);
  	 		}else if(@com.objetdirect.tatami.client.JSHelper::isBoolean(Ljava/lang/Object;)(value)){
@@ -88,6 +88,10 @@ public class JSHelper {
 		return array[index];
 	}-*/;
 	
+	public static native Object getElementAtIndex(JavaScriptObject array , String index)/*-{
+		return array[index];
+	}-*/;
+	
 	public static native int getArraySize(JavaScriptObject array)/*-{
 		return array ? array.length : 0;
 	}-*/;
@@ -98,7 +102,7 @@ public class JSHelper {
  			if(collec[i] instanceof String){
  				array = addStringToArray(array, i , (String) collec[i] );
  			}else if(collec[i] instanceof Number){
- 				array = addNumberToArray(array, i , (Number) collec[i] );
+ 				array = addNumberToArray(array, i , ((Number) collec[i]).doubleValue() );
  			}else if(collec[i] instanceof Date){
  				array = addDateToArray(array, i , (Date) collec[i]  );
  			}else if(collec[i] instanceof Boolean){
@@ -151,7 +155,7 @@ public class JSHelper {
 		return array;
 	}-*/;
  	
- 	private native static JavaScriptObject addNumberToArray(JavaScriptObject array , int index , Number toAdd)/*-{
+ 	private native static JavaScriptObject addNumberToArray(JavaScriptObject array , int index , double toAdd)/*-{
  		array.push(toAdd);
 		return array;
 	}-*/;

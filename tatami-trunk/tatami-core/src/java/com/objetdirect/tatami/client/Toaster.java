@@ -26,6 +26,7 @@
 package com.objetdirect.tatami.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
  * This widget does display in a corner of a container some messages which
@@ -106,6 +107,8 @@ public class Toaster extends AbstractDojo {
 
 	private String typeMessage;
 
+	private SimplePanel container;
+	
 	/**
 	 * Creates the Toatser specifying the topic of the messages. The message
 	 * will have the position <code>BOTTOM_RIGHT_UP</code>
@@ -115,7 +118,6 @@ public class Toaster extends AbstractDojo {
 	 */
 	public Toaster(String messageTopic) {
 		this(messageTopic, BOTTOM_RIGHT_UP);
-
 	}
 
 	/**
@@ -239,6 +241,7 @@ public class Toaster extends AbstractDojo {
 	 );
 	 return widget;
 	 }-*/;
+	
 
 	/**
 	 * Publishes a PLAIN type message on a specific topic. the delay is specify

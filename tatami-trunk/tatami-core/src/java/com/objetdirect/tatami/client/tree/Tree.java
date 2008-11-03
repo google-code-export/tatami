@@ -34,8 +34,8 @@ import java.util.List;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
 import com.objetdirect.tatami.client.AbstractDojo;
-import com.objetdirect.tatami.client.DojoAfterCreationListener;
 import com.objetdirect.tatami.client.DojoAfterCreationEventsSource;
+import com.objetdirect.tatami.client.DojoAfterCreationListener;
 import com.objetdirect.tatami.client.DojoController;
 import com.objetdirect.tatami.client.JSHelper;
 import com.objetdirect.tatami.client.data.AbstractDataStore;
@@ -190,6 +190,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.model._requeryTop();
 	}-*/;
 	
+	@Override
 	public void doAfterCreation() {
 		DojoController.getInstance().setGWTWidget(getDojoTreeModel(), this);
 		for (DojoAfterCreationListener listener : afterCreationListeners) {
@@ -200,6 +201,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 
 	
 	
+	@Override
 	public void doBeforeDestruction() {
 		this.store.doBeforeDestruction();
 	}
@@ -296,6 +298,9 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 			onClick: function( item, node){
 				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateClick(Lcom/objetdirect/tatami/client/tree/TreeItem;)(item);
 			},
+			onDblClick: function( item, node){
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateDblClick(Lcom/objetdirect/tatami/client/tree/TreeItem;)(item);
+			},
 			onOpen: function(item,  node){
 				if(item == this.model.root || item == null){
 					return;
@@ -335,6 +340,14 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 			listener.onClick(item);
 		}
 	}
+	
+	private void propagateDblClick(TreeItem item){
+		for (Iterator<TreeListener> iterator = treeListeners.iterator(); iterator.hasNext();) {
+			TreeListener listener =  iterator.next();
+			listener.onDblClick(item);
+		}
+	}
+	
 	/**
 	 * Notifies the tree listeners that a onOpen event occured on the item
 	 * 
@@ -408,6 +421,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		model.root.children.push(item);
 	}-*/;
 	
+	@Override
 	public void onDojoLoad() {
 		defineTatamiTree();
 	}

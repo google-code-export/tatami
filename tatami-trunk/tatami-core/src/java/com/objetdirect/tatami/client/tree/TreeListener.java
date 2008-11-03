@@ -26,7 +26,6 @@
 
 package com.objetdirect.tatami.client.tree;
 
-import com.objetdirect.tatami.client.data.Item;
 
 /**
  * Interface for tree listeners
@@ -48,5 +47,8 @@ public interface TreeListener {
 	public void onOpen(TreeItem item);
 	
 	public void onClose(TreeItem item);
+
+
+	public void onDblClick(TreeItem item);
 	
 }

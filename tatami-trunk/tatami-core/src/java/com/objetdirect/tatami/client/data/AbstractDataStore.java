@@ -53,7 +53,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	/**
 	 * The name used to declare the generated dojo class
 	 */
-	private final String dojoReadStoreClassName = "dojox.data.store.TatamiDataStore";
+	//private final String dojoReadStoreClassName = "dojox.data.store.TatamiDataStore";
 	
 	
 	
@@ -132,7 +132,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * 
 	 */
 	private native void defineReadStore(String dojoReadStoreClassName )/*-{
-		$wnd.dojo.declare(dojoReadStoreClassName, [$wnd.dojo.data.api.Identity ,$wnd.dojo.data.api.Write , $wnd.dojo.data.api.Notification]   , {
+		$wnd.dojo.declare("dojox.data.store.TatamiDataStore", null   , {
 			 getValue: function (item,attribute,defaultValue) {
 			 	var newDefaultValue = (defaultValue == undefined ? null : defaultValue);
 			 	var toReturn = this.gwtStore.@com.objetdirect.tatami.client.data.AbstractDataStore::dojoGetValue(Lcom/objetdirect/tatami/client/data/Item;Ljava/lang/String;Ljava/lang/Object;)(item,attribute,newDefaultValue);
@@ -541,7 +541,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @see com.objetdirect.tatami.client.HasDojo#onDojoLoad()
 	 */
 	public void onDojoLoad(){
-		defineReadStore(dojoReadStoreClassName);
+		defineReadStore("dojox.data.store.TatamiDataStore");
 	}
 
 
@@ -929,18 +929,15 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	}
 	
 	
-	/**
-	 * Method that should be overriden by subclasses implementors 
-	 * to provide further finalization behaviors.
-	 */
-	private native void destroyStore()/*-{
+	private native void destroyStore(JavaScriptObject store)/*-{
+	
 	}-*/;
 
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.HasDojo#free()
 	 */
 	public void free() {
-		destroyStore();
+		//destroyStore(dojoStore);
 		this.dojoStore = null;
 	}
 	

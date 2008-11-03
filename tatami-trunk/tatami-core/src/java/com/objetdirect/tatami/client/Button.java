@@ -156,16 +156,13 @@ public class Button extends com.google.gwt.user.client.ui.Button implements HasD
 	 */
 	
 	private native JavaScriptObject createDojoButton(String label , String iconClass)
-		/*-{
-		 var button = new $wnd.dojox.form.TatamiButton(
-		 	 {
+	/*-{
+		 var button = new $wnd.dojox.form.TatamiButton({
 		 label: label,
 		 iconClass : iconClass
-		 }
-		 );
-		 
+		 });
 		 return button;
-		 }-*/
+	}-*/
 	;
 	
 	

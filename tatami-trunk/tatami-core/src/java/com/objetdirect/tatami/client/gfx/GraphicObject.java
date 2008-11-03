@@ -452,8 +452,6 @@ public abstract class GraphicObject {
 		this.parent = surface;
 		shape = createGfx(surface.getDojoCanvas());
 		configureShape();
-		
-		
 	}
 	
 	/**

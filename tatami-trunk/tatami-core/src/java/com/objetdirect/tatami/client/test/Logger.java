@@ -8,6 +8,8 @@ public class Logger {
 	
 	private static FlowPanel loggerWindow;
 	
+	
+	
 	public static FlowPanel getLoggerWindow(){
 		if(loggerWindow == null){
 			loggerWindow = new FlowPanel();
@@ -17,8 +19,8 @@ public class Logger {
 		return loggerWindow;
 	}
 	
-	public static void log(String message){
-		getLoggerWindow().add(new HTML("<p>"+message+"</p>"));
+	public static void log(String message ){
+		getLoggerWindow().add(new HTML("<span>"+message+"</span>"));
 	}
 	
 }

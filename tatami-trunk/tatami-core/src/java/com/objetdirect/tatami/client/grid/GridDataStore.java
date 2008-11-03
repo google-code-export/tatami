@@ -28,21 +28,11 @@ package com.objetdirect.tatami.client.grid;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.data.AbstractDataStore;
-import com.objetdirect.tatami.client.data.FetchListener;
 import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.data.Request;
-import com.objetdirect.tatami.client.data.SortField;
  
 /**
  * This DataStore is specific to the Grid.
@@ -79,13 +69,12 @@ public class GridDataStore extends AbstractDataStore{
 	 */
 	
 	//TODO : Better callback management
+	@Override
 	public void fetch(Request request) {
 		
 		//Saves the request to keep filtering and sorting parameter for later use
 		// (for example, to fetch multiple pages)
 		lastRequest = request;
-		GWT.log("FETCHING "+ request.getNbItemToReturn() +" ITEMS FROM " + request.getStartItemNumber() ,null);
-		
 		//Gets the items matching the query , and sorts them according to the
 		//request
 		List itemsSortedAndMatchingQuery = this.executeQuery(items.values() , request);
@@ -126,6 +115,7 @@ public class GridDataStore extends AbstractDataStore{
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.data.AbstractDataStore#isItemLoaded(com.objetdirect.tatami.client.data.Item)
 	 */
+	@Override
 	public boolean isItemLoaded(Item item) {
 		return getItemByIdentity(getIdentity(item)) != null;
 	}
@@ -133,6 +123,7 @@ public class GridDataStore extends AbstractDataStore{
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.data.AbstractDataStore#loadItemImpl(com.objetdirect.tatami.client.data.Item)
 	 */
+	@Override
 	public boolean loadItemImpl(Item item) {
 		return false;
 	}

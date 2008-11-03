@@ -132,7 +132,6 @@ public abstract class AbstractDojo extends Widget implements HasDojo {
 	protected void onAttach() {
 		super.onAttach();
 		DojoController.getInstance().constructDojoWidget(this,this);
-		
     }
 
 } // end of class

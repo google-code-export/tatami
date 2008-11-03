@@ -45,6 +45,10 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class DojoController {
 
+	static{
+		overrideDojoGetComputedStyle();
+	}
+	
 	/** singleton DojoController*/
 	private static DojoController controller;
 
@@ -61,11 +65,9 @@ public class DojoController {
 	 **/
 	private DojoController() {
 		mapWidget = new HashMap();
-		//TODO remove this as soon as its corrected in Dojo
-		overrideDojoGetComputedStyle();
 	}
 	
-	private native void overrideDojoGetComputedStyle()/*-{
+	private  static native void overrideDojoGetComputedStyle()/*-{
 		if($wnd.dojo.isSafari){
 			$wnd.dojo.getComputedStyle = function(node){
 				var s;
@@ -78,6 +80,10 @@ public class DojoController {
 				return s || {};
 			}; 
 		}
+		$wnd.dojo.isArray = function(it){
+			var isArray = (it instanceof $wnd.Array ||typeof it=="array" || it instanceof Array);
+			return (it != undefined && isArray);
+		};
 	}-*/;
 
 	/**
