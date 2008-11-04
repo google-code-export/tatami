@@ -1,7 +1,5 @@
 package com.objetdirect.tatami.client.data;
 
-import java.util.List;
-
 public interface DataStore extends FetchEventSource , DatumChangeSource , LoadItemEventSource{
 
 	/**

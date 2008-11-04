@@ -66,10 +66,11 @@ public class DndTreeElement implements IDnDElement {
 		return treeItem;
 	}
 
-	public IDnDSource getSource() {
+	public IDnDSource<DndTreeElement> getSource() {
 		return source;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void setSource(IDnDSource source) {
 		this.source = source;
 	}

@@ -26,7 +26,6 @@
 package com.objetdirect.tatami.client;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -188,7 +187,7 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	 * 
 	 * 
 	 */
-	private Map constraints = new HashMap();
+	private Map<String,Object> constraints = new HashMap<String,Object>();
 	
 	
 	
@@ -217,7 +216,7 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	public NumberSpinner(int defaultTimeout, String invalidMessage,
 			boolean intermediateChanges, float delta, 
 			String promptMessage, String rangeMessage,
-			float timeoutChangeRate, boolean trim , float value , Map constraints) {
+			float timeoutChangeRate, boolean trim , float value , Map<String,Object> constraints) {
 		this(DOM.createDiv());
 		this.defaultTimeout = defaultTimeout;
 		this.invalidMessage = invalidMessage;
@@ -250,7 +249,7 @@ public class NumberSpinner extends TextBox implements HasDojo {
 		constraints.put("max",new Float(maxValue));
 	}
 	
-	public NumberSpinner(String invalidMessage , float smallDelta , String promptMessage , String rangeMessage ,float value ,  Map constraints){
+	public NumberSpinner(String invalidMessage , float smallDelta , String promptMessage , String rangeMessage ,float value ,  Map<String,Object> constraints){
 		this(DOM.createDiv());
 		this.promptMessage = promptMessage;
 		this.rangeMessage = rangeMessage;
@@ -280,13 +279,14 @@ public class NumberSpinner extends TextBox implements HasDojo {
 		setElement(element);
 		DojoController.getInstance().loadDojoWidget(this);
 		changeListeners = new ChangeListenerCollection();
-		constraints = new HashMap();
+		constraints = new HashMap<String, Object>();
 	}
 	
 	public NumberSpinner(){
 		this(DOM.createDiv());
 	}
 	
+	@Override
 	protected void setElement(Element elem) {
 		Helper.replaceElement(this, elem);
 	}
@@ -317,7 +317,7 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	/**
 	 * @return the constraints' HashMap
 	 */
-	public Map getConstraints() {
+	public Map<String, Object> getConstraints() {
 		return constraints;
 	}
 	
@@ -325,7 +325,7 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	 * @param constraints : the constraints to be applied to the spinner
 	 * {@link #constraints}
 	 */
-	public void setConstraints(Map constraints) {
+	public void setConstraints(Map<String, Object> constraints) {
 		this.constraints = constraints;
 		if(dojoWidget != null){
 			dojoSetConstraints(JSHelper.convertObjectToJSObject(constraints), dojoWidget);
@@ -450,10 +450,12 @@ public class NumberSpinner extends TextBox implements HasDojo {
 		changeListeners.fireChange(this);
 	}
 	
+	@Override
 	public void addChangeListener(ChangeListener listener) {
 		changeListeners.add(listener);
 	}
 
+	@Override
 	public void removeChangeListener(ChangeListener listener) {
 		changeListeners.remove(listener);
 	}
@@ -504,11 +506,13 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	}
 
 	
+	@Override
 	protected void onAttach() {
 		super.onAttach();
       	DojoController.getInstance().constructDojoWidget(this, this);
 	}
 	
+	@Override
 	protected void onDetach() {
 		DojoController.getInstance().destroyDojoWidget(this, this);
 		super.onDetach();

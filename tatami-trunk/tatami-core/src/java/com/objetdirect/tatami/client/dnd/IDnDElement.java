@@ -44,7 +44,7 @@ public interface IDnDElement {
 	
 	public Element getElement();
 	
-	public IDnDSource<IDnDElement> getSource();
+	public IDnDSource<? extends IDnDElement> getSource();
 	
 	public  void setSource(IDnDSource<? extends IDnDElement> source);
 	

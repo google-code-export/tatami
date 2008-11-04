@@ -10,9 +10,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
-import com.objetdirect.tatami.client.AbstractDojo;
 import com.objetdirect.tatami.client.DojoAfterCreationEventsSource;
 import com.objetdirect.tatami.client.DojoAfterCreationListener;
 import com.objetdirect.tatami.client.DojoController;
@@ -92,12 +90,12 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 		this.plots = plots;
 	}
 	
-	public void addPlot(Plot plot){
+	public void addPlot(Plot<?> plot){
 		this.plots.add(plot);
 	}
 	
 	
-	private void destroyPlot(Plot plot){
+	private void destroyPlot(Plot<?> plot){
 		for(Effect effect : plot.getEffects()){
 			effect.destroyEffect();
 		}
@@ -126,20 +124,23 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 		}
 	}
 	
+	/**
+	 * Renders the chart
+	 */
 	public void refreshChart(){
 		if(dojoWidget != null){
-			for (Plot plot : plots) {
+			for (Plot<?> plot : plots) {
 				Map<String,Object> options = plot.getOptions();
-				if(plot.getHAxis() != null){
-					addAxis(plot.getHAxis());
-					options.put("hAxis", plot.getHAxis().getId());
+				if(plot.getXAxis() != null){
+					addAxis(plot.getXAxis());
+					options.put("hAxis", plot.getXAxis().getId());
 				}
-				if(plot.getVAxis() != null){
-					addAxis(plot.getVAxis());
-					options.put("vAxis", plot.getVAxis().getId());
+				if(plot.getYAxis() != null){
+					addAxis(plot.getYAxis());
+					options.put("vAxis", plot.getYAxis().getId());
 				}
 				addDojoPlot(plot.getName(),JSHelper.convertObjectToJSObject(plot.getOptions()), dojoWidget);
-				for(Serie serie : plot.getSeries()){
+				for(Serie<?> serie : plot.getSeries()){
 					serie.getOptions().put("plot",plot.getName());
 					series.add(serie);
 				}
@@ -150,7 +151,7 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 			for (Axis axis : axes) {
 				addDojoAxis(axis.getId(), JSHelper.convertObjectToJSObject(axis.getOptions()), dojoWidget);
 			}
-			for (Serie serie : series) {
+			for (Serie<?> serie : series) {
 				addDojoSerie(serie.getName(),JSHelper.convertObjectToJSObject(serie.getData()),JSHelper.convertObjectToJSObject(serie.getOptions()),dojoWidget);
 			}
 			if(theme != null){
@@ -171,14 +172,14 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 		
 	}
 
-	public void removePlot(Plot plot){
+	public void removePlot(Plot<?> plot){
 		destroyPlot(plot);
 		plots.remove(plot);
 	}
 	
 	public void free() {
 		for (Iterator<Plot> iterator = plots.iterator(); iterator.hasNext();) {
-			Plot plot =  iterator.next();
+			Plot<?> plot =  iterator.next();
 			destroyPlot(plot);
 			iterator.remove();
 		}
@@ -217,25 +218,25 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 		dojoWidget.destroy();
 	}-*/;
 	
-	public Plot addGrid(Boolean hMajorLines,Boolean hMinorLines,Boolean vMajorLines,Boolean vMinorLines){
-		Plot gridPlot = new Plot(Plot.PLOT_TYPE_GRID);
+	public Plot<?> addGrid(Boolean hMajorLines,Boolean hMinorLines,Boolean vMajorLines,Boolean vMinorLines){
+		Plot<?> gridPlot = new Plot<Object>(Plot.PLOT_TYPE_GRID);
 		gridPlot.setGridHMajorLines(hMajorLines);
 		gridPlot.setGridHMinorLines(hMinorLines);
 		gridPlot.setGridVMajorLines(vMajorLines);
 		gridPlot.setGridVMinorLines(vMinorLines);
-		gridPlot.setHAxis(defaultXAxis);
-		gridPlot.setVAxis(defaultYAxis);
+		gridPlot.setXAxis(defaultXAxis);
+		gridPlot.setYAxis(defaultYAxis);
 		addPlot(gridPlot);
 		return gridPlot;
 	}
 
-	public void updateSerie(Serie serieToUpdate){
+	public void updateSerie(Serie<?> serieToUpdate){
 		updateDojoSeries(serieToUpdate.getName(),JSHelper.convertObjectToJSObject(serieToUpdate.getData()),dojoWidget);
 		dojoRender(dojoWidget);
 	}
 	
 	public void updateSeries(Serie[] seriesToUpdate){
-		for (Serie serie : seriesToUpdate) {
+		for (Serie<?> serie : seriesToUpdate) {
 			updateDojoSeries(serie.getName(),JSHelper.convertObjectToJSObject(serie.getData()),dojoWidget);
 		}
 		dojoRender(dojoWidget);
@@ -249,5 +250,12 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 		afterCreationListeners.remove(listener);
 	}
 	
+	public Axis getDefaultXAxis() {
+		return defaultXAxis;
+	}
+
+	public Axis getDefaultYAxis() {
+		return defaultYAxis;
+	}
 	
 }

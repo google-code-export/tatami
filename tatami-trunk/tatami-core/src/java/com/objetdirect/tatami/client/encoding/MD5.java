@@ -1,6 +1,5 @@
 package com.objetdirect.tatami.client.encoding;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.DojoController;
 
 public class MD5 {

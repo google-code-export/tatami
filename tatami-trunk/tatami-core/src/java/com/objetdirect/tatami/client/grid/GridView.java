@@ -62,7 +62,7 @@ public class GridView implements ConvertibleToJSObject {
 	/**
 	 * List of rows of cells
 	 */
-	private List rows = new ArrayList();
+	private List<List<Cell>> rows = new ArrayList<List<Cell>>();
 	
 	/**
 	 * View's width in standard css units  
@@ -81,10 +81,10 @@ public class GridView implements ConvertibleToJSObject {
 	 */
 	public void addCellToLastRow(Cell cell){
 		if(rows.size() < 1){
-			List row = new ArrayList();
+			List<Cell> row = new ArrayList<Cell>();
 			rows.add(row);
 		}
-		((List)rows.get(rows.size() - 1 )).add(cell);
+		((List<Cell>)rows.get(rows.size() - 1 )).add(cell);
 	}
 	
 	/**
@@ -96,11 +96,11 @@ public class GridView implements ConvertibleToJSObject {
 	 */
 	public void addCellToRow(Cell cell , int row , int index){
 		if(row > rows.size() - 1){
-			List newRow = new ArrayList();
+			List<Cell> newRow = new ArrayList<Cell>();
 			newRow.add(cell);
 			rows.add(newRow);
 		}else{
-			((List)rows.get(row)).add(index , cell);
+			((List<Cell>)rows.get(row)).add(index , cell);
 		}
 	}
 	
@@ -112,11 +112,11 @@ public class GridView implements ConvertibleToJSObject {
 	 */
 	public void addCellToRow(Cell cell , int row){
 		if(row > rows.size() - 1){
-			List newRow = new ArrayList();
+			List<Cell> newRow = new ArrayList<Cell>();
 			newRow.add(cell);
 			rows.add(newRow);
 		}else{
-			((List)rows.get(row)).add(cell);
+			((List<Cell>)rows.get(row)).add(cell);
 		}
 	}
 	
@@ -128,10 +128,10 @@ public class GridView implements ConvertibleToJSObject {
 	 */
 	public void addCellToLastRow(Cell cell , int index){
 		if(rows.size() < 1){
-			List row = new ArrayList();
+			List<Cell> row = new ArrayList<Cell>();
 			rows.add(row);
 		}
-		((List)rows.get(rows.size() - 1 )).add(index , cell);
+		((List<Cell>)rows.get(rows.size() - 1 )).add(index , cell);
 	}
 	
 	/**
@@ -140,8 +140,8 @@ public class GridView implements ConvertibleToJSObject {
 	 * @param cell
 	 */
 	public void removeCell(Cell cell){
-		for (Iterator iterator = rows.iterator(); iterator.hasNext();) {
-			List row = (List) iterator.next();
+		for (Iterator<List<Cell>> iterator = rows.iterator(); iterator.hasNext();) {
+			List<?> row = (List<?>) iterator.next();
 			row.remove(cell);
 		}
 	}
@@ -153,7 +153,7 @@ public class GridView implements ConvertibleToJSObject {
 	 * @param row
 	 */
 	public void removeCell(Cell cell , int row){
-		((List)rows.get(row)).remove(cell);
+		((List<?>)rows.get(row)).remove(cell);
 	}
 	
 	/**
@@ -163,7 +163,7 @@ public class GridView implements ConvertibleToJSObject {
 	 * @param index
 	 */
 	public void removeCell(int row , int index){
-		((List)rows.get(row)).remove(index);
+		((List<?>)rows.get(row)).remove(index);
 	}
 	
 	/**
@@ -180,8 +180,8 @@ public class GridView implements ConvertibleToJSObject {
 	 */
 	public int getNbCells(){
 		int size = 0;
-		for (Iterator iterator = rows.iterator(); iterator.hasNext();) {
-			List row = (List) iterator.next();
+		for (Iterator<List<Cell>> iterator = rows.iterator(); iterator.hasNext();) {
+			List<?> row = (List<?>) iterator.next();
 			size += row.size();
 		}
 		return size;
@@ -194,8 +194,8 @@ public class GridView implements ConvertibleToJSObject {
 	 */
 	public Cell getCell(int index){
 		int previousSize = 0;
-		for (Iterator iterator = rows.iterator(); iterator.hasNext();) {
-			List row = (List) iterator.next();
+		for (Iterator<List<Cell>> iterator = rows.iterator(); iterator.hasNext();) {
+			List<?> row = (List<?>) iterator.next();
 			int size = row.size();
 			if(size > index - previousSize ){
 				return (Cell)row.get(index - previousSize ) ;
@@ -211,15 +211,15 @@ public class GridView implements ConvertibleToJSObject {
 	 * @return the cell at given index in the given row
 	 */
 	public Cell getCellFromRow(int row , int index){
-		return (Cell) ((List)rows.get(row)).get(index);
+		return (Cell) ((List<?>)rows.get(row)).get(index);
 	}
 	
 	/**
 	 * @param index
 	 * @return the row at given index. A row is a List of cells.
 	 */
-	public List getRow(int index){
-		return (List) rows.get(index);
+	public List<?> getRow(int index){
+		return (List<?>) rows.get(index);
 	}
 
 	/* (non-Javadoc)

@@ -34,7 +34,6 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Helper;
-import com.google.gwt.user.client.ui.SourcesClickEvents;
 
 
 
@@ -49,7 +48,7 @@ import com.google.gwt.user.client.ui.SourcesClickEvents;
  */
 public class Button extends com.google.gwt.user.client.ui.Button implements HasDojo{
 
-	private List listeners = new ArrayList();
+	private List<ClickListener> listeners = new ArrayList<ClickListener>();
 	
 	private final static String dojoName = "dijit.form.Button" ;
 	
@@ -190,7 +189,7 @@ public class Button extends com.google.gwt.user.client.ui.Button implements HasD
 	 * 
 	 */
 	public void onClick(){
-		for (Iterator iterator = listeners.iterator(); iterator.hasNext();) {
+		for (Iterator<ClickListener> iterator = listeners.iterator(); iterator.hasNext();) {
 			ClickListener listener = (ClickListener) iterator.next();
 			listener.onClick(this);
 		}

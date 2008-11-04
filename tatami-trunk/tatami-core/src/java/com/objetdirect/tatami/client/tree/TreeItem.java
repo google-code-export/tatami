@@ -53,9 +53,9 @@ public class TreeItem extends Item{
 	
 	
 	public void addChild(TreeItem item){
-		List children = getChildren();
+		List<TreeItem> children = getChildren();
 		if(children == null){
-			children = new ArrayList();
+			children = new ArrayList<TreeItem>();
 			addAttribute("children", children);
 		}
 		item.setParentItem(this);
@@ -64,17 +64,19 @@ public class TreeItem extends Item{
 	
 	public void removeChild(TreeItem item){
 		item.setParentItem(null);
-		List children = (List) getValue("children", null);
+		List<?> children = (List<?>) getValue("children", null);
 		if(children != null){
 			children.remove(item);
 		}
 	}
 	
-	public List getChildren(){
-		List children = (List) attributes.get("children");
+	@SuppressWarnings("unchecked")
+	public List<TreeItem> getChildren(){
+		List<TreeItem> children = (List<TreeItem>) attributes.get("children");
 		return children;
 	}
 
+	@Override
 	public Object getValues(String attributeName) {
 		if(attributeName == "children"){
 			return getChildren();

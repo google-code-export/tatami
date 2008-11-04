@@ -58,13 +58,13 @@ public class DojoController {
 	 * what are the script JavaScript which are loaded in the browser.
 
 	 */
-	private Map mapWidget;
+	private Map<String, Boolean> mapWidget;
 
 	/**
 	 * Creates the controller.
 	 **/
 	private DojoController() {
-		mapWidget = new HashMap();
+		mapWidget = new HashMap<String, Boolean>();
 	}
 	
 	private  static native void overrideDojoGetComputedStyle()/*-{

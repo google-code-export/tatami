@@ -77,7 +77,7 @@ public class GridDataStore extends AbstractDataStore{
 		lastRequest = request;
 		//Gets the items matching the query , and sorts them according to the
 		//request
-		List itemsSortedAndMatchingQuery = this.executeQuery(items.values() , request);
+		List<?> itemsSortedAndMatchingQuery = this.executeQuery(items.values() , request);
 		
 		
 		int size = itemsSortedAndMatchingQuery.size();
@@ -86,7 +86,7 @@ public class GridDataStore extends AbstractDataStore{
 		// We notify the fetch listeners that the request is being performed
 		//(it should include a grid , since this store is designed to be used by  
 		notifyBeginFetchListeners(size , request);
-		List result = new ArrayList();
+		List<Item> result = new ArrayList<Item>();
 		
 		// We determine which item should be the first returned. 
 		// To do this , we use :

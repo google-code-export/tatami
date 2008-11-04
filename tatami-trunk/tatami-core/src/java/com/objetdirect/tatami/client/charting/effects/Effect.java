@@ -12,5 +12,5 @@ public interface Effect {
 	
 	void destroyEffect();
 	
-	void initEffect(Chart2D chart, Plot plot);
+	void initEffect(Chart2D chart, Plot<?> plot);
 }

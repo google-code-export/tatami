@@ -28,9 +28,6 @@ package com.objetdirect.tatami.client.grid.editor;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.user.client.DOM;
-import com.objetdirect.tatami.client.AbstractDojo;
 import com.objetdirect.tatami.client.DojoController;
 import com.objetdirect.tatami.client.NumberSpinner;
 
@@ -44,7 +41,7 @@ import com.objetdirect.tatami.client.NumberSpinner;
  */
 public class NumberSpinnerEditor implements GridEditor {
 
-	private Map attributes = new HashMap();
+	private Map<String, Object> attributes = new HashMap<String, Object>();
 	
 	
 	/**
@@ -72,7 +69,7 @@ public class NumberSpinnerEditor implements GridEditor {
 	public NumberSpinnerEditor(int defaultTimeout, String invalidMessage,
 			boolean intermediateChanges, float delta, 
 			String promptMessage, String rangeMessage,
-			float timeoutChangeRate, boolean trim , Map constraints) {
+			float timeoutChangeRate, boolean trim , Map<String, Float> constraints) {
 		this();
 		attributes.put("constraints", constraints);
 		attributes.put("smallDelta", ""+delta);
@@ -105,7 +102,7 @@ public class NumberSpinnerEditor implements GridEditor {
 			String promptMessage, String rangeMessage,
 			float timeoutChangeRate, boolean trim ,  float minValue , float maxValue) {
 		this(defaultTimeout , invalidMessage , intermediateChanges , smallDelta , promptMessage , rangeMessage , timeoutChangeRate , trim , null);
-		Map constraints = new HashMap();
+		Map<String, Float> constraints = new HashMap<String, Float>();
 		constraints.put("min", new Float(minValue));
 		constraints.put("max", new Float(maxValue));
 		attributes.put("constraints", constraints);
@@ -120,7 +117,7 @@ public class NumberSpinnerEditor implements GridEditor {
 	 * @param rangeMessage
 	 * @param constraints
 	 */
-	public NumberSpinnerEditor(String invalidMessage , float smallDelta , String promptMessage , String rangeMessage  ,  Map constraints){
+	public NumberSpinnerEditor(String invalidMessage , float smallDelta , String promptMessage , String rangeMessage  ,  Map<String, Float> constraints){
 		this();
 		attributes.put("promptMessage", promptMessage);
 		attributes.put("rangeMessage" , rangeMessage);
@@ -138,7 +135,7 @@ public class NumberSpinnerEditor implements GridEditor {
 	 */
 	public NumberSpinnerEditor( float minValue , float maxValue , float delta){
 		this();
-		Map constraints = new HashMap();
+		Map<String, Float> constraints = new HashMap<String, Float>();
 		constraints.put("min",new Float(minValue));
 		constraints.put("max",new Float(maxValue));
 		attributes.put("constraints", constraints);
@@ -178,7 +175,7 @@ public class NumberSpinnerEditor implements GridEditor {
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.grid.editor.GridEditor#getAttributes()
 	 */
-	public Map getAttributes() {
+	public Map<String, Object> getAttributes() {
 		return attributes;
 	}
 

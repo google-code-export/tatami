@@ -158,12 +158,13 @@ public class DnDMainController {
 	 * @param ctrlPressed
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	protected <E extends IDnDElement> boolean onDndDrop(JavaScriptObject jssource , JavaScriptObject jstarget , JavaScriptObject nodes , String targetNodeId ,  boolean ctrlPressed){
 		try{
 			IDnDController<IDnDSource<E>,?> sourceOwner =  (IDnDController<IDnDSource<E>, ?>) jssources.get(jssource);
 			IDnDController<?,IDnDTarget> targetOwner = (IDnDController<?, IDnDTarget>) jstargets.get(jstarget);
-			IDnDSource<E> dndSource = (IDnDSource<E>) sourceOwner.getSource(jssource);
-			IDnDTarget dndTarget = (IDnDTarget) targetOwner.getTarget(jstarget);
+			IDnDSource<E> dndSource = sourceOwner.getSource(jssource);
+			IDnDTarget dndTarget = targetOwner.getTarget(jstarget);
 			Collection<E> dndElements = (Collection<E>) sourceOwner.getGWTDnDElements(jssource , nodes);
 			IDnDBehavior<E, IDnDSource<E>, IDnDTarget> behavior = (IDnDBehavior<E, IDnDSource<E>, IDnDTarget>) DnDBehaviors.getBehaviorFor(dndSource, dndTarget);
 			if(behavior.onDrop(dndElements , dndSource , dndTarget, targetNodeId, ctrlPressed)){
@@ -184,6 +185,7 @@ public class DnDMainController {
 	 * @param nodes
 	 * @param copy
 	 */
+	@SuppressWarnings("unchecked")
 	protected <E extends IDnDElement> void onDnDStart(JavaScriptObject jssource, JavaScriptObject nodes, boolean copy){
 		try{
 			IDnDController<IDnDSource<E>,?> sourceOwner =  (IDnDController<IDnDSource<E>, ?>) jssources.get(jssource);
@@ -206,6 +208,7 @@ public class DnDMainController {
 	 * @param nodes
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	protected <E extends IDnDElement> boolean checkAcceptance(JavaScriptObject jssource , JavaScriptObject jstarget , JavaScriptObject nodes){
 		try{
 			IDnDController<IDnDSource<E>,?> sourceOwner =  (IDnDController<IDnDSource<E>, ?>) jssources.get(jssource);

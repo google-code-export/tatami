@@ -42,7 +42,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class WidgetDnDElement implements IDnDElement{
 
-		private static Map widgetsToElementMap = new HashMap();
+		private static Map<Widget, WidgetDnDElement> widgetsToElementMap = new HashMap<Widget, WidgetDnDElement>();
 		
 		private Widget widget;
 		
@@ -99,7 +99,7 @@ public class WidgetDnDElement implements IDnDElement{
 		/* (non-Javadoc)
 		 * @see com.objetdirect.tatami.client.dnd.IDnDElement#getSource()
 		 */
-		public IDnDSource getSource() {
+		public IDnDSource<WidgetDnDElement> getSource() {
 			return source;
 		}
 
@@ -107,6 +107,7 @@ public class WidgetDnDElement implements IDnDElement{
 		/* (non-Javadoc)
 		 * @see com.objetdirect.tatami.client.dnd.IDnDElement#setSource(com.objetdirect.tatami.client.dnd.IDnDSource)
 		 */
+		@SuppressWarnings("unchecked")
 		public void setSource(IDnDSource source) {
 			this.source = source;
 		}

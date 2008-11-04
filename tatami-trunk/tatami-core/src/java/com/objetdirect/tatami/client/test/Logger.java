@@ -2,7 +2,6 @@ package com.objetdirect.tatami.client.test;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Widget;
 
 public class Logger {
 	

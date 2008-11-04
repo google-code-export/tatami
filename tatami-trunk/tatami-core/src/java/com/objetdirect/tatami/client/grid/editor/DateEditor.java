@@ -28,9 +28,6 @@ package com.objetdirect.tatami.client.grid.editor;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.objetdirect.tatami.client.grid.formatters.DateFormatter;
-
 /**
  * A grid Date Editor (similar to drop down date picker)
  * 
@@ -41,7 +38,7 @@ public class DateEditor implements GridEditor{
 
 	private final String dojoName = "dojox.grid.cells.DateTextBox";
 	
-	private Map attributes = new HashMap();
+	private Map<String, Object> attributes = new HashMap<String, Object>();
 	
 	public DateEditor(){
 	}
@@ -50,7 +47,7 @@ public class DateEditor implements GridEditor{
 	}
 	
 	
-	public Map getAttributes() {
+	public Map<String, Object> getAttributes() {
 		return attributes;
 	}
 

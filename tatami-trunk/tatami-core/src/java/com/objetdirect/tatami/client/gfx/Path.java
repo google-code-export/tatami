@@ -60,7 +60,7 @@ public class Path extends GraphicObject {
 
 	private boolean absoluteMode = true;
 	
-	private ArrayList commands ;
+	private ArrayList<Command> commands ;
 	
 	/**
 	 * Creates a <code>Path</code> component
@@ -68,7 +68,7 @@ public class Path extends GraphicObject {
 	 */
 	public Path() {
 		super();
-		this.commands = new ArrayList(); 
+		this.commands = new ArrayList<Command>(); 
 	}
 	
 	/**
@@ -564,7 +564,7 @@ public class Path extends GraphicObject {
 	 */
 	protected void show(GraphicCanvas canvas) {
 		super.show(canvas);
-		Iterator ite = commands.iterator();
+		Iterator<Command> ite = commands.iterator();
 		while ( ite.hasNext()) {
 			Command com = (Command)ite.next();
 			execute(com);
@@ -664,7 +664,7 @@ public class Path extends GraphicObject {
 		public static final int ABSOLUTE = 10;
 		
 		private int id; //id of the command
-		private ArrayList parameters; //list of parameters to use 
+		private ArrayList<Object> parameters; //list of parameters to use 
 		
 		/**
 		 * Creates a new Command
@@ -672,7 +672,7 @@ public class Path extends GraphicObject {
 		 */
 		public Command(int id) {
 			this.id = id;
-			parameters = new ArrayList();
+			parameters = new ArrayList<Object>();
 		}
 		
 		/**
@@ -687,7 +687,7 @@ public class Path extends GraphicObject {
 		 * Returns the parameters of the <code>Command</code>
 		 * @return the parameters of the <code>Command</code>
 		 */
-	    public ArrayList getParameters() {
+	    public ArrayList<Object> getParameters() {
 	    	return this.parameters;
 	    }
 	    

@@ -1,6 +1,6 @@
 package com.objetdirect.tatami.client.charting;
 
-public class PiePlot extends Plot{
+public class PiePlot<T> extends Plot<T>{
 
 	final public static String PLOT_TYPE_PIE = "Pie";
 	
@@ -27,7 +27,5 @@ public class PiePlot extends Plot{
 	public void setRadius(int radius){
 		options.put("radius", radius);
 	}
-	
-	
 	
 }

@@ -3,7 +3,6 @@ package com.objetdirect.tatami.client.charting.effects;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gwt.core.client.Duration;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.DojoController;
 import com.objetdirect.tatami.client.JSHelper;
@@ -36,7 +35,7 @@ public abstract class AbstractJSEffect implements Effect{
 
 	abstract String getEffectName();
 	
-	public void initEffect(Chart2D chart, Plot plot) {
+	public void initEffect(Chart2D chart, Plot<?> plot) {
 		jsEffect = createEffect(chart.getDojoWidget(), plot.getName(), getEffectName(),JSHelper.convertObjectToJSObject(options));
 	}
 

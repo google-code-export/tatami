@@ -50,7 +50,7 @@ public class GraphicCanvas extends Widget {
 	/**
 	 * The list of <code>GraphicObject</code>
 	 */
-	private List objects = new ArrayList(); 
+	private List<GraphicObject> objects = new ArrayList<GraphicObject>(); 
 	/**
 	 * the DOJO surface it means the DOJO canvas 
 	 */
@@ -58,17 +58,17 @@ public class GraphicCanvas extends Widget {
 	/**
 	 * List of <code>GraphicObjectListener</code>
 	 */
-	private List listeners = new ArrayList();
+	private List<GraphicObjectListener> listeners = new ArrayList<GraphicObjectListener>();
 	/**
 	 * List of <code>GraphicObjectListener</code>
 	 */
-	private List currentListeners = null;
+	private List<GraphicObjectListener> currentListeners = null;
 	
 	/**
 	 * Map the key are the <code>JavaScriptObject</code> representing
 	 * the source of an event, and the values are the <code>GraphicObject</code>
 	 */
-	private Map graphicObjects = new HashMap();
+	private Map<JavaScriptObject, GraphicObject> graphicObjects = new HashMap<JavaScriptObject, GraphicObject>();
 	
 	/**
 	 * Creates a canvas
@@ -120,11 +120,11 @@ public class GraphicCanvas extends Widget {
 	 *
 	 */
 	private void attachAllGraphicObjects() {
-		final Iterator ite = objects.iterator();
+		final Iterator<GraphicObject> ite = objects.iterator();
 		while (ite.hasNext()) {
 			final GraphicObject graphicObject = (GraphicObject)ite.next();
 			graphicObject.show(this);
-			final Collection shapes = graphicObject.getShapes();
+			final Collection<?> shapes = graphicObject.getShapes();
 			putEventSource(shapes,graphicObject);
      	}
 	}
@@ -142,7 +142,7 @@ public class GraphicCanvas extends Widget {
 	 * <code>GraphicCanvas</code>
 	 * @return a collection of <code>GraphicObject</code>
 	 */
-	public Collection getGraphicObjects() {
+	public Collection<GraphicObject> getGraphicObjects() {
 		return this.objects;
 	}
 	
@@ -151,7 +151,7 @@ public class GraphicCanvas extends Widget {
 	 *
 	 */
 	private void detachAllGraphicObjects() {
-		final Iterator ite = objects.iterator();
+		final Iterator<GraphicObject> ite = objects.iterator();
 		while (ite.hasNext()) {
 			final GraphicObject graphicObject = (GraphicObject)ite.next();
 			graphicObject.hide();
@@ -193,7 +193,7 @@ public class GraphicCanvas extends Widget {
 	 *
 	 */
 	public void clear() {
-		Iterator ite = objects.iterator();
+		Iterator<GraphicObject> ite = objects.iterator();
 		while ( ite.hasNext()) {
 			if ( isAttached()) { 
 				detachGraphicObject((GraphicObject)ite.next());
@@ -221,7 +221,7 @@ public class GraphicCanvas extends Widget {
 	 */
 	private void attachGraphicObject(GraphicObject graphicObject) {
 		graphicObject.show(this);
-		Collection shapes = graphicObject.getShapes();
+		Collection<?> shapes = graphicObject.getShapes();
 		putEventSource(graphicObject.getShape(),graphicObject);
 		//graphicObjects.put(getEventSource(graphicObject.getShape()), graphicObject);
 	}
@@ -241,8 +241,8 @@ public class GraphicCanvas extends Widget {
 	 * @param shapes the collection of <code>JavaScriptObject</code> corresponding to a collection of DOJO GFX shape
 	 * @param graphicObject the <code>GraphicObject</code>  to associates the event sources
 	 */
-	protected void putEventSource(Collection shapes,GraphicObject graphicObject) {
-		Iterator ite = shapes.iterator();
+	protected void putEventSource(Collection<?> shapes,GraphicObject graphicObject) {
+		Iterator<?> ite = shapes.iterator();
 		while (ite.hasNext()) {
 			JavaScriptObject shape = (JavaScriptObject)ite.next();
 			putEventSource(shape,graphicObject);	
@@ -258,8 +258,8 @@ public class GraphicCanvas extends Widget {
 	 */
 	private void detachGraphicObject(GraphicObject graphicObject) {
 		graphicObject.hide();
-		Collection shapes = graphicObject.getShapes();
-		Iterator ite = shapes.iterator();
+		Collection<?> shapes = graphicObject.getShapes();
+		Iterator<?> ite = shapes.iterator();
 		while (ite.hasNext()) {
 			final JavaScriptObject shape = (JavaScriptObject)ite.next();
 			if ( shape != null) {
@@ -277,7 +277,7 @@ public class GraphicCanvas extends Widget {
 	 */
 	protected void doClick(JavaScriptObject evtSource, Event evt) {
 		GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
-		final Iterator ite = getCurrentListeners().iterator();
+		final Iterator<GraphicObjectListener> ite = getCurrentListeners().iterator();
 		while (ite.hasNext()) {
 			final GraphicObjectListener listener = (GraphicObjectListener)ite.next();
 			listener.mouseClicked(graphicObject,evt);
@@ -292,7 +292,7 @@ public class GraphicCanvas extends Widget {
 	 */
 	protected void doDoubleClick(JavaScriptObject evtSource, Event evt) {
 		GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
-		final Iterator ite = getCurrentListeners().iterator();
+		final Iterator<GraphicObjectListener> ite = getCurrentListeners().iterator();
 		while (ite.hasNext()) {
 			final GraphicObjectListener listener = (GraphicObjectListener)ite.next();
 			listener.mouseDblClicked(graphicObject,evt);
@@ -306,7 +306,7 @@ public class GraphicCanvas extends Widget {
 	 */
 	protected void doMouseDown(JavaScriptObject evtSource, Event evt) {
 		GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
-		final Iterator ite = getCurrentListeners().iterator();
+		final Iterator<GraphicObjectListener> ite = getCurrentListeners().iterator();
 		while (ite.hasNext()) {
 			final GraphicObjectListener listener = (GraphicObjectListener)ite.next();
 			listener.mousePressed(graphicObject, evt);
@@ -320,7 +320,7 @@ public class GraphicCanvas extends Widget {
 	 */
 	protected void doMouseMove(JavaScriptObject evtSource, Event evt) {
 		final GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
-		Iterator ite = getCurrentListeners().iterator();
+		Iterator<GraphicObjectListener> ite = getCurrentListeners().iterator();
 		while (ite.hasNext()) {
 			final GraphicObjectListener listener = (GraphicObjectListener)ite.next();
 			listener.mouseMoved(graphicObject,evt);
@@ -334,7 +334,7 @@ public class GraphicCanvas extends Widget {
 	 */
 	protected void doMouseUp(JavaScriptObject evtSource,  Event evt) {
 		final GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
-		final Iterator ite = getCurrentListeners().iterator();
+		final Iterator<GraphicObjectListener> ite = getCurrentListeners().iterator();
 		while (ite.hasNext()) {
 			final GraphicObjectListener listener = (GraphicObjectListener)ite.next();
 			listener.mouseReleased(graphicObject,evt);
@@ -349,9 +349,9 @@ public class GraphicCanvas extends Widget {
 	 * If there are no listeners, a new list (empty) is created
 	 * @return a list of <code>GraphicObjectListener</code>, can be empty
 	 */
-	private List getCurrentListeners() {
+	private List<GraphicObjectListener> getCurrentListeners() {
 		if (currentListeners==null) {
-			currentListeners = new ArrayList(listeners);
+			currentListeners = new ArrayList<GraphicObjectListener>(listeners);
 		}
 		return currentListeners;
 	}

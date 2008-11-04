@@ -32,6 +32,7 @@ package com.objetdirect.tatami.client.dnd;
  * @author rdunklau 
  *
  */
+@SuppressWarnings("serial")
 public class JSSourceCreationException extends Exception {
 
 	public JSSourceCreationException() {

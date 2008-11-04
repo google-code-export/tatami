@@ -191,8 +191,8 @@ public abstract class GraphicObject {
 	 *This is used for a <code>VirtualGroup</code> for example
 	 *@return a Collection of <code>JavaScriptObject</code> corresponding to the different shapes
 	 */
-	protected Collection getShapes() {
-		List list = new ArrayList();
+	protected Collection<JavaScriptObject> getShapes() {
+		List<JavaScriptObject> list = new ArrayList<JavaScriptObject>();
 		list.add(shape);
 		return list;
 	}

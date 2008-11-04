@@ -48,7 +48,7 @@ public class GridLayout implements ConvertibleToJSObject{
 	/**
 	 * List of all views
 	 */
-	private List views = new ArrayList();
+	private List<GridView> views = new ArrayList<GridView>();
 
 	/**
 	 * Determines wether a row selection bar 
@@ -139,7 +139,7 @@ public class GridLayout implements ConvertibleToJSObject{
 	 */
 	public int getNbCells(){
 		int nbColumns = 0;
-		for (Iterator iterator = views.iterator(); iterator.hasNext();) {
+		for (Iterator<GridView> iterator = views.iterator(); iterator.hasNext();) {
 			Object view = (Object) iterator.next();
 			if(view instanceof GridView){
 				nbColumns += ((GridView) view).getNbCells();
@@ -207,7 +207,7 @@ public class GridLayout implements ConvertibleToJSObject{
 	 */
 	public Cell getCellAmongAllViews(int index){
 		int previousSize = 0;
-		for (Iterator iterator = views.iterator(); iterator.hasNext();) {
+		for (Iterator<GridView> iterator = views.iterator(); iterator.hasNext();) {
 			GridView view = (GridView) iterator.next();
 			int size = view.getNbCells();
 			if(size > index - previousSize ){
@@ -224,7 +224,7 @@ public class GridLayout implements ConvertibleToJSObject{
 	 * @param cell 
 	 */
 	public void removeCellAmongAllViews(Cell cell){
-		for (Iterator iterator = views.iterator(); iterator.hasNext();) {
+		for (Iterator<GridView> iterator = views.iterator(); iterator.hasNext();) {
 			GridView view = (GridView) iterator.next();
 			view.removeCell(cell);
 		}

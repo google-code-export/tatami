@@ -43,7 +43,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class VirtualGroup extends GraphicObject {
 
 	/** List of <code>GraphicObject</code> */
-	private List objects;
+	private List<GraphicObject> objects;
 	
 	
 	
@@ -55,7 +55,7 @@ public class VirtualGroup extends GraphicObject {
 	 */
 	public VirtualGroup() {
 		super();
-		objects = new ArrayList();
+		objects = new ArrayList<GraphicObject>();
 	}
 	
 	
@@ -84,7 +84,7 @@ public class VirtualGroup extends GraphicObject {
 	 * @param collection a collection of  <code>GraphicObject</code> 
 	 * @return true if <code>VirtualGroup</code> contains them false otherwise
 	 */
-	public boolean containsAll(Collection collection) {
+	public boolean containsAll(Collection<?> collection) {
 		return this.objects.containsAll(collection);
 	}
 	
@@ -122,7 +122,7 @@ public class VirtualGroup extends GraphicObject {
 		if ( getShape() !=null ) {
 		    if ( getParent() != null) {
 		    	object.show(getParent());
-		    	Collection shapes = object.getShapes();
+		    	Collection<JavaScriptObject> shapes = object.getShapes();
 		    	getParent().putEventSource(shapes,object);
 		    	add(getShape(),object.getShape());
 		    }
@@ -137,7 +137,7 @@ public class VirtualGroup extends GraphicObject {
 	 */
 	public GraphicObject setFillColor(Color color ) {
 		super.setFillColor(color);
-	    Iterator ite = objects.iterator();
+	    Iterator<GraphicObject> ite = objects.iterator();
 	    while ( ite.hasNext()) {
 	    	((GraphicObject)ite.next()).setFillColor(color);
 	    }
@@ -154,7 +154,7 @@ public class VirtualGroup extends GraphicObject {
 	 */
 	public GraphicObject setStroke(Color color,int width ) {
 		super.setStroke(color,width);
-	    Iterator ite = objects.iterator();
+	    Iterator<GraphicObject> ite = objects.iterator();
 	    while ( ite.hasNext()) {
 	    	((GraphicObject)ite.next()).setStroke(color,width);
 	    }
@@ -169,7 +169,7 @@ public class VirtualGroup extends GraphicObject {
 	 */
 	public GraphicObject applyPattern(Pattern pattern) {
 		super.applyPattern(pattern);
-	    Iterator ite = objects.iterator();
+	    Iterator<GraphicObject> ite = objects.iterator();
 	    while ( ite.hasNext()) {
 	    	((GraphicObject)ite.next()).applyPattern(pattern);
 	    }
@@ -206,7 +206,7 @@ public class VirtualGroup extends GraphicObject {
 	 * <code>VirtualGroup</code>
 	 */
 	public void clear() {
-		Iterator ite = objects.iterator();
+		Iterator<GraphicObject> ite = objects.iterator();
 		while (ite.hasNext()) {
 			GraphicObject gObject = (GraphicObject)ite.next();
 			gObject.setGroup(null);
@@ -250,10 +250,10 @@ public class VirtualGroup extends GraphicObject {
 	 * @return a collection of <code>JavaScriptObject</code> corresponding to the DOJO
 	 *         GFX shape. 
 	 */
-	protected Collection getShapes() {
-		List list = new ArrayList();
+	protected Collection<JavaScriptObject> getShapes() {
+		List<JavaScriptObject> list = new ArrayList<JavaScriptObject>();
 		list.add(getShape());
-		Iterator ite = objects.iterator();
+		Iterator<GraphicObject> ite = objects.iterator();
 		while ( ite.hasNext()) {
 			GraphicObject object = (GraphicObject)ite.next();
 			list.addAll(object.getShapes());
@@ -267,11 +267,11 @@ public class VirtualGroup extends GraphicObject {
 	 *
 	 */
 	private void buildObjects() {
-		Iterator ite = objects.iterator();
+		Iterator<GraphicObject> ite = objects.iterator();
 		while ( ite.hasNext()) {
 			GraphicObject object = (GraphicObject)ite.next();
 			object.show(getParent());
-			Collection shapes = object.getShapes();
+			Collection<JavaScriptObject> shapes = object.getShapes();
 			//to control the event on the different shape
 			getParent().putEventSource(shapes,object);
 			// add the shape to the virtual group

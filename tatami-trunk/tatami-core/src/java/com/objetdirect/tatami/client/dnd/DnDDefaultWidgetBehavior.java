@@ -63,7 +63,6 @@ public abstract class DnDDefaultWidgetBehavior extends WidgetDnDBehavior{
 	@Override
 	public boolean checkTargetItemAcceptance(Panel target, Panel source,
 			Collection<Widget> draggedWidgets) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

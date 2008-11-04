@@ -26,11 +26,9 @@
 package com.objetdirect.tatami.client.dnd;
 
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.objetdirect.tatami.client.test.Logger;
 
 /**

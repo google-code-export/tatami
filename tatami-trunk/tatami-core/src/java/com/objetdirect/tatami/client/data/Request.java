@@ -27,16 +27,9 @@ package com.objetdirect.tatami.client.data;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.ConvertibleToJSObject;
 import com.objetdirect.tatami.client.JSHelper;
@@ -69,13 +62,13 @@ public class Request implements ConvertibleToJSObject{
 	/**
 	 * Map containing the filtering options
 	 */
-	private Map query = new HashMap();
+	private Map<String, Object> query = new HashMap<String, Object>();
 	
 	/**
 	 * List containing the sort fields
 	 * @see {@link SortField}
 	 */
-	private List sortFields = new ArrayList();
+	private List<SortField> sortFields = new ArrayList<SortField>();
 	
 	private JavaScriptObject onCompleteCallback;
 	
@@ -252,7 +245,7 @@ public class Request implements ConvertibleToJSObject{
 	/**
 	 * @return the map of filtering options
 	 */
-	public Map getQuery() {
+	public Map<String, Object> getQuery() {
 		return query;
 	}
 	
@@ -260,7 +253,7 @@ public class Request implements ConvertibleToJSObject{
 	/**
 	 * @param query : the map of filtering options
 	 */
-	public void setQuery(Map query) {
+	public void setQuery(Map<String, Object> query) {
 		this.query = query;
 	}
 	
@@ -284,7 +277,7 @@ public class Request implements ConvertibleToJSObject{
 	 * how the result from a fetch process invoked with this request should 
 	 * be sorted 
 	 */
-	public List getSortFields() {
+	public List<SortField> getSortFields() {
 		return sortFields;
 	}
 
@@ -293,7 +286,7 @@ public class Request implements ConvertibleToJSObject{
 	 * how the result from a fetch process invoked with this request should 
 	 * be sorted 
 	 */
-	public void setSortFields(List sortFields) {
+	public void setSortFields(List<SortField> sortFields) {
 		this.sortFields = sortFields;
 	}
 

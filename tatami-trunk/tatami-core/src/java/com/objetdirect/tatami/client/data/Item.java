@@ -32,8 +32,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.JSHelper;
 import com.objetdirect.tatami.client.ConvertibleToJSObject;
@@ -51,13 +49,13 @@ public class Item  implements ConvertibleToJSObject{
 	/**
 	 * Item's attributes
 	 */
-	protected Map attributes;
+	protected Map<String, Object> attributes;
 	
 	/**
 	 * Default constructor
 	 */
 	public Item(){
-		attributes = new HashMap();
+		attributes = new HashMap<String, Object>();
 	}
 	
 	
@@ -66,7 +64,7 @@ public class Item  implements ConvertibleToJSObject{
 	 * 
 	 * @param map
 	 */
-	public Item(Map map){
+	public Item(Map<String, Object> map){
 		attributes = map;
 	}
 	
@@ -91,7 +89,7 @@ public class Item  implements ConvertibleToJSObject{
 		if(valueFromMap == value){
 			return true;
 		}else if(valueFromMap instanceof Collection){
-			if(((Collection) valueFromMap).contains(value)){
+			if(((Collection<?>) valueFromMap).contains(value)){
 				return true;
 			}else{
 				return false;
@@ -105,10 +103,10 @@ public class Item  implements ConvertibleToJSObject{
 	 * @return a String array containing the attributes names.
 	 */
 	public String[] getAttributes(){
-		Collection values = attributes.keySet();
+		Collection<String> values = attributes.keySet();
 		String[] toReturn = new String[values.size()];
 		int i = 0;
-		for (Iterator iterator = values.iterator(); iterator.hasNext();) {
+		for (Iterator<String> iterator = values.iterator(); iterator.hasNext();) {
 			Object object = (Object) iterator.next();
 			toReturn[i] = object != null ? object.toString() : "";
 			i++;

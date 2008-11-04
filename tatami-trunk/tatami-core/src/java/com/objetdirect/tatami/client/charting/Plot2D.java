@@ -1,13 +1,9 @@
 package com.objetdirect.tatami.client.charting;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.objetdirect.tatami.client.charting.effects.Effect;
-
-public class Plot2D extends Plot{
+public class Plot2D<T> extends Plot<T>{
 
 	final public static String PLOT_TYPE_LINES = "Lines";
 	final public static String PLOT_TYPE_AREAS = "Areas";
@@ -66,7 +62,7 @@ public class Plot2D extends Plot{
 	}
 	
 	/**
-	 * @param show : Set wether to show the markers or not.
+	 * @param show : Set wether to show the lines or not.
 	 * Overrides the default "PLOT_TYPE" behavior.
 	 */
 	public void setShowLines(boolean show){

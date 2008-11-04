@@ -30,7 +30,6 @@ import java.util.Collection;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.IndexedPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.DojoController;
@@ -223,6 +222,7 @@ public class DnD {
 	 * @param target :a widget which is registered as target, or null
 	 * @throws BehaviorScopeException : when a behavior is already registered for this source-target couple
 	 */
+	@SuppressWarnings("unchecked")
 	public static <E extends IDnDElement , S extends IDnDSource<? extends E> , T extends IDnDTarget>  void registerBehavior(IDnDBehavior<E, S, T> behavior, Widget source, Widget target) throws BehaviorScopeException{
 		S dsource = null;
 		T dtarget = null;

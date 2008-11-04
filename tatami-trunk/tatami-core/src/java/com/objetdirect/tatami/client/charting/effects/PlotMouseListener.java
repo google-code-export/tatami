@@ -15,7 +15,7 @@ public abstract class PlotMouseListener extends AbstractJSEffect implements Effe
 	}
 	
 	@Override
-	public void initEffect(Chart2D chart, Plot plot) {
+	public void initEffect(Chart2D chart, Plot<?> plot) {
 		jsEffect = createEffect(this, chart.getDojoWidget(), plot.getName());
 	}
 	

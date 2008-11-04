@@ -42,7 +42,7 @@ public interface FetchListener {
 	 * @param items : fetched items
 	 * @param request : request which was used to fetch those items
 	 */
-	public void onComplete(FetchEventSource source ,List items , Request request );
+	public void onComplete(FetchEventSource source ,List<?> items , Request request );
 	
 	/**
 	 *  Called at the beginning of the fetch process

@@ -22,7 +22,7 @@ public class JSHelper {
  	 * @throws NotJSONIzableObjectException
  	 */
  	
- 	private native static JavaScriptObject convertMapToJSObject(Map map)/*-{
+ 	private native static JavaScriptObject convertMapToJSObject(Map<?, ?> map)/*-{
  		var obj = {};
  		var keys = map.@java.util.Map::keySet()();
  	 	var iterator = keys.@java.util.Set::iterator()();
@@ -75,8 +75,8 @@ public class JSHelper {
  			return false;
  	}
  
-	public static Collection convertJSArrayToCollection(JavaScriptObject array){
-		Collection collec = new ArrayList();
+	public static Collection<Object> convertJSArrayToCollection(JavaScriptObject array){
+		Collection<Object> collec = new ArrayList<Object>();
 		int length = getArraySize(array);
 		for (int i = 0; i < length; i++) {
 			collec.add(getElementAtIndex(array, i));
@@ -124,11 +124,11 @@ public class JSHelper {
  		}else if(object instanceof ConvertibleToJSObject){
  			return (((ConvertibleToJSObject)object).toJSObject());
  		}else if(object instanceof Map){
- 			return convertMapToJSObject((Map)object);
+ 			return convertMapToJSObject((Map<?, ?>)object);
  		}else if(object instanceof Object[]){
  			return convertArrayToJSObject((Object [])object);
  		}else if(object instanceof Collection){
- 			return convertArrayToJSObject(((Collection)object).toArray());
+ 			return convertArrayToJSObject(((Collection<?>)object).toArray());
  		}else{
  			return null ; 
  		}

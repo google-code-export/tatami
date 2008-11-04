@@ -68,20 +68,20 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * The fetch listeners. They observe the fetch process
 	 * @see FetchListener
 	 */
-	protected List fetchListeners = new ArrayList();
+	protected List<FetchListener> fetchListeners = new ArrayList<FetchListener>();
 	
 	
 	/**
 	 * The load listeners. They observe the loading process
 	 */
-	protected List loadListeners = new ArrayList();
+	protected List<LoadItemListener> loadListeners = new ArrayList<LoadItemListener>();
 	
 	/**
 	 * The Datum change listeners. They are notified whenever an item is 
 	 * added , deleted or modified
 	 * @see DatumChangeListener
 	 */
-	protected List datumChangeListeners = new ArrayList();
+	protected List<DatumChangeListener> datumChangeListeners = new ArrayList<DatumChangeListener>();
 	
 	
 	
@@ -294,7 +294,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 */
 	public void setValue(Item item , String attribute , Object value) {
 		if(isItem(item)){
-			Object oldValue = (Object) getValue(item, attribute, null);
+			Object oldValue = getValue(item, attribute, null);
 			item.addAttribute(attribute, value);
 			items.put(getIdentity(item), item);
 			onSet(item, attribute, oldValue, value);
@@ -311,11 +311,11 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param attrValue : the value to match
 	 * @return : a List of items which match the specified attribute name / attribute value couple
 	 */
-	public List searchItemsByAttributes(String attrName , Object attrValue){
-		List toReturn = new ArrayList();
-		Collection concreteItems = items.values();
-		for (Iterator iterator = concreteItems.iterator(); iterator.hasNext();) {
-			Item currItem = (Item) iterator.next();
+	public List<Item> searchItemsByAttributes(String attrName , Object attrValue){
+		List<Item> toReturn = new ArrayList<Item>();
+		Collection<Item> concreteItems = items.values();
+		for (Iterator<Item> iterator = concreteItems.iterator(); iterator.hasNext();) {
+			Item currItem = iterator.next();
 			Object value;
 			value = getValue(currItem , attrName , null);
 			if(value.equals(attrValue)){
@@ -385,7 +385,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @return the item with the specified id, null if no one does.
 	 */
 	public Item getItemByIdentity(Object id){
-		return (Item) items.get(id);
+		return items.get(id);
 	}
 	
 
@@ -555,7 +555,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	
 	public void add(Item item, JavaScriptObject parentInfo){
 		Object id = getIdentity(item);
-		Item oldItem = (Item) items.get(id);
+		Item oldItem = items.get(id);
 		if(oldItem != null){
 			String[] attributes = oldItem.getAttributes();
 			for (int i = 0; i < attributes.length; i++) {
@@ -722,8 +722,8 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * 
 	 */
 	protected void notifyLoadItemListeners(Item item){
-		for (Iterator iterator = loadListeners.iterator(); iterator.hasNext();) {
-			LoadItemListener loadListeners = (LoadItemListener) iterator.next();
+		for (Iterator<LoadItemListener> iterator = loadListeners.iterator(); iterator.hasNext();) {
+			LoadItemListener loadListeners = iterator.next();
 			loadListeners.onLoad(item);
 		}
 	}
@@ -760,8 +760,8 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @see {@link DatumChangeListener}
 	 */
 	protected void notifyDatumChangeListeners(Item item , String attribute , Object oldValue , Object newValue){
-		for (Iterator iterator = datumChangeListeners.iterator(); iterator.hasNext();) {
-			DatumChangeListener datumChangeListener = (DatumChangeListener) iterator.next();
+		for (Iterator<DatumChangeListener> iterator = datumChangeListeners.iterator(); iterator.hasNext();) {
+			DatumChangeListener datumChangeListener = iterator.next();
 			datumChangeListener.onDataChange(item, attribute, oldValue, newValue);
 		}
 	}
@@ -775,8 +775,8 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * 
 	 */
 	protected void notifyOnNewListeners(Item item){
-		for (Iterator iterator = datumChangeListeners.iterator(); iterator.hasNext();) {
-			DatumChangeListener datumChangeListener = (DatumChangeListener) iterator.next();
+		for (Iterator<DatumChangeListener> iterator = datumChangeListeners.iterator(); iterator.hasNext();) {
+			DatumChangeListener datumChangeListener = iterator.next();
 			datumChangeListener.onNew(item);
 		}
 	}
@@ -790,8 +790,8 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @see {@link DatumChangeListener}
 	 */
 	protected void notifyOnDeleteListeners(Item item){
-		for (Iterator iterator = datumChangeListeners.iterator(); iterator.hasNext();) {
-			DatumChangeListener datumChangeListener = (DatumChangeListener) iterator.next();
+		for (Iterator<DatumChangeListener> iterator = datumChangeListeners.iterator(); iterator.hasNext();) {
+			DatumChangeListener datumChangeListener = iterator.next();
 			datumChangeListener.onDelete(item);
 		}
 	}
@@ -825,9 +825,9 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * 
 	 * @see {@link FetchListener}
 	 */
-	protected void notifyCompleteFetchListeners(List items , Request request){
-		for (Iterator iterator = fetchListeners.iterator(); iterator.hasNext();) {
-			FetchListener listener = (FetchListener) iterator.next();
+	protected void notifyCompleteFetchListeners(List<?> items , Request request){
+		for (Iterator<FetchListener> iterator = fetchListeners.iterator(); iterator.hasNext();) {
+			FetchListener listener = iterator.next();
 			listener.onComplete(this, items , request);
 		}
 	}
@@ -840,8 +840,8 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @see {@link FetchListener}
 	 */
 	protected void notifyBeginFetchListeners(int size , Request request){
-		for (Iterator iterator = fetchListeners.iterator(); iterator.hasNext();) {
-			FetchListener listener = (FetchListener) iterator.next();
+		for (Iterator<FetchListener> iterator = fetchListeners.iterator(); iterator.hasNext();) {
+			FetchListener listener = iterator.next();
 			listener.onBegin(this,size , request);
 		}
 	}
@@ -852,8 +852,8 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @see {@link FetchListener}
 	 */
 	protected void notifyErrorFetchListeners(){
-		for (Iterator iterator = fetchListeners.iterator(); iterator.hasNext();) {
-			FetchListener listener = (FetchListener) iterator.next();
+		for (Iterator<FetchListener> iterator = fetchListeners.iterator(); iterator.hasNext();) {
+			FetchListener listener = iterator.next();
 			listener.onError(this);
 		}
 	}
@@ -864,8 +864,8 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param item : the item which has been loaded/fetched
 	 */
 	protected void notifyItemFetchListeners(Item item){
-		for (Iterator iterator = fetchListeners.iterator(); iterator.hasNext();) {
-			FetchListener listener = (FetchListener) iterator.next();
+		for (Iterator<FetchListener> iterator = fetchListeners.iterator(); iterator.hasNext();) {
+			FetchListener listener = iterator.next();
 			listener.onItem(this ,item);
 		}
 	}
@@ -917,9 +917,9 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 		try {
 			createDojoWidget();
 			setGWTStore(dojoStore, this);
-			Collection itemsValues = items.values();
-			for (Iterator iterator = itemsValues.iterator(); iterator.hasNext();) {
-				Item item = (Item) iterator.next();
+			Collection<Item> itemsValues = items.values();
+			for (Iterator<Item> iterator = itemsValues.iterator(); iterator.hasNext();) {
+				Item item = iterator.next();
 				callJSOnNew(item);
 			}
 		} catch (Exception e) {
@@ -968,10 +968,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param request
 	 * @return
 	 */
-	public List executeQuery(Collection items , Request request){
-		List itemsMatchingAndSorted = new ArrayList();
+	public List<Item> executeQuery(Collection<?> items , Request request){
+		List<Item> itemsMatchingAndSorted = new ArrayList<Item>();
 		ItemComparator comparator = new ItemComparator(request.getSortFields());
-		for (Iterator iterator = items.iterator(); iterator
+		for (Iterator<?> iterator = items.iterator(); iterator
 				.hasNext();) {
 			Item item = (Item) iterator.next();
 			if(itemMatchQuery(item , request)){
@@ -988,19 +988,20 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @author rdunklau
 	 *
 	 */
-	private static class ItemComparator implements Comparator{
+	private static class ItemComparator implements Comparator<Object>{
 
-		private List sortFields;
+		private List<?> sortFields;
 		
-		public ItemComparator(List sortFields){
+		public ItemComparator(List<?> sortFields){
 			this.sortFields = sortFields;
 		}
 		
+		@SuppressWarnings("unchecked")
 		public int compare(Object arg0, Object arg1)  {
 			Item item1 = (Item) arg0;
 			Item item2 = (Item) arg1;
 			int result = 0;
-			for (Iterator iterator = sortFields.iterator(); iterator.hasNext();) {
+			for (Iterator<?> iterator = sortFields.iterator(); iterator.hasNext();) {
 				SortField sortField = (SortField) iterator.next();
 				
 				Object value1 = item1.getValue( sortField.getAttribute() , null);
@@ -1013,7 +1014,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 					result = 0;
 				}else if(value1 instanceof Comparable && value2 instanceof Comparable){
 					try{
-						result = ((Comparable)value1).compareTo(value2);
+						result = ((Comparable<Object>)value1).compareTo(value2);
 					}catch(ClassCastException e){
 						result = value1.toString().compareTo(value2.toString());
 					}
@@ -1039,12 +1040,13 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param request
 	 * @return : true it item matches the criteria of the request
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean itemMatchQuery(Item item , Request request){
 		boolean match = true;
-		Map query = request.getQuery();
-		Set keys = query.keySet();
+		Map<?, ?> query = request.getQuery();
+		Set<?> keys = query.keySet();
 		boolean result = true;
-		for (Iterator iterator = keys.iterator(); iterator.hasNext();) {
+		for (Iterator<?> iterator = keys.iterator(); iterator.hasNext();) {
 			String queryparameter = (String) iterator.next();
 			if(query.get(queryparameter).toString().compareTo("*") != 0){
 				Object actualProperty = item.getValues(queryparameter);
@@ -1056,7 +1058,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 						if(actualProperty instanceof Boolean || expectedProperty instanceof Boolean){
 							result = actualProperty.toString().compareTo(expectedProperty.toString()) == 0 ? true : false;
 						}else{
-							result = ((Comparable)actualProperty).compareTo((Comparable)expectedProperty) == 0 ? true : false;
+							result = ((Comparable<Comparable<?>>)actualProperty).compareTo((Comparable<?>)expectedProperty) == 0 ? true : false;
 						}
 					}catch(ClassCastException e){
 						result = actualProperty.toString().compareTo(expectedProperty.toString()) == 0 ? true : false;

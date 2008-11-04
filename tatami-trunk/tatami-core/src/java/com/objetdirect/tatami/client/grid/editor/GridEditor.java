@@ -27,8 +27,6 @@ package com.objetdirect.tatami.client.grid.editor;
 
 import java.util.Map;
 
-import com.objetdirect.tatami.client.HasDojo;
-
 /**
  * This interface defines a grid editor
  * 
@@ -46,7 +44,7 @@ public interface  GridEditor   {
 	/**
 	 * @return editor's options
 	 */
-	public  Map<String, Object> getAttributes();
+	public  Map<String,? extends Object> getAttributes();
 	
 	
 }

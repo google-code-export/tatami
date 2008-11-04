@@ -83,23 +83,37 @@ public class Axis {
 		}-*/;
 	}
 	
+	/**
+	 * Constructs a default bottom horizontal axis
+	 */
 	public Axis(){
 		options = new HashMap<String,Object>();
-		setAlignement(HORIZONTAL | BOTTOM);
+		setPosition(HORIZONTAL | BOTTOM);
 	}
 	
-	public Axis(int alignement){
+	/**
+	 * @param position : an int representing the Axis position.
+	 * It is obtained from int byte to byte OR operation between the following constants :
+	 * 
+	 *  Axis.LEFT
+	 *  Axis.RIGHT
+	 *  Axis.BOTTOM
+	 *  Axis.TOP
+	 *  Axis.VERTICAL
+	 *  Axis.HORIZONTAL
+	 */
+	public Axis(int position){
 		this();
-		setAlignement(alignement);
+		setPosition(position);
 	}
 	
-	public void setAlignement(int alignement){
-		if((alignement - RIGHT) >= 0 ){
+	public void setPosition(int position){
+		if((position - RIGHT) >= 0 ){
 			options.put(leftOption,Boolean.FALSE);
 		}else{
 			options.put(leftOption,Boolean.TRUE);
 		}
-		if((alignement - VERTICAL)%2 == 0 ){
+		if((position - VERTICAL)%2 == 0 ){
 			options.put(verticalOption,Boolean.TRUE);
 		}else{
 			options.put(verticalOption,Boolean.FALSE);
@@ -209,7 +223,7 @@ public class Axis {
 
 	/**
 	 * @param majorLabels : whether the major ticks should be labeled
-	 */
+		 */
 	public void setMajorLabels(Boolean majorLabels) {
 		this.majorLabels = majorLabels;
 		options.put("majorLabels", majorLabels);
@@ -239,17 +253,17 @@ public class Axis {
 		options.put("minorLabels", minorLabels);
 	}
 
-	public Boolean getMicroTicks() {
-		return microTicks;
-	}
+//	public Boolean getMicroTicks() {
+//		return microTicks;
+//	}
 
 	/**
 	 * @param microTicks : whether the micro ticks should be displayed
 	 */
-	public void setMicroTicks(Boolean microTicks) {
-		this.microTicks = microTicks;
-		options.put("microTicks", microTicks);
-	}
+//	public void setMicroTicks(Boolean microTicks) {
+//		this.microTicks = microTicks;
+//		options.put("microTicks", microTicks);
+//	}
 
 	public Boolean getMajorTicks() {
 		return majorTicks;
@@ -308,6 +322,7 @@ public class Axis {
 	public void setMinorTicksColor(String color){
 		if(minorTickOptions == null){
 			minorTickOptions = new HashMap<String, Object>();
+			minorTickOptions.put("length",3);
 		}
 		minorTickOptions.put("color",color);
 		options.put("minorTick", minorTickOptions);
@@ -318,6 +333,7 @@ public class Axis {
 	public void setMajorTicksColor(String color){
 		if(majorTickOptions == null){
 			majorTickOptions = new HashMap<String, Object>();
+			majorTickOptions.put("length",5);
 		}
 		majorTickOptions.put("color",color);
 		options.put("majorTick", majorTickOptions);
@@ -326,13 +342,14 @@ public class Axis {
 	/**
 	 * @param color : micro ticks color
 	 */
-	public void setMicroTicksColor(String color){
-		if(microTickOptions == null){
-			microTickOptions = new HashMap<String, Object>();
-		}
-		microTickOptions.put("color",color);
-		options.put("microTick", microTickOptions);
-	}
+//	public void setMicroTicksColor(String color){
+//		if(microTickOptions == null){
+//			microTickOptions = new HashMap<String, Object>();
+//			microTickOptions.put("length",1);
+//		}
+//		microTickOptions.put("color",color);
+//		options.put("microTick", microTickOptions);
+//	}
 	
 	/**
 	 * @param length : minor ticks length
@@ -360,13 +377,13 @@ public class Axis {
 	/**
 	 * @param length : micro ticks length
 	 */
-	public void setMicroTicksLength(double length){
-		if(microTickOptions == null){
-			microTickOptions = new HashMap<String, Object>();
-		}
-		microTickOptions.put("length",length);
-		options.put("microTick", microTickOptions);
-	}
+//	public void setMicroTicksLength(double length){
+//		if(microTickOptions == null){
+//			microTickOptions = new HashMap<String, Object>();
+//		}
+//		microTickOptions.put("length",length);
+//		options.put("microTick", microTickOptions);
+//	}
 	
 	/**
 	 * @param step : step between the major ticks
@@ -386,9 +403,9 @@ public class Axis {
 	/**
 	 * @param step : step between the micro ticks
 	 */
-	public void setMicroTickStep(double step) {
-		options.put("microTickStep",step);
-	}
+//	public void setMicroTickStep(double step) {
+//		options.put("microTickStep",step);
+//	}
 	
 	/**
 	 * @param color : axis labels font color 

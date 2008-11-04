@@ -28,7 +28,6 @@ package com.objetdirect.tatami.client.dnd;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -56,6 +55,7 @@ public class DnDBehaviors {
 	 * @author rdunklau
 	 *
 	 */
+	@SuppressWarnings("serial")
 	public static class BehaviorScopeException extends Exception{
 		public BehaviorScopeException() {
 			super();

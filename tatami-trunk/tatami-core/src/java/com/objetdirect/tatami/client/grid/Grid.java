@@ -32,10 +32,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.objetdirect.tatami.client.AbstractDojo;
 import com.objetdirect.tatami.client.DojoController;
 import com.objetdirect.tatami.client.JSHelper;
@@ -89,12 +87,12 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * List containing the grid listeners 
 	 * @see : {@link GridListener}
 	 */
-	protected List gridListeners = new ArrayList();
+	protected List<GridListener> gridListeners = new ArrayList<GridListener>();
 	
 	/**
 	 *  List containing currently selected indexes
 	 */
-	protected List selectedIndexes = new ArrayList();
+	protected List<Integer> selectedIndexes = new ArrayList<Integer>();
 	
 	/**
 	 * Number of displayed rows
@@ -615,6 +613,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.AbstractDojo#onDojoLoad()
 	 */
+	@Override
 	public void onDojoLoad() {
 		defineTatamiGrid();
 	}
@@ -623,6 +622,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	/* (non-Javadoc)
 	 * @see com.google.gwt.user.client.ui.UIObject#setHeight(java.lang.String)
 	 */
+	@Override
 	public void setHeight(String height) {
 		super.setHeight(height);
 		if(dojoWidget != null){
@@ -634,6 +634,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	/* (non-Javadoc)
 	 * @see com.google.gwt.user.client.ui.UIObject#setSize(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public void setSize(String width, String height) {
 		super.setSize(width, height);
 		if(dojoWidget != null){
@@ -645,6 +646,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	/* (non-Javadoc)
 	 * @see com.google.gwt.user.client.ui.UIObject#setWidth(java.lang.String)
 	 */
+	@Override
 	public void setWidth(String width) {
 		super.setWidth(width);
 		if(dojoWidget != null){
@@ -724,6 +726,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.AbstractDojo#doBeforeDestruction()
 	 */
+	@Override
 	public void doBeforeDestruction() {
 		this.store.doBeforeDestruction();
 	}
@@ -734,10 +737,11 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.AbstractDojo#doAfterCreation()
 	 */
+	@Override
 	public void doAfterCreation() {
 		DOM.sinkEvents(getElement(),Event.MOUSEEVENTS);
 		DOM.sinkEvents(getElement(),Event.FOCUSEVENTS);
-		DojoController.getInstance().startup(this);
+		DojoController.startup(this);
 	}
 
 	/**
@@ -779,9 +783,9 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * 
 	 * Called by the store when the item fetch ends
 	 */
-	public void onComplete(FetchEventSource source ,List items , Request request) {
+	public void onComplete(FetchEventSource source ,List<?> items , Request request) {
 		JavaScriptObject itemArray = JavaScriptObject.createArray();
-		for (Iterator iterator = items.iterator(); iterator.hasNext();) {
+		for (Iterator<?> iterator = items.iterator(); iterator.hasNext();) {
 			Item item = (Item) iterator.next();
 			itemArray = addItemToJSArray(itemArray, item);
 		}
@@ -1078,8 +1082,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param colIndex : the column index where the click happened 
 	 */
 	private void notifyGridListenersOnCellClick(int rowIndex , String colField , int colIndex){
-		for (Iterator iterator = gridListeners.iterator(); iterator.hasNext();) {
-			GridListener gridListener = (GridListener) iterator.next();
+		for (Iterator<GridListener> iterator = gridListeners.iterator(); iterator.hasNext();) {
+			GridListener gridListener = iterator.next();
 			gridListener.onCellClick(this , rowIndex,  colIndex , colField);
 		}
 	}
@@ -1093,8 +1097,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param colIndex : the column index where the click happened 
 	 */
 	private void notifyGridListenersOnCellDblClick(int rowIndex , String colField , int colIndex){
-		for (Iterator iterator = gridListeners.iterator(); iterator.hasNext();) {
-			GridListener gridListener = (GridListener) iterator.next();
+		for (Iterator<GridListener> iterator = gridListeners.iterator(); iterator.hasNext();) {
+			GridListener gridListener = iterator.next();
 			gridListener.onCellDblClick(this , rowIndex,  colIndex , colField);
 		}
 	}
@@ -1108,8 +1112,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param newValue : new value
 	 */
 	private void notifyGridListenersOnDataChange(Item item, String attributeName, Object oldValue, Object newValue){
-		for (Iterator iterator = gridListeners.iterator(); iterator.hasNext();) {
-			GridListener gridListener = (GridListener) iterator.next();
+		for (Iterator<GridListener> iterator = gridListeners.iterator(); iterator.hasNext();) {
+			GridListener gridListener = iterator.next();
 			gridListener.onDataChange(this , item , attributeName , oldValue , newValue );
 		}
 	}
@@ -1119,8 +1123,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * 
 	 */
 	private void notifyGridListenersOnSelectionChange(){
-		for (Iterator iterator = gridListeners.iterator(); iterator.hasNext();) {
-			GridListener gridListener = (GridListener) iterator.next();
+		for (Iterator<GridListener> iterator = gridListeners.iterator(); iterator.hasNext();) {
+			GridListener gridListener = iterator.next();
 			gridListener.onSelectionChanged(this);
 		}
 	}
@@ -1185,7 +1189,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	public Item[] getSelectedItems(){
 		Item[] selectedItems = new Item[selectedIndexes.size()];
 		for(int i = 0 ; i < selectedIndexes.size() ; i++) {
-			Number selectedIndex = (Number) selectedIndexes.get(i);
+			Number selectedIndex = selectedIndexes.get(i);
 			selectedItems[i] = getItemFromRow(selectedIndex.intValue());
 		}
 		return selectedItems;

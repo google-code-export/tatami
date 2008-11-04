@@ -110,7 +110,7 @@ public class FishEye extends AbstractDojo implements WindowResizeListener {
 	 */
 	private int itemMaxHeight = 200;
 
-	/** orientation de la barre d'icone (horizontale où verticale). */
+	/** orientation de la barre d'icone (horizontale oï¿½ verticale). */
 	private String orientation = HORIZONTAL;
 
 	/** controls how much reaction the menu makes, relative to the distance of the mouse from the menu */
@@ -153,7 +153,7 @@ public class FishEye extends AbstractDojo implements WindowResizeListener {
 	/**
 	 * List of the items <code>Item</code> of the FishEye menu
 	 */
-	private List items = new ArrayList();
+	private List<Item> items = new ArrayList<Item>();
 
 
 
@@ -442,7 +442,7 @@ public class FishEye extends AbstractDojo implements WindowResizeListener {
 	 * @param conservativeTrigger     if true, don't start enlarging menu items until mouse is over an image;
 	                                  if false, start enlarging menu items as the mouse moves near them.
 	 *
-	 * @return la widget DOJO construite par cette méthode
+	 * @return la widget DOJO construite par cette mï¿½thode
 	 */
 	private native JavaScriptObject createFishEye(int itemWidth,
 			int itemHeight, int itemMaxWidth, int itemMaxHeight,

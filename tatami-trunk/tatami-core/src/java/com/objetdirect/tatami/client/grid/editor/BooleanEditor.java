@@ -43,7 +43,7 @@ public class BooleanEditor implements GridEditor{
 	public BooleanEditor(){
 	}
 	
-	public Map getAttributes() {
+	public Map<String, Object> getAttributes() {
 		return null;
 	}
 

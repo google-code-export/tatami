@@ -38,17 +38,17 @@ public class ComboBoxEditor implements GridEditor{
 
 	private final String dojoName = "dojox.grid.cells.ComboBox";
 	
-	private Map attributes ;
+	private Map<String, String[]> attributes ;
 	
 	/**
 	 * @param options : combo box choices
 	 */
 	public ComboBoxEditor(String[] options){
-		this.attributes = new HashMap();
+		this.attributes = new HashMap<String, String[]>();
 		this.attributes.put("options", options);
 	}
 	
-	public Map getAttributes() {
+	public Map<String, String[]> getAttributes() {
 		return attributes;
 	}
 

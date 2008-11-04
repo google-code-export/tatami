@@ -5,10 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.charting.effects.Effect;
 
-public class Plot {
+public class Plot<T>{
 	
 	
 	
@@ -19,7 +18,7 @@ public class Plot {
 	
 	
 	protected Map<String,Object> options;
-	private List<Serie> series ; 
+	private List<Serie<T>> series ; 
 	private List<Effect> effects;
 	private Axis hAxis ;
 	private Axis vAxis ;
@@ -36,21 +35,21 @@ public class Plot {
 	
 	public Plot(){
 		options = new HashMap<String, Object>();
-		series = new ArrayList<Serie>();
+		series = new ArrayList<Serie<T>>();
 		effects = new ArrayList<Effect>();
 	}
 
 	/**
 	 * @return the series to draw in this plot
 	 */
-	public List<Serie> getSeries() {
+	public List<Serie<T>> getSeries() {
 		return series;
 	}
 
 	/**
 	 * @param series the series to draw in this plot
 	 */ 
-	public void setSeries(List<Serie> series) {
+	public void setSeries(List<Serie<T>> series) {
 		this.series = series;
 	}
 
@@ -79,21 +78,21 @@ public class Plot {
 	/**
 	 * @param serie : a serie to be drawn on this plot
 	 */
-	public void addSerie(Serie serie){
+	public void addSerie(Serie<T> serie){
 		series.add(serie);
 	}
 	
 	/**
 	 * @param serie : a serie to be drawn on this plot
 	 */
-	public void removeSerie(Serie serie){
+	public void removeSerie(Serie<T> serie){
 		series.remove(serie);
 	}
 	
 	/**
 	 * @return the horizontal axis, or null if no axis is defined
 	 */
-	public Axis getHAxis() {
+	public Axis getXAxis() {
 		return hAxis;
 	}
 
@@ -101,7 +100,7 @@ public class Plot {
 	/**
 	 * @param axis the horizontal axis, or null if no axis is defined
 	 */
-	public void setHAxis(Axis axis) {
+	public void setXAxis(Axis axis) {
 		hAxis = axis;
 	}
 
@@ -109,14 +108,14 @@ public class Plot {
 	/**
 	 * @return the vertical axis, or null if no axis is defined
 	 */
-	public Axis getVAxis() {
+	public Axis getYAxis() {
 		return vAxis;
 	}
 
 	/**
 	 * @param axis the vertical axis, or null if no axis is defined
 	 */
-	public void setVAxis(Axis axis) {
+	public void setYAxis(Axis axis) {
 		vAxis = axis;
 	}
 	

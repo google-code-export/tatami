@@ -1,7 +1,5 @@
 package com.objetdirect.tatami.client.grid.formatters;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 public class BooleanFormatter extends  BaseFormatter{
 
 	public String format(String toFormat) {

@@ -27,8 +27,6 @@ package com.objetdirect.tatami.client.grid.editor;
 
 import java.util.Map;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 
 /**
  * A check box grid editor
@@ -45,7 +43,7 @@ public class CheckBoxEditor implements GridEditor{
 	}
 	
 	
-	public Map getAttributes() {
+	public Map<String, Object> getAttributes() {
 		return null;
 	}
 

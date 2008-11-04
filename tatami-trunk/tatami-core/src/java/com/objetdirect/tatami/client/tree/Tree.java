@@ -259,7 +259,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	}
 	
 	public void addChildrenToItem(TreeItem parent, Collection<TreeItem> children){
-		for (Iterator iterator = children.iterator(); iterator.hasNext();) {
+		for (Iterator<TreeItem> iterator = children.iterator(); iterator.hasNext();) {
 			TreeItem treeItem = (TreeItem) iterator.next();
 			parent.addChild(treeItem);
 		}
@@ -472,7 +472,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.data.FetchListener#onComplete(com.objetdirect.tatami.client.data.FetchEventSource, java.util.List, com.objetdirect.tatami.client.data.Request)
 	 */
-	public void onComplete(FetchEventSource source, List items, Request request) {
+	public void onComplete(FetchEventSource source, List<?> items, Request request) {
 		assert source!=null;
 		assert request.getOnCompleteCallback() !=null;
 		proceedJSOnComplete(JSHelper.convertObjectToJSObject(items), request.getOnCompleteCallback());

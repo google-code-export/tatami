@@ -1,6 +1,6 @@
 package com.objetdirect.tatami.client.charting;
 
-public class BarPlot extends Plot {
+public class BarPlot<T extends Number> extends Plot<T> {
 
 	final public static String PLOT_TYPE_BARS = "Bars";
 	final public static String PLOT_TYPE_COLUMNS = "Columns";
@@ -18,8 +18,7 @@ public class BarPlot extends Plot {
 	}
 
 	/**
-	 * @param gap
-	 *            : on a Column or Bar chart, sets the gap between two bars
+	 * @param gap :  sets the gap between two bars
 	 */
 	public void setGap(int gap) {
 		options.put("gap", gap);

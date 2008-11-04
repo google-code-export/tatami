@@ -119,31 +119,31 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * the drag and drop (DDPlayer of YUI). Widgets is the keys of the map, value being objects
 	 *  DDRecord which besides the suitable objects DDPlayer, contain the list of linked affinity.
 	 */
-	Map draggables = new HashMap();
+	Map<Widget, DDRecord> draggables = new HashMap<Widget, DDRecord>();
 	/**
 	 *
 	 * Map linking the widgets of the panel, in the objects of management of the target faculty of the drag and drop 
 	 * (DDTarget of YUI). Widgets is the keys of the map, values being objects DDRecord which besides the suitable objects DDTarget, 
 	 * contain the list of linked affinity.
 	 */
-	Map targets = new HashMap();
+	Map<Widget, DDRecord> targets = new HashMap<Widget, DDRecord>();
 	/**
 	 * Map linking affinity with the widgets which use them in their faculty " draggable". 
 	 * Keys are affinity (String ) and values  are set of widgets.
 	 */
-	Map draggableAffordances = new HashMap();
+	Map<String, Set> draggableAffordances = new HashMap<String, Set>();
 	
 	/**
 	 * Map linking affinity with the widgets which use them in their faculty " of target ". 
 	 * Keys are affinity (String ) and values  are set of widgets.
 	 */
-	Map targetAffordances = new HashMap();
+	Map<String, Set> targetAffordances = new HashMap<String, Set>();
 	
 	/**
 	 * Map linking the widgets with their base (instance of SimplePanel)The keys are widgets, values are the bases
 	 * 
 	 */
-	Map bases = new HashMap();
+	Map<Widget, SimplePanel> bases = new HashMap<Widget, SimplePanel>();
 	
 	/**
 	 * Map linking the DOM element of the bases with the widget that they contain. This DOM elements of the bases  
@@ -151,7 +151,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * and returned by YUI 
 	 * 
 	 */
-	Map widgets = new HashMap();
+	Map<Element, Widget> widgets = new HashMap<Element, Widget>();
 
     private static final String ERROR_NOT_BELONG  = "The widget does not belong to the panel";
     
@@ -173,7 +173,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 		/**
 		 * Liste of affordance used by dd
 		 */
-		List affordances = new ArrayList();
+		List<String> affordances = new ArrayList<String>();
 	}
 	
 	/**
@@ -235,11 +235,12 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * @return <code>true</code> if a new affordance is added, <code>false</code> otherwise (It's means 
 	 * the affordance already existed for the faculty
 	 */
-	protected boolean addAffordance(Widget widget, DDRecord ddr, Map affordances, String affordance) {
+	@SuppressWarnings("unchecked")
+	protected boolean addAffordance(Widget widget, DDRecord ddr, Map<String, Set> affordances, String affordance) {
 		boolean result = false;
-		Set widgetSet = (Set)affordances.get(affordance);
+		Set<Widget> widgetSet = affordances.get(affordance);
 		if (widgetSet==null) {
-			widgetSet = new HashSet();
+			widgetSet = new HashSet<Widget>();
 			affordances.put(affordance, widgetSet);
 		}
 		if (widgetSet.contains(widget)) {
@@ -262,9 +263,9 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * @return <code>true</code> if a new affordance is removed, <code>false</code> otherwise (It's means 
 	 * the affordance didn't  exist for the faculty)
 	 */
-	protected boolean removeAffordance(Widget widget, DDRecord ddr, Map affordances, String affordance) {
+	protected boolean removeAffordance(Widget widget, DDRecord ddr, Map<String, Set> affordances, String affordance) {
 		boolean result = false;
-		Set widgetSet = (Set)affordances.get(affordance);
+		Set<?> widgetSet = affordances.get(affordance);
 		if (widgetSet!=null) {
 			widgetSet.remove(widget);
 			if (widgetSet.isEmpty()) {
@@ -287,7 +288,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 		} if (affordance==null) {
 			throw new IllegalArgumentException(ERROR_AFFORDANCE);
 		}
-		DDRecord ddr = (DDRecord)draggables.get(widget);
+		DDRecord ddr = draggables.get(widget);
 		if (ddr!=null) {
 			if (addAffordance(widget, ddr, draggableAffordances, affordance)) {
 				if (isAttached()) {
@@ -298,9 +299,9 @@ public class DragAndDropPanel extends AbsolutePanel {
 			ddr = new DDRecord();
 			if (addAffordance(widget, ddr, draggableAffordances, affordance)) {
 				draggables.put(widget, ddr);
-				DDRecord ddt = (DDRecord)targets.get(widget);
-				if (ddt!=null) {// cas particulier pour contourner un bug de YUI : la faculté 
-							   // glissante doit toujours être définie "avant" la faculté cible.
+				DDRecord ddt = targets.get(widget);
+				if (ddt!=null) {// cas particulier pour contourner un bug de YUI : la facultï¿½ 
+							   // glissante doit toujours ï¿½tre dï¿½finie "avant" la facultï¿½ cible.
 					rebuild(widget, ddt.dd);
 				}else {
 					if (isAttached()) {
@@ -325,7 +326,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 		if (affordance==null) {
 			throw new IllegalArgumentException(ERROR_AFFORDANCE);
 	    }
-		DDRecord ddr = (DDRecord)targets.get(widget);
+		DDRecord ddr = targets.get(widget);
 		if (ddr!=null) {
 			if (addAffordance(widget, ddr, targetAffordances, affordance)) {
 				if (isAttached()) {
@@ -356,7 +357,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 		} if (affordance==null) {
 			throw new IllegalArgumentException(ERROR_AFFORDANCE);
 		}
-		DDRecord ddr = (DDRecord)draggables.get(widget);
+		DDRecord ddr = draggables.get(widget);
 		if (ddr!=null) {
 			if (!removeAffordance(widget, ddr, draggableAffordances, affordance)) {
 				throw new NoSuchElementException("Unknown affordance : "+affordance);
@@ -384,7 +385,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 		} if (affordance==null) {
 			throw new IllegalArgumentException(ERROR_AFFORDANCE);
 		}
-		DDRecord ddr = (DDRecord)targets.get(widget);
+		DDRecord ddr = targets.get(widget);
 		if (ddr!=null) {
 			if (!removeAffordance(widget, ddr, targetAffordances, affordance)) {
 				throw new NoSuchElementException("Unknown affordance : "+affordance);
@@ -437,12 +438,12 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * @param affordances Map linking affordances and set of widgets for a faculty
 	 * @return the updated DDrecord
 	 */
-	protected DDRecord removeWidgetFromDragOrDrop(Widget widget, Map widgetMap, Map affordances) {
-		DDRecord ddr = (DDRecord)widgetMap.remove(widget);
+	protected DDRecord removeWidgetFromDragOrDrop(Widget widget, Map<Widget, DDRecord> widgetMap, Map<String, Set> affordances) {
+		DDRecord ddr = widgetMap.remove(widget);
 		int length = ddr.affordances.size();
 		for (int i=0; i<length; i++) {
-			String affordance = (String)ddr.affordances.get(i);
-			Set widgetSet = (Set)affordances.get(affordance);
+			String affordance = ddr.affordances.get(i);
+			Set<?> widgetSet = affordances.get(affordance);
 			widgetSet.remove(widget);
 			if (widgetSet.isEmpty()) {
 				affordances.remove(affordance);
@@ -452,38 +453,38 @@ public class DragAndDropPanel extends AbsolutePanel {
 	}
 		
 	/**
-	 * Reconstruit complètement les objets YUI de gestion du Drag and Drop, pour une widget donnée. Cette
-	 * méthode est nécessaire pour contourner deux bugs/limitations de YUI :
+	 * Reconstruit complï¿½tement les objets YUI de gestion du Drag and Drop, pour une widget donnï¿½e. Cette
+	 * mï¿½thode est nï¿½cessaire pour contourner deux bugs/limitations de YUI :
 	 * <ul>
-	 * 		<li> YUI ne sait pas retirer isolément une faculté à une widget
-	 * 		<li> La faculté glissante doit être créée avant la faculté cible
+	 * 		<li> YUI ne sait pas retirer isolï¿½ment une facultï¿½ ï¿½ une widget
+	 * 		<li> La facultï¿½ glissante doit ï¿½tre crï¿½ï¿½e avant la facultï¿½ cible
 	 * <ul>
-	 * @param widget widget dont les objets de gestion du Drag and Drop doivent être reconstruit.
-	 * @param ddt un des objets de gestion du Drag and Drop associé à la widget (c'est à partir de lui que
-	 * la fonction unreg de YUI sera appelée).
+	 * @param widget widget dont les objets de gestion du Drag and Drop doivent ï¿½tre reconstruit.
+	 * @param ddt un des objets de gestion du Drag and Drop associï¿½ ï¿½ la widget (c'est ï¿½ partir de lui que
+	 * la fonction unreg de YUI sera appelï¿½e).
 	 */
 	protected void rebuild(Widget widget, JavaScriptObject ddt) {
 		if (ddt!=null) {
 			removeSlot(ddt);
 		}
 		{
-			DDRecord ddr = (DDRecord)draggables.get(widget);
+			DDRecord ddr = draggables.get(widget);
 			if (ddr!=null) {
-				ddr.dd = addDraggableSlot(widget, (String)ddr.affordances.get(0));
+				ddr.dd = addDraggableSlot(widget, ddr.affordances.get(0));
 				setGWTWidget(ddr.dd, this);
 				int length=ddr.affordances.size();
 				for (int i=1; i<length; i++) {
-					addAffordance(ddr.dd, (String)ddr.affordances.get(i));
+					addAffordance(ddr.dd, ddr.affordances.get(i));
 				}
 			}
 		}
 		{
-			DDRecord ddr = (DDRecord)targets.get(widget);
+			DDRecord ddr = targets.get(widget);
 			if (ddr!=null) {
-				ddr.dd = addTargetSlot(widget, (String)ddr.affordances.get(0));
+				ddr.dd = addTargetSlot(widget, ddr.affordances.get(0));
 				int length=ddr.affordances.size();
 				for (int i=1; i<length; i++) {
-					addAffordance(ddr.dd, (String)ddr.affordances.get(i));
+					addAffordance(ddr.dd, ddr.affordances.get(i));
 				}
 			}
 		}
@@ -492,6 +493,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 	/**
 	 * This method rebuilds the objects DDPlayer and DDProxies when the GWT is attached on the browser.
 	 */
+	@Override
 	protected void onAttach() {
 		rebuildAll();
 		super.onAttach();
@@ -500,6 +502,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 	/**
 	 * When the GWT widget is detached from the browser, the DDProxies and DDPlayer are destroyed.
 	 */
+	@Override
 	protected void onDetach() {
 		removeAll();
 		super.onDetach();
@@ -511,7 +514,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 
 	 */
     protected void rebuildAll() {
-		Iterator it = draggables.entrySet().iterator();
+		Iterator<?> it = draggables.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry entry = (Map.Entry)it.next();
 			Widget widget = (Widget)entry.getKey();
@@ -533,15 +536,15 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * widget they contain can be targets or sources.
 	 */
     protected void removeAll() {
-		Iterator it = draggables.values().iterator();
+		Iterator<DDRecord> it = draggables.values().iterator();
 		while (it.hasNext()) {
-			DDRecord ddr = (DDRecord)it.next();
+			DDRecord ddr = it.next();
 			setGWTWidget(ddr.dd, null);
 			removeSlot(ddr.dd);
 		}
 		it = targets.values().iterator();
 		while (it.hasNext()) {
-			DDRecord ddr = (DDRecord)it.next();
+			DDRecord ddr = it.next();
 			removeSlot(ddr.dd);
 		}
     }
@@ -567,7 +570,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 		if (affordance==null) {
 			throw new IllegalArgumentException(ERROR_AFFORDANCE);
 		}
-		DDRecord ddr = (DDRecord)draggables.get(widget); 
+		DDRecord ddr = draggables.get(widget); 
 		if (ddr!=null) {
 			result =  ddr.affordances.contains(affordance);
 		}
@@ -581,12 +584,12 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 *         If the widget is not draggable, returns <code>null</code>.
 	 */
 	public String[] getDraggableAffordances(Widget widget) {
-		DDRecord ddr = (DDRecord)draggables.get(widget);
+		DDRecord ddr = draggables.get(widget);
 		String[] affordances = null;
 		if (ddr != null) {
 			affordances = new String[ddr.affordances.size()];
 			for (int i=0; i<ddr.affordances.size(); i++) {
-				affordances[i] = (String)ddr.affordances.get(i);
+				affordances[i] = ddr.affordances.get(i);
 			}
 			
 		}
@@ -605,11 +608,11 @@ public class DragAndDropPanel extends AbsolutePanel {
 		if (affordance==null) {
 			throw new IllegalArgumentException(ERROR_AFFORDANCE);
 		}
-		Set widgetSet = (Set)draggableAffordances.get(affordance);
+		Set<?> widgetSet = draggableAffordances.get(affordance);
 		if (widgetSet != null) { 
 		   widgetArray = new Widget[widgetSet.size()];
 		   int i=0;
-		   Iterator it = widgetSet.iterator();
+		   Iterator<?> it = widgetSet.iterator();
 		   while (it.hasNext()) {
 		      widgetArray[i++] = (Widget)it.next();
 		   }
@@ -639,7 +642,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 		if (affordance==null) {
 			throw new IllegalArgumentException(ERROR_AFFORDANCE);
 		}
-		DDRecord ddr = (DDRecord)targets.get(widget);
+		DDRecord ddr = targets.get(widget);
 		if (ddr != null) {
 			result =  ddr.affordances.contains(affordance);
 		}
@@ -654,11 +657,11 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 */
 	public String[] getTargetAffordances(Widget widget) {
 		String[] affordances = null;
-		DDRecord ddr = (DDRecord)targets.get(widget);
+		DDRecord ddr = targets.get(widget);
 		if (ddr != null) {
 			affordances = new String[ddr.affordances.size()];
 			for (int i=0; i<ddr.affordances.size(); i++) {
-				affordances[i] = (String)ddr.affordances.get(i);
+				affordances[i] = ddr.affordances.get(i);
 			}
 			
 		}
@@ -676,11 +679,11 @@ public class DragAndDropPanel extends AbsolutePanel {
 		if (affordance==null) {
 			throw new IllegalArgumentException(ERROR_AFFORDANCE);
 		}
-		Set widgetSet = (Set)targetAffordances.get(affordance);
+		Set<?> widgetSet = targetAffordances.get(affordance);
 		if (widgetSet!=null) { 
 		   widgetArray = new Widget[widgetSet.size()];
 		   int i=0;
-		   Iterator it = widgetSet.iterator(); 
+		   Iterator<?> it = widgetSet.iterator(); 
 		   while (it.hasNext()) {
 			 widgetArray[i++] = (Widget)it.next();
 		   }
@@ -704,7 +707,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * @return the widget linked to the DOM element given in parameter.
 	 */
 	protected Widget getWidget(Element e) {
-		return (Widget)widgets.get(e);
+		return widgets.get(e);
 	}
 		
 	/**
@@ -725,7 +728,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * @return the DDPlayer created
 	 */
 	protected JavaScriptObject addDraggableSlot(Widget widget, String affordance) {
-		SimplePanel base = (SimplePanel)bases.get(widget);
+		SimplePanel base = bases.get(widget);
 		return addDraggableSlotToElement(base.getElement(), affordance);
 	}
 	
@@ -750,7 +753,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * @return an instance of  DDTarget object.
 	 */
 	protected JavaScriptObject addTargetSlot(Widget widget, String affordance) {
-		SimplePanel base = (SimplePanel)bases.get(widget);
+		SimplePanel base = bases.get(widget);
 		return addTargetSlotToElement(base.getElement(), affordance);
 	}
 
@@ -795,7 +798,7 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * List of the objects listening the drop events
 	 * This objet have to implement the interface <code>DragAndDropListener</code>.
 	 */
-	List listeners = new ArrayList();
+	List<DragAndDropListener> listeners = new ArrayList<DragAndDropListener>();
 
 	
 	/**
@@ -856,8 +859,9 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * @param left initial left position of the widget on the panel
 	 * @param top  initial top position of the widget on the panel
 	 */
+	@Override
 	public void add(Widget widget, int left, int top) {
-		SimplePanel base = (SimplePanel)bases.get(widget);
+		SimplePanel base = bases.get(widget);
 		if (base!=null) {
 			throw new IllegalStateException(ERROR_ALREADY_REGISTERED);
 		}else {
@@ -875,15 +879,16 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * The base of the widget is destroy.
 	 * @param widget widget to remove from the panel
 	 */
+	@Override
 	public boolean remove(Widget widget) {
-		SimplePanel base = (SimplePanel)bases.get(widget);
+		SimplePanel base = bases.get(widget);
 		if (base==null) {
 			throw new IllegalStateException(ERROR_ALREADY_REGISTERED);
 		} else {
 			unsetDraggable(widget);
 			unsetTarget(widget);
 			widgets.remove(base.getElement());
-			SimplePanel panel = (SimplePanel)bases.get(widget);
+			SimplePanel panel = bases.get(widget);
 			return super.remove(panel);
 		}
 	}
@@ -894,8 +899,9 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * (which the "super-implementation" of the panel doesn't know). 
 	 * @param widget widget to get the position
 	 */
+	@Override
 	public int getWidgetLeft(Widget widget) {
-		return super.getWidgetLeft((Widget)bases.get(widget));
+		return super.getWidgetLeft(bases.get(widget));
 	}
 	
 	/**
@@ -904,8 +910,9 @@ public class DragAndDropPanel extends AbsolutePanel {
 	 * (which the "super-implementation" of the panel doesn't know). 
 	 * @param widget widget to get the position
 	 */
+	@Override
 	public int getWidgetTop(Widget widget) {
-		return super.getWidgetTop((Widget)bases.get(widget));
+		return super.getWidgetTop(bases.get(widget));
 	}
 
 	/**

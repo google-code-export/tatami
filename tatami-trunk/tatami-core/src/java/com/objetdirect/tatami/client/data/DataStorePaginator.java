@@ -48,7 +48,7 @@ public class DataStorePaginator implements FetchEventSource, FetchListener {
 	 * The fetch listeners. They observe the fetch process
 	 * @see FetchListener
 	 */
-	protected List fetchListeners = new ArrayList();
+	protected List<FetchListener> fetchListeners = new ArrayList<FetchListener>();
 	
 	private Request lastPagingRequest;
 
@@ -155,17 +155,17 @@ public class DataStorePaginator implements FetchEventSource, FetchListener {
 		}
 	}
 
-	public void onComplete(FetchEventSource source, List items, Request request) {
+	public void onComplete(FetchEventSource source, List<?> items, Request request) {
 		lastPagingRequest = request;
 		int startItemNumber = lastPagingRequest.getStartItemNumber();
 		if(rowsPerPage > -1){
 			lastPagingRequest.setStartItemNumber(Math.max(0,startItemNumber - currentPage * rowsPerPage));
 			int i = 0;
-			Iterator iterator = items.iterator();
-			for (Iterator it = iterator;  iterator.hasNext() && i < rowsPerPage;) {
+			Iterator<?> iterator = items.iterator();
+			for (Iterator<?> it = iterator;  iterator.hasNext() && i < rowsPerPage;) {
 				iterator.next();
 			}
-			for (Iterator it = iterator;  iterator.hasNext();) {
+			for (Iterator<?> it = iterator;  iterator.hasNext();) {
 				iterator.next();
 				iterator.remove();
 			}
@@ -188,7 +188,7 @@ public class DataStorePaginator implements FetchEventSource, FetchListener {
 	 * @see {@link FetchListener}
 	 */
 	protected void notifyErrorFetchListeners(FetchEventSource source){
-		for (Iterator iterator = fetchListeners.iterator(); iterator.hasNext();) {
+		for (Iterator<FetchListener> iterator = fetchListeners.iterator(); iterator.hasNext();) {
 			FetchListener listener = (FetchListener) iterator.next();
 			listener.onError(source);
 		}
@@ -199,7 +199,7 @@ public class DataStorePaginator implements FetchEventSource, FetchListener {
 	 * @param item : the item which has been loaded/fetched
 	 */
 	protected void notifyItemFetchListeners(FetchEventSource source, Item item){
-		for (Iterator iterator = fetchListeners.iterator(); iterator.hasNext();) {
+		for (Iterator<FetchListener> iterator = fetchListeners.iterator(); iterator.hasNext();) {
 			FetchListener listener = (FetchListener) iterator.next();
 			listener.onItem(source ,item);
 		}
@@ -213,7 +213,7 @@ public class DataStorePaginator implements FetchEventSource, FetchListener {
 	 * @see {@link FetchListener}
 	 */
 	protected void notifyBeginFetchListeners(FetchEventSource source,int size , Request request){
-		for (Iterator iterator = fetchListeners.iterator(); iterator.hasNext();) {
+		for (Iterator<FetchListener> iterator = fetchListeners.iterator(); iterator.hasNext();) {
 			FetchListener listener = (FetchListener) iterator.next();
 			listener.onBegin(source,size , request);
 		}
@@ -226,8 +226,8 @@ public class DataStorePaginator implements FetchEventSource, FetchListener {
 	 * 
 	 * @see {@link FetchListener}
 	 */
-	protected void notifyCompleteFetchListeners(FetchEventSource source,List items , Request request){
-		for (Iterator iterator = fetchListeners.iterator(); iterator.hasNext();) {
+	protected void notifyCompleteFetchListeners(FetchEventSource source,List<?> items , Request request){
+		for (Iterator<FetchListener> iterator = fetchListeners.iterator(); iterator.hasNext();) {
 			FetchListener listener = (FetchListener) iterator.next();
 			listener.onComplete(source, items , request);
 		}

@@ -25,21 +25,15 @@
  */
 package com.objetdirect.tatami.client.tree;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.user.client.Window;
 import com.objetdirect.tatami.client.data.AbstractDataStore;
 import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.data.Request;
-import com.objetdirect.tatami.client.grid.GridDataStore;
 
 public class TreeStore extends AbstractDataStore{
 
-	
-	
 	private String childAttribute = "child";
 	
 	private LabelBuilderStrategy buildLabelStrategy;
@@ -70,12 +64,13 @@ public class TreeStore extends AbstractDataStore{
 		this.buildLabelStrategy = new DefaultBuildLabelStrategy();
 	}
 	
+	@Override
 	public void fetch(Request request) {
 		
-		Object[] concreteItems = (Object[]) items.values().toArray();
-		List itemsSortedAndMatchingQuery = this.executeQuery(items.values() , request);
+		Object[] concreteItems = items.values().toArray();
+		List<?> itemsSortedAndMatchingQuery = this.executeQuery(items.values() , request);
 		notifyBeginFetchListeners(itemsSortedAndMatchingQuery.size(), request);
-		for (Iterator iterator = itemsSortedAndMatchingQuery.iterator(); iterator
+		for (Iterator<?> iterator = itemsSortedAndMatchingQuery.iterator(); iterator
 				.hasNext();) {
 			TreeItem item = (TreeItem) iterator.next();
 			notifyItemFetchListeners(item);
@@ -84,14 +79,17 @@ public class TreeStore extends AbstractDataStore{
 	}
 
 
+	@Override
 	public boolean isItemLoaded(Item item) {
 		return true;
 	}
 
+	@Override
 	public boolean loadItemImpl(Item item) {
 		return true;
 	}
 
+	@Override
 	public boolean isItem(Object item){
 		boolean isItem;
 		if(item instanceof Item || item instanceof TreeItem && getItemByIdentity(getIdentity((Item)item)) != null){
@@ -102,10 +100,12 @@ public class TreeStore extends AbstractDataStore{
 		return isItem;
 	}
 
+	@Override
 	public String getLabel(Item item) {
 		return buildLabelStrategy.getLabel(item);
 	}
 
+	@Override
 	public String[] getLabelAttributes(Item item) {
 		return buildLabelStrategy.getLabelAttributes(item);
 	}

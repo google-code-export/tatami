@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Serie {
+public class Serie<T> {
 	
 	private String name;
 	
-	private List data;
+	private List<T> data;
 	private Map<String,Object> options;
 	private Map<String, Object> strokeOptions = new HashMap<String, Object>();
 
@@ -23,17 +23,17 @@ public class Serie {
 
 	public Serie(){
 		options = new HashMap<String, Object>();
-		this.data = new ArrayList();
+		this.data = new ArrayList<T>();
 	}
 	
 	/**
 	 * A serie contains data, stored as a List.
-	 * This data can be : a Number, a Point @see {@link Point},
-	 * or a PiePiece @see {@link PiePiece}
+	 * This data can be : a Number, a Point @see {@link Point}, a Bubble @see {@link Bubble}
+	 * or a PiePiece @see {@link PiePiece}, depending on the chart type
 	 * 
 	 * @param data : the data to plot on the chart
 	 */
-	public Serie(List<?> data){
+	public Serie(List<T> data){
 		options = new HashMap<String, Object>();
 		this.data = data;
 	}
@@ -45,7 +45,7 @@ public class Serie {
 	 * @param name
 	 * @param data
 	 */
-	public Serie(List<?> data, String name ){
+	public Serie(List<T> data, String name ){
 		this(data);
 		setName(name);
 	}
@@ -55,23 +55,24 @@ public class Serie {
 	}
 	
 
-	public List<?> getData() {
+	public List<T> getData() {
 		return data;
 	}
 	
-	public void setData(List<?> data) {
+	public void setData(List<T> data) {
 		this.data = data;
 	}
 	
-	public void addData(Object o){
+	public void addData(T o){
 		this.data.add(o);
 	}
 	
-	public void addData(int index , Object o){
+	
+	public void addData(int index , T o){
 		this.data.add(index,o);
 	}
 	
-	public void removeData(Object o){
+	public void removeData(T o){
 		this.data.remove(o);
 	}
 	

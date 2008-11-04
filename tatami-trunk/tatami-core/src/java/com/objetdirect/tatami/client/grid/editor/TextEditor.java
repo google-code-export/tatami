@@ -48,7 +48,7 @@ public class TextEditor implements GridEditor{
 		this(false);
 	}
 	
-	public Map getAttributes() {
+	public Map<String, Object> getAttributes() {
 		return attributes;
 	}
 

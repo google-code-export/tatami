@@ -66,7 +66,7 @@ public class Cell implements ConvertibleToJSObject{
 	/**
 	 * Map containing all the cell attributes
 	 */
-	private Map attributes = new HashMap();
+	private Map<String, Object> attributes = new HashMap<String, Object>();
 	
 	
 	/**
@@ -128,10 +128,10 @@ public class Cell implements ConvertibleToJSObject{
 	 */
 	public JavaScriptObject toJSObject(){
 		JavaScriptObject jsRepresentation = JavaScriptObject.createObject();
-		Set cellAttributesKey = attributes.keySet();
-		for (Iterator iterator = cellAttributesKey.iterator(); iterator
+		Set<String> cellAttributesKey = attributes.keySet();
+		for (Iterator<String> iterator = cellAttributesKey.iterator(); iterator
 				.hasNext();) {
-			String cellAttributeKey = (String) iterator.next();
+			String cellAttributeKey = iterator.next();
 			Object cellAttributeValue = attributes.get(cellAttributeKey);
 			if(cellAttributeValue instanceof String){
 				addAttribute(jsRepresentation, cellAttributeKey, (String)cellAttributeValue);
@@ -454,7 +454,7 @@ public class Cell implements ConvertibleToJSObject{
 	 */
 	public void setEditor(GridEditor editor) {
 		this.editor = editor;
-		Map editorAttributes = editor.getAttributes(); 
+		Map<String , ? extends Object> editorAttributes = editor.getAttributes(); 
 		if(editorAttributes != null){
 			attributes.putAll(editorAttributes);
 		}
