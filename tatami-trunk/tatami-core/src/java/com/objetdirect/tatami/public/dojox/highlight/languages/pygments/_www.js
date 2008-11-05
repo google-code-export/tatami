@@ -5,11 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.highlight.languages.pygments._www"]){
-dojo._hasResource["dojox.highlight.languages.pygments._www"]=true;
-dojo.provide("dojox.highlight.languages.pygments._www");
-dojo.require("dojox.highlight.languages.pygments.xml");
-dojo.require("dojox.highlight.languages.pygments.html");
-dojo.require("dojox.highlight.languages.pygments.css");
-dojo.require("dojox.highlight.languages.pygments.javascript");
-}
+if(!dojo._hasResource["dojox.highlight.languages.pygments._www"]){dojo._hasResource["dojox.highlight.languages.pygments._www"]=true;dojo.provide("dojox.highlight.languages.pygments._www");dojo.require("dojox.highlight.languages.pygments.xml");dojo.require("dojox.highlight.languages.pygments.html");dojo.require("dojox.highlight.languages.pygments.css");dojo.require("dojox.highlight.languages.pygments.javascript");}

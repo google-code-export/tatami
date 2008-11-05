@@ -5,21 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.analytics.plugins.consoleMessages"]){
-dojo._hasResource["dojox.analytics.plugins.consoleMessages"]=true;
-dojo.provide("dojox.analytics.plugins.consoleMessages");
-dojox.analytics.plugins.consoleMessages=new (function(){
-this.addData=dojo.hitch(dojox.analytics,"addData","consoleMessages");
-var _1=dojo.config["consoleLogFuncs"]||["error","warn","info","rlog"];
-if(!console){
-console={};
-}
-for(var i=0;i<_1.length;i++){
-if(console[_1[i]]){
-dojo.connect(console,_1[i],dojo.hitch(this,"addData",_1[i]));
-}else{
-console[_1[i]]=dojo.hitch(this,"addData",_1[i]);
-}
-}
-})();
-}
+if(!dojo._hasResource["dojox.analytics.plugins.consoleMessages"]){dojo._hasResource["dojox.analytics.plugins.consoleMessages"]=true;dojo.provide("dojox.analytics.plugins.consoleMessages");dojox.analytics.plugins.consoleMessages=new (function(){this.addData=dojo.hitch(dojox.analytics,"addData","consoleMessages");var _1=dojo.config["consoleLogFuncs"]||["error","warn","info","rlog"];if(!console){console={};}for(var i=0;i<_1.length;i++){if(console[_1[i]]){dojo.connect(console,_1[i],dojo.hitch(this,"addData",_1[i]));}else{console[_1[i]]=dojo.hitch(this,"addData",_1[i]);}}})();}

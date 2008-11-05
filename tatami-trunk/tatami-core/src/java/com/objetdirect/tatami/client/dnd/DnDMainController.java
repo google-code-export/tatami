@@ -55,6 +55,10 @@ public class DnDMainController {
 	
 	private Collection<IDnDController<?, ?>> controllers;
 	
+	private IDnDSource<?> lastDnDSource;
+
+	private Collection<? extends IDnDElement> lastDnDElements;
+	
 	/**
 	 * Private default constructor
 	 * It adds a WindowListener to clean up the various dnd elements 
@@ -79,8 +83,8 @@ public class DnDMainController {
 		.hasNext();) {
 			IDnDController<?,?> controller =  iterator.next();
 			controller.destroyAllSourcesAndTargets();
-			unRegisterDnDController(controller);
 		}
+		unRegisterAllDnDControllers();
 	}
 	
 	/**
@@ -147,6 +151,13 @@ public class DnDMainController {
 		}
 	}
 	
+	protected void unRegisterAllDnDControllers(){
+		Collection<IDnDController<? , ?>> controllers = jssources.values();
+		jssources.clear();
+		jstargets.clear();
+		controllers.clear();
+	}
+	
 	/**
 	 * This method is called by dojo on each dnd drop.
 	 * 
@@ -191,13 +202,33 @@ public class DnDMainController {
 			IDnDController<IDnDSource<E>,?> sourceOwner =  (IDnDController<IDnDSource<E>, ?>) jssources.get(jssource);
 			IDnDSource<E> dndSource =  sourceOwner.getSource(jssource);
 			Collection<E> dndElements = (Collection<E>) sourceOwner.getGWTDnDElements(jssource , nodes);
-			IDnDBehavior<E, IDnDSource<E>, IDnDTarget> behavior = (IDnDBehavior<E, IDnDSource<E>, IDnDTarget>) DnDBehaviors.getBehaviorFor(dndSource, null);
-			if(behavior != null){
-				behavior.onDndStart(dndElements, dndSource, copy);
+			lastDnDSource = dndSource;
+			lastDnDElements = dndElements;
+			Collection<IDnDBehavior<?,?,?>> behaviors = DnDBehaviors.getAllBehaviorForSource(lastDnDSource);
+			for (Iterator iterator = behaviors.iterator(); iterator.hasNext();) {
+				IDnDBehavior<? extends IDnDElement, ? extends IDnDSource<?>, ? extends IDnDTarget> dnDBehavior = (IDnDBehavior<? extends IDnDElement, ? extends IDnDSource<?>, ? extends IDnDTarget>) iterator
+						.next();
+				((IDnDBehavior<E,IDnDSource<E>,IDnDTarget>)dnDBehavior).onDndStart(dndElements,dndSource, false);
 			}
 		}catch(ClassCastException e){
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	protected <E extends IDnDElement> void onDnDCancel(){
+		System.out.println("ON DND CANCEL");
+		try{
+			Collection<IDnDBehavior<? extends IDnDElement,? extends IDnDSource<?>,? extends IDnDTarget>> behaviors = DnDBehaviors.getAllBehaviorForSource(lastDnDSource);
+			for (Iterator iterator = behaviors.iterator(); iterator.hasNext();) {
+				IDnDBehavior<? extends IDnDElement, ? extends IDnDSource<?>, ? extends IDnDTarget> dnDBehavior = (IDnDBehavior<? extends IDnDElement, ? extends IDnDSource<?>, ? extends IDnDTarget>) iterator
+						.next();
+				dnDBehavior.onCancel();
+			}
+		}catch(ClassCastException e){
+		}
+	}
+	
+	
 	
 	/**
 	 * This method is called by dojo to check wether a drop should be accepted
@@ -231,5 +262,24 @@ public class DnDMainController {
 			return false;
 		}
 	}
+	
+	protected <E extends IDnDElement> void  dragOver(JavaScriptObject jstarget){
+		try{
+			System.out.println("ON DND DRAGOVER");
+			IDnDController<?,IDnDTarget> targetOwner = (IDnDController<?, IDnDTarget>) jstargets.get(jstarget);
+			if(targetOwner != null){
+				IDnDTarget dndTarget =  targetOwner.getTarget(jstarget);
+				if(dndTarget != null){
+					IDnDBehavior<E,? extends IDnDSource<E>,? extends IDnDTarget> behavior = (IDnDBehavior<E, ? extends IDnDSource<E>, ? extends IDnDTarget>) DnDBehaviors.getBehaviorFor(lastDnDSource, dndTarget);
+					if(behavior != null){
+						behavior.dragOver(dndTarget);
+					}
+				}
+			}
+		}catch(ClassCastException e){
+			e.printStackTrace();
+		}
+	}
+	
 	
 }

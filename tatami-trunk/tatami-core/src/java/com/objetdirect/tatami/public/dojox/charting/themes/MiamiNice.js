@@ -5,12 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.charting.themes.MiamiNice"]){
-dojo._hasResource["dojox.charting.themes.MiamiNice"]=true;
-dojo.provide("dojox.charting.themes.MiamiNice");
-dojo.require("dojox.charting.Theme");
-(function(){
-var _1=dojox.charting;
-_1.themes.MiamiNice=new _1.Theme({colors:["#7f9599","#45b8cc","#8ecfb0","#f8acac","#cc4482"]});
-})();
-}
+if(!dojo._hasResource["dojox.charting.themes.MiamiNice"]){dojo._hasResource["dojox.charting.themes.MiamiNice"]=true;dojo.provide("dojox.charting.themes.MiamiNice");dojo.require("dojox.charting.Theme");(function(){var _1=dojox.charting;_1.themes.MiamiNice=new _1.Theme({colors:["#7f9599","#45b8cc","#8ecfb0","#f8acac","#cc4482"]});})();}

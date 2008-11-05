@@ -5,14 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.widget.CalendarFx"]){
-dojo._hasResource["dojox.widget.CalendarFx"]=true;
-dojo.provide("dojox.widget.CalendarFx");
-dojo.require("dojox.widget.FisheyeLite");
-dojo.declare("dojox.widget._FisheyeFX",null,{addFx:function(_1,_2){
-dojo.query(_1,_2).forEach(function(_3){
-new dojox.widget.FisheyeLite({properties:{fontSize:1.1}},_3);
-});
-}});
-dojo.declare("dojox.widget.CalendarFisheye",[dojox.widget.Calendar,dojox.widget._FisheyeFX],{});
-}
+if(!dojo._hasResource["dojox.widget.CalendarFx"]){dojo._hasResource["dojox.widget.CalendarFx"]=true;dojo.provide("dojox.widget.CalendarFx");dojo.require("dojox.widget.FisheyeLite");dojo.declare("dojox.widget._FisheyeFX",null,{addFx:function(_1,_2){dojo.query(_1,_2).forEach(function(_3){new dojox.widget.FisheyeLite({properties:{fontSize:1.1}},_3);});}});dojo.declare("dojox.widget.CalendarFisheye",[dojox.widget.Calendar,dojox.widget._FisheyeFX],{});}

@@ -5,24 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.xmpp.widget.ChatSession"]){
-dojo._hasResource["dojox.xmpp.widget.ChatSession"]=true;
-dojo.provide("dojox.xmpp.widget.ChatSession");
-dojo.declare("dojox.xmpp.widget.ChatSession",[dijit.layout.LayoutContainer,dijit._Templated],{templateString:"<div>\n<div dojoAttachPoint=\"messages\" dojoType=\"dijit.layout.ContentPane\" layoutAlign=\"client\" style=\"overflow:auto\">\n</div>\n<div dojoType=\"dijit.layout.ContentPane\" layoutAlign=\"bottom\" style=\"border-top: 2px solid #333333; height: 35px;\"><input dojoAttachPoint=\"chatInput\" dojoAttachEvent=\"onkeypress: onKeyPress\" style=\"width: 100%;height: 35px;\" /></div>\n</div>\n",enableSubWidgets:true,widgetsInTemplate:true,widgetType:"ChatSession",chatWith:null,instance:null,postCreate:function(){
-},displayMessage:function(_1,_2){
-if(_1){
-var _3=_1.from?this.chatWith:"me";
-this.messages.domNode.innerHTML+="<b>"+_3+":</b> "+_1.body+"<br/>";
-this.goToLastMessage();
-}
-},goToLastMessage:function(){
-this.messages.domNode.scrollTop=this.messages.domNode.scrollHeight;
-},onKeyPress:function(e){
-var _5=e.keyCode||e.charCode;
-if((_5==dojo.keys.ENTER)&&(this.chatInput.value!="")){
-this.instance.sendMessage({body:this.chatInput.value});
-this.displayMessage({body:this.chatInput.value},"out");
-this.chatInput.value="";
-}
-}});
-}
+if(!dojo._hasResource["dojox.xmpp.widget.ChatSession"]){dojo._hasResource["dojox.xmpp.widget.ChatSession"]=true;dojo.provide("dojox.xmpp.widget.ChatSession");dojo.declare("dojox.xmpp.widget.ChatSession",[dijit.layout.LayoutContainer,dijit._Templated],{templateString:"<div>\r\n<div dojoAttachPoint=\"messages\" dojoType=\"dijit.layout.ContentPane\" layoutAlign=\"client\" style=\"overflow:auto\">\r\n</div>\r\n<div dojoType=\"dijit.layout.ContentPane\" layoutAlign=\"bottom\" style=\"border-top: 2px solid #333333; height: 35px;\"><input dojoAttachPoint=\"chatInput\" dojoAttachEvent=\"onkeypress: onKeyPress\" style=\"width: 100%;height: 35px;\" /></div>\r\n</div>\r\n",enableSubWidgets:true,widgetsInTemplate:true,widgetType:"ChatSession",chatWith:null,instance:null,postCreate:function(){},displayMessage:function(_1,_2){if(_1){var _3=_1.from?this.chatWith:"me";this.messages.domNode.innerHTML+="<b>"+_3+":</b> "+_1.body+"<br/>";this.goToLastMessage();}},goToLastMessage:function(){this.messages.domNode.scrollTop=this.messages.domNode.scrollHeight;},onKeyPress:function(e){var _5=e.keyCode||e.charCode;if((_5==dojo.keys.ENTER)&&(this.chatInput.value!="")){this.instance.sendMessage({body:this.chatInput.value});this.displayMessage({body:this.chatInput.value},"out");this.chatInput.value="";}}});}

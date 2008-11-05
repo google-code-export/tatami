@@ -159,7 +159,7 @@ public abstract class WidgetDnDBehavior implements IDnDBehavior<WidgetDnDElement
 	 */
 	public boolean checkSourceItemAcceptance(
 			WidgetSource source, WidgetTarget target,
-			Collection<? extends WidgetDnDElement> dndElements) {
+			Collection<WidgetDnDElement> dndElements) {
 			return  checkSourceItemAcceptance(source.getPanel(), target.getPanel(), getWidgetFromWidgetDnDElement(dndElements));
 	}
 

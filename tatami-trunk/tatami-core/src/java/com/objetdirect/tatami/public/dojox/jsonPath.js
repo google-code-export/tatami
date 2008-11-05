@@ -5,8 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.jsonPath"]){
-dojo._hasResource["dojox.jsonPath"]=true;
-dojo.provide("dojox.jsonPath");
-dojo.require("dojox.jsonPath.query");
-}
+if(!dojo._hasResource["dojox.jsonPath"]){dojo._hasResource["dojox.jsonPath"]=true;dojo.provide("dojox.jsonPath");dojo.require("dojox.jsonPath.query");}

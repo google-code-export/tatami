@@ -5,8 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.highlight"]){
-dojo._hasResource["dojox.highlight"]=true;
-dojo.provide("dojox.highlight");
-dojo.require("dojox.highlight._base");
-}
+if(!dojo._hasResource["dojox.highlight"]){dojo._hasResource["dojox.highlight"]=true;dojo.provide("dojox.highlight");dojo.require("dojox.highlight._base");}

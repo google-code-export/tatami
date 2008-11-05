@@ -200,6 +200,18 @@ public class DnDBehaviors {
 		 */
 		private Collection<Couple> couples = new ArrayList<Couple>();
 		
+		public Collection<Couple> getCouples() {
+			return couples;
+		}
+
+		public void setCouples(Collection<Couple> couples) {
+			this.couples = couples;
+		}
+
+		public void setBehavior(IDnDBehavior<?, ?, ?> behavior) {
+			this.behavior = behavior;
+		}
+
 		/**
 		 * The behavior which scopes is defined  
 		 */
@@ -450,12 +462,45 @@ public class DnDBehaviors {
 		}
 	}
 	
+	public static Collection<IDnDBehavior<? extends IDnDElement,? extends IDnDSource<?>,? extends IDnDTarget>> getAllBehavior(){
+		return behaviorScopesMapping.keySet();
+	}
+	
 	public static void removeAllBehaviors(){
 		Set<IDnDBehavior<? extends IDnDElement, ? extends IDnDSource<?>, ? extends IDnDTarget>> scopes = behaviorScopesMapping.keySet();
 		for (Iterator<IDnDBehavior<? extends IDnDElement, ? extends IDnDSource<?>, ? extends IDnDTarget>> iterator = scopes.iterator(); iterator.hasNext();) {
 			iterator.next();
 			iterator.remove();
 		}
+	}
+	
+	public static Collection<IDnDBehavior<?, ?, ?>> getAllBehaviorForSource(IDnDSource<?> source){
+		Collection<BehaviorScope> scopes = behaviorScopesMapping.values();
+		Collection<IDnDBehavior<?, ?,?>> appliedBehavior = new ArrayList<IDnDBehavior<?,?,?>>();
+		for (BehaviorScope behaviorScope : scopes) {
+			for(Couple couple : behaviorScope.getCouples()){
+				if(couple.getSource() == source || couple.getSource() == null){
+					appliedBehavior.add(behaviorScope.getBehavior());
+					break;
+				}
+			}
+		}
+		return appliedBehavior;
+	}
+	
+	public static Collection<IDnDBehavior<?, ?, ?>> getAllBehaviorForTarget(IDnDTarget target){
+		Collection<BehaviorScope> scopes = behaviorScopesMapping.values();
+		Collection<IDnDBehavior<?, ?,?>> appliedBehavior = new ArrayList<IDnDBehavior<?,?,?>>();
+		
+		for (BehaviorScope behaviorScope : scopes) {
+			for(Couple couple : behaviorScope.getCouples()){
+				if(couple.getTarget() == target || couple.getTarget() == null){
+					appliedBehavior.add(behaviorScope.getBehavior());
+					break;
+				}
+			}
+		}
+		return appliedBehavior;
 	}
 	
 	

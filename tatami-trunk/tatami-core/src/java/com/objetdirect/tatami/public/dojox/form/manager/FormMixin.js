@@ -1,0 +1,8 @@
+/*
+	Copyright (c) 2004-2008, The Dojo Foundation All Rights Reserved.
+	Available via Academic Free License >= 2.1 OR the modified BSD license.
+	see: http://dojotoolkit.org/license for details
+*/
+
+
+if(!dojo._hasResource["dojox.form.manager.FormMixin"]){dojo._hasResource["dojox.form.manager.FormMixin"]=true;dojo.provide("dojox.form.manager.FormMixin");dojo.declare("dojox.form.manager.FormMixin",null,{name:"",action:"",method:"",encType:"","accept-charset":"",accept:"",target:"",startup:function(){this.isForm=this.domNode.tagName.toLowerCase()=="form";if(this.isForm){this.connect(this.domNode,"onreset","_onReset");this.connect(this.domNode,"onsubmit","_onSubmit");}this.inherited(arguments);},_onReset:function(e){var _2={returnValue:true,preventDefault:function(){this.returnValue=false;},stopPropagation:function(){},currentTarget:e.currentTarget,target:e.target};if(!(this.onReset(_2)===false)&&_2.returnValue){this.reset();}dojo.stopEvent(e);return false;},onReset:function(e){return true;},reset:function(){if(this.isForm){this.domNode.reset();}for(var _4 in this._widgets){var _5=this._widgets[_4];if(_5.reset){_5.reset();}}return this;},_onSubmit:function(e){if(this.onSubmit(e)===false){dojo.stopEvent(e);}},onSubmit:function(e){return this.isValid();},submit:function(){if(this.isForm){if(!(this.onSubmit()===false)){this.domNode.submit();}}},isValid:function(){for(var _8 in this._widgets){var _9=this._widgets[_8];if(!_9.attr("disabled")&&_9.isValid&&!_9.isValid()){return false;}}return true;}});}

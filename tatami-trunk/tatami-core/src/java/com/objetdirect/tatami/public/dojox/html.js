@@ -5,8 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.html"]){
-dojo._hasResource["dojox.html"]=true;
-dojo.provide("dojox.html");
-dojo.require("dojox.html._base");
-}
+if(!dojo._hasResource["dojox.html"]){dojo._hasResource["dojox.html"]=true;dojo.provide("dojox.html");dojo.require("dojox.html._base");}

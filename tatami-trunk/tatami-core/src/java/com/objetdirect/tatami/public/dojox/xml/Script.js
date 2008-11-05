@@ -5,12 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.xml.Script"]){
-dojo._hasResource["dojox.xml.Script"]=true;
-dojo.provide("dojox.xml.Script");
-dojo.require("dojo.parser");
-dojo.require("dojox.xml.widgetParser");
-dojo.declare("dojox.xml.Script",null,{constructor:function(_1,_2){
-dojo.parser.instantiate(dojox.xml.widgetParser._processScript(_2));
-}});
-}
+if(!dojo._hasResource["dojox.xml.Script"]){dojo._hasResource["dojox.xml.Script"]=true;dojo.provide("dojox.xml.Script");dojo.require("dojo.parser");dojo.require("dojox.xml.widgetParser");dojo.declare("dojox.xml.Script",null,{constructor:function(_1,_2){dojo.parser.instantiate(dojox.xml.widgetParser._processScript(_2));}});}

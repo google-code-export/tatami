@@ -5,10 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.form.DropDownStack"]){
-dojo._hasResource["dojox.form.DropDownStack"]=true;
-dojo.provide("dojox.form.DropDownStack");
-dojo.require("dojox.form.DropDownSelect");
-dojo.require("dojox.form._SelectStackMixin");
-dojo.declare("dojox.form.DropDownStack",[dojox.form.DropDownSelect,dojox.form._SelectStackMixin],{});
-}
+if(!dojo._hasResource["dojox.form.DropDownStack"]){dojo._hasResource["dojox.form.DropDownStack"]=true;dojo.provide("dojox.form.DropDownStack");dojo.require("dojox.form.DropDownSelect");dojo.require("dojox.form._SelectStackMixin");dojo.declare("dojox.form.DropDownStack",[dojox.form.DropDownSelect,dojox.form._SelectStackMixin],{});}

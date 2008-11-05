@@ -5,8 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.highlight.languages._dynamic"]){
-dojo._hasResource["dojox.highlight.languages._dynamic"]=true;
-dojo.provide("dojox.highlight.languages._dynamic");
-dojo.require("dojox.highlight.languages.python");
-}
+if(!dojo._hasResource["dojox.highlight.languages._dynamic"]){dojo._hasResource["dojox.highlight.languages._dynamic"]=true;dojo.provide("dojox.highlight.languages._dynamic");dojo.require("dojox.highlight.languages.python");}

@@ -5,8 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.sql"]){
-dojo._hasResource["dojox.sql"]=true;
-dojo.provide("dojox.sql");
-dojo.require("dojox.sql._base");
-}
+if(!dojo._hasResource["dojox.sql"]){dojo._hasResource["dojox.sql"]=true;dojo.provide("dojox.sql");dojo.require("dojox.sql._base");}

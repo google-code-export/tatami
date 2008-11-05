@@ -82,9 +82,9 @@ public abstract class IDnDController<T extends IDnDSource<?>,U extends IDnDTarge
 			gwtToDojoSourceMap.put(source, jsSource);
 			dojoToGWTSourceMap.put(jsSource, source);
 			DnDMainController.getInstance().registerDnDSource(this, jsSource);
-			Collection<? extends IDnDElement> elems = (Collection<? extends IDnDElement>) source.getRegisteredDndElement();
+			Collection<? extends IDnDElement> elems = source.getRegisteredDndElement();
 			for (Iterator<? extends IDnDElement> iterator = elems.iterator(); iterator.hasNext();) {
-				IDnDElement dnDElement = (IDnDElement) iterator.next();
+				IDnDElement dnDElement = iterator.next();
 				addDnDElementToJSSource(source, dnDElement);
 			}
 		}catch (JSSourceCreationException e) {
@@ -119,7 +119,6 @@ public abstract class IDnDController<T extends IDnDSource<?>,U extends IDnDTarge
 			dojoToGWTTargetMap.put(jsTarget, target);
 			DnDMainController.getInstance().registerDnDTarget(this, jsTarget);
 		}catch (JSSourceCreationException e) {
-			e.printStackTrace();
 			return;
 		}
 	}
@@ -134,9 +133,9 @@ public abstract class IDnDController<T extends IDnDSource<?>,U extends IDnDTarge
 	public void unRegisterSource(T source){
 		DnDMainController.getInstance().unregisterDnDSource(getJSSourceFromGWTSource(source));
 		JavaScriptObject jsSource = gwtToDojoSourceMap.get(source);
-		Collection<? extends IDnDElement> elems = (Collection<? extends IDnDElement>) source.getRegisteredDndElement();
+		Collection<? extends IDnDElement> elems = source.getRegisteredDndElement();
 		for (Iterator<? extends IDnDElement> iterator = elems.iterator(); iterator.hasNext();) {
-			IDnDElement dnDElement = (IDnDElement) iterator.next();
+			IDnDElement dnDElement = iterator.next();
 			removeDnDElementFromJSSource(source , dnDElement);
 		}
 		cleanupSource(source);
@@ -258,15 +257,15 @@ public abstract class IDnDController<T extends IDnDSource<?>,U extends IDnDTarge
 		Set<T> sourceskeys = gwtToDojoSourceMap.keySet();
 		for (T source : sourceskeys) {
 			cleanupSource(source);
-			dojoToGWTSourceMap.remove(gwtToDojoSourceMap.get(source));
-			gwtToDojoSourceMap.remove(source);
 		}
+		dojoToGWTSourceMap.clear();
+		gwtToDojoSourceMap.clear();
 		Set<U> targetKeys = gwtToDojoTargetMap.keySet();
 		for (U target : targetKeys) {
 			cleanupTarget(target);
-			dojoToGWTTargetMap.remove(gwtToDojoTargetMap.get(target));
-			gwtToDojoTargetMap.remove(target);
 		}
+		dojoToGWTTargetMap.clear();
+		gwtToDojoTargetMap.clear();
 	}
 	
 

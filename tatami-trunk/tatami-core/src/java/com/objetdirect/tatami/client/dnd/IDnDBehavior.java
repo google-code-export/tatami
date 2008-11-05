@@ -28,6 +28,8 @@ package com.objetdirect.tatami.client.dnd;
 
 import java.util.Collection;
 
+import javax.xml.transform.Source;
+
 
 
 /**
@@ -93,7 +95,7 @@ public interface IDnDBehavior<E extends IDnDElement , S extends IDnDSource<?> , 
 	 * @return true if the drop should be accepted, false otherwise. Usually, it 
 	 * triggers a change in the "avatar" appearance
 	 */
-	public  boolean checkSourceItemAcceptance(S source , T target , Collection<? extends E> dndElements);
+	public  boolean checkSourceItemAcceptance(S source , T target , Collection<E> dndElements);
 	
 	
 	/**

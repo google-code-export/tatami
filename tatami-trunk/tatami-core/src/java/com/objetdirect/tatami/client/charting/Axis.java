@@ -1,3 +1,28 @@
+/*
+ * Tatami: 
+ * Copyright (C) 2007 Objet Direct
+ * Copyright (C) 2007 France Telecom
+ * Contact: tatami@googlegroups.com
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+ * USA
+ *
+ * Authors: Ronan Dunklau
+ * Initial developer(s): Ronan Dunklau
+ * Contributor(s): 
+ */
 package com.objetdirect.tatami.client.charting;
 
 import java.util.ArrayList;
@@ -46,7 +71,7 @@ public class Axis {
 	private Boolean minorLabels= true;		// draw minor labels
 	private Boolean microTicks=  false;		// draw micro ticks
 	private Boolean htmlLabels=  true;		// use HTML to draw labels
-
+	
 	
 
 	
@@ -253,17 +278,17 @@ public class Axis {
 		options.put("minorLabels", minorLabels);
 	}
 
-//	public Boolean getMicroTicks() {
-//		return microTicks;
-//	}
+	public Boolean getMicroTicks() {
+		return microTicks;
+	}
 
 	/**
 	 * @param microTicks : whether the micro ticks should be displayed
 	 */
-//	public void setMicroTicks(Boolean microTicks) {
-//		this.microTicks = microTicks;
-//		options.put("microTicks", microTicks);
-//	}
+	public void setMicroTicks(Boolean microTicks) {
+		this.microTicks = microTicks;
+		options.put("microTicks", microTicks);
+	}
 
 	public Boolean getMajorTicks() {
 		return majorTicks;
@@ -274,7 +299,7 @@ public class Axis {
 	 */
 	public void setMajorTicks(Boolean majorTicks) {
 		this.majorTicks = majorTicks;
-		options.put("majorTicks", microTicks);
+		options.put("majorTicks", microTicks);	
 	}
 
 	public Boolean getHtmlLabels() {
@@ -342,14 +367,14 @@ public class Axis {
 	/**
 	 * @param color : micro ticks color
 	 */
-//	public void setMicroTicksColor(String color){
-//		if(microTickOptions == null){
-//			microTickOptions = new HashMap<String, Object>();
-//			microTickOptions.put("length",1);
-//		}
-//		microTickOptions.put("color",color);
-//		options.put("microTick", microTickOptions);
-//	}
+	public void setMicroTicksColor(String color){
+		if(microTickOptions == null){
+			microTickOptions = new HashMap<String, Object>();
+			microTickOptions.put("length",1);
+		}
+		microTickOptions.put("color",color);
+		options.put("microTick", microTickOptions);
+	}
 	
 	/**
 	 * @param length : minor ticks length
@@ -377,13 +402,13 @@ public class Axis {
 	/**
 	 * @param length : micro ticks length
 	 */
-//	public void setMicroTicksLength(double length){
-//		if(microTickOptions == null){
-//			microTickOptions = new HashMap<String, Object>();
-//		}
-//		microTickOptions.put("length",length);
-//		options.put("microTick", microTickOptions);
-//	}
+	public void setMicroTicksLength(double length){
+		if(microTickOptions == null){
+			microTickOptions = new HashMap<String, Object>();
+		}
+		microTickOptions.put("length",length);
+		options.put("microTick", microTickOptions);
+	}
 	
 	/**
 	 * @param step : step between the major ticks
@@ -403,9 +428,9 @@ public class Axis {
 	/**
 	 * @param step : step between the micro ticks
 	 */
-//	public void setMicroTickStep(double step) {
-//		options.put("microTickStep",step);
-//	}
+	public void setMicroTickStep(double step) {
+		options.put("microTickStep",step);
+	}
 	
 	/**
 	 * @param color : axis labels font color 

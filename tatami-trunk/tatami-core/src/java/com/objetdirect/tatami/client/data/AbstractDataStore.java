@@ -51,13 +51,6 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	protected Request lastRequest = new Request();
 	
 	/**
-	 * The name used to declare the generated dojo class
-	 */
-	//private final String dojoReadStoreClassName = "dojox.data.store.TatamiDataStore";
-	
-	
-	
-	/**
 	 * The DataStore items : the key is the item's idAttribute value, 
 	 * 	while the item itself is an {@link Item}.
 	 */

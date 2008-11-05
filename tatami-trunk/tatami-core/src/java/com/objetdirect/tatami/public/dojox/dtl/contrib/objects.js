@@ -5,11 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.dtl.contrib.objects"]){
-dojo._hasResource["dojox.dtl.contrib.objects"]=true;
-dojo.provide("dojox.dtl.contrib.objects");
-dojo.mixin(dojox.dtl.contrib.objects,{key:function(_1,_2){
-return _1[_2];
-}});
-dojox.dtl.register.filters("dojox.dtl.contrib",{"objects":["key"]});
-}
+if(!dojo._hasResource["dojox.dtl.contrib.objects"]){dojo._hasResource["dojox.dtl.contrib.objects"]=true;dojo.provide("dojox.dtl.contrib.objects");dojo.mixin(dojox.dtl.contrib.objects,{key:function(_1,_2){return _1[_2];}});dojox.dtl.register.filters("dojox.dtl.contrib",{"objects":["key"]});}

@@ -5,10 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.cometd"]){
-dojo._hasResource["dojox.cometd"]=true;
-dojo.provide("dojox.cometd");
-dojo.require("dojox.cometd._base");
-dojo.require("dojox.cometd.longPollTransport");
-dojo.require("dojox.cometd.callbackPollTransport");
-}
+if(!dojo._hasResource["dojox.cometd"]){dojo._hasResource["dojox.cometd"]=true;dojo.provide("dojox.cometd");dojo.require("dojox.cometd._base");dojo.require("dojox.cometd.longPollTransport");dojo.require("dojox.cometd.callbackPollTransport");}

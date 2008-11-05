@@ -5,14 +5,4 @@
 */
 
 
-dojo.declare("dijit.tree.model",null,{destroy:function(){
-},getRoot:function(_1){
-},mayHaveChildren:function(_2){
-},getChildren:function(_3,_4){
-},getIdentity:function(_5){
-},getLabel:function(_6){
-},newItem:function(_7,_8){
-},pasteItem:function(_9,_a,_b,_c){
-},onChange:function(_d){
-},onChildrenChange:function(_e,_f){
-}});
+dojo.declare("dijit.tree.model",null,{destroy:function(){},getRoot:function(_1){},mayHaveChildren:function(_2){},getChildren:function(_3,_4){},getIdentity:function(_5){},getLabel:function(_6){},newItem:function(_7,_8){},pasteItem:function(_9,_a,_b,_c){},onChange:function(_d){},onChildrenChange:function(_e,_f){}});

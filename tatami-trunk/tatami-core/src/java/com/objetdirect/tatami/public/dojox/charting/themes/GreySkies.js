@@ -5,12 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.charting.themes.GreySkies"]){
-dojo._hasResource["dojox.charting.themes.GreySkies"]=true;
-dojo.provide("dojox.charting.themes.GreySkies");
-dojo.require("dojox.charting.Theme");
-(function(){
-var _1=dojox.charting;
-_1.themes.GreySkies=new _1.Theme(_1.Theme._def);
-})();
-}
+if(!dojo._hasResource["dojox.charting.themes.GreySkies"]){dojo._hasResource["dojox.charting.themes.GreySkies"]=true;dojo.provide("dojox.charting.themes.GreySkies");dojo.require("dojox.charting.Theme");(function(){var _1=dojox.charting;_1.themes.GreySkies=new _1.Theme(_1.Theme._def);})();}

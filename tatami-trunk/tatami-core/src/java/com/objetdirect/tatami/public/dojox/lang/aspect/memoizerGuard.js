@@ -5,31 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.lang.aspect.memoizerGuard"]){
-dojo._hasResource["dojox.lang.aspect.memoizerGuard"]=true;
-dojo.provide("dojox.lang.aspect.memoizerGuard");
-(function(){
-var _1=dojox.lang.aspect,_2=function(_3){
-var _4=_1.getContext().instance,t;
-if(!(t=_4.__memoizerCache)){
-return;
-}
-if(arguments.length==0){
-delete _4.__memoizerCache;
-}else{
-if(dojo.isArray(_3)){
-dojo.forEach(_3,function(m){
-delete t[m];
-});
-}else{
-delete t[_3];
-}
-}
-};
-_1.memoizerGuard=function(_7){
-return {after:function(){
-_2(_7);
-}};
-};
-})();
-}
+if(!dojo._hasResource["dojox.lang.aspect.memoizerGuard"]){dojo._hasResource["dojox.lang.aspect.memoizerGuard"]=true;dojo.provide("dojox.lang.aspect.memoizerGuard");(function(){var _1=dojox.lang.aspect,_2=function(_3){var _4=_1.getContext().instance,t;if(!(t=_4.__memoizerCache)){return;}if(arguments.length==0){delete _4.__memoizerCache;}else{if(dojo.isArray(_3)){dojo.forEach(_3,function(m){delete t[m];});}else{delete t[_3];}}};_1.memoizerGuard=function(_7){return {after:function(){_2(_7);}};};})();}

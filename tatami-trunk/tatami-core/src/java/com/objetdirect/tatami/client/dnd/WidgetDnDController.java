@@ -121,6 +121,12 @@ public class WidgetDnDController extends IDnDController<WidgetSource, WidgetTarg
 			getItemFromJSNode : function(node){
 				return this.getItem(node.id).data[0];
 			},
+			onDndSourceOver : function(source){
+				if(this.isDragging){
+					this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::dragOver(Lcom/google/gwt/core/client/JavaScriptObject;)(source);
+				}
+				this.inherited(arguments);
+			},
 			onDndDrop: function(source, nodes, copy){
 				do{ //break box
 					if(this.containerState != "Over"){ break; }
@@ -150,8 +156,8 @@ public class WidgetDnDController extends IDnDController<WidgetSource, WidgetTarg
 				// source: Object: the source which provides items
 				// nodes: Array: the list of transferred items
 				// copy: Boolean: copy items, if true, move items otherwise
-				this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDnDStart(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Z)(source,nodes,copy);
 				if(this.autoSync){ this.sync(); }
+				this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDnDStart(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Z)(source,nodes,copy);
 				if(this.isSource){
 					this._changeState("Source", this == source ? (copy ? "Copied" : "Moved") : "");
 				}
@@ -161,6 +167,10 @@ public class WidgetDnDController extends IDnDController<WidgetSource, WidgetTarg
 					$wnd.dojo.dnd.manager().overSource(this);
 				}
 				this.isDragging = true;
+			},
+			onDndCancel: function(){
+				this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDnDCancel()();
+				this.inherited(arguments);
 			}
 		});
 		$wnd.dojo.declare("dojox.tatami.dnd.WidgetTarget", $wnd.dojox.tatami.dnd.WidgetSource, {
@@ -266,7 +276,7 @@ public class WidgetDnDController extends IDnDController<WidgetSource, WidgetTarg
 	
 	@Override
 	public void removeDnDElementFromJSSource(WidgetSource source , IDnDElement draggable){
-		JavaScriptObject jsSource = (JavaScriptObject) gwtToDojoSourceMap.get(source);
+		JavaScriptObject jsSource = gwtToDojoSourceMap.get(source);
 		source.removeElement((WidgetDnDElement) draggable);
 		removeElementFromJSSource(jsSource,draggable.getDndId() , draggable.getElement());
 		DnDMainController.getInstance().unregisterDnDSource(jsSource);

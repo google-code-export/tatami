@@ -5,10 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.highlight.languages._all"]){
-dojo._hasResource["dojox.highlight.languages._all"]=true;
-dojo.provide("dojox.highlight.languages._all");
-dojo.require("dojox.highlight.languages._static");
-dojo.require("dojox.highlight.languages._dynamic");
-dojo.require("dojox.highlight.languages._www");
-}
+if(!dojo._hasResource["dojox.highlight.languages._all"]){dojo._hasResource["dojox.highlight.languages._all"]=true;dojo.provide("dojox.highlight.languages._all");dojo.require("dojox.highlight.languages._static");dojo.require("dojox.highlight.languages._dynamic");dojo.require("dojox.highlight.languages._www");}

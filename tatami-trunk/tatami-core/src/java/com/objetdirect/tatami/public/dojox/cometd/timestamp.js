@@ -5,12 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.cometd.timestamp"]){
-dojo._hasResource["dojox.cometd.timestamp"]=true;
-dojo.provide("dojox.cometd.timestamp");
-dojo.require("dojox.cometd._base");
-dojox.cometd._extendOutList.push(function(_1){
-_1.timestamp=new Date().toUTCString();
-return _1;
-});
-}
+if(!dojo._hasResource["dojox.cometd.timestamp"]){dojo._hasResource["dojox.cometd.timestamp"]=true;dojo.provide("dojox.cometd.timestamp");dojo.require("dojox.cometd._base");dojox.cometd._extendOutList.push(function(_1){_1.timestamp=new Date().toUTCString();return _1;});}

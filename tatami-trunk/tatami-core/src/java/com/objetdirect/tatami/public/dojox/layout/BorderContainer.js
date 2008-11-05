@@ -5,8 +5,4 @@
 */
 
 
-if(!dojo._hasResource["dojox.layout.BorderContainer"]){
-dojo._hasResource["dojox.layout.BorderContainer"]=true;
-dojo.provide("dojox.layout.BorderContainer");
-console.error("dojox.layout.BorderContainer moved to dijit.layout.BorderContainer");
-}
+if(!dojo._hasResource["dojox.layout.BorderContainer"]){dojo._hasResource["dojox.layout.BorderContainer"]=true;dojo.provide("dojox.layout.BorderContainer");console.error("dojox.layout.BorderContainer moved to dijit.layout.BorderContainer");}

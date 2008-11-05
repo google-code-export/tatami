@@ -42,7 +42,7 @@ public abstract class DnDGenericBehavior<E extends IDnDElement> implements IDnDB
 	 * @see com.objetdirect.tatami.client.dnd.IDnDBehavior#checkSourceItemAcceptance(com.objetdirect.tatami.client.dnd.IDnDSource, com.objetdirect.tatami.client.dnd.IDnDTarget, java.util.Collection)
 	 */
 	public boolean checkSourceItemAcceptance(IDnDSource<? extends E> source,
-			IDnDTarget target,Collection<? extends E> dndElements) {
+			IDnDTarget target,Collection<E> dndElements) {
 		return true;
 	}
 
