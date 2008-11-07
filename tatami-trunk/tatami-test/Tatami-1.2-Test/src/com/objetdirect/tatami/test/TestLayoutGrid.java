@@ -2,7 +2,6 @@ package com.objetdirect.tatami.test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.objetdirect.tatami.unit.TatamiTestCase;
-import com.objetdirect.tatami.unit.TestGWT;
 import com.objetdirect.tatami.unit.wrappers.GridWrapper;
 
 public class TestLayoutGrid extends TatamiTestCase{

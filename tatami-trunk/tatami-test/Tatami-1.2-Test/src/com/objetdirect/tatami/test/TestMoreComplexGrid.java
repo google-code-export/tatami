@@ -1,10 +1,5 @@
 package com.objetdirect.tatami.test;
 
-import junit.framework.Test;
-
-import com.gargoylesoftware.htmlunit.AlertHandler;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
@@ -12,7 +7,6 @@ import com.objetdirect.tatami.unit.TatamiTestCase;
 import com.objetdirect.tatami.unit.TestGWT;
 import com.objetdirect.tatami.unit.wrappers.GridWrapper;
 import com.objetdirect.tatami.unit.wrappers.NumberSpinnerWrapper;
-import com.sun.org.apache.bcel.internal.generic.SALOAD;
 
 public class TestMoreComplexGrid extends TatamiTestCase {
 

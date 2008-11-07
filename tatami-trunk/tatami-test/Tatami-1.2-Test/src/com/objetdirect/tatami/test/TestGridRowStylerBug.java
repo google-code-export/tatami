@@ -1,7 +1,6 @@
 package com.objetdirect.tatami.test;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.objetdirect.tatami.unit.TatamiTestCase;
 import com.objetdirect.tatami.unit.wrappers.GridWrapper;
 

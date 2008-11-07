@@ -71,7 +71,7 @@ public class TestNumberSpinner extends TatamiTestCase{
 		page.setFocusedElement(value);
 		testGwt.waitForBackgroundTasksToComplete(100);
 		assertEquals("10", value.getTextContent());
-		assertEquals("35", spinner.getValue());
+		assertEquals("10", spinner.getValue());
 		for(int i = 0 ; i < 45 ; i++){
 			testGwt.mouseDown(spinner.getDownArrow(), TestGWT.BUTTON_LEFT, false, false, false);
 			testGwt.mouseUp(spinner.getDownArrow(), TestGWT.BUTTON_LEFT, false, false, false);
@@ -84,7 +84,7 @@ public class TestNumberSpinner extends TatamiTestCase{
 		page.setFocusedElement(value);
 		testGwt.waitForBackgroundTasksToComplete(100);
 		assertEquals("-10", value.getTextContent());
-		assertEquals("-210", spinner.getValue());
+		assertEquals("-10", spinner.getValue());
 	}
 
 	@Override

@@ -1,21 +1,10 @@
 package com.objetdirect.tatami.test;
 
-import java.io.IOException;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
-import com.gargoylesoftware.htmlunit.AlertHandler;
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.objetdirect.tatami.unit.TatamiTestCase;
 import com.objetdirect.tatami.unit.TestGWT;
 import com.objetdirect.tatami.unit.wrappers.GridWrapper;
-import com.objetdirect.tatami.unit.wrappers.NumberSpinnerWrapper;
 
 public class TestSimplestGrid extends TatamiTestCase{
 
