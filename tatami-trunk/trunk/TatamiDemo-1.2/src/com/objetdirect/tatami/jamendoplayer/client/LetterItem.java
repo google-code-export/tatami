@@ -1,5 +1,7 @@
 package com.objetdirect.tatami.jamendoplayer.client;
 
+import com.objetdirect.tatami.client.tree.Tree;
+
 public class LetterItem extends SearchTreeItem {
 
 	private int nbChildPagesAlreadyLoaded = 1;
@@ -28,14 +30,14 @@ public class LetterItem extends SearchTreeItem {
 
 	public LetterItem(String[] letters){
 		String label = letters.length > 1 ? letters[0] + "-" + letters[letters.length -1] : letters[0]; 
-		addAttribute("label", label);
-		addAttribute("id", label);
+		setLabel(label);
+		setId("Letter"+label);
 		this.letters = letters;
-		this.addAttribute("type", 	"letter");
+		this.setValue("type", 	"letter");
 		loadingItem = new LoadingItem("Loading artists ...","__ARTISTLOADING__");
-		this.setFolderClosedIconClass("letterItem");
-		this.setFolderOpenIconClass("letterItemOpen");
-		this.setLabelClass("letterItemLabel");
+		this.setValue(Tree.folderClosedClassAttribute , "letterItem");
+		this.setValue(Tree.folderOpenedClassAttribute ,"letterItemOpen");
+		this.setValue(Tree.labelClassAttribute ,"letterItemLabel");
 		this.addChild(loadingItem);
 	}
 	

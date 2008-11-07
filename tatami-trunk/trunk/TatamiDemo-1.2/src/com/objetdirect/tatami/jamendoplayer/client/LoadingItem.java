@@ -1,13 +1,15 @@
 package com.objetdirect.tatami.jamendoplayer.client;
 
-import com.objetdirect.tatami.client.tree.TreeItem;
+import com.objetdirect.tatami.client.data.Item;
+import com.objetdirect.tatami.client.tree.Tree;
 
-public class LoadingItem extends TreeItem{
+
+public class LoadingItem extends Item{
 
 	public LoadingItem(String label, String id) {
 		super(label, id);
-		this.setLeafIconClass("loadingTreeItem");
-		this.setLabelClass("loadingTreeItemLabel");
+		this.setValue(Tree.leafClassAttribute,"loadingTreeItem");
+		this.setValue(Tree.labelClassAttribute,"loadingTreeItemLabel");
 	}
 	
 }

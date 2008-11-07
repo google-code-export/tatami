@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.tree.Tree;
-import com.objetdirect.tatami.client.tree.TreeItem;
 import com.objetdirect.tatami.client.tree.TreeListener;
 import com.objetdirect.tatami.jamendoplayer.client.JamendoQueryMaker.JSONHandler;
 
@@ -13,32 +13,32 @@ public class SearchTree extends Tree implements JSONHandler{
 
 private static SearchTree instance;
 	
-	private TreeItem root;
+	private Item root;
 
 	private SearchTree(SearchTreeStore store) {
 		super(store);
 		this.setRootLabel("Collection");
 		this.setShowRoot(false);
-		root = new TreeItem("Collection","COLLECTIONROOT");
-		root.setFolderClosedIconClass("collection");
-		root.setLeafIconClass("collection");
-		root.setFolderOpenIconClass("collectionOpen");
+		root = new Item("Collection","COLLECTIONROOT");
+		root.setValue(Tree.folderClosedClassAttribute,"collection");
+		root.setValue(Tree.leafClassAttribute ,"collection");
+		root.setValue(Tree.folderOpenedClassAttribute, "collectionOpen");
 		this.addRootItem(root);
 		JamendoQueryMaker.searchGenre(this);
 		this.addTreeListener(new TreeListener(){
-			public void onClick(TreeItem item) {
+			public void onClick(Item item) {
 			}
-			public void onClose(TreeItem item) {
+			public void onClose(Item item) {
 			}
 
-			public void onDblClick(TreeItem item) {
+			public void onDblClick(Item item) {
 				try{
 					PlaylistGrid.getInstance().addItemToPlaylist(item);
 				}catch(Exception e){
 					
 				}
 			}
-			public void onOpen(TreeItem item) {
+			public void onOpen(Item item) {
 			}
 		});
 	}
@@ -50,7 +50,7 @@ private static SearchTree instance;
 		return instance;
 	}
 	
-	public boolean mayHaveChildren(TreeItem item) {
+	public boolean mayHaveChildren(Item item) {
 		if(item instanceof LoadingItem || item instanceof MusicItem){
 			return false;
 		}else{
@@ -60,21 +60,21 @@ private static SearchTree instance;
 
 	public void handleJSON(JavaScriptObject obj, SearchTreeItem item) {
 		int length = JamendoQueryMaker.getLength(obj);
-		Collection<TreeItem> genres = new ArrayList<TreeItem>();
+		Collection<Item> genres = new ArrayList<Item>();
 		for(int i = 0 ; i < length ; i++){
 			SearchTreeItem genreItem = new GenreItem(JamendoQueryMaker.extractItemsFromResponse(obj, i));
 			genres.add(genreItem);
 			String[] num = {"0-9"};
 			LetterItem numbers = new LetterItem(num);
-			numbers.addAttribute("id","letter-"+numbers.getValue("label", null)+"-"+genreItem.getValue("label","unknown"));
-			numbers.addAttribute("genre",genreItem.getValue("label","unknown"));
+			numbers.setValue("id","letter-"+numbers.getValue("label", null)+"-"+genreItem.getValue("label","unknown"));
+			numbers.setValue("genre",genreItem.getValue("label","unknown"));
 			addChildToItem(genreItem, numbers);
-			Collection<TreeItem> children = new ArrayList<TreeItem>();
+			Collection<Item> children = new ArrayList<Item>();
 			for(char j = 'A'; j<= 'Z' ; j++){
 				String[] letters = {j+""};
 				LetterItem letter = new LetterItem(letters);
-				letter.addAttribute("id","letter-"+letter.getValue("label", null)+"-"+genreItem.getValue("label","unknown"));
-				letter.addAttribute("genre",genreItem.getValue("label","unknown"));
+				letter.setValue("id","letter-"+letter.getValue("label", null)+"-"+genreItem.getValue("label","unknown"));
+				letter.setValue("genre",genreItem.getValue("label","unknown"));
 				children.add(letter);
 			} 
 			genreItem.setChildHaveBeenLoaded(true);

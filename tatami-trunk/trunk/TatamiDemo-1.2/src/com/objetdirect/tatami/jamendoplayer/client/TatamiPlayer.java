@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.Button;
+import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.dnd.DnD;
 import com.objetdirect.tatami.client.dnd.DnDGenericBehavior;
 import com.objetdirect.tatami.client.dnd.DndTreeElement;
@@ -29,7 +30,6 @@ import com.objetdirect.tatami.client.dnd.IDnDSource;
 import com.objetdirect.tatami.client.dnd.IDnDTarget;
 import com.objetdirect.tatami.client.dnd.WidgetTarget;
 import com.objetdirect.tatami.client.dnd.DnDBehaviors.BehaviorScopeException;
-import com.objetdirect.tatami.client.tree.TreeItem;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -185,7 +185,7 @@ public class TatamiPlayer implements EntryPoint {
 							.hasNext();) {
 						DndTreeElement dndTreeElement =  iterator
 								.next();
-						TreeItem item = dndTreeElement.getTreeItem();
+						Item item = dndTreeElement.getTreeItem();
 						try{
 							PlaylistGrid.getInstance().addItemToPlaylist(item);
 						}catch(Exception e){

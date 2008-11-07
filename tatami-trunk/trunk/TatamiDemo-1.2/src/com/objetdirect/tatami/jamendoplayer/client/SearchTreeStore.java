@@ -8,7 +8,6 @@ import java.util.List;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.data.Request;
-import com.objetdirect.tatami.client.tree.TreeItem;
 import com.objetdirect.tatami.client.tree.TreeStore;
 import com.objetdirect.tatami.jamendoplayer.client.JamendoQueryMaker.JSONHandler;
 
@@ -73,7 +72,7 @@ class SearchTreeStore extends TreeStore implements JSONHandler {
 			}
 			Collections.sort(list,new TrackNumberComparator());
 			album.setChildHaveBeenLoaded(true);
-			this.addChildToItem(album, list.toArray(items));
+			album.addChild(list.toArray(items));
 			removeChildFromItem(album, album.getLoadingItem());
 			notifyLoadItemListeners(album);
 		}

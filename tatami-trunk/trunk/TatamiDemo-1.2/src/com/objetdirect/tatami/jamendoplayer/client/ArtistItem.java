@@ -1,6 +1,7 @@
 package com.objetdirect.tatami.jamendoplayer.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.objetdirect.tatami.client.tree.Tree;
 
 public class ArtistItem extends SearchTreeItem {
 
@@ -18,16 +19,16 @@ public class ArtistItem extends SearchTreeItem {
 	
 	
 	public ArtistItem(JavaScriptObject jsonItem){
-		this.addAttribute("type", "artist");
+		this.setValue("type", "artist");
 		for(int i = 0; i < attributesToFill.length ; i++){
 			String attrName = attributesToFill[i];
-			this.addAttribute(attrName, JamendoQueryMaker.extractFieldFromOBJ(jsonItem, attrName));
+			this.setValue(attrName, JamendoQueryMaker.extractFieldFromOBJ(jsonItem, attrName));
 		}
-		this.addAttribute("label", JamendoQueryMaker.extractFieldFromOBJ(jsonItem, "name") );
+		this.setValue("label", JamendoQueryMaker.extractFieldFromOBJ(jsonItem, "name") );
 		loadingItem = new LoadingItem("Please wait while loading albums ... " , "__ALBUM_LOADING_ITEM__");
-		this.setFolderOpenIconClass("artistTreeItemOpen");
-		this.setFolderClosedIconClass("artistTreeItem");
-		this.setLabelClass("artistTreeItemLabel");
+		this.setValue(Tree.folderOpenedClassAttribute , "artistTreeItemOpen");
+		this.setValue(Tree.folderClosedClassAttribute ,"artistTreeItem");
+		this.setValue(Tree.folderOpenedClassAttribute ,"artistTreeItemLabel");
 		this.addChild(loadingItem);
 	}
 	

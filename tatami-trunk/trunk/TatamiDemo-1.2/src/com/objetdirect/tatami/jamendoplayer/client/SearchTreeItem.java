@@ -1,15 +1,14 @@
 package com.objetdirect.tatami.jamendoplayer.client;
 
 import com.objetdirect.tatami.client.data.Item;
-import com.objetdirect.tatami.client.tree.TreeItem;
 
-public class SearchTreeItem extends TreeItem{
+public class SearchTreeItem extends Item{
 
 	private boolean childHaveBeenLoaded = false;
 	
-	TreeItem loadingItem;
+	Item loadingItem;
 	
-	public TreeItem getLoadingItem() {
+	public Item getLoadingItem() {
 		return loadingItem;
 	}
 	
@@ -23,10 +22,6 @@ public class SearchTreeItem extends TreeItem{
 
 	public SearchTreeItem() {
 		super();
-	}
-
-	public SearchTreeItem(Item item) {
-		super(item);
 	}
 
 	public SearchTreeItem(String label, String id) {

@@ -1,6 +1,7 @@
 package com.objetdirect.tatami.jamendoplayer.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.objetdirect.tatami.client.tree.Tree;
 
 public class AlbumItem extends SearchTreeItem{
 
@@ -16,16 +17,16 @@ public class AlbumItem extends SearchTreeItem{
 	
 	
 	public AlbumItem(JavaScriptObject jsonItem){
-		this.addAttribute("type", "album");
+		this.setValue("type", "album");
 		for(int i = 0; i < attributesToFill.length ; i++){
 			String attrName = attributesToFill[i];
-			this.addAttribute(attrName, JamendoQueryMaker.extractFieldFromOBJ(jsonItem, attrName));
+			this.setValue(attrName, JamendoQueryMaker.extractFieldFromOBJ(jsonItem, attrName));
 		}
-		this.addAttribute("label", JamendoQueryMaker.extractFieldFromOBJ(jsonItem, "name") );
+		this.setValue("label", JamendoQueryMaker.extractFieldFromOBJ(jsonItem, "name") );
 		loadingItem = new LoadingItem("Please wait while loading albums ... " , "__ALBUM_LOADING_ITEM__");
-		this.setFolderOpenIconClass("albumTreeItemOpen");
-		this.setFolderClosedIconClass("albumTreeItem");
-		this.setLabelClass("albumTreeItemLabel");
+		this.setValue(Tree.folderOpenedClassAttribute,"albumTreeItemOpen");
+		this.setValue(Tree.folderClosedClassAttribute,"albumTreeItem");
+		this.setValue(Tree.labelClassAttribute , "albumTreeItemLabel");
 		super.addChild(loadingItem);
 	}
 
