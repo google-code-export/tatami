@@ -1,11 +1,33 @@
+/*
+ * Tatami: 
+ * Copyright (C) 2007 Objet Direct
+ * Copyright (C) 2007 France Telecom
+ * Contact: tatami@googlegroups.com
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307
+ * USA
+ *
+ * Authors:  Ronan Dunklau
+ * Initial developer(s): Ronan Dunklau
+ * Contributor(s):
+ */
 package com.objetdirect.tatami.testpages.client;
 
 import java.util.Date;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Random;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ClickListener;
@@ -14,7 +36,6 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -25,13 +46,8 @@ import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.grid.Cell;
 import com.objetdirect.tatami.client.grid.Grid;
 import com.objetdirect.tatami.client.grid.GridDataStore;
-import com.objetdirect.tatami.client.grid.GridLayout;
 import com.objetdirect.tatami.client.grid.GridListener;
 import com.objetdirect.tatami.client.grid.GridView;
-import com.objetdirect.tatami.client.grid.editor.ComboBoxEditor;
-import com.objetdirect.tatami.client.grid.editor.DateEditor;
-import com.objetdirect.tatami.client.grid.editor.NumberSpinnerEditor;
-import com.objetdirect.tatami.client.grid.editor.TextEditor;
 import com.objetdirect.tatami.client.grid.formatters.BooleanFormatter;
 import com.objetdirect.tatami.client.grid.formatters.DateFormatter;
 
@@ -208,13 +224,13 @@ public class TestMoreComplexGridPage extends TestPage{
 				if(sender == addEmployeeButton){
 					Item item = new Item();
 					idSeq++;
-					item.addAttribute(idAttr, new Integer(idSeq));
-					item.addAttribute(firstNameAttr, "(Insert First Name)");
-					item.addAttribute(lastNameAttr, "(Insert Last Name)");
-					item.addAttribute(birthDateAttr, new Date("01/01/1901"));
-					item.addAttribute(salaryAttr, new Integer("0"));
-					item.addAttribute(functionAttr, "(Insert Function)");
-					item.addAttribute(subscriberAttr, Boolean.FALSE);
+					item.setValue(idAttr, new Integer(idSeq));
+					item.setValue(firstNameAttr, "(Insert First Name)");
+					item.setValue(lastNameAttr, "(Insert Last Name)");
+					item.setValue(birthDateAttr, new Date("01/01/1901"));
+					item.setValue(salaryAttr, new Integer("0"));
+					item.setValue(functionAttr, "(Insert Function)");
+					item.setValue(subscriberAttr, Boolean.FALSE);
 					int[] indexes = grid.getSelectedIndexes();
 					if(indexes.length > 0){
 						grid.addRow(item , indexes[0]);	
@@ -347,19 +363,19 @@ public class TestMoreComplexGridPage extends TestPage{
 
 		public void onChange(Widget sender) {
 			if(sender == lastName){
-				grid.getStore().setValue(asItem(), lastNameAttr , lastName.getText());
+				asItem().setValue(lastNameAttr , lastName.getText());
 			}
 			if(sender == firstName){
-				grid.getStore().setValue(asItem(), firstNameAttr , firstName.getText());
+				asItem().setValue(firstNameAttr , firstName.getText());
 			}
 			if(sender == picker){
-				grid.getStore().setValue(asItem(), birthDateAttr , picker.getDate());
+				asItem().setValue(birthDateAttr , picker.getDate());
 			}
 			if(sender == spinner){
-				grid.getStore().setValue(asItem(), salaryAttr ,new Integer(spinner.getValue().intValue()));
+				asItem().setValue( salaryAttr ,new Integer(spinner.getValue().intValue()));
 			}
 			if(sender == function){
-				grid.getStore().setValue(asItem(), functionAttr, function.getValue(function.getSelectedIndex()));
+				asItem().setValue(functionAttr, function.getValue(function.getSelectedIndex()));
 			}
 			
 			
@@ -367,7 +383,7 @@ public class TestMoreComplexGridPage extends TestPage{
 
 		public void onClick(Widget sender) {
 			if(sender == subscriber){
-				grid.getStore().setValue(asItem(), subscriberAttr , new Boolean(subscriber.isChecked()));
+				asItem().setValue(subscriberAttr , new Boolean(subscriber.isChecked()));
 			}			
 		}
 		

@@ -3,11 +3,7 @@ package com.objetdirect.tatami.testpages.client;
 import java.util.Date;
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Random;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.data.Item;
@@ -19,7 +15,6 @@ import com.objetdirect.tatami.client.grid.GridListener;
 import com.objetdirect.tatami.client.grid.GridView;
 import com.objetdirect.tatami.client.grid.editor.DateEditor;
 import com.objetdirect.tatami.client.grid.editor.NumberSpinnerEditor;
-import com.objetdirect.tatami.client.grid.editor.TextEditor;
 import com.objetdirect.tatami.client.grid.formatters.CurrencyFormatter;
 import com.objetdirect.tatami.client.grid.formatters.DateFormatter;
 
@@ -36,30 +31,30 @@ public class TestLayoutGridPage extends TestPage{
 		GridDataStore store = new GridDataStore("myidAttr");
 		grid.setStore(store);
 		Item itemJohn = new Item();
-		itemJohn.addAttribute("myidAttr", "14563" );
-		itemJohn.addAttribute("myname", "John Doe" );
-		itemJohn.addAttribute("number", "0123456789");
-		itemJohn.addAttribute("salary",  new Integer("500"));
-		itemJohn.addAttribute("date", new Date("03/25/1981"));
-		itemJohn.addAttribute("position", "CEO");
-		itemJohn.addAttribute("available", Boolean.FALSE);
-		itemJohn.addAttribute("mySecret", "!!!");
-		itemJohn.addAttribute("description", "I m John Doe and this is my description" );
-		itemJohn.addAttribute("appreciation", new Integer(2) );
+		itemJohn.setValue("myidAttr", "14563" );
+		itemJohn.setValue("myname", "John Doe" );
+		itemJohn.setValue("number", "0123456789");
+		itemJohn.setValue("salary",  new Integer("500"));
+		itemJohn.setValue("date", new Date("03/25/1981"));
+		itemJohn.setValue("position", "CEO");
+		itemJohn.setValue("available", Boolean.FALSE);
+		itemJohn.setValue("mySecret", "!!!");
+		itemJohn.setValue("description", "I m John Doe and this is my description" );
+		itemJohn.setValue("appreciation", new Integer(2) );
 		store.add(itemJohn);
 		
 		
 		Item itemJane = new Item();
-		itemJane.addAttribute("myidAttr", "87321" );
-		itemJane.addAttribute("number", "9876543210");
-		itemJane.addAttribute("salary",  new Integer("1200"));
-		itemJane.addAttribute("date", new Date("11/12/1978"));
-		itemJane.addAttribute("position", "Developer");
-		itemJane.addAttribute("available", Boolean.TRUE);
-		itemJane.addAttribute("myname", "Jane Doe" );
-		itemJane.addAttribute("description", "I m Jane Doe and this is my description" );
-		itemJane.addAttribute("appreciation", new Integer(8) );
-		itemJane.addAttribute("mySecret", "!!!");
+		itemJane.setValue("myidAttr", "87321" );
+		itemJane.setValue("number", "9876543210");
+		itemJane.setValue("salary",  new Integer("1200"));
+		itemJane.setValue("date", new Date("11/12/1978"));
+		itemJane.setValue("position", "Developer");
+		itemJane.setValue("available", Boolean.TRUE);
+		itemJane.setValue("myname", "Jane Doe" );
+		itemJane.setValue("description", "I m Jane Doe and this is my description" );
+		itemJane.setValue("appreciation", new Integer(8) );
+		itemJane.setValue("mySecret", "!!!");
 		
 		store.add(itemJane);
 		

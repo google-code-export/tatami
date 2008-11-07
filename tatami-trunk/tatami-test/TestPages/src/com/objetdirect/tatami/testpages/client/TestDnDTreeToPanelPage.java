@@ -48,9 +48,9 @@ import com.objetdirect.tatami.client.dnd.DnDBehaviors.BehaviorScopeException;
 import com.objetdirect.tatami.client.tree.Tree;
 import com.objetdirect.tatami.client.tree.TreeItem;
 
-public class TestDNDPage extends TestPage{
+public class TestDnDTreeToPanelPage extends TestPage{
 
-	public TestDNDPage(){
+	public TestDnDTreeToPanelPage(){
 		super("com.objetdirect.tatami.testpages.client.TestDNDPage", "Test DnD");
 	}
 	
