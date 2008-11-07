@@ -27,6 +27,7 @@ package com.objetdirect.tatami.client.dnd;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Element;
@@ -151,16 +152,16 @@ public class DnDTreeController extends IDnDController<TreeSource, TreeTarget> im
 			onDndDrop: function(source, nodes, copy){
 				if(this.containerState == "Over"){
 					var tree = this.tree,
-						model = tree.model,
-						target = this.current,
-						requeryRoot = false;	// set to true iff top level items change
+					model = tree.model,
+					target = this.current,
+					requeryRoot = false;	// set to true iff top level items change
 					this.isDragging = false;
+					// Compute the new parent item
 					var targetWidget = $wnd.dijit.getEnclosingWidget(target),
 					newParentItem = (targetWidget && targetWidget.item) || tree.item;
-					this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDndDrop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;Z)(source,this,nodes,this.store.getIdentity(newParentItem),copy);
+					this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDndDrop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;Z)(source,this,nodes,model.getIdentity(newParentItem),copy);
 					this.tree._expandNode(targetWidget);
 				}
-				this.onDndCancel();
 			},
 			onDndStart: function(source, nodes, copy){
 				this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDnDStart(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Z)(source,nodes,copy);
@@ -209,37 +210,7 @@ public class DnDTreeController extends IDnDController<TreeSource, TreeTarget> im
 			destroyJSSource(gwtToDojoTargetMap.get(target));
 		}
 
-		/* (non-Javadoc)
-		 * @see com.objetdirect.tatami.client.dnd.IDnDController#createAndSetupJSSource(com.objetdirect.tatami.client.dnd.IDnDSource)
-		 */
-		@Override
-		public JavaScriptObject createAndSetupJSSource(TreeSource source) throws JSSourceCreationException {
-			JavaScriptObject jsTree = source.getTree().getDojoWidget();
-			if(jsTree == null){
-				source.getTree().addAfterCreationListener(this);
-				sourcesWaitingToBeRegistered.add(source);
-				throw new JSSourceCreationException("The tree you would like to turn into a Tree DnD Source is not yet ready. The TreeSource will be created and registered as soon as the Tree is ready");
-			}
-			JavaScriptObject jsSource = createJSSourceFromDOM(jsTree ,  DnDMainController.getInstance());
-			jsTree = prepareTree(jsTree, jsSource);
-			return jsSource;
-		}
 
-		/* (non-Javadoc)
-		 * @see com.objetdirect.tatami.client.dnd.IDnDController#createAndSetupJSTarget(com.objetdirect.tatami.client.dnd.IDnDTarget)
-		 */
-		@Override
-		public JavaScriptObject createAndSetupJSTarget(TreeTarget target) throws JSSourceCreationException{
-			JavaScriptObject jsTree = target.getTree().getDojoWidget();
-			if(jsTree == null){
-				target.getTree().addAfterCreationListener(this);
-				targetsWaitingToBeRegistered.add(target);
-				throw new JSSourceCreationException("The tree you would like to turn into a Tree DnD Source is not yet ready. The TreeSource will be created and registered as soon as the Tree is ready");
-			}
-			JavaScriptObject jstarget = createJSTargetFromDOM(jsTree ,  DnDMainController.getInstance());
-			jsTree = prepareTree(jsTree, jstarget);
-			return jstarget;
-		}
 
 		/* (non-Javadoc)
 		 * @see com.objetdirect.tatami.client.dnd.IDnDController#getDndElementAtGivenIndex(int, com.google.gwt.core.client.JavaScriptObject, com.google.gwt.core.client.JavaScriptObject)
@@ -318,8 +289,9 @@ public class DnDTreeController extends IDnDController<TreeSource, TreeTarget> im
 		/* (non-Javadoc)
 		 * @see com.objetdirect.tatami.client.dnd.IDnDController#removeDnDElementFromJSSource(com.objetdirect.tatami.client.dnd.IDnDSource, com.objetdirect.tatami.client.dnd.IDnDElement)
 		 */
+		@Override
 		public void removeDnDElementFromJSSource(TreeSource source , IDnDElement draggable){
-			JavaScriptObject jsSource = (JavaScriptObject) gwtToDojoSourceMap.get(source);
+			JavaScriptObject jsSource = gwtToDojoSourceMap.get(source);
 			removeElementFromJSSource(jsSource,draggable.getDndId() , draggable.getElement());
 			DnDMainController.getInstance().unregisterDnDSource(jsSource);
 		}
@@ -337,13 +309,75 @@ public class DnDTreeController extends IDnDController<TreeSource, TreeTarget> im
 		 */
 		public void dojoAfterCreation(DojoAfterCreationEventsSource source) {
 			for (TreeSource treesource : sourcesWaitingToBeRegistered) {
-				super.registerSource(treesource);
+				try{
+					registerSource(treesource);
+				}catch(JSSourceCreationException e){
+					new Exception("An error occured during tree's dnd post initialization" ,e).printStackTrace();
+				}
 			}
 			for (TreeTarget treetarget : targetsWaitingToBeRegistered) {
-				super.registerTarget(treetarget);
+				try{
+					registerTarget(treetarget);
+				}catch(JSSourceCreationException e){
+					new Exception("An error occured during tree's dnd post initialization" ,e).printStackTrace();
+				}
 			}
 			
 		}
+
+		@Override
+		public void registerSource(TreeSource source) throws JSSourceCreationException{
+			JavaScriptObject jsSource;
+			JavaScriptObject jsTree = source.getTree().getDojoWidget();
+			if(jsTree == null){
+				source.getTree().addAfterCreationListener(this);
+				sourcesWaitingToBeRegistered.add(source);
+			}else{
+				jsSource = createJSSourceFromDOM(jsTree ,  DnDMainController.getInstance());
+				jsTree = prepareTree(jsTree, jsSource);
+				dojoToGWTSourceMap.put(jsSource, source);
+				gwtToDojoSourceMap.put(source, jsSource);
+				DnDMainController.getInstance().registerDnDSource(this, jsSource);
+				Collection<? extends IDnDElement> elems = source.getRegisteredDndElement();
+				for (Iterator<? extends IDnDElement> iterator = elems.iterator(); iterator.hasNext();) {
+					IDnDElement dnDElement = iterator.next();
+					addDnDElementToJSSource(source, dnDElement);
+				}
+			}
+		}
+		@Override
+		public void registerTarget(TreeTarget target) throws JSSourceCreationException{
+			JavaScriptObject jsTree = target.getTree().getDojoWidget();
+			if(jsTree == null){
+				target.getTree().addAfterCreationListener(this);
+				targetsWaitingToBeRegistered.add(target);
+			}else{
+				JavaScriptObject jstarget;
+				if(target instanceof IDnDSource<?> && gwtToDojoSourceMap.containsKey(target)){
+					jstarget = gwtToDojoSourceMap.get(target);
+				}else{
+					jstarget = createJSTargetFromDOM(jsTree ,  DnDMainController.getInstance());
+				}
+				gwtToDojoTargetMap.put(target, jstarget);
+				dojoToGWTTargetMap.put(jstarget, target);
+				DnDMainController.getInstance().registerDnDTarget(this, jstarget);
+				jsTree = prepareTree(jsTree, jstarget);
+			}
+		}
 		
 		
+		@Override
+		//Do nothing here since we override the whole registerSource method
+		public JavaScriptObject createAndSetupJSSource(TreeSource source)
+				throws JSSourceCreationException {
+			return null;
+		}
+
+		@Override
+		//Do nothing here since we override the whole registerTarget method
+		public JavaScriptObject createAndSetupJSTarget(TreeTarget target)
+				throws JSSourceCreationException {
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

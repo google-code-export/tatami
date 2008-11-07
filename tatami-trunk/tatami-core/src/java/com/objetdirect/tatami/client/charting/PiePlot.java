@@ -33,22 +33,39 @@ public class PiePlot<T> extends Plot<T>{
 		super(PiePlot.PLOT_TYPE_PIE);
 	}
 	
+	/**
+	 * @param offset : the label position from the edge of the plot
+	 * Negative values will place the label outside of the plot, whereas positive values will place in inside
+	 */
 	public void setLabelOffset(int offset){
 		options.put("labelOffset", offset);
 	}
 	
+	/**
+	 * @param precision : the precision for percentiles 
+	 */
 	public void setPrecision(int precision){
 		options.put("precision", precision);
 	}
 	
+	/**
+	 * @param font : font to be applied on the various labels
+	 */
 	public void setFont(String font){
 		options.put("font", font);
 	}
 	
+	/**
+	 * @param fontColor : default font color. Can be overriden by each PiePiece
+	 */
 	public void setFontColor(String fontColor){
 		options.put("fontColor", fontColor);
 	}
 	
+	/**
+	 * @param radius : the plot radius. Use it if you want to fix the plot size independently from your
+	 * chart size. 
+	 */
 	public void setRadius(int radius){
 		options.put("radius", radius);
 	}

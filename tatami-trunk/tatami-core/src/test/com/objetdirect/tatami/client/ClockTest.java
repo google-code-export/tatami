@@ -26,8 +26,6 @@
 package com.objetdirect.tatami.client;
 
 
-import java.util.Date;
-
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.objetdirect.tatami.client.gfx.Color;

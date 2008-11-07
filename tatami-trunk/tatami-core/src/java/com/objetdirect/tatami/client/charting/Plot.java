@@ -37,7 +37,7 @@ public class Plot<T>{
 	
 	
 	public static final String PLOT_TYPE_BUBBLE = "Bubble";
-	final public static String PLOT_TYPE_GRID = "Grid";
+	final protected static String PLOT_TYPE_GRID = "Grid";
 	
 	final private static String KEY_PLOT_TYPE = "type";
 	
@@ -145,19 +145,19 @@ public class Plot<T>{
 	}
 	
 	
-	public void setGridHMajorLines(boolean show){
+	protected void setGridHMajorLines(boolean show){
 		options.put("hMajorLines",show);
 	}
 	
-	public void setGridHMinorLines(boolean show){
+	protected void setGridHMinorLines(boolean show){
 		options.put("hMinorLines",show);
 	}
 	
-	public void setGridVMajorLines(boolean show){
+	protected void setGridVMajorLines(boolean show){
 		options.put("vMajorLines",show);
 	}
 	
-	public void setGridVMinorLines(boolean show){
+	protected void setGridVMinorLines(boolean show){
 		options.put("vMinorLines",show);
 	}
 	

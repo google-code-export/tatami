@@ -1,12 +1,7 @@
 package com.objetdirect.tatami.client.dnd;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -17,11 +12,9 @@ import com.objetdirect.tatami.client.DefaultTatamiTest;
 import com.objetdirect.tatami.client.dnd.DnDBehaviors.BehaviorScopeException;
 import com.objetdirect.tatami.client.tree.Tree;
 
-import junit.framework.TestCase;
-
 public class DnDTest extends DefaultTatamiTest {
 
-	public void testInternalWidgetDndRegister(){
+	public void testInternalWidgetDndRegister() throws Exception{
 		Panel panel = new FlowPanel();
 		
 		//Test Register Source as Source
@@ -40,6 +33,7 @@ public class DnDTest extends DefaultTatamiTest {
 		Panel panel2 = new FlowPanel();
 		WidgetTarget target = new WidgetTarget(panel2);
 		WidgetDnDController.getInstance().registerTarget(target);
+		
 		assertTrue(WidgetDnDController.getInstance().getJSTargetFromGWTTarget(target) != null);
 		
 		//Test unregister Source 
@@ -57,7 +51,7 @@ public class DnDTest extends DefaultTatamiTest {
 		assertFalse(WidgetDnDController.getInstance().getJSTargetFromGWTTarget(target) != null);
 	}
 	
-	public void testInternalTreeDndRegister(){
+	public void testInternalTreeDndRegister() throws Exception{
 		Tree tree = new Tree();
 		RootPanel.get().add(tree);
 		//Test Register Source as Source
@@ -244,7 +238,7 @@ public class DnDTest extends DefaultTatamiTest {
 		assertTrue(DnDBehaviors.getBehaviorFor(source3 , source3) == panel3ToAny);
 	}
 	
-	public void testBehaviorCall(){
+	public void testBehaviorCall() throws Exception{
 		Panel panel1 = new FlowPanel();
 		Panel panel2 = new FlowPanel();
 		WidgetSource source1 = new WidgetSource(panel1);

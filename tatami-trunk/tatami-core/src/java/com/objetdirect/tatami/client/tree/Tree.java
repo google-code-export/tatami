@@ -254,13 +254,15 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		if(child.getParentItem() != null){
 			removeChildFromItem(child.getParentItem(), child);
 		}
+		addItem(child);
 		parent.addChild(child);
 		store.setValue(parent, "children", parent.getChildren());
 	}
 	
 	public void addChildrenToItem(TreeItem parent, Collection<TreeItem> children){
 		for (Iterator<TreeItem> iterator = children.iterator(); iterator.hasNext();) {
-			TreeItem treeItem = (TreeItem) iterator.next();
+			TreeItem treeItem = iterator.next();
+			addItem(treeItem);
 			parent.addChild(treeItem);
 		}
 		store.setValue(parent, "children", parent.getChildren());
@@ -387,7 +389,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	/**
 	 * @param item: adds an item to the underlying store.
 	 */
-	public void addItem(TreeItem item){
+	protected void addItem(TreeItem item){
 		this.store.add(item);
 	}
 	
@@ -408,6 +410,9 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		this.store.setValue(item, rootCriteriaName, rootCriteriaValue);
 		if(dojoWidget != null){
 			dojoAddRootItem(getDojoTreeModel(), item);
+		}
+		for(TreeItem child : item.getChildren()){
+			addItem(child);
 		}
 	}
 	
@@ -458,6 +463,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		if(newParent == null){
 			removeChildFromItem(itemToMove.getParentItem(), itemToMove);
 			addRootItem(itemToMove);
+			refreshTree();
 		}else{
 			if(itemToMove.getParentItem() != null){
 				removeChildFromItem(itemToMove.getParentItem(), itemToMove);
@@ -640,6 +646,8 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 
 
 	public void addAfterCreationListener(DojoAfterCreationListener listener) {
+		if(afterCreationListeners.contains(listener))
+			return;
 		afterCreationListeners.add(listener);
 	}
 

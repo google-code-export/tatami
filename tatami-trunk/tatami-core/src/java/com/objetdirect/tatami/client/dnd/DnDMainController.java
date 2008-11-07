@@ -178,12 +178,13 @@ public class DnDMainController {
 			IDnDTarget dndTarget = targetOwner.getTarget(jstarget);
 			Collection<E> dndElements = (Collection<E>) sourceOwner.getGWTDnDElements(jssource , nodes);
 			IDnDBehavior<E, IDnDSource<E>, IDnDTarget> behavior = (IDnDBehavior<E, IDnDSource<E>, IDnDTarget>) DnDBehaviors.getBehaviorFor(dndSource, dndTarget);
-			if(behavior.onDrop(dndElements , dndSource , dndTarget, targetNodeId, ctrlPressed)){
+			if(behavior != null && behavior.onDrop(dndElements , dndSource , dndTarget, targetNodeId, ctrlPressed)){
 				behavior.elementsAccepted(dndSource, dndTarget, dndElements, ctrlPressed, targetOwner);
 				return true;
 			}
 			return false;
 		}catch(ClassCastException e){
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -211,12 +212,12 @@ public class DnDMainController {
 				((IDnDBehavior<E,IDnDSource<E>,IDnDTarget>)dnDBehavior).onDndStart(dndElements,dndSource, false);
 			}
 		}catch(ClassCastException e){
+			e.printStackTrace();
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	protected <E extends IDnDElement> void onDnDCancel(){
-		System.out.println("ON DND CANCEL");
 		try{
 			Collection<IDnDBehavior<? extends IDnDElement,? extends IDnDSource<?>,? extends IDnDTarget>> behaviors = DnDBehaviors.getAllBehaviorForSource(lastDnDSource);
 			for (Iterator iterator = behaviors.iterator(); iterator.hasNext();) {
@@ -225,6 +226,7 @@ public class DnDMainController {
 				dnDBehavior.onCancel();
 			}
 		}catch(ClassCastException e){
+			e.printStackTrace();
 		}
 	}
 	
@@ -259,13 +261,13 @@ public class DnDMainController {
 			}
 			return false;
 		}catch(ClassCastException e){
+			e.printStackTrace();
 			return false;
 		}
 	}
 	
 	protected <E extends IDnDElement> void  dragOver(JavaScriptObject jstarget){
 		try{
-			System.out.println("ON DND DRAGOVER");
 			IDnDController<?,IDnDTarget> targetOwner = (IDnDController<?, IDnDTarget>) jstargets.get(jstarget);
 			if(targetOwner != null){
 				IDnDTarget dndTarget =  targetOwner.getTarget(jstarget);

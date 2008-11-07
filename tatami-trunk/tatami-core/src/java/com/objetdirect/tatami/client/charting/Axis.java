@@ -30,8 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.objetdirect.tatami.client.ConvertibleToJSObject;
 import com.objetdirect.tatami.client.JSHelper;
 
 
@@ -89,24 +87,7 @@ public class Axis {
 	private final static String verticalOption = "vertical";
 	private final static String leftOption = "leftBottom";
 	
-	private class AxisLabel implements ConvertibleToJSObject{
-		String text;
-		double value;
-		
-		public AxisLabel(String text, double value) {
-			super();
-			this.text = text;
-			this.value = value;
-		}
-
-		public JavaScriptObject toJSObject() {
-			return toJS(text, value);
-		}
-		
-		private native JavaScriptObject toJS(String text, double value)/*-{
-			return {text: text, value:value};
-		}-*/;
-	}
+	
 	
 	/**
 	 * Constructs a default bottom horizontal axis
@@ -446,15 +427,37 @@ public class Axis {
 	}
 	
 	/**
-	 * @param forValue : the value for which we define a label
 	 * @param text : the label itself
+	 * @param forValue : the value for which we define a label
 	 */
-	public void addLabel(double forValue, String text){
+	public void addLabel(String text, double forValue){
 		if(labels == null){
 			labels = new ArrayList<AxisLabel>();
 		}
 		labels.add(new AxisLabel(text,forValue));
-		options.put("labels",JSHelper.convertObjectToJSObject(labels));
+		updateLabels();
+	}
+	
+	/**
+	 * @param label
+	 */
+	public void addLabel(AxisLabel label){
+		if(labels == null){
+			labels = new ArrayList<AxisLabel>();
+		}
+		labels.add(label);
+		updateLabels();
+	}
+	
+	/**
+	 * @param label
+	 */
+	public void removeLabel(AxisLabel label){
+		if(labels == null){
+			return;
+		}
+		labels.remove(label);
+		updateLabels();
 	}
 	
 	
@@ -463,8 +466,37 @@ public class Axis {
 	 * @param labels
 	 */
 	public void addLabels(String[] labels){
-		
+		if(this.labels == null){
+			this.labels = new ArrayList<AxisLabel>();
+		}
+		for (int i = 0,j=this.labels.size()+1; i < labels.length ; i++,j++) {
+			this.labels.add(new AxisLabel(labels[i] , j));
+		}
+		updateLabels();
 	}
+	
+	private void updateLabels(){
+		options.put("labels",JSHelper.convertObjectToJSObject(labels));
+	}
+	
+	public void addLabels(List<AxisLabel> labels){
+		if(this.labels == null){
+			this.labels = new ArrayList<AxisLabel>();
+		}
+		this.labels.addAll(labels);
+		updateLabels();
+	}
+	
+
+	public List<AxisLabel> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(List<AxisLabel> labels) {
+		this.labels = labels;
+		updateLabels();
+	}
+
 	
 	
 }

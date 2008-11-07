@@ -22,7 +22,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		
 		public Request lastOnBeginRequest;
 		
-		public List lastOnCompleteItems;
+		public List<?> lastOnCompleteItems;
 		
 		public Request lastOnCompleteRequest;
 		
@@ -35,7 +35,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 			lastOnBeginSize = size;
 		}
 
-		public void onComplete(FetchEventSource source , List items, Request request) {
+		public void onComplete(FetchEventSource source , List<?> items, Request request) {
 			lastOnCompleteItems = items;
 			lastOnCompleteRequest = request;
 		}
@@ -231,14 +231,14 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		request.setStartItemNumber(2);
 		request.addSortParameter("id", false);
 		store.fetch(request);
-		List fetcheditems = listener.lastOnCompleteItems;
+		List<?> fetcheditems = listener.lastOnCompleteItems;
 
-		List expectedItems = new ArrayList();
+		List<Item> expectedItems = new ArrayList<Item>();
 		expectedItems.add(items[2]);
 		expectedItems.add(items[3]);
-		Iterator iterator2 = expectedItems.iterator();
+		Iterator<Item> iterator2 = expectedItems.iterator();
 		assertEquals(expectedItems.size(), fetcheditems.size());
-		for (Iterator iterator = fetcheditems.iterator() ; iterator.hasNext() && iterator2.hasNext();) {
+		for (Iterator<?> iterator = fetcheditems.iterator() ; iterator.hasNext() && iterator2.hasNext();) {
 			Item item = (Item) iterator.next();
 			Item expecteditem = (Item) iterator2.next();
 			assertEquals(expecteditem, item);
@@ -263,7 +263,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		expectedItems.add(items[1]);
 		iterator2 = expectedItems.iterator();
 		assertEquals(expectedItems.size(), fetcheditems.size());
-		for (Iterator iterator = fetcheditems.iterator() ; iterator.hasNext() && iterator2.hasNext();) {
+		for (Iterator<?> iterator = fetcheditems.iterator() ; iterator.hasNext() && iterator2.hasNext();) {
 			Item item = (Item) iterator.next();
 			Item expecteditem = (Item) iterator2.next();
 			assertEquals(expecteditem, item);
@@ -286,7 +286,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		expectedItems.add(items[1]);
 		iterator2 = expectedItems.iterator();
 		assertEquals(expectedItems.size(), fetcheditems.size());
-		for (Iterator iterator = fetcheditems.iterator() ; iterator.hasNext() && iterator2.hasNext();) {
+		for (Iterator<?> iterator = fetcheditems.iterator() ; iterator.hasNext() && iterator2.hasNext();) {
 			Item item = (Item) iterator.next();
 			Item expecteditem = (Item) iterator2.next();
 			assertEquals(expecteditem, item);
@@ -307,9 +307,9 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		request.addQueryParameter("name", "James");
 		store.fetch(request);
 		
-		List fetcheditems = listener.lastOnCompleteItems;
+		List<?> fetcheditems = listener.lastOnCompleteItems;
 
-		List expectedItems = new ArrayList();
+		List<Item> expectedItems = new ArrayList<Item>();
 		expectedItems.add(items[0]);
 		expectedItems.add(items[3]);
 		assertEquals(expectedItems.size(), fetcheditems.size());
@@ -322,14 +322,14 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		DataStore store = new GridDataStore();
 		store.add(items[0]);
 		assertEquals(new Integer(0) , store.getIdentity(items[0]));
-		List expectedAttributes = new ArrayList();
+		List<String> expectedAttributes = new ArrayList<String>();
 		expectedAttributes.add("id");
 		expectedAttributes.add("name");
 		expectedAttributes.add("age");
 		
 		
 		String [] attrs = store.getAttributes(items[0]);
-		List attributesFromStore = new ArrayList();
+		List<String> attributesFromStore = new ArrayList<String>();
 		for (int i = 0; i < attrs.length; i++) {
 			attributesFromStore.add(attrs[i]);
 		}

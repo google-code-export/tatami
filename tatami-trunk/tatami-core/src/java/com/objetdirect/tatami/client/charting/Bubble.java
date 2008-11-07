@@ -28,7 +28,7 @@ package com.objetdirect.tatami.client.charting;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.ConvertibleToJSObject;
 
-public class Bubble implements ConvertibleToJSObject{
+public class Bubble implements ConvertibleToJSObject,HasTooltip{
 
 	private double x;
 	private double y;

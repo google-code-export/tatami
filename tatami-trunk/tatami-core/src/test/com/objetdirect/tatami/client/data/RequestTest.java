@@ -4,11 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.DefaultTatamiTest;
-
-import junit.framework.TestCase;
 
 public class RequestTest extends DefaultTatamiTest {
 
@@ -17,18 +14,18 @@ public class RequestTest extends DefaultTatamiTest {
 		assertEquals(5, request.getNbItemToReturn());
 		assertEquals(3, request.getStartItemNumber());
 		
-		Map query = request.getQuery();
+		Map<?, ?> query = request.getQuery();
 		assertEquals(true, query.containsKey("name"));
 		assertEquals(true, query.containsKey("age"));
 		assertEquals("myNameIs", query.get("name"));
 		assertEquals(23, ((Number)query.get("age")).intValue());
 		
-		List sortFields = request.getSortFields();
+		List<?> sortFields = request.getSortFields();
 		
 		boolean isGrouPresentAndDescending = false;
 		boolean isGroumPresentAndAscending = false;
 		
-		for (Iterator iterator = sortFields.iterator(); iterator.hasNext();) {
+		for (Iterator<?> iterator = sortFields.iterator(); iterator.hasNext();) {
 			SortField sortField = (SortField) iterator.next();
 			if(sortField.getAttribute().compareTo("grou") == 0  && sortField.isDescending()){
 				isGrouPresentAndDescending = true;

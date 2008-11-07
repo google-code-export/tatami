@@ -3,8 +3,6 @@ package com.objetdirect.tatami.client.grid;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.DefaultTatamiTest;
 
-import junit.framework.TestCase;
-
 public class GridViewTest extends DefaultTatamiTest {
 
 	public void testAttributes(){

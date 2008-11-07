@@ -68,7 +68,7 @@ public class VirtualGroupTest extends TestGraphicObject {
 		Circle circle = new Circle(50);
 		getGroup().add(r);
 		getGroup().add(circle);
-		List list = new ArrayList();
+		List<GraphicObject> list = new ArrayList<GraphicObject>();
 		list.add(r);
 		list.add(circle);
 		assertTrue(getGroup().containsAll(list));

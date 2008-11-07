@@ -127,28 +127,31 @@ public class WidgetDnDController extends IDnDController<WidgetSource, WidgetTarg
 				}
 				this.inherited(arguments);
 			},
-			onDndDrop: function(source, nodes, copy){
-				do{ //break box
-					if(this.containerState != "Over"){ break; }
-					var oldCreator = this._normalizedCreator;
-					if(this != source){
-					}else{
-						// transferring nodes within the single source
-						if(this.current && this.current.id in this.selection){ break; }
-						if(this.creator){
+			onDnDDrop: function(source, nodes, copy,target){
+				if(this == target){
+					alert("THIS == TARGET ?? ?? ");
+					do{ //break box 
+						if(this.containerState != "Over"){ break; }
+						var oldCreator = this._normalizedCreator;
+						if(this != source){
 						}else{
+							// transferring nodes within the single source
+							if(this.current && this.current.id in this.selection){ break; }
+							if(this.creator){
+							}else{
+							}
 						}
-					}
-					this._removeSelection();
-					if(this != source){
-						this._removeAnchor();
-					}
-					if(this != source && !copy && !this.creator){
-						source.selectNone();
-					}
-					var id = this.current.id == undefined ? null : this.current.id;
-					this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDndDrop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;Z)(source,this,nodes, id,copy);
-				}while(false);
+						this._removeSelection();
+						if(this != source){
+							this._removeAnchor();
+						}
+						if(this != source && !copy && !this.creator){
+							source.selectNone();
+						}
+						var id = this.current.id == undefined ? null : this.current.id;
+						this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDndDrop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;Z)(source,this,nodes, id,copy);
+					}while(false);
+				}
 				this.onDndCancel();
 			},
 			onDndStart: function(source, nodes, copy){
@@ -184,27 +187,29 @@ public class WidgetDnDController extends IDnDController<WidgetSource, WidgetTarg
 				params._skipStartup = true;
 				return new $wnd.dojox.tatami.dnd.WidgetTarget(node, params);
 			},
-			onDndDrop: function(source, nodes, copy){
-				do{ //break box
-					var oldCreator = this._normalizedCreator;
-					if(this != source){
-					}else{
-						// transferring nodes within the single source
-						if(this.current && this.current.id in this.selection){ break; }
-						if(this.creator){
+			onDndDrop: function(source, nodes, copy, target){
+				if(this == target){
+					do{ //break box
+						var oldCreator = this._normalizedCreator;
+						if(this != source){
 						}else{
+							// transferring nodes within the single source
+							if(this.current && this.current.id in this.selection){ break; }
+							if(this.creator){
+							}else{
+							}
 						}
-					}
-					this._removeSelection();
-					if(this != source){
-						this._removeAnchor();
-					}
-					if(this != source && !copy && !this.creator){
-						source.selectNone();
-					}
-					var id = this.current == undefined ? null : (this.current.id == undefined ? null : this.current.id);
-					this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDndDrop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;Z)(source,this,nodes,id,copy);
-				}while(false);
+						this._removeSelection();
+						if(this != source){
+							this._removeAnchor();
+						}
+						if(this != source && !copy && !this.creator){
+							source.selectNone();
+						}
+						var id = this.current == undefined ? null : (this.current.id == undefined ? null : this.current.id);
+						this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDndDrop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;Z)(source,this,nodes,id,copy);
+					}while(false);
+				}
 				this.onDndCancel();
 			}
 		});
@@ -286,6 +291,6 @@ public class WidgetDnDController extends IDnDController<WidgetSource, WidgetTarg
 	private native void destroyJSSource(JavaScriptObject source)/*-{
 		source.destroy();
 	}-*/;
-	
+
 	
 }

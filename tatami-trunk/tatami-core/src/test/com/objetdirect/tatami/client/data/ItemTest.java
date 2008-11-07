@@ -1,7 +1,5 @@
 package com.objetdirect.tatami.client.data;
 
-import java.util.Iterator;
-
 import junit.framework.TestCase;
 
 public class ItemTest extends TestCase {

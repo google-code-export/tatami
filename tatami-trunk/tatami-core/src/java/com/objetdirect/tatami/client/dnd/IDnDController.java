@@ -76,8 +76,7 @@ public abstract class IDnDController<T extends IDnDSource<?>,U extends IDnDTarge
 	 * @param source : a source to register.
 	 * 
 	 */
-	public void registerSource(T source){
-		try{
+	public  void registerSource(T source) throws JSSourceCreationException{
 			JavaScriptObject jsSource = createAndSetupJSSource(source);
 			gwtToDojoSourceMap.put(source, jsSource);
 			dojoToGWTSourceMap.put(jsSource, source);
@@ -87,10 +86,6 @@ public abstract class IDnDController<T extends IDnDSource<?>,U extends IDnDTarge
 				IDnDElement dnDElement = iterator.next();
 				addDnDElementToJSSource(source, dnDElement);
 			}
-		}catch (JSSourceCreationException e) {
-			return;
-		}
-		
 	}
 	
 	/**
@@ -103,24 +98,20 @@ public abstract class IDnDController<T extends IDnDSource<?>,U extends IDnDTarge
 	 * @param target : a target to register.
 	 * 
 	 */
-	public void registerTarget(U target){
+	public void registerTarget(U target) throws JSSourceCreationException{
 		if(target instanceof IDnDSource<?>){
-			JavaScriptObject registeredSource = gwtToDojoSourceMap.get(target);
-			if(registeredSource != null){
+			if(gwtToDojoSourceMap.containsKey(target)){
+				JavaScriptObject registeredSource = gwtToDojoSourceMap.get(target);
 				gwtToDojoTargetMap.put(target, registeredSource);
 				dojoToGWTTargetMap.put(registeredSource, target);
 				DnDMainController.getInstance().registerDnDTarget(this, registeredSource);
 				return;
 			}
 		}
-		try{
-			JavaScriptObject jsTarget = createAndSetupJSTarget(target);
-			gwtToDojoTargetMap.put(target, jsTarget);
-			dojoToGWTTargetMap.put(jsTarget, target);
-			DnDMainController.getInstance().registerDnDTarget(this, jsTarget);
-		}catch (JSSourceCreationException e) {
-			return;
-		}
+		JavaScriptObject jsTarget = createAndSetupJSTarget(target);
+		gwtToDojoTargetMap.put(target, jsTarget);
+		dojoToGWTTargetMap.put(jsTarget, target);
+		DnDMainController.getInstance().registerDnDTarget(this, jsTarget);
 	}
 	
 	/**

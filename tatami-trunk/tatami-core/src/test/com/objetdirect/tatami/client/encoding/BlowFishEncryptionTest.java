@@ -1,6 +1,5 @@
 package com.objetdirect.tatami.client.encoding;
 
-import com.google.gwt.user.client.Random;
 import com.objetdirect.tatami.client.DefaultTatamiTest;
 import com.objetdirect.tatami.client.encoding.BlowFishEncryption;
 
@@ -45,7 +44,7 @@ public class BlowFishEncryptionTest extends DefaultTatamiTest{
 	public void testEncryptDecryptWithARandomWord(){
 		BlowFishEncryption cipher = BlowFishEncryption.getInstance();
 		String key = "groum";
-		String randomString = "à@#ê";
+		String randomString = "ï¿½@#ï¿½";
 		String ciphered = cipher.encrypt(BlowFishEncryption.Base64OutputType, randomString, key);
 		String deciphered = cipher.decrypt(BlowFishEncryption.Base64OutputType, ciphered, key);
 		assertTrue(randomString.equals(deciphered));

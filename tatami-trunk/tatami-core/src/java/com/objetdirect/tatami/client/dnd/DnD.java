@@ -61,8 +61,12 @@ public class DnD {
 	 */
 	public static TreeSource registerTreeSource(Tree tree){
 		TreeSource sourcetree = new TreeSource(tree);
-		DnDTreeController.getInstance().registerSource(sourcetree);
-		treeSourcesRegistry.addSourceMapping(tree, sourcetree);
+		try{
+			DnDTreeController.getInstance().registerSource(sourcetree);
+			treeSourcesRegistry.addSourceMapping(tree, sourcetree);
+		}catch(JSSourceCreationException e){
+			e.printStackTrace();
+		}
 		return sourcetree;
 	}
 	
@@ -90,8 +94,12 @@ public class DnD {
 	 */
 	public static WidgetSource registerSource(Panel panel){
 		WidgetSource panelSource = new WidgetSource(panel);
-		WidgetDnDController.getInstance().registerSource(panelSource);
-		widgetsSourceRegistry.addSourceMapping(panel , panelSource);
+		try{
+			WidgetDnDController.getInstance().registerSource(panelSource);
+			widgetsSourceRegistry.addSourceMapping(panel , panelSource);
+		}catch(JSSourceCreationException e){
+			e.printStackTrace();
+		}
 		return panelSource;
 	}
 	
@@ -168,8 +176,12 @@ public class DnD {
 		}else{
 			panelTarget = new WidgetTarget(panel);
 		}
-		WidgetDnDController.getInstance().registerTarget(panelTarget);
-		widgetsSourceRegistry.addTargetMapping(panel , panelTarget);
+		try{
+			WidgetDnDController.getInstance().registerTarget(panelTarget);
+			widgetsSourceRegistry.addTargetMapping(panel , panelTarget);
+		}catch(JSSourceCreationException e){
+			e.printStackTrace();
+		}
 		return panelTarget;
 	}
 	
@@ -187,8 +199,12 @@ public class DnD {
 		}else{
 			treeTarget = new TreeTarget(tree);
 		}
-		DnDTreeController.getInstance().registerTarget(treeTarget);
-		treeSourcesRegistry.addTargetMapping(tree , treeTarget);
+		try{
+			DnDTreeController.getInstance().registerTarget(treeTarget);
+			treeSourcesRegistry.addTargetMapping(tree , treeTarget);
+		}catch(JSSourceCreationException e){
+			e.printStackTrace();
+		}
 		return treeTarget;
 	}
 	

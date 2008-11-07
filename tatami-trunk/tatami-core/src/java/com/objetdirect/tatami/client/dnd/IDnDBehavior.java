@@ -28,7 +28,13 @@ package com.objetdirect.tatami.client.dnd;
 
 import java.util.Collection;
 
-import javax.xml.transform.Source;
+
+
+
+
+
+
+
 
 
 
@@ -42,7 +48,7 @@ import javax.xml.transform.Source;
  * Implement this interface to listen for drag and drop events.
  *  
  *  @see {@link DnDElement}
- *  @see {@link Source}
+ *  @see {@link IDnDSource}
  *  @see {@link Target}
  */
 public interface IDnDBehavior<E extends IDnDElement , S extends IDnDSource<?> , T extends IDnDTarget> {

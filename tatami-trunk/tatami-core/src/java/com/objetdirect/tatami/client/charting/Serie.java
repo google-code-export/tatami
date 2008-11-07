@@ -51,6 +51,12 @@ public class Serie<T> {
 		this.data = new ArrayList<T>();
 	}
 	
+	public Serie(String name){
+		this();
+		setName(name);
+	}
+	
+	
 	/**
 	 * A serie contains data, stored as a List.
 	 * This data can be : a Number, a Point @see {@link Point}, a Bubble @see {@link Bubble}

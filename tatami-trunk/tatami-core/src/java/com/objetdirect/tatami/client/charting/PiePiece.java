@@ -28,12 +28,10 @@ package com.objetdirect.tatami.client.charting;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.ConvertibleToJSObject;
 
-public class PiePiece implements ConvertibleToJSObject{
-
+public class PiePiece implements ConvertibleToJSObject,HasTooltip{
 
 
 	private double value;
-	
 
 	private String label;
 

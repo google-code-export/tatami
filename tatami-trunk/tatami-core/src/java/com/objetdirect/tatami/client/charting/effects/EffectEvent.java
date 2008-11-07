@@ -27,7 +27,9 @@ package com.objetdirect.tatami.client.charting.effects;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.JSHelper;
+import com.objetdirect.tatami.client.charting.Bubble;
 import com.objetdirect.tatami.client.charting.PiePiece;
+import com.objetdirect.tatami.client.charting.Point;
 
 public class EffectEvent extends JavaScriptObject{
 
@@ -53,19 +55,53 @@ public class EffectEvent extends JavaScriptObject{
 	
 	private final void initAssociatedObject(){
 		String elementType = getElementType();
-		if(getElementType().compareTo("slice") == 0){
+		if(getElementType().compareTo(ELEMENT_TYPE_SLICE) == 0){
 			JavaScriptObject data = getJSDataObject();
-			Double value = getValue();
+			Double value = getY();
 			String text = (String) JSHelper.getElementAtIndex(data,"text");
 			String color = getColor();
 			String tooltip = getTooltip();
 			String fontColor = getFontColor();
 			setAssociatedObject(new PiePiece(value,text,color,fontColor,tooltip));
+		}else
+		if(getElementType().compareTo(ELEMENT_TYPE_MARKER) == 0 ||
+				getElementType().compareTo(ELEMENT_TYPE_BAR) == 0 ||
+				getElementType().compareTo(ELEMENT_TYPE_COLUMN) == 0){
+			JavaScriptObject data = getJSDataObject();
+			Double y = getY();
+			Double x = getX();
+			String tooltip = getTooltip();
+			if(tooltip != null){
+				setAssociatedObject(new Point(x,y,tooltip));
+			}else{
+				setAssociatedObject(new Point(x,y));
+			}
+		}else
+		if(getElementType().compareTo(ELEMENT_TYPE_CIRCLE) == 0){
+			Double y = getY();
+			Double x = getX();
+			JavaScriptObject data = getJSDataObject();
+			Double size = (Double) JSHelper.getElementAtIndex(data,"text");
+			String tooltip = getTooltip();
+			if(tooltip != null){
+				setAssociatedObject(new Bubble(x,y,size,tooltip));
+			}else{
+				setAssociatedObject(new Bubble(x,y,size));
+			}
 		}
+				
 	}
 	
-	private final native double getValue()/*-{
+	public final native double getY()/*-{
 		return this.run.data[this.index].y;
+	}-*/;
+	
+	public final native double getX()/*-{
+		return this.run.data[this.index].x;
+	}-*/;
+	
+	private final native double getSize()/*-{
+		return this.run.data[this.index].size;
 	}-*/;
 	
 	private final native String getText()/*-{
