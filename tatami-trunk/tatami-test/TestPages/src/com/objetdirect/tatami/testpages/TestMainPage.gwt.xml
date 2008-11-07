@@ -4,6 +4,8 @@
 	<inherits name='com.google.gwt.user.User'/>
 	<inherits name="com.objetdirect.tatami.Tatami"/>
     <inherits name="com.google.gwt.i18n.I18N"/>
+    <script src="dijit/dijit.js" />
+    <stylesheet src="dijit/themes/tundra/tundra.css"/>;
 	<!-- Specify the app entry point class.                   -->
 	<entry-point class='com.objetdirect.tatami.testpages.client.TestMainPage'/>
 </module>
