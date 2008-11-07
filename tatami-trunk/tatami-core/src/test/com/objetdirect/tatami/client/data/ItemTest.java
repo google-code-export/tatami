@@ -7,10 +7,10 @@ public class ItemTest extends TestCase {
 	public void testGetAttributes(){
 		Item item = new Item();
 		String[] attributes = {"attr1" , "attr2" , "attr3" , "attr4"};
-		item.addAttribute(attributes[0], "grou");
-		item.addAttribute(attributes[1], "grou");
-		item.addAttribute(attributes[2], "grou");
-		item.addAttribute(attributes[3], "grou");
+		item.setValue(attributes[0], "grou");
+		item.setValue(attributes[1], "grou");
+		item.setValue(attributes[2], "grou");
+		item.setValue(attributes[3], "grou");
 		String[] gottenAttributes = item.getAttributes();
 		assertEquals(attributes.length, gottenAttributes.length);
 		for (int i = 0; i < attributes.length; i++) {
@@ -27,7 +27,7 @@ public class ItemTest extends TestCase {
 	
 	public void testHasAttribute(){
 		Item item = new Item();
-		item.addAttribute("myAttr", "grou");
+		item.setValue("myAttr", "grou");
 		assertEquals(true, item.hasAttribute("myAttr"));
 		item.removeAttribute("myAttr");
 		assertEquals(false, item.hasAttribute("myAttr"));
@@ -36,7 +36,7 @@ public class ItemTest extends TestCase {
 	
 	public void testGetValue(){
 		Item item = new Item();
-		item.addAttribute("myAttr", "grou");
+		item.setValue("myAttr", "grou");
 		assertEquals("grou", item.getValue("myAttr", null));
 		assertEquals("groum", item.getValue("mahah", "groum"));
 		assertEquals("grou", item.getValues("myAttr"));
@@ -45,7 +45,7 @@ public class ItemTest extends TestCase {
 	
 	public void testContainsValue(){
 		Item item = new Item();
-		item.addAttribute("myAttr", "grou");
+		item.setValue("myAttr", "grou");
 		assertEquals(true , item.containsValue("myAttr", "grou"));
 		assertEquals(false , item.containsValue("myAttr", new Integer(3)) );
 	}

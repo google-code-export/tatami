@@ -60,10 +60,10 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 	public void testAddRemoveItems(){
 		GridDataStore store = new GridDataStore();
 		Item item = new Item();
-		item.addAttribute("id", "myId");
+		item.setValue("id", "myId");
 		store.add(item);
 		Item item2 = new Item();
-		item2.addAttribute("id", "myId2");
+		item2.setValue("id", "myId2");
 		store.add(item2);
 		assertEquals(2, store.size());
 		store.remove(item);
@@ -112,18 +112,18 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		store.addDatumChangeListener(listener);
 		
 		Item item = new Item();
-		item.addAttribute("id", "myId");
+		item.setValue("id", "myId");
 		store.add(item);
 		assertEquals(listener.lastAddedItem, item);
 
-		store.setValue(item, "newAttribute", "newValue");
+		item.setValue("newAttribute", "newValue");
 		assertEquals(item , listener.lastChangedItem);
 		assertEquals("newAttribute" , listener.lastChangedAttribute);
 		assertEquals(null ,listener.lastOldValue);
 		assertEquals("newValue" , listener.lastNewValue);
 		Integer newValue = new Integer(2);
 		
-		store.setValue(item, "newAttribute", newValue);
+		item.setValue("newAttribute", newValue);
 		assertEquals(item , listener.lastChangedItem);
 		assertEquals("newAttribute" , listener.lastChangedAttribute);
 		assertEquals("newValue" ,listener.lastOldValue);
@@ -135,12 +135,12 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		store.removeDatumChangeListener(listener);
 		
 		Item item2 = new Item();
-		item2.addAttribute("id","anotherId");
+		item2.setValue("id","anotherId");
 		
 		store.add(item2);
 		assertEquals(listener.lastAddedItem, item);
 		
-		store.setValue(item2, "anotherAttribute", "grougrou");
+		item2.setValue("anotherAttribute", "grougrou");
 		assertEquals(item , listener.lastChangedItem);
 		assertEquals("newAttribute" , listener.lastChangedAttribute);
 		assertEquals("newValue" ,listener.lastOldValue);
@@ -154,31 +154,31 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 	private Item[] initItems(){
 		Item[] items = new Item[5];
 		Item item1 = new Item();
-		item1.addAttribute("id", new Integer(0));
-		item1.addAttribute("name", "James");
-		item1.addAttribute("age", new Integer(42));
+		item1.setValue("id", new Integer(0));
+		item1.setValue("name", "James");
+		item1.setValue("age", new Integer(42));
 		items[0] = item1;
 		
 		Item item2 = new Item();
-		item2.addAttribute("id", new Integer(1));
-		item2.addAttribute("name", "John");
-		item2.addAttribute("age", new Integer(38));
+		item2.setValue("id", new Integer(1));
+		item2.setValue("name", "John");
+		item2.setValue("age", new Integer(38));
 		items[1] = item2;
 		
 		Item item3 = new Item();
-		item3.addAttribute("id", new Integer(2));
-		item3.addAttribute("age", new Integer(52));
-		item3.addAttribute("name", "John");
+		item3.setValue("id", new Integer(2));
+		item3.setValue("age", new Integer(52));
+		item3.setValue("name", "John");
 		items[2] = item3;
 		
 		Item item4 = new Item();
-		item4.addAttribute("id", new Integer(3));
-		item4.addAttribute("age", new Integer(23));
-		item4.addAttribute("name", "James");
+		item4.setValue("id", new Integer(3));
+		item4.setValue("age", new Integer(23));
+		item4.setValue("name", "James");
 		items[3] = item4;
 		
 		Item item5 = new Item();
-		item5.addAttribute("id", new Integer(4));
+		item5.setValue("id", new Integer(4));
 		items[4] = item5;
 		
 		return items;
@@ -240,7 +240,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		assertEquals(expectedItems.size(), fetcheditems.size());
 		for (Iterator<?> iterator = fetcheditems.iterator() ; iterator.hasNext() && iterator2.hasNext();) {
 			Item item = (Item) iterator.next();
-			Item expecteditem = (Item) iterator2.next();
+			Item expecteditem = iterator2.next();
 			assertEquals(expecteditem, item);
 		}
 		request.clearQueryParameters();
@@ -265,7 +265,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		assertEquals(expectedItems.size(), fetcheditems.size());
 		for (Iterator<?> iterator = fetcheditems.iterator() ; iterator.hasNext() && iterator2.hasNext();) {
 			Item item = (Item) iterator.next();
-			Item expecteditem = (Item) iterator2.next();
+			Item expecteditem = iterator2.next();
 			assertEquals(expecteditem, item);
 		}
 		request.clearQueryParameters();
@@ -288,7 +288,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		assertEquals(expectedItems.size(), fetcheditems.size());
 		for (Iterator<?> iterator = fetcheditems.iterator() ; iterator.hasNext() && iterator2.hasNext();) {
 			Item item = (Item) iterator.next();
-			Item expecteditem = (Item) iterator2.next();
+			Item expecteditem = iterator2.next();
 			assertEquals(expecteditem, item);
 		}
 	}
@@ -353,9 +353,8 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		DataStore store = new GridDataStore();
 		store.add(items[0]);
 		store.add(items[4]);
-		assertEquals("James" , store.getValue(items[0], "name", "notSpecified"));
-		assertEquals("notSpecified" , store.getValue(items[4], "name", "notSpecified"));
-		assertEquals("notSpecified" , store.getValue(items[2], "name", "notSpecified"));
+		assertEquals("James" , items[0].getValue("name", "notSpecified"));
+		assertEquals("notSpecified" , items[4].getValue("name", "notSpecified"));
 		
 		assertTrue(store.containsValue(items[0], "name", "James"));
 	}
@@ -364,8 +363,8 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		Item[] items = initItems();
 		DataStore store = new GridDataStore();
 		store.add(items[0]);
-		store.setValue(items[0], "newAttr", "Groum");
-		assertEquals("Groum", store.getValue(items[0], "newAttr", null));
+		items[0].setValue("newAttr", "Groum");
+		assertEquals("Groum", items[0].getValue("newAttr", null));
 	}
 	
 	public void testGetByIdentity(){
@@ -419,7 +418,7 @@ public class GridDataStoreTest extends DefaultTatamiTest{
 		assertEquals(1, labelAttr.length);
 		assertEquals(labelAttr[0], "label");
 		
-		items[0].addAttribute("label", "MyLabel");
+		items[0].setValue("label", "MyLabel");
 		assertEquals("MyLabel", store.getLabel(items[0]));
 		
 	}

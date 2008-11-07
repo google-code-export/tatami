@@ -59,6 +59,12 @@ import com.objetdirect.tatami.client.data.Request;
  */
 public class Tree extends AbstractDojo implements FetchListener , DatumChangeListener , TreeEventsSource , DojoAfterCreationEventsSource{
 
+	final public static String labelClassAttribute = "labelClass";
+	final public static String leafClassAttribute = "leaf-class";
+	final public static String folderClosedClass = "folder-closed-class";
+	final public static String folderOpenedClass =	"folder-open-class";
+	
+	
 	/**
 	 * The underlying datastore
 	 */
@@ -250,7 +256,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param parent : the item to add child to 
 	 * @param child : the child item to add to the parent
 	 */
-	public void addChildToItem(TreeItem parent, TreeItem child){
+	public void addChildToItem(Item parent, Item child){
 		if(child.getParentItem() != null){
 			removeChildFromItem(child.getParentItem(), child);
 		}
@@ -259,11 +265,11 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		store.setValue(parent, "children", parent.getChildren());
 	}
 	
-	public void addChildrenToItem(TreeItem parent, Collection<TreeItem> children){
-		for (Iterator<TreeItem> iterator = children.iterator(); iterator.hasNext();) {
-			TreeItem treeItem = iterator.next();
-			addItem(treeItem);
-			parent.addChild(treeItem);
+	public void addChildrenToItem(Item parent, Collection<Item> children){
+		for (Iterator<Item> iterator = children.iterator(); iterator.hasNext();) {
+			Item Item = iterator.next();
+			addItem(Item);
+			parent.addChild(Item);
 		}
 		store.setValue(parent, "children", parent.getChildren());
 	}
@@ -289,39 +295,40 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 				if(item == this.model.root){
 					return;
 				}
-				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::getIconClass(Lcom/objetdirect/tatami/client/tree/TreeItem;Z)(item,opened);
+				return item.@com.objetdirect.tatami.client.tree.Tree::getIconClass(Lcom/objetdirect/tatami/client/tree/Item;Z)(item,opened);
 			},
 			getLabelClass : function(item){
 				if(item == this.model.root){
 					return;
 				}
-				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::getLabelClass(Lcom/objetdirect/tatami/client/tree/TreeItem;)(item);
+				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::getLabelClass(Lcom/objetdirect/tatami/client/tree/Item;)(item);
 			},
 			onClick: function( item, node){
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateClick(Lcom/objetdirect/tatami/client/tree/TreeItem;)(item);
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateClick(Lcom/objetdirect/tatami/client/tree/Item;)(item);
 			},
 			onDblClick: function( item, node){
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateDblClick(Lcom/objetdirect/tatami/client/tree/TreeItem;)(item);
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateDblClick(Lcom/objetdirect/tatami/client/tree/Item;)(item);
 			},
 			onOpen: function(item,  node){
 				if(item == this.model.root || item == null){
 					return;
 				}
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateOpen(Lcom/objetdirect/tatami/client/tree/TreeItem;)(item);
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateOpen(Lcom/objetdirect/tatami/client/tree/Item;)(item);
 			},
 			onClose: function(item,node){
 				if(item == this.model.root || item == null){
 					return;
 				}
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateClose(Lcom/objetdirect/tatami/client/tree/TreeItem;)(item);
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateClose(Lcom/objetdirect/tatami/client/tree/Item;)(item);
 			}
 		});
 		$wnd.dojo.declare("dojox.tree.TatamiTreeStoreModel" , $wnd.dijit.tree.ForestStoreModel , {
+			childrenAttrs : [@com.objetdirect.tatami.client.data.Item::childAttribute;
 			pasteItem: function( childItem,  oldParentItem,  newParentItem,  bCopy){
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::moveItem(Lcom/objetdirect/tatami/client/tree/TreeItem;Lcom/objetdirect/tatami/client/tree/TreeItem;)(childItem , newParentItem == this.root || newParentItem == undefined ? null : newParentItem);
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::moveItem(Lcom/objetdirect/tatami/client/tree/Item;Lcom/objetdirect/tatami/client/tree/Item;)(childItem , newParentItem == this.root || newParentItem == undefined ? null : newParentItem);
 			},
 			mayHaveChildren: function(item){
-				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::mayHaveChildren(Lcom/objetdirect/tatami/client/tree/TreeItem;)(item);
+				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::mayHaveChildren(Lcom/objetdirect/tatami/client/tree/Item;)(item);
 			},
 			getRoot: function(onItem, onError){
 				if(this.root){
@@ -336,14 +343,14 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * 
 	 * @param item : the item on wich the onClick event has occured 
 	 */
-	private void propagateClick(TreeItem item){
+	private void propagateClick(Item item){
 		for (Iterator<TreeListener> iterator = treeListeners.iterator(); iterator.hasNext();) {
 			TreeListener listener =  iterator.next();
 			listener.onClick(item);
 		}
 	}
 	
-	private void propagateDblClick(TreeItem item){
+	private void propagateDblClick(Item item){
 		for (Iterator<TreeListener> iterator = treeListeners.iterator(); iterator.hasNext();) {
 			TreeListener listener =  iterator.next();
 			listener.onDblClick(item);
@@ -355,7 +362,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * 
 	 * @param item : the item on wich the onOpen event has occured 
 	 */
-	private void propagateOpen(TreeItem item){
+	private void propagateOpen(Item item){
 		for (Iterator<TreeListener> iterator = treeListeners.iterator(); iterator.hasNext();) {
 			TreeListener type =  iterator.next();
 			type.onOpen(item);
@@ -366,7 +373,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * 
 	 * @param item : the item on wich the onClose event has occured 
 	 */
-	private void propagateClose(TreeItem item){
+	private void propagateClose(Item item){
 		for (Iterator<TreeListener> iterator = treeListeners.iterator(); iterator.hasNext();) {
 			TreeListener type =  iterator.next();
 			type.onClose(item);
@@ -382,21 +389,21 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * necessarily loaded yet, or once loaded it may appear that it doesn't have children at all.
 	 * 		  false if the item is definetely a lead
 	 */
-	public boolean mayHaveChildren(TreeItem item){
+	public boolean mayHaveChildren(Item item){
 		return item.hasAttribute("children");
 	}
 	
 	/**
 	 * @param item: adds an item to the underlying store.
 	 */
-	protected void addItem(TreeItem item){
+	protected void addItem(Item item){
 		this.store.add(item);
 	}
 	
 	/**
 	 * @param item the item to remove from the underlying store 
 	 */
-	public void removeItem(TreeItem item){
+	public void removeItem(Item item){
 		store.remove(item);
 		removeChildFromItem(item.getParentItem(), item);
 	}
@@ -405,13 +412,13 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param item : an item to add as a "virtual root" child. That means it will appear as 
 	 * a root if the virtual root is not displayed.
 	 */
-	public void addRootItem(TreeItem item){
+	public void addRootItem(Item item){
 		this.store.add(item);
 		this.store.setValue(item, rootCriteriaName, rootCriteriaValue);
 		if(dojoWidget != null){
 			dojoAddRootItem(getDojoTreeModel(), item);
 		}
-		for(TreeItem child : item.getChildren()){
+		for(Item child : item.getChildren()){
 			addItem(child);
 		}
 	}
@@ -422,7 +429,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param model
 	 * @param item
 	 */
-	private native void dojoAddRootItem(JavaScriptObject model , TreeItem item)/*-{
+	private native void dojoAddRootItem(JavaScriptObject model , Item item)/*-{
 		model.root.children.push(item);
 	}-*/;
 	
@@ -437,7 +444,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param parent
 	 * @param child
 	 */
-	public void removeChildFromItem(TreeItem parent , TreeItem child){
+	public void removeChildFromItem(Item parent , Item child){
 		if(parent == null){
 			refreshTree();
 		}else{
@@ -459,7 +466,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param itemToMove
 	 * @param newParent
 	 */
-	public void moveItem(TreeItem itemToMove, TreeItem newParent){
+	public void moveItem(Item itemToMove, Item newParent){
 		if(newParent == null){
 			removeChildFromItem(itemToMove.getParentItem(), itemToMove);
 			addRootItem(itemToMove);
@@ -605,29 +612,6 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		this.rootCriteriaValue = rootCriteriaValue;
 	}
 	
-	
-	/**
-	 * 
-	 * 
-	 * @param item : the item we want to know the css class
-	 * @param opened
-	 * @return the css class applied to this item, according to its state
-	 */
-	public String getIconClass(TreeItem item , boolean opened ){
-		String iconClass = item.hasAttribute("children") ?  (opened ? item.getFolderOpenIconClass() : item.getFolderClosedIconClass() ) : item.getLeafIconClass();
-		iconClass = iconClass == null ? (item.hasAttribute("children") ?  (opened ? defaultFolderOpenClass : defaultFolderClosedClass) : defaultLeafClass ) : iconClass;
-		return iconClass;
-	}
-	
-	/**
-	 * @param item : the item we want to know the label's class
-	 * @return the item label's
-	 */
-	public String getLabelClass(TreeItem item){
-		return item.getLabelClass();
-	}
-	
-	
 
 	/**
 	 * @return Should the tree show its virtual root ? 
@@ -656,5 +640,20 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	public void removeAfterCreationListener(DojoAfterCreationListener listener) {
 		afterCreationListeners.remove(listener);
 	}
+	
+	private String getIconClass(Item item , boolean opened ){
+		String iconClass = item.getChildren() != null ?  (opened ? (String)item.getValue(folderOpenedClass,null) : (String)item.getValue(folderClosedClass,null) ) : (String)item.getValue(leafClassAttribute,null);
+		iconClass = iconClass == null ? (item.hasAttribute("children") ?  (opened ? defaultFolderOpenClass : defaultFolderClosedClass) : defaultLeafClass ) : iconClass;
+		return iconClass;
+	}
+	
+	/**
+	 * @param item : the item we want to know the label's class
+	 * @return the item label's
+	 */
+	public String getLabelClass(Item item){
+		return (String) item.getValue(labelClassAttribute , null);
+	}
+	
 	
 }

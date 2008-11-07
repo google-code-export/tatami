@@ -35,7 +35,7 @@ import com.google.gwt.user.client.Event;
 import com.objetdirect.tatami.client.DojoAfterCreationEventsSource;
 import com.objetdirect.tatami.client.DojoAfterCreationListener;
 import com.objetdirect.tatami.client.DojoController;
-import com.objetdirect.tatami.client.tree.TreeItem;
+import com.objetdirect.tatami.client.data.Item;
 
 /**
  * This class is the tree drag and drop controller. It contains the dojo widget's definition 
@@ -217,7 +217,7 @@ public class DnDTreeController extends IDnDController<TreeSource, TreeTarget> im
 		 */
 		@Override
 		public IDnDElement getDndElementAtGivenIndex(int index , JavaScriptObject source , JavaScriptObject nodesArray ){
-			TreeItem item = getItemFromJavascriptArray(index, source , nodesArray);
+			Item item = getItemFromJavascriptArray(index, source , nodesArray);
 			return new DndTreeElement(item);
 		}
 		
@@ -229,7 +229,7 @@ public class DnDTreeController extends IDnDController<TreeSource, TreeTarget> im
 		 * @param nodesArray
 		 * @return
 		 */
-		private native TreeItem getItemFromJavascriptArray(int index , JavaScriptObject source , JavaScriptObject nodesArray )/*-{
+		private native Item getItemFromJavascriptArray(int index , JavaScriptObject source , JavaScriptObject nodesArray )/*-{
 			var toReturn = source.getItemFromJSNode(nodesArray[index]); 
 			return toReturn;
 		}-*/;

@@ -28,6 +28,7 @@ package com.objetdirect.tatami.client.tree;
 import java.util.Iterator;
 import java.util.List;
 
+import com.google.gwt.user.client.ui.TreeItem;
 import com.objetdirect.tatami.client.data.AbstractDataStore;
 import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.data.Request;
@@ -36,43 +37,18 @@ public class TreeStore extends AbstractDataStore{
 
 	private String childAttribute = "child";
 	
-	private LabelBuilderStrategy buildLabelStrategy;
-	
-	public LabelBuilderStrategy getBuildLabelStrategy() {
-		return buildLabelStrategy;
-	}
-
-	public void setBuildLabelStrategy(LabelBuilderStrategy buildLabelStrategy) {
-		this.buildLabelStrategy = buildLabelStrategy;
-	}
-
-	class DefaultBuildLabelStrategy implements LabelBuilderStrategy{
-
-		public String getLabel(Item item) {
-			return (String) item.getValue("label", item.getValue(getIdentityAttribute(), "<No label>").toString());
-		}
-
-		public String[] getLabelAttributes(Item item) {
-			String[] labelAttrs = {"label"};
-			return labelAttrs;
-		}
-		
-	}
-	
 	public TreeStore(){
 		super();
-		this.buildLabelStrategy = new DefaultBuildLabelStrategy();
 	}
 	
 	@Override
 	public void fetch(Request request) {
-		
 		Object[] concreteItems = items.values().toArray();
 		List<?> itemsSortedAndMatchingQuery = this.executeQuery(items.values() , request);
 		notifyBeginFetchListeners(itemsSortedAndMatchingQuery.size(), request);
 		for (Iterator<?> iterator = itemsSortedAndMatchingQuery.iterator(); iterator
 				.hasNext();) {
-			TreeItem item = (TreeItem) iterator.next();
+			Item item = (Item) iterator.next();
 			notifyItemFetchListeners(item);
 		}
 		notifyCompleteFetchListeners(itemsSortedAndMatchingQuery , request);
@@ -100,16 +76,5 @@ public class TreeStore extends AbstractDataStore{
 		return isItem;
 	}
 
-	@Override
-	public String getLabel(Item item) {
-		return buildLabelStrategy.getLabel(item);
-	}
-
-	@Override
-	public String[] getLabelAttributes(Item item) {
-		return buildLabelStrategy.getLabelAttributes(item);
-	}
-
-	
 	
 }

@@ -28,7 +28,7 @@
 package com.objetdirect.tatami.client.dnd;
 
 import com.google.gwt.user.client.Element;
-import com.objetdirect.tatami.client.tree.TreeItem;
+import com.objetdirect.tatami.client.data.Item;
 
 /**
  * A IDnDElement implementation for managing drag and drop 
@@ -42,15 +42,15 @@ public class DndTreeElement implements IDnDElement {
 
 	String dndId;
 	
-	TreeItem treeItem;
+	Item treeItem;
 	
-	public TreeItem getTreeItem() {
+	public Item getTreeItem() {
 		return treeItem;
 	}
 
 	IDnDSource<DndTreeElement> source;
 	
-	public DndTreeElement(TreeItem treeItem) {
+	public DndTreeElement(Item treeItem) {
 		this.treeItem = treeItem;
 	}
 
@@ -62,7 +62,7 @@ public class DndTreeElement implements IDnDElement {
 		return null;
 	}
 	
-	public TreeItem getItem(){
+	public Item getItem(){
 		return treeItem;
 	}
 

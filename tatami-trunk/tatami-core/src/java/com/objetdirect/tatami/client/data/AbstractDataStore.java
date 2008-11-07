@@ -87,13 +87,13 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	/**
 	 * Attribute used to retrieve an Item identity
 	 */
-	private String idAttribute = "id";
+	private String idAttribute = Item.idAttribute;
 	
 	
 	/**
 	 * Attribute used to retrieve an Item Label
 	 */
-	private String labelAttribute = "label";
+	private String labelAttribute = Item.labelAttribute;
 	
 	
 	
@@ -234,6 +234,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @return the attribute's value, or the default value.
 	 * 
 	 */
+	@Deprecated
 	public Object getValue(Item item , String attribute , Object defaultValue) {
 		if(!isItem(item)){
 			return defaultValue;
@@ -252,7 +253,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 */
 	private Object dojoGetValue(Item item , String attribute , Object defaultValue) {
 		Object value = defaultValue;
-		value = getValue(item, attribute, defaultValue);
+		value = item.getValue(attribute, defaultValue);
 		if( value instanceof String ||	value instanceof Boolean || value instanceof Number){
 			return value;
 		}else if(value instanceof Date){
@@ -266,7 +267,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	}
 	
 	private JavaScriptObject dojoGetValues(Item item , String attribute){
-		Object value =  getValue(item, attribute, null);
+		Object value =  item.getValues(attribute);
 		JavaScriptObject valuesArray;
 		if(value == null){
 			return JavaScriptObject.createArray();
@@ -285,10 +286,11 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param attribute : the attribute to set
 	 * @param value : value to set the attribute to 
 	 */
+	@Deprecated
 	public void setValue(Item item , String attribute , Object value) {
 		if(isItem(item)){
-			Object oldValue = getValue(item, attribute, null);
-			item.addAttribute(attribute, value);
+			Object oldValue =item.getValue(attribute, null);
+			item.setValue(attribute, value);
 			items.put(getIdentity(item), item);
 			onSet(item, attribute, oldValue, value);
 		}
@@ -310,7 +312,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 		for (Iterator<Item> iterator = concreteItems.iterator(); iterator.hasNext();) {
 			Item currItem = iterator.next();
 			Object value;
-			value = getValue(currItem , attrName , null);
+			value = currItem.getValue(attrName , null);
 			if(value.equals(attrValue)){
 				toReturn.add(currItem);
 			}
@@ -547,6 +549,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	}
 	
 	public void add(Item item, JavaScriptObject parentInfo){
+		item.setStore(this);
 		Object id = getIdentity(item);
 		Item oldItem = items.get(id);
 		if(oldItem != null){
@@ -583,7 +586,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	}
 	
 	private void dojoSetValues(Item item , String attribute , JavaScriptObject values){
-		setValue(item, attribute, JSHelper.convertJSArrayToCollection(values));
+		item.setValue(attribute, JSHelper.convertJSArrayToCollection(values));
 	}
 	
 	/**
@@ -617,7 +620,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param oldValue 
 	 * @param newValue
 	 */
-	private void onSet(Item item , String attribute , Object oldValue , Object newValue) {
+	public void onSet(Item item , String attribute , Object oldValue , Object newValue) {
 		notifyDatumChangeListeners(item, attribute, oldValue, newValue);
 		if(newValue instanceof Date){
 			newValue = DateUtil.getJSDate((Date)newValue);
@@ -673,6 +676,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param item
 	 */
 	public void remove(Item item) {
+		item.setStore(null);
 		if(dojoStore != null){
 			callJSOnDelete(item);
 		}else{

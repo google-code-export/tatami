@@ -27,14 +27,16 @@
 
 package com.objetdirect.tatami.client.data;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+
 import com.google.gwt.core.client.JavaScriptObject;
-import com.objetdirect.tatami.client.JSHelper;
 import com.objetdirect.tatami.client.ConvertibleToJSObject;
+import com.objetdirect.tatami.client.JSHelper;
 
 /**
  * This class represents an item in the datastore. Items are composed
@@ -46,10 +48,21 @@ import com.objetdirect.tatami.client.ConvertibleToJSObject;
 public class Item  implements ConvertibleToJSObject{
 	
 	
+	private DataStore store;
+	
+	final public static String childAttribute = "_____tatami__children____attribute"; 
+	final public static String labelAttribute = "_____tatami__label____attribute";
+	final public static String idAttribute = "_____tatami__id____attribute";
+	
+
 	/**
 	 * Item's attributes
 	 */
 	protected Map<String, Object> attributes;
+	
+	Item parentItem;
+	
+
 	
 	/**
 	 * Default constructor
@@ -57,6 +70,7 @@ public class Item  implements ConvertibleToJSObject{
 	public Item(){
 		attributes = new HashMap<String, Object>();
 	}
+	
 	
 	
 	/**
@@ -69,6 +83,29 @@ public class Item  implements ConvertibleToJSObject{
 	}
 	
 	
+	public Item(String id, String label) {
+		this();
+		setId(id);
+		setLabel(label);
+	}
+
+	public Object getId(){
+		return attributes.get(idAttribute);
+	}
+	
+	public void setId(Object id){
+		attributes.put(idAttribute , id);
+	}
+	
+	public Object getLabel(){
+		return attributes.get(labelAttribute);
+	}
+	
+	public void setLabel(String label){
+		attributes.put(labelAttribute , label);
+	}
+	
+
 	/**
 	 * @param attributeName : the attribute we want to test the presence
 	 * @return : true if item has the given attribute, 
@@ -107,11 +144,11 @@ public class Item  implements ConvertibleToJSObject{
 		String[] toReturn = new String[values.size()];
 		int i = 0;
 		for (Iterator<String> iterator = values.iterator(); iterator.hasNext();) {
-			Object object = (Object) iterator.next();
+			Object object = iterator.next();
 			toReturn[i] = object != null ? object.toString() : "";
 			i++;
 		}
-		return (String[]) toReturn;
+		return toReturn;
 	}
 	
 	/**
@@ -122,67 +159,67 @@ public class Item  implements ConvertibleToJSObject{
 		return this.attributes.get(attributeName);
 	}
 	
-	/**
-	 * Adds an attribute to the item
-	 * 
-	 * @param attrname
-	 * @param attrvalue
-	 */
-	public void addAttribute(String attrname , Object attrvalue){
-		this.attributes.put(attrname, attrvalue);
-	}
-	
-	/**
-	 * Adds an attribute to the item
-	 * 
-	 * @param attrname
-	 * @param attrvalue
-	 */
-	public void addAttribute(String attrname , String attrvalue){
-		this.attributes.put(attrname, attrvalue);
-	}
-	
-	/**
-	 * Adds an attribute to the item
-	 * 
-	 * @param attrname
-	 * @param attrvalue
-	 */
-	public void addAttribute(String attrname , Date attrvalue){
-		this.attributes.put(attrname, attrvalue);
-	}
-	
-	
-	/**
-	 * Adds an attribute to the item
-	 * 
-	 * @param attrname
-	 * @param attrvalue
-	 */
-	public void addAttribute(String attrname , JavaScriptObject attrvalue){
-		this.attributes.put(attrname, attrvalue);
-	}
-	
-	/**
-	 * Adds an attribute to the item
-	 * 
-	 * @param attrname
-	 * @param attrvalue
-	 */
-	public void addAttribute(String attrname , Number attrvalue){
-		this.attributes.put(attrname, attrvalue);
-	}
-	
-	
-	/**
-	 * Adds an attribute to the item
-	 * 
-	 * @param attrname
-	 * @param attrvalue
-	 */
-	public void addAttribute(String attrname , Boolean attrvalue){
-		this.attributes.put(attrname, attrvalue);
-	}
+//	/**
+//	 * Adds an attribute to the item
+//	 * 
+//	 * @param attrname
+//	 * @param attrvalue
+//	 */
+//	public void addAttribute(String attrname , Object attrvalue){
+//		this.attributes.put(attrname, attrvalue);
+//	}
+//	
+//	/**
+//	 * Adds an attribute to the item
+//	 * 
+//	 * @param attrname
+//	 * @param attrvalue
+//	 */
+//	public void addAttribute(String attrname , String attrvalue){
+//		this.attributes.put(attrname, attrvalue);
+//	}
+//	
+//	/**
+//	 * Adds an attribute to the item
+//	 * 
+//	 * @param attrname
+//	 * @param attrvalue
+//	 */
+//	public void addAttribute(String attrname , Date attrvalue){
+//		this.attributes.put(attrname, attrvalue);
+//	}
+//	
+//	
+//	/**
+//	 * Adds an attribute to the item
+//	 * 
+//	 * @param attrname
+//	 * @param attrvalue
+//	 */
+//	public void addAttribute(String attrname , JavaScriptObject attrvalue){
+//		this.attributes.put(attrname, attrvalue);
+//	}
+//	
+//	/**
+//	 * Adds an attribute to the item
+//	 * 
+//	 * @param attrname
+//	 * @param attrvalue
+//	 */
+//	public void addAttribute(String attrname , Number attrvalue){
+//		this.attributes.put(attrname, attrvalue);
+//	}
+//	
+//	
+//	/**
+//	 * Adds an attribute to the item
+//	 * 
+//	 * @param attrname
+//	 * @param attrvalue
+//	 */
+//	public void addAttribute(String attrname , Boolean attrvalue){
+//		this.attributes.put(attrname, attrvalue);
+//	}
 	
 	/**
 	 * @param attributeName
@@ -199,13 +236,29 @@ public class Item  implements ConvertibleToJSObject{
 			return value;
 		}
 	}
+	
+	public Object getValue(String attributeName){
+		return getValue(attributeName , null);
+	}
+	
+	public void setValue(String attributeName , Object value){
+		Object oldValue = attributes.get(attributeName);
+		attributes.put(attributeName, value);
+		if(store != null){
+			store.onSet(this, attributeName , oldValue, value);
+		}
+	}
 
 	/**
 	 * Removes the given attribute
 	 * @param attributeName : the attribute to remove
 	 */
 	public void removeAttribute(String attributeName){
+		Object oldValue = attributes.get(attributeName);
 		attributes.remove(attributeName);
+		if(store != null){
+			store.onSet(this, attributeName , oldValue, null);
+		}
 	}
 
 
@@ -213,6 +266,46 @@ public class Item  implements ConvertibleToJSObject{
 		return JSHelper.convertObjectToJSObject(attributes);
 	}
 	
+	public DataStore getStore() {
+		return store;
+	}
+
+	public void setStore(DataStore store) {
+		this.store = store;
+	}
 	
+	public void setChildren(List<Item> children){
+		attributes.put(childAttribute, children);
+	}
+	
+	public List<Item> getChildren(){
+		return (List<Item>) attributes.get(childAttribute);
+	}
+	
+	public void addChild(Item item){
+		List<Item> children = getChildren();
+		if(children == null){
+			children = new ArrayList<Item>();
+			setValue(childAttribute, children);
+		}
+		parentItem = item;
+		children.add(item);
+	}
+	
+	public void removeChild(Item item){
+		item.setParentItem(null);
+		List<Item> children = (List<Item>) getValue(childAttribute, null);
+		if(children != null){
+			children.remove(item);
+		}
+	}
+	
+	public void setParentItem(Item item){
+		this.parentItem = item;
+	}
+
+	public Item getParentItem(){
+		return parentItem;
+	}
 
 }

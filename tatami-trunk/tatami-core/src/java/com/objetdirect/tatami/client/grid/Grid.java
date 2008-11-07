@@ -422,10 +422,10 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 		Item item = new Item();
 		for (int i = 0; i < row.length; i++) {
 			String field = layout.getCellAmongAllViews(i).getField();
-			item.addAttribute(field , row[i]);
+			item.setValue(field , row[i]);
 		}
 		if(store.getIdentity(item) == null){
-			item.addAttribute(store.getIdentityAttribute(), new Integer(index) + row[0].toString());
+			item.setValue(store.getIdentityAttribute(), new Integer(index) + row[0].toString());
 		}
 		addRow(item , index );
 	}

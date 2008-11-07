@@ -64,6 +64,7 @@ public interface DataStore extends FetchEventSource , DatumChangeSource , LoadIt
 	 * @param attribute : the attribute to set
 	 * @param value : value to set the attribute to 
 	 */
+	@Deprecated
 	public void setValue(Item item , String attribute , Object value);
 	
 	
@@ -91,12 +92,14 @@ public interface DataStore extends FetchEventSource , DatumChangeSource , LoadIt
 	 * @return the attribute's value, or the default value.
 	 * 
 	 */
+	@Deprecated
 	public Object getValue(Item item , String attribute , Object defaultValue);
 	
 	/**
 	 * @param item : the item to get the attributes from
 	 * @return : an array containing the attributes names.
 	 */
+	@Deprecated
 	public String[] getAttributes(Item item);
 	
 	/**
@@ -105,6 +108,7 @@ public interface DataStore extends FetchEventSource , DatumChangeSource , LoadIt
 	 * @return : true if the item has this attribute, 
 	 * 			 false otherwise.
 	 */
+	@Deprecated
 	public boolean hasAttribute(Item item , String attributeName);
 	
 	/**
@@ -114,6 +118,7 @@ public interface DataStore extends FetchEventSource , DatumChangeSource , LoadIt
 	 * @param value
 	 * @return true if item contains the value for the given attribute, false otherwise
 	 */
+	@Deprecated
 	public boolean containsValue(Item item , String attribute , Object value);
 	
 	
@@ -156,5 +161,7 @@ public interface DataStore extends FetchEventSource , DatumChangeSource , LoadIt
 	 * @return the current store's size
 	 */
 	public int size();
+	
+	public void onSet(Item item, String attributeName, Object oldValue , Object newValue);
 	
 }
