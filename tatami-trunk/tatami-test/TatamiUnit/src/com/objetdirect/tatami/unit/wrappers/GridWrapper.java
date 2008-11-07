@@ -24,15 +24,15 @@ public class GridWrapper {
 	}
 	
 	public void clickOnCell(int row , int col){
-		testGwt.mouseClick(getCell(row , col), testGwt.BUTTON_LEFT, false, false, false);
+		testGwt.mouseClick(getCell(row , col), TestGWT.BUTTON_LEFT, false, false, false);
 	}
 	
 	public void dblClickOnCell(int row , int col){
-		testGwt.mouseDblClick(getCell(row , col), testGwt.BUTTON_LEFT, false, false, false);
+		testGwt.mouseDblClick(getCell(row , col), TestGWT.BUTTON_LEFT, false, false, false);
 	}
 	
 	public void clickOnCellHeader(int index){
-		testGwt.mouseClick(getCellHeader(index), testGwt.BUTTON_LEFT, false, false, false);
+		testGwt.mouseClick(getCellHeader(index), TestGWT.BUTTON_LEFT, false, false, false);
 	}
 	
 	public int getRowCount(){
@@ -57,7 +57,7 @@ public class GridWrapper {
 				Iterable<HtmlElement> rows = (Iterable<HtmlElement>) c.getChildElements();
 				int count = 0;
 				HtmlElement htmlRow = null;
-				for (Iterator iterator = rows.iterator(); iterator.hasNext() && count <= row;) {
+				for (Iterator<HtmlElement> iterator = rows.iterator(); iterator.hasNext() && count <= row;) {
 					htmlRow = (HtmlElement) iterator.next();
 					count++;
 				}

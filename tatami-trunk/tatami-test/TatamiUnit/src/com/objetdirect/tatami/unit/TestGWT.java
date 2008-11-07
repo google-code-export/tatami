@@ -1,18 +1,12 @@
 package com.objetdirect.tatami.unit;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.commons.lang.math.NumberUtils;
-import org.w3c.dom.NamedNodeMap;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.host.MouseEvent;
 
@@ -49,6 +43,11 @@ final private WebWindow window;
 	
 	public void mouseClick(HtmlElement elem , int button , boolean altKey , boolean shiftKey , boolean ctrlKey){
 		MouseEvent event = new MouseEvent(elem , MouseEvent.TYPE_CLICK , shiftKey ,ctrlKey, altKey, button );
+		elem.fireEvent(event);
+	}
+	
+	public void mouseClick(HtmlElement elem){
+		MouseEvent event = new MouseEvent(elem , MouseEvent.TYPE_CLICK , false ,false, false, BUTTON_LEFT );
 		elem.fireEvent(event);
 	}
 	
@@ -98,9 +97,12 @@ final private WebWindow window;
 	}
 	
 	private HtmlElement getNeighbor(HtmlElement element){
-		HtmlElement neighbor = (HtmlElement) element.getNextSibling();
-		neighbor = (HtmlElement) (neighbor == null ? element.getPreviousSibling() : neighbor);
-		neighbor = (HtmlElement) (neighbor == null ? getNeighbor((HtmlElement) element.getParentNode()) : neighbor);
+		DomNode tempneighbor = (DomNode) element.getNextSibling();
+		HtmlElement neighbor = (HtmlElement) ((tempneighbor instanceof HtmlElement)? tempneighbor : null); 
+		tempneighbor =  (neighbor == null ? element.getPreviousSibling() : neighbor);
+		neighbor = (HtmlElement) ((tempneighbor instanceof HtmlElement)? tempneighbor : null);
+		tempneighbor =  (neighbor == null ? element.getParentNode() : neighbor);
+		neighbor = (HtmlElement) ((tempneighbor instanceof HtmlElement)? tempneighbor : null); 
 		return neighbor;
 	}
 	
@@ -137,5 +139,19 @@ final private WebWindow window;
 				window.getWebClient().setAlertHandler(null);
 			}
 	}
+	
+	 
+	public String normalizeSVG(String svg){
+		svg = svg.toLowerCase();
+		svg = svg.replace("\r\n","");
+		svg = svg.replaceAll(">\\s*<", "><");
+		svg = svg.replaceAll("\\s*/>", "/>");
+		System.out.println("BEFORE NORMALIZE : \n" + svg);
+		//Replace all numeric values by 
+		svg = svg.replaceAll("<(\\w*)\\s*.*?([\\>>])","<$1$2");
+		System.out.println("AFTER NORMALIZE : \n" + svg);
+		return svg;
+	}
+	
 	
 }
