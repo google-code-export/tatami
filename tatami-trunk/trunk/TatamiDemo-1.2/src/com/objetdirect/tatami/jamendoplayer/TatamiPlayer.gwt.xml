@@ -1,0 +1,17 @@
+<module>
+	<!-- Inherit the core Web Toolkit stuff.                  -->
+	<inherits name='com.google.gwt.user.User'/>
+	<inherits name="com.objetdirect.tatami.Tatami_DojoWidget"/>
+	<inherits name="com.objetdirect.tatamix.Tatamix"/>
+    <inherits name="com.google.gwt.i18n.I18N"/>
+	<inherits name='org.miller.gwt.Sound'/>
+	<!-- Specify the app entry point class.                   -->
+	<entry-point class='com.objetdirect.tatami.jamendoplayer.client.TatamiPlayer'/>
+  	<stylesheet src="css/tatamiPlayer.css"/>
+  	<stylesheet src="css/contextInfo.css"/>
+  	<stylesheet src="css/controlPanel.css"/>
+  	<stylesheet src="css/header.css"/>
+  	<stylesheet src="css/treeicons.css"/>
+  	<stylesheet src="css/toasterChangeTrack.css"/>
+  	<stylesheet src="dijit/themes/tundra/tundra.css"/>;
+</module>
