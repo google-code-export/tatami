@@ -50,7 +50,7 @@ public class Item  implements ConvertibleToJSObject{
 	
 	private DataStore store;
 	
-	final public static String childAttribute = "_____tatami__children____attribute"; 
+	final public static String childAttribute = "children"; 
 	final public static String labelAttribute = "_____tatami__label____attribute";
 	final public static String idAttribute = "_____tatami__id____attribute";
 	
@@ -286,10 +286,22 @@ public class Item  implements ConvertibleToJSObject{
 		List<Item> children = getChildren();
 		if(children == null){
 			children = new ArrayList<Item>();
-			setValue(childAttribute, children);
 		}
-		parentItem = item;
+		item.setParentItem(this);
 		children.add(item);
+		setValue(childAttribute, children);
+	}
+	
+	public void addChildren(Item[] items){
+		List<Item> children = getChildren();
+		if(children == null){
+			children = new ArrayList<Item>();
+		}
+		for (int i = 0; i < items.length; i++) {
+			items[i].setParentItem(this);
+			children.add(items[i]);
+		}
+		setValue(childAttribute, children);
 	}
 	
 	public void removeChild(Item item){
@@ -298,6 +310,7 @@ public class Item  implements ConvertibleToJSObject{
 		if(children != null){
 			children.remove(item);
 		}
+		setValue(childAttribute,children);
 	}
 	
 	public void setParentItem(Item item){

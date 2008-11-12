@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.DateUtil;
 import com.objetdirect.tatami.client.DojoController;
@@ -168,7 +169,8 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 			 		};
 			 },
 			 getLabel: function(item){
-			 	return this.gwtStore.@com.objetdirect.tatami.client.data.AbstractDataStore::getLabel(Lcom/objetdirect/tatami/client/data/Item;)(item);
+			  	var label = this.gwtStore.@com.objetdirect.tatami.client.data.AbstractDataStore::getLabel(Lcom/objetdirect/tatami/client/data/Item;)(item);
+			  	return label;
 			 },
 			 getLabelAttributes: function(item){
 			 	return this.gwtStore.@com.objetdirect.tatami.client.data.AbstractDataStore::getLabelAttributes(Lcom/objetdirect/tatami/client/data/Item;)(item);
@@ -389,7 +391,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @return the label
 	 */
 	public String getLabel(Item item) {
-		return (String) item.getValue(labelAttribute, "DefaultLabel");
+		return (String) item.getValue(Item.labelAttribute, "DefaultLabel");
 	}
 	
 

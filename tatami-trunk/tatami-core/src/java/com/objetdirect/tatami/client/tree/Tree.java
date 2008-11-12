@@ -33,6 +33,7 @@ import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
 import com.objetdirect.tatami.client.AbstractDojo;
 import com.objetdirect.tatami.client.DojoAfterCreationEventsSource;
 import com.objetdirect.tatami.client.DojoAfterCreationListener;
@@ -61,8 +62,8 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 
 	final public static String labelClassAttribute = "labelClass";
 	final public static String leafClassAttribute = "leaf-class";
-	final public static String folderClosedClass = "folder-closed-class";
-	final public static String folderOpenedClass =	"folder-open-class";
+	final public static String folderClosedClassAttribute = "folder-closed-class";
+	final public static String folderOpenedClassAttribute =	"folder-open-class";
 	
 	
 	/**
@@ -262,16 +263,10 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		}
 		addItem(child);
 		parent.addChild(child);
-		store.setValue(parent, "children", parent.getChildren());
 	}
 	
 	public void addChildrenToItem(Item parent, Collection<Item> children){
-		for (Iterator<Item> iterator = children.iterator(); iterator.hasNext();) {
-			Item Item = iterator.next();
-			addItem(Item);
-			parent.addChild(Item);
-		}
-		store.setValue(parent, "children", parent.getChildren());
+		parent.addChildren((Item[]) children.toArray());
 	}
 	
 	/**
@@ -290,45 +285,47 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * Declares the dojo tatami tree widget
 	 */
 	private native void defineTatamiTree()/*-{
-		$wnd.dojo.declare("dojox.tree.TatamiTree" , $wnd.dijit.Tree , {
+		$wnd.dojo.declare("dojox.tree.TatamiTree" , [$wnd.dijit.Tree] , {
 			getIconClass : function(item , opened){
 				if(item == this.model.root){
 					return;
 				}
-				return item.@com.objetdirect.tatami.client.tree.Tree::getIconClass(Lcom/objetdirect/tatami/client/tree/Item;Z)(item,opened);
+				var iconClass;
+				iconClass = this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::getIconClass(Lcom/objetdirect/tatami/client/data/Item;Z)(item,opened);
+				return iconClass;
 			},
 			getLabelClass : function(item){
 				if(item == this.model.root){
 					return;
 				}
-				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::getLabelClass(Lcom/objetdirect/tatami/client/tree/Item;)(item);
+				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::getLabelClass(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			},
 			onClick: function( item, node){
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateClick(Lcom/objetdirect/tatami/client/tree/Item;)(item);
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateClick(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			},
 			onDblClick: function( item, node){
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateDblClick(Lcom/objetdirect/tatami/client/tree/Item;)(item);
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateDblClick(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			},
 			onOpen: function(item,  node){
 				if(item == this.model.root || item == null){
 					return;
 				}
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateOpen(Lcom/objetdirect/tatami/client/tree/Item;)(item);
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateOpen(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			},
 			onClose: function(item,node){
 				if(item == this.model.root || item == null){
 					return;
 				}
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateClose(Lcom/objetdirect/tatami/client/tree/Item;)(item);
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateClose(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			}
 		});
 		$wnd.dojo.declare("dojox.tree.TatamiTreeStoreModel" , $wnd.dijit.tree.ForestStoreModel , {
-			childrenAttrs : [@com.objetdirect.tatami.client.data.Item::childAttribute;
+			childrenAttrs : [@com.objetdirect.tatami.client.data.Item::childAttribute],
 			pasteItem: function( childItem,  oldParentItem,  newParentItem,  bCopy){
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::moveItem(Lcom/objetdirect/tatami/client/tree/Item;Lcom/objetdirect/tatami/client/tree/Item;)(childItem , newParentItem == this.root || newParentItem == undefined ? null : newParentItem);
+				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::moveItem(Lcom/objetdirect/tatami/client/data/Item;Lcom/objetdirect/tatami/client/data/Item;)(childItem , newParentItem == this.root || newParentItem == undefined ? null : newParentItem);
 			},
 			mayHaveChildren: function(item){
-				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::mayHaveChildren(Lcom/objetdirect/tatami/client/tree/Item;)(item);
+				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::mayHaveChildren(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			},
 			getRoot: function(onItem, onError){
 				if(this.root){
@@ -390,7 +387,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * 		  false if the item is definetely a lead
 	 */
 	public boolean mayHaveChildren(Item item){
-		return item.hasAttribute("children");
+		return item.hasAttribute(Item.childAttribute);
 	}
 	
 	/**
@@ -414,12 +411,9 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	public void addRootItem(Item item){
 		this.store.add(item);
-		this.store.setValue(item, rootCriteriaName, rootCriteriaValue);
+		item.setValue(rootCriteriaName, rootCriteriaValue);
 		if(dojoWidget != null){
 			dojoAddRootItem(getDojoTreeModel(), item);
-		}
-		for(Item child : item.getChildren()){
-			addItem(child);
 		}
 	}
 	
@@ -449,7 +443,6 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 			refreshTree();
 		}else{
 			parent.removeChild(child);
-			store.setValue(parent, "children", parent.getChildren());
 		}
 	}
 
@@ -642,8 +635,18 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	}
 	
 	private String getIconClass(Item item , boolean opened ){
-		String iconClass = item.getChildren() != null ?  (opened ? (String)item.getValue(folderOpenedClass,null) : (String)item.getValue(folderClosedClass,null) ) : (String)item.getValue(leafClassAttribute,null);
-		iconClass = iconClass == null ? (item.hasAttribute("children") ?  (opened ? defaultFolderOpenClass : defaultFolderClosedClass) : defaultLeafClass ) : iconClass;
+		String iconClass = item.getChildren() != null ?  (opened ? (String)item.getValue(folderOpenedClassAttribute,null) : (String)item.getValue(folderClosedClassAttribute,null) ) : (String)item.getValue(leafClassAttribute,null);
+		if(iconClass == null){
+			if(item.hasAttribute(Item.childAttribute)){
+				if(opened){
+					iconClass = defaultFolderOpenClass;
+				}else{
+					iconClass = defaultFolderClosedClass;
+				}
+			}else{
+				iconClass = defaultLeafClass;
+			}
+		}
 		return iconClass;
 	}
 	
