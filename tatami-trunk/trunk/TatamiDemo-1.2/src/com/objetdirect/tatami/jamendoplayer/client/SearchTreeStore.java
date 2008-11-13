@@ -31,9 +31,9 @@ class SearchTreeStore extends TreeStore implements JSONHandler {
 		int length = JamendoQueryMaker.getLength(obj);
 		if(parent instanceof LetterItem){
 			LetterItem letter = (LetterItem) parent;
-			TreeItem[] items = new TreeItem[length];
+			Item[] items = new Item[length];
 			for(int i = 0 ; i < length ; i++){
-				TreeItem artistItem = new ArtistItem(JamendoQueryMaker.extractItemsFromResponse(obj, i));
+				Item artistItem = new ArtistItem(JamendoQueryMaker.extractItemsFromResponse(obj, i));
 				items[i] = artistItem;
 			}
 			letter.setChildHaveBeenLoaded(true);
@@ -46,19 +46,19 @@ class SearchTreeStore extends TreeStore implements JSONHandler {
 					letter.setCurrentLetterRequested(letter.getCurrentLetterRequested()+1);
 					JamendoQueryMaker.searchArtistByLetter(this,letter);
 			}else{
-				removeChildFromItem(letter, letter.getLoadingItem());
+				letter.removeChild(letter.getLoadingItem());
 			}
 		}
 		if(parent instanceof ArtistItem){
 			ArtistItem artist = (ArtistItem) parent;
-			TreeItem[] items = new TreeItem[length];
+			Item[] items = new Item[length];
 			for(int i = 0 ; i < length ; i++){
-				TreeItem albumItem = new AlbumItem(JamendoQueryMaker.extractItemsFromResponse(obj, i));
+				Item albumItem = new AlbumItem(JamendoQueryMaker.extractItemsFromResponse(obj, i));
 				items[i] = albumItem;
 			}
 			artist.setChildHaveBeenLoaded(true);
 			this.addChildToItem(artist, items);
-			removeChildFromItem(artist, artist.getLoadingItem());
+			artist.removeChild(artist.getLoadingItem());
 			notifyLoadItemListeners(artist);
 		}
 		
@@ -72,8 +72,8 @@ class SearchTreeStore extends TreeStore implements JSONHandler {
 			}
 			Collections.sort(list,new TrackNumberComparator());
 			album.setChildHaveBeenLoaded(true);
-			album.addChild(list.toArray(items));
-			removeChildFromItem(album, album.getLoadingItem());
+			album.addChildren(list.toArray(items));
+			album.removeChild(album.getLoadingItem());
 			notifyLoadItemListeners(album);
 		}
 	}
@@ -84,11 +84,10 @@ class SearchTreeStore extends TreeStore implements JSONHandler {
 		}
 	}
 	
-	public void addChildToItem(TreeItem parent, TreeItem[] children){
+	public void addChildToItem(Item parent, Item[] children){
 		for (int i = 0; i < children.length; i++) {
 			parent.addChild(children[i]);
 		}
-		setValue(parent, "children", parent.getChildren());
 	}
 	
 	public Object getValue(Item item, String attribute, Object defaultValue) {
@@ -115,10 +114,6 @@ class SearchTreeStore extends TreeStore implements JSONHandler {
 
 
 
-	public void removeChildFromItem(TreeItem parent , TreeItem child){
-		parent.removeChild(child);
-		setValue(parent, "children", parent.getChildren());
-	}
 
 	
 

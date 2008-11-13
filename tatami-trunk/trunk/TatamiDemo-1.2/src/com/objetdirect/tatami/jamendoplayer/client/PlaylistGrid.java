@@ -167,8 +167,8 @@ public class PlaylistGrid extends Grid implements LoadItemListener , Callback{
 	}
 
 	public void execute() {
-		store.setValue(Player.getLastPlayed(), "isPlayed", Boolean.FALSE);
-		store.setValue(Player.getPlayed(), "isPlayed", Boolean.TRUE);
+		Player.getLastPlayed().setValue("isPlayed", Boolean.FALSE);
+		Player.getPlayed().setValue("isPlayed", Boolean.TRUE);
 	}
 	
 	
