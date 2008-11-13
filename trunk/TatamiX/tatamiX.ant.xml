@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="TatamiX" default="compile" basedir=".">
+  
+	<property file="env.properties" />
+	<property name="build.dir" value="bin"/>
+	<property name="dist.dir" value="dist"/>
+	
+	<description>
+    TatamiX build file.  This is used to package up  the TatamiX project as a jar,
+    to distribute it.  
+  </description>
+
+  <!-- set classpath -->
+  <path id="project.class.path">
+    <pathelement path="${java.class.path}/"/>
+    <pathelement path="${tatami.lib}/"/>
+  	<pathelement path="${gwt.user.lib}/"/>
+    <!-- Additional dependencies (such as junit) go here -->
+  </path>
+
+  <target name="compile" description="Compile src to build">
+    <mkdir dir="${build.dir}"/>
+    <javac srcdir="src/java:src/test" destdir="${build.dir}" includes="**" debug="on" debuglevel="lines,vars,source" >
+      <classpath refid="project.class.path"/>
+    </javac>
+  </target>
+
+  <target name="package" depends="compile" description="Package up the project as a jar">
+  	<mkdir dir="${dist.dir}"/>
+  	<jar destfile="${dist.dir}/tatamix.jar">
+      <fileset dir="${build.dir}">
+        <include name="**/*.class"/>
+      </fileset>
+      <!-- Get everything; source, modules, html files -->
+      <fileset dir="src/java">
+        <include name="**"/>
+      </fileset>
+      <fileset dir="src/test">
+        <include name="**"/>
+      </fileset>
+    </jar>
+  </target>
+
+  <target name="clean">
+    <!-- Delete the bin directory tree -->
+    <delete file="${dist.dir}/tatamix.jar"/>
+    <delete>
+      <fileset dir="${build.dir}" includes="**/*.class"/>
+    </delete>
+  </target>
+
+  <target name="all" depends="package"/>
+
+</project>
