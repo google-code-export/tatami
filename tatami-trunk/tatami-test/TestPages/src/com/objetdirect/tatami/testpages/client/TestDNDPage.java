@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.dnd.DnD;
 import com.objetdirect.tatami.client.dnd.DnDDefaultWidgetBehavior;
 import com.objetdirect.tatami.client.dnd.DnDGenericBehavior;
@@ -46,7 +47,6 @@ import com.objetdirect.tatami.client.dnd.IDnDTarget;
 import com.objetdirect.tatami.client.dnd.WidgetDnDBehavior;
 import com.objetdirect.tatami.client.dnd.DnDBehaviors.BehaviorScopeException;
 import com.objetdirect.tatami.client.tree.Tree;
-import com.objetdirect.tatami.client.tree.TreeItem;
 
 public class TestDNDPage extends TestPage{
 
@@ -101,11 +101,11 @@ public class TestDNDPage extends TestPage{
 		};
 		
 		
-//		try {
-//			DnD.registerBehavior(treeToPanel1Behavior,sourceOnlyTree, targetOnlyPanel);
-//		} catch (BehaviorScopeException e1) {
-//			e1.printStackTrace();
-//		}
+		try {
+			DnD.registerBehavior(treeToPanel1Behavior,sourceOnlyTree, targetOnlyPanel);
+		} catch (BehaviorScopeException e1) {
+			e1.printStackTrace();
+		}
 		DnDGenericBehavior<IDnDElement> grosBehavior = new DnDGenericBehavior<IDnDElement>() {
 			@Override
 			public boolean onDrop(Collection<IDnDElement> dndElements, IDnDSource<? extends IDnDElement> source,
@@ -130,7 +130,6 @@ public class TestDNDPage extends TestPage{
 			@Override
 			public boolean onDrop(Collection<DndTreeElement> dndElements, IDnDSource<? extends DndTreeElement> source,
 					IDnDTarget target, String targetNodeId, boolean isCopy) {
-				System.out.println("GROU DROP");
 				lastDropBehaviorCalled.setHTML("Tree To Tree Behavior : dropped on tree item : " + targetNodeId);
 				return true;
 			}
@@ -175,8 +174,8 @@ public class TestDNDPage extends TestPage{
 			}
 		};
 		try {
-			//DnD.registerBehavior(grosBehavior, null, null);
-			//DnD.registerBehavior(myBehavior, sourceOnlyPanel, targetOnlyPanel);
+			DnD.registerBehavior(grosBehavior, null, null);
+			DnD.registerBehavior(myBehavior, sourceOnlyPanel, targetOnlyPanel);
 			DnD.registerBehavior(treeToTreeBehavior, sourceOnlyPanel, sourceOnlyTree);
 		} catch (BehaviorScopeException e) {
 			e.printStackTrace();
@@ -224,9 +223,9 @@ public class TestDNDPage extends TestPage{
 	
 	public Tree sourceOnlyTree(){
 		final Tree tree = new Tree();
-		TreeItem firstRoot = new TreeItem("Grou" , "1");
-		firstRoot.addChild(new TreeItem("Grou 1" , "1.1"));
-		firstRoot.addChild(new TreeItem("Grou 2" , "1.2"));
+		Item firstRoot = new Item("Grou" , "1");
+		firstRoot.addChild(new Item("Grou 1" , "1.1"));
+		firstRoot.addChild(new Item("Grou 2" , "1.2"));
 		tree.addRootItem(firstRoot);
 		DOM.setElementAttribute(tree.getElement(),"id", "Tree");
 		DnD.registerTreeSource(tree);

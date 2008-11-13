@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.dnd.DnD;
 import com.objetdirect.tatami.client.dnd.DnDDefaultWidgetBehavior;
 import com.objetdirect.tatami.client.dnd.DnDGenericBehavior;
@@ -48,7 +49,6 @@ import com.objetdirect.tatami.client.dnd.WidgetDnDBehavior;
 import com.objetdirect.tatami.client.dnd.WidgetDnDElement;
 import com.objetdirect.tatami.client.dnd.DnDBehaviors.BehaviorScopeException;
 import com.objetdirect.tatami.client.tree.Tree;
-import com.objetdirect.tatami.client.tree.TreeItem;
 
 public class TestDnDToTreePage extends TestPage{
 
@@ -93,7 +93,7 @@ public class TestDnDToTreePage extends TestPage{
 						.hasNext();) {
 					DndTreeElement dndTreeElement = (DndTreeElement) iterator
 							.next();
-					tree.moveItem(dndTreeElement.getItem(),(TreeItem)tree.getStore().getItemByIdentity(targetNodeId));
+					tree.moveItem(dndTreeElement.getItem(),(Item)tree.getStore().getItemByIdentity(targetNodeId));
 				}
 				return true;
 			}
@@ -107,7 +107,7 @@ public class TestDnDToTreePage extends TestPage{
 						.hasNext();) {
 					WidgetDnDElement dndElement = (WidgetDnDElement) iterator
 							.next();
-					tree.addChildToItem((TreeItem)tree.getStore().getItemByIdentity(targetNodeId), new TreeItem(dndElement.getDndId(),((HTML)dndElement.getWidget()).getHTML()));
+					tree.addChildToItem((Item)tree.getStore().getItemByIdentity(targetNodeId), new Item(dndElement.getDndId(),((HTML)dndElement.getWidget()).getHTML()));
 				}
 				return true;
 			}
@@ -126,12 +126,12 @@ public class TestDnDToTreePage extends TestPage{
 	
 	public Tree initTree(){
 		final Tree tree = new Tree();
-		TreeItem firstRoot = new TreeItem("Item 1" , "1");
-		tree.addChildToItem(firstRoot,new TreeItem("Item 1.1" , "1.1"));
-		tree.addChildToItem(firstRoot,new TreeItem("Item 1.2" , "1.2"));
-		TreeItem secondRoot = new TreeItem("Item 2" , "2");
-		tree.addChildToItem(secondRoot,new TreeItem("Item 2.1" , "2.1"));
-		tree.addChildToItem(secondRoot,new TreeItem("Item 2.2" , "2.2"));
+		Item firstRoot = new Item("Item 1" , "1");
+		tree.addChildToItem(firstRoot,new Item("Item 1.1" , "1.1"));
+		tree.addChildToItem(firstRoot,new Item("Item 1.2" , "1.2"));
+		Item secondRoot = new Item("Item 2" , "2");
+		tree.addChildToItem(secondRoot,new Item("Item 2.1" , "2.1"));
+		tree.addChildToItem(secondRoot,new Item("Item 2.2" , "2.2"));
 		tree.addRootItem(firstRoot);
 		tree.addRootItem(secondRoot);
 		DOM.setElementAttribute(tree.getElement(),"id", "Tree");

@@ -31,8 +31,8 @@ import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.tree.Tree;
-import com.objetdirect.tatami.client.tree.TreeItem;
 import com.objetdirect.tatami.client.tree.TreeListener;
 
 public class TestTreePage extends TestPage{
@@ -44,16 +44,16 @@ public class TestTreePage extends TestPage{
 	public Widget getTestPage() {
 		final Tree tree = new Tree();
 		DOM.setElementAttribute(tree.getElement(), "id", "TreeContainer");
-		final TreeItem item1 = new TreeItem("item1" , "Item 1");
-		final TreeItem item11 = new TreeItem("item1.1" , "Item 1.1");
-		final TreeItem item12 = new TreeItem("item1.2" , "Item 1.2");
+		final Item item1 = new Item("item1" , "Item 1");
+		final Item item11 = new Item("item1.1" , "Item 1.1");
+		final Item item12 = new Item("item1.2" , "Item 1.2");
 		item1.addChild(item11);
 		item1.addChild(item12);
-		item12.addChild(new TreeItem("item1.2.1" , "Item 1.2.1"));
-		item12.addChild(new TreeItem("item1.2.2" , "Item 1.2.2"));
-		item1.setLabelClass("myLabelClass");
+		item12.addChild(new Item("item1.2.1" , "Item 1.2.1"));
+		item12.addChild(new Item("item1.2.2" , "Item 1.2.2"));
+		item1.setValue(Tree.labelClassAttribute,"myLabelClass");
 		
-		final TreeItem item2 = new TreeItem("item2" , "Item 2");
+		final Item item2 = new Item("item2" , "Item 2");
 		tree.setDefaultFolderClosedClass("myTreeClosed");
 		tree.setDefaultFolderOpenClass("myTreeOpened");
 		tree.addRootItem(item1);
@@ -71,16 +71,16 @@ public class TestTreePage extends TestPage{
 			}
 		}));
 		tree.addTreeListener(new TreeListener() {
-			public void onOpen(TreeItem item) {
+			public void onOpen(Item item) {
 				openValue.setHTML("Opened :" + tree.getStore().getIdentity(item));
 			}
-			public void onClose(TreeItem item) {
+			public void onClose(Item item) {
 				closedValue.setHTML("Closed :" + tree.getStore().getIdentity(item));
 			}
-			public void onClick(TreeItem item) {
+			public void onClick(Item item) {
 				onClickValue.setHTML("Clicked :" + tree.getStore().getIdentity(item));
 			}
-			public void onDblClick(TreeItem item) {
+			public void onDblClick(Item item) {
 				onDblClickValue.setHTML("DblClicked :" + tree.getStore().getIdentity(item));
 			}
 		});
@@ -89,9 +89,9 @@ public class TestTreePage extends TestPage{
 		DOM.setElementAttribute(closedValue.getElement(), "id", "TreeClosedValue");
 		DOM.setElementAttribute(onClickValue.getElement(), "id", "TreeClickValue");
 		DOM.setElementAttribute(onDblClickValue.getElement(), "id", "TreeDblClickValue");
-		TreeItem newItem =  new TreeItem("item3" , "Item 3");
+		Item newItem =  new Item("item3" , "Item 3");
 		tree.addRootItem(newItem);
-		TreeItem newItem2 =  new TreeItem("item3.1" , "Item 3.1");
+		Item newItem2 =  new Item("item3.1" , "Item 3.1");
 		newItem.addChild(newItem2);
 		tree.setSize("200px", "200px");
 		panel.add(onClickValue);

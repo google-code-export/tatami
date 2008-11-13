@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.dnd.DnD;
 import com.objetdirect.tatami.client.dnd.DnDDefaultWidgetBehavior;
 import com.objetdirect.tatami.client.dnd.DnDGenericBehavior;
@@ -46,7 +47,6 @@ import com.objetdirect.tatami.client.dnd.IDnDTarget;
 import com.objetdirect.tatami.client.dnd.WidgetDnDBehavior;
 import com.objetdirect.tatami.client.dnd.DnDBehaviors.BehaviorScopeException;
 import com.objetdirect.tatami.client.tree.Tree;
-import com.objetdirect.tatami.client.tree.TreeItem;
 
 public class TestDnDTreeToPanelPage extends TestPage{
 
@@ -224,9 +224,9 @@ public class TestDnDTreeToPanelPage extends TestPage{
 	
 	public Tree sourceOnlyTree(){
 		final Tree tree = new Tree();
-		TreeItem firstRoot = new TreeItem("Grou" , "1");
-		firstRoot.addChild(new TreeItem("Grou 1" , "1.1"));
-		firstRoot.addChild(new TreeItem("Grou 2" , "1.2"));
+		Item firstRoot = new Item("Grou" , "1");
+		firstRoot.addChild(new Item("Grou 1" , "1.1"));
+		firstRoot.addChild(new Item("Grou 2" , "1.2"));
 		tree.addRootItem(firstRoot);
 		DOM.setElementAttribute(tree.getElement(),"id", "Tree");
 		DnD.registerTreeSource(tree);
