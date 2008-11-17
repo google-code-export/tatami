@@ -88,13 +88,13 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	/**
 	 * Attribute used to retrieve an Item identity
 	 */
-	private String idAttribute = Item.idAttribute;
+	private String idAttribute;
 	
 	
 	/**
 	 * Attribute used to retrieve an Item Label
 	 */
-	private String labelAttribute = Item.labelAttribute;
+	private String labelAttribute;
 	
 	
 	
@@ -107,10 +107,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	}
 	
 	/**
-	 * @param readStoreClassName : The name used to declare the generated dojo class
 	 * @param idAttribute : Attribute used to retrieve an Item identity
 	 * @param labelAttribute : Attribute used to retrieve an Item Label
 	 */
+	@Deprecated
 	public AbstractDataStore(String idAttribute , String labelAttribute){
 		this();
 		this.idAttribute = idAttribute;
@@ -391,7 +391,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @return the label
 	 */
 	public String getLabel(Item item) {
-		return (String) item.getValue(Item.labelAttribute, "DefaultLabel");
+		if(labelAttribute != null){
+			return item.getValue(labelAttribute).toString();
+		}
+		return (String) item.getLabel();
 	}
 	
 
@@ -404,9 +407,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * 	specified item's label 
 	 */
 	public String[] getLabelAttributes(Item item) {
-		String[] attrs = new String[1];
-		attrs[0] = labelAttribute;
-		return attrs;
+		if(labelAttribute != null){
+			return new String[]{labelAttribute};
+		}
+		return item.getLabelAttributes();
 	}
 	
 	
@@ -418,12 +422,16 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @return item's identity
 	 */	
 	public Object getIdentity(Item item) {
-		return item.getValue(idAttribute, null);
+		if(idAttribute != null){
+			return item.getValue(idAttribute);
+		}
+		return item.getId();
 	}
 	
 	/**
 	 * @return the attribute used as identifier
 	 */
+	@Deprecated
 	public String getIdentityAttribute(){
 		return idAttribute;
 	}
@@ -445,9 +453,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @return the names from attributes which are used to construct item's identity
 	 */
 	public String[] getIdentityAttributes(Item item) {
-		String[] attrs = new String[1];
-		attrs[0] = idAttribute;
-		return attrs;
+		if(idAttribute != null){
+			return new String[]{idAttribute};
+		}
+		return item.getIdAttributes();
 	}
 	
 	

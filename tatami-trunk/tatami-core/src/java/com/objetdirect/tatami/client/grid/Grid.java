@@ -425,7 +425,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 			item.setValue(field , row[i]);
 		}
 		if(store.getIdentity(item) == null){
-			item.setValue(store.getIdentityAttribute(), new Integer(index) + row[0].toString());
+			item.setId(new Integer(index) + row[0].toString());
 		}
 		addRow(item , index );
 	}

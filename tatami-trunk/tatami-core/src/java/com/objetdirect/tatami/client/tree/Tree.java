@@ -41,6 +41,7 @@ import com.objetdirect.tatami.client.DojoController;
 import com.objetdirect.tatami.client.JSHelper;
 import com.objetdirect.tatami.client.data.AbstractDataStore;
 import com.objetdirect.tatami.client.data.DatumChangeListener;
+import com.objetdirect.tatami.client.data.DefaultDataStore;
 import com.objetdirect.tatami.client.data.FetchEventSource;
 import com.objetdirect.tatami.client.data.FetchListener;
 import com.objetdirect.tatami.client.data.Item;
@@ -64,8 +65,14 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	final public static String leafClassAttribute = "leaf-class";
 	final public static String folderClosedClassAttribute = "folder-closed-class";
 	final public static String folderOpenedClassAttribute =	"folder-open-class";
+	private  String rootCriteriaName = "___tatami__root_attr";
 	
+
+	private  Object rootCriteriaValue = Boolean.TRUE;
+	private Item rootItem;
+	private boolean showRoot = true;
 	
+
 	/**
 	 * The underlying datastore
 	 */
@@ -77,22 +84,8 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	private Collection<TreeListener> treeListeners = new ArrayList<TreeListener>();
 	
-	/**
-	 * Datastore's items attribute name to match when querying tree roots
-	 * (tree roots are under the virtual root)
-	 */
-	private String rootCriteriaName = "root";
 	
-	/**
-	 * Datastore's items attribute value to match when querying tree roots
-	 * (tree roots are under the virtual root)
-	 */
-	private Object rootCriteriaValue = Boolean.TRUE;
 	
-	/**
-	 * The css class for the virtual root icon
-	 */
-	private Object rootIconClass ="dijitFolderOpened";
 	
 	/**
 	 * Default css class to be applied on a tree opened folder
@@ -110,17 +103,10 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	private String defaultLeafClass = "dijitLeaf";
 	
-	/**
-	 * Should the tree show its virtual root ? 
-	 */
-	private boolean showRoot;
 	
-	/**
-	 * The label to be displayed on the virtual root
-	 */
-	private String rootLabel = "root";
 
 	private Collection<DojoAfterCreationListener> afterCreationListeners = new ArrayList<DojoAfterCreationListener>();
+	
 
 
 
@@ -128,10 +114,28 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * Default constructor. Instantiates a tree with the default TreeStore
 	 */
 	public Tree(){
-		this(new TreeStore());
+		this(new DefaultDataStore());
 	}
 	
+	public Tree(Item item){
+		this();
+		setRootItem(item);
+	}
+	
+	public Tree(Item item , AbstractDataStore store){
+		this(store);
+		setRootItem(item);
+	}
+	
+	public Item getRootItem() {
+		return rootItem;
+	}
 
+	public void setRootItem(Item rootItem) {
+		this.rootItem = rootItem;
+		rootItem.setValue(rootCriteriaName, rootCriteriaValue);
+		store.add(rootItem);
+	}
 	
 	/**
 	 * @param store The store to use for tree items
@@ -166,19 +170,6 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		store.addDatumChangeListener(this);
 	}
 	
-	/**
-	 * @return The label to be displayed on the virtual root
-	 */
-	public String getRootLabel() {
-		return rootLabel;
-	}
-
-	/**
-	 * @param rootLabel The label to be displayed on the virtual root
-	 */
-	public void setRootLabel(String rootLabel) {
-		this.rootLabel = rootLabel;
-	}
 	
 
 
@@ -194,7 +185,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	
 	
 	private native void dojoRefreshTree()/*-{
-		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.model._requeryTop();
+		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.model.getRoot();
 	}-*/;
 	
 	@Override
@@ -222,24 +213,14 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 
 
 	public void createDojoWidget() throws Exception {
-		this.dojoWidget = createDojoTree(store.getDojoWidget() , this , showRoot , rootCriteriaName , rootCriteriaValue.toString(), rootLabel);
+		this.dojoWidget = createDojoTree(store.getDojoWidget() , this , showRoot);
 	}
 	
-	private native JavaScriptObject prepareDojoTree(JavaScriptObject dataStore , Tree gwtWidget , boolean showRoot , String rootCriteriaName , String rootCriteriaValue , String rootLabel)/*-{
+	private native JavaScriptObject  createDojoTree(JavaScriptObject dataStore , Tree gwtWidget , boolean showRoot)/*-{
 		var rootQuery = {};
-		rootQuery[rootCriteriaName] = rootCriteriaValue;
-		var model = new $wnd.dojox.tree.TatamiTreeStoreModel({store : dataStore , gwtWidget : gwtWidget , query : rootQuery , rootLabel : rootLabel, rootId : "___TATAMI_ROOT_NODE___" });
-		var tree = new $wnd.dojox.tree.TatamiTree({model : model , persist: false ,gwtWidget : gwtWidget, showRoot : showRoot, query : rootQuery });
-		tree.domNode.height = "100%";
-		tree.domNode.width = "100%";
-		return tree;
-	}-*/;
-	
-	private native JavaScriptObject  createDojoTree(JavaScriptObject dataStore , Tree gwtWidget , boolean showRoot , String rootCriteriaName , String rootCriteriaValue , String rootLabel)/*-{
-		var rootQuery = {};
-		rootQuery[rootCriteriaName] = rootCriteriaValue;
-		var model = new $wnd.dojox.tree.TatamiTreeStoreModel({store : dataStore , gwtWidget : gwtWidget , query : rootQuery , rootLabel : rootLabel, rootId : "___TATAMI_ROOT_NODE___" });
-		var tree = new $wnd.dojox.tree.TatamiTree({model : model , persist: false ,gwtWidget : gwtWidget, showRoot : showRoot, query : rootQuery });
+		rootQuery[this.@com.objetdirect.tatami.client.tree.Tree::rootCriteriaName]  = this.@com.objetdirect.tatami.client.tree.Tree::rootCriteriaValue;
+		var model = new $wnd.dojox.tree.TatamiTreeStoreModel({store : dataStore , gwtWidget : gwtWidget , query : rootQuery});
+		var tree = new $wnd.dojox.tree.TatamiTree({model : model , persist: false ,gwtWidget : gwtWidget,query : rootQuery , showRoot : showRoot});
 		tree.domNode.height = "100%";
 		tree.domNode.width = "100%";
 		return tree;
@@ -250,24 +231,6 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		return "dijit.Tree";
 	}
 	
-	/**
-	 * Adds a child to an item. You have to use it if you want 
-	 * the change to be propagated.
-	 *  
-	 * @param parent : the item to add child to 
-	 * @param child : the child item to add to the parent
-	 */
-	public void addChildToItem(Item parent, Item child){
-		if(child.getParentItem() != null){
-			removeChildFromItem(child.getParentItem(), child);
-		}
-		addItem(child);
-		parent.addChild(child);
-	}
-	
-	public void addChildrenToItem(Item parent, Collection<Item> children){
-		parent.addChildren((Item[]) children.toArray());
-	}
 	
 	/**
 	 * This method SHOULD NOT be called by the developer
@@ -287,17 +250,11 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	private native void defineTatamiTree()/*-{
 		$wnd.dojo.declare("dojox.tree.TatamiTree" , [$wnd.dijit.Tree] , {
 			getIconClass : function(item , opened){
-				if(item == this.model.root){
-					return;
-				}
 				var iconClass;
 				iconClass = this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::getIconClass(Lcom/objetdirect/tatami/client/data/Item;Z)(item,opened);
 				return iconClass;
 			},
 			getLabelClass : function(item){
-				if(item == this.model.root){
-					return;
-				}
 				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::getLabelClass(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			},
 			onClick: function( item, node){
@@ -307,30 +264,33 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateDblClick(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			},
 			onOpen: function(item,  node){
-				if(item == this.model.root || item == null){
-					return;
-				}
 				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateOpen(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			},
 			onClose: function(item,node){
-				if(item == this.model.root || item == null){
-					return;
-				}
 				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::propagateClose(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			}
 		});
-		$wnd.dojo.declare("dojox.tree.TatamiTreeStoreModel" , $wnd.dijit.tree.ForestStoreModel , {
+		$wnd.dojo.declare("dojox.tree.TatamiTreeStoreModel" , $wnd.dijit.tree.TreeStoreModel , {
 			childrenAttrs : [@com.objetdirect.tatami.client.data.Item::childAttribute],
 			pasteItem: function( childItem,  oldParentItem,  newParentItem,  bCopy){
-				this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::moveItem(Lcom/objetdirect/tatami/client/data/Item;Lcom/objetdirect/tatami/client/data/Item;)(childItem , newParentItem == this.root || newParentItem == undefined ? null : newParentItem);
+				this.oldParentItem.@com.objetdirect.tatami.client.data.Item::removeChild(Lcom/objetdirect/tatami/client/data/Item;)(childItem);
+				this.newParentItem.@com.objetdirect.tatami.client.data.Item::addChild(Lcom/objetdirect/tatami/client/data/Item;)(childItem);
 			},
 			mayHaveChildren: function(item){
 				return this.gwtWidget.@com.objetdirect.tatami.client.tree.Tree::mayHaveChildren(Lcom/objetdirect/tatami/client/data/Item;)(item);
 			},
-			getRoot: function(onItem, onError){
-				if(this.root){
-					onItem(this.root);
-				}
+			_onNewItem: function(item, parentInfo){
+			},
+			getChildren : function(parentItem,callback,onError){
+				var query = {};
+				query[@com.objetdirect.tatami.client.data.Item::parentAttribute] = parentItem;
+				this.store.fetch({
+					query: {parent : parentItem},
+					onComplete: $wnd.dojo.hitch(this, function(items){
+						callback(items);
+					}),
+					onError: onError
+				});
 			}
 		});
 	}-*/;
@@ -387,7 +347,8 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * 		  false if the item is definetely a lead
 	 */
 	public boolean mayHaveChildren(Item item){
-		return item.hasAttribute(Item.childAttribute);
+		List<Item> children = item.getChildren();
+		return children != null ? children.size() > 0 : false;
 	}
 	
 	/**
@@ -402,49 +363,16 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	public void removeItem(Item item){
 		store.remove(item);
-		removeChildFromItem(item.getParentItem(), item);
+		item.getParentItem().removeChild(item);
 	}
 	
-	/**
-	 * @param item : an item to add as a "virtual root" child. That means it will appear as 
-	 * a root if the virtual root is not displayed.
-	 */
-	public void addRootItem(Item item){
-		this.store.add(item);
-		item.setValue(rootCriteriaName, rootCriteriaValue);
-		if(dojoWidget != null){
-			dojoAddRootItem(getDojoTreeModel(), item);
-		}
-	}
 	
-	/**
-	 * Native method used to add an item to the dojo tree model
-	 * 
-	 * @param model
-	 * @param item
-	 */
-	private native void dojoAddRootItem(JavaScriptObject model , Item item)/*-{
-		model.root.children.push(item);
-	}-*/;
 	
 	@Override
 	public void onDojoLoad() {
 		defineTatamiTree();
 	}
 	
-	/**
-	 * Removes a child item from its parent
-	 * 
-	 * @param parent
-	 * @param child
-	 */
-	public void removeChildFromItem(Item parent , Item child){
-		if(parent == null){
-			refreshTree();
-		}else{
-			parent.removeChild(child);
-		}
-	}
 
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.data.FetchListener#onBegin(com.objetdirect.tatami.client.data.FetchEventSource, int, com.objetdirect.tatami.client.data.Request)
@@ -453,27 +381,6 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		
 	}
 
-	/**
-	 * Moves an item to a new parent.
-	 * 
-	 * @param itemToMove
-	 * @param newParent
-	 */
-	public void moveItem(Item itemToMove, Item newParent){
-		if(newParent == null){
-			removeChildFromItem(itemToMove.getParentItem(), itemToMove);
-			addRootItem(itemToMove);
-			refreshTree();
-		}else{
-			if(itemToMove.getParentItem() != null){
-				removeChildFromItem(itemToMove.getParentItem(), itemToMove);
-			}else{
-				itemToMove.removeAttribute(rootCriteriaName);
-				refreshTree();
-			}
-			addChildToItem(newParent, itemToMove);
-		}
-	}
 	
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.data.FetchListener#onComplete(com.objetdirect.tatami.client.data.FetchEventSource, java.util.List, com.objetdirect.tatami.client.data.Request)
@@ -517,6 +424,14 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	public void onDataChange(Item item, String attributeName, Object oldValue,
 			Object newValue) {
+		if(attributeName == Item.parentAttribute){
+			if(newValue == null){
+				refreshTree();
+			}else if(oldValue == null){
+				item.removeAttribute(rootCriteriaName);
+				refreshTree();
+			}
+		}
 	}
 
 	/* (non-Javadoc)
@@ -529,6 +444,9 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @see com.objetdirect.tatami.client.data.DatumChangeListener#onNew(com.objetdirect.tatami.client.data.Item)
 	 */
 	public void onNew(Item item) {
+		if(item.getParentItem() == null){
+			refreshTree();
+		}
 	}
 	
 	/**
@@ -573,52 +491,8 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 		this.defaultLeafClass = defaultLeafClass;
 	}
 
-	/**
-	 * @return Datastore's items attribute name to match when querying tree roots
-	 * (tree roots are under the virtual root)
-	 */
-	public String getRootCriteriaName() {
-		return rootCriteriaName;
-	}
 
-	/**
-	 * @param rootCriteriaName :Datastore's items attribute name to match when querying tree roots
-	 * (tree roots are under the virtual root)
-	 */
-	public void setRootCriteriaName(String rootCriteriaName) {
-		this.rootCriteriaName = rootCriteriaName;
-	}
-	
-	/**
-	 * @return Datastore's items attribute value to match when querying tree roots
-	 * (tree roots are under the virtual root)
-	 */
-	public Object getRootCriteriaValue() {
-		return rootCriteriaValue;
-	}
 
-	/**
-	 * @param rootCriteriaValue : Datastore's items attribute value to match when querying tree roots
-	 * (tree roots are under the virtual root)
-	 */
-	public void setRootCriteriaValue(Object rootCriteriaValue) {
-		this.rootCriteriaValue = rootCriteriaValue;
-	}
-	
-
-	/**
-	 * @return Should the tree show its virtual root ? 
-	 */
-	public boolean isShowRoot() {
-		return showRoot;
-	}
-
-	/**
-	 * @param showRoot Should the tree show its virtual root ? 
-	 */
-	public void setShowRoot(boolean showRoot) {
-		this.showRoot = showRoot;
-	}
 
 
 
@@ -656,6 +530,31 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	public String getLabelClass(Item item){
 		return (String) item.getValue(labelClassAttribute , null);
+	}
+	
+	
+	public boolean isShowRoot() {
+		return showRoot;
+	}
+
+	public void setShowRoot(boolean showRoot) {
+		this.showRoot = showRoot;
+	}
+	
+	public String getRootCriteriaName() {
+		return rootCriteriaName;
+	}
+
+	public void setRootCriteriaName(String rootCriteriaName) {
+		this.rootCriteriaName = rootCriteriaName;
+	}
+
+	public Object getRootCriteriaValue() {
+		return rootCriteriaValue;
+	}
+
+	public void setRootCriteriaValue(Object rootCriteriaValue) {
+		this.rootCriteriaValue = rootCriteriaValue;
 	}
 	
 	

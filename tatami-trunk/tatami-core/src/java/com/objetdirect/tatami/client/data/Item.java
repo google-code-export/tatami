@@ -51,9 +51,11 @@ public class Item  implements ConvertibleToJSObject{
 	private DataStore store;
 	
 	final public static String childAttribute = "children"; 
+	final public static String parentAttribute = "parent";
 	final public static String labelAttribute = "_____tatami__label____attribute";
 	final public static String idAttribute = "_____tatami__id____attribute";
 	
+	private boolean isFullyLoaded = true;
 
 	/**
 	 * Item's attributes
@@ -97,8 +99,8 @@ public class Item  implements ConvertibleToJSObject{
 		attributes.put(idAttribute , id);
 	}
 	
-	public Object getLabel(){
-		return attributes.get(labelAttribute);
+	public String getLabel(){
+		return (String) attributes.get(labelAttribute);
 	}
 	
 	public void setLabel(String label){
@@ -271,8 +273,37 @@ public class Item  implements ConvertibleToJSObject{
 	}
 
 	public void setStore(DataStore store) {
+		removeMyChildren();
 		this.store = store;
+		addMyChildren();
 	}
+	
+	private void addMyChildren(){
+		if(store != null){
+			List<Item> children = getChildren();
+			if(children != null){
+				for (Item item : children) {
+					if(!store.isItem(item)){
+						store.add(item);
+					}
+				}
+			}
+		}
+	}
+	
+	private void removeMyChildren(){
+		if(store != null){
+			List<Item> children = getChildren();
+			if(children != null){
+				for (Item item : children) {
+					if(store.isItem(item)){
+						store.remove(item);
+					}
+				}
+			}
+		}
+	}
+	
 	
 	public void setChildren(List<Item> children){
 		attributes.put(childAttribute, children);
@@ -287,38 +318,62 @@ public class Item  implements ConvertibleToJSObject{
 		if(children == null){
 			children = new ArrayList<Item>();
 		}
+		if(store != null && !store.isItem(item)){
+			store.add(item);
+		}
 		item.setParentItem(this);
 		children.add(item);
 		setValue(childAttribute, children);
 	}
 	
-	public void addChildren(Item[] items){
+	
+	public void addChildren(Collection<Item> items){
 		List<Item> children = getChildren();
 		if(children == null){
 			children = new ArrayList<Item>();
 		}
-		for (int i = 0; i < items.length; i++) {
-			items[i].setParentItem(this);
-			children.add(items[i]);
+		for (Item item : items) {
+			item.setParentItem(this);
+			children.add(item);
+			if(store != null && !store.isItem(item)){
+				store.add(item);
+			}
 		}
 		setValue(childAttribute, children);
 	}
 	
 	public void removeChild(Item item){
-		item.setParentItem(null);
 		List<Item> children = (List<Item>) getValue(childAttribute, null);
-		if(children != null){
+		if(children != null && children.contains(item)){
 			children.remove(item);
+			item.setParentItem(null);
 		}
 		setValue(childAttribute,children);
 	}
 	
 	public void setParentItem(Item item){
 		this.parentItem = item;
+		setValue(parentAttribute,item);
 	}
 
 	public Item getParentItem(){
 		return parentItem;
+	}
+	
+	public boolean isFullyLoaded() {
+		return isFullyLoaded;
+	}
+
+	public void setFullyLoaded(boolean isFullyLoaded) {
+		this.isFullyLoaded = isFullyLoaded;
+	}
+	
+	public String[] getLabelAttributes(){
+		return new String[]{labelAttribute};
+	}
+	
+	public String[] getIdAttributes(){
+		return new String[]{idAttribute};
 	}
 
 }

@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.objetdirect.tatami.client.data.AbstractDataStore;
+import com.objetdirect.tatami.client.data.DefaultDataStore;
 import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.data.Request;
  
@@ -41,92 +42,14 @@ import com.objetdirect.tatami.client.data.Request;
  * @author rdunklau
  *
  */
-public class GridDataStore extends AbstractDataStore{
+public class GridDataStore extends DefaultDataStore{
 
-
-	
-	/**
-	 * Number of rows per page
-	 * 
-	 */
-	
-	/**
-	 * Current page.
-	 */
-	private int currentPage = 0;
-	
-	public GridDataStore(){
+	public GridDataStore() {
 		super();
 	}
 	
-	public GridDataStore(String idAttr){
-		super( idAttr , "label");
+	@Deprecated
+	public GridDataStore(String idAttr) {
+		super(idAttr);
 	}
-	
-	
-	/* (non-Javadoc)
-	 * @see com.objetdirect.tatami.client.data.AbstractDataStore#fetch(com.objetdirect.tatami.client.data.Request)
-	 */
-	
-	//TODO : Better callback management
-	@Override
-	public void fetch(Request request) {
-		
-		//Saves the request to keep filtering and sorting parameter for later use
-		// (for example, to fetch multiple pages)
-		lastRequest = request;
-		//Gets the items matching the query , and sorts them according to the
-		//request
-		List<?> itemsSortedAndMatchingQuery = this.executeQuery(items.values() , request);
-		
-		
-		int size = itemsSortedAndMatchingQuery.size();
-		
-		
-		// We notify the fetch listeners that the request is being performed
-		//(it should include a grid , since this store is designed to be used by  
-		notifyBeginFetchListeners(size , request);
-		List<Item> result = new ArrayList<Item>();
-		
-		// We determine which item should be the first returned. 
-		// To do this , we use :
-		// 	-- firstItemFromPageToLoad : the position of the first wanted item in the current page
-		//	-- currentPage * rowsPerPage : the number of items which should be on previous pages 
-		int count = request.getNbItemToReturn() == -1 ? size : Math.min(size, request.getNbItemToReturn());
-		int startItem = request.getStartItemNumber();
-		int end =  Math.min(startItem + count , itemsSortedAndMatchingQuery.size());
-		
-		// We load all items between start item and end item,
-		// notify the fetchListeners that an item is being fetched , and
-		// add it to the result
-		for (int i = (startItem ) ; i < end ; i++) {
-			Item item = (Item) itemsSortedAndMatchingQuery.get(i);
-			loadItem(item);
-			notifyItemFetchListeners(item);
-			result.add(i-startItem,item);
-		}
-		
-		//Finally , we pass the result to the fetch listeners
-		notifyCompleteFetchListeners(result , request);
-	}
-
-	
-
-	/* (non-Javadoc)
-	 * @see com.objetdirect.tatami.client.data.AbstractDataStore#isItemLoaded(com.objetdirect.tatami.client.data.Item)
-	 */
-	@Override
-	public boolean isItemLoaded(Item item) {
-		return getItemByIdentity(getIdentity(item)) != null;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.objetdirect.tatami.client.data.AbstractDataStore#loadItemImpl(com.objetdirect.tatami.client.data.Item)
-	 */
-	@Override
-	public boolean loadItemImpl(Item item) {
-		return false;
-	}
-
-	
 }
