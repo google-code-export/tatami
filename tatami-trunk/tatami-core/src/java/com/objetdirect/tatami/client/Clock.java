@@ -27,10 +27,8 @@ package com.objetdirect.tatami.client;
 
 import java.util.Date;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.Helper;
-import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Composite;
 import com.objetdirect.tatami.client.gfx.Circle;
 import com.objetdirect.tatami.client.gfx.Color;
 import com.objetdirect.tatami.client.gfx.GraphicCanvas;
@@ -45,7 +43,7 @@ import com.objetdirect.tatami.client.gfx.Polyline;
  * @author Vianney
  *
  */
-public class Clock extends SimplePanel {
+public class Clock extends Composite {
 
 	/** 
 	 * Canvas to display the needles
@@ -129,7 +127,6 @@ public class Clock extends SimplePanel {
 	 * @param width the width for the image and so for the clock.
 	 */
 	public Clock(String url,int width) {
-		Helper.replaceElement(this, DOM.createDiv());
 	  current_time = new Date();
 	  this.width = width;
 	  center = new Point(width/2,width/2);
@@ -226,7 +223,7 @@ public class Clock extends SimplePanel {
 	 */
 	public void onAttach() {
 		super.onAttach();
-		add(canvas);
+		//add(canvas);
 		current_time = new Date();
 		Timer timer = new Timer() {
 			public void run() {
@@ -249,6 +246,7 @@ public class Clock extends SimplePanel {
 	 */
 	private void makeClock() {
 		canvas = new GraphicCanvas();
+		initWidget(canvas);
 		canvas.setPixelSize(width, width);
 		if ( image != null) {
 		  ImageGfx clock = new ImageGfx(image,width,width);
