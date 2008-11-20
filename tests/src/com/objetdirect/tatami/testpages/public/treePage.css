@@ -1,0 +1,25 @@
+.tundra .myTreeOpened {
+	background-image: url('folder-open.png');
+	background-position: top;
+	top: 1px;
+	height: 32px !important;
+	width: 32px !important;
+}
+
+.tundra .myTreeClosed {
+	background-image: url('folder.png');
+	background-position: top;
+	top: 1px;
+	height: 32px !important;
+	width: 32px !important;
+}
+
+.tundra .dijitTreeIcon .noIcon{
+	background-image: none;
+	height: 32px !important;
+	width: 32px !important;
+}
+
+.myLabelClass{
+	color: red;
+}
