@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="tatamiJS" default="help" basedir="..">
+	<target name="help" description="Shows task list">
+		<echo message="Available tasks : clean,build-dojo,copyjsfiles,package,all"/>
+	</target>
+	
+	<target name ="all" depends="clean,build-dojo,removeUnusedFiles,package">
+		<echo message="Building all ..." />
+	</target>
+	
+	<target name="clean" description="Delete generated dojo builds">
+			<echo message="Delete generated dojo builds" />
+			<delete includeemptydirs="false">
+				<fileset dir="build/" includes="**/*"/>
+			</delete>
+	</target>
+	
+	<target name="build-dojo" description="Build and optimizes dojo for tatami">
+		     
+			<echo message="Rebuilding Dojo"/>
+		     <exec dir="${basedir}/src/com/objetdirect/tatami/public/util/buildscripts/" 
+		       executable="${basedir}/src/com/objetdirect/tatami/public/util/buildscripts/build.bat"
+		     	output="${basedir}/antDojo.log"
+		     >
+		       <arg line="releaseDir='../../../../../../../build/com/objetdirect/tatami/public/'"/>
+		       <arg line="profileFile='${basedir}/ant/dojoprofiles/tatami_all.profile.js'"/>
+		       <arg line="releaseName='.'"/>
+		       <arg line="copyTests='false'"/>
+		       <arg line="action='release'"/>
+		       <arg line="optimize='shrinksafe'"/>
+		       <arg line="version='tatami_1.3'"/>
+		    </exec>
+			<copy todir="${basedir}/build/com/objetdirect/tatami/">
+				<fileset dir="${basedir}/src/com/objetdirect/tatami/">
+					<include name="*.gwt.xml"/>
+				</fileset>
+			</copy>
+	</target>
+	
+	<target name="removeUnusedFiles" description="Removes dojo files not used by Tatami">
+		<echo message="Removing unused dojo files" />
+		<delete includeemptydirs="true">
+			<fileset dir="${basedir}/build/com/objetdirect/tatami/public/dojox/">
+				<include name="analytics/**/*"/>
+				<include name="av/**/*"/>
+				<include name="flash/**/*"/>
+				<include name="highlight/**/*"/>
+				<include name="image/**/*"/>
+				<include name="robot/**/*"/>
+				<include name="sketch/**/*"/>
+				<include name="sql/**/*"/>
+				<include name="storage/**/*"/>
+				<include name="testing/**/*"/>
+				<include name="xmpp/**/*"/>
+			</fileset>
+		</delete>
+	</target>
+	<target name="package" description="Creates tatami jar file">
+		<echo message="Packaging tatami js files" />
+		<mkdir dir="dist"/>
+		<jar destfile="${basedir}/dist/tatamiJS.jar">
+			<fileset dir="${basedir}/build/">
+				<include name="**/*"/>
+			</fileset>
+		</jar>
+	</target>
+</project>
