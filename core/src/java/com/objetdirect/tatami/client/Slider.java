@@ -90,12 +90,12 @@ public class Slider extends AbstractDojoFocus {
 	/**
 	 * Width of this <code>Slider</code>
 	 */
-	private int width = 200;
+	private String width = "200px";
 
 	/**
 	 * Height of this <code>Slider</code>
 	 */
-	private int height = 10;
+	private String height = "10px";
 
 	/** value choose by the user */
 	private int value = 0;
@@ -120,14 +120,14 @@ public class Slider extends AbstractDojoFocus {
 	}
 
 	/**
-	 * Sets the size if the DOJO DOM element.
+	 * Sets the size the slider in pixel
 	 * 
 	 * @param width the width to apply
 	 * @param height the height to apply
 	 */
 	public void setSize(int width, int height) {
-		this.width = width;
-		this.height = height;
+		this.width = width + "px";
+		this.height = height + "px";
 		applySize();
 	}
 
@@ -138,11 +138,14 @@ public class Slider extends AbstractDojoFocus {
 	private void applySize() {
 		if (isAttached()) {
 			Element element = DojoController.getInstance().getDomNode(this);
-			DOM.setStyleAttribute(element, "width", width + "px");
-			DOM.setStyleAttribute(element, "height", height + "px");
+			DOM.setStyleAttribute(element, "width", width);
+			DOM.setStyleAttribute(element, "height", height);
 		}
 	}
 
+	
+	
+	
 	/**
 	 * Sets enabled or not the Slider bar
 	 * @param enabled <code>true</code> to set the slider enabled
@@ -210,11 +213,9 @@ public class Slider extends AbstractDojoFocus {
 	public void createDojoWidget() throws Exception {
 
 		if (HORIZONTAL.equals(type)) {
-			this.dojoWidget = createHorizontalSlider(minimum, maximum, value,
-					showButtons);
+			this.dojoWidget = createHorizontalSlider(minimum, maximum, value,showButtons);
 		} else {
-			this.dojoWidget = createVerticalSlider(minimum, maximum, value,
-					showButtons);
+			this.dojoWidget = createVerticalSlider(minimum, maximum, value,showButtons);
 		}
 
 	}
@@ -245,10 +246,10 @@ public class Slider extends AbstractDojoFocus {
 	 }-*/;
 
 	/**
-	 * Creates a Slider DOJO widgte in a horinzontal position.
-	 * @parma minimum the min value for the cursor.
+	 * Creates a Slider DOJO widget in a horizontal position.
+	 * @param minimum the min value for the cursor.
 	 * @param maximum the max value for the cursor.
-	 * @param initialValue the intial value for the cursor.
+	 * @param initialValue the initial value for the cursor.
 	 * @param showButtons  Show increment/decrement buttons at the ends of the slider
 	 * @return the Slider DOJO widget
 	 */
@@ -306,7 +307,8 @@ public class Slider extends AbstractDojoFocus {
 	 * @return the height of the Slider
 	 */
 	public int getHeight() {
-		return this.height;
+		return this.getOffsetHeight();
+		
 	}
 
 	/**
@@ -314,9 +316,25 @@ public class Slider extends AbstractDojoFocus {
 	 * @return the width of the Slider
 	 */
 	public int getWidth() {
-		return this.width;
+		return this.getOffsetWidth();
 	}
 
+	public void setSize(String width,String height) {
+		this.width = width;
+		this.height = height;
+		applySize();
+	}
+	
+	public void setWidth(String width) {
+		this.width = width;
+		applySize();
+	}
+	
+	public void setHeight(String height) {
+		this.height = height;
+		applySize();
+	}
+	
 	/**
 	 * Returns the value of the cursor.
 	 * 
@@ -362,7 +380,7 @@ public class Slider extends AbstractDojoFocus {
 	 */
 	public void removeRuleMarkTop() {
 		removeDojoRule(sliderRuleTop);
-		sliderRuleTop = null;
+		//sliderRuleTop = null;
 	}
 	
     /**
@@ -522,7 +540,11 @@ public class Slider extends AbstractDojoFocus {
 	 *Removes all <code>RuleMark</code> and <code>RuleLabel</code> 
 	 */
 	public void doBeforeDestruction() {
-		this.removeRuleAndLabel();
+		removeDojoRule(labelBottom);
+		removeDojoRule(labelTop);
+		removeDojoRule(sliderRuleBottom);
+		removeDojoRule(sliderRuleTop);
+		
     }
 	
 	
