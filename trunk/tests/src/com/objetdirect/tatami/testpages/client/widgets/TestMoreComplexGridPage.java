@@ -55,7 +55,7 @@ import com.objetdirect.tatami.testpages.client.TestPage;
 public class TestMoreComplexGridPage extends TestPage{
 
 	public TestMoreComplexGridPage(){
-		 super(TestMoreComplexGridPage.class.getName(), "Test Complex Grid");
+		 super(TestMoreComplexGridPage.class.getCanonicalName(), "Test Complex Grid");
 	}
 	
 	public Widget getTestPage() {

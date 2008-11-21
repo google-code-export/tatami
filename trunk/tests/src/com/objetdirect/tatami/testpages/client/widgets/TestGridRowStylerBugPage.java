@@ -55,7 +55,7 @@ public class TestGridRowStylerBugPage extends TestPage {
 	}
 
 	public TestGridRowStylerBugPage(){
-		super(TestGridRowStylerBugPage.class.getName(), "Test bug grid row styler");
+		super(TestGridRowStylerBugPage.class.getCanonicalName(), "Test bug grid row styler");
 	}
 
 	public class MyStyler implements RowStyler {

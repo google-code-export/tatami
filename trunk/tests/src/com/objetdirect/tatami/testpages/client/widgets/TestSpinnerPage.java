@@ -43,7 +43,7 @@ import com.objetdirect.tatami.testpages.client.TestPage;
 public class TestSpinnerPage extends TestPage{
 
 	public TestSpinnerPage(){
-		super(TestSpinnerPage.class.getName(), "Test Spinner");
+		super(TestSpinnerPage.class.getCanonicalName(), "Test Spinner");
 	}
 	
 	public Widget getTestPage() {

@@ -36,7 +36,7 @@ import com.objetdirect.tatami.testpages.client.TestPage;
 public class TestFillingEmtyGridPage extends TestPage{
 
 	protected TestFillingEmtyGridPage() {
-		super(TestFillingEmtyGridPage.class.getName(), "Test Empty Grid");
+		super(TestFillingEmtyGridPage.class.getCanonicalName(), "Test Empty Grid");
 	}
 
 	public Widget getTestPage() {

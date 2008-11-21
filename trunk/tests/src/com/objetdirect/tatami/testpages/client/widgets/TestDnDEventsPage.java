@@ -69,13 +69,20 @@ public class TestDnDEventsPage extends TestPage{
 		AbstractDnDBehavior<WidgetDnDElement, WidgetSource,WidgetTarget> behavior = new AbstractDnDBehavior<WidgetDnDElement, WidgetSource, WidgetTarget>(){
 
 			@Override
-			public boolean checkItemAcceptance(WidgetSource source,
+			public boolean checkSourceItemAcceptance(WidgetSource source,
 					WidgetTarget target,
 					Collection<WidgetDnDElement> dndElements) {
 				onDnDCheckSourceHasBeenCalled.setHTML("TRUE");
 				return super.checkItemAcceptance(source, target, dndElements);
 			}
 
+			@Override
+			public boolean checkTargetItemAcceptance(WidgetSource source,
+					WidgetTarget target,
+					Collection<WidgetDnDElement> dndElements) {
+				onDnDCheckTargetHasBeenCalled.setHTML("TRUE");
+				return super.checkTargetItemAcceptance(source, target, dndElements);
+			}
 
 			@Override
 			public void dragOver(IDnDTarget target) {
