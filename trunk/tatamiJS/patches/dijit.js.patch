@@ -1,0 +1,16 @@
+Index: dojox/grid/cells/dijit.js
+===================================================================
+--- dojox/grid/cells/dijit.js	(revision 15756)
++++ dojox/grid/cells/dijit.js	(working copy)
+@@ -162,6 +162,11 @@
+ 				this.inherited(arguments);
+ 			}
+ 		},
++		getWidgetProps: function(inDatum){
++			return dojo.mixin({}, this.widgetProps||{}, {
++				checked: inDatum
++			});
++		},
+ 		sizeWidget: function(inNode, inDatum, inRowIndex){
+ 			return;
+ 		}

@@ -1,0 +1,93 @@
+Index: Tree.js
+===================================================================
+--- Tree.js	(revision 15563)
++++ Tree.js	(working copy)
+@@ -62,6 +62,13 @@
+ 		this._setExpando(false);	
+ 	},
+ 
++	_setStyleText : function(inNode, inStyleText){
++		if(inNode.style.cssText == undefined){
++			inNode.setAttribute("style", inStyleText);
++		}else{
++			inNode.style.cssText = inStyleText;
++		}
++	},
+ 	_updateItemClasses: function(item){
+ 		// summary: set appropriate CSS classes for icon and label dom node (used to allow for item updates to change respective CSS)
+ 		var tree = this.tree, model = tree.model;
+@@ -71,6 +78,8 @@
+ 		}
+ 		this.iconNode.className = "dijitTreeIcon " + tree.getIconClass(item, this.isExpanded);
+ 		this.labelNode.className = "dijitTreeLabel " + tree.getLabelClass(item, this.isExpanded);
++		this._setStyleText(this.labelNode , tree.getLabelStyle(item, this.isExpanded) + (this.labelNode._style||''));
++		this._setStyleText(this.iconNode , tree.getIconStyle(item, this.isExpanded)  + (this.iconNode._style||''));
+ 	},
+ 
+ 	_updateLayout: function(){
+@@ -315,6 +324,8 @@
+ 	// openOnClick: Boolean
+ 	//		If true, clicking a folder node's label will open it, rather than calling onClick()
+ 	openOnClick: false,
++	
++	openOnDblClick: false,
+ 
+ 	templatePath: dojo.moduleUrl("dijit", "_tree/Tree.html"),		
+ 
+@@ -486,7 +497,15 @@
+ 	getLabelClass: function(/*dojo.data.Item*/ item, /*Boolean*/ opened){
+ 		// summary: user overridable function to return CSS class name to display label
+ 	},
++	
++	getIconStyle: function(/*dojo.data.Item*/ item, /*Boolean*/ opened){
++		// summary: user overridable function to return CSS styles to display icon
++	},
+ 
++	getLabelStyle: function(/*dojo.data.Item*/ item, /*Boolean*/ opened){
++		// summary: user overridable function to return CSS styles to display label
++	},
++
+ 	/////////// Keyboard and Mouse handlers ////////////////////
+ 
+ 	_onKeyPress: function(/*Event*/ e){
+@@ -662,7 +681,30 @@
+ 		}
+ 		dojo.stopEvent(e);
+ 	},
++	_onDblClick: function(/*Event*/ e){
++		// summary: translates click events into commands for the controller to process
++		var domElement = e.target;
+ 
++		// find node
++		var nodeWidget = dijit.getEnclosingWidget(domElement);	
++		if(!nodeWidget || !nodeWidget.isTreeNode){
++			return;
++		}
++
++		if( (this.openOnDblClick && nodeWidget.isExpandable) ||
++			(domElement == nodeWidget.expandoNode || domElement == nodeWidget.expandoNodeText) ){
++			// expando node was clicked, or label of a folder node was clicked; open it
++			if(nodeWidget.isExpandable){
++				this._onExpandoClick({node:nodeWidget});
++			}
++		}else{
++			this._publish("execute", { item: nodeWidget.item, node: nodeWidget} );
++			this.onDblClick(nodeWidget.item, nodeWidget);
++			this.focusNode(nodeWidget);
++		}
++		dojo.stopEvent(e);
++	},
++
+ 	_onExpandoClick: function(/*Object*/ message){
+ 		// summary: user clicked the +/- icon; expand or collapse my children.
+ 		var node = message.node;
+@@ -682,6 +724,9 @@
+ 	onClick: function(/* dojo.data */ item, /*TreeNode*/ node){
+ 		// summary: user overridable function for executing a tree item
+ 	},
++	onDblClick: function(/* dojo.data */ item, /*TreeNode*/ node){
++		// summary: user overridable function for executing a tree item
++	},
+ 	onOpen: function(/* dojo.data */ item, /*TreeNode*/ node){
+ 		// summary: callback when a node is opened
+ 	},

@@ -1,0 +1,41 @@
+Index: Blowfish.js
+===================================================================
+--- Blowfish.js	(revision 15563)
++++ Blowfish.js	(working copy)
+@@ -343,14 +343,14 @@
+ 		var cipher=[], count=plaintext.length >> 3, pos=0, o={}, isCBC=(mode==dojox.encoding.crypto.cipherModes.CBC);
+ 		var vector={left:iv.left||null, right:iv.right||null};
+ 		for(var i=0; i<count; i++){
+-			o.left=plaintext.charCodeAt(pos)*POW24
+-				|plaintext.charCodeAt(pos+1)*POW16
+-				|plaintext.charCodeAt(pos+2)*POW8
+-				|plaintext.charCodeAt(pos+3);
+-			o.right=plaintext.charCodeAt(pos+4)*POW24
+-				|plaintext.charCodeAt(pos+5)*POW16
+-				|plaintext.charCodeAt(pos+6)*POW8
+-				|plaintext.charCodeAt(pos+7);
++			o.left=(plaintext.charCodeAt(pos) % 256)*POW24 
++				|(plaintext.charCodeAt(pos+1) % 256)*POW16
++				|(plaintext.charCodeAt(pos+2) % 256)*POW8
++				|(plaintext.charCodeAt(pos+3) % 256);
++			o.right=(plaintext.charCodeAt(pos+4) % 256)*POW24
++				|(plaintext.charCodeAt(pos+5) % 256)*POW16
++				|(plaintext.charCodeAt(pos+6) % 256)*POW8
++				|(plaintext.charCodeAt(pos+7) % 256);
+ 
+ 			if(isCBC){
+ 				o.left=(((o.left>>0x10)^(vector.left>>0x10))<<0x10)|(((o.left&0xffff)^(vector.left&0xffff))&0xffff);
+@@ -469,9 +469,14 @@
+ 
+ 		//	convert to string
+ 		return dojo.map(pt, function(item){
++			if(item > 127){
++				item = 65536 - 256 + item;		
++			}
+ 			return String.fromCharCode(item);
+ 		}).join("");	//	string
+ 	};
+ 
+ 	this.setIV("0000000000000000", dojox.encoding.crypto.outputTypes.Hex);
+ }();
+

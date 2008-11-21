@@ -1,0 +1,63 @@
+Index: _tree/Tree.html
+===================================================================
+--- _tree/Tree.html	(revision 15563)
++++ _tree/Tree.html	(working copy)
+@@ -1,3 +1,3 @@
+ <div class="dijitTreeContainer" waiRole="tree"
+-	dojoAttachEvent="onclick:_onClick,onkeypress:_onKeyPress">
++	dojoAttachEvent="onclick:_onClick,onkeypress:_onKeyPress,ondblclick:_onDblClick">
+ </div>
+Index: Tree.js
+===================================================================
+--- Tree.js	(revision 15563)
++++ Tree.js	(working copy)
+@@ -315,6 +315,8 @@
+ 	// openOnClick: Boolean
+ 	//		If true, clicking a folder node's label will open it, rather than calling onClick()
+ 	openOnClick: false,
++	
++	openOnDblClick: false,
+ 
+ 	templatePath: dojo.moduleUrl("dijit", "_tree/Tree.html"),		
+ 
+@@ -662,7 +664,30 @@
+ 		}
+ 		dojo.stopEvent(e);
+ 	},
++	_onDblClick: function(/*Event*/ e){
++		// summary: translates click events into commands for the controller to process
++		var domElement = e.target;
+ 
++		// find node
++		var nodeWidget = dijit.getEnclosingWidget(domElement);	
++		if(!nodeWidget || !nodeWidget.isTreeNode){
++			return;
++		}
++
++		if( (this.openOnDblClick && nodeWidget.isExpandable) ||
++			(domElement == nodeWidget.expandoNode || domElement == nodeWidget.expandoNodeText) ){
++			// expando node was clicked, or label of a folder node was clicked; open it
++			if(nodeWidget.isExpandable){
++				this._onExpandoClick({node:nodeWidget});
++			}
++		}else{
++			this._publish("execute", { item: nodeWidget.item, node: nodeWidget} );
++			this.onDblClick(nodeWidget.item, nodeWidget);
++			this.focusNode(nodeWidget);
++		}
++		dojo.stopEvent(e);
++	},
++
+ 	_onExpandoClick: function(/*Object*/ message){
+ 		// summary: user clicked the +/- icon; expand or collapse my children.
+ 		var node = message.node;
+@@ -682,6 +707,9 @@
+ 	onClick: function(/* dojo.data */ item, /*TreeNode*/ node){
+ 		// summary: user overridable function for executing a tree item
+ 	},
++	onDblClick: function(/* dojo.data */ item, /*TreeNode*/ node){
++		// summary: user overridable function for executing a tree item
++	},
+ 	onOpen: function(/* dojo.data */ item, /*TreeNode*/ node){
+ 		// summary: callback when a node is opened
+ 	},
