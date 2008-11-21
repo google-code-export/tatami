@@ -29,4 +29,5 @@
 	<inherits name="com.objetdirect.tatami.Tatami_Base" />
 	<inherits name="com.objetdirect.tatami.Tatami_DojoBase" />
 	<inherits name="com.objetdirect.tatami.Tatami_YUI" />
+	<inherits name="com.objetdirect.tatami.theme.Tundra"/>
 </module>
