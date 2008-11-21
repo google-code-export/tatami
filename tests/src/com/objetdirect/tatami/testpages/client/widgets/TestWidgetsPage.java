@@ -37,17 +37,13 @@ public class TestWidgetsPage extends TestMainPage implements EntryPoint  {
    * This is the entry point method.
    */
   public void onModuleLoad() {
-	  addTestPage(new TestDnDEventsPage());
-	  addTestPage(new TestDNDPage());
-	  addTestPage(new TestDnDToTreePage());
-	  addTestPage(new TestDnDTreeToPanelPage());
-	  addTestPage(new TestFillingEmtyGridPage());
-	  addTestPage(new TestGridRowStylerBugPage());
-	  addTestPage(new TestLayoutGridPage());
-	  addTestPage(new TestMoreComplexGridPage());
-	  addTestPage(new TestSimpleGridPage());
-	  addTestPage(new TestSpinnerPage());
-	  addTestPage(new TestTreePage());
+	  addTestPage(new TestBasicChartPage());
+	  addTestPage(new TestChartUpdatingPage());
+	  addTestPage(new TestChartEffectPage());
+	  addTestPage(new TestChartLabelsPage());
+	  addTestPage(new TestChartCustomEffectPage());
+	  addTestPage(new TestChartAxes());
+	  addTestPage(new TestPieChartPage());
   }
   
   

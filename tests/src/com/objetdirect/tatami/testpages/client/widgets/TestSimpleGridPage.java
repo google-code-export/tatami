@@ -51,7 +51,7 @@ public class TestSimpleGridPage extends TestPage{
 		grid = new Grid();
 		panel = new VerticalPanel();
 		panel.add(grid);
-		grid.addColumn("First Column","1");
+		grid.addColumn("First Column","1" , new TextEditor());
 		grid.addColumn("Second Column","2");
 		grid.addColumn("Third Column","3");
 		Object[] row1 = {"A" , "b" , "3"};

@@ -33,7 +33,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Panel;
@@ -121,7 +120,6 @@ public class TestDnDToTreePage extends TestPage{
 						.hasNext();) {
 					WidgetDnDElement dndElement = (WidgetDnDElement) iterator
 							.next();
-					Window.alert("DROPPED");
 					((Item)tree.getStore().getItemByIdentity(targetNodeId)).addChild(new Item(dndElement.getDndId(),((HTML)dndElement.getWidget()).getHTML()));
 				}
 				return true;

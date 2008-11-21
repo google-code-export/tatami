@@ -136,10 +136,10 @@ public class TestDNDPage extends TestPage{
 			}
 
 			@Override
-			public boolean checkItemAcceptance(
+			public boolean checkSourceItemAcceptance(
 					IDnDSource<? extends DndTreeElement> source,
 					IDnDTarget target, Collection<DndTreeElement> dndElements) {
-				return super.checkItemAcceptance(source, target, dndElements);
+				return super.checkSourceItemAcceptance(source, target, dndElements);
 			}
 
 

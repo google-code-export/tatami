@@ -7,7 +7,6 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.objetdirect.tatami.client.data.DefaultDataStore;
 import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.grid.Cell;
 import com.objetdirect.tatami.client.grid.Grid;
@@ -37,7 +36,7 @@ public class TestLayoutGridPage extends TestPage{
 	public Widget getTestPage() {
 		grid = new Grid();
 		VerticalPanel panel = new VerticalPanel();
-		DefaultDataStore store = new DefaultDataStore();
+		GridDataStore store = new GridDataStore();
 		grid.setStore(store);
 		Item itemJohn = new Item();
 		itemJohn.setId("14563" );

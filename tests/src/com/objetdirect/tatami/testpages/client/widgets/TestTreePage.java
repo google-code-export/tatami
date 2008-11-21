@@ -94,6 +94,7 @@ public class TestTreePage extends TestPage{
 		panel.add(onDblClickValue);
 		panel.add(closedValue);
 		panel.add(openValue);
+		
 		return panel;
 	}
 
