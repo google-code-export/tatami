@@ -10,7 +10,7 @@
 	
 	<target name="clean" description="Delete generated dojo builds">
 			<echo message="Delete generated dojo builds" />
-			<delete includeemptydirs="false">
+			<delete includeemptydirs="false" failonerror="false">
 				<fileset dir="build/" includes="**/*"/>
 			</delete>
 	</target>
@@ -30,11 +30,6 @@
 		       <arg line="optimize='shrinksafe'"/>
 		       <arg line="version='tatami_1.3'"/>
 		    </exec>
-			<copy todir="${basedir}/build/com/objetdirect/tatami/">
-				<fileset dir="${basedir}/src/com/objetdirect/tatami/">
-					<include name="*.gwt.xml"/>
-				</fileset>
-			</copy>
 	</target>
 	
 	<target name="removeUnusedFiles" description="Removes dojo files not used by Tatami">
