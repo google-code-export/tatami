@@ -4,6 +4,7 @@
 	<property file="env.properties" />
 	<property name="build.dir" value="bin"/>
 	<property name="dist.dir" value="dist"/>
+	<property name="test" value="env.properties"/>
 	
 	<description>
     TatamiX build file.  This is used to package up  the TatamiX project as a jar,
@@ -15,6 +16,7 @@
     <pathelement path="${java.class.path}/"/>
     <pathelement path="${tatami.lib}/"/>
   	<pathelement path="${gwt.user.lib}/"/>
+  	
     <!-- Additional dependencies (such as junit) go here -->
   </path>
 
@@ -43,9 +45,10 @@
 
   <target name="clean">
     <!-- Delete the bin directory tree -->
-    <delete file="${dist.dir}/tatamix.jar"/>
-    <delete>
-      <fileset dir="${build.dir}" includes="**/*.class"/>
+    <delete failonerror="false">
+      
+    	<fileset dir="${build.dir}" includes="**/*.class"/>
+    	<fileset file="${dist.dir}/tatamix.jar"/>
     </delete>
   </target>
 
