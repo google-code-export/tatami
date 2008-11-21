@@ -1,0 +1,60 @@
+Index: Default.js
+===================================================================
+--- Default.js	(revision 15592)
++++ Default.js	(working copy)
+@@ -48,6 +48,7 @@
+ 			stroke:        {},	// stroke for an axis
+ 			majorTick:     {},	// stroke + length for a tick
+ 			minorTick:     {},	// stroke + length for a tick
++			microTick:     {},
+ 			font:          "",	// font for labels
+ 			fontColor:     ""	// color for labels as a string
+ 		},
+@@ -217,6 +218,7 @@
+ 				taStroke = "stroke" in this.opt ? this.opt.stroke : ta.stroke,
+ 				taMajorTick = "majorTick" in this.opt ? this.opt.majorTick : ta.majorTick,
+ 				taMinorTick = "minorTick" in this.opt ? this.opt.minorTick : ta.minorTick,
++				taMicroTick = "microTick" in this.opt ? this.opt.microTick : ta.minorTick,
+ 				taFont = "font" in this.opt ? this.opt.font : ta.font,
+ 				taFontColor = "fontColor" in this.opt ? this.opt.fontColor : ta.fontColor,
+ 				tickSize = Math.max(taMajorTick.length, taMinorTick.length),
+@@ -225,7 +227,7 @@
+ 				start = {y: dim.height - offsets.b};
+ 				stop  = {y: offsets.t};
+ 				axisVector = {x: 0, y: -1};
+-				if(this.opt.leftBottom){
++				if(this.opt.leftBottom){ 
+ 					start.x = stop.x = offsets.l;
+ 					tickVector = {x: -1, y: 0};
+ 					labelAlign = "end";
+@@ -285,7 +287,7 @@
+ 
+ 				dx = tickVector.x * taMinorTick.length;
+ 				dy = tickVector.y * taMinorTick.length;
+-				canLabel = c.minMinorStep <= c.minor.tick * c.scale;
++				canLabel = c.minMinorStep <= c.minor.tick * c.bounds.scale;
+ 				dojo.forEach(t.minor, function(tick){
+ 					var offset = f(tick.value), elem,
+ 						x = start.x + axisVector.x * offset,
+@@ -303,9 +305,9 @@
+ 						}
+ 				}, this);
+ 
+-				// use minor ticks for now
+-				//dx = tickVector.x * taMicroTick.length;
+-				//dy = tickVector.y * taMicroTick.length;
++				
++				dx = tickVector.x * taMicroTick.length;
++				dy = tickVector.y * taMicroTick.length;
+ 				dojo.forEach(t.micro, function(tick){
+ 					var offset = f(tick.value), elem,
+ 						x = start.x + axisVector.x * offset,
+@@ -314,7 +316,7 @@
+ 							x1: x, y1: y,
+ 							x2: x + dx,
+ 							y2: y + dy
+-						}).setStroke(taMinorTick);	// use minor tick for now
++						}).setStroke(taMicroTick);	// use minor tick for now
+ 				}, this);
+ 			}catch(e){
+ 				// squelch
