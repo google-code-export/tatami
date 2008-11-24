@@ -85,13 +85,12 @@ dependencies = {
 		},
 		{
 			name: "../dojo/tatami_all_module.js",
-			dependencies: [
-				
-			],
 			layerDependencies: [
-			    "../dojo/tatami_widgets_module.js",
-			    "../dojo/tatami_gfx_module.js",
-			    "../dojo/tatami_charting_module.js"
+			    "dojo/tatami_widgets_module.js",
+			    "dojo/tatami_gfx_module.js",
+			    "dojo/tatami_charting_module.js"
+			],
+			dependencies: [
 			]
 		}
 		
