@@ -1,5 +1,0 @@
-<module>
-	<!-- Inherit the core Web Toolkit stuff.                  -->
-	<inherits name="com.objetdirect.tatami.Tatami_DojoCharting"/>
-	<entry-point class='com.objetdirect.tatami.testpages.client.charting.TestChartPage'/>
-</module>
