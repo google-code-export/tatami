@@ -33,15 +33,46 @@ public class ChartWrapper {
 		return pies;
 	}
 	
-	public List<HtmlElement> getCircleMarkers(){
-		List<HtmlElement> elems = chartBaseElement.getHtmlElementsByTagName("path");
+	public List<HtmlElement> getCircleMarkers(int serieIndex) throws Exception{
+		List<HtmlElement> elems = getSerie(serieIndex).getHtmlElementsByTagName("path");
 		List<HtmlElement> markers = new ArrayList<HtmlElement>();
 		for (HtmlElement htmlElement : elems) {
-			if(htmlElement.getAttribute("d").endsWith("m-3,0 c0,-4 6,-4 6,0 m-6,0 c0,4 6,4 6,0")){
+			if(htmlElement.getAttribute("d").endsWith("m-3 0c 0-4 6-4 6 0m-6 0c 0 4 6 4 6 0") && !htmlElement.getAttribute("fill").equals("none")){
 				markers.add(htmlElement);
 			}
 		}
 		return markers;
 	}
+	
+	public List<HtmlElement> getBubbles(int serieIndex) throws Exception{
+		List<HtmlElement> elems = getSerie(serieIndex).getHtmlElementsByTagName("circle");
+		List<HtmlElement> bubbles = new ArrayList<HtmlElement>();
+		for (HtmlElement htmlElement : elems) {
+			if(!htmlElement.getAttribute("fill").equals("none")){
+				bubbles.add(htmlElement);
+			}
+		}
+		return bubbles;
+	}
+	
+	public List<HtmlElement> getColumns(int serieIndex) throws Exception{
+		List<HtmlElement> bars = getSerie(serieIndex).getHtmlElementsByTagName("rect");
+		return bars;
+	}
+	
+	public List<HtmlElement> getSeries(){
+		List<HtmlElement> series = (List<HtmlElement>) chartBaseElement.getByXPath("svg/g/g");
+		return series;
+	}
+	
+	public HtmlElement getSerie(int serieIndex) throws Exception{
+		List<HtmlElement> series = getSeries();
+		if(series.size() < serieIndex){
+			throw new Exception("Not so much series in this chart");
+		}else{
+			return series.get(serieIndex);
+		}
+	}
+	
 	
 }
