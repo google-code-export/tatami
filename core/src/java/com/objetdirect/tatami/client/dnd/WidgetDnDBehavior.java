@@ -98,7 +98,6 @@ public abstract class WidgetDnDBehavior implements IDnDBehavior<WidgetDnDElement
 	/**
 	 * It checks whether the source could accept the drop operation. The drop operation can still be refused 
 	 * when the onDrop event is fired.
-	 * This method is called when the checkTargetItemAcceptance returned true
 	 * 
 	 * @param target: the target
 	 * @param source : the source

@@ -92,6 +92,14 @@ public class JSHelper {
 		return array[index];
 	}-*/;
 	
+	public static Number getNumberElementAtIndex(JavaScriptObject array , String index){
+		return (Number) jsGetNumberElementAtIndex(array, index);
+	}
+	
+	private static native double jsGetNumberElementAtIndex(JavaScriptObject array , String index)/*-{
+		return array[index];
+	}-*/;
+	
 	public static native int getArraySize(JavaScriptObject array)/*-{
 		return array ? array.length : 0;
 	}-*/;
