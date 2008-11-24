@@ -2,8 +2,8 @@ package com.objetdirect.tatami.demo.client;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.objetdirect.tatami.client.Clock;
 import com.objetdirect.tatami.client.FishEye;
 import com.objetdirect.tatami.client.Toaster;
 import com.objetdirect.tatamix.client.hmvc.CompositeView;
@@ -27,7 +27,7 @@ public class MainView extends CompositeView implements TatamiDemoEvent {
 
 	private FlowPanel layout;
 	private FlowPanel content;
-	private SimplePanel menuContainer;
+	private FlowPanel menuContainer;
 	private FlowPanel header;
 	private FishEye menu;
 
@@ -70,8 +70,9 @@ public class MainView extends CompositeView implements TatamiDemoEvent {
 		layout.add(header);
 	    toaster = new Toaster("message",Toaster.BOTTOM_LEFT_UP);
         initMenu();
-        menuContainer = new SimplePanel();
-        menuContainer.setWidget(menu);
+        menuContainer = new FlowPanel();
+        menuContainer.add(menu);
+    
         menuContainer.setStylePrimaryName("menu");
         layout.add(menuContainer);
         content = new FlowPanel();
@@ -103,13 +104,15 @@ public class MainView extends CompositeView implements TatamiDemoEvent {
 		header.add(ftLink);
 		header.add(title);
 		header.add(dojo);
-
+         
 		return header;
 	}
 
 
 	private void initHomeContent() {
 		content.clear();
+		
+		
 		RoundedContainer wrapper = new RoundedContainer();
 
 		Paragraph p = new Paragraph();

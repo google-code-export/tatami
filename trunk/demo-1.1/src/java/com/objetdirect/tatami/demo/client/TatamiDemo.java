@@ -30,6 +30,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.objetdirect.tatami.client.Slider;
+import com.objetdirect.tatami.client.Tatami;
 import com.objetdirect.tatami.demo.client.resources.TatamiMessages;
 import com.objetdirect.tatamix.client.hmvc.MVCImpl;
 
@@ -69,12 +71,14 @@ public class TatamiDemo implements EntryPoint {
 
 
 	public void onModuleLoad() {
-
+        
+		Tatami.applyDefaultTheme();
 		MainController controller = new MainController();
 		MainView view = new MainView();
 		MVCImpl.createTriad(null,view,controller);
 	    RootPanel.get().add(view);
 
+		
 	   	hideLoading();
 	}
 

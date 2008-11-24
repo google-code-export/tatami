@@ -29,9 +29,8 @@
 	<!-- Inherit the core Web Toolkit stuff.                  -->
 
 	<inherits name="com.objetdirect.tatami.Tatami"/>
-		<inherits name="com.objetdirect.tatamix.Tatamix"/>
-   <!--  <inherits name="com.google.gwt.i18n.I18N"/>-->
-	<!-- Specify the app entry point class.                   -->
+	<inherits name="com.objetdirect.tatamix.Tatamix"/>
+   	<!-- Specify the app entry point class.                   -->
 	<entry-point class="com.objetdirect.tatami.demo.client.TatamiDemo"/>
-    <stylesheet src="tatamiDemo.css"/>
+     <stylesheet src="tatamiDemo.css"/> 
 </module>
