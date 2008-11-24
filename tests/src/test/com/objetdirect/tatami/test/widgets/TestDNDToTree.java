@@ -29,12 +29,12 @@ public class TestDNDToTree extends AbstractTestWidgets {
 	}
 	
 	public void testSubItemToRootItem(){
-		TreeNode node1 = tree.getNode(0);
-		TreeNode node2 = tree.getNode(1);
-		testGwt.mouseClick(node1.getExpandNode(), TestGWT.BUTTON_LEFT, false, false, false);
-		TreeNode node3 = tree.getChildNode(node1,0);
-		testGwt.dragElementTo(node3.getNodeElement(),node1.getNodeElement(), false);
-		assertEquals("1.1",tree.getChildNode(node1,0).getLabel());
+		TreeNode root = tree.getRoot();
+		testGwt.mouseClick(tree.getChildNodeByPath(tree.getRoot(),0).getExpandNode());
+		testGwt.waitForBackgroundTasksToComplete(500);
+		TreeNode node1 = tree.getChildNodeByPath(tree.getRoot(),0,1);
+		testGwt.dragElementTo(node1.getNodeContent(),root.getNodeContent(), false);
+		assertEquals("1.2",tree.getChildNode(tree.getRoot(),0).getLabel());
 	}
 	
 	public void testSubItemToSubItem(){
@@ -43,21 +43,12 @@ public class TestDNDToTree extends AbstractTestWidgets {
 		testGwt.waitForBackgroundTasksToComplete(5000);
 		TreeNode subTreeItem = tree.getChildNodeByPath(tree.getRoot(),0,0);
 		TreeNode subTreeItem2 = tree.getChildNodeByPath(tree.getRoot(),1,0);
-		testGwt.dragElementTo(subTreeItem.getNodeElement(),subTreeItem2.getNodeElement(), false);
-		testGwt.mouseClick(subTreeItem2.getExpandNode());
+		testGwt.dragElementTo(subTreeItem.getNodeContent(),subTreeItem2.getNodeContent(), false);
 		testGwt.waitForBackgroundTasksToComplete(5000);
-		assertEquals("2.1.1",tree.getChildNodeByPath(subTreeItem2,0).getLabel());
+		assertEquals("1.1",(tree.getChildNodeByPath(tree.getRoot(),1,0,0).getLabel()));
 	}
 	
-	public void testWidgetToTree(){
-		testGwt.mouseClick(tree.getRoot().getChildNodeByPath(0).getExpandNode());
-		testGwt.dragElementTo(page.getHtmlElementById("widget1"),tree.getChildNodeByPath(tree.getRoot(),0,1).getNodeElement(),false);
-		testGwt.waitForBackgroundTasksToComplete(5000);
-		testGwt.mouseClick(tree.getChildNodeByPath(tree.getRoot(),0,1).getExpandNode());
-		testGwt.waitForBackgroundTasksToComplete(5000);
-		System.out.println(tree.getChildNodeByPath(tree.getRoot(),0,1).getNodeElement().asXml());
-		assertEquals("Widget 1",tree.getChildNodeByPath(tree.getRoot(),0,1,0).getLabel());
-	}
+	
 	
 	
 }

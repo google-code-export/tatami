@@ -120,6 +120,7 @@ public class TestDNDToTreePage extends TestPage{
 					WidgetDnDElement dndElement = (WidgetDnDElement) iterator
 							.next();
 					((Item)tree.getStore().getItemByIdentity(targetNodeId)).addChild(new Item(dndElement.getDndId(),((HTML)dndElement.getWidget()).getHTML()));
+					dndElement.getWidget().removeFromParent();
 				}
 				return true;
 			}
@@ -166,7 +167,7 @@ public class TestDNDToTreePage extends TestPage{
 		vpanel2.setWidth("300px");
 		DOM.setElementAttribute(vpanel2.getElement(),"id", "SourceOnlyPanel");
 		DOM.setElementAttribute(widget1.getElement(),"id", "widget1");
-		DOM.setElementAttribute(widget2.getElement(),"id", "widget2	");
+		DOM.setElementAttribute(widget2.getElement(),"id", "widget2");
 		DnD.registerSource(vpanel2);
 		DnD.registerElement(vpanel2,widget1);
 		DnD.registerElement(vpanel2,widget2);

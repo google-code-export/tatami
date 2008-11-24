@@ -35,10 +35,7 @@ public class TestDND extends AbstractTestWidgets {
 		HtmlElement widget4 = page.getHtmlElementById("widget4");
 		testGwt.dragElementTo(widget4,targetOnlyPanel, false);
 		testGwt.waitForBackgroundTasksToComplete(1000);
-		assertEquals( "Right panel to left panel" , displayBehavior.getTextContent());
-		Iterator<HtmlElement> leftPanelChildren = targetOnlyPanel.getFirstChild().getAllHtmlChildElements().iterator();
-		assertEquals("Please Drag me" ,leftPanelChildren.next().getTextContent());
-		assertTrue(leftPanelChildren.next().getTextContent().contains("Please Drag me"));
+		assertTrue(targetOnlyPanel.hasHtmlElementWithId("widget4"));
 	}
 	
 	public void testTreeSourceToWidgetTargetDND(){

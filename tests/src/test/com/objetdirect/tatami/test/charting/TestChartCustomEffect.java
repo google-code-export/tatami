@@ -23,6 +23,7 @@ public class TestChartCustomEffect extends AbstractTestChart{
 		List<HtmlElement> slices = chart1.getPiePieces();
 		assertTrue(slices.size() == 6);
 		HtmlElement myPiePiece;
+		//We seek the white pie piece to click it
 		for (Iterator iterator = slices.iterator(); iterator.hasNext();) {
 			HtmlElement htmlElement = (HtmlElement) iterator.next();
 			if(htmlElement.getAttribute("fill").equals("rgb(255, 255, 255)")){
