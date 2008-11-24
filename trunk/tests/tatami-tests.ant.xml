@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="tatami-tests" default="compile" basedir=".">
+	<property file="env.properties"/>
+	<property name="build.dir" value="bin"/>
+	<property name="dist.dir" value="dist"/>
+	
+	<description>
+	    Tatami Test build file.  This is used to package up  the Tatami Test project as a jar,
+	    to distribute it.  
+  	</description>
+
+  <!-- set classpath -->
+  <path id="project.class.path">
+    <pathelement path="${java.class.path}/"/>
+  	<pathelement path="${gwt.user.lib}/"/>
+    <!-- Additional dependencies (such as junit) go here -->
+  	<fileset dir="${htmlunit.libdir}" includes="*.jar"/>
+  	<pathelement path="${junit.lib}"/>
+  	<pathelement path="${tatami.lib}"/>
+  	<pathelement path="${tatamiTestUtil.lib}"/>
+  </path>
+
+  <target name="compile" description="Compile src to build">
+    <mkdir dir="${build.dir}"/>
+  	<mkdir dir="${build.dir}/java/"/>
+  	<mkdir dir="${build.dir}/test/"/>
+    <javac source="1.5"  srcdir="src/java:src/test" destdir="${build.dir}" includes="**" debug="on" debuglevel="lines,vars,source" >
+    	<classpath refid="project.class.path"/>
+    </javac>
+  </target>
+  	
+  <target name="package" depends="compile" description="Package up the project as a jar">
+  	<mkdir dir="${dist.dir}"/>
+  	<jar destfile="${dist.dir}/tatamiTests.jar">
+  	  <fileset dir="${build.dir}/test/">
+        <include name="**/*"/>
+      </fileset>
+      <fileset dir="${build.dir}/java/">
+      	<include name="**/*"/>
+      </fileset>
+      <fileset dir="src/java">
+      	<include name="**"/>
+      </fileset>
+      <fileset dir="src/test">
+      	<include name="**"/>
+      </fileset>
+  	  <fileset file="*.launch"/>
+    </jar>
+  </target>
+
+  <target name="clean">
+    <!-- Delete the bin directory tree -->
+    <delete />
+    <delete includeemptydirs="true" failonerror="false">
+      <fileset dir="${build.dir}" includes="**/*"/>
+      <fileset file="${dist.dir}/tatamiTests.jar"/>
+    </delete>
+  </target>
+	
+
+  <target name="all" depends="package"/>
+
+</project>

@@ -1,0 +1,9 @@
+<module>
+	<inherits name="com.objetdirect.tatami.Tatami_DojoWidget"/>
+	<stylesheet src="dijit/themes/tundra/tundra.css"></stylesheet>
+	<stylesheet src="dojox/grid/resources/tundraGrid.css"> </stylesheet>
+	<stylesheet src="treePage.css"> </stylesheet>
+	<stylesheet src="testRowStyle.css"> </stylesheet>
+	<stylesheet src="testDoc.css"> </stylesheet>
+	<entry-point class='com.objetdirect.tatami.testpages.client.widgets.TestWidgetsPage'/>
+</module>
