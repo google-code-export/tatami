@@ -356,7 +356,36 @@ public class DojoController {
       private native void addChild(JavaScriptObject dojoWidget, JavaScriptObject child) /*-{
         dojoWidget.addChild(child);
 	    dojoWidget.startup();
+	    child.startup();
       }-*/;
 
+      
+      /**
+       * Sets the style for the domNode of the DojoWidget.  
+       * @param widget the GWT widget wrapping the dojoWidget
+       * @param name the name of the style property
+       * @param value the value to apply 
+       */
+      public void setStyle(HasDojo widget,String name,String value) {
+    	  setStyle(widget.getDojoWidget(),name,value);
+      }
+      
+      /**
+       * Sets the style for the domNode of the DojoWidget.  
+       * @param widget the GWT widget wrapping the dojoWidget
+       * @param value the value to apply, a string like <code>{width:1.2em;color:gray}</code> 
+       */
+      public void setStyle(HasDojo widget,String value) {
+    	  setStyle(widget.getDojoWidget(),value);
+      }
+      
+      private native void setStyle(JavaScriptObject dojoWidget, String name,String value) /*-{
+           $wnd.dojo.style(dojoWidget.domNode,name,value);
+      }-*/;
+      
+      
+      private native void setStyle(JavaScriptObject dojoWidget, String value) /*-{
+      $wnd.dojo.style(dojoWidget.domNode,value);
+ }-*/;
 
 }//end of class
