@@ -29,6 +29,7 @@ import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
+import com.objetdirect.tatami.client.RuleLabels;
 import com.objetdirect.tatami.client.Slider;
 import com.objetdirect.tatamix.client.hmvc.CompositeView;
 import com.objetdirect.tatamix.client.widget.Paragraph;
@@ -75,10 +76,12 @@ public class SliderDemo extends CompositeView implements ChangeListener{
 		 verticalSlider = new Slider(Slider.VERTICAL, 0, 100, 100,true);
 		 verticalSlider.setStylePrimaryName("verticalSlider");
          verticalSlider.setRuleMarkLeft(6, "5px");
+         verticalSlider.setSize(10,200);
 		 verticalSlider.setRuleMarkRight(12, "3px");
 		 String[] labels = {" ","20%","40%","60%","80%", " "};
 
 		 verticalSlider.setLabelsLeft(labels,"margin: 0px -0.5em 0px -2em;color:gray");
+		 
 		 layout.add(verticalSlider);
 
 
@@ -89,12 +92,15 @@ public class SliderDemo extends CompositeView implements ChangeListener{
 
 		 horizontalSlider = new Slider(Slider.HORIZONTAL, 0, 100, 100,true);
 		 horizontalSlider.setStylePrimaryName("horizontalSlider");
-		// horizontalSlider.setRuleMarkBottom(6, "5px");
-	//	 horizontalSlider.setLabelsTop(labels,"margin: -0.5em 0px -3.5em 0px;color:gray");
+		 horizontalSlider.setRuleMarkBottom(6, "5px");
+		 horizontalSlider.setLabelsTop(labels,"margin:  -0.5em 0px 2em 0px;color:gray");
+		 
+
 		 horizontalSlider.addChangeListener(this);
 		 wrapper.add(horizontalSlider);
 
          layout.add(wrapper);
+         
          verticalSlider.addChangeListener(this);
 		 verticalSlider.setValue(100);
 
