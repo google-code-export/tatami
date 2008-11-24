@@ -9,11 +9,6 @@ public abstract class AbstractDnDBehavior<E extends IDnDElement,S extends IDnDSo
 		return true;
 	}
 
-	public boolean checkTargetItemAcceptance(S source, T target,
-			Collection<E> dndElements) {
-		return true;
-	}
-
 	public void dragOver(IDnDTarget target) {
 	}
 

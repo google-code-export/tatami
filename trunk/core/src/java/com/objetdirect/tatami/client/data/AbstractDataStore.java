@@ -611,7 +611,9 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	
 	private Item dojoRemove(Item item){
 		item.setStore(null);
-		item.getParentItem().removeChild(item);
+		if(item.getParentItem() != null){
+			item.getParentItem().removeChild(item);
+		}
 		items.remove(getIdentity(item));
 		notifyOnDeleteListeners(item);
 		return item;
@@ -628,7 +630,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	/*
 	private void onNew(Item item , boolean notifyDojo){
 		callJSOnNew(item.toJSObject());
-		notifyOnNewListeners(item);
+			notifyOnNewListeners(item);
 	}*/
 	
 	/**

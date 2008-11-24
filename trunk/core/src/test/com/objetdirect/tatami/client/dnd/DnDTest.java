@@ -250,7 +250,6 @@ public class DnDTest extends DefaultTatamiTest {
 		
 		class MyDnDBehavior extends WidgetDnDBehavior{
 			public boolean checkSourceCalled = false;
-			public boolean checkTargetCalled = false;
 			public boolean elementsAcceptedCalled = false;
 			public boolean onDropCalled = false;
 			
@@ -289,7 +288,6 @@ public class DnDTest extends DefaultTatamiTest {
 			@Override
 			public void run() {
 				assertTrue(behavior.checkSourceCalled);
-				assertTrue(behavior.checkTargetCalled);
 				assertTrue(behavior.elementsAcceptedCalled);
 				assertTrue(behavior.onDropCalled);
 				finishTest();
