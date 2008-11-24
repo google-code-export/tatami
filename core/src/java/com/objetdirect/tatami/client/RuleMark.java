@@ -26,7 +26,7 @@
 package com.objetdirect.tatami.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-
+  
 /**
  * 
  * This class permits to create some mark like a rule. 
@@ -62,7 +62,8 @@ public class RuleMark extends AbstractDojo {
      * default position
      */
 	protected String position = "containerNode";
-
+	
+	
             
     /**
      * Creates a <code>RuleMark</code>
@@ -172,4 +173,13 @@ public class RuleMark extends AbstractDojo {
     private native JavaScriptObject createHorizontalRule(int count,String ruleStyle, String position)/*-{
       return new $wnd.dijit.form.HorizontalRule({count:count,ruleStyle:ruleStyle,container:position});
     }-*/;
-}
+
+   
+   
+
+    
+   
+    
+  
+
+}//end of class

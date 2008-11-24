@@ -29,8 +29,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.Helper;
-
+  
 /**
  * Class for widgets with a cursor that permit to choose an integer value
  * bounded by a max value and a min value. The max and min value are specified
@@ -116,9 +115,13 @@ public class Slider extends AbstractDojoFocus {
 		this.value = initialValue;
 		this.showButtons = showButtons;
 		setType(type);
-		Helper.replaceElement(this, getElement());
+		//Helper.replaceElement(this, getElement());
 	}
 
+	
+	
+	
+	
 	/**
 	 * Sets the size the slider in pixel
 	 * 
@@ -126,9 +129,9 @@ public class Slider extends AbstractDojoFocus {
 	 * @param height the height to apply
 	 */
 	public void setSize(int width, int height) {
-		this.width = width + "px";
-		this.height = height + "px";
-		applySize();
+		
+		setSize(width +"px", height + "px");
+		
 	}
 
 	/**
@@ -271,7 +274,7 @@ public class Slider extends AbstractDojoFocus {
 	 }-*/;
 
 	/**
-	 * Arms a callbakc on the call of the method <code>onValueChanged</code>
+	 * Arms a callback on the call of the method <code>onValueChanged</code>
 	 * of the DOJO widget. This one gives the hand to the method
 	 * <code> onValueChanged</code> of the GWT widget.
 	 * @param dojoWidget the DOJO widget fulfilling the cursor.
@@ -322,16 +325,19 @@ public class Slider extends AbstractDojoFocus {
 	public void setSize(String width,String height) {
 		this.width = width;
 		this.height = height;
+		//super.setSize(width, height);
 		applySize();
 	}
 	
 	public void setWidth(String width) {
 		this.width = width;
+		///super.setWidth(width);
 		applySize();
 	}
 	
 	public void setHeight(String height) {
 		this.height = height;
+	//	super.setHeight(height);
 		applySize();
 	}
 	
@@ -380,7 +386,7 @@ public class Slider extends AbstractDojoFocus {
 	 */
 	public void removeRuleMarkTop() {
 		removeDojoRule(sliderRuleTop);
-		//sliderRuleTop = null;
+		sliderRuleTop = null;
 	}
 	
     /**
@@ -664,12 +670,26 @@ public class Slider extends AbstractDojoFocus {
 		  try {
 		  	rule.createDojoWidget();
 		    DojoController.getInstance().addChild(this, rule.getDojoWidget());
-		  	
+		    applySizeForRule(rule);
 		  } catch (Exception e ) {
 			 GWT.log("ERROR", e);
 		  }
 		}
     }
+	
+	/**
+	 * These method serves to fix a bug under IE6, we need to specify a height for the 
+	 * rules otherwise they won't be aligned with the slider. This bug exists also with only Dojo. 
+	 * @param rule the rule to resize
+	 */
+	private void applySizeForRule(RuleMark rule) {
+		
+			if ( RuleMark.HORIZONTAL.equals(rule.getPosition())) {
+				DojoController.getInstance().setStyle(rule, "width","100%");
+			} else {
+				DojoController.getInstance().setStyle(rule, "height","100%");
+			}
+	}
 
 	
 	/**
@@ -809,6 +829,14 @@ public class Slider extends AbstractDojoFocus {
 	public String[] getLabelsRight() {
 		return getLabelsBottom();
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Returns the style of a <code>RuleLabels</code> of the <code>Slider</code>
