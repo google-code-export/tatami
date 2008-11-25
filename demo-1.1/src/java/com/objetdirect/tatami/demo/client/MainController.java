@@ -52,17 +52,24 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 			}
 		};
 
+		ControllerProcessor showGrid = new ControllerProcessor() {
+			public void run(Event evt) {
+				showGrid();
+			}
+		};
+		
 		ControllerProcessor showHome = new ControllerProcessor() {
 			public void run(Event evt) {
 				fire(new ViewEvent(SHOW_HOME,this));
 			}
 		};
-
+		
 		register(SHOW_SLIDER_DEMO,showSlider);
 		register(SHOW_DATE_TIME_DEMO,showDateTime);
 		register(SHOW_GFX_DEMO,showGfx);
 		register(SHOW_COLOR_DEMO,showColor);
 		register(SHOW_DND_DEMO,showDnd);
+		register(SHOW_GRID_DEMO,showGrid);
 		register(SHOW_HOME,showHome);
 	}
 
@@ -101,6 +108,21 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 			triads[colorMVC].setView(new ColorDemo());
 		}
 		displayTriad(colorMVC);
+	}
+	
+	public void showGrid() {
+		if ( triads[dataGridMVC].getView() == null) {
+			GridDemoController gridDemoController = new GridDemoController();
+			GridDemo demo = new GridDemo();
+			triads[dataGridMVC].setView(demo);
+			triads[dataGridMVC].setController(gridDemoController);
+			triads[dataGridMVC].setModel(new GridModel());
+			addChild(GridDemoController.CONTROLLER_NAME, gridDemoController);
+			demo.init();
+		}else{
+			delegateToChild(GridDemoController.CONTROLLER_NAME,new ViewEvent(SHOW_GRID_DEMO,this));
+		}
+		displayTriad(dataGridMVC);
 	}
 
 	public void showDnd() {

@@ -28,9 +28,14 @@
 <module>
 	<!-- Inherit the core Web Toolkit stuff.                  -->
 
-	<inherits name="com.objetdirect.tatami.Tatami"/>
+	<inherits name="com.objetdirect.tatami.Tatami_Base"/>
+	<inherits name="com.objetdirect.tatami.Tatami_DojoBase"/>
+	<inherits name="com.objetdirect.tatami.Tatami_DojoGFX"/>
+	<inherits name="com.objetdirect.tatami.Tatami_YUI"/>
+	<inherits name="com.objetdirect.tatami.Tatami_DojoWidget"/>
+	<inherits name="com.objetdirect.tatami.theme.Tundra"/>
 	<inherits name="com.objetdirect.tatamix.Tatamix"/>
    	<!-- Specify the app entry point class.                   -->
 	<entry-point class="com.objetdirect.tatami.demo.client.TatamiDemo"/>
-     <stylesheet src="tatamiDemo.css"/> 
+    <stylesheet src="tatamiDemo.css"/> 
 </module>
