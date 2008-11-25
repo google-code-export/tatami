@@ -10,8 +10,8 @@ public class ModelCallback implements AsyncCallback {
 	private ModelImpl model;
 	private String name="model";
 	private String errorMessage = null;
-	private int successEvent = -1;
-	private int errorEvent = -1;
+	private String successEvent = null;
+	private String errorEvent = null;
 
 	/**
 	 * Creates a <code>ModelAsyncCallback</code>
@@ -93,24 +93,24 @@ public class ModelCallback implements AsyncCallback {
 	 * @param event
 	 * @param result
 	 */
-	public void fire(int event, Object result) {
+	public void fire(String event, Object result) {
 		setSuccessEvent(event);
 		model.fire(new ModelEvent(getSuccessEvent(), model, result));
 	}
 
-	public int getErrorEvent() {
+	public String getErrorEvent() {
 		return errorEvent;
 	}
 
-	public void setErrorEvent(int errorEvent) {
+	public void setErrorEvent(String errorEvent) {
 		this.errorEvent = errorEvent;
 	}
 
-	public int getSuccessEvent() {
+	public String getSuccessEvent() {
 		return successEvent;
 	}
 
-	public void setSuccessEvent(int successEvent) {
+	public void setSuccessEvent(String successEvent) {
 		this.successEvent = successEvent;
 	}
 

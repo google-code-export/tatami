@@ -32,7 +32,7 @@ public class ModelEvent extends Event {
 	 * Insert the method's description here. Creation date: (6/5/2001 10:47:24
 	 * PM)
 	 */
-	public ModelEvent(int type, Object source) {
+	public ModelEvent(String type, Object source) {
 		super(type, source);
 	}
 
@@ -40,7 +40,7 @@ public class ModelEvent extends Event {
 	 * Insert the method's description here. Creation date: (6/5/2001 10:47:24
 	 * PM)
 	 */
-	public ModelEvent(int type, Object source, Object data) {
+	public ModelEvent(String type, Object source, Object data) {
 		super(type, source, data);
 	}
 

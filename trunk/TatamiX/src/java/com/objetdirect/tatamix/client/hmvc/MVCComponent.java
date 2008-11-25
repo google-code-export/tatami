@@ -52,7 +52,7 @@ public interface MVCComponent extends EventListener {
 	 * @param _processor
 	 *            java.lang.Object
 	 */
-	void register(int _t, EventProcessor _processor);
+	void register(String _t, EventProcessor _processor);
 
 	/**
 	 *

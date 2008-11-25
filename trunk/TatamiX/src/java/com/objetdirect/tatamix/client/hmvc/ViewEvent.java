@@ -31,7 +31,7 @@ public class ViewEvent extends Event {
 	 * @param _source
 	 *          
 	 */
-	public ViewEvent(int type, Object source) {
+	public ViewEvent(String type, Object source) {
 		super(type, source);
 	}
 
@@ -45,7 +45,7 @@ public class ViewEvent extends Event {
 	 * @param _data
 	 *            java.lang.Object
 	 */
-	public ViewEvent(int type, Object source, Object data) {
+	public ViewEvent(String type, Object source, Object data) {
 		super(type, source, data);
 	}
 

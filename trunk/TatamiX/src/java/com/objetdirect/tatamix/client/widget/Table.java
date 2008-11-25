@@ -27,14 +27,14 @@ import com.google.gwt.user.client.ui.Widget;
  *  below an example of a CSS classes used with the <code>Table</code>
  *
  *  .clara-Table {} for the Table
- *  .clara-Table .header-table {} for the headers of the table
-    .clara-Table .header-table-sort-asc {} for headers when the column is sorted
-    .clara-Table .header-table-sort-desc {} the same
-    .clara-Table .header-table-hover {} used when the mouse over an header
-    .clara-Table tr.odd {} used for each odd row in the table
-    .clara-Table tr.even {} used for even row in the table
-    .clara-Table tr.hover{} used when the mouse is over on a row
-    .clara-Table tr.odd-selected, .diamants-Table .tr.even-selected {} used
+ *  .od-Table .header-table {} for the headers of the table
+    .od-Table .header-table-sort-asc {} for headers when the column is sorted
+    .od-Table .header-table-sort-desc {} the same
+    .od-Table .header-table-hover {} used when the mouse over an header
+    .od-Table tr.odd {} used for each odd row in the table
+    .od-Table tr.even {} used for even row in the table
+    .od-Table tr.hover{} used when the mouse is over on a row
+    .od-Table tr.odd-selected, .diamants-Table .tr.even-selected {} used
     when a row is selected.
 
 
@@ -105,7 +105,7 @@ public class Table extends FocusWidget implements SourcesTableEvents,  HasText, 
 		DOM.appendChild(getElement(), tbody);
 		setCellSpacing(0);
 		setCellPadding(0);
-		setStylePrimaryName("clara-Table");
+		setStylePrimaryName("od-Table");
 		this.selection = new ArrayList();
 		this.rowData = new ArrayList();
 		this.model = model;

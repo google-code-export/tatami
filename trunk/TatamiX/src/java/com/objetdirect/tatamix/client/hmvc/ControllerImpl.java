@@ -49,7 +49,7 @@ public class ControllerImpl extends AbstractProcessor implements Controller {
 	 */
 	protected View view = new ViewImpl(this);
 
-	//protected Map<Integer,EventProcessor> registered = null;
+	
 
 	/**
 	 * Create a instance of a <code>Controller</code>
@@ -152,8 +152,8 @@ public class ControllerImpl extends AbstractProcessor implements Controller {
 		}
 	}
 
-	@Override
-	public void register(int type, EventProcessor processor) {
+	
+	public void register(String type, EventProcessor processor) {
         //the processor must be a ControllerProcessor
 		if (processor instanceof ControllerProcessor) {
 			super.register(type, processor);	
