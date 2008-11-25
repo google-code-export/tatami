@@ -27,6 +27,6 @@
  * -->
 <module>
   <stylesheet src="./dijit/themes/soria/soria.css"/>
-  <stylesheet src="dojox/grid/_grid/soriaGrid.css"/>
+  <stylesheet src="dojox/grid/resources/soriaGrid.css"/>
   <entry-point class="com.objetdirect.tatami.theme.client.Soria"/>
 </module>

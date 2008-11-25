@@ -28,6 +28,6 @@
 <module>
   
   <stylesheet src="./dijit/themes/nihilo/nihilo.css"/>
-  <stylesheet src="dojox/grid/_grid/nihiloGrid.css"/>
+  <stylesheet src="dojox/grid/resources/nihiloGrid.css"/>
   <entry-point class="com.objetdirect.tatami.theme.client.Nihilo"/>
 </module>
