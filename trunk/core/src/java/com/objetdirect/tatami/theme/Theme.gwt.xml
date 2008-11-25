@@ -27,7 +27,5 @@
  * -->
 <module>
   
-  <stylesheet src="./dijit/themes/tundra/tundra.css"/>
-  <stylesheet src="dojox/grid/_grid/tundraGrid.css"/>
-  <entry-point class="com.objetdirect.tatami.theme.client.Tundra"/>
+  
 </module>
