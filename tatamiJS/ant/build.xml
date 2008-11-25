@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="tatamiJS" default="help" basedir="..">
+	
+	<property name="jar.name" value="tatamiJS.jar"/>
+	<property name="dist.dir" location="${basedir}/dist"/>
+	<property name="build.dir" location="${basedir}/build"/>
+	<property name="version" value="tatami-1.3"/>
+	
 	<target name="help" description="Shows task list">
 		<echo message="Available tasks : clean,build-dojo,copyjsfiles,package,all"/>
 	</target>
 	
-	<target name ="all" depends="clean,build-dojo,removeUnusedFiles,package">
+	<target name ="all" depends="clean,build-dojo,removeUnusedFiles,package" >
 		<echo message="Building all ..." />
 	</target>
 	
 	<target name="clean" description="Delete generated dojo builds">
 			<echo message="Delete generated dojo builds" />
 			<delete includeemptydirs="false" failonerror="false">
-				<fileset dir="build/" includes="**/*"/>
+				<fileset dir="${build.dir}/" includes="**/*"/>
+				<fileset file="${dist.dir}/${jar.name}"/>
 			</delete>
 	</target>
 	
@@ -22,20 +29,21 @@
 		       executable="${basedir}/src/com/objetdirect/tatami/public/util/buildscripts/build.bat"
 		     	output="${basedir}/antDojo.log"
 		     >
-		       <arg line="releaseDir='../../../../../../../build/com/objetdirect/tatami/public/'"/>
-		       <arg line="profileFile='${basedir}/ant/dojoprofiles/tatami_all.profile.js'"/>
+		     <!--  <arg line="releaseDir='../../../../../../../build/com/objetdirect/tatami/public/'"/>-->
+		     	<arg line="releaseDir='${build.dir}/com/objetdirect/tatami/public/'"/>
+		     	<arg line="profileFile='${basedir}/ant/dojoprofiles/tatami_all.profile.js'"/>
 		       <arg line="releaseName='.'"/>
 		       <arg line="copyTests='false'"/>
 		       <arg line="action='release'"/>
 		       <arg line="optimize='shrinksafe'"/>
-		       <arg line="version='tatami_1.3'"/>
+		       <arg line="version='${version}'"/>
 		    </exec>
 	</target>
 	
 	<target name="removeUnusedFiles" description="Removes dojo files not used by Tatami">
 		<echo message="Removing unused dojo files" />
 		<delete includeemptydirs="true">
-			<fileset dir="${basedir}/build/com/objetdirect/tatami/public/dojox/">
+			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojox/">
 				<include name="analytics/**/*"/>
 				<include name="av/**/*"/>
 				<include name="cometd/**/*"/>
@@ -60,51 +68,42 @@
 				<include name="xml/**/*"/>
 				<include name="xmpp/**/*"/>
 			</fileset>
-		</delete>
-		<delete includeemptydirs="true">
-			<fileset dir="${basedir}/build/com/objetdirect/tatami/public/dojo/">
-				<include name="*.js.uncompressed.js"/>
+			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojo/">
+							<include name="*.js.uncompressed.js"/>
+			</fileset>
+			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojox/widget">
+							<exclude name="ColorPicker**/*"/>
+							<exclude name="ColorPicker.js"/>
+							<exclude name="Toaster**/*"/>
+							<exclude name="Toaster.js"/>
+							<exclude name="FisheyeList**/*"/>
+							<exclude name="FisheyeList.js"/>
+			</fileset>
+			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojox/grid/compat">
+							<include name="**/*"/>
+			</fileset>
+			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojox/">
+							<include name="**/demos/"/>
+			</fileset>
+			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dijit/themes/">
+							<include name="themeTester.html"/>
+							<include name="themeTesterQuirk.html"/>
+							<include name="templateThemeTest.html"/>
+							<include name="**/*.psd"/>
 			</fileset>
 		</delete>
-		<delete includeemptydirs="true">
-			<fileset dir="${basedir}/build/com/objetdirect/tatami/public/dojox/widget">
-				<exclude name="ColorPicker**/*"/>
-				<exclude name="ColorPicker.js"/>
-				<exclude name="Toaster**/*"/>
-				<exclude name="Toaster.js"/>
-				<exclude name="FisheyeList**/*"/>
-				<exclude name="FisheyeList.js"/>
-			</fileset>
-		</delete>
-		<delete includeemptydirs="true">
-			<fileset dir="${basedir}/build/com/objetdirect/tatami/public/dojox/grid/compat">
-				<include name="**/*"/>
-			</fileset>
-		</delete>
-		<delete includeemptydirs="true">
-			<fileset dir="${basedir}/build/com/objetdirect/tatami/public/dojox/grid/compat">
-					<include name="**/*"/>
-			</fileset>
-		</delete>
-		<delete includeemptydirs="true">
-			<fileset dir="${basedir}/build/com/objetdirect/tatami/public/dojox/">
-				<include name="**/demos/"/>
-			</fileset>
-		</delete>
-		<delete includeemptydirs="true">
-			<fileset dir="${basedir}/build/com/objetdirect/tatami/public/dijit/themes/">
-				<include name="themeTester.html"/>
-				<include name="themeTesterQuirk.html"/>
-				<include name="templateThemeTest.html"/>
-				<include name="**/*.psd"/>
-			</fileset>
-		</delete>
+		
+		
+		
+		
+		
 	</target>
+	
 	<target name="package" description="Creates tatami jar file">
 		<echo message="Packaging tatami js files" />
-		<mkdir dir="dist"/>
-		<jar destfile="${basedir}/dist/tatamiJS.jar">
-			<fileset dir="${basedir}/build/">
+		<mkdir dir="${dist.dir}"/>
+		<jar destfile="${dist.dir}/${jar.name}">
+			<fileset dir="${build.dir}/" >
 				<include name="**/*"/>
 			</fileset>
 		</jar>
