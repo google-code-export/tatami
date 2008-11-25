@@ -29,4 +29,5 @@
   
   <stylesheet src="./dijit/themes/nihilo/nihilo.css"/>
   <stylesheet src="dojox/grid/_grid/nihiloGrid.css"/>
+  <entry-point class="com.objetdirect.tatami.theme.client.Nihilo"/>
 </module>
