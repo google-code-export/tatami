@@ -62,6 +62,11 @@ public class Title extends FocusWidget implements HasHTML, SourcesMouseEvents, S
         this(H1);
     }
 
+    public Title(String text) {
+        this(H1,text);
+    }
+    
+    
     /**
      * Creates a <code>Title</code> with level set to 1.
      *

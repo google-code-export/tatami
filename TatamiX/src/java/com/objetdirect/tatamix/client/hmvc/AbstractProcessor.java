@@ -28,12 +28,12 @@ import java.util.Map;
  */
 abstract class AbstractProcessor implements MVCComponent {
 	
-	protected Map<Integer,EventProcessor> registered = null;
+	protected Map<String,EventProcessor> registered = null;
 
 	public boolean process(Event event) {
 		boolean result = false;
 		if (registered != null) {
-			EventProcessor p = registered.get(new Integer(event.getType()));
+			EventProcessor p = registered.get(event.getType());
 			if (p != null) {
 				p.run(event);
 				result= true;
@@ -50,13 +50,13 @@ abstract class AbstractProcessor implements MVCComponent {
 	 * @param processor the action should not be <code>null</code>
 	 */
 
-	public void register(int type, EventProcessor processor) {
+	public void register(String type, EventProcessor processor) {
 		//if (processor != null) {
 			if (registered == null) {
-				registered = new HashMap<Integer,EventProcessor>();
+				registered = new HashMap<String,EventProcessor>();
 			}
 			processor.setNotifier(this);
-			registered.put(new Integer(type), processor);
+			registered.put(type, processor);
 		//}
 
 	}

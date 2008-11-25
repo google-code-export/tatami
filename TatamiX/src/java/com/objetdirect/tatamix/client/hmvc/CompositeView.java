@@ -53,7 +53,7 @@ public abstract class CompositeView extends Composite implements View {
 	 * @param t the type of the event.
 	 * @param processor the <code>EventProcessor</code> to execute when the event will be fired
 	 */
-	public void register(int type, EventProcessor processor) {
+	public void register(String type, EventProcessor processor) {
 		 view.register(type, processor);
 
 	}

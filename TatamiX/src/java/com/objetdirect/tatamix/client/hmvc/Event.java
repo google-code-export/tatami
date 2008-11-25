@@ -28,14 +28,14 @@ import java.util.EventObject;
  */
 public abstract class Event extends EventObject {
 	
-	protected int type;
+	protected String type;
 	protected Object data;
 
 	/**
 	 * Insert the method's description here. Creation date: (6/5/2001 10:47:24
 	 * PM)
 	 */
-	public Event(int type, Object source) {
+	public Event(String type, Object source) {
 		super(source);
 		this.type = type;
 		this.data = null;
@@ -45,7 +45,7 @@ public abstract class Event extends EventObject {
 	 * Insert the method's description here. Creation date: (6/5/2001 10:47:24
 	 * PM)
 	 */
-	public Event(int type, Object source, Object data) {
+	public Event(String type, Object source, Object data) {
 		this(type,source);
 		this.data = data;
 	}
@@ -73,7 +73,7 @@ public abstract class Event extends EventObject {
 	 *
 	 *
 	 */
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 
@@ -95,7 +95,7 @@ public abstract class Event extends EventObject {
 	 * @param type
 	 *            
 	 */
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
