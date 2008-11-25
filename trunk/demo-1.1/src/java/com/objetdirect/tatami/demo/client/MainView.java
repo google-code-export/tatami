@@ -91,7 +91,7 @@ public class MainView extends CompositeView implements TatamiDemoEvent {
 		dojo.setText(TatamiDemo.getMessages().tittle_dojo());
 
 		ImageLink odLink = new ImageLink();
-		odLink.setImageSrc(TatamiDemo.getIconURL("od-logo.gif"));
+		odLink.setImageSrc(TatamiDemo.getIconURL("od_logo.png"));
 		odLink.setAlt("Objet Direct");
 		odLink.setStylePrimaryName("od");
 		odLink.setHref("http://www.objetdirect.com");
@@ -136,11 +136,11 @@ public class MainView extends CompositeView implements TatamiDemoEvent {
 		 addMenuItem("icoColorPic.gif",TatamiDemo.getMessages().menu_color(),TatamiDemo.getMessages().menu_color_explain(),SHOW_COLOR_DEMO);
 		 addMenuItem("amor.png",TatamiDemo.getMessages().menu_dnd(),TatamiDemo.getMessages().menu_dnd_explain(),SHOW_DND_DEMO);
 		 addMenuItem("blackboard.png",TatamiDemo.getMessages().menu_gfx(),TatamiDemo.getMessages().menu_gfx_explain(),SHOW_GFX_DEMO);
-
+		 addMenuItem("x_office_spreadsheet.png",TatamiDemo.getMessages().menu_grid(),TatamiDemo.getMessages().menu_grid_explain(),SHOW_GRID_DEMO);
 	}
 
 
-	private void addMenuItem(String icon,String label,String desc,int eventID) {
+	private void addMenuItem(String icon,String label,String desc,String eventID) {
 		String urlIcon = TatamiDemo.getIconURL(icon);
 		MenuCommand cmd = new MenuCommand(eventID,urlIcon,label,desc);
 		menu.add(urlIcon,label,cmd);
@@ -149,9 +149,9 @@ public class MainView extends CompositeView implements TatamiDemoEvent {
 
 
 	private class MenuCommand extends AbstractAction {
-		private int eventID = -1;
+		private String eventID = "-1";
 
-		public MenuCommand(int eventID,String icon,String name,String message) {
+		public MenuCommand(String eventID,String icon,String name,String message) {
 			this.eventID = eventID;
 		    putValue(ICON_SRC,icon);
 		    putValue(NAME,name);

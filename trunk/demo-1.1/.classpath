@@ -4,7 +4,7 @@
 	<classpathentry kind="src" output="classes/test" path="src/test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/tatami-core"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/GWT-1.5.3"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/TatamiX"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/GWT"/>
 	<classpathentry kind="output" path="classes/java"/>
 </classpath>

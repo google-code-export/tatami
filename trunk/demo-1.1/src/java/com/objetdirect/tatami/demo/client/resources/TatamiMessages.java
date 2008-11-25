@@ -79,10 +79,13 @@ public interface TatamiMessages extends com.google.gwt.i18n.client.Messages {
   @DefaultMessage("<strong>Drag and Drop</strong> : Recompose the famous lovers by moving the images of the amants.")
   String dnd_intro();
 
+  @DefaultMessage("Edit the grid by double clicking on some of its cells, or sort it with the column headers. Clicking on the add button will add a row after the selected row. Clicking on the delete button will delete the selected row(s)")
+  String grid_intro();
+  
   /**
-   * Translated "Choose a color amoung 12.".
+   * Translated "Choose a color among 12.".
    * 
-   * @return translated "Choose a color amoung 12."
+   * @return translated "Choose a color among 12."
   
    */
   @DefaultMessage("Choose a color amoung 12.")
@@ -236,10 +239,26 @@ public interface TatamiMessages extends com.google.gwt.i18n.client.Messages {
    * Translated "Slider".
    * 
    * @return translated "Slider"
-  
    */
   @DefaultMessage("Slider")
   String menu_slider();
+  
+  
+  /**
+   * Translated "Grid".
+   * 
+   * @return translated "Grid"
+   */
+  @DefaultMessage("Grid")
+  String menu_grid();
+  
+  /**
+   * Translated "Grid Demo".
+   * 
+   * @return translated "Grid Demo"
+   */
+  @DefaultMessage("Grid Demo")
+  String menu_grid_explain();
 
   /**
    * Translated "Drag and Drop demo".
