@@ -29,14 +29,13 @@
 		       executable="${basedir}/src/com/objetdirect/tatami/public/util/buildscripts/build.bat"
 		     	output="${basedir}/antDojo.log"
 		     >
-		     <!--  <arg line="releaseDir='../../../../../../../build/com/objetdirect/tatami/public/'"/>-->
-		     	<arg line="releaseDir='${build.dir}/com/objetdirect/tatami/public/'"/>
+		       <arg line="releaseDir='${build.dir}/com/objetdirect/tatami/public/'"/>
 		     	<arg line="profileFile='${basedir}/ant/dojoprofiles/tatami_all.profile.js'"/>
 		       <arg line="releaseName='.'"/>
 		       <arg line="copyTests='false'"/>
 		       <arg line="action='release'"/>
 		       <arg line="optimize='shrinksafe'"/>
-		       <arg line="version='${version}'"/>
+				<arg line="version='${version}'"/>
 		    </exec>
 	</target>
 	
@@ -44,66 +43,66 @@
 		<echo message="Removing unused dojo files" />
 		<delete includeemptydirs="true">
 			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojox/">
-				<include name="analytics/**/*"/>
-				<include name="av/**/*"/>
-				<include name="cometd/**/*"/>
-				<include name="data/**/*"/>
-				<include name="embed/**/*"/>
-				<include name="flash/**/*"/>
-				<include name="help/**/*"/>
-				<include name="highlight/**/*"/>
-				<include name="image/**/*"/>
-				<include name="layout/**/*"/>
-				<include name="presentation/**/*"/>
-				<include name="robot/**/*"/>
-				<include name="rpc/**/*"/>
-				<include name="secure/**/*"/>
-				<include name="sketch/**/*"/>
-				<include name="sql/**/*"/>
-				<include name="storage/**/*"/>
-				<include name="testing/**/*"/>
-				<include name="timing/**/*"/>
-				<include name="validate/**/*"/>
-				<include name="wire/**/*"/>
-				<include name="xml/**/*"/>
-				<include name="xmpp/**/*"/>
+				<include name="analytics/"/>
+				<include name="av/"/>
+				<include name="cometd/"/>
+				<include name="data/"/>
+				<include name="dtl/"/>
+				<include name="embed/"/>
+				<include name="flash/"/>
+				<include name="help/"/>
+				<include name="highlight/"/>
+				<include name="image/"/>
+				<include name="layout/"/>
+				<include name="presentation/"/>
+				<include name="robot/"/>
+				<include name="rpc/"/>
+				<include name="secure/"/>
+				<include name="sketch/"/>
+				<include name="sql/"/>
+				<include name="storage/"/>
+				<include name="testing/"/>
+				<include name="timing/"/>
+				<include name="validate/"/>
+				<include name="wire/"/>
+				<include name="xml/"/>
+				<include name="xmpp/"/>
+				<include name="gfx/resources/*"/>
 			</fileset>
 			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojo/">
-							<include name="*.js.uncompressed.js"/>
+				<include name="*.js.uncompressed.js"/>
 			</fileset>
 			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojox/widget">
-							<exclude name="ColorPicker**/*"/>
-							<exclude name="ColorPicker.js"/>
-							<exclude name="Toaster**/*"/>
-							<exclude name="Toaster.js"/>
-							<exclude name="FisheyeList**/*"/>
-							<exclude name="FisheyeList.js"/>
+				<exclude name="ColorPicker**/*"/>
+				<exclude name="ColorPicker.js"/>
+				<exclude name="Toaster**/*"/>
+				<exclude name="Toaster.js"/>
+				<exclude name="FisheyeList**/*"/>
+				<exclude name="FisheyeList.js"/>
 			</fileset>
 			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojox/grid/compat">
-							<include name="**/*"/>
+				<include name="**/*"/>
+			</fileset>
+			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojox/grid/compat">
+					<include name="**/*"/>
+					<exclude name="**/.css"/>
 			</fileset>
 			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dojox/">
-							<include name="**/demos/"/>
+				<include name="**/demos/"/>
 			</fileset>
 			<fileset dir="${build.dir}/com/objetdirect/tatami/public/dijit/themes/">
-							<include name="themeTester.html"/>
-							<include name="themeTesterQuirk.html"/>
-							<include name="templateThemeTest.html"/>
-							<include name="**/*.psd"/>
+				<include name="themeTester.html"/>
+				<include name="themeTesterQuirk.html"/>
+				<include name="templateThemeTest.html"/>
+				<include name="**/*.psd"/>
 			</fileset>
 		</delete>
-		
-		
-		
-		
-		
 	</target>
-	
 	<target name="package" description="Creates tatami jar file">
 		<echo message="Packaging tatami js files" />
 		<mkdir dir="${dist.dir}"/>
 		<jar destfile="${dist.dir}/${jar.name}">
-			<fileset dir="${build.dir}/" >
+			<fileset dir="${build.dir}/">
 				<include name="**/*"/>
 			</fileset>
 		</jar>
