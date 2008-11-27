@@ -68,7 +68,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	protected AbstractDataStore store;
 	
 	
-	protected String rowSelector = "";
+	protected String rowSelector;
 	
 	public String getRowSelector() {
 		return rowSelector;
@@ -570,6 +570,9 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	public void createDojoWidget() throws Exception {
 		JavaScriptObject jsstore = store.getDojoWidget();
 		JavaScriptObject jslayout = this.layout.toJSObject();
+		if(this.rowSelector == null && layout.hasRowBar()){
+			this.rowSelector = "20px";
+		}
 		this.dojoWidget = createDojoGrid(jsstore , jslayout , autoHeight , 
 				autoWidth , userSortable ,  elasticView , sortIndex , isSortAsc , maximumFetchCountAtAtime , renderGridOnLoad , rowSelector , JSHelper.convertObjectToJSObject(store.getLastRequest().getQuery()));
 	}
@@ -603,8 +606,20 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 		//parameter comes back in DataGrid, remove this silly sortinfo calculation. 
 		var si = sortCol +1;
 		si *= (ascending == true ? 1 : -1);
-		$wnd.dojo.isArray = function(it){return it&&(it instanceof Array ||typeof it=="array");}
-  		var grid = new $wnd.dojox.grid.TatamiGrid({store : jsstore , sortInfo: si ,  structure : layout ,  width: "100%" , height: "100%" , gwtWidget : this , query : query});
+		var gridOptions = {
+			store : jsstore , 
+			sortInfo: si , 
+			structure : layout , 
+//			width: "100%" ,
+//			height: "100%" ,
+			gwtWidget : this ,
+			query : query
+		}; 
+		if(rowSelector){
+			gridOptions.rowSelector = rowSelector;
+		}
+		var grid = new $wnd.dojox.grid.TatamiGrid(gridOptions);
+  		
   		return grid;
 	}-*/;
 

@@ -117,19 +117,24 @@ public class GridLayout implements ConvertibleToJSObject{
 	}
 	
 	/**
+	 * See the grid rowSelector instead
 	 * Set wether a row selection bar (permitting to select a
 	 * row without firing an on click event) should be displayer
 	 * 
 	 * @param shouldItExist 
 	 */
+	@Deprecated
 	public void setRowBar(boolean shouldItExist){
 		hasRowBar = shouldItExist;
 	}
 	
 	/**
+	 * See the grid rowSelector instead
+	 * 
 	 * @return true if this layout is set to display a row selection bar,
 	 * false otherwise
 	 */
+	@Deprecated
 	public boolean hasRowBar(){
 		return hasRowBar;
 	}

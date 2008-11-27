@@ -161,67 +161,6 @@ public class Item  implements ConvertibleToJSObject{
 		return this.attributes.get(attributeName);
 	}
 	
-//	/**
-//	 * Adds an attribute to the item
-//	 * 
-//	 * @param attrname
-//	 * @param attrvalue
-//	 */
-//	public void addAttribute(String attrname , Object attrvalue){
-//		this.attributes.put(attrname, attrvalue);
-//	}
-//	
-//	/**
-//	 * Adds an attribute to the item
-//	 * 
-//	 * @param attrname
-//	 * @param attrvalue
-//	 */
-//	public void addAttribute(String attrname , String attrvalue){
-//		this.attributes.put(attrname, attrvalue);
-//	}
-//	
-//	/**
-//	 * Adds an attribute to the item
-//	 * 
-//	 * @param attrname
-//	 * @param attrvalue
-//	 */
-//	public void addAttribute(String attrname , Date attrvalue){
-//		this.attributes.put(attrname, attrvalue);
-//	}
-//	
-//	
-//	/**
-//	 * Adds an attribute to the item
-//	 * 
-//	 * @param attrname
-//	 * @param attrvalue
-//	 */
-//	public void addAttribute(String attrname , JavaScriptObject attrvalue){
-//		this.attributes.put(attrname, attrvalue);
-//	}
-//	
-//	/**
-//	 * Adds an attribute to the item
-//	 * 
-//	 * @param attrname
-//	 * @param attrvalue
-//	 */
-//	public void addAttribute(String attrname , Number attrvalue){
-//		this.attributes.put(attrname, attrvalue);
-//	}
-//	
-//	
-//	/**
-//	 * Adds an attribute to the item
-//	 * 
-//	 * @param attrname
-//	 * @param attrvalue
-//	 */
-//	public void addAttribute(String attrname , Boolean attrvalue){
-//		this.attributes.put(attrname, attrvalue);
-//	}
 	
 	/**
 	 * @param attributeName

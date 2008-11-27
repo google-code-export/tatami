@@ -79,6 +79,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	
 	
 	
+	
 	/**
 	 * The underlying Dojo Object
 	 * 
@@ -191,6 +192,9 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 			 },
 			 setValue : function(item , attribute , value){
 			 	var javavalue;
+			 	
+			 	//Converting primitivve types to Object type
+			 	//(Because GWT just can't convert js number into Number and boolean into Boolean)
 			 	if(typeof value == "boolean"){
 			 		javavalue = @java.lang.Boolean::valueOf(Ljava/lang/String;)(value+"");
 			 	}else if(typeof value == "number"){
@@ -590,8 +594,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 				callJSOnNew(item , parentInfo);
 			}else{
 				//We stay purely in the java world, the dojostore not being initialized now.
-				item.setStore(this);
-				notifyOnNewListeners(item);
+				dojoAdd(item);
 			}
 		}
 	}
@@ -624,14 +627,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	}
 	
 	/**
-	 * Fires a onNew event
-	 * @param item : item which has been added to the store
+	 * Do nothing. Called when a new Item is added to the store
 	 */
-	/*
-	private void onNew(Item item , boolean notifyDojo){
-		callJSOnNew(item.toJSObject());
-			notifyOnNewListeners(item);
-	}*/
+	public void onNew(Item item){
+	}
 	
 	/**
 	 * Calls underlying DojoStore's onNew method, on which dojo can connect
@@ -662,8 +661,6 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 		if(oldValue instanceof Date){
 			oldValue = DateUtil.getJSDate((Date)oldValue);
 		}
-		
-		
 		if(dojoStore != null){
 			callJSOnSet(item, attribute, oldValue, newValue);
 		}
@@ -705,12 +702,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	
 	
 	/**
-	 * Fires an onDelete event
+	 * Do nothing
 	 * @param item : the item which has been deleted
 	 */
-	private void onDelete(Item item){
-		callJSOnDelete(item);
-		notifyOnDeleteListeners(item);
+	public void onDelete(Item item){
 	}
 	
 	/**
@@ -1012,7 +1007,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	}
 	
 	public void clearDataStore(){
-		items.clear();
+		Collection<Item> collec = items.values();
+		for (Item item : collec) {
+			remove(item);
+		}
 	}
 	
 	
