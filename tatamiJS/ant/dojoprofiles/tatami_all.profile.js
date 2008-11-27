@@ -14,6 +14,7 @@ dependencies = {
 				"dojox.widget.Toaster",
 				"dojo.dnd.Source",
 				"dojox.grid.DataGrid",
+				"dojox.widget.FisheyeList",
 				"dijit.form.Button",
 				"dijit.form.Slider",
 				"dijit.Tree",
@@ -79,8 +80,8 @@ dependencies = {
 			dependencies: [
 				"dojox.gfx",
 				"dojox.gfx.matrix",
-				"dojox.gfx.path",
-				"dojox.gfx.shape"
+				"dojox.gfx.Path",
+				"dojox.gfx.Shape"
 			]
 		},
 		{
