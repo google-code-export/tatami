@@ -1,0 +1,37 @@
+Tatami Tests
+
+
+
+ 	This project provides functional test to tatami. It is consisted of Test Pages,
+ 	which is a bunch of GWT modules providing simple use cases, and HTMLUnit tests, which are run
+ 	against those pages.
+ 	
+ 	See the LICENSE files for licensing conditions. 
+ 	
+ 	Dependencies :
+		- JUnit 3.x : http://www.junit.org/ 
+		- HTMLUnit 2.3 : http://htmlunit.sourceforge.net/
+		- Tatami : http://code.google.com/p/tatami/
+		- TatamiTestUtils : http://code.google.com/p/tatami/
+		- GWT : http://code.google.com/webtoolkit/
+		
+		Place htmlunit libs in the lib/htmlunit/ folder 
+		and junit.jar,tatami.jar,tatamiTestUtil.jar in the lib folder, or modify the env.properties
+		file according to your needs.
+		
+		Modify the env.properties file according to your gwt location.
+	
+	
+	Build:
+	
+	Run ant on the tatami-tests.ant.xml file.
+	
+	 
+	
+
+
+
+
+
+
+
