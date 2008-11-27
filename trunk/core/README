@@ -1,0 +1,30 @@
+Tatami
+
+
+
+ 	This project provides the tatami library. 
+ 	
+ 	See the LICENSE files for licensing conditions. 
+ 	
+ 	Dependencies :
+		- TatamiJS : http://code.google.com/p/tatami
+		- GWT : http://code.google.com/webtoolkit/
+		
+		Copy tatamiJS.jar in the lib directory, or modify your env.properties
+		according to your location of the tatamiJS.jar file.
+		Modify the env.properties file according to your gwt location.
+	
+	
+	Build:
+	
+	Run ant on the tatami.ant.xml file.
+	
+	 
+	
+
+
+
+
+
+
+

@@ -27,5 +27,7 @@
 
 <module>
 	<inherits name="com.objetdirect.tatami.Tatami_DojoBase" />
-	<script src="dojo/tatami_all_module.js" />
+	<inherits name="com.objetdirect.tatami.Tatami_DojoWidget" />
+	<inherits name="com.objetdirect.tatami.Tatami_DojoGFX" />
+	<inherits name="com.objetdirect.tatami.Tatami_DojoCharting" />
 </module>
