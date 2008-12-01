@@ -25,15 +25,13 @@
  */
 package com.objetdirect.tatami.client;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Helper;
+import com.google.gwt.user.client.ui.ClickListenerCollection;
+import com.google.gwt.user.client.ui.HasText;
 
 
 
@@ -46,9 +44,9 @@ import com.google.gwt.user.client.ui.Helper;
  * @author rdunklau
  *
  */
-public class Button extends com.google.gwt.user.client.ui.Button implements HasDojo{
+public class Button extends AbstractDojo  implements HasDojo, HasText {
 
-	private List<ClickListener> listeners = new ArrayList<ClickListener>();
+	private ClickListenerCollection listeners;
 	
 	private final static String dojoName = "dijit.form.Button" ;
 	
@@ -56,19 +54,20 @@ public class Button extends com.google.gwt.user.client.ui.Button implements HasD
 	
 	private String iconClass = "";
 	
+	private Command command = null;
 
+	private boolean enabled = true;
 
 	private JavaScriptObject dojoWidget;
 	
 	
 	public Button() {
-		this(DOM.createDiv() , null , null);
+		this(Document.get().createDivElement() , null , null);
 	}
 
 	public Button(String html, ClickListener listener) {
 		this(html);
 		addClickListener(listener);
-		
 	}
 
 	/**
@@ -80,8 +79,10 @@ public class Button extends com.google.gwt.user.client.ui.Button implements HasD
 	}
 	
 	public Button(String label , String iconClass){
-		this(DOM.createDiv() , label , iconClass);
+		this(Document.get().createDivElement(), label , iconClass);
 	}
+	
+	
 	
 	/**
 	 * Same as Button(String label), except it takes the css class name for 
@@ -96,17 +97,22 @@ public class Button extends com.google.gwt.user.client.ui.Button implements HasD
      *	}
 	 */
 	public Button(Element element ,String label , String iconClass){
-		super(label);
-		setElement(element);
-		DojoController.getInstance().loadDojoWidget(this);
+		super(element);
 		this.label = label;
 		this.iconClass = iconClass;
+
 	}
 	
-	protected void setElement(Element elem) {
-		Helper.replaceElement(this, elem);
+
+	
+	
+	public void setCommand(Command command) {
+		this.command = command;
 	}
 	
+	public Command getCommand() {
+		return this.command;
+	}
 
 	public String getIconClass() {
 		return iconClass;
@@ -130,6 +136,17 @@ public class Button extends com.google.gwt.user.client.ui.Button implements HasD
 	;
 	
 	
+	public void setEnabled(boolean b) {
+		this.enabled = b;
+		if ( isAttached()) {
+			setEnabled(getDojoWidget(),b);
+		}
+	}
+	
+	
+	private native void setEnabled(JavaScriptObject dojoWidget, boolean enabled) /*-{
+	   dojoWidget.setDisabled(!enabled);
+	}-*/;
 	
 	
 	/**
@@ -189,36 +206,42 @@ public class Button extends com.google.gwt.user.client.ui.Button implements HasD
 	 * 
 	 */
 	public void onClick(){
-		for (Iterator<ClickListener> iterator = listeners.iterator(); iterator.hasNext();) {
-			ClickListener listener = (ClickListener) iterator.next();
-			listener.onClick(this);
+		if ( command != null ) {
+			command.execute();
+		}
+		if (listeners != null) {
+		listeners.fireClick(this);
 		}
 	}
 	
 	
 	public void addClickListener(ClickListener listener) {
+		if ( listeners == null) {
+			listeners = new ClickListenerCollection();
+		}
 		listeners.add(listener);	
 	}
 
 
 	public void removeClickListener(ClickListener listener) {
+		if ( listeners != null) {
 		listeners.remove(listener);
+		}
 	}
 
-	protected void onAttach() {
-		super.onAttach();
-      	DojoController.getInstance().constructDojoWidget(this, this);
-	}
 	
-	protected void onDetach() {
-		DojoController.getInstance().destroyDojoWidget(this, this);
-		super.onDetach();
-	}
 
 	public void doAfterCreation() {
 		DojoController.startup(this);
+		setEnabled(enabled);
 	}
 
+	
+	public boolean isEnabled() {
+		return this.enabled;
+	}
+	
+	
 	public void doBeforeDestruction() {
 	}
 
@@ -230,9 +253,7 @@ public class Button extends com.google.gwt.user.client.ui.Button implements HasD
 		return dojoWidget;
 	}
 
-	public void click() {
-		onClick();
-	}
+	
 
 	public String getLabel() {
 		return this.label;
@@ -247,7 +268,13 @@ public class Button extends com.google.gwt.user.client.ui.Button implements HasD
 		dojoSetLabel(text , dojoWidget);
 	}
 	
+	public void setText(String text) {
+		setLabel(text);
+	}
+
+	public String getText() {
+		return getLabel();
+	}
 
 
-
-}
+}//end of class
