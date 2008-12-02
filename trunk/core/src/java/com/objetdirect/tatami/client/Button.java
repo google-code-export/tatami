@@ -32,6 +32,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.ClickListenerCollection;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.SourcesClickEvents;
 
 
 
@@ -44,7 +45,7 @@ import com.google.gwt.user.client.ui.HasText;
  * @author rdunklau
  *
  */
-public class Button extends AbstractDojo  implements HasDojo, HasText {
+public class Button extends AbstractDojo  implements HasDojo, HasText,SourcesClickEvents  {
 
 	private ClickListenerCollection listeners;
 	
