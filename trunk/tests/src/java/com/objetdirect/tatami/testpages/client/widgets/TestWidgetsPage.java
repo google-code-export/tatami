@@ -47,6 +47,7 @@ public class TestWidgetsPage extends TestMainPage implements EntryPoint  {
 	  addTestPage(new TestSimpleGridPage());
 	  addTestPage(new TestSpinnerPage());
 	  addTestPage(new TestTreePage());
+	  addTestPage(new TestChangeDataStorePage());
   }
   
   
