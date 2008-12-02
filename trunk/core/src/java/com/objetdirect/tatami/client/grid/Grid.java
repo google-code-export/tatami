@@ -215,6 +215,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * 
 	 * @param shouldItExist
 	 */
+	@Deprecated
 	public void setRowBar(boolean shouldItExist){
 		layout.setRowBar(shouldItExist);
 	}
@@ -222,6 +223,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	/**
 	 * @return true if the grid displays a rowbar, false otherwise
 	 */
+	@Deprecated
 	public boolean hasRowBar(){
 		return layout.hasRowBar();
 	}
@@ -837,7 +839,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 
 	
 	/**
-	 * This method is used to callback the dojo model "beginReturn" method.
+	 * This method is used to callback the dojo "beginReturn" method.
 	 * @param size : the expected number of items which are fetched
 	 * @param grid : the dojo grid object
 	 */
@@ -847,7 +849,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	
 	
 	/**
-	 * This method is used to callback the dojo model "processRows"
+	 * This method is used to callback the dojo  "processRows"
 	 * @param items : a javascript object representing an array of items fetched
 	 * @param request : the dojo request object
 	 */
@@ -1148,7 +1150,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	/**
 	 * @return the underlying data store
 	 */
-	public DataStore getStore() {
+	public AbstractDataStore getStore() {
 		return store;
 	}
 	
@@ -1177,7 +1179,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param store
 	 */
 	private native void dojoSetStore(JavaScriptObject store)/*-{
-		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.model.setData(store);
+		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.setStore(store);
 	}-*/;
 	
 	
@@ -1266,7 +1268,6 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * Goes to the previous page
 	 */
 	public void previousPage(){
-		//dojoPreparePageChange();
 		paginator.previousPage();
 	}
 	
@@ -1274,7 +1275,6 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param index : the page index where to go
 	 */
 	public void goToPage(int index){
-		dojoPreparePageChange();
 		paginator.fetchPage(index);
 	}
 
@@ -1316,14 +1316,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param maximumFetchCountAtAtime
 	 */
 	private native void setDojoMaximumFetchCountAtATime(int maximumFetchCountAtAtime)/*-{
-		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.model.rowsPerPage = maximumFetchCountAtAtime;
-	}-*/;
-	
-	/**
-	 * Internal method used to clear data kept in dojo widget before loading a new page
-	 */
-	private native void dojoPreparePageChange()/*-{
-		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.model.clearData(true);
+		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.rowsPerPage = maximumFetchCountAtAtime;
 	}-*/;
 	
 	
