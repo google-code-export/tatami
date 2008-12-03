@@ -9,22 +9,13 @@ import com.objetdirect.tatami.client.tree.Tree;
 import com.objetdirect.tatami.client.tree.TreeListener;
 import com.objetdirect.tatami.jamendoplayer.client.JamendoQueryMaker.JSONHandler;
 
-public class SearchTree extends Tree implements JSONHandler{
+public class SearchTree extends Tree{
 
 private static SearchTree instance;
 	
-	private Item root;
 
 	private SearchTree(SearchTreeStore store) {
-		super(store);
-		this.setRootLabel("Collection");
-		this.setShowRoot(false);
-		root = new Item("Collection","COLLECTIONROOT");
-		root.setValue(Tree.folderClosedClassAttribute,"collection");
-		root.setValue(Tree.leafClassAttribute ,"collection");
-		root.setValue(Tree.folderOpenedClassAttribute, "collectionOpen");
-		this.addRootItem(root);
-		JamendoQueryMaker.searchGenre(this);
+		super(new SearchTreeItem("Collection","Collection"),store);
 		this.addTreeListener(new TreeListener(){
 			public void onClick(Item item) {
 			}
@@ -41,6 +32,7 @@ private static SearchTree instance;
 			public void onOpen(Item item) {
 			}
 		});
+		
 	}
 
 	public static SearchTree getInstance(){
@@ -58,31 +50,6 @@ private static SearchTree instance;
 		}
 	}
 
-	public void handleJSON(JavaScriptObject obj, SearchTreeItem item) {
-		int length = JamendoQueryMaker.getLength(obj);
-		Collection<Item> genres = new ArrayList<Item>();
-		for(int i = 0 ; i < length ; i++){
-			SearchTreeItem genreItem = new GenreItem(JamendoQueryMaker.extractItemsFromResponse(obj, i));
-			genres.add(genreItem);
-			String[] num = {"0-9"};
-			LetterItem numbers = new LetterItem(num);
-			numbers.setValue("id","letter-"+numbers.getValue("label", null)+"-"+genreItem.getValue("label","unknown"));
-			numbers.setValue("genre",genreItem.getValue("label","unknown"));
-			addChildToItem(genreItem, numbers);
-			Collection<Item> children = new ArrayList<Item>();
-			for(char j = 'A'; j<= 'Z' ; j++){
-				String[] letters = {j+""};
-				LetterItem letter = new LetterItem(letters);
-				letter.setValue("id","letter-"+letter.getValue("label", null)+"-"+genreItem.getValue("label","unknown"));
-				letter.setValue("genre",genreItem.getValue("label","unknown"));
-				children.add(letter);
-			} 
-			genreItem.setChildHaveBeenLoaded(true);
-			addChildrenToItem(genreItem, children);
-		}
-		this.addChildrenToItem(root, genres);
-		this.refreshTree();
-	}
 	
 	
 }

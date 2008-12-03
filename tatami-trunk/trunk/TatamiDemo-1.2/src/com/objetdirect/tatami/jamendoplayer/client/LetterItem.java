@@ -1,52 +1,44 @@
 package com.objetdirect.tatami.jamendoplayer.client;
 
+
 import com.objetdirect.tatami.client.tree.Tree;
 
 public class LetterItem extends SearchTreeItem {
 
-	private int nbChildPagesAlreadyLoaded = 1;
-	private String[] letters;
-	private int currentLetterRequested = 0;
+	public static final String type="letter";
+	public static final String letterAttr="letter";
 	
-	public int getCurrentLetterRequested() {
-		return currentLetterRequested;
+	private String letter;
+
+
+	public String getLetter() {
+		return letter;
 	}
 
-	public void setCurrentLetterRequested(int currentLetterRequested) {
-		this.currentLetterRequested = currentLetterRequested;
-	}
-
-	public int getNbChildPagesAlreadyLoaded() {
-		return nbChildPagesAlreadyLoaded;
-	}
-
-	public void setNbChildPagesAlreadyLoaded(int nbChildPagesAlreadyLoaded) {
-		this.nbChildPagesAlreadyLoaded = nbChildPagesAlreadyLoaded;
-	}
-
-	public String[] getLetters() {
-		return letters;
-	}
-
-	public LetterItem(String[] letters){
-		String label = letters.length > 1 ? letters[0] + "-" + letters[letters.length -1] : letters[0]; 
-		setLabel(label);
-		setId("Letter"+label);
-		this.letters = letters;
-		this.setValue("type", 	"letter");
-		loadingItem = new LoadingItem("Loading artists ...","__ARTISTLOADING__");
+	public LetterItem(String letter){
+		setId("Letter"+letter);
+		setLabel(letter);
+		this.letter = letter;
+		this.setValue(typeKey, 	type);
 		this.setValue(Tree.folderClosedClassAttribute , "letterItem");
 		this.setValue(Tree.folderOpenedClassAttribute ,"letterItemOpen");
 		this.setValue(Tree.labelClassAttribute ,"letterItemLabel");
-		this.addChild(loadingItem);
 	}
 	
-	public void removeLoadingChild(){
-		this.removeChild(loadingItem);
-	}
 	
-	public void addLoadingChild(){
-		this.addChild(loadingItem);
+	@Override
+	public String getLabel() {
+		return (String) attributes.get(letterAttr);
+	}
+
+	@Override
+	public String[] getLabelAttributes() {
+		return new String[]{letterAttr};
+	}
+
+	@Override
+	public void setLabel(String label) {
+		attributes.put(letterAttr, label);
 	}
 
 }

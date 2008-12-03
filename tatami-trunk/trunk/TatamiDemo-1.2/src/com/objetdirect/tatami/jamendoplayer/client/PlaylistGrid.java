@@ -144,7 +144,7 @@ public class PlaylistGrid extends Grid implements LoadItemListener , Callback{
 	
 	public void addAlbumToPlaylist(AlbumItem album){
 		List<?> tracks = (List<?>) SearchTree.getInstance().getStore().getValue(album, "children", null);
-		if(album.isChildHaveBeenLoaded()){
+		if(album.isFullyLoaded()){
 			for (Iterator<?> iterator = tracks.iterator(); iterator.hasNext();) {
 				MusicItem track = (MusicItem) iterator.next();
 				addTrackToPlaylist(track);
@@ -156,7 +156,7 @@ public class PlaylistGrid extends Grid implements LoadItemListener , Callback{
 	
 	public void addArtistToPlaylist(ArtistItem artist){
 		List<?> tracks = (List<?>) SearchTree.getInstance().getStore().getValue(artist, "children", null);
-		if(artist.isChildHaveBeenLoaded()){
+		if(artist.isFullyLoaded()){
 			for (Iterator<?> iterator = tracks.iterator(); iterator.hasNext();) {
 				AlbumItem album = (AlbumItem) iterator.next();
 				addAlbumToPlaylist(album);
