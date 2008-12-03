@@ -35,12 +35,13 @@ public abstract class BaseFormatter implements Formatter{
 	
 	protected native JavaScriptObject getJSFormatter()/*-{
 		var f = function(toFormat){
-			return this.formatter.gwtFormatter.@com.objetdirect.tatami.client.grid.formatters.BaseFormatter::format(Ljava/lang/String;)(toFormat +"");
+			alert(toFormat);
+			return this.formatter.gwtFormatter.@com.objetdirect.tatami.client.grid.formatters.BaseFormatter::format(Ljava/lang/Object;)(toFormat);
 		};
 		f.gwtFormatter = this;
 		return f;
 	}-*/;
 	
-	public abstract String format(String toFormat);
+	public abstract String format(Object toFormat);
 
 }
