@@ -283,6 +283,9 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 			return value;
 		}else{
 			JavaScriptObject toReturn = JSHelper.convertObjectToJSObject(value); 
+			if(toReturn == null){
+				return value;
+			}
 			return toReturn;
 		}
 	}

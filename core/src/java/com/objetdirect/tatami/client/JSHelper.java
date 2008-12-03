@@ -41,6 +41,7 @@ public class JSHelper {
  	 			newvalue = value.@java.lang.Boolean::booleanValue()();
  	 		}else {
  	 			newvalue = @com.objetdirect.tatami.client.JSHelper::convertObjectToJSObject(Ljava/lang/Object;)(value);
+ 	 			newvalue = newvalue == null ? value : newvalue;
  	 		}
  	 		obj[string] = newvalue;
  	 	}
