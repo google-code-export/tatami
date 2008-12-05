@@ -102,20 +102,6 @@ public class TestSimpleGrid extends AbstractTestWidgets{
 		assertEquals("B", grid.getCell(0, 0).getTextContent());
 	}
 	
-	public void testSelectRows(){
-		grid.clickOnCell(0,0);
-		assertEquals("0", lastRowSelection.getTextContent());
-		grid.clickOnCell(0,0);
-		testGwt.mouseClick(grid.getCell(2,0), TestGWT.BUTTON_LEFT, false, true, false);
-		assertEquals("0-1-2", lastRowSelection.getTextContent());
-		grid.clickOnCell(1,0);
-		assertEquals("1", lastRowSelection.getTextContent());
-		testGwt.mouseClick(grid.getCell(0,0), TestGWT.BUTTON_LEFT, false, false, true);
-		assertEquals("0-1", lastRowSelection.getTextContent());
-		testGwt.mouseClick(removeSelectedRows, TestGWT.BUTTON_LEFT, false, false, false);
-		assertEquals(1 , grid.getRowCount());
-		assertEquals("C", grid.getCell(0,0).getTextContent());
-	}
 	
 	public void testAddRemoveColumns(){
 		testGwt.mouseClick(addColumnButton, TestGWT.BUTTON_LEFT, false, false, false);

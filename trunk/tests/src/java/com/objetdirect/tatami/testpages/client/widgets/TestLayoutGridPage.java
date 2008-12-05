@@ -14,6 +14,7 @@ import com.objetdirect.tatami.client.grid.GridDataStore;
 import com.objetdirect.tatami.client.grid.GridLayout;
 import com.objetdirect.tatami.client.grid.GridListener;
 import com.objetdirect.tatami.client.grid.GridView;
+import com.objetdirect.tatami.client.grid.editor.BooleanEditor;
 import com.objetdirect.tatami.client.grid.editor.CheckBoxEditor;
 import com.objetdirect.tatami.client.grid.editor.ComboBoxEditor;
 import com.objetdirect.tatami.client.grid.editor.DateEditor;
@@ -121,7 +122,7 @@ public class TestLayoutGridPage extends TestPage{
 		view2.addCellToRow(descriptionCell, 1);
 		
 		Cell marriedCell = new Cell("married" , "Is Married ?");
-		marriedCell.setEditor(new CheckBoxEditor(true));
+		marriedCell.setEditor(new CheckBoxEditor());
 		marriedCell.setRowSpan(2);
 		view2.addCellToRow(marriedCell,0);
 		
@@ -173,11 +174,11 @@ public class TestLayoutGridPage extends TestPage{
 			private String selectedIndexesCellContent;
 
 
-			//What should be displayed when an item’s value change
+			//What should be displayed when an itemâ€™s value change
 			private String itemChangedContent;
 
 
-			//The constructor takes an “HTML” object in which
+			//The constructor takes an â€œHTMLâ€� object in which
 			// it will write the cell content.
 			public myGridListener(HTML html){
 				this.html = html;

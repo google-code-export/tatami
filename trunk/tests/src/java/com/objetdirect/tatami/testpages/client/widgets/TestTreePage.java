@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.tree.Tree;
@@ -53,13 +54,11 @@ public class TestTreePage extends TestPage{
 		item12.addChild(new Item("item1.2.1" , "Item 1.2.1"));
 		item12.addChild(new Item("item1.2.2" , "Item 1.2.2"));
 		item1.setValue(Tree.labelClassAttribute,"myLabelClass");
-		
 		final Item item2 = new Item("item2" , "Item 2");
 		tree.setDefaultFolderClosedClass("myTreeClosed");
 		tree.setDefaultFolderOpenClass("myTreeOpened");
 		tree.getRootItem().addChild(item1);
 		tree.getRootItem().addChild(item2);
-		//tree.setShowRoot(false);
 		HorizontalPanel panel = new HorizontalPanel();
 		final HTML openValue = new HTML("Opened :");
 		final HTML closedValue = new HTML("Closed :");
@@ -94,7 +93,7 @@ public class TestTreePage extends TestPage{
 		panel.add(onDblClickValue);
 		panel.add(closedValue);
 		panel.add(openValue);
-		
+		  
 		return panel;
 	}
 
