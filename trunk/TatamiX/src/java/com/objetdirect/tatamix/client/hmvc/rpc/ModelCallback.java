@@ -5,7 +5,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.objetdirect.tatamix.client.hmvc.ModelEvent;
 import com.objetdirect.tatamix.client.hmvc.ModelImpl;
 
-public class ModelCallback implements AsyncCallback {
+public class ModelCallback<T> implements AsyncCallback<T> {
 
 	private ModelImpl model;
 	private String name="model";
@@ -63,7 +63,7 @@ public class ModelCallback implements AsyncCallback {
 	 * (non-Javadoc)
 	 * @see com.google.gwt.user.client.rpc.AsyncCallback#onSuccess(java.lang.Object)
 	 */
-	public void onSuccess(Object result) {
+	public void onSuccess(T result) {
 		Object result_ = doBeforeFire(result);
 		doFire(result_);
 
@@ -74,9 +74,9 @@ public class ModelCallback implements AsyncCallback {
 	 * @param result the result given on success
 	 * @return the result itself or an other object. The Object returned will be send in the <code>ModelEvent</code>
 	 * @see #doFire(Object)
-	 *
+	 *    
 	 */
-	protected Object doBeforeFire(Object result) {
+	protected Object doBeforeFire(T result) {
 		return result;
 	}
 
@@ -93,7 +93,7 @@ public class ModelCallback implements AsyncCallback {
 	 * @param event
 	 * @param result
 	 */
-	public void fire(String event, Object result) {
+	protected void fire(String event, Object result) {
 		setSuccessEvent(event);
 		model.fire(new ModelEvent(getSuccessEvent(), model, result));
 	}
