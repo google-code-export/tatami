@@ -34,15 +34,14 @@ import java.util.Map;
  * @author rdunklau
  *
  */
-public class CheckBoxEditor extends BaseEditor{
+public class BooleanEditor extends BaseEditor{
 
-	private final String dojoName = "dojox.grid.cells.CheckBox";
+	private final String dojoName = "dojox.grid.cells.Bool";	
 	
 	
-	public CheckBoxEditor(){
+	public BooleanEditor(){
 	}
 	
-
 	public String getDojoGridEditorName() {
 		return dojoName;
 	}

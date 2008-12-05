@@ -38,6 +38,8 @@ import java.util.Set;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.DateUtil;
 import com.objetdirect.tatami.client.DojoController;
 import com.objetdirect.tatami.client.HasDojo;
@@ -657,16 +659,27 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @param newValue
 	 */
 	public void onSet(Item item , String attribute , Object oldValue , Object newValue) {
-		notifyDatumChangeListeners(item, attribute, oldValue, newValue);
-		if(newValue instanceof Date){
-			newValue = DateUtil.getJSDate((Date)newValue);
+		boolean shouldNotify = false;
+		if(newValue instanceof Collection || newValue instanceof Map){
+			shouldNotify = true;
+		}else if(newValue == null && newValue != oldValue){
+			shouldNotify = true;
+		}else if(!newValue.equals(oldValue)){
+			shouldNotify = true;
 		}
-		if(oldValue instanceof Date){
-			oldValue = DateUtil.getJSDate((Date)oldValue);
+		if(shouldNotify){
+			notifyDatumChangeListeners(item, attribute, oldValue, newValue);
+			if(newValue instanceof Date){
+				newValue = DateUtil.getJSDate((Date)newValue);
+			}
+			if(oldValue instanceof Date){
+				oldValue = DateUtil.getJSDate((Date)oldValue);
+			}
+			if(dojoStore != null){
+				callJSOnSet(item, attribute, oldValue, newValue);
+			}
 		}
-		if(dojoStore != null){
-			callJSOnSet(item, attribute, oldValue, newValue);
-		}
+		
 	}
 	
 	

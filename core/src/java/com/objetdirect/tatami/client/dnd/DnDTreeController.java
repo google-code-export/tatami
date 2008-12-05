@@ -162,9 +162,9 @@ public class DnDTreeController extends IDnDController<TreeSource, TreeTarget> im
 					this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDndDrop(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Ljava/lang/String;Z)(source,this,nodes,model.getIdentity(newParentItem),copy);
 					this.tree._expandNode(targetWidget);
 				}
+				this.onDndCancel();
 			},
 			onDndStart: function(source, nodes, copy){
-				this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDnDStart(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Z)(source,nodes,copy);
 				if(this.isSource){
 					this._changeState("Source", this == source ? (copy ? "Copied" : "Moved") : "");
 				}
@@ -173,6 +173,7 @@ public class DnDTreeController extends IDnDController<TreeSource, TreeTarget> im
 				if(accepted){
 					$wnd.dojo.dnd.manager().overSource(this);
 				}
+				this.gwtDndController.@com.objetdirect.tatami.client.dnd.DnDMainController::onDnDStart(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;Z)(source,nodes,copy);
 				this.isDragging = true;
 			}
 		});

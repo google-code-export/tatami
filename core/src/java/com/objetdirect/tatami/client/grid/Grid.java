@@ -34,6 +34,8 @@ import java.util.List;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.AbstractDojo;
 import com.objetdirect.tatami.client.DojoController;
 import com.objetdirect.tatami.client.JSHelper;
@@ -612,16 +614,16 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 			store : jsstore , 
 			sortInfo: si , 
 			structure : layout , 
-//			width: "100%" ,
-//			height: "100%" ,
+			width: "100%" ,
+			height: "100%" ,
 			gwtWidget : this ,
-			query : query
+			query : query,
+			columnReordering: true
 		}; 
 		if(rowSelector){
 			gridOptions.rowSelector = rowSelector;
 		}
 		var grid = new $wnd.dojox.grid.TatamiGrid(gridOptions);
-  		
   		return grid;
 	}-*/;
 
@@ -685,6 +687,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * overriding the default onSelectionChanged and onCellClick functions
 	 */
 	private native void defineTatamiGrid()/*-{
+		$wnd.dojo.require("dojo.html");
 		$wnd.dojo.declare("dojox.grid.TatamiGrid" , $wnd.dojox.grid.DataGrid , {
 			onSelectionChanged : function(){
 				this.gwtWidget.@com.objetdirect.tatami.client.grid.Grid::onSelectionChange(Lcom/google/gwt/core/client/JavaScriptObject;)(this.selection.selected);
@@ -746,6 +749,10 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	@Override
 	public void doBeforeDestruction() {
 		this.store.doBeforeDestruction();
+	}
+	
+	private static boolean isWidget(Object o){
+		return o instanceof Widget;
 	}
 	
 
@@ -1479,5 +1486,10 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	public void setStyler(RowStyler styler) {
 		this.styler = styler;
 	}
+	
+	
+	
+	
+	
 
 }
