@@ -20,7 +20,7 @@
 
   <target name="compile" description="Compile src to build">
     <mkdir dir="${build.dir}"/>
-    <javac source="1.5"  srcdir="src/java" destdir="${build.dir}" includes="**" debug="on" debuglevel="lines,vars,source" >
+    <javac source="1.5"  srcdir="src/" destdir="${build.dir}" includes="**" debug="on" debuglevel="lines,vars,source" >
     	<classpath refid="project.class.path"/>
     </javac>
   </target>
@@ -32,7 +32,7 @@
         <include name="**/*"/>
       </fileset>
       <!-- Get everything; source, modules, html files -->
-      <fileset dir="src/java">
+      <fileset dir="src/">
         <include name="**"/>
       </fileset>
     </jar>
