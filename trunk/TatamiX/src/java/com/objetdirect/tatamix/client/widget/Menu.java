@@ -39,7 +39,7 @@ public class Menu extends Composite{
 		actionMap = new HashMap();
 
 	    initWidget(menu);
-
+        setStylePrimaryName("tatamix-Menu");
 	    itemListener = new ClickListener() {
 	    	public void onClick(Widget sender) {
 	    		Command cmd = (Command)actionMap.get(sender);
@@ -91,6 +91,15 @@ public class Menu extends Composite{
 
 	}
 
+	
+	
+	public void activeItem(int index) {
+		Widget sender = menu.getWidget(index);
+		if ( sender != null) {
+			this.itemListener.onClick(sender);
+		}
+	}
+	
 
 	/**
 	 * Adds a new  item for the menu
@@ -219,5 +228,12 @@ public class Menu extends Composite{
     	return (Hyperlink)menu.getWidget(index);
     }
 
+    public void setStyleAt(int index,String styleName) {
+    	menu.setStyleAt(index, styleName);
+    	
+    }
+    
+   
+    
 
 }//end of class
