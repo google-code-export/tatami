@@ -69,6 +69,7 @@ public class Button extends AbstractDojo  implements HasDojo, HasText,SourcesCli
 	public Button(String html, ClickListener listener) {
 		this(html);
 		addClickListener(listener);
+		
 	}
 
 	/**
@@ -101,7 +102,7 @@ public class Button extends AbstractDojo  implements HasDojo, HasText,SourcesCli
 		super(element);
 		this.label = label;
 		this.iconClass = iconClass;
-
+		setStylePrimaryName("tatami-Button");
 	}
 	
 
@@ -266,7 +267,9 @@ public class Button extends AbstractDojo  implements HasDojo, HasText,SourcesCli
 	 */
 	public void setLabel(String text) {
 		this.label = text;
+		if ( isAttached()) {
 		dojoSetLabel(text , dojoWidget);
+		}
 	}
 	
 	public void setText(String text) {
