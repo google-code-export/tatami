@@ -21,7 +21,7 @@ public class TestGridRowStylerBug extends AbstractTestWidgets{
 	}
 	
 	public void testRowStyler() throws Exception{
-		HtmlElement elem = grid.getView(0);
+		HtmlElement elem = grid.getView(1);
 		assertEquals("dojoxGridRow myRow", elem.getHtmlElementsByTagName("div").get(0).getHtmlElementsByTagName("div").get(0).getHtmlElementsByTagName("div").get(0).getHtmlElementsByTagName("div").get(0).getAttribute("class"));
 	}
 

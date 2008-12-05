@@ -20,6 +20,14 @@
 	width: 32px !important;
 }
 
+.item1{
+	background-image: url('folder-visiting.png');
+	background-position: top;
+	top: 1px;
+	height: 32px !important;
+	width: 32px !important;
+}
+
 .myLabelClass{
 	color: red;
 }

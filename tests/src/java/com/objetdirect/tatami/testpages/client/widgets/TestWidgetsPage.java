@@ -26,6 +26,9 @@
 package com.objetdirect.tatami.testpages.client.widgets;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.objetdirect.tatami.client.data.Item;
+import com.objetdirect.tatami.client.tree.Tree;
 import com.objetdirect.tatami.testpages.client.TestMainPage;
 
 /**
@@ -42,12 +45,15 @@ public class TestWidgetsPage extends TestMainPage implements EntryPoint  {
 	  addTestPage(new TestDNDToTreePage());
 	  addTestPage(new TestFillingEmptyGridPage());
 	  addTestPage(new TestGridRowStylerBugPage());
+	  addTestPage(new TestGridSelectionManagerPage());
 	  addTestPage(new TestLayoutGridPage());
 	  addTestPage(new TestMoreComplexGridPage());
 	  addTestPage(new TestSimpleGridPage());
 	  addTestPage(new TestSpinnerPage());
 	  addTestPage(new TestTreePage());
 	  addTestPage(new TestChangeDataStorePage());
+	  addTestPage(new TestDNDSimplestPage());
+	  addTestPage(new TestBorderContainerPage());
   }
   
   

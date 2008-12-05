@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.data.Item;
+import com.objetdirect.tatami.client.dnd.AbstractDnDBehavior;
 import com.objetdirect.tatami.client.dnd.DnD;
 import com.objetdirect.tatami.client.dnd.DnDDefaultWidgetBehavior;
 import com.objetdirect.tatami.client.dnd.DnDGenericBehavior;
@@ -45,6 +46,9 @@ import com.objetdirect.tatami.client.dnd.IDnDElement;
 import com.objetdirect.tatami.client.dnd.IDnDSource;
 import com.objetdirect.tatami.client.dnd.IDnDTarget;
 import com.objetdirect.tatami.client.dnd.WidgetDnDBehavior;
+import com.objetdirect.tatami.client.dnd.WidgetDnDElement;
+import com.objetdirect.tatami.client.dnd.WidgetSource;
+import com.objetdirect.tatami.client.dnd.WidgetTarget;
 import com.objetdirect.tatami.client.dnd.DnDBehaviors.BehaviorScopeException;
 import com.objetdirect.tatami.client.tree.Tree;
 import com.objetdirect.tatami.testpages.client.TestPage;
@@ -127,6 +131,11 @@ public class TestDNDPage extends TestPage{
 				return true;
 			}
 		};
+		
+		AbstractDnDBehavior<WidgetDnDElement, WidgetSource, WidgetTarget> be = new AbstractDnDBehavior<WidgetDnDElement, WidgetSource, WidgetTarget>(){
+			
+		};
+		
 		DnDGenericBehavior<DndTreeElement> treeToTreeBehavior = new DnDGenericBehavior<DndTreeElement>(){
 			@Override
 			public boolean onDrop(Collection<DndTreeElement> dndElements, IDnDSource<? extends DndTreeElement> source,
@@ -224,7 +233,7 @@ public class TestDNDPage extends TestPage{
 		tree.setRootItem(firstRoot);
 		DOM.setElementAttribute(tree.getElement(),"id", "Tree");
 		DnD.registerTreeSource(tree);
-		DnD.registerTarget(tree);
+			
 		return tree;
 	}
 	
