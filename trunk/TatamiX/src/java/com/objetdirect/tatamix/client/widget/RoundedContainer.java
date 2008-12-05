@@ -65,5 +65,10 @@ public class RoundedContainer extends Composite {
 	public void insert(Widget w,int beforeIndex) {
 		this.content.insert(w, beforeIndex);
 	}
+	
+	public void clear() {
+		content.clear();
+		
+	}
 
 }
