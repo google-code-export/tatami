@@ -11,21 +11,10 @@ public abstract class BaseEditor implements GridEditor {
 		
 	}
 	
-	public BaseEditor(Boolean alwaysEditing){
-		setAlwaysEditing(alwaysEditing);
-	}
-	
 	public Map<String,Object> getAttributes() {
 		return attributes;
 	}
 
-	public void setAlwaysEditing(Boolean always){
-		attributes.put("alwaysEditing",always);
-	}
-
-	public boolean getAlwaysEditing(boolean always){
-		return (Boolean) attributes.get("alwaysEditing");
-	}
 	
 	public void addAttribute(String attrName,Object attrValue){
 		attributes.put(attrName,attrValue);

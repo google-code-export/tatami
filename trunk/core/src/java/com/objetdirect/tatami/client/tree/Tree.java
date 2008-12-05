@@ -368,8 +368,9 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @see com.objetdirect.tatami.client.data.FetchListener#onComplete(com.objetdirect.tatami.client.data.FetchEventSource, java.util.List, com.objetdirect.tatami.client.data.Request)
 	 */
 	public void onComplete(FetchEventSource source, List<?> items, Request request) {
-		assert source!=null;
-		assert request.getOnCompleteCallback() !=null;
+		if(request == null || request.getOnCompleteCallback() == null || source == null ){
+			return;
+		}
 		proceedJSOnComplete(JSHelper.convertObjectToJSObject(items), request.getOnCompleteCallback());
 	} 
 	

@@ -41,9 +41,6 @@ public class DateEditor extends BaseEditor{
 	public DateEditor(){
 	}
 	
-	public DateEditor(Boolean alwaysEditing) {
-		super(alwaysEditing);
-	}
 
 	public String getDojoGridEditorName() {
 		return dojoName;

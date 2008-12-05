@@ -78,8 +78,8 @@ public class Cell implements ConvertibleToJSObject{
 	 * @param name
 	 */
 	public Cell(String field, String name) {
+		this(name);
 		attributes.put("field" , field);
-		attributes.put("name"  , name);
 	}
 	
 	/**
@@ -471,9 +471,6 @@ public class Cell implements ConvertibleToJSObject{
 	public void setEditor(GridEditor editor) {
 		this.editor = editor;
 		Map<String , ? extends Object> editorAttributes = editor.getAttributes(); 
-		if(editorAttributes != null){
-			attributes.putAll(editorAttributes);
-		}
 	}
 
 	/**

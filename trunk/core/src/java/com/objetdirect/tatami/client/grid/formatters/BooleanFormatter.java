@@ -34,6 +34,4 @@ public class BooleanFormatter extends  BaseFormatter{
 			return "<input type='checkbox' disabled='true'></input>";
 		}
 	}
-
-
 }

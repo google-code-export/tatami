@@ -36,10 +36,6 @@ import java.util.Map;
  */
 public class ComboBoxEditor extends BaseEditor{
 
-	public ComboBoxEditor(String[] options,Boolean alwaysEditing) {
-		super(alwaysEditing);
-		setOptions(options);
-	}
 
 	private final String dojoName = "dojox.grid.cells.Select";
 	

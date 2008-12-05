@@ -46,9 +46,4 @@ public class TextEditor extends BaseEditor{
 		return dojoName;
 	}
 
-
-	public TextEditor(Boolean alwaysEditing) {
-		super(alwaysEditing);
-	}
-
 }
