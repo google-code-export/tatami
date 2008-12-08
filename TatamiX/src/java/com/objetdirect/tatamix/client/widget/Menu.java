@@ -1,12 +1,13 @@
 package com.objetdirect.tatamix.client.widget;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -22,13 +23,14 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Vianney
  *
  */
-public class Menu extends Composite{
+public class Menu extends Composite implements ListSelectionListener{
 
-
+    private List<ListSelectionListener> listeners;
 	private HTMLList menu;
 	private Widget lastActive;
 	private ClickListener itemListener;
-	private Map actionMap;
+	private Map<Hyperlink,Command> actionMap;
+	private Map<Hyperlink,Boolean> selectMap;
 
 	/**
 	 * Creates an empty menu
@@ -36,8 +38,9 @@ public class Menu extends Composite{
 	 */
 	public Menu() {
 		menu = new HTMLList();
-		actionMap = new HashMap();
-
+		actionMap = new HashMap<Hyperlink,Command>();
+		selectMap = new HashMap<Hyperlink,Boolean>();
+		
 	    initWidget(menu);
         setStylePrimaryName("tatamix-Menu");
 	    itemListener = new ClickListener() {
@@ -51,9 +54,12 @@ public class Menu extends Composite{
 	    		}
 
 	    		if ( enabled) {
-	    		  activeItem(lastActive,false);
-	    	      lastActive = sender;
-	    	      activeItem(sender,true);
+	    		
+	    		  int index = menu.indexOf(sender);
+	    		  
+	    		  if ( selectMap.get(sender)) {
+	    		    fireListSelectionListeners(index);
+	    		  }
    	    		  if ( cmd != null) {
 	    			cmd.execute();
   	    		  }
@@ -61,15 +67,44 @@ public class Menu extends Composite{
 	    	}
 
 	    };
+	    this.addListSelectionListener(this);
 
 	}
 
+	
+	private void fireListSelectionListeners(int index) {
+		if ( listeners != null) {
+		ListSelectionEvent event = new ListSelectionEvent(this,index);
+		for ( ListSelectionListener listener : listeners) {
+			listener.valueChanged(event);
+		}
+		}
+	}
+	
+	
+	
+	public void addListSelectionListener(ListSelectionListener listener) {
+		if ( listeners == null) {
+			listeners = new ArrayList<ListSelectionListener>();
+		}
+		listeners.add(listener);
+		
+	}
+	
+	public void removeListSelectionListener(ListSelectionListener listener) {
+		if ( listeners != null) {
+			listeners.remove(listener);
+		}
+		
+		
+	}
+	
 
-	public void unActiveAllItem() {
+	public void unSelectAllItem() {
 		 lastActive = null;
-		 Iterator ite = actionMap.keySet().iterator();
+		 Iterator<Hyperlink> ite = actionMap.keySet().iterator();
 		 while (ite.hasNext()) {
-			 Widget w = (Widget)ite.next();
+			 Widget w = ite.next();
 			 activeItem(w,false);
 		 }
 	}
@@ -78,12 +113,19 @@ public class Menu extends Composite{
 	private void activeItem(Widget sender,boolean active) {
 	    if ( sender != null) {
 		Element el = sender.getElement();
-           Element li = DOM.getParent(el);
-           if (active) {
-        	   DOM.setElementProperty(li,"className","active");
-           } else {
-        	   DOM.setElementProperty(li,"className","");
+        Element li = el.getParentElement();
 
+        String currentClass = li.getClassName();
+        if  (currentClass == null) {
+        	currentClass = "";
+        }
+           if (active) {
+               if ( !currentClass.contains("active")) {
+            	   li.setClassName(currentClass + " active");
+               }
+        	  
+           } else {
+        	  li.setClassName(currentClass.replace("active",""));
            }
 
 		}
@@ -93,7 +135,9 @@ public class Menu extends Composite{
 
 	
 	
-	public void activeItem(int index) {
+	
+	
+	public void selectItem(int index) {
 		Widget sender = menu.getWidget(index);
 		if ( sender != null) {
 			this.itemListener.onClick(sender);
@@ -108,17 +152,36 @@ public class Menu extends Composite{
 	 * @param cmd the <code>Command</code> executed when the item is selected, can be <code>null</code>
 	 */
     public void add(String text,String tokenHistory,Command cmd) {
+    	this.add(text, tokenHistory, cmd,true);
+
+
+    }
+
+    
+    
+    /**
+	 * Adds a new  item for the menu
+	 * @param text the text of the item, should not be <code>null</code>
+	 * @param tokenHistory the histoy token used when the item is selected, should not be <code>null</code>
+	 * @param cmd the <code>Command</code> executed when the item is selected, can be <code>null</code>
+	 * @param selectable boolean to determinate if the item will be "selectable". If the <code>false</code> no <code>ListSelectionEvent</code> will be fired 
+	 * when the item will execute the command 
+	 */
+    public void add(String text,String tokenHistory,Command cmd,boolean selectable) {
     	Hyperlink item = new Hyperlink();
     	item.setHTML(text);
     	item.setTargetHistoryToken(tokenHistory);
 
     	actionMap.put(item,cmd);
+    	selectMap.put(item,selectable);
     	item.addClickListener(itemListener);
     	menu.add(item);
 
 
     }
 
+    
+    
 
     /**
      * Removes an item at the specified index
@@ -232,6 +295,15 @@ public class Menu extends Composite{
     	menu.setStyleAt(index, styleName);
     	
     }
+
+
+	
+	public void valueChanged(ListSelectionEvent event) {
+		  activeItem(lastActive,false);
+	      lastActive = menu.getWidget(event.getIndex());
+	      activeItem(lastActive,true);
+		
+	}
     
    
     
