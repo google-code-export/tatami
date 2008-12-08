@@ -159,6 +159,17 @@ public class HTMLList extends Panel implements SourcesClickEvents, SourcesMouseE
 		return remove(items.indexOf(w));
 	}
 
+	
+	/**
+	 * Returns the index of the given widget in the list.
+	 * @param w the widget to retrieve
+	 * @return the index of the given widget. <code>-1</code> if the widget is not found. 
+	 */
+	public int indexOf(Widget w) {
+		return items.indexOf(w);
+	}
+	
+	
 	/**
 	 * Sets the style for the LI element at the specified index
 	 * @param index

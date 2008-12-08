@@ -57,7 +57,7 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 		style.setProperty("top", "0px");
 		style.setProperty("left", "0px");
 		style.setProperty("visibility", "visible");
-		
+		setStylePrimaryName("OptionPanel");
 	}
 	
 	
@@ -68,6 +68,7 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 		Label label = new Label();
 		
 		label.setText(message);
+		label.setStylePrimaryName("label");
 		layout.add(label);
 		yesButton = new com.objetdirect.tatami.client.Button();
 		yesButton.addClickListener(this);
@@ -82,17 +83,17 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 			   noButton.setText(strings.no());
 			   layout.add(noButton);
 			   setCancel(noButton);
-			   label.setStylePrimaryName("OptionPanel-confirmMessage");
+			   label.addStyleDependentName("confirmMessage");
 			   break;
 		   }
 		   case MESSAGE: {
 			   yesButton.setText(strings.ok());
-			   label.setStylePrimaryName("OptionPanel-message");
+			   label.addStyleDependentName("message");
 			   break;
 		   }
 		   case ERROR_MESSAGE: {
 			   yesButton.setText(strings.ok());
-			   label.setStylePrimaryName("OptionPanel-errorMessage");
+			   label.addStyleDependentName("errorMessage");
 			   break;
 		   }
 		   
