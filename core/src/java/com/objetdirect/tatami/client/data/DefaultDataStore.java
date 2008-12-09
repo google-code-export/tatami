@@ -85,14 +85,10 @@ public class DefaultDataStore extends AbstractDataStore{
 		
 		
 		// We notify the fetch listeners that the request is being performed
-		//(it should include a grid , since this store is designed to be used by  
 		notifyBeginFetchListeners(size , request);
 		List<Item> result = new ArrayList<Item>();
 		
 		// We determine which item should be the first returned. 
-		// To do this , we use :
-		// 	-- firstItemFromPageToLoad : the position of the first wanted item in the current page
-		//	-- currentPage * rowsPerPage : the number of items which should be on previous pages 
 		int count = request.getNbItemToReturn() == -1 ? size : Math.min(size, request.getNbItemToReturn());
 		int startItem = request.getStartItemNumber() == -1  ? 0 : request.getStartItemNumber() ;
 		int end =  Math.min(startItem + count , itemsSortedAndMatchingQuery.size());
