@@ -618,7 +618,6 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 			height: "100%" ,
 			gwtWidget : this ,
 			query : query,
-			columnReordering: true
 		}; 
 		if(rowSelector){
 			gridOptions.rowSelector = rowSelector;
