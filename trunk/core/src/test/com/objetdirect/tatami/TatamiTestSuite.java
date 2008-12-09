@@ -47,6 +47,7 @@ import com.objetdirect.tatami.client.grid.GridDataStoreTest;
 import com.objetdirect.tatami.client.grid.GridLayoutTest;
 import com.objetdirect.tatami.client.grid.GridTest;
 import com.objetdirect.tatami.client.grid.GridViewTest;
+import com.objetdirect.tatami.client.layout.TestBorderContainer;
 
 public class TatamiTestSuite extends GWTTestSuite {
 	public static Test suite() {
@@ -106,6 +107,9 @@ public class TatamiTestSuite extends GWTTestSuite {
 	    suite.addTestSuite(GridLayoutTest.class);
 	    suite.addTestSuite(GridTest.class);
 	    suite.addTestSuite(GridViewTest.class);
+	    
+	    //Layout package
+	    suite.addTestSuite(TestBorderContainer.class);
 	    
 	    return suite;
 	  }

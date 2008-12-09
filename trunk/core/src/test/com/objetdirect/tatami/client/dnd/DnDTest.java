@@ -93,7 +93,7 @@ public class DnDTest extends DefaultTatamiTest {
 		WidgetSource source1 = new WidgetSource(panel1);
 		WidgetSource source2 = new WidgetSource(panel2);
 		WidgetSource source3 = new WidgetSource(panel3);	
-		DnDGenericBehavior<IDnDElement> panel1ToPanel2 = new DnDGenericBehavior<IDnDElement>(){};
+		DnDGenericBehavior<WidgetDnDElement> panel1ToPanel2 = new DnDGenericBehavior<WidgetDnDElement>(){};
 		try {
 			DnDBehaviors.addScopeToBehavior(panel1ToPanel2, source1, source2);
 		} catch (BehaviorScopeException e) {
@@ -101,7 +101,7 @@ public class DnDTest extends DefaultTatamiTest {
 		}
 		assertTrue(DnDBehaviors.getBehaviorFor(source1, source2) == panel1ToPanel2);
 		assertTrue(DnDBehaviors.getBehaviorFor(source2, source1) == null);
-		DnDGenericBehavior<IDnDElement> panel2ToPanel1 = new DnDGenericBehavior<IDnDElement>(){};
+		DnDGenericBehavior<WidgetDnDElement> panel2ToPanel1 = new DnDGenericBehavior<WidgetDnDElement>(){};
 		try {
 			DnDBehaviors.addScopeToBehavior(panel2ToPanel1, source2, source1);
 		} catch (BehaviorScopeException e) {
@@ -138,7 +138,7 @@ public class DnDTest extends DefaultTatamiTest {
 		WidgetSource source1 = new WidgetSource(panel1);
 		WidgetSource source2 = new WidgetSource(panel2);
 		WidgetSource source3 = new WidgetSource(panel3);	
-		DnDGenericBehavior<IDnDElement> panel3ToAny = new DnDGenericBehavior<IDnDElement>(){};
+		DnDGenericBehavior<WidgetDnDElement> panel3ToAny = new DnDGenericBehavior<WidgetDnDElement>(){};
 		try {
 			DnDBehaviors.addScopeToBehavior(panel3ToAny, source3 , null);
 		} catch (BehaviorScopeException e) {
@@ -191,13 +191,13 @@ public class DnDTest extends DefaultTatamiTest {
 		WidgetSource source3 = new WidgetSource(panel3);	
 		
 		//Test the source --- > target priority over source --> any
-		DnDGenericBehavior<IDnDElement> panel3ToAny = new DnDGenericBehavior<IDnDElement>(){};
+		DnDGenericBehavior<WidgetDnDElement> panel3ToAny = new DnDGenericBehavior<WidgetDnDElement>(){};
 		try {
 			DnDBehaviors.addScopeToBehavior(panel3ToAny, source3 , null);
 		} catch (BehaviorScopeException e) {
 			fail();
 		}
-		DnDGenericBehavior<IDnDElement> panel3ToPanel1 = new DnDGenericBehavior<IDnDElement>(){};
+		DnDGenericBehavior<WidgetDnDElement> panel3ToPanel1 = new DnDGenericBehavior<WidgetDnDElement>(){};
 		try {
 			DnDBehaviors.addScopeToBehavior(panel3ToPanel1, source3 , source1);
 		} catch (BehaviorScopeException e) {
@@ -208,7 +208,7 @@ public class DnDTest extends DefaultTatamiTest {
 		assertTrue(DnDBehaviors.getBehaviorFor(source3 , source3) == panel3ToAny);
 		
 		//Test the source-->null , null-->target ambiguity detection
-		DnDGenericBehavior<IDnDElement> anyToPanel2 = new DnDGenericBehavior<IDnDElement>(){};
+		DnDGenericBehavior<WidgetDnDElement> anyToPanel2 = new DnDGenericBehavior<WidgetDnDElement>(){};
 		try {
 			DnDBehaviors.addScopeToBehavior(anyToPanel2, null , source2);
 			fail();
@@ -227,7 +227,7 @@ public class DnDTest extends DefaultTatamiTest {
 			fail();
 		}
 		
-		DnDGenericBehavior<IDnDElement> panel1ToPanel2 = new DnDGenericBehavior<IDnDElement>(){};
+		DnDGenericBehavior<WidgetDnDElement> panel1ToPanel2 = new DnDGenericBehavior<WidgetDnDElement>(){};
 		try {
 			DnDBehaviors.addScopeToBehavior(panel1ToPanel2, source1 , source2);
 		} catch (BehaviorScopeException e) {
@@ -254,25 +254,39 @@ public class DnDTest extends DefaultTatamiTest {
 			public boolean onDropCalled = false;
 			
 			@Override
-			public boolean checkItemAcceptance(Panel target,
-					Panel source, Collection<Widget> draggedWidgets) {
+			public boolean checkItemAcceptance(					Panel source, Widget target,Collection<Widget> draggedWidgets) {
 				checkSourceCalled = true;
 				return true;
 			}
 
 			@Override
-			public void elementsAccepted(Panel source, Panel target,
+			public void elementsAccepted(Panel source, Widget target,
 					Collection<Widget> draggedWidgets, boolean copied) {
 				elementsAcceptedCalled = true;
 			}
 
 			@Override
 			public boolean onDrop(Collection<Widget> draggedWidgets,
-					Panel source, Panel target, String targetNodeId,
+					Panel source, Widget target, String targetNodeId,
 					boolean isCopy) {
 				onDropCalled = true;
 				return true;
 			}
+
+			@Override
+			public void dragOver(Widget target) {
+			}
+
+			@Override
+			public void onCancel() {
+			}
+
+			@Override
+			public void onDndStart(Panel source,
+					Collection<Widget> draggedWidgets, boolean copied) {
+			}
+
+			
 		}
 		
 		final MyDnDBehavior behavior = new MyDnDBehavior();
