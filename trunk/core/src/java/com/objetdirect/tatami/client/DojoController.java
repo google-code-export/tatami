@@ -227,7 +227,6 @@ public class DojoController {
 	}
 
 	/**
-
 	 * Returns the DOM element that correponding to the DOJO widget.
 	 * @param dojoWidget the DOJO widget.
 	 * @return the DOM element of the given DOJO widget
