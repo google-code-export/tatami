@@ -78,10 +78,10 @@ public class TestDNDSimplestPage extends TestPage{
 		WidgetDnDBehavior myBehavior = new DnDDefaultWidgetBehavior() {
 			@Override
 			public boolean onDrop(Collection<Widget> draggedWidgets,
-					Panel source, Panel target, String targetNodeId,
+					Panel source, Widget target, String targetNodeId,
 					boolean isCopy) {
 				for (Widget widget : draggedWidgets) {
-					DnD.move(widget, source, target);
+					DnD.move(widget, source, (Panel)target);
 				}
 				return true;
 			}

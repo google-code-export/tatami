@@ -83,7 +83,7 @@ public class TestDNDToTreePage extends TestPage{
 		DnDGenericBehavior<DndTreeElement> treeToTreeBehavior = new DnDGenericBehavior<DndTreeElement>(){
 			@Override
 			public boolean onDrop(Collection<DndTreeElement> dndElements,
-					IDnDSource<? extends DndTreeElement> source,
+					IDnDSource<? super DndTreeElement> source,
 					IDnDTarget target, String targetNodeId, boolean isCopy) {
 				for (Iterator iterator = dndElements.iterator(); iterator
 						.hasNext();) {
@@ -113,7 +113,7 @@ public class TestDNDToTreePage extends TestPage{
 		
 		DnDGenericBehavior<WidgetDnDElement> panelToTreeBehavior = new DnDGenericBehavior<WidgetDnDElement>(){
 			public boolean onDrop(Collection<WidgetDnDElement> dndElements,
-					IDnDSource<? extends WidgetDnDElement> source,
+					IDnDSource<? super WidgetDnDElement> source,
 					IDnDTarget target, String targetNodeId, boolean isCopy) {
 				for (Iterator iterator = dndElements.iterator(); iterator
 						.hasNext();) {

@@ -78,7 +78,7 @@ public class TestDNDEventsPage extends TestPage{
 
 
 			@Override
-			public void dragOver(IDnDTarget target) {
+			public void dragOver(WidgetTarget target) {
 				onDnDDragOverHasBeenCalled.setHTML("TRUE");
 				super.dragOver(target);
 			}
@@ -126,7 +126,7 @@ public class TestDNDEventsPage extends TestPage{
 
 
 			@Override
-			public void dragOver(IDnDTarget target) {
+			public void dragOver(WidgetTarget target) {
 				onDnDDragOverHasBeenCalled2.setHTML("TRUE");
 				super.dragOver(target);
 			}

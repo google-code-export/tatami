@@ -11,8 +11,6 @@ import com.objetdirect.tatami.testpages.client.widgets.TestBorderContainerPage;
 
 public class TestBorderContainer extends AbstractTestWidgets{
 
-
-
 	@Override
 	protected String getTestPageId() {
 		return TestBorderContainerPage.class.getName();

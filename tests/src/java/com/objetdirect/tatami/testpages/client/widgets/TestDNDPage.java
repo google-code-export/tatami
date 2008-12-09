@@ -31,6 +31,7 @@ import java.util.Collection;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -94,15 +95,13 @@ public class TestDNDPage extends TestPage{
 		
 		
 		DnDGenericBehavior<IDnDElement> treeToPanel1Behavior = new DnDGenericBehavior<IDnDElement>(){
-
 			@Override
 			public boolean onDrop(Collection<IDnDElement> dndElements,
-					IDnDSource<? extends IDnDElement> source,
+					IDnDSource<? super IDnDElement> source,
 					IDnDTarget target, String targetNodeId, boolean isCopy) {
 				lastDropBehaviorCalled.setHTML("Tree to LEFTPANEL");
 				return true;
 			}
-			
 		};
 		
 		
@@ -113,7 +112,7 @@ public class TestDNDPage extends TestPage{
 		}
 		DnDGenericBehavior<IDnDElement> grosBehavior = new DnDGenericBehavior<IDnDElement>() {
 			@Override
-			public boolean onDrop(Collection<IDnDElement> dndElements, IDnDSource<? extends IDnDElement> source,
+			public boolean onDrop(Collection<IDnDElement> dndElements, IDnDSource<? super IDnDElement> source,
 					IDnDTarget target, String targetNodeId, boolean isCopy) {
 				lastDropBehaviorCalled.setHTML("Default behavior");
 				return true;
@@ -122,65 +121,21 @@ public class TestDNDPage extends TestPage{
 		WidgetDnDBehavior myBehavior = new DnDDefaultWidgetBehavior() {
 			@Override
 			public boolean onDrop(Collection<Widget> draggedWidgets,
-					Panel source, Panel target, String targetNodeId,
+					Panel source, Widget target, String targetNodeId,
 					boolean isCopy) {
 				lastDropBehaviorCalled.setHTML("Right panel to left panel");
-				for (Widget widget : draggedWidgets) {
-					DnD.move(widget, source, target);
+				if(target instanceof Panel){
+					for (Widget widget : draggedWidgets) {
+						DnD.move(widget, source, (Panel)target);
+					}
 				}
 				return true;
 			}
 		};
 		
-		AbstractDnDBehavior<WidgetDnDElement, WidgetSource, WidgetTarget> be = new AbstractDnDBehavior<WidgetDnDElement, WidgetSource, WidgetTarget>(){
-			
-		};
-		
-		DnDGenericBehavior<DndTreeElement> treeToTreeBehavior = new DnDGenericBehavior<DndTreeElement>(){
-			@Override
-			public boolean onDrop(Collection<DndTreeElement> dndElements, IDnDSource<? extends DndTreeElement> source,
-					IDnDTarget target, String targetNodeId, boolean isCopy) {
-				lastDropBehaviorCalled.setHTML("Tree To Tree Behavior : dropped on tree item : " + targetNodeId);
-				return true;
-			}
-
-			@Override
-			public boolean checkItemAcceptance(
-					IDnDSource<? extends DndTreeElement> source,
-					IDnDTarget target, Collection<DndTreeElement> dndElements) {
-				return super.checkItemAcceptance(source, target, dndElements);
-			}
-
-
-			@Override
-			public void dragOver(IDnDTarget target) {
-				super.dragOver(target);
-			}
-
-			@Override
-			public void elementsAccepted(
-					IDnDSource<? extends DndTreeElement> source,
-					IDnDTarget target, Collection<DndTreeElement> elements,
-					boolean copied, IDnDController<?, IDnDTarget> controller) {
-				super.elementsAccepted(source, target, elements, copied, controller);
-			}
-
-			@Override
-			public void onCancel() {
-				super.onCancel();
-			}
-
-			@Override
-			public void onDndStart(
-					Collection<DndTreeElement> elementBeingDragged,
-					IDnDSource<? extends DndTreeElement> source, boolean ctrlKey) {
-				super.onDndStart(elementBeingDragged, source, ctrlKey);
-			}
-		};
 		try {
 			DnD.registerBehavior(grosBehavior, null, null);
 			DnD.registerBehavior(myBehavior, sourceOnlyPanel, targetOnlyPanel);
-			DnD.registerBehavior(treeToTreeBehavior, sourceOnlyPanel, sourceOnlyTree);
 		} catch (BehaviorScopeException e) {
 			e.printStackTrace();
 		}
