@@ -933,7 +933,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 		for (Iterator<FetchListener> iterator = fetchListeners.iterator(); iterator.hasNext();) {
 			FetchListener listener = iterator.next();
 			listener.onItem(this ,item);
-		}
+		}	
 	}
 	
 	
