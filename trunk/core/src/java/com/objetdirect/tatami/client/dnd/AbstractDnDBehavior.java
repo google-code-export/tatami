@@ -9,7 +9,7 @@ public abstract class AbstractDnDBehavior<E extends IDnDElement,S extends IDnDSo
 		return true;
 	}
 
-	public void dragOver(IDnDTarget target) {
+	public void dragOver(T target) {
 	}
 
 	public void elementsAccepted(S source, T target, Collection<E> elements,
