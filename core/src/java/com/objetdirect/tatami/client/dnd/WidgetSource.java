@@ -31,6 +31,7 @@ import java.util.Map;
 
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
+import com.objetdirect.tatami.client.layout.ContentPanel;
 
 /**
  * Implements a DnDSource for widgets.
@@ -44,6 +45,16 @@ public class WidgetSource extends WidgetTarget implements IDnDSource<WidgetDnDEl
 
 	private Map<String,WidgetDnDElement> elements;
 	
+	
+	@Override
+	public Widget getWidget() {
+		return super.getWidget();
+	}
+
+	public Panel getPanel(){
+		return ((Panel)super.getWidget());
+	}
+
 	/**
 	 * @param panel : the panel which should be turned into a DnDSource
 	 */

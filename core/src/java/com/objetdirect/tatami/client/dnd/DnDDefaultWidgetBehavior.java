@@ -41,23 +41,36 @@ import com.google.gwt.user.client.ui.Widget;
 public abstract class DnDDefaultWidgetBehavior extends WidgetDnDBehavior{
 
 	@Override
-	public boolean checkItemAcceptance(Panel target, Panel source,
+	public boolean checkItemAcceptance( Panel source,Widget target,
 			Collection<Widget> draggedWidgets) {
 		return true;
 	}
 
 	@Override
-	public void elementsAccepted(Panel source, Panel target,
+	public void elementsAccepted(Panel source, Widget target,
 			Collection<Widget> draggedWidgets, boolean copied) {
 	}
 
 	@Override
 	public boolean onDrop(Collection<Widget> draggedWidgets, Panel source,
-			Panel target, String targetNodeId, boolean isCopy) {
-		for (Widget widget : draggedWidgets) {
-			DnD.move(widget, source, target);
-		}
+			Widget target, String targetNodeId, boolean isCopy) {
 		return true;
+	}
+	
+	public void onDndStart(Panel source,
+			Collection<Widget> draggedWidgets,
+			boolean copied ){
+		
+	}
+	
+	@Override
+	public void onCancel(){
+		
+	}
+	
+	@Override
+	public void dragOver(Widget target){
+		
 	}
 
 

@@ -48,7 +48,7 @@ public abstract class WidgetDnDBehavior implements IDnDBehavior<WidgetDnDElement
 	public void elementsAccepted(WidgetSource source,
 			WidgetTarget target, Collection<WidgetDnDElement> elements,
 			boolean copied, IDnDController<?, WidgetTarget> controller) {
-			elementsAccepted(source.getPanel(), target.getPanel(), getWidgetFromWidgetDnDElement(elements), copied);
+			elementsAccepted(source.getPanel(), target.getWidget(), getWidgetFromWidgetDnDElement(elements), copied);
 	}
 	
 	
@@ -57,7 +57,13 @@ public abstract class WidgetDnDBehavior implements IDnDBehavior<WidgetDnDElement
 	 */
 	public void onDndStart(Collection<WidgetDnDElement> elementBeingDragged,
 			WidgetSource source, boolean ctrlKey) {
+		onDndStart(source.getPanel(), getWidgetFromWidgetDnDElement(elementBeingDragged),ctrlKey);
 	}
+	
+	
+	public abstract void onDndStart(Panel source,
+			Collection<Widget> draggedWidgets,
+			boolean copied );
 	
 	/**
 	 * Implement this to provide basic DnD behavior.
@@ -72,7 +78,7 @@ public abstract class WidgetDnDBehavior implements IDnDBehavior<WidgetDnDElement
 	 * while dragging the widgets)
 	 */
 	public abstract void elementsAccepted(Panel source,
-			Panel target, Collection<Widget> draggedWidgets,
+			Widget target, Collection<Widget> draggedWidgets,
 			boolean copied );
 	
 	/**
@@ -92,7 +98,9 @@ public abstract class WidgetDnDBehavior implements IDnDBehavior<WidgetDnDElement
 	 * @return true if the drop is considered as "accepted" , false otherwise
 	 */
 	public abstract boolean onDrop(Collection<Widget> draggedWidgets,
-			Panel source, Panel target, String targetNodeId, boolean isCopy);
+			Panel source, Widget target, String targetNodeId, boolean isCopy);
+	
+	public abstract void dragOver(Widget target);
 	
 	
 	/**
@@ -104,19 +112,19 @@ public abstract class WidgetDnDBehavior implements IDnDBehavior<WidgetDnDElement
 	 * @param draggedWidgets : 
 	 * @return
 	 */
-	public abstract boolean checkItemAcceptance(Panel target, Panel source, Collection<Widget> draggedWidgets);
+	public abstract boolean checkItemAcceptance(Panel source,Widget target, Collection<Widget> draggedWidgets);
 
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.dnd.IDnDBehavior#dragOver(com.objetdirect.tatami.client.dnd.IDnDTarget)
 	 */
-	public void dragOver(IDnDTarget target) {
+	public void dragOver(WidgetTarget target) {
+		dragOver(target.getWidget());
 	}
 
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.dnd.IDnDBehavior#onCancel()
 	 */
-	public void onCancel() {
-	}
+	public abstract void onCancel();
 
 	/**
 	 * Helper method to extract widgets from a collection of WidgetDnDElement
@@ -138,7 +146,7 @@ public abstract class WidgetDnDBehavior implements IDnDBehavior<WidgetDnDElement
 	public boolean onDrop(Collection<WidgetDnDElement> dndElements,
 			WidgetSource source, WidgetTarget target, String targetNodeId,
 			boolean isCopy) {
-		return onDrop(getWidgetFromWidgetDnDElement(dndElements) , source.getPanel(), target.getPanel() , targetNodeId, isCopy);
+		return onDrop(getWidgetFromWidgetDnDElement(dndElements) , source.getPanel(), target.getWidget() , targetNodeId, isCopy);
 	}
 
 	/* (non-Javadoc)
@@ -147,7 +155,7 @@ public abstract class WidgetDnDBehavior implements IDnDBehavior<WidgetDnDElement
 	public boolean checkItemAcceptance(
 			WidgetSource source, WidgetTarget target,
 			Collection<WidgetDnDElement> dndElements) {
-			return  checkItemAcceptance(source.getPanel(), target.getPanel(), getWidgetFromWidgetDnDElement(dndElements));
+			return  checkItemAcceptance(source.getPanel(), target.getWidget(), getWidgetFromWidgetDnDElement(dndElements));
 	}
 
 	

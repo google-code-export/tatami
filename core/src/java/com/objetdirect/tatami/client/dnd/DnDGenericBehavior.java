@@ -36,12 +36,12 @@ import java.util.Collection;
  *
  * @param <E>
  */
-public abstract class DnDGenericBehavior<E extends IDnDElement> implements IDnDBehavior<E, IDnDSource<? extends E>, IDnDTarget>{
+public abstract class DnDGenericBehavior<E extends IDnDElement> implements IDnDBehavior<E, IDnDSource<? super E>, IDnDTarget>{
 
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.dnd.IDnDBehavior#checkSourceItemAcceptance(com.objetdirect.tatami.client.dnd.IDnDSource, com.objetdirect.tatami.client.dnd.IDnDTarget, java.util.Collection)
 	 */
-	public boolean checkItemAcceptance(IDnDSource<? extends E> source,
+	public boolean checkItemAcceptance(IDnDSource<? super E> source,
 			IDnDTarget target,Collection<E> dndElements) {
 		return true;
 	}
@@ -55,7 +55,7 @@ public abstract class DnDGenericBehavior<E extends IDnDElement> implements IDnDB
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.dnd.IDnDBehavior#elementsAccepted(com.objetdirect.tatami.client.dnd.IDnDSource, com.objetdirect.tatami.client.dnd.IDnDTarget, java.util.Collection, boolean, com.objetdirect.tatami.client.dnd.IDnDController)
 	 */
-	public void elementsAccepted(IDnDSource<? extends E> source,
+	public void elementsAccepted(IDnDSource<? super E> source,
 			IDnDTarget target, Collection<E> elements,
 			boolean copied,
 			IDnDController<?, IDnDTarget> controller) {
@@ -73,7 +73,7 @@ public abstract class DnDGenericBehavior<E extends IDnDElement> implements IDnDB
 	 * @see com.objetdirect.tatami.client.dnd.IDnDBehavior#onDndStart(java.util.Collection, com.objetdirect.tatami.client.dnd.IDnDSource, boolean)
 	 */
 	public void onDndStart(Collection<E> elementBeingDragged,
-			IDnDSource<? extends E> source, boolean ctrlKey) {
+			IDnDSource<? super E> source, boolean ctrlKey) {
 		
 	}
 
@@ -81,7 +81,7 @@ public abstract class DnDGenericBehavior<E extends IDnDElement> implements IDnDB
 	 * @see com.objetdirect.tatami.client.dnd.IDnDBehavior#onDrop(java.util.Collection, com.objetdirect.tatami.client.dnd.IDnDSource, com.objetdirect.tatami.client.dnd.IDnDTarget, java.lang.String, boolean)
 	 */
 	public boolean onDrop(Collection<E> dndElements,
-			IDnDSource<? extends E> source, IDnDTarget target,
+			IDnDSource<? super E> source, IDnDTarget target,
 			String targetNodeId, boolean isCopy) {
 		return true;
 	}
