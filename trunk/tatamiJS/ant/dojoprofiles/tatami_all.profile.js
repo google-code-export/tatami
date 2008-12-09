@@ -26,6 +26,8 @@ dependencies = {
 				"dijit.form.TextBox",
 				"dijit.form.DateTextBox",
 				"dijit.form.NumberTextBox",
+				"dijit.layout.ContentPane",
+				"dijit.layout.BorderContainer",
 				"dojo.date",
 				"dojo.date.locale",
 				"dijit.form._DateTimeTextBox",
