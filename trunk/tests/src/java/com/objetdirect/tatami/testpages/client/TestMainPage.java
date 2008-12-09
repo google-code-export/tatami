@@ -48,7 +48,6 @@ public abstract class TestMainPage implements EntryPoint {
   
   public void loadTestPage(TestPage page){
 	  RootPanel.get().clear();
-	  RootPanel.get().setStyleName("tundra");
 	  RootPanel.get().add(page.getTestPage());
 	  RootPanel.get().add(new Button("Back",new ClickListener() {
 		public void onClick(Widget sender) {
