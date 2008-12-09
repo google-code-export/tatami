@@ -362,7 +362,7 @@ public class DnDBehaviors {
 	 * @param target
 	 * @throws BehaviorScopeException
 	 */
-	public static <E extends IDnDElement , S extends IDnDSource<? extends  E> , T extends IDnDTarget> void addScopeToBehavior(IDnDBehavior<E, S, T> behavior,S source , T target) throws BehaviorScopeException{
+	public static <E extends IDnDElement , S extends IDnDSource<? super  E> , T extends IDnDTarget> void addScopeToBehavior(IDnDBehavior<E, S, T> behavior,S source , T target) throws BehaviorScopeException{
 		BehaviorScope scope = behaviorScopesMapping.get(behavior);
 		if(scope == null){
 			scope = new BehaviorScope(behavior);

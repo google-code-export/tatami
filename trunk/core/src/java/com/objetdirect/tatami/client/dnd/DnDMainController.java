@@ -272,7 +272,7 @@ public class DnDMainController {
 			if(targetOwner != null){
 				IDnDTarget dndTarget =  targetOwner.getTarget(jstarget);
 				if(dndTarget != null){
-					IDnDBehavior<E,? extends IDnDSource<E>,? extends IDnDTarget> behavior = (IDnDBehavior<E, ? extends IDnDSource<E>, ? extends IDnDTarget>) DnDBehaviors.getBehaviorFor(lastDnDSource, dndTarget);
+					IDnDBehavior<E,? extends IDnDSource<E>,IDnDTarget> behavior = (IDnDBehavior<E, ? extends IDnDSource<E>, IDnDTarget>) DnDBehaviors.getBehaviorFor(lastDnDSource, dndTarget);
 					if(behavior != null){
 						behavior.dragOver(dndTarget);
 					}

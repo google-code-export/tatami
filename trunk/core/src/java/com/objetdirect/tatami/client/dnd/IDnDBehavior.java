@@ -76,7 +76,7 @@ public interface IDnDBehavior<E extends IDnDElement , S extends IDnDSource<?> , 
 	 * 
 	 * @param target : the target over which a DnDElement is being dragged
 	 */
-	public void dragOver(IDnDTarget target);
+	public void dragOver(T target);
 	
 	
 	

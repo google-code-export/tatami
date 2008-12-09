@@ -31,6 +31,7 @@ package com.objetdirect.tatami.client.dnd;
 
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This class represents a WidgetTarget, that means, a Panel which can accept drops.
@@ -40,28 +41,28 @@ import com.google.gwt.user.client.ui.Panel;
  */
 public class WidgetTarget implements IDnDTarget {
 
-	private Panel panel;
+	private Widget widget;
 	
 	
 	/**
 	 * @return the panel associated with this target
 	 */
-	public Panel getPanel() {
-		return panel;
+	public Widget getWidget() {
+		return widget;
 	}
 
 	/**
 	 * @param panel the panel associated with this target
 	 */
-	public WidgetTarget(Panel panel){
-		this.panel = panel;
+	public WidgetTarget(Widget widget){
+		this.widget = widget;
 	}
 
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.dnd.IDnDTarget#getDomElement()
 	 */
 	public Element getDomElement() {
-		return panel.getElement();
+		return widget.getElement();
 	}
 	
 }

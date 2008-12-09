@@ -44,7 +44,7 @@ import com.objetdirect.tatami.client.tree.Tree;
  */
 public class DnD {
 
-	private static DnDSourceTargetRegistry<Panel,WidgetSource,WidgetTarget> widgetsSourceRegistry = new DnDSourceTargetRegistry<Panel, WidgetSource, WidgetTarget>();
+	private static DnDSourceTargetRegistry<Widget,WidgetSource,WidgetTarget> widgetsSourceRegistry = new DnDSourceTargetRegistry<Widget, WidgetSource, WidgetTarget>();
 	
 	private static DnDSourceTargetRegistry<Tree,TreeSource,TreeTarget> treeSourcesRegistry = new DnDSourceTargetRegistry<Tree, TreeSource, TreeTarget>();
 	
@@ -168,17 +168,20 @@ public class DnD {
 	 * @param panel : the panel to register as a Target.
 	 * @return
 	 */
-	public static WidgetTarget registerTarget(Panel panel){
-		WidgetSource existingSource = widgetsSourceRegistry.getSource(panel);
-		WidgetTarget panelTarget;
-		if(existingSource != null){
-			panelTarget = existingSource;
-		}else{
-			panelTarget = new WidgetTarget(panel);
+	public static WidgetTarget registerTarget(Widget widget){
+		WidgetTarget panelTarget = null;
+		if(widget instanceof Panel){
+			WidgetSource existingSource = widgetsSourceRegistry.getSource((Panel)widget);
+			if(existingSource != null){
+				panelTarget = existingSource;
+			}
+		}
+		if(panelTarget == null){
+			panelTarget = new WidgetTarget(widget);
 		}
 		try{
 			WidgetDnDController.getInstance().registerTarget(panelTarget);
-			widgetsSourceRegistry.addTargetMapping(panel , panelTarget);
+			widgetsSourceRegistry.addTargetMapping(widget , panelTarget);
 		}catch(JSSourceCreationException e){
 			e.printStackTrace();
 		}
@@ -239,7 +242,7 @@ public class DnD {
 	 * @throws BehaviorScopeException : when a behavior is already registered for this source-target couple
 	 */
 	@SuppressWarnings("unchecked")
-	public static <E extends IDnDElement , S extends IDnDSource<? extends E> , T extends IDnDTarget>  void registerBehavior(IDnDBehavior<E, S, T> behavior, Widget source, Widget target) throws BehaviorScopeException{
+	public static <E extends IDnDElement , S extends IDnDSource<? super E> , T extends IDnDTarget>  void registerBehavior(IDnDBehavior<E, S, T> behavior, Widget source, Widget target) throws BehaviorScopeException{
 		S dsource = null;
 		T dtarget = null;
 		try{
@@ -282,7 +285,7 @@ public class DnD {
 	 * @param target :a dnd target
 	 * @throws BehaviorScopeException : when a behavior is already registered for this source-target couple
 	 */
-	public static <E extends IDnDElement , S extends IDnDSource<? extends  E> , T extends IDnDTarget>  void registerBehaviorForDnDObjects(IDnDBehavior<E, S, T> behavior, S source ,  T target) throws BehaviorScopeException{
+	public static <E extends IDnDElement , S extends IDnDSource<? super  E> , T extends IDnDTarget>  void registerBehaviorForDnDObjects(IDnDBehavior<E, S, T> behavior, S source ,  T target) throws BehaviorScopeException{
 		DnDBehaviors.addScopeToBehavior(behavior, source, target);
 	}
 	
