@@ -2,6 +2,7 @@ package com.objetdirect.tatami.client.layout;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.DojoController;
 
@@ -77,7 +78,9 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	    	cp = (ContentPanel) child;
 	    }
 		cp.addProperty(ATTRIBUTE_REGION, region);
-		cp.addProperty(ATTRIBUTE_SPLITTER, splitter+"");
+		if(splitter){
+			cp.addProperty(ATTRIBUTE_SPLITTER, splitter);
+		}
 		super.add(cp);
 	}
 	
@@ -111,11 +114,5 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 		throw new UnsupportedOperationException("The border container does not support the no-arg add operation. Use add(Widget,String) instead");
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.objetdirect.tatami.client.layout.DojoPanel#asWidget()
-	 */
-	public Widget asWidget(){
-		return this;
-	}
 
 }

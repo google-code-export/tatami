@@ -14,6 +14,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.AbstractDojo;
@@ -28,7 +29,7 @@ public class ContentPanel extends SimplePanel implements DojoPanel {
 	protected List<Widget> children = new ArrayList<Widget>();
 	private Map<String, Object> properties = new HashMap<String, Object>();
 	
-	public Widget asWidget(){
+	public Panel asPanel(){
 		return this;
 	}
 	
@@ -162,10 +163,10 @@ public class ContentPanel extends SimplePanel implements DojoPanel {
 	}
 	
 	public void onDetach() {
+		super.onDetach();
 		doBeforeDestruction();
 		DojoController.getInstance().destroy(dojoWidget);
 		free();
-		super.onDetach();
 	}
 	
 	@Override
