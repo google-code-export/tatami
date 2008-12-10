@@ -8,6 +8,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ComplexPanel;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.WidgetCollection;
 import com.objetdirect.tatami.client.DojoController;
@@ -34,10 +35,6 @@ public abstract class AbstractDojoComplexPanel extends ComplexPanel implements D
 	
 	public void createDojoWidget() throws Exception {
 		dojoWidget = createDojoLayout();
-		for(Widget widget : getChildren()){
-			DojoPanel panel = ((DojoPanel)widget);
-			dojoAddChild(dojoWidget, panel.getDojoWidget() , null );
-		}
 	}
 
 	/**
@@ -57,7 +54,7 @@ public abstract class AbstractDojoComplexPanel extends ComplexPanel implements D
 		if(index){
 			dojoLayout.addChild(dojoPanel , index);
 		}else{
-			dojoLayout.addChild(dojoPanel , index);
+			dojoLayout.addChild(dojoPanel);
 		}
 	}-*/;
 	
@@ -100,7 +97,9 @@ public abstract class AbstractDojoComplexPanel extends ComplexPanel implements D
 		}
 		orphan(child);
 		getChildren().remove(child);
-		dojoRemoveChild(dojoWidget, ((DojoPanel)child).getDojoWidget());
+		if(dojoWidget != null){
+			dojoRemoveChild(dojoWidget, ((DojoPanel)child).getDojoWidget());
+		}
 		return true;
 	}
 	
@@ -113,13 +112,11 @@ public abstract class AbstractDojoComplexPanel extends ComplexPanel implements D
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.google.gwt.user.client.ui.Panel#doAttachChildren()
+	 * @see com.objetdirect.tatami.client.layout.DojoPanel#asWidget()
 	 */
-	@Override
-	protected void doAttachChildren() {
-		super.doAttachChildren();
+	public Panel asPanel(){
+		return this;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see com.google.gwt.user.client.ui.Widget#onAttach()
@@ -137,6 +134,11 @@ public abstract class AbstractDojoComplexPanel extends ComplexPanel implements D
 	}
 
 	public void doAfterCreation() {
+		int index = 0;
+		for(Widget widget : getChildren()){
+			DojoPanel panel = ((DojoPanel)widget);
+			dojoAddChild(dojoWidget, panel.getDojoWidget() , index++ );
+		}
 		DojoController.startup(this);
 	}
 	
@@ -152,6 +154,10 @@ public abstract class AbstractDojoComplexPanel extends ComplexPanel implements D
 	}-*/;
 
 	public void doBeforeDestruction() {
+		for(Widget widget : getChildren()){
+			DojoPanel panel = ((DojoPanel)widget);
+			dojoRemoveChild(dojoWidget, panel.getDojoWidget());
+		}
 	}
 
 	public void free() {
@@ -240,9 +246,9 @@ public abstract class AbstractDojoComplexPanel extends ComplexPanel implements D
 	    }
 		child.removeFromParent();
 		if(!domInsert){
-			getChildren().add(actualChild.asWidget());
+			getChildren().add(actualChild.asPanel());
 		}else{
-			getChildren().insert(actualChild.asWidget(),beforeIndex);
+			getChildren().insert(actualChild.asPanel(),beforeIndex);
 		}
 		if(dojoWidget != null){
 			if(domInsert){

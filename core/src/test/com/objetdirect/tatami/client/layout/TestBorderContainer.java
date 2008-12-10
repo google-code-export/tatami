@@ -51,8 +51,8 @@ public class TestBorderContainer extends DefaultTatamiTest{
 	
 	public void testAddingNonContentPanes(){
 		try{
-			container.add(new HTML("AH AH AH"));
-			fail();
+			container.add(new HTML("AH AH AH"),BorderContainer.REGION_CENTER);
+			fail();	
 		}catch(IllegalArgumentException e){
 		}
 	}
