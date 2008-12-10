@@ -762,6 +762,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	@Override
 	public void doAfterCreation() {
+		this.store.doAfterCreation();
 		DOM.sinkEvents(getElement(),Event.MOUSEEVENTS);
 		DOM.sinkEvents(getElement(),Event.FOCUSEVENTS);
 		DojoController.startup(this);

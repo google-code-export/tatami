@@ -981,12 +981,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 */
 	public void doAfterCreation() {
 		try {
-			createDojoWidget();
-			setGWTStore(dojoStore, this);
-			Collection<Item> itemsValues = items.values();
-			for (Iterator<Item> iterator = itemsValues.iterator(); iterator.hasNext();) {
-				Item item = iterator.next();
-				callJSOnNew(item);
+			if(dojoStore == null){
+				createDojoWidget();
+				setGWTStore(dojoStore, this);
+				Collection<Item> itemsValues = items.values();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1003,7 +1001,6 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * @see com.objetdirect.tatami.client.HasDojo#free()
 	 */
 	public void free() {
-		//destroyStore(dojoStore);
 		this.dojoStore = null;
 	}
 	
