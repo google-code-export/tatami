@@ -30,18 +30,7 @@ public class TestBorderContainerPage extends TestPage{
 		mainPanel.add(new HTML("Border Container with sizers "));
 		mainPanel.add(getContainer3());
 		mainPanel.add(getContainer4());
-//		mainPanel.add(new ContentPane(new HTML("Grou"){
-//			@Override
-//			public void onAttach(){
-//				Window.alert("HTML WIDGET ATTACHED");
-//				super.onAttach();
-//			}
-//			@Override
-//			public void onDetach(){
-//				Window.alert("HTML WIDGET DETACHED");
-//				super.onDetach();
-//			}
-//		}));
+		mainPanel.add(getContainer5());
 		return mainPanel;
 	}
 	
@@ -50,39 +39,39 @@ public class TestBorderContainerPage extends TestPage{
 		panel.setSize("300px","300px");
 		HTML left = new HTML("LEFT");
 		left.setSize("50px", "50px");
-		HTML right = new HTML("RIGHT");
+		HTML right = new HTML(BorderContainer.REGION_RIGHT);
 		right.setSize("50px", "50px");
-		HTML top = new HTML("TOP");
+		HTML top = new HTML(BorderContainer.REGION_TOP);
 		top.setSize("50px", "50px");
-		HTML bottom = new HTML("BOTTOM");
+		HTML bottom = new HTML(BorderContainer.REGION_BOTTOM);
 		bottom.setSize("50px", "50px");
-		HTML center = new HTML("CENTER");
+		HTML center = new HTML(BorderContainer.REGION_CENTER);
 		center.setSize("100%","100%");
-		panel.add(left,"left");
-		panel.add(right,"right");
-		panel.add(top,"top");
-		panel.add(bottom,"bottom");
-		panel.add(center);
+		panel.add(new ContentPanel(left),BorderContainer.REGION_LEFT);
+		panel.add(new ContentPanel(right),BorderContainer.REGION_RIGHT);
+		panel.add(new ContentPanel(top),BorderContainer.REGION_TOP);
+		panel.add(new ContentPanel(bottom),BorderContainer.REGION_BOTTOM);
+		panel.add(new ContentPanel(center),BorderContainer.REGION_CENTER);
 		return panel;
 	}
 	
 	private BorderContainer getContainer2(){
 		BorderContainer panel = new BorderContainer();
 		panel.setSize("300px","300px");
-		HTML left = new HTML("LEFT");
+		HTML left = new HTML(BorderContainer.REGION_LEFT);
 		left.setSize("10%", "10%");
-		HTML right = new HTML("RIGHT");
+		HTML right = new HTML(BorderContainer.REGION_RIGHT);
 		right.setSize("10%", "10%");
-		HTML top = new HTML("TOP");
+		HTML top = new HTML(BorderContainer.REGION_TOP);
 		top.setSize("10%", "10%");
-		HTML bottom = new HTML("BOTTOM");
+		HTML bottom = new HTML(BorderContainer.REGION_BOTTOM);
 		bottom.setSize("10%", "10%");
-		HTML center = new HTML("CENTER");
-		panel.add(left,"left");
-		panel.add(right,"right");
-		panel.add(top,"top");
-		panel.add(bottom,"bottom");
-		panel.add(center);
+		HTML center = new HTML(BorderContainer.REGION_CENTER);
+		panel.add(new ContentPanel(left),BorderContainer.REGION_LEFT);
+		panel.add(new ContentPanel(right),BorderContainer.REGION_RIGHT);
+		panel.add(new ContentPanel(top),BorderContainer.REGION_TOP);
+		panel.add(new ContentPanel(bottom),BorderContainer.REGION_BOTTOM);
+		panel.add(new ContentPanel(center),BorderContainer.REGION_CENTER);
 		return panel;
 	}
 	
@@ -90,20 +79,18 @@ public class TestBorderContainerPage extends TestPage{
 	private BorderContainer getContainer3(){
 		BorderContainer panel = new BorderContainer();
 		panel.setSize("300px","300px");
-		HTML left = new HTML("LEFT");
-		left.setSize("100px","100px");
-		HTML right = new HTML("RIGHT");
-		right.setSize("100px","100px");
-		HTML top = new HTML("TOP");
-		top.setSize("100px","100px");
-		HTML bottom = new HTML("BOTTOM");
-		bottom.setSize("100px","100px");
-		HTML center = new HTML("CENTER");
-		panel.add(left,"left",true);
-		panel.add(right,"right",true);
-		panel.add(top,"top",true);
-		panel.add(bottom,"bottom",true);
-		panel.add(center,"center");
+		panel.setLiveSplitters(false);
+		panel.setDesign(BorderContainer.DESIGN_SIDEBAR);
+		HTML left = new HTML(BorderContainer.REGION_LEFT);
+		HTML right = new HTML(BorderContainer.REGION_RIGHT);
+		HTML top = new HTML(BorderContainer.REGION_TOP);
+		HTML bottom = new HTML(BorderContainer.REGION_BOTTOM);
+		HTML center = new HTML(BorderContainer.REGION_CENTER);
+		panel.add(new ContentPanel(left),BorderContainer.REGION_LEFT,true);
+		panel.add(new ContentPanel(right),BorderContainer.REGION_RIGHT,true);
+		panel.add(new ContentPanel(top),BorderContainer.REGION_TOP,true);
+		panel.add(new ContentPanel(bottom),BorderContainer.REGION_BOTTOM,true);
+		panel.add(new ContentPanel(center),BorderContainer.REGION_CENTER);
 		return panel;
 	}
 	
@@ -120,15 +107,23 @@ public class TestBorderContainerPage extends TestPage{
 		grid.addColumn("Col1");
 		grid.addColumn("Col2");
 		grid.addColumn("Col3");
-		Cell cell1 = new Cell("Col4","Col4");
-		cell1.setWidth("auto");
+		Cell cell4 = new Cell("Col4","Col4");
+		cell4.setWidth("auto");
 		grid.setElasticView(0);
-		grid.addCell(cell1);
+		grid.addCell(cell4);
 		grid.addRow(new Object[]{"1","2","3","4"});
 		grid.setSize("100%","100%");
-		panel.add(new Label("Title"),"top",true);
-		panel.add(tree,"left",true);
-		panel.add(grid,"center");
+		panel.add(new ContentPanel(new Label("Title")),BorderContainer.REGION_TOP,false);
+		panel.add(new ContentPanel(tree),BorderContainer.REGION_LEFT,true);
+		panel.add(new ContentPanel(grid),BorderContainer.REGION_CENTER);
+		return panel;
+	}
+	
+	private BorderContainer getContainer5(){
+		BorderContainer panel = new BorderContainer();
+		panel.setSize("300px","300px");
+		panel.add(new ContentPanel(new HTML("TOP SIDE")),BorderContainer.REGION_TOP,true);
+		panel.add(new ContentPanel(new HTML("BOTTOM SIDE")),BorderContainer.REGION_CENTER);
 		return panel;
 	}
 

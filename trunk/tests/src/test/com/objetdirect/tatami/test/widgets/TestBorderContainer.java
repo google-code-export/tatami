@@ -1,5 +1,6 @@
 package com.objetdirect.tatami.test.widgets;
 
+import com.gargoylesoftware.htmlunit.javascript.host.HTMLElement;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.objetdirect.tatami.client.data.Item;
@@ -11,9 +12,10 @@ import com.objetdirect.tatami.testpages.client.widgets.TestBorderContainerPage;
 
 public class TestBorderContainer extends AbstractTestWidgets{
 
+	
 	@Override
 	protected String getTestPageId() {
 		return TestBorderContainerPage.class.getName();
 	}
-
+	
 }
