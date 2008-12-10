@@ -36,7 +36,6 @@ dependencies = {
 				"dijit.form.ComboBox",
 				"dijit.Toolbar",
 				"dijit.Editor"
-				
 			]
 		},
 		{

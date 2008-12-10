@@ -30,7 +30,7 @@
 		     	output="${basedir}/antDojo.log"
 		     >
 		       <arg line="releaseDir='${build.dir}/com/objetdirect/tatami/public/'"/>
-		     	<arg line="profileFile='${basedir}/ant/dojoprofiles/tatami_all.profile.js'"/>
+		       <arg line="profileFile='${basedir}/ant/dojoprofiles/tatami_all.profile.js'"/>
 		       <arg line="releaseName='.'"/>
 		       <arg line="copyTests='false'"/>
 		       <arg line="action='release'"/>
