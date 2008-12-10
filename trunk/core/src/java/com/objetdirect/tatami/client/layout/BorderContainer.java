@@ -23,8 +23,16 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	static public final String REGION_LEADING = "leading";
 	static public final String REGION_TRAILING = "trailing";
 	
+	static public final String DESIGN_HEADLINE = "headline";
+	static public final String DESIGN_SIDEBAR = "sidebar";
+	
 	private final String ATTRIBUTE_REGION = "region";
 	private final String ATTRIBUTE_SPLITTER = "splitter";
+	
+	private boolean liveSplitters = true;
+	
+
+	private String design = DESIGN_HEADLINE;
 	
 	/**
 	 * Default construtor
@@ -37,7 +45,7 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	 * @see com.objetdirect.tatami.client.layout.AbstractDojoComplexPanel#createDojoLayout()
 	 */
 	public JavaScriptObject createDojoLayout() {
-		return createBorderContainer();
+		return createBorderContainer(design,liveSplitters);
 	}
 	
 	/**
@@ -47,8 +55,8 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	 * 
 	 * @return
 	 */
-	private native JavaScriptObject createBorderContainer()/*-{
-		return new $wnd.dijit.layout.BorderContainer({style:"width:100%;height:100%;",liveSplitters: true});
+	private native JavaScriptObject createBorderContainer(String design, boolean liveSplitters)/*-{
+		return new $wnd.dijit.layout.BorderContainer({style:"width:100%;height:100%;",liveSplitters: liveSplitters, design: design});
 	}-*/;
 	
 
@@ -114,5 +122,54 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 		throw new UnsupportedOperationException("The border container does not support the no-arg add operation. Use add(Widget,String) instead");
 	}
 	
+	private native void updateDojoWidget(JavaScriptObject dojoWidget, String property , Object value)/*-{
+		dojoWidget[property] = value;
+	}-*/;
+	
+	/**
+	 * @return whether the splitters should resize the content as soon as they are dragged
+	 */
+	public boolean isLiveSplitters() {
+		return liveSplitters;
+	}
+
+	/**
+	 * @param liveSplitters: whether the splitters should resize the content as soon as they are dragged
+	 */
+	public void setLiveSplitters(boolean liveSplitters) {
+		this.liveSplitters = liveSplitters;
+		if(getDojoWidget() != null){
+			updateDojoWidget(getDojoWidget(), "liveSplitters", liveSplitters);
+		}
+	}	
+	
+	/**
+	 * @return DESIGN_HEADLINE if the design is HEADLINE (top and bottom section take
+	 * 			the whole width) 
+	 * 		   OR
+	 * 		   DESIGN_SIDEBAR if the design is sidebar (left and right section will take
+	 * 			the whole height)
+	 * 			
+	 */
+	public String getDesign() {
+		return design;
+	}
+
+	
+	/**
+	 * @param design :
+	 * DESIGN_HEADLINE if the design is HEADLINE (top and bottom section take
+	 * 			the whole width) 
+	 * 		   OR
+	 * DESIGN_SIDEBAR if the design is sidebar (left and right section will take
+	 * 			the whole height)
+	 */
+	public void setDesign(String design) {
+		this.design = design;
+		if(getDojoWidget() != null){
+			updateDojoWidget(getDojoWidget(), "desing", design);
+		}
+	}
+
 
 }
