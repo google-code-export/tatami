@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class Loader extends Composite  implements HasText {
 
+    
 	private Image image;
     private FlowPanel panel;
     private Label label;
@@ -120,7 +121,7 @@ public class Loader extends Composite  implements HasText {
 	public void display() {
 	    if ( widgetLoading != null && widgetLoading.getParent() != null) {
 	    	if ( !(widgetLoading.getParent() instanceof FlowPanel) ) {
-				throw new IllegalArgumentException("The widget should have to get a FlowPanel as parent");
+				throw new IllegalArgumentException("The widget should have a FlowPanel as parent");
 			}
 	    	FlowPanel parent = (FlowPanel)widgetLoading.getParent();
 	    	widgetIndex = parent.getWidgetIndex(widgetLoading);
