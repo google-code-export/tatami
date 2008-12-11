@@ -12,4 +12,13 @@ public class MD5Test extends DefaultTatamiTest{
 		String resultingMD5 = md5.encode(text , MD5.HexOutputType);
 		assertEquals(expectedMD5 , resultingMD5);
 	}
+	
+	public void testMD5WithBase64(){
+		MD5 md5 = MD5.getInstance();
+		
+		String expected = "OUhxbVZ1Mtmu4zx9LzS5cA==";
+		String text = "The rain in Spain falls mainly on the plain.";
+		String resultingMD5 = md5.encode(text , MD5.Base64OutputType);
+		assertEquals(expected , resultingMD5);
+	}
 }
