@@ -31,11 +31,11 @@
 \use_bibtopic false
 \paperorientation portrait
 \branch HTML
-\selected 0
+\selected 1
 \color #faf0e6
 \end_branch
 \branch PDF
-\selected 0
+\selected 1
 \color #faf0e6
 \end_branch
 \secnumdepth 5
@@ -57,18 +57,11 @@
 
 \begin_layout Standard
 \begin_inset Branch HTML
-status collapsed
+status open
 
 \begin_layout Standard
 \begin_inset ERT
 status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-usepackage{tex4ht}
-\end_layout
 
 \begin_layout Plain Layout
 
@@ -391,14 +384,11 @@ status open
 
 \begin_layout Standard
 You do not have to choose import the dojo stylesheets, nor add the corresponding
- class in your marku
+ class in your markup: the theme package takes care of that for yourself!
+ 
 \end_layout
 
-\begin_layout Standard
-p: the theme package takes care of that for yourself! 
-\end_layout
-
-\begin_layout Section
+\begin_layout Subsection
 Custom Installation
 \end_layout
 
@@ -569,6 +559,362 @@ Widgets
 
 \begin_layout Section
 Layout Widgets
+\end_layout
+
+\begin_layout Standard
+Since version 1.3, tatami provides some layout widgets from the dojo world.
+ Most GWTPanels are built from tables, and did not respect the semantic
+ syntax of HTML.
+ 
+\end_layout
+
+\begin_layout Subsection
+BorderContainer
+\end_layout
+
+\begin_layout Standard
+This layout widget provides is designed as an alternative to both SplitPanel
+ and DockPanel widgets.
+ It is constituted of ContentPanels layed out in Regions, with or without
+ splitters between the center region and the outer ones.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/borderContainer.jpg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Create the BorderContainer layout
+\end_layout
+
+\begin_layout Standard
+You will need to use to import the following classes :
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+import com.objetdirect.tatami.client.layout.BorderContainer;
+\end_layout
+
+\begin_layout Plain Layout
+
+import com.objetdirect.tatami.client.layout.ContentPanel;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then, all you have to do is to instantiate your BorderContainer, and add
+ ContentPanel to it.
+ Only ContentPanels can be added to the BorderContainer, so you will have
+ to wrap your widgets into a ContentPanel:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+BorderContainer panel = new BorderContainer();
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.setSize("300px","300px");
+\end_layout
+
+\begin_layout Plain Layout
+
+HTML left = new HTML("left");
+\end_layout
+
+\begin_layout Plain Layout
+
+HTML right = new HTML("right");
+\end_layout
+
+\begin_layout Plain Layout
+
+HTML top = new HTML("top");
+\end_layout
+
+\begin_layout Plain Layout
+
+HTML bottom = new HTML("bottom");
+\end_layout
+
+\begin_layout Plain Layout
+
+HTML center = new HTML("center");
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.add(new ContentPanel(left),BorderContainer.REGION_LEFT,true);
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.add(new ContentPanel(right),BorderContainer.REGION_RIGHT,true);
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.add(new ContentPanel(top),BorderContainer.REGION_TOP,true);
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.add(new ContentPanel(bottom),BorderContainer.REGION_BOTTOM,true);
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.add(new ContentPanel(center),BorderContainer.REGION_CENTER);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To add a widget to the border container panel, use one of the following
+ methods:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public void add(Widget child, String region);
+\end_layout
+
+\begin_layout Plain Layout
+
+public void add(Widget child, String region,boolean splitter);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The region argument must be one of the following constants from BorderContainer:
+\end_layout
+
+\begin_layout Description
+BorderContainer.REGION_CENTER: the content will be placed in the center area
+\end_layout
+
+\begin_layout Description
+BorderContainer.REGION_TOP: the content will be placed in the top area
+\end_layout
+
+\begin_layout Description
+BorderContainer.REGION_BOTTOM: the content will be placed in the bottom area
+\end_layout
+
+\begin_layout Description
+BorderContainer.REGION_LEFT: the content will be placed in the left area
+\end_layout
+
+\begin_layout Description
+BorderContainer.REGION_RIGHT: the content will be placed in the right area
+\end_layout
+
+\begin_layout Description
+BorderContainer.REGION_LEADING: same as left except it will be reversed in
+ a right-to-left environment
+\end_layout
+
+\begin_layout Description
+BorderContainer.REGION_TRAILING: same as right except it will be reversed
+ in a right-to-left environment
+\end_layout
+
+\begin_layout Standard
+The splitter argument determines whether a splitter should be placed between
+ this panel and the center one.
+ If it is true, then the panel will be resizable.
+ If false, it will not.
+ The method public void 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+add(child,region);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+will act exactly like 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+add(child,region,false);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Options
+\end_layout
+
+\begin_layout Standard
+The border container has mainly two options :
+\end_layout
+
+\begin_layout Description
+liveSplitters: indicates whether the panel should be resized while the splitter
+ is dragged or only when it is released
+\end_layout
+
+\begin_layout Description
+design : one of: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+BorderContainer.DESIGN_HEADLINE if the design is HEADLINE (top and bottom
+ section take the whole width)(defaultValue)
+\end_layout
+
+\begin_layout Itemize
+BorderContainer.DESIGN_SIDEBAR if the design is sidebar (left and right section
+ will take the whole height)
+\begin_inset Newline newline
+\end_inset
+
+ex:
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename images/borderContainer_sidebar.jpg
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Examples:
+\end_layout
+
+\begin_layout Paragraph
+HorizontalSplitPanel
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+BorderContainer panel = new BorderContainer();
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.setSize("300px","300px");
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.add(new ContentPanel(new HTML("LEFT SIDE")),BorderContainer.REGION_LEFT,true
+);
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.add(new ContentPanel(new HTML("RIGHT SIDE")),BorderContainer.REGION_CENTER);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename images/borderContainer_hsplit.jpg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+VerticalSplitPanel
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+BorderContainer panel = new BorderContainer();
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.setSize("300px","300px");
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.add(new ContentPanel(new HTML("TOP SIDE")),BorderContainer.REGION_TOP,true);
+\end_layout
+
+\begin_layout Plain Layout
+
+panel.add(new ContentPanel(new HTML("BOTTOM SIDE")),BorderContainer.REGION_CENTER)
+;
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -7296,16 +7642,18 @@ The following example show how the icon classes were customized for the
 \end_layout
 
 \end_deeper
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset listings
 inline false
 status open
 
 \begin_layout Plain Layout
+
 tree.setDefaultFolderClosedClass("myTreeClosed");
 \end_layout
 
 \begin_layout Plain Layout
+
 tree.setDefaultFolderOpenClass("myTreeOpened");
 \end_layout
 
@@ -7318,65 +7666,79 @@ tree.setDefaultFolderOpenClass("myTreeOpened");
 With the myTreeClosed and myTreeOpened class defined like this:
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset listings
 lstparams "language=HTML"
 inline false
 status open
 
 \begin_layout Plain Layout
+
 .tundra .myTreeOpened {
 \end_layout
 
 \begin_layout Plain Layout
+
 	background-image: url('folder-open.png');
 \end_layout
 
 \begin_layout Plain Layout
+
 	background-position: top;
 \end_layout
 
 \begin_layout Plain Layout
+
 	top: 1px;
 \end_layout
 
 \begin_layout Plain Layout
+
 	height: 32px !important;
 \end_layout
 
 \begin_layout Plain Layout
+
 	width: 32px !important;
 \end_layout
 
 \begin_layout Plain Layout
+
 }
 \end_layout
 
 \begin_layout Plain Layout
+
 .tundra .myTreeClosed {
 \end_layout
 
 \begin_layout Plain Layout
+
 	background-image: url('folder.png'); 
 \end_layout
 
 \begin_layout Plain Layout
+
 	background-position: top; 
 \end_layout
 
 \begin_layout Plain Layout
+
 	top: 1px; 
 \end_layout
 
 \begin_layout Plain Layout
+
 	height: 32px !important; 
 \end_layout
 
 \begin_layout Plain Layout
+
 	width: 32px !important; 
 \end_layout
 
 \begin_layout Plain Layout
+
 }
 \end_layout
 
@@ -7403,6 +7765,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 item1.setValue(Tree.folderClosedClassAttribute,"item1");
 \end_layout
 
@@ -7421,34 +7784,42 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 .item1{
 \end_layout
 
 \begin_layout Plain Layout
+
 	background-image: 
 \end_layout
 
 \begin_layout Plain Layout
+
 	url('folder-visiting.png');
 \end_layout
 
 \begin_layout Plain Layout
+
 	background-position: top;
 \end_layout
 
 \begin_layout Plain Layout
+
 	top: 1px;
 \end_layout
 
 \begin_layout Plain Layout
+
 	height: 32px !important;
 \end_layout
 
 \begin_layout Plain Layout
+
 	width: 32px !important;
 \end_layout
 
 \begin_layout Plain Layout
+
 }
 \end_layout
 
@@ -7486,6 +7857,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 item1.setValue(Tree.labelClassAttribute,"myLabelClass");
 \end_layout
 
@@ -7504,14 +7876,17 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 .myLabelClass{ 
 \end_layout
 
 \begin_layout Plain Layout
+
 	color: red;
 \end_layout
 
 \begin_layout Plain Layout
+
 }
 \end_layout
 
@@ -7529,40 +7904,48 @@ The Tree accepts tree listeners.
  A Tree Listener must implement the following interface:
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset listings
 inline false
 status open
 
 \begin_layout Plain Layout
+
 package com.objetdirect.tatami.client.tree;
 \end_layout
 
 \begin_layout Plain Layout
+
 import com.objetdirect.tatami.client.data.Item;
 \end_layout
 
 \begin_layout Plain Layout
+
 public interface TreeListener {
 \end_layout
 
 \begin_layout Plain Layout
+
 	public void onClick(Item item); 
 \end_layout
 
 \begin_layout Plain Layout
+
 	public void onOpen(Item item); 
 \end_layout
 
 \begin_layout Plain Layout
+
 	public void onClose(Item item);
 \end_layout
 
 \begin_layout Plain Layout
+
 	public void onDblClick(Item item); 
 \end_layout
 
 \begin_layout Plain Layout
+
 }
 \end_layout
 
@@ -7581,10 +7964,12 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 addTreeListener(TreeListener)
 \end_layout
 
 \begin_layout Plain Layout
+
 removeTreeListener(TreeListener)
 \end_layout
 
@@ -7602,7 +7987,7 @@ The following example illustrates the tree customization and tree listeners
  concepts.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset listings
 inline false
 status open
@@ -8337,7 +8722,16 @@ Why implement your own data store ? The DefaultDataStore implementation
 To implement your own DataStore , you only have to subclass the DefaultDataStore
 , and override the particular method you would like to implement yourself.
  The DefaultDataStore itself extends the AbstractDataStore class.
- 
+ You should respect the following steps: 
+\end_layout
+
+\begin_layout Standard
+-implement the fetch method to retrieve Items, either locally in the datastore
+ or from another data source
+\end_layout
+
+\begin_layout Standard
+-implement the loadItem method, accordingly to your need.
 \end_layout
 
 \begin_layout Subsection
@@ -8352,80 +8746,1111 @@ Suppose you would like to connect your grid directly to a relational database.
  be fetched.
 \end_layout
 
-\begin_layout Description
-addItem(Item): Adds an item to the datastore.
- If an item already has the same id, it is overridden.
+\begin_layout Subsubsection
+DefaultDataStore implementation
+\end_layout
+
+\begin_layout Standard
+The default datastore implementation stores its items locally in a Map.
+ Each time a request is performed to the datastore, items will be returned
+ directly from the datastore.
+\end_layout
+
+\begin_layout Standard
+First of all, the items are filtered and sorted against the query:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public void fetch(Request request) { 
+\end_layout
+
+\begin_layout Plain Layout
+
+	//Saves the request to keep filtering and sorting parameter for later use
+\end_layout
+
+\begin_layout Plain Layout
+
+	// (for example, to fetch multiple pages) lastRequest = request;
+\end_layout
+
+\begin_layout Plain Layout
+
+	//Gets the items matching the query , and sorts them according to the
+\end_layout
+
+\begin_layout Plain Layout
+
+	//request
+\end_layout
+
+\begin_layout Plain Layout
+
+	List<?> itemsSortedAndMatchingQuery = this.executeQuery(items.values() ,
+ request);	
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then, we notify the fetch listeners that the fetch process has begun.This
+ is done with the 
+\begin_inset Quotes eld
+\end_inset
+
+notifyBeginFetchListeners
+\begin_inset Quotes erd
+\end_inset
+
+ request.
+\end_layout
+
+\begin_layout Standard
+It takes two arguments : the total number of items matching the query, and
+ the request itself.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	int size = itemsSortedAndMatchingQuery.size(); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	// We notify the fetch listeners that the request is being performed
+\end_layout
+
+\begin_layout Plain Layout
+
+	notifyBeginFetchListeners(size , request);
+\end_layout
+
+\begin_layout Plain Layout
+
+	List<Item> result = new ArrayList<Item>();	
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can process the actual fetched items, and load them accordingly.
+ Here, the load method does nothing, since it is a purely local datastore.
+ Items are supposed to be fully loaded as soon as they are added to the
+ datastore.
+ The load item is supposed to load the items from an external datasource
+ if you want to perform lazy loading.
+ Please see the according example for more information.
+ FetchListeners must be notified that a new item has been fetched.
  
 \end_layout
 
-\begin_layout Description
-removeItem(Item): Removes an item from the data store
-\end_layout
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
 
-\begin_layout Description
-hasAttribute(Item item, String attr): Return true if the given attribute
- is specified for the given Item, false otherwise.
-\end_layout
+\begin_layout Plain Layout
 
-\begin_layout Description
-getItemByIdentity(Object id): Returns the item stored with the given id,
- null if no item within the store has the given attribute
-\end_layout
-
-\begin_layout Description
-isItem(Object): true if item is an instance of Item and the store contains
- this item, false otherwise
-\end_layout
-
-\begin_layout Description
-loadItem(Item): Loads the specified item if it has not already been.
- A “loaded” item should have all its attributes loaded, while a not-yet-loaded
- item can be a “stub” used for remote lazy loading.
+// We determine which item should be the first returned.
  
 \end_layout
 
-\begin_layout Description
-isItemLoaded(Item): Returns true if the given Item is in the store AND has
- been fully loaded.
+\begin_layout Plain Layout
+
+int count = request.getNbItemToReturn() == -1 ? size : Math.min(size, request.getNb
+ItemToReturn());
+\end_layout
+
+\begin_layout Plain Layout
+
+int startItem = request.getStartItemNumber() == -1 ? 0 : request.getStartItemNumbe
+r() ;
+\end_layout
+
+\begin_layout Plain Layout
+
+int end = Math.min(startItem + count , itemsSortedAndMatchingQuery.size());
+\end_layout
+
+\begin_layout Plain Layout
+
+// We load all items between start item and end item,
+\end_layout
+
+\begin_layout Plain Layout
+
+// notify the fetchListeners that an item is being fetched ,and 
+\end_layout
+
+\begin_layout Plain Layout
+
+// add it to the resultS
+\end_layout
+
+\begin_layout Plain Layout
+
+for (int i = (startItem ) ; i < end ; i++) { 
+\end_layout
+
+\begin_layout Plain Layout
+
+	Item item = (Item) itemsSortedAndMatchingQuery.get(i); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	loadItem(item); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	item.setFullyLoaded(true); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	notifyItemFetchListeners(item); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	result.add(i-startItem,item); 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, we can finish the fetch process by notifying the FetchListeners
+ that the process is complete:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+//Finally , we pass the result to the fetch listeners 
+\end_layout
+
+\begin_layout Plain Layout
+
+notifyCompleteFetchListeners(result , request);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+A datastore connecting to a GWT RPC Backend
+\end_layout
+
+\begin_layout Standard
+This section will show an example of a purely remote datastore, which fetch
+ all its items from a GWT-RPC Service.
+ This implementation is quite simple, and allows the filtering, and sorting
+ operation to be managed on the server.
+\end_layout
+
+\begin_layout Paragraph
+The service
+\end_layout
+
+\begin_layout Standard
+We will begin with defining our GWT-RPC service.
+ This one has nothing special, and offers CRUD operation for a small pet
+ store :
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public interface PetSearchService extends RemoteService{
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	final public String SPECIE = "Specie"; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	final public String NAME = "Name"; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	final public String AGE = "Age"; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	final public String TATOONUMBER = "TatooNumber";
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	public List<Pet> getAllPets(); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public List<Pet> getAllPetsSortedBy(String sortCriteria ,boolean ascending);
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public List<Pet> getPetsBySpecie(String specie); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public List<Pet> getPetsBySpecieSortedBy(String specie , String sortCriteria
+ ,boolean ascending); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void updatePet(Pet pet); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void addPet(Pet pet); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void removePet(Pet pet); 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Data
+\end_layout
+
+\begin_layout Standard
+The pet class itself extends Item.
+ The first part of the class simply defines a bean:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class PetItem extends Item implements Pet,Serializable{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public PetItem(){ super(); } 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public PetItem(int age, String name, String specie, int tatooNumber) {
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+		super(); this.age = age;
+\end_layout
+
+\begin_layout Plain Layout
+
+		this.name = name;
+\end_layout
+
+\begin_layout Plain Layout
+
+		this.specie = specie;
+\end_layout
+
+\begin_layout Plain Layout
+
+		this.tatooNumber = tatooNumber;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	private int age;
+\end_layout
+
+\begin_layout Plain Layout
+
+	public int getAge() {return age;} 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void setAge(int age) {this.age = age;}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	private String name; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public String getName() { return name; }
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void setName(String name) { this.name = name; }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	private String specie; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public String getSpecie() { return specie; }
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void setSpecie(String specie) { this.specie = specie; }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	private int tatooNumber;
+\end_layout
+
+\begin_layout Plain Layout
+
+	public int getTatooNumber() { return tatooNumber; }
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void setTatooNumber(int tatooNumber) { this.tatooNumber = tatooNumber;
+ }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Then, we override the standard items method.
+ The following changes were made, in order to not to store the attributes
+ in the hashmap but rather using the instance fields:
 \end_layout
 
 \begin_layout Description
-searchItemsByAttributes(String attr, Object value): Returns a list of items
- which given attribute attr has the given value.
+getId method: we return the tattoo number
 \end_layout
 
 \begin_layout Description
-setValue(Item, String attr, Object value): Sets the given value for the
- given attribute of the given item.
- If this attribute already exists , it is overridden.
+getValue: we call the getter corresponding to the attribute being requested
 \end_layout
 
 \begin_layout Description
-size(): Returns the number of items in the store.
+setValue: we call the setter corresponding to the attribute being modified
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@Override 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public Object getId() { return getTatooNumber(); }
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	@Override
+\end_layout
+
+\begin_layout Plain Layout
+
+	public String[] getAttributes() { return  {PetSearchService.SPECIE,PetSearchServ
+ice.NAME,PetSearchService.AGE,PetSearchService.TATOONUMBER}; }
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	@Override public Object getValue(String attributeName, Object defaultValue)
+ {
+\end_layout
+
+\begin_layout Plain Layout
+
+		return getValue(attributeName) == null ? defaultValue : getValue(attributeName
+);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	@Override public Object getValue(String attributeName) {	
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(attributeName.equals(PetSearchService.AGE)){
+\end_layout
+
+\begin_layout Plain Layout
+
+			return getAge();
+\end_layout
+
+\begin_layout Plain Layout
+
+		}else if(attributeName.equals(PetSearchService.NAME)){
+\end_layout
+
+\begin_layout Plain Layout
+
+			return getName(); }
+\end_layout
+
+\begin_layout Plain Layout
+
+		else if(attributeName.equals(PetSearchService.SPECIE)){
+\end_layout
+
+\begin_layout Plain Layout
+
+			return getSpecie(); 
+\end_layout
+
+\begin_layout Plain Layout
+
+		}else if(attributeName.equals(PetSearchService.TATOONUMBER)){ 
+\end_layout
+
+\begin_layout Plain Layout
+
+			return getTatooNumber(); 
+\end_layout
+
+\begin_layout Plain Layout
+
+		}else return null;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+	@Override public void setValue(String attributeName, Object value) {
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(attributeName.equals(PetSearchService.AGE)){
+\end_layout
+
+\begin_layout Plain Layout
+
+			if(value instanceof String){
+\end_layout
+
+\begin_layout Plain Layout
+
+				value = Integer.parseInt((String) value);
+\end_layout
+
+\begin_layout Plain Layout
+
+			} 
+\end_layout
+
+\begin_layout Plain Layout
+
+			setAge((Integer) value); 
+\end_layout
+
+\begin_layout Plain Layout
+
+		}else if(attributeName.equals(PetSearchService.NAME)){
+\end_layout
+
+\begin_layout Plain Layout
+
+			setName((String) value);
+\end_layout
+
+\begin_layout Plain Layout
+
+		}else if(attributeName.equals(PetSearchService.SPECIE)){
+\end_layout
+
+\begin_layout Plain Layout
+
+			setSpecie((String) value); 
+\end_layout
+
+\begin_layout Plain Layout
+
+		}else if(attributeName.equals(PetSearchService.TATOONUMBER)){
+\end_layout
+
+\begin_layout Plain Layout
+
+			if(value instanceof String){
+\end_layout
+
+\begin_layout Plain Layout
+
+				value = Integer.parseInt((String) value); 
+\end_layout
+
+\begin_layout Plain Layout
+
+			} 
+\end_layout
+
+\begin_layout Plain Layout
+
+			setTatooNumber((Integer) value);
+\end_layout
+
+\begin_layout Plain Layout
+
+		} super.setValue(attributeName, value);
+\end_layout
+
+\begin_layout Plain Layout
+
+	} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Datastore Fetch implementation
+\end_layout
+
+\begin_layout Standard
+The datastore implementation, will parse the request to determine wich service
+ method should be invoked.
+ Since the GWT-RPC process is asynchronous, we must provide an AsyncCallback
+ implementation which will perform the fetch process.
+ As you can notice, this implementation only calls the fetchlisteners and
+ stores the fetched items:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+private class DataStoreAsyncCallback implements AsyncCallback<List<Pet>>{
+\end_layout
+
+\begin_layout Plain Layout
+
+	Request request; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public DataStoreAsyncCallback(Request request){ this.request = request;
+ } 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void onFailure(Throwable arg0) { notifyErrorFetchListeners(); }
+\end_layout
+
+\begin_layout Plain Layout
+
+	public void onSuccess(List<Pet> pets) { 
+\end_layout
+
+\begin_layout Plain Layout
+
+		notifyBeginFetchListeners(pets.size(), request);
+\end_layout
+
+\begin_layout Plain Layout
+
+		List<Item> petsItems = new 	ArrayList<Item>();
+\end_layout
+
+\begin_layout Plain Layout
+
+		for (Iterator iterator = pets.iterator(); iterator.hasNext();){ 
+\end_layout
+
+\begin_layout Plain Layout
+
+			PetItem item = (PetItem) iterator.next();
+\end_layout
+
+\begin_layout Plain Layout
+
+			items.put(item.getId(),item);
+\end_layout
+
+\begin_layout Plain Layout
+
+			petsItems.add(item);
+\end_layout
+
+\begin_layout Plain Layout
+
+			notifyItemFetchListeners(item);
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+		notifyCompleteFetchListeners(petsItems, request); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	} 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The fetch method itself will determine wich method from the service to call.
+\end_layout
+
+\begin_layout Standard
+This method can be :
 \end_layout
 
 \begin_layout Description
-addDatumChangeListener(DatumChangeListener): Adds a DatumChangeListener
+getAllPets: if no filtering or sort parameters are provided with the request
 \end_layout
 
 \begin_layout Description
-removeDatumChangeListener(DatumChangeListener): Removes a DatumChangeListener
+getAllPetsSortedBy: if only sort parameters are provided
 \end_layout
 
 \begin_layout Description
-addFetchListener(FetchListener): Adds a FetchListener
+getPetsBySpecie: if a filtering parameter named SPECIE is providedd
 \end_layout
 
 \begin_layout Description
-removeFetchListener(FetchListener): Removes a FetchListener
+getPetsBySpecieSortedBy: same as previous, but with a sort parameter
 \end_layout
 
-\begin_layout Description
-addLoadItemListener(LoadItemListener): Adds a LoadItemListener
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@Override public void fetch(Request request) { 
 \end_layout
 
-\begin_layout Description
-removeLoadItemListener(LoadItemListener): Removes a LoadItemListener
+\begin_layout Plain Layout
+
+	String sortParameter = null;
+\end_layout
+
+\begin_layout Plain Layout
+
+	boolean ascending = true;
+\end_layout
+
+\begin_layout Plain Layout
+
+	notifyBeginFetchListeners(0, request);
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(request.getSortFields().size() > 0){
+\end_layout
+
+\begin_layout Plain Layout
+
+		sortParameter = request.getSortFields().get(0).getAttribute();
+\end_layout
+
+\begin_layout Plain Layout
+
+		ascending = !request.getSortFields().get(0).isDescending();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(request.getQuery().containsKey(PetSearchService.SPECIE)){
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(sortParameter != null){
+\end_layout
+
+\begin_layout Plain Layout
+
+			petSearchService.getPetsBySpecieSortedBy((String)request.getQuery().get(PetSearc
+hService.SPECIE),sortParameter,ascending,new DataStoreAsyncCallback(request));
+\end_layout
+
+\begin_layout Plain Layout
+
+		}else{ 
+\end_layout
+
+\begin_layout Plain Layout
+
+			petSearchService.getPetsBySpecie((String)request.getQuery().get(PetSearchService.
+SPECIE),new 			DataStoreAsyncCallback(request));
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+	}else{
+\end_layout
+
+\begin_layout Plain Layout
+
+		if(sortParameter != null){
+\end_layout
+
+\begin_layout Plain Layout
+
+			petSearchService.getAllPetsSortedBy(sortParameter,ascending,new DataStoreAsync
+Callback(request));
+\end_layout
+
+\begin_layout Plain Layout
+
+		}else{
+\end_layout
+
+\begin_layout Plain Layout
+
+			petSearchService.getAllPets(new DataStoreAsyncCallback(request));
+\end_layout
+
+\begin_layout Plain Layout
+
+		}
+\end_layout
+
+\begin_layout Plain Layout
+
+	} notifyCompleteFetchListeners(new ArrayList<Item>(),request);
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+DataStore Creation-Update-Delete implementation
+\end_layout
+
+\begin_layout Standard
+As we want to allow our datastore to create/update/delete items on the server,
+ we have to override the corresponding methods: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@Override public void onDelete(Item item) { 
+\end_layout
+
+\begin_layout Plain Layout
+
+	super.onDelete(item);
+\end_layout
+
+\begin_layout Plain Layout
+
+	Pet pet = ((PetItem)item);
+\end_layout
+
+\begin_layout Plain Layout
+
+	petSearchService.removePet(pet, new DataStoreDoNothingCallBack());
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+@Override public void onNew(Item item) {
+\end_layout
+
+\begin_layout Plain Layout
+
+	super.onNew(item);
+\end_layout
+
+\begin_layout Plain Layout
+
+	Pet pet = ((PetItem)item);
+\end_layout
+
+\begin_layout Plain Layout
+
+	petSearchService.addPet(pet, new DataStoreDoNothingCallBack());
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+@Override public void onSet(Item item, String attribute, Object oldValue,
+ Object newValue) {
+\end_layout
+
+\begin_layout Plain Layout
+
+	super.onSet(item, attribute, oldValue, newValue);
+\end_layout
+
+\begin_layout Plain Layout
+
+	Pet pet = ((PetItem)item);
+\end_layout
+
+\begin_layout Plain Layout
+
+	petSearchService.updatePet(pet, new DataStoreDoNothingCallBack());
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At last, you can use this datastore with a grid, for example, wich will
+ allow you to manipulate this datastore through an ui and propagate the
+ modifications back to the server:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+grid = new Grid();
+\end_layout
+
+\begin_layout Plain Layout
+
+grid.setStore(new RPCDataStore());
+\end_layout
+
+\begin_layout Plain Layout
+
+GridLayout gridLayout = new GridLayout();
+\end_layout
+
+\begin_layout Plain Layout
+
+grid.setSize("100%", "20em");
+\end_layout
+
+\begin_layout Plain Layout
+
+grid.addColumn("Name",PetSearchService.NAME);
+\end_layout
+
+\begin_layout Plain Layout
+
+grid.addColumn("Specie",PetSearchService.SPECIE);
+\end_layout
+
+\begin_layout Plain Layout
+
+grid.addColumn("Tatoo Number",PetSearchService.TATOONUMBER);
+\end_layout
+
+\begin_layout Plain Layout
+
+grid.addColumn("Age",PetSearchService.AGE,new TextEditor());
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+A datastore for lazy loading child items from a tree
 \end_layout
 
 \begin_layout Chapter
@@ -12061,46 +13486,42 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 DragAndDropPanel ddPanel = new DragAndDropPanel();
 \end_layout
 
 \begin_layout Plain Layout
-Widget w1 = 
-...
 
-\lang english
- 
+Widget w1 = (some widget creation code) 
 \end_layout
 
 \begin_layout Plain Layout
-Widget w2 = 
-...
+
+Widget w2 = (some widget creation code)
 \end_layout
 
 \begin_layout Plain Layout
-Widget
- 
-\lang english
-w3 = 
-...
 
-\lang english
- 
+Widget w3 = (some widget creation code)
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.addTargetWidget(w1, 50, 50, "aff1");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.addDraggableWidget(w2, 100, 100, "aff1");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.setDraggable(w1, "aff2");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.addTargetWidget(w3, 50, 50, "aff2");
 \end_layout
 
@@ -12169,10 +13590,12 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 import com.objetdirect.tatami.client.DragAndDropPanel;
 \end_layout
 
 \begin_layout Plain Layout
+
 DragAndDropPanel ddPanel = new DragAndDropPanel();
 \end_layout
 
@@ -12192,10 +13615,12 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 ddPanel.setSize("500px", "400px");
 \end_layout
 
 \begin_layout Plain Layout
+
 RootPanel.get().add(ddPanel, 0, 0);
 \end_layout
 
@@ -12215,10 +13640,12 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 Image romeo = new Image("romeo.png");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.addDraggableWidget(romeo, 50, 50, "romeo&juliet");
 \end_layout
 
@@ -12248,10 +13675,12 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 Image juliet = new Image("juliet.png");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.addTargetWidget(juliet, 250, 50, "romeo&juliet");
 \end_layout
 
@@ -12277,18 +13706,22 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 Image tristan = new Image("tristan.png");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.addDraggableWidget(tristan, 50, 250, "tristan&iseult");
 \end_layout
 
 \begin_layout Plain Layout
+
 Image iseult = new Image("iseult.png");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.addTargetWidget(iseult, 250, 250, "tristan&iseult");
 \end_layout
 
@@ -12320,14 +13753,17 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 mage domjuan = new Image("domjuan.png");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.addDraggableWidget(domjuan, 50, 450, "romeo&juliet");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.setDraggable(domjuan, "tristan&iseult");
 \end_layout
 
@@ -12361,18 +13797,22 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 ddPanel.setDraggable(juliet, "romeo&juliet");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.setDraggable(iseult, "tristan&iseult");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.setTarget(romeo, "romeo&juliet");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.setTarget(tristan, "tristan&iseult");
 \end_layout
 
@@ -12395,18 +13835,22 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 ddPanel.setTarget(juliet, "woman");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.setTarget(iseult, "woman");
 \end_layout
 
 \begin_layout Plain Layout
+
 Image domjuan = new Image("domjuan.png");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.addDraggableWidget(domjuan, 50, 450, "woman");
 \end_layout
 
@@ -12426,10 +13870,12 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 Image tintin = new Image("tintin.png");
 \end_layout
 
 \begin_layout Plain Layout
+
 ddPanel.add(tintin, 450, 450);
 \end_layout
 
@@ -12451,6 +13897,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 ddPanel.setWidgetPosition(tintin, 500, 500);
 \end_layout
 
@@ -12487,10 +13934,12 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public boolean acceptDrop(Widget draggable, Widget target) { … } 
 \end_layout
 
 \begin_layout Plain Layout
+
 public void onDrop(Widget draggable, Widget target) { … }
 \end_layout
 
@@ -12514,33 +13963,39 @@ Both methods receive the dragged and the target widget involved in the operation
  The removing of a listener can be done via the removeDragDropListener method.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset listings
 inline false
 status open
 
 \begin_layout Plain Layout
+
 DragAndDropListener listener = new DragAndDropListener() {
 \end_layout
 
 \begin_layout Plain Layout
+
 	public void onDrop(Widget draggable, Widget target) { … }
 \end_layout
 
 \begin_layout Plain Layout
+
 	public boolean acceptDrop(Widget draggable, Widget target) { return true;
  }
 \end_layout
 
 \begin_layout Plain Layout
+
 };
 \end_layout
 
 \begin_layout Plain Layout
+
 ddpPanel.addDragDropListener(listener); 
 \end_layout
 
 \begin_layout Plain Layout
+
 … ddpPanel.removeDragDropListener(listener);
 \end_layout
 
@@ -12573,6 +14028,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public void unsetDraggable(Widget widget, String affordance); 
 \end_layout
 
@@ -12592,6 +14048,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public void unsetTarget(Widget widget, String affordance);
 \end_layout
 
@@ -12616,6 +14073,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public void unsetDraggable(Widget widget);
 \end_layout
 
@@ -12630,6 +14088,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public void unsetTarget(Widget widget);
 \end_layout
 
@@ -12662,6 +14121,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public boolean isDraggable(Widget widget);
 \end_layout
 
@@ -12681,6 +14141,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public boolean hasDraggableAffordance( Widget widget, String affordance);
 \end_layout
 
@@ -12701,6 +14162,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public String[] getDraggableAffordances(Widget widget);
 \end_layout
 
@@ -12720,6 +14182,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public Widget[] getDraggableAffordanceSet(String affordance); 
 \end_layout
 
@@ -12740,6 +14203,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public boolean isTarget(Widget widget);
 \end_layout
 
@@ -12759,6 +14223,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public boolean hasTargetAffordance( Widget widget, String affordance);
 \end_layout
 
@@ -12779,6 +14244,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public String[] getTargetAffordances(Widget widget);
 \end_layout
 
@@ -12798,6 +14264,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public Widget[] getTargetAffordanceSet(String affordance); 
 \end_layout
 
@@ -12924,20 +14391,23 @@ Then, we register this panel as a source panel, and the widgets it contains
  as dnd element within these source.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset listings
 inline false
 status open
 
 \begin_layout Plain Layout
+
 DnD.registerSource(sourcePanel);
 \end_layout
 
 \begin_layout Plain Layout
+
 DnD.registerElement(sourcePanel,widget1);
 \end_layout
 
 \begin_layout Plain Layout
+
 DnD.registerElement(sourcePanel,widget2);
 \end_layout
 
@@ -13038,39 +14508,48 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 WidgetDnDBehavior myBehavior = new DnDDefaultWidgetBehavior() { 
 \end_layout
 
 \begin_layout Plain Layout
+
 	@Override 
 \end_layout
 
 \begin_layout Plain Layout
+
 	public boolean onDrop(Collection<Widget> draggedWidgets, Panel source,
  Panel target, String targetNodeId, boolean isCopy) {
 \end_layout
 
 \begin_layout Plain Layout
+
 		for (Widget widget : draggedWidgets) {
 \end_layout
 
 \begin_layout Plain Layout
+
 			DnD.move(widget, source, target);
 \end_layout
 
 \begin_layout Plain Layout
+
 		} 
 \end_layout
 
 \begin_layout Plain Layout
+
 		return true;
 \end_layout
 
 \begin_layout Plain Layout
+
 	}
 \end_layout
 
 \begin_layout Plain Layout
+
 };
 \end_layout
 
@@ -13089,18 +14568,22 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 try { 
 \end_layout
 
 \begin_layout Plain Layout
+
 	DnD.registerBehavior(myBehavior, sourcePanel, targetPanel);
 \end_layout
 
 \begin_layout Plain Layout
+
 } catch (BehaviorScopeException e) {
 \end_layout
 
 \begin_layout Plain Layout
+
 }
 \end_layout
 
@@ -13170,6 +14653,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 DnD.registerSource(Panel panel);
 \end_layout
 
@@ -13188,13 +14672,8 @@ inline false
 status open
 
 \begin_layout Plain Layout
-DnD.registerElement(
-Panel
-\lang english
-,
-Widget
-\lang english
-);
+
+DnD.registerElement(Panel,Widget);
 \end_layout
 
 \end_inset
@@ -13212,10 +14691,8 @@ inline false
 status open
 
 \begin_layout Plain Layout
-DnD.registerTreeSource(
-Tree
-\lang english
-);
+
+DnD.registerTreeSource(Tree);
 \end_layout
 
 \end_inset
@@ -13240,16 +14717,18 @@ A DndTarget is defined as a container wich may accept drop operations
 A DndTarget is registered with one of the following methods:
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset listings
 inline false
 status open
 
 \begin_layout Plain Layout
+
 DnD.registerTarget(Tree);
 \end_layout
 
 \begin_layout Plain Layout
+
 DnD.registerTarget(Panel);
 \end_layout
 
@@ -13275,7 +14754,7 @@ A DndBehavior is responsible for processing drag and drop events from a
 IDnDBehavior interface
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset listings
 inline false
 status open
@@ -13396,8 +14875,9 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 public abstract class AbstractDnDBehavior<E extends IDnDElement,S extends
- IDnDSource<? extends E>,T extends IDnDTarget> implements IDnDBehavior<E,
+ IDnDSource<? super E>,T extends IDnDTarget> implements IDnDBehavior<E,
  S, T>
 \end_layout
 
@@ -13412,6 +14892,129 @@ So you can override only the methods you want from the AbstractDnDBehavior.
 
 \begin_layout Standard
 Ex:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+AbstractDnDBehavior<WidgetDnDElement, WidgetSource, WidgetTarget> be = new
+ AbstractDnDBehavior<WidgetDnDElement, WidgetSource, WidgetTarget>(){ 
+\end_layout
+
+\begin_layout Plain Layout
+
+	@Override 
+\end_layout
+
+\begin_layout Plain Layout
+
+	public boolean onDrop(Collection<WidgetDnDElement> dndElements, IDnDSource<?
+ super WidgetDnDElement> source, 					IDnDTarget target, String targetNodeId,
+ boolean isCopy) {
+\end_layout
+
+\begin_layout Plain Layout
+
+				Window.alert("You dropped on item with id : " + targetNodeId);
+\end_layout
+
+\begin_layout Plain Layout
+
+				return true; 		
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+};
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+DnDGenericBehavior provides is another default implementation which is designed
+ to use with a particular type of element, any DnDSource which can handle
+ it and any DnDTarget.
+\end_layout
+
+\begin_layout Subsubsection
+DefaultWidgetDnD Behavior
+\end_layout
+
+\begin_layout Standard
+The WidgetDnDBehavior class is an abstract class designed to make it easier
+ to implement DnD behavior for widgets.
+ You just have to override at your convenience the following methods:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public boolean checkItemAcceptance( Panel source,Widget target, Collection<Widge
+t> draggedWidgets) { return true; }
+\end_layout
+
+\begin_layout Plain Layout
+
+public void elementsAccepted(Panel source, Widget target, Collection<Widget>
+ draggedWidgets, boolean copied) { }
+\end_layout
+
+\begin_layout Plain Layout
+
+public boolean onDrop(Collection<Widget> draggedWidgets, Panel source, Widget
+ target, String targetNodeId, boolean isCopy) { return true; } 
+\end_layout
+
+\begin_layout Plain Layout
+
+public void onDndStart(Panel source, Collection<Widget> draggedWidgets,
+ boolean copied ){ 
+\end_layout
+
+\begin_layout Plain Layout
+
+} 
+\end_layout
+
+\begin_layout Plain Layout
+
+public void onCancel(){ 
+\end_layout
+
+\begin_layout Plain Layout
+
+} 
+\end_layout
+
+\begin_layout Plain Layout
+
+public void dragOver(Widget target){ 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
