@@ -1,0 +1,2054 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>The Grid component</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 1708--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu14.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu13.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">2.3.1   </span> <a 
+ id="x23-580002.3.1"></a>The Grid component</h4>
+<!--l. 1710--><p class="noindent" >Introduced in Tatami version 1.2 , the grid component provides a rich table, with
+nice features such as client-side sorting, lazy loading , view change , paging , in-cell
+editing, data formatting &#x2026;
+                                                                  
+
+                                                                  
+<!--l. 1714--><p class="indent" >   <img 
+src="TatamiUserDocumentation16x.png" alt="PIC" class="graphics" width="559.08875pt" height="266.9975pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation16x.png" src="16C__dev_workspace_docs_images_grid_preview.eps"  
+-->
+<!--l. 1717--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.1.1   </span> <a 
+ id="x23-590002.3.1.1"></a>Building and manipulating a simple grid : an example</h5>
+<!--l. 1719--><p class="noindent" >This section will introduce the basics about building and manipulating a grid. We
+will learn how to create a grid, how to add/remove rows or columns and the basic
+grid settings. For further information, refer to Grid API and Grid MVC
+sections
+<!--l. 1726--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-600002.3.1.1.1"></a><span 
+class="ecbx-1000">Building a simple Grid</span><br 
+class="newline" /></span>
+   <!--l. 1729-->
+<div class="lstlisting" id="listing-60"><span class="label"><a 
+ id="x23-60001r1"></a></span>Grid&#x00A0;grid&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Grid();&#x00A0;<br /><span class="label"><a 
+ id="x23-60002r2"></a></span>grid.addColumn("Name");&#x00A0;<br /><span class="label"><a 
+ id="x23-60003r3"></a></span>grid.addColumn("Phone&#x2423;Number");&#x00A0;<br /><span class="label"><a 
+ id="x23-60004r4"></a></span>grid.addColumn("BirthDate");&#x00A0;<br /><span class="label"><a 
+ id="x23-60005r5"></a></span>Object[]&#x00A0;row1&#x00A0;=&#x00A0;{"John&#x2423;Doe"&#x00A0;,&#x00A0;"0123456789"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("03/25/1981")&#x00A0;};&#x00A0;<br /><span class="label"><a 
+ id="x23-60006r6"></a></span>Object[]&#x00A0;row2&#x00A0;=&#x00A0;{"Jane&#x2423;Doe"&#x00A0;,&#x00A0;"9876543210"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("11/12/1978")};&#x00A0;<br /><span class="label"><a 
+ id="x23-60007r7"></a></span>grid.addRow(row1);&#x00A0;<br /><span class="label"><a 
+ id="x23-60008r8"></a></span>grid.addRow(row2);&#x00A0;<br /><span class="label"><a 
+ id="x23-60009r9"></a></span>grid.setWidth("300px");&#x00A0;<br /><span class="label"><a 
+ id="x23-60010r10"></a></span>grid.setHeight("200px");&#x00A0;<br /><span class="label"><a 
+ id="x23-60011r11"></a></span>RootPanel.get().add(grid);&#x00A0;<br /><span class="label"><a 
+ id="x23-60012r12"></a></span>grid.updateGrid();
+   </div>
+<!--l. 1745--><p class="indent" >   The above snippet will produce the following grid :
+                                                                  
+
+                                                                  
+<!--l. 1747--><p class="indent" >   <img 
+src="TatamiUserDocumentation17x.png" alt="PIC" class="graphics" width="271.0125pt" height="198.7425pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation17x.png" src="17C__dev_workspace_docs_images_grid_simpleexample.eps"  
+-->
+<!--l. 1749--><p class="indent" >   Notice that the date is displayed using the standard ISO notation. Please refer to
+Cell editing and formatting section know how to display it properly.
+<!--l. 1753--><p class="indent" >   It&#8217;s default properties make it user sortable, and we can add and remove rows and
+columns as we wish.
+<!--l. 1758--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-610002.3.1.1.2"></a><span 
+class="ecbx-1000">Settings</span><br 
+class="newline" /></span>
+   After creating the grid , and before attaching it to the dom tree, we can set a
+bunch of properties.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">setAutoHeight(boolean):</span> </dt><dd 
+class="description">true indicates that the grid should auto adapt its
+     height, false that its height is fixed. Default : false
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setAutoWidth(boolean):</span> </dt><dd 
+class="description">true indicates that the grid should auto adapt its
+     width, false that its width is fixed. Default : false
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setElasticView(int):</span> </dt><dd 
+class="description">Indicates  which  view  should  be  elastic,  which  means
+     that it will fill the remaining space once all other views are drawn. Default
+     : -1 (none)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setMaximumFetchCountAtAtime(int):</span> </dt><dd 
+class="description">Sets  the  maximum  number  that
+     are returned at a time. It indicates how many items should be loaded.
+     When the user scrolls, items to be displayed are fetched by groups of
+     maximumFetchCountAtAtime items. A typical setting for this value is 1.5
+     the number of rows to be displayed at a time. (That is , the grid won&#8217;t
+     have to load items until the user scrolls) Default:25
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setRowsPerPage(int):</span> </dt><dd 
+class="description">Sets  the  number  of  row  per  page.  A  value  of  -1
+     indicates that all rows should fit on a single page. That does not mean
+     they are all loaded at one time, since only the displayed rows are loaded,
+     and updated when the user scrolls. Default : -1
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setSortIndex(int</span> </dt><dd 
+class="description">, boolean) : Sets the grid sorting. sortIndex : the column
+     index by which the grid should be sorted ascending : indicates wether the
+     sort should be performed in ascending or descending order
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setUserSortable(boolean):</span> </dt><dd 
+class="description">Sets wether the user can sort the grid by clicking
+     on the column header. Default : true.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setRenderOnload(boolean):</span> </dt><dd 
+class="description">Sets   wether   the   grid   content   should   be
+     rendered as soon as the grid is displayed (attached on GWT panel)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setRowSelector(String)</span> </dt><dd 
+class="description">Sets wether a row handle should be displayed. A row
+     handle is a bar on the left side that allows the user to select a row without
+     clicking on a particular cell (and without firing an oncellclick event). The
+     given parameter is its size, in css units.</dd></dl>
+<!--l. 1795--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-620002.3.1.1.3"></a><span 
+class="ecbx-1000">Adding / removing rows: </span><br 
+class="newline" /></span>
+   Tatami Grid provides a simple way to manipulate rows. Once again, please refer
+to Grid MVC section for a more complete way to do that.
+<!--l. 1800--><p class="indent" >   When you add or remove a row , the displayed grid is automatically updated and
+reflects the changes.
+<!--l. 1803--><p class="indent" >   Example :
+   <!--l. 1806-->
+<div class="lstlisting" id="listing-61"><span class="label"><a 
+ id="x23-62001r1"></a></span>Object[]&#x00A0;row&#x00A0;=&#x00A0;{"Jane&#x2423;Doe"&#x00A0;,&#x00A0;"9876543210"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Integer("1200")&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("11/12/1978")&#x00A0;,&#x00A0;"Developer"&#x00A0;,&#x00A0;Boolean.TRUE};&#x00A0;<br /><span class="label"><a 
+ id="x23-62002r2"></a></span>grid.addRow(row);&#x00A0;<br /><span class="label"><a 
+ id="x23-62003r3"></a></span>grid.removeRow(0);
+   </div>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">addRow(Object[]):</span> </dt><dd 
+class="description">Adds a row , taking each object from the array as the
+     value for the corresponding column
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addRow(Object[],int</span><span 
+class="ecbx-1000">&#x00A0;index):</span> </dt><dd 
+class="description">Same  as  previous,  except  that  instead  of
+     adding it to the end of the grid, it adds it to the given index.
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeRow(int):</span> </dt><dd 
+class="description">Removes the row at specified index
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addRow(Item):</span> </dt><dd 
+class="description">Delegates method for addItem in the underlying datastore.
+     See DataStore and Items to learn how to manipulate Items directly
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addRow(Item</span> </dt><dd 
+class="description">, int): Same as previous , except that it adds it at the specified
+     index
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeRow(Item):</span> </dt><dd 
+class="description">Delegates  method  for  removeItem  in  the  underlying
+     datastore. See DataStore and Items to learn how to manipulate Items
+     directly
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getRowCount():</span> </dt><dd 
+class="description">Returns the current row count</dd></dl>
+<!--l. 1831--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-630002.3.1.1.4"></a><span 
+class="ecbx-1000">Adding / removing columns</span><br 
+class="newline" /></span>
+   Columns can be added or removed at any time during grid lifecycle. To refresh
+the grid view (ie, how the columns are layed out), you must call the updateView()
+method.
+<!--l. 1837--><p class="indent" >   For example, if we want to add a toggle button, to hide/show a column, we can
+code it just like that :&#8217;
+   <!--l. 1841-->
+<div class="lstlisting" id="listing-62"><span class="label"><a 
+ id="x23-63001r1"></a></span>Button&#x00A0;button&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Button("Toggle&#x2423;Phone&#x2423;Column");&#x00A0;<br /><span class="label"><a 
+ id="x23-63002r2"></a></span>button.addClickListener(<span 
+class="ecbx-1000">new</span>&#x00A0;ClickListener(){&#x00A0;<br /><span class="label"><a 
+ id="x23-63003r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">private</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a 
+ id="x23-63004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onClick(Widget&#x00A0;sender){&#x00A0;<br /><span class="label"><a 
+ id="x23-63005r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">if</span>(isShown){&#x00A0;<br /><span class="label"><a 
+ id="x23-63006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.removeColumn(1);&#x00A0;<br /><span class="label"><a 
+ id="x23-63007r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.updateView();&#x00A0;<br /><span class="label"><a 
+ id="x23-63008r8"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">false</span>;&#x00A0;<br /><span class="label"><a 
+ id="x23-63009r9"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+class="ecbx-1000">else</span>{&#x00A0;<br /><span class="label"><a 
+ id="x23-63010r10"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.insertColumn("Phone&#x2423;Number"&#x00A0;,&#x00A0;1);&#x00A0;<br /><span class="label"><a 
+ id="x23-63011r11"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.updateView();&#x00A0;<br /><span class="label"><a 
+ id="x23-63012r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a 
+ id="x23-63013r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-63014r14"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-63015r15"></a></span>});&#x00A0;<br /><span class="label"><a 
+ id="x23-63016r16"></a></span>RootPanel.get().add(button);
+   </div>
+<!--l. 1861--><p class="indent" >   As we notice , those insertColumn and removeColumn methods take the column
+index as a parameter.
+<!--l. 1864--><p class="indent" >   On the left, before hitting the button
+<!--l. 1866--><p class="indent" >   On the right, after.
+                                                                  
+
+                                                                  
+<!--l. 1868--><p class="indent" >   <img 
+src="TatamiUserDocumentation18x.png" alt="PIC" class="graphics" width="552.0625pt" height="234.87749pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation18x.png" src="18C__dev_workspace_docs_images_grid_columnmanipulationexample.eps"  
+-->
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">addColumn(String</span><span 
+class="ecbx-1000">&#x00A0;name):</span> </dt><dd 
+class="description">Adds a column with the specified name
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addColumn(String</span><span 
+class="ecbx-1000">&#x00A0;name,String</span><span 
+class="ecbx-1000">&#x00A0;fieldName):</span> </dt><dd 
+class="description">Adds  a  column  with  the
+     specified name, which value is taken from the specified items attributes.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addColumn(String,String,Formatter):</span> </dt><dd 
+class="description">Same as previous , except that you
+     specify a Formatter , which is responsible for formatting the data to be
+     displayed (See Formatting section)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addColumn(String,String,GridEditor):</span> </dt><dd 
+class="description">Same as addColumn(String name,
+     String fieldName), except that you specify an Editor, making this column
+     editable (See Editing section)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addColumn(String,String,GridEditor,Formatter):</span> </dt><dd 
+class="description">Same   as   the   two
+     previous
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addColumn(String,String,int):</span> </dt><dd 
+class="description">Same  as  addColumn(String  name,  String
+     fieldName), except that you specify a cell width in pixel
+     </dd><dt class="description">
+                                                                  
+
+                                                                  
+<span 
+class="ecbx-1000">addColumn(String</span><span 
+class="ecbx-1000">&#x00A0;name,GridEditor</span><span 
+class="ecbx-1000">&#x00A0;editor,Formatter</span><span 
+class="ecbx-1000">&#x00A0;formatter,String</span><span 
+class="ecbx-1000">&#x00A0;width):</span> </dt><dd 
+class="description">
+     Adds a column with the specified name, editor , formatter and width in
+     standard css units (ex : &#8220;100px&#8221; , &#8220;10em&#8221;). Null values are accepted, except
+     for width which could lead to strange behaviours
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addColumn(String</span><span 
+class="ecbx-1000">&#x00A0;name,String</span><span 
+class="ecbx-1000">&#x00A0;fieldName,String</span><span 
+class="ecbx-1000">&#x00A0;width,GridEditor</span><span 
+class="ecbx-1000">&#x00A0;editor,Formatter</span><span 
+class="ecbx-1000">&#x00A0;formatter):</span> </dt><dd 
+class="description">
+     Same as previous , except you specify the field name from which values
+     should be taken
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addCell(Cell):</span> </dt><dd 
+class="description">Adds the specified cell as a column in the underlying GridView
+     (See GridView and Cells)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeColumn(int):</span> </dt><dd 
+class="description">Removes the column at specified index
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeColumn(Cell):</span> </dt><dd 
+class="description">Removes  the  specifided  cell  as  a  column  in  the
+     underlying GridView (See GridView and Cells)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">updateView():</span> </dt><dd 
+class="description">Forces  the  grid  to  refresh  its  view,  updating  its  columns
+     definitions.</dd></dl>
+<!--l. 1902--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-640002.3.1.1.5"></a><span 
+class="ecbx-1000">Paging</span><br 
+class="newline" /></span>
+   Tatami&#8217;s grid supports two types of paging : the dojo&#8217;s one, which loads the
+grid rows as the user scrolls its grid, and a &#8220;previous page&#8221; / &#8220;next page&#8221;
+pagination.
+<!--l. 1909--><p class="indent" >   This section will present you both, and how you can enable / disable any of
+them.
+<!--l. 1915--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-650002.3.1.1.5.1"></a><span 
+class="ecbx-1000">Dojo&#8217;s &#8220;OnScroll&#8221; paging</span><br 
+class="newline" /></span>
+   To prevent massive requests to the datastore (which can be a remote datastore,
+requesting the server each time a fetch operation is performed), dojo provides an on
+scroll paging mechanism.
+<!--l. 1921--><p class="indent" >   That means the grid will only fetch items that need to be displayed, by set of
+maximumFetchCountAtAtime. When the user scrolls the grid vertically, more rows
+need to be displayed , so the grid will fetch a new set of items.
+<!--l. 1926--><p class="indent" >   This value is 25 by default , but we can specify it for the grid to be more
+efficient.
+                                                                  
+
+                                                                  
+<!--l. 1929--><p class="indent" >   For example, if we know that we will always display 10 rows , setting the
+maximumFetchCountAtAtime to 20 will be sufficient to assure a quite reactive
+scrolling: the user will be able to scroll down the 10 next rows without a need for
+re-fetching data from the data store.
+<!--l. 1934--><p class="indent" >   To perform this operation, just use the following method :
+   <!--l. 1937-->
+<div class="lstlisting" id="listing-63"><span class="label"><a 
+ id="x23-65001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setMaximumFetchCountAtAtime(<span 
+class="ecbx-1000">int</span>&#x00A0;maximumFetchCountAtAtime)
+   </div>
+<!--l. 1944--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-660002.3.1.1.5.2"></a><span 
+class="ecbx-1000">Tatami pagination system</span><br 
+class="newline" /></span>
+   While dojo does not offer a &#8220;real&#8221; pagination system, one is built-in tatami&#8217;s grid.
+For using it, we just need to set the rowsPerPage parameter to something different
+from -1.
+<!--l. 1951--><p class="indent" >   Example :
+   <!--l. 1954-->
+<div class="lstlisting" id="listing-64"><span class="label"><a 
+ id="x23-66001r1"></a></span>grid.setRowsPerPage(50);
+   </div>
+<!--l. 1959--><p class="indent" >   So, the grid will only display the first 50 rows, according to the specified
+order/filter.
+<!--l. 1962--><p class="indent" >   Then if we want to turn pages, we just have to usse one of the following methods
+:
+   <!--l. 1966-->
+<div class="lstlisting" id="listing-65"><span class="label"><a 
+ id="x23-66002r1"></a></span>grid.previousPage();&#x00A0;<br /><span class="label"><a 
+ id="x23-66003r2"></a></span>grid.nextPage();&#x00A0;<br /><span class="label"><a 
+ id="x23-66004r3"></a></span>grid.goToPage(<span 
+class="ecbx-1000">int</span>&#x00A0;pageIndex);
+   </div>
+<!--l. 1974--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-670002.3.1.1.5.3"></a><span 
+class="ecbx-1000">Pagination related Grid API</span></span>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getMaximumFetchCountAtAtime():</span> </dt><dd 
+class="description">gets  how  much  items  should  be
+     loaded at a time (for onScroll paging)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setMaximumFetchCountAtAtime(int):</span> </dt><dd 
+class="description">sets  how  much  items  should  be
+     loaded at a time (for onScroll paging)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getRowsPerPage():</span> </dt><dd 
+class="description">gets the number of row to be displayed on each page
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setRowsPerPage(int):</span> </dt><dd 
+class="description">sets the number of row to be displayed on each page
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">previousPage():</span> </dt><dd 
+class="description">Go to previous page
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">nextPage():</span> </dt><dd 
+class="description">Go to next page
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">goToPage(int):</span> </dt><dd 
+class="description">Go to the given page index</dd></dl>
+<!--l. 1990--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-680002.3.1.1.6"></a><span 
+class="ecbx-1000">Filtering </span><br 
+class="newline" /></span>
+   Tatami&#8217;s grid can easily perform filters. For now, it only supports exact-match
+filters but we expect to support regular expressions and simple mathematic operators
+in the future.
+<!--l. 1998--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-690002.3.1.1.6.1"></a><span 
+class="ecbx-1000">How to filter a grid</span><br 
+class="newline" /></span>
+   To add a filter to the grid , just use :
+   <!--l. 2003-->
+<div class="lstlisting" id="listing-66"><span class="label"><a 
+ id="x23-69001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;addFilter(String&#x00A0;fieldName&#x00A0;,&#x00A0;String&#x00A0;criterium)
+   </div>
+<!--l. 2008--><p class="indent" >   where field name is the attribute on which we want to perform filtering, and
+criterium is the value that attribute has to match.
+<!--l. 2011--><p class="indent" >   For example , it we filter the following grid :
+                                                                  
+
+                                                                  
+<!--l. 2013--><p class="indent" >   <img 
+src="TatamiUserDocumentation19x.png" alt="PIC" class="graphics" width="606.265pt" height="265.99374pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation19x.png" src="19C__dev_workspace_docs_images_grid_filteringexample.eps"  
+-->
+<!--l. 2015--><p class="indent" >   with the following filter:
+   <!--l. 2018-->
+<div class="lstlisting" id="listing-67"><span class="label"><a 
+ id="x23-69002r1"></a></span>grid.addFilter("firstName","Jose");
+   </div>
+<!--l. 2023--><p class="indent" >   It will result in :
+<!--l. 2025--><p class="indent" >   <img 
+src="TatamiUserDocumentation20x.png" alt="PIC" class="graphics" width="510.90874pt" height="66.2475pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation20x.png" src="20C__dev_workspace_docs_images_grid_filteringexample2.eps"  
+-->
+<!--l. 2027--><p class="indent" >   Then , if we want to remove that filter, we can just use :
+   <!--l. 2030-->
+<div class="lstlisting" id="listing-68"><span class="label"><a 
+ id="x23-69003r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;removeFilter(String&#x00A0;fieldName)
+   </div>
+<!--l. 2035--><p class="indent" >   To remove the previous filter, we would use :
+   <!--l. 2038-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-69"><span class="label"><a 
+ id="x23-69004r1"></a></span>grid.removeFilter("firstName");
+   </div>
+<!--l. 2045--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-700002.3.1.1.6.2"></a><span 
+class="ecbx-1000">Filtering API</span><br 
+class="newline" /></span>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">addFilter(String,Object):</span> </dt><dd 
+class="description">Adds a filter on given attribute which would be
+     compared to given object
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeFilter(String):</span> </dt><dd 
+class="description">Removes a filter on given attribute</dd></dl>
+<!--l. 2053--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-710002.3.1.1.7"></a><span 
+class="ecbx-1000">Common issues while manipulating columns : introducing the MVC</span>
+<span 
+class="ecbx-1000">model.</span><br 
+class="newline" /></span>
+   This section is intended to demonstrate some problems with the simplest column
+manipulation API, and to introduce to the solution.
+<!--l. 2058--><p class="indent" >   We will start from the previous column manipulation example :
+   <!--l. 2061-->
+<div class="lstlisting" id="listing-70"><span class="label"><a 
+ id="x23-71001r1"></a></span>Button&#x00A0;button&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Button("Toggle&#x2423;Phone&#x2423;Column");&#x00A0;<br /><span class="label"><a 
+ id="x23-71002r2"></a></span>button.addClickListener(<span 
+class="ecbx-1000">new</span>&#x00A0;ClickListener(){&#x00A0;<br /><span class="label"><a 
+ id="x23-71003r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">private</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a 
+ id="x23-71004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onClick(Widget&#x00A0;sender){&#x00A0;<br /><span class="label"><a 
+ id="x23-71005r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">if</span>(isShown){&#x00A0;<br /><span class="label"><a 
+ id="x23-71006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.removeColumn(1);&#x00A0;<br /><span class="label"><a 
+ id="x23-71007r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.updateView();&#x00A0;<br /><span class="label"><a 
+ id="x23-71008r8"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">false</span>;&#x00A0;<br /><span class="label"><a 
+ id="x23-71009r9"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+class="ecbx-1000">else</span>{&#x00A0;<br /><span class="label"><a 
+ id="x23-71010r10"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.insertColumn("Phone&#x2423;Number"&#x00A0;,&#x00A0;1);&#x00A0;<br /><span class="label"><a 
+ id="x23-71011r11"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.updateView();&#x00A0;<br /><span class="label"><a 
+ id="x23-71012r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a 
+ id="x23-71013r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-71014r14"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-71015r15"></a></span>});&#x00A0;<br /><span class="label"><a 
+ id="x23-71016r16"></a></span>RootPanel.get().add(button);
+   </div>
+<!--l. 2081--><p class="indent" >   Suppose now that we want to insert it AFTER the Birthdate when the user clicks
+on the button again &#x2026; We would probably be tempted to use the following snippet
+:
+   <!--l. 2086-->
+<div class="lstlisting" id="listing-71"><span class="label"><a 
+ id="x23-71017r1"></a></span>}<span 
+class="ecbx-1000">else</span>{&#x00A0;<br /><span class="label"><a 
+ id="x23-71018r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.insertColumn("Phone&#x2423;Number"&#x00A0;,&#x00A0;2);&#x00A0;<br /><span class="label"><a 
+ id="x23-71019r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.updateView();&#x00A0;<br /><span class="label"><a 
+ id="x23-71020r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a 
+ id="x23-71021r5"></a></span>}
+   </div>
+<!--l. 2095--><p class="indent" >   In this case, after the user hit the button a second time , the produced result
+would be :
+                                                                  
+
+                                                                  
+<!--l. 2098--><p class="indent" >   <img 
+src="TatamiUserDocumentation21x.png" alt="PIC" class="graphics" width="263.98624pt" height="201.75374pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation21x.png" src="21C__dev_workspace_docs_images_grid_columnmanipulationtroubleexample.eps"  
+-->
+<!--l. 2100--><p class="indent" >   Why ? That&#8217;s because the only logical link between your data and your columns
+is their order &#x2026; Because we specified an index of 2 for our column, it takes for it the
+data at index 2 from our rows, which is precisely the same as the birthdate column.
+We can also notice that the data from birthdate column has not changed :
+that&#8217;s because when it was created, it was told to use the data from field
+&#8220;2&#8221;.
+<!--l. 2108--><p class="indent" >   If we want to solve this problem, we just can use the following method
+:
+   <!--l. 2112-->
+<div class="lstlisting" id="listing-72"><span class="label"><a 
+ id="x23-71022r1"></a></span>grid.insertColumn("Phone&#x2423;Number"&#x00A0;,&#x00A0;"1",&#x00A0;2);&#x00A0;<br /><span class="label"><a 
+ id="x23-71023r2"></a></span>grid.updateView();&#x00A0;<br /><span class="label"><a 
+ id="x23-71024r3"></a></span>isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">true</span>;
+   </div>
+<!--l. 2117--><p class="indent" >   This method insert a column taking data from the field &#8220;1&#8221; , which was implicitly
+generated when you added your columns. To make it a bit cleaner , we will rewrite
+the base code for our grid :
+   <!--l. 2122-->
+<div class="lstlisting" id="listing-73"><span class="label"><a 
+ id="x23-71025r1"></a></span>Grid&#x00A0;grid&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Grid();&#x00A0;<br /><span class="label"><a 
+ id="x23-71026r2"></a></span>grid.addColumn("Name"&#x00A0;,&#x00A0;"name");&#x00A0;<br /><span class="label"><a 
+ id="x23-71027r3"></a></span>grid.addColumn("Phone&#x2423;Number"&#x00A0;,&#x00A0;"number");&#x00A0;<br /><span class="label"><a 
+ id="x23-71028r4"></a></span>grid.addColumn("BirthDate"&#x00A0;,&#x00A0;"birthdate");&#x00A0;<br /><span class="label"><a 
+ id="x23-71029r5"></a></span>Object[]&#x00A0;row1&#x00A0;=&#x00A0;{"John&#x2423;Doe"&#x00A0;,&#x00A0;"0123456789"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("03/25/1981")&#x00A0;};&#x00A0;<br /><span class="label"><a 
+ id="x23-71030r6"></a></span>Object[]&#x00A0;row2&#x00A0;=&#x00A0;{"Jane&#x2423;Doe"&#x00A0;,&#x00A0;"9876543210"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("11/12/1978")&#x00A0;};&#x00A0;<br /><span class="label"><a 
+ id="x23-71031r7"></a></span>grid.addRow(row1);&#x00A0;<br /><span class="label"><a 
+ id="x23-71032r8"></a></span>grid.addRow(row2);&#x00A0;<br /><span class="label"><a 
+ id="x23-71033r9"></a></span>grid.setWidth("300px");&#x00A0;<br /><span class="label"><a 
+ id="x23-71034r10"></a></span>grid.setHeight("200px");&#x00A0;<br /><span class="label"><a 
+ id="x23-71035r11"></a></span>RootPanel.get().add(grid);&#x00A0;<br /><span class="label"><a 
+ id="x23-71036r12"></a></span>Button&#x00A0;button&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Button("Toggle&#x2423;Phone&#x2423;Column");&#x00A0;<br /><span class="label"><a 
+ id="x23-71037r13"></a></span>button.addClickListener(<span 
+class="ecbx-1000">new</span>&#x00A0;ClickListener(){&#x00A0;<br /><span class="label"><a 
+ id="x23-71038r14"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">private</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a 
+ id="x23-71039r15"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onClick(Widget&#x00A0;sender)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x23-71040r16"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">if</span>(isShown){&#x00A0;<br /><span class="label"><a 
+ id="x23-71041r17"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.removeColumn(1);&#x00A0;<br /><span class="label"><a 
+ id="x23-71042r18"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.updateView();&#x00A0;<br /><span class="label"><a 
+ id="x23-71043r19"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">false</span>;&#x00A0;<br /><span class="label"><a 
+ id="x23-71044r20"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+class="ecbx-1000">else</span>{&#x00A0;<br /><span class="label"><a 
+ id="x23-71045r21"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.insertColumn("Phone&#x2423;Number"&#x00A0;,&#x00A0;"number"&#x00A0;,&#x00A0;2);&#x00A0;<br /><span class="label"><a 
+ id="x23-71046r22"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;grid.updateView();&#x00A0;<br /><span class="label"><a 
+ id="x23-71047r23"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;isShown&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a 
+ id="x23-71048r24"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-71049r25"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-71050r26"></a></span>});&#x00A0;<br /><span class="label"><a 
+ id="x23-71051r27"></a></span>RootPanel.get().add(button);
+   </div>
+<!--l. 2153--><p class="indent" >   Notice the what has changed : we assigned a field name to the columns when we
+created them. Later, when we added our rows, the grid assigned field names to the
+various objects in the row according to the column&#8217;s order. Then , we can assign data
+to a column by its field name. That shows the limits of the simple grid utilisation &#x2026;
+Please see Grid MVC section for a more powerful way of assigning columns and
+rows.
+                                                                  
+
+                                                                  
+<!--l. 2162--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.1.2   </span> <a 
+ id="x23-720002.3.1.2"></a>Cell editing and formatting</h5>
+<!--l. 2166--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-730002.3.1.2.1"></a><span 
+class="ecbx-1000">Formatting</span><br 
+class="newline" /></span>
+   As we have seen earlier, some data need to be formatted for display. Tatami grid
+package offers only a Date formatter and a Currency formatter , but more are
+expected to come. You can also implement your own, by implementing the Formatter
+interface.
+<!--l. 2175--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-740002.3.1.2.1.1"></a><span 
+class="ecbx-1000">How to use the date formatter</span><br 
+class="newline" /></span>
+   Example for a Date formatter, using the example from previous section
+:
+   <!--l. 2181-->
+<div class="lstlisting" id="listing-74"><span class="label"><a 
+ id="x23-74001r1"></a></span>grid.addColumn("Name"&#x00A0;,&#x00A0;"name");&#x00A0;<br /><span class="label"><a 
+ id="x23-74002r2"></a></span>grid.addColumn("Phone&#x2423;Number"&#x00A0;,&#x00A0;"number");&#x00A0;<br /><span class="label"><a 
+ id="x23-74003r3"></a></span>grid.addColumn("BirthDate"&#x00A0;,&#x00A0;"date"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DateFormatter(DateFormatter.displayDateOnly));&#x00A0;<br /><span class="label"><a 
+ id="x23-74004r4"></a></span>grid.addColumn("Birth&#x2423;Time"&#x00A0;,&#x00A0;"date"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DateFormatter(DateFormatter.displayTimeOnly));&#x00A0;<br /><span class="label"><a 
+ id="x23-74005r5"></a></span>grid.addColumn("Birth&#x2423;Year"&#x00A0;,&#x00A0;"date"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DateFormatter("yyyy",<span 
+class="ecbx-1000">null</span>));&#x00A0;<br /><span class="label"><a 
+ id="x23-74006r6"></a></span>grid.addColumn("Birth&#x2423;Day&#x2423;and&#x2423;Time"&#x00A0;,&#x00A0;"date"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DateFormatter("mm:dd","hh:mm"));&#x00A0;<br /><span class="label"><a 
+ id="x23-74007r7"></a></span>grid.addColumn("Birth&#x2423;Time"&#x00A0;,&#x00A0;"date"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DateFormatter(<span 
+class="ecbx-1000">null</span>&#x00A0;,&#x00A0;"hh"));&#x00A0;<br /><span class="label"><a 
+ id="x23-74008r8"></a></span>Object[]&#x00A0;row1&#x00A0;=&#x00A0;{"John&#x2423;Doe"&#x00A0;,&#x00A0;"0123456789"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("03/25/1981")&#x00A0;};&#x00A0;<br /><span class="label"><a 
+ id="x23-74009r9"></a></span>Object[]&#x00A0;row2&#x00A0;=&#x00A0;{"Jane&#x2423;Doe"&#x00A0;,&#x00A0;"9876543210"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("11/12/1978")};
+   </div>
+<!--l. 2194--><p class="indent" >   The above snippet will give the following output :
+<!--l. 2196--><p class="indent" >   <img 
+src="TatamiUserDocumentation22x.png" alt="PIC" class="graphics" width="530.98375pt" height="87.32625pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation22x.png" src="22C__dev_workspace_docs_images_grid_formattingexample.eps"  
+-->
+<!--l. 2200--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-750002.3.1.2.1.2"></a><span 
+class="ecbx-1000">Date Formatter constructors: </span><br 
+class="newline" /></span>
+   DateFormatter(selector): Either DateFormatter.displayTimeAndDate,
+DateFormatter.displayTimeOnly , or DateFormatter.displayDateOnly.According to
+the constant, will display in the default locale time representation the date and the
+time, the date only , or the time only.
+<!--l. 2207--><p class="indent" >   DateFormatter(datePattern , timePattern): Create a date formatter using the
+specified datePattern and timePattern. Date and Time pattern are specified as in
+ISO. <span class="lstinline">formatter&#x00A0;=<span 
+class="ecbx-1000">new</span>&#x00A0;DateFormatter("dd/mm/yyyy",&#x00A0;<span 
+class="ecbx-1000">null</span>);</span> is equivalent to
+<span class="lstinline">formatter=<span 
+class="ecbx-1000">new</span>&#x00A0;DateFormatter(DateFormatter.displayDateOnly);formatter.setDatePattern("dd/mm/yyyy");</span>
+                                                                  
+
+                                                                  
+<!--l. 2214--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-760002.3.1.2.2"></a><span 
+class="ecbx-1000">Editing</span><br 
+class="newline" /></span>
+   Tatami offers the same grid edition facility as Dojo Grid. That is, you can easily
+use one of the dojo editor to provide your grid in-place editing feature. User toggle
+editing by double-clicking on a grid cell.
+<!--l. 2221--><p class="indent" >   All editors implement the GridEditor interface.
+<!--l. 2224--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-770002.3.1.2.2.1"></a><span 
+class="ecbx-1000">Available editors :</span></span>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">TextEditor:</span> </dt><dd 
+class="description">a simple text field
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">DateEditor:</span> </dt><dd 
+class="description">a drop-down calendar
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">NumberSpinnerEditor:</span> </dt><dd 
+class="description">a simple spinner
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">ComboBoxEditor:</span> </dt><dd 
+class="description">a drop-down list
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">CheckBoxEditor:</span> </dt><dd 
+class="description">a checkbox for boolean values</dd></dl>
+Please refer to Javadoc for specific information about an editor. For the
+NumberSpinnerEditor, please refer to The NumberSpinner component section to see
+how to create it.
+<!--l. 2236--><p class="indent" >   Sample :
+   <!--l. 2239-->
+<div class="lstlisting" id="listing-75"><span class="label"><a 
+ id="x23-77001r1"></a></span>grid.addColumn("Name"&#x00A0;,&#x00A0;"name"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;TextEditor());&#x00A0;<br /><span class="label"><a 
+ id="x23-77002r2"></a></span>grid.addColumn("Phone&#x2423;Number"&#x00A0;,&#x00A0;"number"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;TextEditor());&#x00A0;<br /><span class="label"><a 
+ id="x23-77003r3"></a></span>grid.addColumn("Salary",&#x00A0;"salary",&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;NumberSpinnerEditor(&#x00A0;0&#x00A0;,&#x00A0;1500&#x00A0;,&#x00A0;100));&#x00A0;<br /><span class="label"><a 
+ id="x23-77004r4"></a></span>grid.addColumn("BirthDate"&#x00A0;,&#x00A0;"date"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DateEditor()&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DateFormatter(DateFormatter.displayDateOnly));&#x00A0;<br /><span class="label"><a 
+ id="x23-77005r5"></a></span>String[]&#x00A0;positions&#x00A0;=&#x00A0;{"CEO"&#x00A0;,&#x00A0;"Developer"};&#x00A0;<br /><span class="label"><a 
+ id="x23-77006r6"></a></span>grid.addColumn("Position"&#x00A0;,&#x00A0;"position"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;ComboBoxEditor(positions));&#x00A0;<br /><span class="label"><a 
+ id="x23-77007r7"></a></span>grid.addColumn("Available"&#x00A0;,&#x00A0;"available"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;CheckBoxEditor());&#x00A0;<br /><span class="label"><a 
+ id="x23-77008r8"></a></span>Object[]&#x00A0;row1&#x00A0;=&#x00A0;{"John&#x2423;Doe"&#x00A0;,&#x00A0;"0123456789"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Integer("500")&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("03/25/1981")&#x00A0;,&#x00A0;"CEO"&#x00A0;,&#x00A0;Boolean.FALSE};&#x00A0;<br /><span class="label"><a 
+ id="x23-77009r9"></a></span>Object[]&#x00A0;row2&#x00A0;=&#x00A0;{"Jane&#x2423;Doe"&#x00A0;,&#x00A0;"9876543210"&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Integer("1200")&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("11/12/1978")&#x00A0;,&#x00A0;"Developer"&#x00A0;,&#x00A0;Boolean.TRUE};
+   </div>
+<!--l. 2252--><p class="indent" >   This will give the following results, based on the cell on which you double-clicked:
+                                                                  
+
+                                                                  
+<!--l. 2255--><p class="indent" >   <img 
+src="TatamiUserDocumentation23x.png" alt="PIC" class="graphics" width="544.03249pt" height="250.9375pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation23x.png" src="23C__dev_workspace_docs_images_grid_editorsexample.eps"  
+-->
+<!--l. 2258--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.1.3   </span> <a 
+ id="x23-780002.3.1.3"></a>Grid events</h5>
+<!--l. 2260--><p class="noindent" >The grid accepts GridListeners , which are notified when an event occurs on
+the grid. To observe those events, just implements the following interface
+:
+   <!--l. 2265-->
+<div class="lstlisting" id="listing-76"><span class="label"><a 
+ id="x23-78001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">interface</span>&#x00A0;GridListener&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x23-78002r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onCellClick(Grid&#x00A0;grid&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">int</span>&#x00A0;rowIndex&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">int</span>&#x00A0;colIndex&#x00A0;String&#x00A0;colName);&#x00A0;<br /><span class="label"><a 
+ id="x23-78003r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onSelectionChanged(Grid&#x00A0;grid);&#x00A0;<br /><span class="label"><a 
+ id="x23-78004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onDataChange(Grid&#x00A0;grid&#x00A0;,&#x00A0;Item&#x00A0;itemWhichChanged,&#x00A0;String&#x00A0;attributeName,&#x00A0;Object&#x00A0;oldValue,&#x00A0;Object&#x00A0;newValue);&#x00A0;<br /><span class="label"><a 
+ id="x23-78005r5"></a></span>}
+   </div>
+     <ul class="itemize1">
+     <li class="itemize">onCellClick event will be fired each time a cell is clicked.
+     </li>
+     <li class="itemize">onSelectionChange  event  will  be  fired  each  time  the  user  selects  (or
+     unselects) a row, via a row click , or the classic SHIFT + click , CTRL +
+     click selection combinations.
+     </li>
+     <li class="itemize">onDataChange will be fired each time an item in the underlying store has
+     changed.</li></ul>
+                                                                  
+
+                                                                  
+<!--l. 2281--><p class="noindent" >For example, let&#8217;s write a simple grid observer to see how we can handle those
+events:
+   <!--l. 2285-->
+<div class="lstlisting" id="listing-77"><span class="label"><a 
+ id="x23-78006r1"></a></span><span 
+class="ecbx-1000">class</span>&#x00A0;myGridListener&#x00A0;<span 
+class="ecbx-1000">implements</span>&#x00A0;GridListener{&#x00A0;<br /><span class="label"><a 
+ id="x23-78007r2"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">The</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">html</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">which</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">content</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">will</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">be</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">changed</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">each</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">time</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">grid</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">event</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">occurs</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-78008r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">private</span>&#x00A0;HTML&#x00A0;html;&#x00A0;<br /><span class="label"><a 
+ id="x23-78009r4"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">What</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">should</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">be</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">updated</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">when</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">clicked</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">on</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-78010r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">private</span>&#x00A0;String&#x00A0;lastClickedCellContent;&#x00A0;<br /><span class="label"><a 
+ id="x23-78011r6"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">What</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">should</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">be</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">updated</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">when</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">rows</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">selection</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">change</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-78012r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">private</span>&#x00A0;String&#x00A0;selectedIndexesCellContent;&#x00A0;<br /><span class="label"><a 
+ id="x23-78013r8"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">What</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">should</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">be</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">displayed</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">when</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">an</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">item</span><span 
+class="ecti-1000">&#8217;</span><span 
+class="ecti-1000">s</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">value</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">changes</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-78014r9"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">private</span>&#x00A0;String&#x00A0;itemChangedContent;&#x00A0;<br /><span class="label"><a 
+ id="x23-78015r10"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">The</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">constructor</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">takes</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">an</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">HTML</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">object</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">in</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">which</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">it</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">will</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">write</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">content</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-78016r11"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;myGridListener(HTML&#x00A0;html){&#x00A0;<br /><span class="label"><a 
+ id="x23-78017r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">this</span>.html&#x00A0;=&#x00A0;html;&#x00A0;<br /><span class="label"><a 
+ id="x23-78018r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-78019r14"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Updates</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">html</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">object</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">content</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-78020r15"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">private</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;refresh(){&#x00A0;<br /><span class="label"><a 
+ id="x23-78021r16"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">this</span>.html.setText(lastClickedCellContent&#x00A0;+&#x00A0;"\n"&#x00A0;+&#x00A0;selectedIndexesCellContent&#x00A0;+"\n"&#x00A0;+&#x00A0;itemChangedContent);&#x00A0;<br /><span class="label"><a 
+ id="x23-78022r17"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-78023r18"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Updates</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">displayed</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">text</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">show</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">content</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">of</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">which</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">has</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">been</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">clicked</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-78024r19"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onCellClick(Grid&#x00A0;grid,&#x00A0;<span 
+class="ecbx-1000">int</span>&#x00A0;rowIndex&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">int</span>&#x00A0;colIndex&#x00A0;,&#x00A0;String&#x00A0;colFieldName){&#x00A0;<br /><span class="label"><a 
+ id="x23-78025r20"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Object&#x00A0;cellContent&#x00A0;=&#x00A0;grid.getItemFromRow(rowIndex).getValues(colFieldName);&#x00A0;<br /><span class="label"><a 
+ id="x23-78026r21"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;lastClickedCellContent&#x00A0;="The&#x2423;last&#x2423;clicked&#x2423;cell&#x2423;contained&#x2423;:&#x2423;"&#x00A0;+&#x00A0;cellContent.toString();&#x00A0;<br /><span class="label"><a 
+ id="x23-78027r22"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">this</span>.refresh();&#x00A0;<br /><span class="label"><a 
+ id="x23-78028r23"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-78029r24"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Updates</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">displayed</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">text</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">show</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">selected</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">rows</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">indexes</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-78030r25"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onSelectionChanged(Grid&#x00A0;grid){&#x00A0;<br /><span class="label"><a 
+ id="x23-78031r26"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">int</span>[]&#x00A0;indexes&#x00A0;=&#x00A0;grid.getSelectedIndexes();&#x00A0;<br /><span class="label"><a 
+ id="x23-78032r27"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;selectedIndexesCellContent&#x00A0;=&#x00A0;"Selected&#x2423;rows&#x2423;:&#x2423;";&#x00A0;<br /><span class="label"><a 
+ id="x23-78033r28"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">for</span>(<span 
+class="ecbx-1000">int</span>&#x00A0;i&#x00A0;=&#x00A0;0;&#x00A0;i&#x00A0;&#x003C;&#x00A0;indexes.length;&#x00A0;i&#x00A0;++&#x00A0;){&#x00A0;<br /><span class="label"><a 
+ id="x23-78034r29"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;selectedIndexesCellContent&#x00A0;+=&#x00A0;i&#x00A0;+"&#x2423;";&#x00A0;<br /><span class="label"><a 
+ id="x23-78035r30"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-78036r31"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">this</span>.refresh();&#x00A0;<br /><span class="label"><a 
+ id="x23-78037r32"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-78038r33"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Updates</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">displayed</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">text</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">show</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">how</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">data</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">has</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">changed</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">in</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">grid</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-78039r34"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onDataChange(Grid&#x00A0;grid&#x00A0;,&#x00A0;Item&#x00A0;itemWhichChanged,&#x00A0;String&#x00A0;attributeName,&#x00A0;Object&#x00A0;oldValue,&#x00A0;Object&#x00A0;newValue){&#x00A0;<br /><span class="label"><a 
+ id="x23-78040r35"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;itemChangedContent&#x00A0;=&#x00A0;"&#x2423;The&#x2423;item&#x2423;at&#x2423;row&#x2423;"&#x00A0;+&#x00A0;grid.getRowFromItem(itemWhichChanged)&#x00A0;+&#x00A0;"&#x2423;has&#x2423;changed.&#x2423;His&#x2423;attribute&#x2423;"&#x00A0;+&#x00A0;attributeName&#x00A0;+&#x00A0;"&#x2423;changed&#x2423;its&#x2423;value&#x2423;from&#x2423;"&#x00A0;+&#x00A0;oldValue.toString()&#x00A0;+&#x00A0;"&#x2423;to&#x2423;"+&#x00A0;newValue.toString();&#x00A0;<br /><span class="label"><a 
+ id="x23-78041r36"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">this</span>.refresh();&#x00A0;<br /><span class="label"><a 
+ id="x23-78042r37"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x23-78043r38"></a></span>}&#x00A0;<br /><span class="label"><a 
+ id="x23-78044r39"></a></span>HTML&#x00A0;html&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML();&#x00A0;<br /><span class="label"><a 
+ id="x23-78045r40"></a></span>grid.addGridListener(<span 
+class="ecbx-1000">new</span>&#x00A0;myGridListener(html));&#x00A0;<br /><span class="label"><a 
+ id="x23-78046r41"></a></span>RootPanel.get().add(html);
+   </div>
+<!--l. 2330--><p class="indent" >   After modifying the &#8220;John Doe&#8221; row , and selecting both rows (with CTRL +
+click) :
+<!--l. 2333--><p class="indent" >   <img 
+src="TatamiUserDocumentation24x.png" alt="PIC" class="graphics" width="532.99124pt" height="251.94124pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation24x.png" src="24C__dev_workspace_docs_images_grid_listenerexample.eps"  
+-->
+<!--l. 2336--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.1.4   </span> <a 
+ id="x23-790002.3.1.4"></a>Advanced Grid usage</h5>
+<!--l. 2339--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-800002.3.1.4.1"></a><span 
+class="ecbx-1000">Datastore usage</span></span>
+<!--l. 2343--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-810002.3.1.4.1.1"></a><span 
+class="ecbx-1000">Introduction</span><br 
+class="newline" /></span>
+   Tatami grid, just as dojo grid, relies on a data store. This data store is used to
+access the various items represented in the grid, and perform local operation like
+sorting , filtering &#x2026;
+                                                                  
+
+                                                                  
+<!--l. 2349--><p class="indent" >   Whenever anything changes in the datastore, the grid updates itself according to
+those needs.
+<!--l. 2352--><p class="indent" >   There are two principles you should be aware of:
+     <ul class="itemize1">
+     <li class="itemize">a row in the grid represents an item in the datastore
+     </li>
+     <li class="itemize">an item always has a unique identifier</li></ul>
+<!--l. 2357--><p class="noindent" >You should see the DataStore Integration section on how to use it.
+<!--l. 2361--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-820002.3.1.4.1.2"></a><span 
+class="ecbx-1000">Store-related Grid API</span><br 
+class="newline" /></span>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getStore():</span> </dt><dd 
+class="description">Gets the grid datastore
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setStore(GridDataStore</span><span 
+class="ecbx-1000">&#x00A0;store):</span> </dt><dd 
+class="description">Sets the grid datastore</dd></dl>
+The following methods add an item to the datastore, either directly or creating it
+from an array of object, positioning the item attributes accordingly to the declared
+columns fields:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">addRow(Item)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addRow(Item,int)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addRow(Object[])</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addRow(Object[],int)</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 2375--><p class="noindent" >The following methods remove an item from the datastore:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">removeRow(int)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeRow(Item)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeSelectedRows()</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+                                                                  
+
+                                                                  
+<!--l. 2383--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x23-830002.3.1.4.2"></a><span 
+class="ecbx-1000">GridLayout, GridView and Cells</span><br 
+class="newline" /></span>
+   In the Adding / removing columns section , we saw how to create/modify a grid
+layout.
+<!--l. 2388--><p class="indent" >   We also saw how this method was limited when we want to add/remove columns
+from a grid.
+<!--l. 2391--><p class="indent" >   Tatami grid offers the same flexibility as dojo&#8217;s one to define how it should be
+layed out.
+<!--l. 2396--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-840002.3.1.4.2.1"></a><span 
+class="ecbx-1000">How the grid layout is defined</span><br 
+class="newline" /></span>
+   The schema below shows what objects are used to define a grid layout.
+                                                                  
+
+                                                                  
+<!--l. 2400--><p class="indent" >   <img 
+src="TatamiUserDocumentation25x.png" alt="PIC" class="graphics" width="701.62125pt" height="557.08124pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation25x.png" src="25C__dev_workspace_docs_images_grid_layoutdefinition.eps"  
+-->
+<!--l. 2402--><p class="indent" >   A layout is composed of one or several views (in red). Those views can be denifed
+as a set of columns. Each view can have its specific size, and its specific scrollbar(s).
+Of course, the vertical scrollbars are synchronized, since a grid row is defined among
+all views. Defining multiple views allows to have a fixed width view (not scrollable)
+while another view is scrollable. That can be useful to produce grid like this
+:
+<!--l. 2410--><p class="indent" >   <img 
+src="TatamiUserDocumentation26x.png" alt="PIC" class="graphics" width="202.75749pt" height="202.75749pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation26x.png" src="26C__dev_workspace_docs_images_grid_multipleviewusage.eps"  
+-->
+<!--l. 2412--><p class="indent" >   The first column (name) is in its own (not scrollable) view, while other columns
+are grouped in another view. Thus, you can scroll through the columns while keeping
+the &#8220;Name&#8221; column in sight.
+<!--l. 2417--><p class="indent" >   A view itself is composed of one or several rows of cells (in light green). Defining
+multiple cell-rows for a view is useful when you want to create sub-rows in the grid
+(look at the description field in the layout schema).
+<!--l. 2422--><p class="indent" >   Those rows are composed of cells (in blue). The cell is the atomic entity of the
+layout. A cell is (at least) defined with the field used to fill its values and
+its name. If no field is provided, it will use the &#8220;value&#8221; setting to fill the
+cell.
+<!--l. 2428--><p class="indent" >   Both cell and views have settings you can use to define their appearance and
+behavior.
+<!--l. 2433--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-850002.3.1.4.2.2"></a><span 
+class="ecbx-1000">GridLayout usage</span><br 
+class="newline" /></span>
+   Below is a simple sample showing how to create a GridLayout.
+   <!--l. 2438-->
+<div class="lstlisting" id="listing-78"><span class="label"><a 
+ id="x23-85001r1"></a></span>GridLayout&#x00A0;layout&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;GridLayout();&#x00A0;<br /><span class="label"><a 
+ id="x23-85002r2"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Creating</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">first</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">(</span><span 
+class="ecti-1000">left</span><span 
+class="ecti-1000">)</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">view</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85003r3"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">This</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">view</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">contains</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">only</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">one</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">which</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">label</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">Name</span><span 
+class="ecti-1000">".</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85004r4"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">wich</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">content</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">myname</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">field</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">from</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">data</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">store</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">objects</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85005r5"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">This</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">also</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">not</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">resizable</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85006r6"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">It</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">also</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">has</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">fixed</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">width</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">not</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">scrollable</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85007r7"></a></span>GridView&#x00A0;view&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;GridView();&#x00A0;<br /><span class="label"><a 
+ id="x23-85008r8"></a></span>Cell&#x00A0;cell&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Cell("myname"&#x00A0;,&#x00A0;"Name");&#x00A0;<br /><span class="label"><a 
+ id="x23-85009r9"></a></span>cell.setIsNotResizable(Boolean.TRUE);&#x00A0;<br /><span class="label"><a 
+ id="x23-85010r10"></a></span>view.addCellToLastRow(cell);&#x00A0;<br /><span class="label"><a 
+ id="x23-85011r11"></a></span>view.setScrollable(<span 
+class="ecbx-1000">false</span>);&#x00A0;<br /><span class="label"><a 
+ id="x23-85012r12"></a></span>view.setWidth("100px");&#x00A0;<br /><span class="label"><a 
+ id="x23-85013r13"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Creating</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">second</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">(</span><span 
+class="ecti-1000">right</span><span 
+class="ecti-1000">)</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">view</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85014r14"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">This</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">view</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">has</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">2</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">rows</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">GridView</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85015r15"></a></span>view2&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;GridView();&#x00A0;<br /><span class="label"><a 
+ id="x23-85016r16"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">We</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">add</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">(</span><span 
+class="ecti-1000">current</span><span 
+class="ecti-1000">)</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">last</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">row</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85017r17"></a></span>view2.addCellToLastRow(<span 
+class="ecbx-1000">new</span>&#x00A0;Cell("number"&#x00A0;,"Phone&#x2423;Number"));&#x00A0;<br /><span class="label"><a 
+ id="x23-85018r18"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">We</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">define</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">containing</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">salary</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">attribute</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">add</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">it</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">row</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85019r19"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">This</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">editable</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">(</span><span 
+class="ecti-1000">with</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">number</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">spinner</span><span 
+class="ecti-1000">)</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85020r20"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">formatted</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">as</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">currency</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85021r21"></a></span>Cell&#x00A0;salaryCell&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Cell("salary"&#x00A0;,"Salary");&#x00A0;<br /><span class="label"><a 
+ id="x23-85022r22"></a></span>salaryCell.setEditor(<span 
+class="ecbx-1000">new</span>&#x00A0;NumberSpinnerEditor());&#x00A0;<br /><span class="label"><a 
+ id="x23-85023r23"></a></span>salaryCell.setFormatter(<span 
+class="ecbx-1000">new</span>&#x00A0;CurrencyFormatter("EUR"));&#x00A0;<br /><span class="label"><a 
+ id="x23-85024r24"></a></span>salaryCell.setWidth("50px");&#x00A0;<br /><span class="label"><a 
+ id="x23-85025r25"></a></span>view2.addCellToLastRow(salaryCell);&#x00A0;<br /><span class="label"><a 
+ id="x23-85026r26"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">We</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">define</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">containt</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">date</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">attribute</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">add</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">it</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">row</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85027r27"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">This</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">also</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">editable</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">(</span><span 
+class="ecti-1000">with</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">DateEditor</span><span 
+class="ecti-1000">)</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">formatted</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">as</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">date</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85028r28"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Please</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">note</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">that</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">we</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">define</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">specific</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">style</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">settings</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">for</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">this</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85029r29"></a></span>Cell&#x00A0;birthDateCell&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Cell("date"&#x00A0;,"Birthdate");&#x00A0;<br /><span class="label"><a 
+ id="x23-85030r30"></a></span>birthDateCell.setEditor(<span 
+class="ecbx-1000">new</span>&#x00A0;DateEditor());&#x00A0;<br /><span class="label"><a 
+ id="x23-85031r31"></a></span>birthDateCell.setFormatter(<span 
+class="ecbx-1000">new</span>&#x00A0;DateFormatter(DateFormatter.displayDateOnly));&#x00A0;<br /><span class="label"><a 
+ id="x23-85032r32"></a></span>birthDateCell.setWidth("150px");&#x00A0;<br /><span class="label"><a 
+ id="x23-85033r33"></a></span>birthDateCell.setCellStyles("text<span 
+class="cmsy-10">-</span>align&#x2423;:&#x2423;right;");&#x00A0;<br /><span class="label"><a 
+ id="x23-85034r34"></a></span>view2.addCellToLastRow(birthDateCell);&#x00A0;<br /><span class="label"><a 
+ id="x23-85035r35"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">We</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">define</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">containing</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">description</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85036r36"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">This</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">will</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">be</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">added</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">second</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">row</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">will</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">have</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">colspan</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">of</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">3</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85037r37"></a></span>Cell&#x00A0;descriptionCell&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Cell("description"&#x00A0;,&#x00A0;"Description");&#x00A0;<br /><span class="label"><a 
+ id="x23-85038r38"></a></span>descriptionCell.setColSpan(<span 
+class="ecbx-1000">new</span>&#x00A0;Integer(3));&#x00A0;<br /><span class="label"><a 
+ id="x23-85039r39"></a></span>view2.addCellToRow(descriptionCell,&#x00A0;1);&#x00A0;<br /><span class="label"><a 
+ id="x23-85040r40"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">We</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">define</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">containing</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">appreciation</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">add</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">it</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">first</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">row</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85041r41"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">This</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">has</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">rowspan</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">of</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">2</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85042r42"></a></span>Cell&#x00A0;appreciationCell&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Cell("appreciation"&#x00A0;,&#x00A0;"Mark");&#x00A0;<br /><span class="label"><a 
+ id="x23-85043r43"></a></span>appreciationCell.setEditor(<span 
+class="ecbx-1000">new</span>&#x00A0;NumberSpinnerEditor(0f&#x00A0;,&#x00A0;10f,&#x00A0;0.5f));&#x00A0;<br /><span class="label"><a 
+ id="x23-85044r44"></a></span>appreciationCell.setRowSpan(<span 
+class="ecbx-1000">new</span>&#x00A0;Integer(2));&#x00A0;<br /><span class="label"><a 
+ id="x23-85045r45"></a></span>view2.addCellToRow(appreciationCell,0);&#x00A0;<br /><span class="label"><a 
+ id="x23-85046r46"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">We</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">define</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">cell</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">containing</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">an</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">constant</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">value</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">(</span><span 
+class="ecti-1000">an</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">image</span><span 
+class="ecti-1000">)</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">add</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">it</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">just</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">like</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">previous</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">one</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85047r47"></a></span>Cell&#x00A0;imageCell&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Cell("Send&#x2423;e<span 
+class="cmsy-10">-</span>mail");&#x00A0;<br /><span class="label"><a 
+ id="x23-85048r48"></a></span>imageCell.setDefaultValue("&#x003C;img&#x2423;src=&#8217;./mail<span 
+class="cmsy-10">-</span>message<span 
+class="cmsy-10">-</span>new.png&#8217;&#x2423;alt=&#8217;send&#x2423;mail&#8217;&#x003E;&#x003C;/img&#x003E;");&#x00A0;<br /><span class="label"><a 
+ id="x23-85049r49"></a></span>imageCell.setRowSpan(<span 
+class="ecbx-1000">new</span>&#x00A0;Integer(2));&#x00A0;<br /><span class="label"><a 
+ id="x23-85050r50"></a></span>view2.addCellToRow(imageCell,0);&#x00A0;<br /><span class="label"><a 
+ id="x23-85051r51"></a></span>view2.setWidth("500px");&#x00A0;<br /><span class="label"><a 
+ id="x23-85052r52"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">We</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">add</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">views</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">layout</span>&#x00A0;<br /><span class="label"><a 
+ id="x23-85053r53"></a></span>layout.addView(view);&#x00A0;<br /><span class="label"><a 
+ id="x23-85054r54"></a></span>layout.addView(view2);&#x00A0;<br /><span class="label"><a 
+ id="x23-85055r55"></a></span>grid.setLayout(layout);&#x00A0;<br /><span class="label"><a 
+ id="x23-85056r56"></a></span>grid.setAutoWidth(<span 
+class="ecbx-1000">false</span>);&#x00A0;<br /><span class="label"><a 
+ id="x23-85057r57"></a></span>grid.setWidth("500px");&#x00A0;<br /><span class="label"><a 
+ id="x23-85058r58"></a></span>grid.updateView();
+   </div>
+                                                                  
+
+                                                                  
+<!--l. 2500--><p class="indent" >   The above code will produce the following layout :
+<!--l. 2502--><p class="indent" >   <img 
+src="TatamiUserDocumentation27x.png" alt="PIC" class="graphics" width="504.88625pt" height="200.75pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation27x.png" src="27C__dev_workspace_docs_images_grid_layoutexample.eps"  
+-->
+<!--l. 2506--><p class="indent" >   <span class="subparagraphHead"> <a 
+ id="x23-860002.3.1.4.2.3"></a><span 
+class="ecbx-1000">GridLayout , GridView and Cell APIs</span><br 
+class="newline" /></span>
+   <span 
+class="ecbx-1200">GridLayout API :</span>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">addCellToLastView(Cell):</span> </dt><dd 
+class="description">Adds the given cell to the last row of the last
+     view (useful when there is an only view)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addCellToLastView(Cell,</span> </dt><dd 
+class="description">int): Adds the given cell at the specified index of
+     the last row of the last view (useful when there is an only view)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addView(GridView):</span> </dt><dd 
+class="description">Adds a view to the layout
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addView(int,GridView):</span> </dt><dd 
+class="description">Adds a view to the layout at the given index
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">clear():</span> </dt><dd 
+class="description">Removes all views from the layout
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getCellAmongAllViews(int):</span> </dt><dd 
+class="description">Gets a cell by its index among all views. That
+     is, if the layout contains 2 views of 4 cells each, getCellAmongAllViews(4)
+     will return the cell at index 0 from the second view.
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getLastView():</span> </dt><dd 
+class="description">Returns the last view from the layout
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getNbCells():</span> </dt><dd 
+class="description">Returns the total number of cells defined in the layout
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getView(int):</span> </dt><dd 
+class="description">Returns the view at specified index
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeCellAmongAllViews(Cell):</span> </dt><dd 
+class="description">Removes  a  cell  wherever  it  is  in  the
+     views
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeView(GridView):</span> </dt><dd 
+class="description">Removes a view from the layout
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeView(int):</span> </dt><dd 
+class="description">Removes the view at specified index
+     <!--l. 2532--><p class="noindent" ><span 
+class="ecbx-1200">GridView API:</span>
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addCellToLastRow(Cell):</span> </dt><dd 
+class="description">Adds the given cell to the last row
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addCellToLastRow(Cell,int):</span> </dt><dd 
+class="description">Adds the given cell at the specified index of
+     the last row
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addCellToRow(Cell,int</span><span 
+class="ecbx-1000">&#x00A0;row):Adds</span> </dt><dd 
+class="description">the given cell to the given row. If this
+     row doesn&#8217;t exist, it will be created.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addCellToRow(Cell,int</span><span 
+class="ecbx-1000">&#x00A0;row,int</span><span 
+class="ecbx-1000">&#x00A0;index):</span> </dt><dd 
+class="description">Adds the given cell at the given
+     index of the given row. If this row doesn&#8217;t exist, it will be created.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">clear():</span> </dt><dd 
+class="description">Removes all rows from the view
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getCell(int):</span> </dt><dd 
+class="description">Gets a cell by its index among all rows. That is, if the view
+     contains 2 rows of 4 cells each, getCell (4) will return the cell at index 0
+     from the second view.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getCellFromRow(int</span> </dt><dd 
+class="description">row, int index): Returns the cell at the specified index
+     from the specified row
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getNbCells():</span> </dt><dd 
+class="description">Returns the total number of cells defined in the view
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getRow(int):</span> </dt><dd 
+class="description">Returns the row at specified index ( a row is a List of cells)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getWidth():</span> </dt><dd 
+class="description">Get the specified width in css units. If null, the view will be as
+     wide as its containing cells.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">isScrollable():</span> </dt><dd 
+class="description">Returns true if this view shows scrollbars, false othervwise
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeCell(Cell):</span> </dt><dd 
+class="description">Removes the given cell
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeCell(Cell,</span> </dt><dd 
+class="description">int): Removes the given cell from the given row
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeCell(int):</span> </dt><dd 
+class="description">Removes the cell at given index (see getCell(int))
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeCell(int</span> </dt><dd 
+class="description">row, int index): Removes the cell at given index from the given
+     row.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setScrollable(boolean):</span> </dt><dd 
+class="description">Sets if the view should display scrollbars
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setWidth(String):</span> </dt><dd 
+class="description">Sets the view width (in standard css units)
+     <!--l. 2566--><p class="noindent" ><span 
+class="ecbx-1200">Cell API:</span><br 
+class="newline" />The following methods respectevely get/set the css classes or styles applied
+     to a Cell:
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getCellClasses()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setCellClasses(String)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getCellStyles()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setCellStyles(String)</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 2575--><p class="noindent" >The following methods respectevely get/set the css classes or styles applied to the whole
+column (data and header):
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getClasses()</span> </dt><dd 
+class="description">&#x00A0;
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setClasses(String)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getStyles()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setStyles(String)</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 2583--><p class="noindent" >The following methods respectively get/set the colspan (ie, the number of columns this
+cell should occupy)
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getColSpan():</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setColSpan(Integer)</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 2589--><p class="noindent" >The following methods respectively get/set the rowspan(ie, the number of rows this cell
+should occupy)
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getRowSpan()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setRowSpan(Integer)</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 2595--><p class="noindent" >The following methods respectively get/set the cell default value (ie , the value to be
+used when no field is assigned or when the underlying item doesn&#8217;t have the given
+field )
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getDefaultValue()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setDefaultValue()</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 2602--><p class="noindent" >The following methods respectively get/set this cell editor. If the editor is different from
+null, the cell will be editable.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getEditor()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setEditor(GridEditor)</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 2608--><p class="noindent" >The following methods respectively get/set the field from which this cell should fill its
+content.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getField()</span> </dt><dd 
+class="description">&#x00A0;
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setField(String)</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 2614--><p class="noindent" >The following methods respectively get/set whether this cell should not be resizable. If
+true, the cell will not be resizable. If false , it will be resizable. Default to
+true.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getIsNotResizable()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setIsNotResizable(Boolean)</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 2621--><p class="noindent" >The following methods respectively get/set this cell name (ie , what will be displayed on
+the column header)
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getName()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setName(String)</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 2627--><p class="noindent" >The following methods respectively get/set the cell&#8217;s width in standard css units
+:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getWidth()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setWidth(String)</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+                                                                  
+
+                                                                  
+   <!--l. 2634--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu14.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu13.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 2634--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu13.html"></a>     
+</body></html> 

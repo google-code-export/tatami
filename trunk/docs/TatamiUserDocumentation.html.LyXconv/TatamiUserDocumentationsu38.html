@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>DndSources</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 5113--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu39.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu37.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse18.html#TatamiUserDocumentationsu38.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">5.2.2   </span> <a 
+ id="x65-1550005.2.2"></a>DndSources</h4>
+<!--l. 5115--><p class="noindent" >A dnd source acts as a container for Dnd elements. It is registered to an
+associated DnDController, which is designed to manage this particular type of
+source.
+<!--l. 5119--><p class="indent" >   Tatami currently provides two types of dnd sources :
+     <ul class="itemize1">
+     <li class="itemize">WidgetSource: they are constructed from a Panel, and allow any Widget
+     to be dragged.
+     </li>
+     <li class="itemize">TreeSource: they allow tree items to be dragged and to accept drop events.</li></ul>
+<!--l. 5126--><p class="noindent" >You normally do not have to instantiate those objects yourself, but you will be able to
+manipulate them when using a DnDBehavior.
+<!--l. 5129--><p class="indent" >   If you want to use a widgetSource, just use the following method
+   <!--l. 5132-->
+<div class="lstlisting" id="listing-209"><span class="label"><a 
+ id="x65-155001r1"></a></span>DnD.registerSource(Panel&#x00A0;panel);
+   </div>
+<!--l. 5137--><p class="indent" >   Then, you can add register widgets contained in this panel as DndElement:
+   <!--l. 5140-->
+<div class="lstlisting" id="listing-210"><span class="label"><a 
+ id="x65-155002r1"></a></span>DnD.registerElement(Panel,Widget);
+   </div>
+<!--l. 5145--><p class="indent" >   If you want to use a TreeSource, use the following method:
+   <!--l. 5148-->
+<div class="lstlisting" id="listing-211"><span class="label"><a 
+ id="x65-155003r1"></a></span>DnD.registerTreeSource(Tree);
+   </div>
+<!--l. 5153--><p class="indent" >   You do not have to register any DndElement for a tree, since all TreeItems are
+necessarily DnDElement in a tree registered as a tree source.
+                                                                  
+
+                                                                  
+   <!--l. 5157--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu39.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu37.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse18.html#TatamiUserDocumentationsu38.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 5157--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu38.html"></a>  
+</body></html> 

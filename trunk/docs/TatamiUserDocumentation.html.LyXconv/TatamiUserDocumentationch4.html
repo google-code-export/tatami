@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>4 Charting</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 3419--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationch5.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationch3.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentation3.html#TatamiUserDocumentationch4.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapter&#x00A0;4</span><br /><a 
+ id="x33-1070004"></a>Charting</h2>
+<!--l. 3421--><p class="noindent" >Tatami also includes dojo&#8217;s simple and powerful charting system. It is located in
+the
+<!--l. 3424--><p class="indent" >   <span class="lstinline">com.objetdirect.tatami.client.charting&#x00A0;</span>package. We advice you to take a look at
+the numerous chart examples in the TestPages module.
+   <div class="sectionTOCS">
+   &#x00A0;<span class="sectionToc" >4.1 <a 
+href="TatamiUserDocumentationse10.html#x34-1080004.1">Introduction</a></span>
+<br />   &#x00A0;<span class="sectionToc" >4.2 <a 
+href="TatamiUserDocumentationse11.html#x35-1090004.2">Getting started </a></span>
+<br />   &#x00A0;<span class="sectionToc" >4.3 <a 
+href="TatamiUserDocumentationse12.html#x36-1100004.3">Plot types</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.3.1 <a 
+href="TatamiUserDocumentationsu17.html#x37-1110004.3.1">Plot2D</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.3.2 <a 
+href="TatamiUserDocumentationsu18.html#x38-1150004.3.2">BubblePlot: </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.3.3 <a 
+href="TatamiUserDocumentationsu19.html#x39-1160004.3.3">BarPlot</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.3.4 <a 
+href="TatamiUserDocumentationsu20.html#x40-1200004.3.4">PiePlot</a></span>
+<br />   &#x00A0;<span class="sectionToc" >4.4 <a 
+href="TatamiUserDocumentationse13.html#x41-1230004.4">Axes</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.4.1 <a 
+href="TatamiUserDocumentationsu21.html#x42-1240004.4.1">Setting axis </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.4.2 <a 
+href="TatamiUserDocumentationsu22.html#x43-1250004.4.2">Axis Options</a></span>
+<br />   &#x00A0;<span class="sectionToc" >4.5 <a 
+href="TatamiUserDocumentationse14.html#x44-1290004.5">Series </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.5.1 <a 
+href="TatamiUserDocumentationsu23.html#x45-1300004.5.1">Simple serie customization example </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.5.2 <a 
+href="TatamiUserDocumentationsu24.html#x46-1310004.5.2">Series and data</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.5.3 <a 
+href="TatamiUserDocumentationsu25.html#x47-1320004.5.3">Series Options </a></span>
+<br />   &#x00A0;<span class="sectionToc" >4.6 <a 
+href="TatamiUserDocumentationse15.html#x48-1330004.6">Themes </a></span>
+<br />   &#x00A0;<span class="sectionToc" >4.7 <a 
+href="TatamiUserDocumentationse16.html#x49-1340004.7">Effects</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.7.1 <a 
+href="TatamiUserDocumentationsu26.html#x50-1350004.7.1">Commons Options</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.7.2 <a 
+href="TatamiUserDocumentationsu27.html#x51-1360004.7.2">EffectTooltip </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.7.3 <a 
+href="TatamiUserDocumentationsu28.html#x52-1370004.7.3">EffectHighlight </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.7.4 <a 
+href="TatamiUserDocumentationsu29.html#x53-1380004.7.4">EffectShake </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.7.5 <a 
+href="TatamiUserDocumentationsu30.html#x54-1390004.7.5">EffectMagnify </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.7.6 <a 
+href="TatamiUserDocumentationsu31.html#x55-1400004.7.6">EffectMoveSlice : </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >4.7.7 <a 
+href="TatamiUserDocumentationsu32.html#x56-1410004.7.7">PlotListener :</a></span>
+   </div>
+
+
+
+
+
+
+                                                                  
+
+                                                                  
+   <!--l. 4598--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationch5.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationch3.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentation3.html#TatamiUserDocumentationch4.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 4598--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationch4.html"></a>  
+</body></html> 

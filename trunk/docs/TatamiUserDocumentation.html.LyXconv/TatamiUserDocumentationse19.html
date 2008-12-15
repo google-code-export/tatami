@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>BlowFish encryption</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 5280--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse20.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationch6.html#TatamiUserDocumentationse19.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h3 class="sectionHead"><span class="titlemark">6.1   </span> <a 
+ id="x69-1620006.1"></a>BlowFish encryption</h3>
+<!--l. 5282--><p class="noindent" >BlowFish is a symmetric cipher algorithm, relying on a private key that must be
+shared amongst people wanting to communicates ciphered data.
+<!--l. 5286--><p class="indent" >   Tatami provides a simple API to use the BlowFish algorithm in GWT.
+<!--l. 5288--><p class="indent" >   Sample :
+   <!--l. 5291-->
+<div class="lstlisting" id="listing-217"><span class="label"><a 
+ id="x69-162001r1"></a></span>BlowFishEncryption&#x00A0;cipher&#x00A0;=&#x00A0;BlowFishEncryption.getInstance();&#x00A0;<br /><span class="label"><a 
+ id="x69-162002r2"></a></span>String&#x00A0;key&#x00A0;=&#x00A0;"the&#x2423;secret&#x2423;key";&#x00A0;<br /><span class="label"><a 
+ id="x69-162003r3"></a></span>String&#x00A0;randomString&#x00A0;=&#x00A0;"this&#x2423;text&#x2423;should&#x2423;remain&#x2423;unrevealed!&#x2423;";&#x00A0;<br /><span class="label"><a 
+ id="x69-162004r4"></a></span>String&#x00A0;ciphered&#x00A0;=&#x00A0;cipher.encrypt(BlowFishEncryption.Base64OutputType,&#x00A0;randomString,&#x00A0;key);&#x00A0;<br /><span class="label"><a 
+ id="x69-162005r5"></a></span>String&#x00A0;deciphered&#x00A0;=&#x00A0;ciher.decrypt(BlowFishEncryption.Base64OutputType,&#x00A0;ciphered,&#x00A0;key);
+   </div>
+<!--l. 5300--><p class="indent" >   In the above sample, we use a secret key (&#8220;the secret key&#8221;) to encrypt a text.
+Tatami currently support two output-types/input types for the ciphering/deciphering
+process.
+<!--l. 5304--><p class="indent" >   Those are :
+     <ul class="itemize1">
+     <li class="itemize">Base64 : the output will be encoded in Base64 format.
+     </li>
+     <li class="itemize">Hex : the output will be encoded in Hex format</li></ul>
+<!--l. 5309--><p class="noindent" >Those formats are defined as constants in the BlowFishEncryption class (respectively
+BlowFishEncryption.Base64OutputType and BlowFishEncryption. HexOutputType)
+<!--l. 5313--><p class="indent" >   While using the BlowFish encryption , you should assure which output format
+comes from the cipher, and which format waits the decipher.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getInstance():</span> </dt><dd 
+class="description">Returns an instance of the BlowFishEncryption
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">encrypt(EncodingTypeConstant</span><span 
+class="ecbx-1000">&#x00A0;outputTypeConstant,String</span><span 
+class="ecbx-1000">&#x00A0;toCrypt,String</span><span 
+class="ecbx-1000">&#x00A0;key):</span> </dt><dd 
+class="description">
+     Encrypt the given text using the given key. The output format is defined by
+                                                                  
+
+                                                                  
+     outputTypeConstant, which can be either <span class="lstinline">BlowFishEncryption.Base64OutputType</span>
+     or <span class="lstinline">BlowFishEncryption.HexOutputType</span>
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">decrypt(EncodingTypeConstant</span><span 
+class="ecbx-1000">&#x00A0;inputTypeConstant,String</span><span 
+class="ecbx-1000">&#x00A0;toDecrypt,String</span> </dt><dd 
+class="description">
+     key): Decrypt the given text using the given key. The input format is
+     defined by inputTypeConstant, which can be either <span class="lstinline">BlowFishEncryption.Base64OutputType</span>
+     or <span class="lstinline">BlowFishEncryption.HexOutputType</span></dd></dl>
+                                                                  
+
+                                                                  
+   <!--l. 5327--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse20.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationch6.html#TatamiUserDocumentationse19.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 5327--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationse19.html"></a>  
+</body></html> 

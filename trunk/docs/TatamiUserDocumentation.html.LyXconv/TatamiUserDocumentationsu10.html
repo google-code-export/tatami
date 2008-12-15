@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>The DropdownContainer, DropdownDatePicker et DropdownTimePicker
+components. </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 1233--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu11.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu9.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu10.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">2.2.8   </span> <a 
+ id="x19-430002.2.8"></a>The DropdownContainer, DropdownDatePicker et DropdownTimePicker
+components. </h4>
+<!--l. 1235--><p class="noindent" >Tatami offers components which allow the simplification of an entered of
+temporal information as date or a time. Both components which allow this are
+DropdownDatePicker (at the left) for a date input and DropdownTimePicker (at
+the right) for a time input. These two classes implement the abstract class
+DropdownContainer allowing the input of temporal information.
+<!--l. 1241--><p class="indent" >   <img 
+src="TatamiUserDocumentation11x.png" alt="PIC" class="graphics" width="501.875pt" height="351.3125pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation11x.png" src="11C__dev_workspace_docs_images_dropdownTimeAndDatePickers.eps"  
+-->
+<!--l. 1243--><p class="indent" >   The inputs are simplified due to the fact that the user will be able to select their
+                                                                  
+
+                                                                  
+temporal information using a BasePicker component (ie, TimePicker or DatePicker).
+Once its information was chosen, the field text of seizure will have the value of this
+information and will be formatted.
+<!--l. 1249--><p class="indent" >   Moreover, these components perform a validation on the entered text
+and indicate in a tooltip the expected format (for example: hh:mm for time
+information).
+<!--l. 1253--><p class="indent" >   <img 
+src="TatamiUserDocumentation12x.png" alt="PIC" class="graphics" width="274.02374pt" height="36.135pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation12x.png" src="12C__dev_workspace_docs_images_dropdownDatePicker_validation.eps"  
+-->
+<!--l. 1255--><p class="indent" >   If the format is incorrect the user is warned by another tooltip and the color of
+the text field changes:
+<!--l. 1258--><p class="indent" >   <img 
+src="TatamiUserDocumentation13x.png" alt="PIC" class="graphics" width="344.28624pt" height="43.16124pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation13x.png" src="13C__dev_workspace_docs_images_dropdownDatePicker_validationFailed.eps"  
+-->
+<!--l. 1261--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.8.1   </span> <a 
+ id="x19-440002.2.8.1"></a>Create a DropdownDatePicker.</h5>
+<!--l. 1263--><p class="noindent" >The component DropdownDatePicker allows to grab a date in a text field via a
+DatePicker component. So, the selected date will be formatted accordingly to the
+user&#8217;s locale. Example: 08/28/2007 for a locale EN.
+<!--l. 1268--><p class="indent" >   To import the class:
+   <!--l. 1271-->
+<div class="lstlisting" id="listing-46"><span class="label"><a 
+ id="x19-44001r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.DropdownDatePicker;
+   </div>
+<!--l. 1276--><p class="indent" >   There are 2 constructors for a DropDwonDatePicker, one with two parameters
+and one with no parameters. The parameters will have default values.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">startDate:</span> </dt><dd 
+class="description">the lowest allowed value
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">endDate:</span> </dt><dd 
+class="description">the highest allowed value</dd></dl>
+<!--l. 1282--><p class="noindent" >An example:
+   <!--l. 1285-->
+<div class="lstlisting" id="listing-47"><span class="label"><a 
+ id="x19-44002r1"></a></span>DropdownDatePicker&#x00A0;dddp&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DropdownDatePicker();
+   </div>
+<!--l. 1290--><p class="indent" >   Or
+   <!--l. 1293-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-48"><span class="label"><a 
+ id="x19-44003r1"></a></span>DropdownDatePicker&#x00A0;dddp&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DropdownDatePicker(startDate,&#x00A0;endDate);
+   </div>
+<!--l. 1298--><p class="indent" >   This creates our component, which has to be attached to the browser.
+<!--l. 1301--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.8.2   </span> <a 
+ id="x19-450002.2.8.2"></a>Create a DropdownTimePicker.</h5>
+<!--l. 1303--><p class="noindent" >The DropdownTimePicker component permits to enter a time with hours and
+minutes in an text fied via the TimePicker component. So, the selected date will be
+formatted accordingly to a defined time pattern. Example: 2:30
+<!--l. 1308--><p class="indent" >   To import the class:
+   <!--l. 1311-->
+<div class="lstlisting" id="listing-49"><span class="label"><a 
+ id="x19-45001r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.DropdownTimePicker;
+   </div>
+<!--l. 1316--><p class="indent" >   There are 3 constructors available. The most &#8220;complex&#8221; constructor needs 3
+parameters. The others set some default values on these 3 parameters.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">startDate:</span> </dt><dd 
+class="description">the lowest allowed value
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">endDate:</span> </dt><dd 
+class="description">the highest allowed value
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">timePattern:</span> </dt><dd 
+class="description">To format the time information. See the DOJO explanations for
+     more details about the time pattern. It&#8217;s like in JAVA for the most of
+     principals options. Default is "HH:mm"</dd></dl>
+<!--l. 1326--><p class="noindent" >An example:
+   <!--l. 1329-->
+<div class="lstlisting" id="listing-50"><span class="label"><a 
+ id="x19-45002r1"></a></span>DropdownTimePicker&#x00A0;ddtp&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DropdownTimePicker();
+   </div>
+<!--l. 1334--><p class="indent" >   Or
+   <!--l. 1337-->
+<div class="lstlisting" id="listing-51"><span class="label"><a 
+ id="x19-45003r1"></a></span>DropdownTimePicker&#x00A0;ddtp&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DropdownTimePicker("HH:mm");
+   </div>
+<!--l. 1342--><p class="indent" >   Or
+   <!--l. 1345-->
+<div class="lstlisting" id="listing-52"><span class="label"><a 
+ id="x19-45004r1"></a></span>DropdownTimePicker&#x00A0;ddtp&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DropdownTimePicker(startDate,&#x00A0;endDate,"HH:mm");
+                                                                  
+
+                                                                  
+   </div>
+<!--l. 1350--><p class="indent" >   This creates our component, which has to be attached to the browser.
+<!--l. 1353--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.8.3   </span> <a 
+ id="x19-460002.2.8.3"></a>The API of the DropdownTimePicker and DropdownDatePicker.</h5>
+<!--l. 1355--><p class="noindent" >The API of these components comes from the DropdownContainer class.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setDate(Date):</span> </dt><dd 
+class="description">sets the default selected date
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Date</span><span 
+class="ecbx-1000">&#x00A0;getDate():</span> </dt><dd 
+class="description">get the currently selected date
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setTime(Date):</span> </dt><dd 
+class="description">sets the default selected time for a TimePicker
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Date</span><span 
+class="ecbx-1000">&#x00A0;getTime():</span> </dt><dd 
+class="description">gets the default selected time for a TimePicker
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;getMinDate():</span> </dt><dd 
+class="description">Returns the minimum available date in the calendar or
+     in the time picker
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;getMaxDate():</span> </dt><dd 
+class="description">Returns the maximum available date in the calendar or
+     in the time picker
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;addChangeListener(ChangeListener):</span> </dt><dd 
+class="description">Adds a ChangeListener when
+     the seletected date value changes.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeChangeListener(ChangeListener):</span> </dt><dd 
+class="description">Removes                   a
+     ChangeListener when the seletected date value changes.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setText(String):</span> </dt><dd 
+class="description">Writes   some   text   in   the   text   field   of   the
+     DropdownContainer.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getText():</span> </dt><dd 
+class="description">Returns the time information as a string.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setEnabled(boolean):</span> </dt><dd 
+class="description">Enables or disables the DropdownContainer.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setInvalidMessage(String):</span> </dt><dd 
+class="description">Sets  the  message  displayed  when  the
+     user&#8217;s input is not valid.
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getInvalidMessage():</span> </dt><dd 
+class="description">Gets the message displayed when the user&#8217;s
+     input is not valid.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setPromptMessage(String):</span> </dt><dd 
+class="description">Sets  the  message  helping  the  user  to
+     respect the expected format.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getPromptMessage():</span> </dt><dd 
+class="description">Gets the message helping the user to respect
+     the expected format.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Boolean</span><span 
+class="ecbx-1000">&#x00A0;isValid():</span> </dt><dd 
+class="description">Indicates if the entered text is valid or not.</dd></dl>
+<!--l. 1384--><p class="noindent" >Below, you will find an example extracted from the project TatamiDemo-1.1 which
+presents the DropdownTimePicker, DropdownDatePicker, TimePicker and
+DatePicker components. These different components notify their change of values and
+update some others components treating the same type of data. It&#8217;s means that the
+DatePicker will be linked with the DropdownDatePicker and the TimePicker will be
+linked with the DropdownTimePicker. So if the TimePicker is modified then it will
+update the DropdownTimePicker if it&#8217;s necessary, same for the DatePicker with the
+DropdownDatePicker.
+   <!--l. 1395-->
+<div class="lstlisting" id="listing-53"><span class="label"><a 
+ id="x19-46001r1"></a></span><span 
+class="ecbx-1000">private</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;initComponents()&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x19-46002r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mainPanel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HorizontalPanel();&#x00A0;<br /><span class="label"><a 
+ id="x19-46003r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mainPanel.setSpacing(50);&#x00A0;<br /><span class="label"><a 
+ id="x19-46004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;VerticalPanel&#x00A0;timePanel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;VerticalPanel();&#x00A0;<br /><span class="label"><a 
+ id="x19-46005r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;VerticalPanel&#x00A0;datePanel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;VerticalPanel();&#x00A0;<br /><span class="label"><a 
+ id="x19-46006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;datePanel.setSpacing(20);&#x00A0;<br /><span class="label"><a 
+ id="x19-46007r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;timePanel.setSpacing(20);&#x00A0;<br /><span class="label"><a 
+ id="x19-46008r8"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inputDate&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DropdownDatePicker();&#x00A0;<br /><span class="label"><a 
+ id="x19-46009r9"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inputDate.setInvalidMessage("the&#x2423;date&#x2423;is&#x2423;incorrect");&#x00A0;<br /><span class="label"><a 
+ id="x19-46010r10"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;datePicker&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DatePicker();&#x00A0;<br /><span class="label"><a 
+ id="x19-46011r11"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;datePicker.setDate(<span 
+class="ecbx-1000">new</span>&#x00A0;Date());&#x00A0;<br /><span class="label"><a 
+ id="x19-46012r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;datePanel.add(htmlInputDate);&#x00A0;<br /><span class="label"><a 
+ id="x19-46013r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;datePanel.add(inputDate);&#x00A0;<br /><span class="label"><a 
+ id="x19-46014r14"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;datePanel.add(htmlDatePicker);&#x00A0;<br /><span class="label"><a 
+ id="x19-46015r15"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;datePanel.add(datePicker);&#x00A0;<br /><span class="label"><a 
+ id="x19-46016r16"></a></span>&#x00A0;<br /><span class="label"><a 
+ id="x19-46017r17"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;linkDropdownAndPicker(inputDate,&#x00A0;datePicker);&#x00A0;<br /><span class="label"><a 
+ id="x19-46018r18"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inputTime&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DropdownTimePicker();&#x00A0;<br /><span class="label"><a 
+ id="x19-46019r19"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;inputTime.setPromptMessage("HH:mm");&#x00A0;<br /><span class="label"><a 
+ id="x19-46020r20"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;TimePickerConstraints&#x00A0;constraints=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;TimePickerConstraints();&#x00A0;<br /><span class="label"><a 
+ id="x19-46021r21"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;constraints.clickableIncrement&#x00A0;=&#x00A0;TimePickerConstraints.EVERY_HALF_HOUR;&#x00A0;<br /><span class="label"><a 
+ id="x19-46022r22"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;timePicker&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;TimePicker(constraints);&#x00A0;<br /><span class="label"><a 
+ id="x19-46023r23"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;timePanel.add(htmlInputTime);&#x00A0;<br /><span class="label"><a 
+ id="x19-46024r24"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;timePanel.add(inputTime);&#x00A0;<br /><span class="label"><a 
+ id="x19-46025r25"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;timePanel.add(htmlTimePicker);&#x00A0;<br /><span class="label"><a 
+ id="x19-46026r26"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;timePanel.add(timePicker);&#x00A0;<br /><span class="label"><a 
+ id="x19-46027r27"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;linkDropdownAndPicker(inputTime,&#x00A0;timePicker);&#x00A0;<br /><span class="label"><a 
+ id="x19-46028r28"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mainPanel.add(datePanel);&#x00A0;<br /><span class="label"><a 
+ id="x19-46029r29"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;mainPanel.add(timePanel);&#x00A0;<br /><span class="label"><a 
+ id="x19-46030r30"></a></span>}&#x00A0;<br /><span class="label"><a 
+ id="x19-46031r31"></a></span><span 
+class="ecbx-1000">private</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;linkDropdownAndPicker(<span 
+class="ecbx-1000">final</span>&#x00A0;DropdownContainer&#x00A0;container,<span 
+class="ecbx-1000">final</span>&#x00A0;BasePicker&#x00A0;picker)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x19-46032r32"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;container.addChangeListener(<span 
+class="ecbx-1000">new</span>&#x00A0;ChangeListener()&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x19-46033r33"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onChange(Widget&#x00A0;sender)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x19-46034r34"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">if</span>&#x00A0;(!equalsObj(picker.getDate(),&#x00A0;container.getDate()))&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x19-46035r35"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;picker.setDate(container.getDate());&#x00A0;<br /><span class="label"><a 
+ id="x19-46036r36"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x19-46037r37"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x19-46038r38"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;});&#x00A0;<br /><span class="label"><a 
+ id="x19-46039r39"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;picker.addChangeListener(<span 
+class="ecbx-1000">new</span>&#x00A0;ChangeListener()&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x19-46040r40"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onChange(Widget&#x00A0;sender)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x19-46041r41"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">if</span>&#x00A0;(!equalsObj(container.getDate(),&#x00A0;picker.getDate()))&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x19-46042r42"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;container.setDate(picker.getDate());&#x00A0;<br /><span class="label"><a 
+ id="x19-46043r43"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x19-46044r44"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x19-46045r45"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;});&#x00A0;<br /><span class="label"><a 
+ id="x19-46046r46"></a></span>}
+   </div>
+                                                                  
+
+                                                                  
+   <!--l. 1446--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu11.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu9.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu10.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 1446--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu10.html"></a>   
+</body></html> 

@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>RuleMark and RuleLabels components</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 1585--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu11.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu12.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">2.2.10   </span> <a 
+ id="x21-510002.2.10"></a>RuleMark and RuleLabels components</h4>
+<!--l. 1587--><p class="noindent" >RuleMark and RuleLabels permit to create some mark or some labels in a vertical or
+horizontal position. The distance between each marks or labels is based on the size of
+the component (RuleMark or RuleLabels). These components are used in the Slider
+component; see the documentation of this component to understand how RuleMark
+and RuleLabels are created. Below, this is an example of RuleMark and
+RuleLabels components to create a rule for a graphic canvas or an editor for
+example.
+<!--l. 1595--><p class="indent" >   <img 
+src="TatamiUserDocumentation15x.png" alt="PIC" class="graphics" width="421.575pt" height="301.125pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation15x.png" src="15C__dev_workspace_docs_images_ruleMarks_preview.eps"  
+-->
+<!--l. 1598--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.10.1   </span> <a 
+ id="x21-520002.2.10.1"></a>Create a RuleMark component. </h5>
+<!--l. 1600--><p class="noindent" >To import the RuleMark class, just do this:
+                                                                  
+
+                                                                  
+   <!--l. 1603-->
+<div class="lstlisting" id="listing-57"><span class="label"><a 
+ id="x21-52001r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.RuleMark;
+   </div>
+<!--l. 1608--><p class="indent" >   To create a RuleMark component you need specify 4 parameters. One
+parameter is optional; the others are required and cannot be have a default
+value.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">type:</span> </dt><dd 
+class="description">Determines if the RuleMark will be set in horizontal or vertical position
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">count:</span> </dt><dd 
+class="description">The number of marks to display
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">size:</span> </dt><dd 
+class="description">The size for each mark in pixel, em&#x2026;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">position:</span> </dt><dd 
+class="description">The position to use for the RuleMark in the parent container, this
+     parameter is optional. But it is used in the Slider to specify the position of
+     the RuleMark on the Slider left, top, bottom, right. In fact if this RuleMark
+     is a child of a dojo widget, this RuleMark will be connected to its parent
+     node by the position. The default position is &#8220;containerNode&#8221;.</dd></dl>
+<!--l. 1624--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.10.2   </span> <a 
+ id="x21-530002.2.10.2"></a>The API of the RuleMak component</h5>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getSize():</span> </dt><dd 
+class="description">Returns the size of each mark. The size is in pixel, em&#x2026;.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">int</span><span 
+class="ecbx-1000">&#x00A0;getCount():</span> </dt><dd 
+class="description">Returns the number or marks in the RuleMark.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getPosition():</span> </dt><dd 
+class="description">Returns  the  position  of  the  RuleMark,  default  is
+     containerNode</dd></dl>
+<!--l. 1633--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.10.3   </span> <a 
+ id="x21-540002.2.10.3"></a>Create a RuleLabels Component.</h5>
+<!--l. 1635--><p class="noindent" >A RuleLabels component extends the RuleMark component, but instead
+of writing some marks, some labels are displayed. To import the class do
+this:
+   <!--l. 1640-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-58"><span class="label"><a 
+ id="x21-54001r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.RuleLabels;
+   </div>
+<!--l. 1645--><p class="indent" >   Like the RuleMark, the RuleLabels needs 4 parameters but instead of specifying
+the number of marks, we specify an array of labels where labels are just string
+characters. So the number of labels is calculated by the length of the array. Also, we
+specify the style for the labels and not the size. The style is exactly the same than a
+CSS style. (color, font-family,margin&#x2026;)
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">type:</span> </dt><dd 
+class="description">Determines if the RuleMark will be set in horizontal or vertical position
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">labels:</span> </dt><dd 
+class="description">An array of string corresponding to the labels.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">style:</span> </dt><dd 
+class="description">The style for the labels (color, font, margin etc&#x2026;) Use the CSS syntax.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">position:</span> </dt><dd 
+class="description">The same that the RuleMark class.</dd></dl>
+<!--l. 1660--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.10.4   </span> <a 
+ id="x21-550002.2.10.4"></a>The API of the RuleLabels component</h5>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">String[]</span><span 
+class="ecbx-1000">&#x00A0;getLabels():</span> </dt><dd 
+class="description">Returns all the labels to display.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getStyle():</span> </dt><dd 
+class="description">Returns the style used for each label.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">int</span><span 
+class="ecbx-1000">&#x00A0;getCount():</span> </dt><dd 
+class="description">Returns the number or labels.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getPosition():</span> </dt><dd 
+class="description">Returns  the  position  of  the  RuleLabels,  default  is
+     containerNode</dd></dl>
+<!--l. 1669--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.10.5   </span> <a 
+ id="x21-560002.2.10.5"></a>An example</h5>
+<!--l. 1671--><p class="noindent" >Below stands an example, which demonstrates how to create the rule presented in the
+screenshot at the beginning of this chapter. Note that in the project TatamiDemo
+there are no example. The use of RuleMark and RuleLabels is hidden by the Slider
+component in the SliderDemo class.
+   <!--l. 1678-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-59"><span class="label"><a 
+ id="x21-56001r1"></a></span>RuleMark&#x00A0;rule&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;RuleMark(RuleMark.HORIZONTAL,15,"7px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56002r2"></a></span>DOM.setStyleAttribute(rule.getElement(),"borderTop","solid&#x2423;1px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56003r3"></a></span>RuleMark&#x00A0;rule2&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;RuleMark(RuleMark.HORIZONTAL,3,"15px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56004r4"></a></span>rule.setWidth("300px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56005r5"></a></span>rule.setHeight("20px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56006r6"></a></span>rule2.setWidth("300px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56007r7"></a></span>RootPanel.get().add(rule,20,100);&#x00A0;<br /><span class="label"><a 
+ id="x21-56008r8"></a></span>RootPanel.get().add(rule2,rule.getAbsoluteLeft(),&#x00A0;rule.getAbsoluteTop());&#x00A0;<br /><span class="label"><a 
+ id="x21-56009r9"></a></span>String[]&#x00A0;labelsArray&#x00A0;=&#x00A0;{"0","5","10","15"};&#x00A0;<br /><span class="label"><a 
+ id="x21-56010r10"></a></span>RuleLabels&#x00A0;labels&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;RuleLabels(RuleLabels.HORIZONTAL,&#x00A0;labelsArray,&#x00A0;"margin:<span 
+class="cmsy-10">-</span>0.5em&#x2423;<span 
+class="cmsy-10">-</span>0.5px&#x2423;5px&#x2423;<span 
+class="cmsy-10">-</span>.2.5em;color:gray");&#x00A0;<br /><span class="label"><a 
+ id="x21-56011r11"></a></span>labels.setWidth("300px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56012r12"></a></span>RootPanel.get().add(labels,rule.getAbsoluteLeft(),&#x00A0;rule.getAbsoluteTop()<span 
+class="cmsy-10">-</span>10);&#x00A0;<br /><span class="label"><a 
+ id="x21-56013r13"></a></span>RuleMark&#x00A0;rule4&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;RuleMark(RuleMark.VERTICAL,15,"7px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56014r14"></a></span>RuleMark&#x00A0;rule5&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;RuleMark(RuleMark.VERTICAL,3,"15px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56015r15"></a></span>rule4.setHeight("300px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56016r16"></a></span>rule5.setHeight("300px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56017r17"></a></span>RootPanel.get().add(rule4,rule.getAbsoluteLeft(),&#x00A0;rule.getAbsoluteTop());&#x00A0;<br /><span class="label"><a 
+ id="x21-56018r18"></a></span>DOM.setStyleAttribute(rule4.getElement(),"borderLeft","solid&#x2423;1px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56019r19"></a></span>RootPanel.get().add(rule5,rule.getAbsoluteLeft(),&#x00A0;rule.getAbsoluteTop());&#x00A0;<br /><span class="label"><a 
+ id="x21-56020r20"></a></span>RuleLabels&#x00A0;labels2&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;RuleLabels(RuleLabels.VERTICAL,&#x00A0;labelsArray2,&#x00A0;"margin:&#x2423;<span 
+class="cmsy-10">-</span>0.5em&#x2423;<span 
+class="cmsy-10">-</span>0.5px&#x2423;5px&#x2423;<span 
+class="cmsy-10">-</span>.2.5em;color:gray");&#x00A0;<br /><span class="label"><a 
+ id="x21-56021r21"></a></span>labels2.setHeight("300px");&#x00A0;<br /><span class="label"><a 
+ id="x21-56022r22"></a></span>RootPanel.get().add(labels2,rule.getAbsoluteLeft()<span 
+class="cmsy-10">-</span>15,&#x00A0;rule.getAbsoluteTop());
+   </div>
+                                                                  
+
+                                                                  
+   <!--l. 1705--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu11.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu12.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 1705--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu12.html"></a>   
+</body></html> 

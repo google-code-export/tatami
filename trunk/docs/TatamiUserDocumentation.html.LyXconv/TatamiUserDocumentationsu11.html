@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>The Slider component</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 1446--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu12.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu10.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu11.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">2.2.9   </span> <a 
+ id="x20-470002.2.9"></a>The Slider component</h4>
+<!--l. 1448--><p class="noindent" >The Slider component permits to modify the position of a cursor. At this position, is
+associated a value. The value is bounded by a maximum and a minimum value. The
+slider has two positions: vertical and horizontal.
+<!--l. 1452--><p class="indent" >   <img 
+src="TatamiUserDocumentation14x.png" alt="PIC" class="graphics" width="283.0575pt" height="247.92624pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation14x.png" src="14C__dev_workspace_docs_images_slidersPreview.eps"  
+-->
+<!--l. 1455--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.9.1   </span> <a 
+ id="x20-480002.2.9.1"></a>Create a Slider. </h5>
+<!--l. 1457--><p class="noindent" >To import the Slider class:
+   <!--l. 1460-->
+<div class="lstlisting" id="listing-54"><span class="label"><a 
+ id="x20-48001r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.Slider;
+   </div>
+<!--l. 1465--><p class="indent" >   To create a Slider, we need 5 parameters:
+<!--l. 1467--><p class="indent" >   position: Slider.HORIZONTAL or Slider.VERTICAL determines the position for
+the slider.
+                                                                  
+
+                                                                  
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">minimum:</span> </dt><dd 
+class="description">Sets the minimum value available on the slider
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">maximum:</span> </dt><dd 
+class="description">Sets the maximum value available on the slider
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">initialValue:</span> </dt><dd 
+class="description">determines the initial cursor&#8217;s position.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">showButtons:</span> </dt><dd 
+class="description">Boolean permitting to show or hide the button to increment or
+     decrement the position of the cursor.</dd></dl>
+<!--l. 1476--><p class="noindent" >Example of using the Slider constructor :
+   <!--l. 1479-->
+<div class="lstlisting" id="listing-55"><span class="label"><a 
+ id="x20-48002r1"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">0</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">min</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">value</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x20-48003r2"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">100</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">max</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">value</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x20-48004r3"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">50</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">initial</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">value</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x20-48005r4"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">no</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">buttons</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">are</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">shown</span>&#x00A0;<br /><span class="label"><a 
+ id="x20-48006r5"></a></span>Slider&#x00A0;slider&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Slider(Slider.HORIZONTAL,&#x00A0;0,100,50,<span 
+class="ecbx-1000">false</span>);
+   </div>
+<!--l. 1489--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.9.2   </span> <a 
+ id="x20-490002.2.9.2"></a>The API of the Slider component. </h5>
+<!--l. 1491--><p class="noindent" >Principal methods from the Slider component :
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setValue(int):</span> </dt><dd 
+class="description">Modifies the selected value on the cursor
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">int</span><span 
+class="ecbx-1000">&#x00A0;getValue():</span> </dt><dd 
+class="description">Returns the current selected value.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">int</span><span 
+class="ecbx-1000">&#x00A0;getMaximunValue():</span> </dt><dd 
+class="description">Returns the maximum allowed value.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">int</span> </dt><dd 
+class="description">getMinimumValue(): Returns the minimum allowed value.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span> </dt><dd 
+class="description">setEnabled(boolean): enables or disables the slider
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Boolean</span> </dt><dd 
+class="description">isEnabled() : returns whether the slider is enabled or not</dd></dl>
+<!--l. 1501--><p class="noindent" >The following methods are used to add or remove rule marks at different positions on the
+slider. The first parameter sets the number of ticks, and the second one their size in
+any standard css unit (&#8220;px&#8221;,&#8221;em&#8221; etc...).
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setRuleMarkBottom(int,String)</span> </dt><dd 
+class="description">&#x00A0;
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setRuleMarkTop(int,String)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setRuleMarkLeft(int,String)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setRuleMarkRight(int,String)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeRuleMarkBottom()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeRuleMarkTop()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeRuleMarkLeft()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeRuleMarkRight()</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 1515--><p class="noindent" >The following methods are used to add or remove labels on each rule mark set. The first
+argument is an array containing the labels, the second one is the css style applied to
+this label.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setRuleLabelsTop(String[],String)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setRuleLabelsBottom(String[],String)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setRuleLabelsLeft(String[],String)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setRuleLabelsRight(String[],String)</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeLabelsTop()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeLabelsBottom()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeLabelsLeft()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeLabelsRight()</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 1528--><p class="noindent" >The following methods return the labels on a specific position. If there are no labels,
+they return null.
+                                                                  
+
+                                                                  
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">String[]</span><span 
+class="ecbx-1000">&#x00A0;getLabelsLeft()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String[]</span><span 
+class="ecbx-1000">&#x00A0;getLabelsRight()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String[]</span><span 
+class="ecbx-1000">&#x00A0;getLabelsBottom()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String[]</span><span 
+class="ecbx-1000">&#x00A0;getLabelsTop()</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 1536--><p class="noindent" >The following methods return the labels style for a specific position:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getLabelsTopStyle()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getLabelsBottomStyle()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getLabelsRightStyle()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getLabelsLeftStyle()</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 1543--><p class="noindent" >The following methods return the number of mark at the specified position:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">int</span><span 
+class="ecbx-1000">&#x00A0;countRuleMarkTop()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">int</span><span 
+class="ecbx-1000">&#x00A0;countRuleMarkBottom()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">int</span><span 
+class="ecbx-1000">&#x00A0;countRuleMarkLeft()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">int</span><span 
+class="ecbx-1000">&#x00A0;countRuleMarkRight()</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+<!--l. 1550--><p class="noindent" >The following methods return the mark size at the specified position
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getSizeRuleMarkTop()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getSizeRuleMarkBottom()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getSizeRuleMarkLeft()</span> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getSizeRuleMarkRight()</span> </dt><dd 
+class="description">&#x00A0;</dd></dl>
+                                                                  
+
+                                                                  
+<!--l. 1558--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.9.3   </span> <a 
+ id="x20-500002.2.9.3"></a>Add some rule mark ands and labels.</h5>
+<!--l. 1560--><p class="noindent" >Below stands an example of how to add some rule mark and labels on a Slider
+component. See also the project TatamiDemo-1.1. You can add a rule mark at the
+right, left, top, bottom of the slider, it depends of the position (vertical or horizontal)
+of the slider. But if you add a rule mark at the right position while the slider has a
+horizontal value, the rule mark will be displayed at the bottom of the slider. To set a
+rule mark, you need to know how many marks you want and their size. For the labels
+it&#8217;s the same thing, but instead of giving a number you give an array of
+String corresponding to each label. Moreover you can specify the labels css
+style.
+   <!--l. 1572-->
+<div class="lstlisting" id="listing-56"><span class="label"><a 
+ id="x20-50001r1"></a></span>Slider&#x00A0;verticalSlider&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Slider(Slider.VERTICAL,&#x00A0;0,&#x00A0;100,&#x00A0;100,<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x20-50002r2"></a></span>verticalSlider.setRuleMarkLeft(6,&#x00A0;"5px");&#x00A0;<br /><span class="label"><a 
+ id="x20-50003r3"></a></span>verticalSlider.setRuleMarkRight(12,&#x00A0;"3px");&#x00A0;<br /><span class="label"><a 
+ id="x20-50004r4"></a></span>String[]&#x00A0;labels&#x00A0;=&#x00A0;{"&#x2423;","20%","40%","60%","80%",&#x00A0;"&#x2423;"};&#x00A0;<br /><span class="label"><a 
+ id="x20-50005r5"></a></span>verticalSlider.setLabelsLeft(labels,"margin:&#x2423;0px&#x2423;<span 
+class="cmsy-10">-</span>0.5em&#x2423;0px&#x2423;<span 
+class="cmsy-10">-</span>2em;color:gray");&#x00A0;<br /><span class="label"><a 
+ id="x20-50006r6"></a></span>Slider&#x00A0;horizontalSlider&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Slider&#x00A0;<br /><span class="label"><a 
+ id="x20-50007r7"></a></span>(Slider.HORIZONTAL,&#x00A0;0,&#x00A0;100,&#x00A0;100,<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x20-50008r8"></a></span>horizontalSlider.setRuleMarkBottom(6,&#x00A0;"5px");&#x00A0;horizontalSlider.setLabelsTop(labels,"margin:&#x2423;<span 
+class="cmsy-10">-</span>0.5em&#x2423;0px&#x2423;<span 
+class="cmsy-10">-</span>3.5em&#x2423;0px;color:gray");
+   </div>
+                                                                  
+
+                                                                  
+   <!--l. 1585--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu12.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu10.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu11.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 1585--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu11.html"></a>   
+</body></html> 

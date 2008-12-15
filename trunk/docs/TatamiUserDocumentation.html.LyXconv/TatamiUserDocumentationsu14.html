@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Tree</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 2634--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu13.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu14.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">2.3.2   </span> <a 
+ id="x24-870002.3.2"></a>Tree</h4>
+<!--l. 2636--><p class="noindent" >Like the grid, the tree uses a datastore to store its items
+<!--l. 2639--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.2.1   </span> <a 
+ id="x24-880002.3.2.1"></a>Getting Started</h5>
+<!--l. 2641--><p class="noindent" >To use the tree, you need to import:
+   <!--l. 2644-->
+<div class="lstlisting" id="listing-79"><span class="label"><a 
+ id="x24-88001r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.tree.Tree;
+   </div>
+<!--l. 2649--><p class="indent" >   The tree must be initialized with a root item, either directly in the constructor, or
+with the setRootItem method:
+   <!--l. 2653-->
+<div class="lstlisting" id="listing-80"><span class="label"><a 
+ id="x24-88002r1"></a></span>Tree&#x00A0;tree&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Tree();&#x00A0;<br /><span class="label"><a 
+ id="x24-88003r2"></a></span>tree.setRootItem(<span 
+class="ecbx-1000">new</span>&#x00A0;Item("Item1","Item1"));&#x00A0;<br /><span class="label"><a 
+ id="x24-88004r3"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Or</span><span 
+class="ecti-1000">:</span>&#x00A0;<br /><span class="label"><a 
+ id="x24-88005r4"></a></span>tree&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Tree(<span 
+class="ecbx-1000">new</span>&#x00A0;Item("Item1","Item1"));
+   </div>
+<!--l. 2661--><p class="indent" >   Two other constructors are available if you do not want to use the default
+datastore:
+   <!--l. 2665-->
+<div class="lstlisting" id="listing-81"><span class="label"><a 
+ id="x24-88006r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;Tree(AbstractDataStore);&#x00A0;<br /><span class="label"><a 
+ id="x24-88007r2"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;Tree(Item,&#x00A0;AbstractDataStore);
+   </div>
+<!--l. 2671--><p class="indent" >   Now, we will see how to populate such a tree:
+   <!--l. 2674-->
+<div class="lstlisting" id="listing-82"><span class="label"><a 
+ id="x24-88008r1"></a></span>Tree&#x00A0;tree&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Tree(<span 
+class="ecbx-1000">new</span>&#x00A0;Item("Root","Root"));&#x00A0;<br /><span class="label"><a 
+ id="x24-88009r2"></a></span>Item&#x00A0;item1&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item1"&#x00A0;,&#x00A0;"Item&#x2423;1");&#x00A0;<br /><span class="label"><a 
+ id="x24-88010r3"></a></span>Item&#x00A0;item11&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item1.1"&#x00A0;,&#x00A0;"Item&#x2423;1.1");&#x00A0;<br /><span class="label"><a 
+ id="x24-88011r4"></a></span>Item&#x00A0;item12&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item1.2"&#x00A0;,&#x00A0;"Item&#x2423;1.2");&#x00A0;<br /><span class="label"><a 
+ id="x24-88012r5"></a></span>item1.addChild(item11);&#x00A0;<br /><span class="label"><a 
+ id="x24-88013r6"></a></span>item1.addChild(item12);&#x00A0;<br /><span class="label"><a 
+ id="x24-88014r7"></a></span>item12.addChild(<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item1.2.1"&#x00A0;,&#x00A0;"Item&#x2423;1.2.1"));&#x00A0;<br /><span class="label"><a 
+ id="x24-88015r8"></a></span>item12.addChild(<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item1.2.2"&#x00A0;,&#x00A0;"Item&#x2423;1.2.2"));&#x00A0;<br /><span class="label"><a 
+ id="x24-88016r9"></a></span>tree.getRootItem().addChild(item1);&#x00A0;<br /><span class="label"><a 
+ id="x24-88017r10"></a></span>tree.getRootItem().addChild(item2);&#x00A0;<br /><span class="label"><a 
+ id="x24-88018r11"></a></span>RootPanel.get().add(tree);
+   </div>
+<!--l. 2689--><p class="indent" >   <img 
+src="TatamiUserDocumentation28x.png" alt="PIC" class="graphics" width="121.45374pt" height="95.35625pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation28x.png" src="28C__dev_workspace_docs_images_tree.eps"  
+-->
+                                                                  
+
+                                                                  
+<!--l. 2692--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.2.2   </span> <a 
+ id="x24-890002.3.2.2"></a>Customizing the tree display</h5>
+<!--l. 2694--><p class="noindent" >The tree offers many customization options.
+<!--l. 2696--><p class="indent" >   <img 
+src="TatamiUserDocumentation29x.png" alt="PIC" class="graphics" width="95.35625pt" height="147.55124pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation29x.png" src="29C__dev_workspace_docs_images_treeExampleCustom.eps"  
+-->
+<!--l. 2698--><p class="indent" >   As you can see on the above picture, you can customize the icons used for items,
+as well as some css styling on the labels.
+<!--l. 2701--><p class="indent" >   Customizing the icons can be done at two levels:
+     <ul class="itemize1">
+     <li class="itemize">setting default icons for the whole tree. This can be achieved by using
+     the following methods. Those methods will take a string as an argument,
+     which will be used as a css class to apply to the icon node.</li></ul>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">setDefaultFolderClosedClass(String):</span> </dt><dd 
+class="description">sets  the  class  applied  to  a  closed
+     folder icon
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setDefaultFolderOpenClass(String):</span> </dt><dd 
+class="description">sets the class applied to an opened
+     folder icon
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setDefaultLeafClass(String):</span> </dt><dd 
+class="description">sets the class applied to a tree leaf icon
+     <!--l. 2715--><p class="noindent" >The following example show how the icon classes were customized for the
+     above tree:
+     </dd></dl>
+   <!--l. 2720-->
+<div class="lstlisting" id="listing-83"><span class="label"><a 
+ id="x24-89001r1"></a></span>tree.setDefaultFolderClosedClass("myTreeClosed");&#x00A0;<br /><span class="label"><a 
+ id="x24-89002r2"></a></span>tree.setDefaultFolderOpenClass("myTreeOpened");
+   </div>
+<!--l. 2726--><p class="indent" >   With the myTreeClosed and myTreeOpened class defined like this:
+   <!--l. 2729-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-84"><span class="label"><a 
+ id="x24-89003r1"></a></span>.tundra&#x00A0;.myTreeOpened&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x24-89004r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;background<span 
+class="cmsy-10">-</span>image:&#x00A0;url(&#8217;folder<span 
+class="cmsy-10">-</span>open.png&#8217;);&#x00A0;<br /><span class="label"><a 
+ id="x24-89005r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;background<span 
+class="cmsy-10">-</span>position:&#x00A0;top;&#x00A0;<br /><span class="label"><a 
+ id="x24-89006r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;top:&#x00A0;1px;&#x00A0;<br /><span class="label"><a 
+ id="x24-89007r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;height:&#x00A0;32px&#x00A0;!important;&#x00A0;<br /><span class="label"><a 
+ id="x24-89008r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;width:&#x00A0;32px&#x00A0;!important;&#x00A0;<br /><span class="label"><a 
+ id="x24-89009r7"></a></span>}&#x00A0;<br /><span class="label"><a 
+ id="x24-89010r8"></a></span>.tundra&#x00A0;.myTreeClosed&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x24-89011r9"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;background<span 
+class="cmsy-10">-</span>image:&#x00A0;url(&#8217;folder.png&#8217;);&#x00A0;<br /><span class="label"><a 
+ id="x24-89012r10"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;background<span 
+class="cmsy-10">-</span>position:&#x00A0;top;&#x00A0;<br /><span class="label"><a 
+ id="x24-89013r11"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;top:&#x00A0;1px;&#x00A0;<br /><span class="label"><a 
+ id="x24-89014r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;height:&#x00A0;32px&#x00A0;!important;&#x00A0;<br /><span class="label"><a 
+ id="x24-89015r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;width:&#x00A0;32px&#x00A0;!important;&#x00A0;<br /><span class="label"><a 
+ id="x24-89016r14"></a></span>}
+   </div>
+     <ul class="itemize1">
+     <li class="itemize">setting different icons for some items. This can be achieved by setting
+     the Tree.folderClosedClassAttribute, Tree.folderOpenedClassAttribute or
+     Tree.leafClassAttribute.
+     <!--l. 2752--><p class="noindent" >Example:
+     <!--l. 2755-->
+     <div class="lstlisting" id="listing-85"><span class="label"><a 
+ id="x24-89017r1"></a></span>item1.setValue(Tree.folderClosedClassAttribute,"item1");
+     
+     </div>
+     <!--l. 2760--><p class="noindent" >With the item1 css class defined as:
+     <!--l. 2763-->
+     <div class="lstlisting" id="listing-86"><span class="label"><a 
+ id="x24-89018r1"></a></span>.item1{&#x00A0;<br /><span class="label"><a 
+ id="x24-89019r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;background<span 
+class="cmsy-10">-</span>image:&#x00A0;<br /><span class="label"><a 
+ id="x24-89020r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;url(&#8217;folder<span 
+class="cmsy-10">-</span>visiting.png&#8217;);&#x00A0;<br /><span class="label"><a 
+ id="x24-89021r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;background<span 
+class="cmsy-10">-</span>position:&#x00A0;top;&#x00A0;<br /><span class="label"><a 
+ id="x24-89022r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;top:&#x00A0;1px;&#x00A0;<br /><span class="label"><a 
+ id="x24-89023r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;height:&#x00A0;32px&#x00A0;!important;&#x00A0;<br /><span class="label"><a 
+ id="x24-89024r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;width:&#x00A0;32px&#x00A0;!important;&#x00A0;<br /><span class="label"><a 
+ id="x24-89025r8"></a></span>}
+     
+     </div>
+     <!--l. 2775--><p class="noindent" >Our item item1 will then have its own class:
+     <!--l. 2777--><p class="noindent" ><img 
+src="TatamiUserDocumentation30x.png" alt="PIC" class="graphics" width="89.33374pt" height="88.32999pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation30x.png" src="30C__dev_workspace_docs_images_treeExampleCustom2.eps"  
+-->
+     </li></ul>
+<!--l. 2780--><p class="noindent" >You can also customize the css styles applied to the label. As you probably noticed,
+item1 is the only one item which label is red-colored.
+<!--l. 2783--><p class="indent" >   It has been achieved by using the following method:
+   <!--l. 2786-->
+<div class="lstlisting" id="listing-87"><span class="label"><a 
+ id="x24-89026r1"></a></span>item1.setValue(Tree.labelClassAttribute,"myLabelClass");
+   </div>
+<!--l. 2791--><p class="indent" >   With the corresponding css class:
+   <!--l. 2794-->
+<div class="lstlisting" id="listing-88"><span class="label"><a 
+ id="x24-89027r1"></a></span>.myLabelClass{&#x00A0;<br /><span class="label"><a 
+ id="x24-89028r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;color:&#x00A0;red;&#x00A0;<br /><span class="label"><a 
+ id="x24-89029r3"></a></span>}
+                                                                  
+
+                                                                  
+   </div>
+<!--l. 2802--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.2.3   </span> <a 
+ id="x24-900002.3.2.3"></a>Tree events</h5>
+<!--l. 2804--><p class="noindent" >The Tree accepts tree listeners. A Tree Listener must implement the following
+interface:
+   <!--l. 2808-->
+<div class="lstlisting" id="listing-89"><span class="label"><a 
+ id="x24-90001r1"></a></span><span 
+class="ecbx-1000">package</span>&#x00A0;com.objetdirect.tatami.client.tree;&#x00A0;<br /><span class="label"><a 
+ id="x24-90002r2"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.data.Item;&#x00A0;<br /><span class="label"><a 
+ id="x24-90003r3"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">interface</span>&#x00A0;TreeListener&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x24-90004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onClick(Item&#x00A0;item);&#x00A0;<br /><span class="label"><a 
+ id="x24-90005r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onOpen(Item&#x00A0;item);&#x00A0;<br /><span class="label"><a 
+ id="x24-90006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onClose(Item&#x00A0;item);&#x00A0;<br /><span class="label"><a 
+ id="x24-90007r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onDblClick(Item&#x00A0;item);&#x00A0;<br /><span class="label"><a 
+ id="x24-90008r8"></a></span>}
+   </div>
+<!--l. 2820--><p class="indent" >   Then, you can or remove tree listeners to a tree with the following methods:
+   <!--l. 2824-->
+<div class="lstlisting" id="listing-90"><span class="label"><a 
+ id="x24-90009r1"></a></span>addTreeListener(TreeListener)&#x00A0;<br /><span class="label"><a 
+ id="x24-90010r2"></a></span>removeTreeListener(TreeListener)
+   </div>
+<!--l. 2831--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.2.4   </span> <a 
+ id="x24-910002.3.2.4"></a>Example</h5>
+<!--l. 2833--><p class="noindent" >The following example illustrates the tree customization and tree listeners
+concepts.
+   <!--l. 2837-->
+<div class="lstlisting" id="listing-91"><span class="label"><a 
+ id="x24-91001r1"></a></span>FlowPanel&#x00A0;panel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;FlowPanel();&#x00A0;<br /><span class="label"><a 
+ id="x24-91002r2"></a></span>Tree&#x00A0;tree&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Tree(<span 
+class="ecbx-1000">new</span>&#x00A0;Item("Root","Root"));&#x00A0;<br /><span class="label"><a 
+ id="x24-91003r3"></a></span>Item&#x00A0;item1&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item1"&#x00A0;,&#x00A0;"Item&#x2423;1");&#x00A0;<br /><span class="label"><a 
+ id="x24-91004r4"></a></span>Item&#x00A0;item11&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item1.1"&#x00A0;,&#x00A0;"Item&#x2423;1.1");&#x00A0;<br /><span class="label"><a 
+ id="x24-91005r5"></a></span>Item&#x00A0;item12&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item1.2"&#x00A0;,&#x00A0;"Item&#x2423;1.2");&#x00A0;<br /><span class="label"><a 
+ id="x24-91006r6"></a></span>item1.addChild(item11);&#x00A0;<br /><span class="label"><a 
+ id="x24-91007r7"></a></span>item1.addChild(item12);&#x00A0;<br /><span class="label"><a 
+ id="x24-91008r8"></a></span>item12.addChild(<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item1.2.1"&#x00A0;,&#x00A0;"Item&#x2423;1.2.1"));&#x00A0;<br /><span class="label"><a 
+ id="x24-91009r9"></a></span>item12.addChild(<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item1.2.2"&#x00A0;,&#x00A0;"Item&#x2423;1.2.2"));&#x00A0;<br /><span class="label"><a 
+ id="x24-91010r10"></a></span>item1.setValue(Tree.labelClassAttribute,"myLabelClass");&#x00A0;<br /><span class="label"><a 
+ id="x24-91011r11"></a></span>item1.setValue(Tree.folderClosedClassAttribute,"item1");&#x00A0;<br /><span class="label"><a 
+ id="x24-91012r12"></a></span>Item&#x00A0;item2&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Item("item2"&#x00A0;,&#x00A0;"Item&#x2423;2");&#x00A0;<br /><span class="label"><a 
+ id="x24-91013r13"></a></span>tree.setDefaultFolderClosedClass("myTreeClosed");&#x00A0;<br /><span class="label"><a 
+ id="x24-91014r14"></a></span>tree.setDefaultFolderOpenClass("myTreeOpened");&#x00A0;<br /><span class="label"><a 
+ id="x24-91015r15"></a></span>tree.getRootItem().addChild(item1);&#x00A0;<br /><span class="label"><a 
+ id="x24-91016r16"></a></span>tree.getRootItem().addChild(item2);&#x00A0;<br /><span class="label"><a 
+ id="x24-91017r17"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;HTML&#x00A0;openValue&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("Opened&#x2423;:");&#x00A0;<br /><span class="label"><a 
+ id="x24-91018r18"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;HTML&#x00A0;closedValue&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("Closed&#x2423;:");&#x00A0;<br /><span class="label"><a 
+ id="x24-91019r19"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;HTML&#x00A0;onClickValue&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("Clicked&#x2423;:");&#x00A0;<br /><span class="label"><a 
+ id="x24-91020r20"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;HTML&#x00A0;onDblClickValue&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("DblClicked&#x2423;:");&#x00A0;<br /><span class="label"><a 
+ id="x24-91021r21"></a></span>panel.add(tree);&#x00A0;<br /><span class="label"><a 
+ id="x24-91022r22"></a></span>tree.addTreeListener(<span 
+class="ecbx-1000">new</span>&#x00A0;TreeListener()&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x24-91023r23"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onOpen(Item&#x00A0;item)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x24-91024r24"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;openValue.setHTML("Opened&#x2423;:"&#x00A0;+&#x00A0;item.getId());&#x00A0;<br /><span class="label"><a 
+ id="x24-91025r25"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x24-91026r26"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onClose(Item&#x00A0;item)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x24-91027r27"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;closedValue.setHTML("Closed&#x2423;:"&#x00A0;+&#x00A0;item.getId());&#x00A0;<br /><span class="label"><a 
+ id="x24-91028r28"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x24-91029r29"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onClick(Item&#x00A0;item)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x24-91030r30"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;onClickValue.setHTML("Clicked&#x2423;:"&#x00A0;+&#x00A0;item.getId());&#x00A0;<br /><span class="label"><a 
+ id="x24-91031r31"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x24-91032r32"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onDblClick(Item&#x00A0;item)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x24-91033r33"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;onDblClickValue.setHTML("DblClicked&#x2423;:"&#x00A0;+&#x00A0;item.getId());&#x00A0;<br /><span class="label"><a 
+ id="x24-91034r34"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x24-91035r35"></a></span>});&#x00A0;<br /><span class="label"><a 
+ id="x24-91036r36"></a></span>panel.add(onClickValue);&#x00A0;<br /><span class="label"><a 
+ id="x24-91037r37"></a></span>panel.add(onDblClickValue);&#x00A0;<br /><span class="label"><a 
+ id="x24-91038r38"></a></span>panel.add(closedValue);&#x00A0;<br /><span class="label"><a 
+ id="x24-91039r39"></a></span>panel.add(openValue);
+   </div>
+                                                                  
+
+                                                                  
+   <!--l. 2881--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu13.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu14.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 2881--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu14.html"></a>   
+</body></html> 

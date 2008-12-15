@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Axis Options</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 3993--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu21.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu22.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">4.4.2   </span> <a 
+ id="x43-1250004.4.2"></a>Axis Options</h4>
+<!--l. 3995--><p class="noindent" >The precedent example shows how axis can be customized. There are a lot of options
+for Axis &#x2026;
+<!--l. 3999--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">4.4.2.1   </span> <a 
+ id="x43-1260004.4.2.1"></a>Ticks Options</h5>
+<!--l. 4001--><p class="noindent" >Axes can show up to 3 different kinds of ticks: major minor, and micro. You can
+enable/disable them with the corresponding methods :
+   <!--l. 4005-->
+<div class="lstlisting" id="listing-142"><span class="label"><a 
+ id="x43-126001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setMinorTicks(Boolean&#x00A0;minorTicks);&#x00A0;<br /><span class="label"><a 
+ id="x43-126002r2"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setMajorTicks(Boolean&#x00A0;majorTicks);&#x00A0;<br /><span class="label"><a 
+ id="x43-126003r3"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setMajorTicks(Boolean&#x00A0;microTicks);
+   </div>
+<!--l. 4012--><p class="indent" >   Each of these ticks types have different options:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">length:</span> </dt><dd 
+class="description">the length of the ticks, in pixels
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">color:</span> </dt><dd 
+class="description">the color of the ticks
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">step:</span> </dt><dd 
+class="description">the step between the ticks</dd></dl>
+<!--l. 4018--><p class="noindent" >The corresponding methods names are pretty straightforward:
+   <!--l. 4021-->
+<div class="lstlisting" id="listing-143"><span class="label"><a 
+ id="x43-126004r1"></a></span>setMajorTicksColor(String)&#x00A0;<br /><span class="label"><a 
+ id="x43-126005r2"></a></span>setMajorTicksLength(<span 
+class="ecbx-1000">double</span>)&#x00A0;<br /><span class="label"><a 
+ id="x43-126006r3"></a></span>setMajorTickStep(<span 
+class="ecbx-1000">double</span>)&#x00A0;<br /><span class="label"><a 
+ id="x43-126007r4"></a></span>setMinorTicksColor(String)&#x00A0;<br /><span class="label"><a 
+ id="x43-126008r5"></a></span>setMinorTicksLength(<span 
+class="ecbx-1000">double</span>)&#x00A0;<br /><span class="label"><a 
+ id="x43-126009r6"></a></span>setMicroTickStep(<span 
+class="ecbx-1000">double</span>)&#x00A0;<br /><span class="label"><a 
+ id="x43-126010r7"></a></span>setMicroTicksColor(String)&#x00A0;<br /><span class="label"><a 
+ id="x43-126011r8"></a></span>setMicroTicksLength(<span 
+class="ecbx-1000">double</span>)&#x00A0;<br /><span class="label"><a 
+ id="x43-126012r9"></a></span>setMicroTickStep(<span 
+class="ecbx-1000">double</span>)
+   </div>
+<!--l. 4032--><p class="indent" >   Minor and Major ticks can also show labels :
+   <!--l. 4035-->
+<div class="lstlisting" id="listing-144"><span class="label"><a 
+ id="x43-126013r1"></a></span>setMajorLabels(Boolean)&#x00A0;<br /><span class="label"><a 
+ id="x43-126014r2"></a></span>setMinorLabels(Boolean)
+   </div>
+<!--l. 4041--><p class="indent" >   Example :
+<!--l. 4043--><p class="indent" >   The following example demonstrates the use of ticks options.
+   <!--l. 4046-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-145"><span class="label"><a 
+ id="x43-126015r1"></a></span>Axis&#x00A0;xLinesAxis&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Axis(Axis.BOTTOM&#x00A0;|&#x00A0;Axis.HORIZONTAL);&#x00A0;<br /><span class="label"><a 
+ id="x43-126016r2"></a></span>xLinesAxis.setMajorTickStep(50);&#x00A0;<br /><span class="label"><a 
+ id="x43-126017r3"></a></span>xLinesAxis.setMajorTicksLength(15);&#x00A0;<br /><span class="label"><a 
+ id="x43-126018r4"></a></span>xLinesAxis.setMajorTicksColor("blue");&#x00A0;<br /><span class="label"><a 
+ id="x43-126019r5"></a></span>xLinesAxis.setMinorTickStep(20);&#x00A0;<br /><span class="label"><a 
+ id="x43-126020r6"></a></span>xLinesAxis.setMinorTicksLength(10);&#x00A0;<br /><span class="label"><a 
+ id="x43-126021r7"></a></span>xLinesAxis.setMinorLabels(<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x43-126022r8"></a></span>xLinesAxis.setMinorTicksColor("red");&#x00A0;<br /><span class="label"><a 
+ id="x43-126023r9"></a></span>xLinesAxis.setMicroTicks(<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x43-126024r10"></a></span>xLinesAxis.setMicroTickStep(10);&#x00A0;<br /><span class="label"><a 
+ id="x43-126025r11"></a></span>xLinesAxis.setMicroTicksLength(5);&#x00A0;<br /><span class="label"><a 
+ id="x43-126026r12"></a></span>xLinesAxis.setMicroTicksColor("green");
+   </div>
+<!--l. 4063--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">4.4.2.2   </span> <a 
+ id="x43-1270004.4.2.2"></a>Miscellaneous options</h5>
+<!--l. 4065--><p class="noindent" >This set of options allow you to customize some axis properties such as its minimum
+and maximum, if it should be aligned on ticks etc...
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">setIncludeZero(Boolean):</span> </dt><dd 
+class="description">sets whether the axis should be forced to include
+     the zero.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setMax(double):</span> </dt><dd 
+class="description">sets the maximum value displayed on the axis
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setMin(double):</span> </dt><dd 
+class="description">sets the minimum value displayed on the axis
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setNatural(boolean):</span> </dt><dd 
+class="description">forces the ticks to be aligned on natural numbers
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setFixed(Boolean):</span> </dt><dd 
+class="description">sets whether the labels precision is fixed
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setFont(String):</span> </dt><dd 
+class="description">sets the font used for the labels
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setFontColor(String):</span> </dt><dd 
+class="description">sets the font color used for the labels
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setFixLower(String):</span> </dt><dd 
+class="description">forces          the          lower          axis          bound
+     to be aligned on a tick. Possible values are : AXIS.FIX_TYPE_MAJOR,
+     AXIS.FIX_TYPE_MINOR, AXIS.FIX_TYPE_MICRO
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setFixUpper(String)</span> </dt><dd 
+class="description">: same as setFixLower, but for the upper bound.</dd></dl>
+<!--l. 4083--><p class="noindent" >Example :
+   <!--l. 4086-->
+<div class="lstlisting" id="listing-146"><span class="label"><a 
+ id="x43-127001r1"></a></span>xLinesAxis.setFixed(<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x43-127002r2"></a></span>xLinesAxis.setFixLower(Axis.FIX_TYPE_MAJOR);&#x00A0;<br /><span class="label"><a 
+ id="x43-127003r3"></a></span>xLinesAxis.setFixUpper(Axis.FIX_TYPE_MICRO);&#x00A0;<br /><span class="label"><a 
+ id="x43-127004r4"></a></span>xLinesAxis.setFont("normal&#x2423;normal&#x2423;bold&#x2423;12pt&#x2423;Tahoma");&#x00A0;<br /><span class="label"><a 
+ id="x43-127005r5"></a></span>xLinesAxis.setFontColor("green");
+   </div>
+                                                                  
+
+                                                                  
+<!--l. 4095--><p class="indent" >   <img 
+src="TatamiUserDocumentation51x.png" alt="PIC" class="graphics" width="475.7775pt" height="96.35999pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation51x.png" src="51C__dev_workspace_docs_images_chartingimages_axes_options_example2.eps"  
+-->
+<!--l. 4097--><p class="indent" >   Notice the upper value is aligned on a micro tick, the lower one is aligned on a
+major tick.
+<!--l. 4101--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">4.4.2.3   </span> <a 
+ id="x43-1280004.4.2.3"></a>Labels</h5>
+<!--l. 4103--><p class="noindent" >The Axis class provides default labels : they correspond to the actual value on the
+axis. But you can also provide your own labels.
+   <!--l. 4107-->
+<div class="lstlisting" id="listing-147"><span class="label"><a 
+ id="x43-128001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;addLabel(<span 
+class="ecbx-1000">double</span>&#x00A0;forValue,&#x00A0;String&#x00A0;text)
+   </div>
+<!--l. 4112--><p class="indent" >   This method customizes the label for the given forValue. Example :
+   <!--l. 4115-->
+<div class="lstlisting" id="listing-148"><span class="label"><a 
+ id="x43-128002r1"></a></span>String[]&#x00A0;labels&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};&#x00A0;<br /><span class="label"><a 
+ id="x43-128003r2"></a></span><span 
+class="ecbx-1000">for</span>&#x00A0;(<span 
+class="ecbx-1000">int</span>&#x00A0;i&#x00A0;=&#x00A0;0;&#x00A0;i&#x00A0;&#x003C;&#x00A0;labels.length;&#x00A0;i++)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x43-128004r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;xColumnsAxis.addLabel(i+1,labels[i]);&#x00A0;<br /><span class="label"><a 
+ id="x43-128005r4"></a></span>}
+   </div>
+<!--l. 4123--><p class="indent" >   For each integer value on the X axis, we set the label to the corresponding
+month.
+                                                                  
+
+                                                                  
+<!--l. 4126--><p class="indent" >   <img 
+src="TatamiUserDocumentation52x.png" alt="PIC" class="graphics" width="869.2475pt" height="301.125pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation52x.png" src="52C__dev_workspace_docs_images_chartingimages_axes_labelsexample1.eps"  
+-->
+<!--l. 4128--><p class="indent" >   We could have done it as easily with the following method, which only adds labels
+for integer values, in the given order.
+   <!--l. 4132-->
+<div class="lstlisting" id="listing-149"><span class="label"><a 
+ id="x43-128006r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;addLabels(String[]&#x00A0;labels)
+   </div>
+<!--l. 4137--><p class="indent" >   Example :
+   <!--l. 4140-->
+<div class="lstlisting" id="listing-150"><span class="label"><a 
+ id="x43-128007r1"></a></span>String[]&#x00A0;labels&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};&#x00A0;<br /><span class="label"><a 
+ id="x43-128008r2"></a></span>xColumnsAxis.addLabels(labels);
+   </div>
+<!--l. 4146--><p class="indent" >   The above example will have exactly the same effect as the previous
+one.
+<!--l. 4149--><p class="indent" >   These methods only converts the given value/label couple into an AxisLabel
+object.
+<!--l. 4152--><p class="indent" >   You can also use the AxisLabel object directly:
+   <!--l. 4155-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-151"><span class="label"><a 
+ id="x43-128009r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;List&#x003C;AxisLabel&#x003E;&#x00A0;getDiscreteLabels(){&#x00A0;<br /><span class="label"><a 
+ id="x43-128010r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;List&#x003C;AxisLabel&#x003E;&#x00A0;labels&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;ArrayList&#x003C;AxisLabel&#x003E;();&#x00A0;<br /><span class="label"><a 
+ id="x43-128011r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;labels.add(<span 
+class="ecbx-1000">new</span>&#x00A0;AxisLabel("Zero",0));&#x00A0;<br /><span class="label"><a 
+ id="x43-128012r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;labels.add(<span 
+class="ecbx-1000">new</span>&#x00A0;AxisLabel("Max",10));&#x00A0;<br /><span class="label"><a 
+ id="x43-128013r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;labels.add(<span 
+class="ecbx-1000">new</span>&#x00A0;AxisLabel("Min",<span 
+class="cmsy-10">-</span>10));&#x00A0;<br /><span class="label"><a 
+ id="x43-128014r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">return</span>&#x00A0;labels;&#x00A0;<br /><span class="label"><a 
+ id="x43-128015r7"></a></span>}&#x00A0;<br /><span class="label"><a 
+ id="x43-128016r8"></a></span>xLinesAxis.addLabels(getDiscreteLabels());
+   </div>
+<!--l. 4167--><p class="indent" >   <img 
+src="TatamiUserDocumentation53x.png" alt="PIC" class="graphics" width="315.17749pt" height="312.16624pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation53x.png" src="53C__dev_workspace_docs_images_chartingimages_axes_labelsexample2.eps"  
+-->
+                                                                  
+
+                                                                  
+   <!--l. 4170--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu21.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu22.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 4170--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu22.html"></a>   
+</body></html> 

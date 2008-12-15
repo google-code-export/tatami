@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Fetching items</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 2968--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse8.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse6.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse7.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h3 class="sectionHead"><span class="titlemark">3.3   </span> <a 
+ id="x28-950003.3"></a>Fetching items</h3>
+<!--l. 2970--><p class="noindent" >The core method of the datastore is the &#8220;fetch&#8221; function. The fetch function performs
+a query , represented by the &#8220;Request&#8221; object.
+<!--l. 2974--><p class="indent" >   The fetch method signature :
+   <!--l. 2977-->
+<div class="lstlisting" id="listing-94"><span class="label"><a 
+ id="x28-95001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;fetch(Request&#x00A0;request)
+   </div>
+<!--l. 2982--><p class="indent" >   This method performs a Request , and notifies the FetchListeners during the
+whole fetch process.
+<!--l. 2985--><p class="indent" >   Below stands the Fetch Listener interface. The grid itself implements the
+FetchListener interface, but we can implement our own fetch listener to be aware of
+all the Fetch Process.
+   <!--l. 2990-->
+<div class="lstlisting" id="listing-95"><span class="label"><a 
+ id="x28-95002r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">interface</span>&#x00A0;FetchListener&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x28-95003r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onComplete(FetchEventSource&#x00A0;source,&#x00A0;List&#x00A0;items&#x00A0;,&#x00A0;Request&#x00A0;request&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x28-95004r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onBegin(FetchEventSource&#x00A0;source&#x00A0;,<span 
+class="ecbx-1000">int</span>&#x00A0;size&#x00A0;,&#x00A0;Request&#x00A0;request);&#x00A0;<br /><span class="label"><a 
+ id="x28-95005r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onItem(FetchEventSource&#x00A0;source&#x00A0;,Item&#x00A0;item);&#x00A0;<br /><span class="label"><a 
+ id="x28-95006r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onError(FetchEventSource&#x00A0;source);&#x00A0;<br /><span class="label"><a 
+ id="x28-95007r6"></a></span>}
+   </div>
+<!--l. 3000--><p class="indent" >   The main method is onComplete : it is called once the fetch is done. Items is a
+List containing all the fetched items, while request is the (possibly modified) request
+performed.
+<!--l. 3004--><p class="indent" >   onBegin is called before the actual fetch. &#8220;Size&#8221; is the total number of items
+matching the request (or the page size when using paging), while request is the
+(possibly modified) request performed.
+<!--l. 3009--><p class="indent" >   onItem is called each time an Item has been fetched, that is , it will be present in
+the list passed to onComplete.
+<!--l. 3012--><p class="indent" >   onError is called when an error occurs during the fetch.
+<!--l. 3014--><p class="indent" >   The request object owns a certain amount of parameters, used to search items in
+the store.
+<!--l. 3017--><p class="indent" >   These parameters are :
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">nbItemToReturn:</span> </dt><dd 
+class="description">Maximum number of item to return. The number of item
+     actually returned can be lesser than nbItemToReturn.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">startItemNumber:</span> </dt><dd 
+class="description">Specifies the item number from which the item should be
+     returned. In particular, this is used to load only the number of items that
+     fits on screen. (for example, this is what dojo specified to load the items
+     as the user scrolls the grid)
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">query:</span> </dt><dd 
+class="description">Map of key / attributes pair describing the search criterias.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">sortFields:</span> </dt><dd 
+class="description">A  list  of  SortField.  A  SortField  is  a  simple  object  containing
+     an attribute name and a Boolean indicating wether the sort should be
+     performed in ascending or descending order.</dd></dl>
+                                                                  
+
+                                                                  
+   <!--l. 3031--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse8.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse6.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse7.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 3031--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationse7.html"></a>  
+</body></html> 

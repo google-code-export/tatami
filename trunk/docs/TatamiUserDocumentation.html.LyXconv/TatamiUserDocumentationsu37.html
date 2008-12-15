@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Getting Started</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 4998--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu38.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse18.html#TatamiUserDocumentationsu37.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">5.2.1   </span> <a 
+ id="x64-1510005.2.1"></a>Getting Started</h4>
+<!--l. 5000--><p class="noindent" >We will demonstrate a simple DnD use. This example will define a DnDSource, a
+DnDTarget and add some behaviours to those.
+<!--l. 5004--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">5.2.1.1   </span> <a 
+ id="x64-1520005.2.1.1"></a>Defining the Source</h5>
+<!--l. 5006--><p class="noindent" >First, we define a drag and drop source. There are two DNDSource types in
+tatami:
+     <ul class="itemize1">
+     <li class="itemize">WidgetSource: they are constructed from a Panel, and allow any Widget
+     to be dragged.
+     </li>
+     <li class="itemize">TreeSource: they allow tree items to be dragged and to accept drop events.</li></ul>
+<!--l. 5014--><p class="noindent" >But you do not have to construct these objects yourself, since the DnD helper do all this
+for you.
+<!--l. 5017--><p class="indent" >   We begin by defining a standard GWT panel, and adding widgets to it
+:
+   <!--l. 5021-->
+<div class="lstlisting" id="listing-204"><span class="label"><a 
+ id="x64-152001r1"></a></span>VerticalPanel&#x00A0;sourcePanel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;VerticalPanel();&#x00A0;<br /><span class="label"><a 
+ id="x64-152002r2"></a></span>HTML&#x00A0;widget1&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("I&#x2423;can&#x2423;be&#x2423;dragged");&#x00A0;<br /><span class="label"><a 
+ id="x64-152003r3"></a></span>HTML&#x00A0;widget2&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("I&#x2423;can&#x2423;be&#x2423;dragged&#x2423;too");&#x00A0;<br /><span class="label"><a 
+ id="x64-152004r4"></a></span>sourcePanel.add(widget1);&#x00A0;<br /><span class="label"><a 
+ id="x64-152005r5"></a></span>sourcePanel.add(widget2);
+   </div>
+<!--l. 5031--><p class="indent" >   Then, we register this panel as a source panel, and the widgets it contains as dnd
+element within these source.
+   <!--l. 5035-->
+<div class="lstlisting" id="listing-205"><span class="label"><a 
+ id="x64-152008r1"></a></span>DnD.registerSource(sourcePanel);&#x00A0;<br /><span class="label"><a 
+ id="x64-152009r2"></a></span>DnD.registerElement(sourcePanel,widget1);&#x00A0;<br /><span class="label"><a 
+ id="x64-152010r3"></a></span>DnD.registerElement(sourcePanel,widget2);
+   </div>
+<!--l. 5042--><p class="indent" >   We are now able to move widget1 and widget2 across the screen, but nobody is
+there to accept them.
+<!--l. 5046--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">5.2.1.2   </span> <a 
+ id="x64-1530005.2.1.2"></a>Defining the Target</h5>
+<!--l. 5048--><p class="noindent" >Similarly,we will define a DnD Target.
+   <!--l. 5051-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-206"><span class="label"><a 
+ id="x64-153001r1"></a></span>VerticalPanel&#x00A0;targetPanel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;VerticalPanel();&#x00A0;<br /><span class="label"><a 
+ id="x64-153002r2"></a></span>HTML&#x00A0;widget3&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("I&#x2423;cannot&#x2423;be&#x2423;dragged");&#x00A0;<br /><span class="label"><a 
+ id="x64-153003r3"></a></span>HTML&#x00A0;widget4&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("Me&#x2423;neither");&#x00A0;<br /><span class="label"><a 
+ id="x64-153004r4"></a></span>targetPanel.add(widget3);&#x00A0;<br /><span class="label"><a 
+ id="x64-153005r5"></a></span>targetPanel.add(widget4);&#x00A0;<br /><span class="label"><a 
+ id="x64-153006r6"></a></span>DnD.registerTarget(targetPanel);&#x00A0;<br /><span class="label"><a 
+ id="x64-153007r7"></a></span>DnD.registerElement(targetPanel,widget3);&#x00A0;<br /><span class="label"><a 
+ id="x64-153008r8"></a></span>DnD.registerElement(targetPanel,widget4);
+   </div>
+<!--l. 5064--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">5.2.1.3   </span> <a 
+ id="x64-1540005.2.1.3"></a>Defining a behavior</h5>
+<!--l. 5066--><p class="noindent" >Now we must define a behavior to be applied to those drag and drop events.
+<!--l. 5069--><p class="indent" >   There are some Behavior classes defined. See the behavior section for a complete
+description of each.
+<!--l. 5072--><p class="indent" >   Here, we will use the WidgetDnDBehavior, which is the best suited to manage
+dragging a widget from one panel to another.
+<!--l. 5075--><p class="indent" >   We will override the onDrop method only, to move the dropped widget from the
+source to the target.
+   <!--l. 5079-->
+<div class="lstlisting" id="listing-207"><span class="label"><a 
+ id="x64-154001r1"></a></span>WidgetDnDBehavior&#x00A0;myBehavior&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DnDDefaultWidgetBehavior()&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x64-154002r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override&#x00A0;<br /><span class="label"><a 
+ id="x64-154003r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;onDrop(Collection&#x003C;Widget&#x003E;&#x00A0;draggedWidgets,&#x00A0;Panel&#x00A0;source,&#x00A0;Panel&#x00A0;target,&#x00A0;String&#x00A0;targetNodeId,&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;isCopy)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x64-154004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">for</span>&#x00A0;(Widget&#x00A0;widget&#x00A0;:&#x00A0;draggedWidgets)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x64-154005r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DnD.move(widget,&#x00A0;source,&#x00A0;target);&#x00A0;<br /><span class="label"><a 
+ id="x64-154006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x64-154007r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">return</span>&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a 
+ id="x64-154008r8"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x64-154009r9"></a></span>};
+   </div>
+<!--l. 5092--><p class="indent" >   Then, we register this behavior for our specifics sources and target:
+   <!--l. 5095-->
+<div class="lstlisting" id="listing-208"><span class="label"><a 
+ id="x64-154010r1"></a></span><span 
+class="ecbx-1000">try</span>&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x64-154011r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;DnD.registerBehavior(myBehavior,&#x00A0;sourcePanel,&#x00A0;targetPanel);&#x00A0;<br /><span class="label"><a 
+ id="x64-154012r3"></a></span>}&#x00A0;<span 
+class="ecbx-1000">catch</span>&#x00A0;(BehaviorScopeException&#x00A0;e)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x64-154013r4"></a></span>}
+   </div>
+<!--l. 5103--><p class="indent" >   Registering a behavior for a source/target couple may raise an exception if a
+behavior is already defined for these couple.
+<!--l. 5106--><p class="indent" >   Now, we are able to drag a widget from the source panel to the target:
+<!--l. 5108--><p class="indent" >   <img 
+src="TatamiUserDocumentation64x.png" alt="PIC" class="graphics" width="153.57375pt" height="61.22874pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation64x.png" src="64C__dev_workspace_docs_images_dndSimple.eps"  
+-->
+<!--l. 5110--><p class="indent" >   You may also drag both draggable items by clicking them s
+                                                                  
+
+                                                                  
+   <!--l. 5113--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu38.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse18.html#TatamiUserDocumentationsu37.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 5113--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu37.html"></a>   
+</body></html> 
