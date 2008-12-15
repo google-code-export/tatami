@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>PlotListener :</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 4496--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu31.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse16.html#TatamiUserDocumentationsu32.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">4.7.7   </span> <a 
+ id="x56-1410004.7.7"></a>PlotListener :</h4>
+<!--l. 4499--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">4.7.7.1   </span> <a 
+ id="x56-1420004.7.7.1"></a>API description</h5>
+<!--l. 4501--><p class="noindent" >You can add your own listener to chart event. To do so, extend the PlotMouseListener
+class.
+   <!--l. 4505-->
+<div class="lstlisting" id="listing-175"><span class="label"><a 
+ id="x56-142001r1"></a></span>PlotMouseListener&#x00A0;listener&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;PlotMouseListener()&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x56-142002r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;processEvent(EffectEvent&#x00A0;event)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x56-142003r3"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Process</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">event</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">as</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">you</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">wish</span>&#x00A0;<br /><span class="label"><a 
+ id="x56-142004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x56-142005r5"></a></span>};
+   </div>
+<!--l. 4514--><p class="indent" >   The EffectEvent contains chart specific events.
+<!--l. 4516--><p class="indent" >   It provides several methods describing the event.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">getType():</span> </dt><dd 
+class="description">This method returns the type of the event. It will return one of the
+     following constants : <!--l. 4520-->
+     <div class="lstlisting" id="listing-176"><span class="label"><a 
+ id="x56-142006r1"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;TYPE_ONCLICK&#x00A0;=&#x00A0;"onclick";&#x00A0;<br /><span class="label"><a 
+ id="x56-142007r2"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;TYPE_ONMOUSEOVER&#x00A0;=&#x00A0;"onmouseover";&#x00A0;<br /><span class="label"><a 
+ id="x56-142008r3"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;TYPE_ONMOUSEOUT&#x00A0;=&#x00A0;"onmouseout";
+     
+     </div>
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getElementType():</span> </dt><dd 
+class="description">This method returns the type of the element which fired the
+     event. It will return one of the following constants : <!--l. 4529-->
+     <div class="lstlisting" id="listing-177"><span class="label"><a 
+ id="x56-142009r1"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;ELEMENT_TYPE_MARKER&#x00A0;=&#x00A0;"marker";&#x00A0;<br /><span class="label"><a 
+ id="x56-142010r2"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;ELEMENT_TYPE_BAR&#x00A0;=&#x00A0;"bar";&#x00A0;<br /><span class="label"><a 
+ id="x56-142011r3"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;ELEMENT_TYPE_COLUMN&#x00A0;=&#x00A0;"column";&#x00A0;<br /><span class="label"><a 
+ id="x56-142012r4"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;ELEMENT_TYPE_CIRCLE&#x00A0;=&#x00A0;"circle";&#x00A0;<br /><span class="label"><a 
+ id="x56-142013r5"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;ELEMENT_TYPE_SLICE&#x00A0;=&#x00A0;"slice";
+     
+     </div>
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getX():</span> </dt><dd 
+class="description">this method returns the x-coordinate of the point which fired the
+     event.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getY():</span> </dt><dd 
+class="description">this method returns the y-coordinate of the point which fired the
+     event.
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getAssociatedObject():</span> </dt><dd 
+class="description">It will return a representation of the element. This
+     representation is :</dd></dl>
+     <ul class="itemize1">
+     <li class="itemize">a PiePiece object if the element which fired the event was a slice
+     </li>
+     <li class="itemize">a Point object if the element which fired the event was a marker
+     </li>
+     <li class="itemize">a Bubble object if the element which fired the event was a circle
+     </li>
+     <li class="itemize">a Double if the element which fired the event was a Bar or a column</li></ul>
+<!--l. 4550--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">4.7.7.2   </span> <a 
+ id="x56-1430004.7.7.2"></a>Example/Tutorial </h5>
+   <!--l. 4553-->
+<div class="lstlisting" id="listing-178"><span class="label"><a 
+ id="x56-143001r1"></a></span>FlowPanel&#x00A0;panel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;FlowPanel();&#x00A0;<br /><span class="label"><a 
+ id="x56-143002r2"></a></span>panel.setStylePrimaryName("testChartCustomEffectPage<span 
+class="cmsy-10">-</span>chartAndLabelsContainer");&#x00A0;<br /><span class="label"><a 
+ id="x56-143003r3"></a></span>Chart2D&#x00A0;chart&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Chart2D("300px","300px");&#x00A0;<br /><span class="label"><a 
+ id="x56-143004r4"></a></span>PiePlot&#x003C;PiePiece&#x003E;&#x00A0;plot&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;PiePlot&#x003C;PiePiece&#x003E;();&#x00A0;<br /><span class="label"><a 
+ id="x56-143005r5"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;HTML&#x00A0;onMouseOver&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML();&#x00A0;<br /><span class="label"><a 
+ id="x56-143006r6"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;HTML&#x00A0;onMouseClick&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML();&#x00A0;<br /><span class="label"><a 
+ id="x56-143007r7"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;HTML&#x00A0;onMouseOut&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML();&#x00A0;<br /><span class="label"><a 
+ id="x56-143008r8"></a></span>Serie&#x003C;PiePiece&#x003E;&#x00A0;serie1&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;PiePiece&#x003E;();&#x00A0;<br /><span class="label"><a 
+ id="x56-143009r9"></a></span>serie1.setName("continents");&#x00A0;<br /><span class="label"><a 
+ id="x56-143010r10"></a></span>serie1.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;PiePiece(30370000,"Africa","#FFFFFF"));&#x00A0;<br /><span class="label"><a 
+ id="x56-143011r11"></a></span>serie1.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;PiePiece(42330000,"America"));&#x00A0;<br /><span class="label"><a 
+ id="x56-143012r12"></a></span>serie1.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;PiePiece(13720000,"Antarctica"));&#x00A0;<br /><span class="label"><a 
+ id="x56-143013r13"></a></span>serie1.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;PiePiece(43810000&#x00A0;,"Asia"));&#x00A0;<br /><span class="label"><a 
+ id="x56-143014r14"></a></span>serie1.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;PiePiece(9010000,"Australia"));&#x00A0;<br /><span class="label"><a 
+ id="x56-143015r15"></a></span>serie1.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;PiePiece(10180000,"Europe"));&#x00A0;<br /><span class="label"><a 
+ id="x56-143016r16"></a></span>plot.addEffect(<span 
+class="ecbx-1000">new</span>&#x00A0;EffectTooltip());&#x00A0;<br /><span class="label"><a 
+ id="x56-143017r17"></a></span>PlotMouseListener&#x00A0;listener&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;PlotMouseListener()&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x56-143018r18"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;processEvent(EffectEvent&#x00A0;event)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x56-143019r19"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;String&#x00A0;<span 
+class="ecbx-1000">label</span>&#x00A0;="";&#x00A0;<br /><span class="label"><a 
+ id="x56-143020r20"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">if</span>(EffectEvent.ELEMENT_TYPE_SLICE.equals(event.getElementType())){&#x00A0;<br /><span class="label"><a 
+ id="x56-143021r21"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">label</span>&#x00A0;=&#x00A0;((PiePiece)event.getAssociatedObject()).getLabel();&#x00A0;<br /><span class="label"><a 
+ id="x56-143022r22"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x56-143023r23"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">if</span>(event.getType().compareTo(EffectEvent.TYPE_ONCLICK)&#x00A0;==&#x00A0;0){&#x00A0;<br /><span class="label"><a 
+ id="x56-143024r24"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;onMouseClick.setHTML("Clicked&#x2423;on&#x2423;:&#x2423;"&#x00A0;+&#x00A0;<span 
+class="ecbx-1000">label</span>);&#x00A0;<br /><span class="label"><a 
+ id="x56-143025r25"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+class="ecbx-1000">else</span>&#x00A0;<span 
+class="ecbx-1000">if</span>(event.getType().compareTo(EffectEvent.TYPE_ONMOUSEOVER)&#x00A0;==&#x00A0;0){&#x00A0;<br /><span class="label"><a 
+ id="x56-143026r26"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;onMouseOver.setHTML("Mouse&#x2423;Over&#x2423;:&#x2423;"&#x00A0;+&#x00A0;<span 
+class="ecbx-1000">label</span>);&#x00A0;<br /><span class="label"><a 
+ id="x56-143027r27"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+class="ecbx-1000">else</span>&#x00A0;<span 
+class="ecbx-1000">if</span>(event.getType().compareTo(EffectEvent.TYPE_ONMOUSEOUT)&#x00A0;==&#x00A0;0){&#x00A0;<br /><span class="label"><a 
+ id="x56-143028r28"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;onMouseOut.setHTML("Mouse&#x2423;Out&#x2423;:&#x2423;"&#x00A0;+&#x00A0;<span 
+class="ecbx-1000">label</span>);&#x00A0;<br /><span class="label"><a 
+ id="x56-143029r29"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x56-143030r30"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x56-143031r31"></a></span>};&#x00A0;<br /><span class="label"><a 
+ id="x56-143032r32"></a></span>plot.addEffect(listener);&#x00A0;<br /><span class="label"><a 
+ id="x56-143033r33"></a></span>plot.addSerie(serie1);&#x00A0;<br /><span class="label"><a 
+ id="x56-143034r34"></a></span>chart.addPlot(plot);&#x00A0;<br /><span class="label"><a 
+ id="x56-143035r35"></a></span>DOM.setElementAttribute(chart.getElement(),"id","chart1");&#x00A0;<br /><span class="label"><a 
+ id="x56-143036r36"></a></span>DOM.setElementAttribute(onMouseOver.getElement(),"id","chart1MouseOver");&#x00A0;DOM.setElementAttribute(onMouseClick.getElement(),"id","chart1MouseClick");&#x00A0;DOM.setElementAttribute(onMouseOut.getElement(),"id","chart1MouseOut");&#x00A0;<br /><span class="label"><a 
+ id="x56-143037r37"></a></span>panel.add(chart);&#x00A0;<br /><span class="label"><a 
+ id="x56-143038r38"></a></span>panel.add(onMouseClick);&#x00A0;<br /><span class="label"><a 
+ id="x56-143039r39"></a></span>panel.add(onMouseOver);&#x00A0;<br /><span class="label"><a 
+ id="x56-143040r40"></a></span>panel.add(onMouseOut);
+   </div>
+                                                                  
+
+                                                                  
+   <!--l. 4598--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu31.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse16.html#TatamiUserDocumentationsu32.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 4598--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu32.html"></a>   
+</body></html> 

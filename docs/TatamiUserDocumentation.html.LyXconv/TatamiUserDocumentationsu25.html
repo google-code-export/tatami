@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Series Options </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 4253--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu24.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse14.html#TatamiUserDocumentationsu25.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">4.5.3   </span> <a 
+ id="x47-1320004.5.3"></a>Series Options </h4>
+<!--l. 4255--><p class="noindent" >The Serie offers several methods to customize its rendering.
+     <dl class="description"><dt class="description">
+<span class="lstinline">    <span 
+class="ecbx-1000">public</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">setFillColor</span><span 
+class="ecbx-1000">(</span><span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">color</span><span 
+class="ecbx-1000">)</span>                         </span><span 
+class="ecbx-1000">:</span></dt><dd 
+class="description">Fills the serie with the given
+     color. It may the area for a line chart, or the columns/bars for a bar chart
+     etc...
+     </dd><dt class="description">
+<span class="lstinline">   <span 
+class="ecbx-1000">public</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">setStrokeColor</span><span 
+class="ecbx-1000">(</span><span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">color</span><span 
+class="ecbx-1000">)</span>                       </span><span 
+class="ecbx-1000">:</span></dt><dd 
+class="description">Sets the color of the lines.
+     </dd><dt class="description">
+<span class="lstinline">  <span 
+class="ecbx-1000">public</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">setStrokeWidth</span><span 
+class="ecbx-1000">(</span><span 
+class="ecbx-1000">int</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">width</span><span 
+class="ecbx-1000">)</span>                          </span><span 
+class="ecbx-1000">:</span></dt><dd 
+class="description">Defines the lines width.
+     </dd><dt class="description">
+<span class="lstinline"> <span 
+class="ecbx-1000">public</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">setMarkerType</span><span 
+class="ecbx-1000">(</span><span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">marker</span><span 
+class="ecbx-1000">)</span>                       </span><span 
+class="ecbx-1000">:</span></dt><dd 
+class="description">Defines the Marker Type.The
+     marker argument can be any SVG path, but the Serie class provides constants
+     for a few markers : <!--l. 4267-->
+     <div class="lstlisting" id="listing-157"><span class="label"><a 
+ id="x47-132001r1"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;MARKER_TYPE_CIRCLE=&#x00A0;"m<span 
+class="cmsy-10">-</span>3,0&#x2423;c0,<span 
+class="cmsy-10">-</span>4&#x2423;6,<span 
+class="cmsy-10">-</span>4&#x2423;6,0&#x2423;m<span 
+class="cmsy-10">-</span>6,0&#x2423;c0,4&#x2423;6,4&#x2423;6,0";&#x00A0;<br /><span class="label"><a 
+ id="x47-132002r2"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;MARKER_TYPE_SQUARE=&#x00A0;"m<span 
+class="cmsy-10">-</span>3,<span 
+class="cmsy-10">-</span>3&#x2423;l0,6&#x2423;6,0&#x2423;0,<span 
+class="cmsy-10">-</span>6&#x2423;z";&#x00A0;<br /><span class="label"><a 
+ id="x47-132003r3"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;MARKER_TYPE_DIAMOND=&#x00A0;"m0,<span 
+class="cmsy-10">-</span>3&#x2423;l3,3&#x2423;<span 
+class="cmsy-10">-</span>3,3&#x2423;<span 
+class="cmsy-10">-</span>3,<span 
+class="cmsy-10">-</span>3&#x2423;z";&#x00A0;<br /><span class="label"><a 
+ id="x47-132004r4"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;MARKER_TYPE_CROSS=&#x00A0;"m0,<span 
+class="cmsy-10">-</span>3&#x2423;l0,6&#x2423;m<span 
+class="cmsy-10">-</span>3,<span 
+class="cmsy-10">-</span>3&#x2423;l6,0";&#x00A0;<br /><span class="label"><a 
+ id="x47-132005r5"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;MARKER_TYPE_X=&#x00A0;"m<span 
+class="cmsy-10">-</span>3,<span 
+class="cmsy-10">-</span>3&#x2423;l6,6&#x2423;m0,<span 
+class="cmsy-10">-</span>6&#x2423;l<span 
+class="cmsy-10">-</span>6,6";&#x00A0;<br /><span class="label"><a 
+ id="x47-132006r6"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;MARKER_TYPE_TRIANGLE=&#x00A0;"m<span 
+class="cmsy-10">-</span>3,3&#x2423;l3,<span 
+class="cmsy-10">-</span>6&#x2423;3,6&#x2423;z";&#x00A0;<br /><span class="label"><a 
+ id="x47-132007r7"></a></span><span 
+class="ecbx-1000">final</span>&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;String&#x00A0;MARKER_TYPE_TRIANGLE_INVERTED=&#x00A0;"m<span 
+class="cmsy-10">-</span>3,<span 
+class="cmsy-10">-</span>3&#x2423;l3,6&#x2423;3,<span 
+class="cmsy-10">-</span>6&#x2423;z";
+     
+     </div>
+     </dd><dt class="description">
+<span class="lstinline"><span 
+class="ecbx-1000">public</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">setMaxDisplayed</span><span 
+class="ecbx-1000">(</span><span 
+class="ecbx-1000">double</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">max</span><span 
+class="ecbx-1000">)</span>                        </span><span 
+class="ecbx-1000">:</span></dt><dd 
+class="description">Sets the Max displayed value for
+     this Serie.
+     </dd><dt class="description">
+<span class="lstinline"> <span 
+class="ecbx-1000">public</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">setMinDisplayed</span><span 
+class="ecbx-1000">(</span><span 
+class="ecbx-1000">double</span><span 
+class="ecbx-1000">&#x00A0;</span><span 
+class="ecbx-1000">min</span><span 
+class="ecbx-1000">)</span>                        </span><span 
+class="ecbx-1000">:</span></dt><dd 
+class="description">Sets the Min displayed value for
+     this Serie.</dd></dl>
+                                                                  
+
+                                                                  
+   <!--l. 4283--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu24.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse14.html#TatamiUserDocumentationsu25.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 4283--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu25.html"></a>  
+</body></html> 

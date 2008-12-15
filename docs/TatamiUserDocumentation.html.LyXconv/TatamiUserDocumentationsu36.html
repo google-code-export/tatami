@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Getting information from the drag-and-drop panel</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 4903--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu35.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse17.html#TatamiUserDocumentationsu36.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">5.1.4   </span> <a 
+ id="x62-1490005.1.4"></a>Getting information from the drag-and-drop panel</h4>
+<!--l. 4905--><p class="noindent" >More methods are available on the drag-and-drop panel which give access to
+information relative its contents.
+<!--l. 4908--><p class="indent" >   The isDraggable method tells whether a widget is draggable (i.e. for at least one
+compatibility):
+   <!--l. 4912-->
+<div class="lstlisting" id="listing-196"><span class="label"><a 
+ id="x62-149001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;isDraggable(Widget&#x00A0;widget);
+   </div>
+<!--l. 4917--><p class="indent" >   The hasDraggableAffordance&#x00A0;method tells whether a given widget is draggable
+for a given compatibility:
+   <!--l. 4921-->
+<div class="lstlisting" id="listing-197"><span class="label"><a 
+ id="x62-149002r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;hasDraggableAffordance(&#x00A0;Widget&#x00A0;widget,&#x00A0;String&#x00A0;affordance);
+   </div>
+<!--l. 4926--><p class="indent" >   The&#x00A0;getDraggableAffordances&#x00A0;method returns the list of all draggable
+compatibilities for a given widget (the compatibilities relative to the target capacity
+of the widget, if any, are not in that list):
+   <!--l. 4931-->
+<div class="lstlisting" id="listing-198"><span class="label"><a 
+ id="x62-149003r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;String[]&#x00A0;getDraggableAffordances(Widget&#x00A0;widget);
+   </div>
+<!--l. 4936--><p class="indent" >   The&#x00A0;getDraggableAffordanceSet&#x00A0;method return the list of draggable widgets for
+the given compatibility:
+   <!--l. 4940-->
+<div class="lstlisting" id="listing-199"><span class="label"><a 
+ id="x62-149004r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;Widget[]&#x00A0;getDraggableAffordanceSet(String&#x00A0;affordance);
+   </div>
+<!--l. 4945--><p class="indent" >   Similar methods are available for the target capacity. The isTarget&#x00A0;method tells
+whether a given widget is a target (i.e. for at least one compatibility):
+   <!--l. 4949-->
+<div class="lstlisting" id="listing-200"><span class="label"><a 
+ id="x62-149005r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;isTarget(Widget&#x00A0;widget);
+                                                                  
+
+                                                                  
+   </div>
+<!--l. 4954--><p class="indent" >   The hasTargetAffordance&#x00A0;method tells whether a given widget is a target for a
+given compatibility:
+   <!--l. 4958-->
+<div class="lstlisting" id="listing-201"><span class="label"><a 
+ id="x62-149006r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;hasTargetAffordance(&#x00A0;Widget&#x00A0;widget,&#x00A0;String&#x00A0;affordance);
+   </div>
+<!--l. 4963--><p class="indent" >   The&#x00A0;getTargetAffordances&#x00A0;methods returns the list of all target compatibilities
+for a given widget ((the compatibilities relative to the draggable capacity of the
+widget, if any, are not in that list):
+   <!--l. 4968-->
+<div class="lstlisting" id="listing-202"><span class="label"><a 
+ id="x62-149007r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;String[]&#x00A0;getTargetAffordances(Widget&#x00A0;widget);
+   </div>
+<!--l. 4973--><p class="indent" >   The&#x00A0;getTargetAffordanceSet&#x00A0;method returns the list of target widgets for the
+given compatibility:
+   <!--l. 4977-->
+<div class="lstlisting" id="listing-203"><span class="label"><a 
+ id="x62-149008r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;Widget[]&#x00A0;getTargetAffordanceSet(String&#x00A0;affordance);
+   </div>
+                                                                  
+
+                                                                  
+   <!--l. 4983--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu35.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse17.html#TatamiUserDocumentationsu36.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 4983--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu36.html"></a>  
+</body></html> 

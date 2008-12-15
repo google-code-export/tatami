@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>DnDBehavior</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 5173--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu39.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse18.html#TatamiUserDocumentationsu40.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">5.2.4   </span> <a 
+ id="x67-1570005.2.4"></a>DnDBehavior</h4>
+<!--l. 5175--><p class="noindent" >A DndBehavior is responsible for processing drag and drop events from a set of
+sources to a set of target.
+<!--l. 5179--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">5.2.4.1   </span> <a 
+ id="x67-1580005.2.4.1"></a>IDnDBehavior interface</h5>
+   <!--l. 5182-->
+<div class="lstlisting" id="listing-213"><span class="label"><a 
+ id="x67-158001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">interface</span>&#x00A0;IDnDBehavior&#x003C;E&#x00A0;<span 
+class="ecbx-1000">extends</span>&#x00A0;IDnDElement&#x00A0;,&#x00A0;S&#x00A0;<span 
+class="ecbx-1000">extends</span>&#x00A0;IDnDSource&#x003C;?&#x003E;&#x00A0;,&#x00A0;T&#x00A0;<span 
+class="ecbx-1000">extends</span>&#x00A0;IDnDTarget&#x003E;&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x67-158002r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;onDrop(Collection&#x003C;E&#x003E;&#x00A0;dndElements,&#x00A0;S&#x00A0;source,&#x00A0;T&#x00A0;target,&#x00A0;String&#x00A0;targetNodeId&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;isCopy&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x67-158003r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;elementsAccepted(S&#x00A0;source,T&#x00A0;target,&#x00A0;Collection&#x003C;E&#x003E;&#x00A0;elements,&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;copied,IDnDController&#x003C;?,&#x00A0;T&#x003E;&#x00A0;controller);&#x00A0;<br /><span class="label"><a 
+ id="x67-158004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;dragOver(IDnDTarget&#x00A0;target);&#x00A0;<br /><span class="label"><a 
+ id="x67-158005r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;checkItemAcceptance(S&#x00A0;source&#x00A0;,&#x00A0;T&#x00A0;target&#x00A0;,&#x00A0;Collection&#x003C;E&#x003E;&#x00A0;dndElements);&#x00A0;<br /><span class="label"><a 
+ id="x67-158006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onDndStart(Collection&#x003C;E&#x003E;&#x00A0;elementBeingDragged&#x00A0;,&#x00A0;S&#x00A0;source&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;ctrlKey);&#x00A0;<br /><span class="label"><a 
+ id="x67-158007r7"></a></span>}
+   </div>
+<!--l. 5193--><p class="indent" >   This interface is generic: it can be implemented for a particular type
+of DnDElement, a particular type of DnDSource and a particular type of
+Target.
+<!--l. 5197--><p class="indent" >   That means you will be able to implement a behavior for WidgetDnDElement
+<!--l. 5199--><p class="indent" >   Each of those methods are called during the drag and drop process.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">onDnDStart:</span> </dt><dd 
+class="description">it will be called each time a drag operation is originated from
+     one of the sources the behavior has been registered for.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">checkItemAcceptance:</span> </dt><dd 
+class="description">it will be called to verify that a target will likely
+     accept a drop operation from a source, for a given set of elements, when
+     the user is dragging any element from one one of the sources the behavior
+     has been registered for to a target. This will result in UI changes: the
+     drag and drop avatar following the mouse will be coloured in red or green
+     according to what has been returned from this call.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">dragOver:</span> </dt><dd 
+class="description">it will be called each time the user is dragging an item over the
+     registered target
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">onDrop:</span> </dt><dd 
+class="description">it will be called each time the user tries to drop an item from a
+     registered source to a registered target
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">elementsAccepted:</span> </dt><dd 
+class="description">it will be called if the onDrop operation returned true.</dd></dl>
+                                                                  
+
+                                                                  
+<!--l. 5218--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">5.2.4.2   </span> <a 
+ id="x67-1590005.2.4.2"></a>AbstractBehavior &amp; DnDGenericBehavior</h5>
+<!--l. 5220--><p class="noindent" >Tatami provides two abstract class which makes the IDnDBehavior interface more
+easy to implement
+<!--l. 5223--><p class="indent" >   AbstractDnDBehavior just implements IDnDBehavior with defaults &#8220;do-nothing&#8221;
+implementations.
+   <!--l. 5227-->
+<div class="lstlisting" id="listing-214"><span class="label"><a 
+ id="x67-159001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">abstract</span>&#x00A0;<span 
+class="ecbx-1000">class</span>&#x00A0;AbstractDnDBehavior&#x003C;E&#x00A0;<span 
+class="ecbx-1000">extends</span>&#x00A0;IDnDElement,S&#x00A0;<span 
+class="ecbx-1000">extends</span>&#x00A0;IDnDSource&#x003C;?&#x00A0;<span 
+class="ecbx-1000">super</span>&#x00A0;E&#x003E;,T&#x00A0;<span 
+class="ecbx-1000">extends</span>&#x00A0;IDnDTarget&#x003E;&#x00A0;<span 
+class="ecbx-1000">implements</span>&#x00A0;IDnDBehavior&#x003C;E,&#x00A0;S,&#x00A0;T&#x003E;
+   </div>
+<!--l. 5232--><p class="indent" >   So you can override only the methods you want from the AbstractDnDBehavior.
+<!--l. 5234--><p class="indent" >   Ex:
+   <!--l. 5237-->
+<div class="lstlisting" id="listing-215"><span class="label"><a 
+ id="x67-159002r1"></a></span>AbstractDnDBehavior&#x003C;WidgetDnDElement,&#x00A0;WidgetSource,&#x00A0;WidgetTarget&#x003E;&#x00A0;be&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;AbstractDnDBehavior&#x003C;WidgetDnDElement,&#x00A0;WidgetSource,&#x00A0;WidgetTarget&#x003E;(){&#x00A0;<br /><span class="label"><a 
+ id="x67-159003r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override&#x00A0;<br /><span class="label"><a 
+ id="x67-159004r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;onDrop(Collection&#x003C;WidgetDnDElement&#x003E;&#x00A0;dndElements,&#x00A0;IDnDSource&#x003C;?&#x00A0;<span 
+class="ecbx-1000">super</span>&#x00A0;WidgetDnDElement&#x003E;&#x00A0;source,&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;IDnDTarget&#x00A0;target,&#x00A0;String&#x00A0;targetNodeId,&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;isCopy)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x67-159005r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Window.alert("You&#x2423;dropped&#x2423;on&#x2423;item&#x2423;with&#x2423;id&#x2423;:&#x2423;"&#x00A0;+&#x00A0;targetNodeId);&#x00A0;<br /><span class="label"><a 
+ id="x67-159006r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">return</span>&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a 
+ id="x67-159007r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x67-159008r7"></a></span>};
+   </div>
+<!--l. 5248--><p class="indent" >   DnDGenericBehavior provides is another default implementation which is
+designed to use with a particular type of element, any DnDSource which can handle
+it and any DnDTarget.
+<!--l. 5253--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">5.2.4.3   </span> <a 
+ id="x67-1600005.2.4.3"></a>DefaultWidgetDnD Behavior</h5>
+<!--l. 5255--><p class="noindent" >The WidgetDnDBehavior class is an abstract class designed to make it easier to
+implement DnD behavior for widgets. You just have to override at your convenience
+the following methods:
+   <!--l. 5260-->
+<div class="lstlisting" id="listing-216"><span class="label"><a 
+ id="x67-160001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;checkItemAcceptance(&#x00A0;Panel&#x00A0;source,Widget&#x00A0;target,&#x00A0;Collection&#x003C;Widget&#x003E;&#x00A0;draggedWidgets)&#x00A0;{&#x00A0;<span 
+class="ecbx-1000">return</span>&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x67-160002r2"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;elementsAccepted(Panel&#x00A0;source,&#x00A0;Widget&#x00A0;target,&#x00A0;Collection&#x003C;Widget&#x003E;&#x00A0;draggedWidgets,&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;copied)&#x00A0;{&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x67-160003r3"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;onDrop(Collection&#x003C;Widget&#x003E;&#x00A0;draggedWidgets,&#x00A0;Panel&#x00A0;source,&#x00A0;Widget&#x00A0;target,&#x00A0;String&#x00A0;targetNodeId,&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;isCopy)&#x00A0;{&#x00A0;<span 
+class="ecbx-1000">return</span>&#x00A0;<span 
+class="ecbx-1000">true</span>;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x67-160004r4"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onDndStart(Panel&#x00A0;source,&#x00A0;Collection&#x003C;Widget&#x003E;&#x00A0;draggedWidgets,&#x00A0;<span 
+class="ecbx-1000">boolean</span>&#x00A0;copied&#x00A0;){&#x00A0;<br /><span class="label"><a 
+ id="x67-160005r5"></a></span>}&#x00A0;<br /><span class="label"><a 
+ id="x67-160006r6"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onCancel(){&#x00A0;<br /><span class="label"><a 
+ id="x67-160007r7"></a></span>}&#x00A0;<br /><span class="label"><a 
+ id="x67-160008r8"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;dragOver(Widget&#x00A0;target){&#x00A0;<br /><span class="label"><a 
+ id="x67-160009r9"></a></span>}
+   </div>
+                                                                  
+
+                                                                  
+   <!--l. 5274--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu39.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse18.html#TatamiUserDocumentationsu40.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 5274--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu40.html"></a>   
+</body></html> 

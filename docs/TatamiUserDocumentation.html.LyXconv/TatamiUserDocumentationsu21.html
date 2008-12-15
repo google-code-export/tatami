@@ -1,0 +1,548 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Setting axis </title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 3861--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu22.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu21.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">4.4.1   </span> <a 
+ id="x42-1240004.4.1"></a>Setting axis </h4>
+<!--l. 3863--><p class="noindent" >Axis can be set at the chart or at the plot level. Axis set at the chart level will be
+used by all plots which don&#8217;t have any specific axis.
+<!--l. 3867--><p class="indent" >   To set the default X and Y axis, use the following methods from the Chart2D
+class :
+   <!--l. 3871-->
+<div class="lstlisting" id="listing-135"><span class="label"><a 
+ id="x42-124001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setDefaultXAxis(Axis&#x00A0;axis);&#x00A0;<br /><span class="label"><a 
+ id="x42-124002r2"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setDefaultYAxis(Axis&#x00A0;axis);
+   </div>
+<!--l. 3877--><p class="indent" >   The Axis class provides two constructors :
+   <!--l. 3880-->
+<div class="lstlisting" id="listing-136"><span class="label"><a 
+ id="x42-124003r1"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124004r2"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Constructs</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">default</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">bottom</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">horizontal</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">axis</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124005r3"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124006r4"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;Axis();&#x00A0;<br /><span class="label"><a 
+ id="x42-124007r5"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124008r6"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@param</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">position</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">an</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">int</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">representing</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Axis</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">position</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124009r7"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">It</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">is</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">obtained</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">from</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">int</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">byte</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">byte</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">OR</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">operation</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">between</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">following</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">constants</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124010r8"></a></span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124011r9"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Axis</span><span 
+class="ecti-1000">.</span><span 
+class="ecti-1000">LEFT</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124012r10"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Axis</span><span 
+class="ecti-1000">.</span><span 
+class="ecti-1000">RIGHT</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124013r11"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Axis</span><span 
+class="ecti-1000">.</span><span 
+class="ecti-1000">BOTTOM</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124014r12"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Axis</span><span 
+class="ecti-1000">.</span><span 
+class="ecti-1000">TOP</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124015r13"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Axis</span><span 
+class="ecti-1000">.</span><span 
+class="ecti-1000">VERTICAL</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124016r14"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Axis</span><span 
+class="ecti-1000">.</span><span 
+class="ecti-1000">HORIZONTAL</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124017r15"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124018r16"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;Axis(<span 
+class="ecbx-1000">int</span>&#x00A0;position)&#x00A0;;
+   </div>
+<!--l. 3900--><p class="indent" >   For example, a right vertical axis would be created as :
+   <!--l. 3903-->
+<div class="lstlisting" id="listing-137"><span class="label"><a 
+ id="x42-124019r1"></a></span><span 
+class="ecbx-1000">new</span>&#x00A0;Axis(Axis.RIGHT&#x00A0;|&#x00A0;Axis.VERTICAL);
+   </div>
+<!--l. 3908--><p class="indent" >   The Axis class also proposes two helper methods to get a bottom X axis and a
+left Y Axis :
+                                                                  
+
+                                                                  
+   <!--l. 3912-->
+<div class="lstlisting" id="listing-138"><span class="label"><a 
+ id="x42-124020r1"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124021r2"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@return</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">default</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">horizontal</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">axis</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">instance</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124022r3"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124023r4"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;Axis&#x00A0;simpleXAxis()&#x00A0;<br /><span class="label"><a 
+ id="x42-124024r5"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124025r6"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@return</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">default</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">vertical</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">axis</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">instance</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124026r7"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124027r8"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">static</span>&#x00A0;Axis&#x00A0;simpleYAxis()
+   </div>
+<!--l. 3924--><p class="indent" >   The following snippet can then be used to provide simple axes to your charts
+:
+   <!--l. 3928-->
+<div class="lstlisting" id="listing-139"><span class="label"><a 
+ id="x42-124028r1"></a></span>chart.setDefaultXAxis(Axis.simpleXAxis());&#x00A0;<br /><span class="label"><a 
+ id="x42-124029r2"></a></span>chart.setDefaultYAxis(Axis.simpleYAxis());
+   </div>
+<!--l. 3934--><p class="indent" >   To set axes for a specific plot, you can use the Plot methods
+   <!--l. 3937-->
+<div class="lstlisting" id="listing-140"><span class="label"><a 
+ id="x42-124030r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setXAxis(Axis&#x00A0;axis);&#x00A0;<br /><span class="label"><a 
+ id="x42-124031r2"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setYAxis(Axis&#x00A0;axis);
+   </div>
+<!--l. 3943--><p class="indent" >   Below is an example of two plots on the same chart with different axes
+:
+   <!--l. 3947-->
+<div class="lstlisting" id="listing-141"><span class="label"><a 
+ id="x42-124032r1"></a></span>Chart2D&#x00A0;chart&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Chart2D("500px","500px");&#x00A0;<br /><span class="label"><a 
+ id="x42-124033r2"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Constructing</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Column</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">plot</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124034r3"></a></span>BarPlot&#x003C;Integer&#x003E;&#x00A0;columns&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;BarPlot&#x003C;Integer&#x003E;(BarPlot.PLOT_TYPE_COLUMNS);&#x00A0;<br /><span class="label"><a 
+ id="x42-124035r4"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Constructing</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">its</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">serie</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124036r5"></a></span>Serie&#x003C;Integer&#x003E;&#x00A0;columnsSerie&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Integer&#x003E;();&#x00A0;<br /><span class="label"><a 
+ id="x42-124037r6"></a></span>columnsSerie.addData(4);&#x00A0;<br /><span class="label"><a 
+ id="x42-124038r7"></a></span>columnsSerie.addData(3);&#x00A0;<br /><span class="label"><a 
+ id="x42-124039r8"></a></span>columnsSerie.addData(2);&#x00A0;<br /><span class="label"><a 
+ id="x42-124040r9"></a></span>columnsSerie.addData(5);&#x00A0;<br /><span class="label"><a 
+ id="x42-124041r10"></a></span>columnsSerie.addData(1);&#x00A0;<br /><span class="label"><a 
+ id="x42-124042r11"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Simple</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Serie</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">options</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">see</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">Series</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">section</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">for</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">more</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">info</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124043r12"></a></span>columnsSerie.setFillColor("blue");&#x00A0;<br /><span class="label"><a 
+ id="x42-124044r13"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">We</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">add</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">serie</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">column</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">plot</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124045r14"></a></span>columns.addSerie(columnsSerie);&#x00A0;<br /><span class="label"><a 
+ id="x42-124046r15"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Constructing</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">line</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">plot</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124047r16"></a></span>Plot2D&#x003C;Point&#x003E;&#x00A0;lines&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Plot2D&#x003C;Point&#x003E;(Plot2D.PLOT_TYPE_MARKERS_LINES);&#x00A0;<br /><span class="label"><a 
+ id="x42-124048r17"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Constructing</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">its</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">series</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">from</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">points</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124049r18"></a></span>Serie&#x003C;Point&#x003E;&#x00A0;linesSerie&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Point&#x003E;();&#x00A0;<br /><span class="label"><a 
+ id="x42-124050r19"></a></span>linesSerie.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;Point(12.,41.));&#x00A0;<br /><span class="label"><a 
+ id="x42-124051r20"></a></span>linesSerie.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;Point(25.,68.));&#x00A0;<br /><span class="label"><a 
+ id="x42-124052r21"></a></span>linesSerie.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;Point(48.,21));&#x00A0;<br /><span class="label"><a 
+ id="x42-124053r22"></a></span>linesSerie.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;Point(72,10));&#x00A0;<br /><span class="label"><a 
+ id="x42-124054r23"></a></span>linesSerie.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;Point(121,142));&#x00A0;<br /><span class="label"><a 
+ id="x42-124055r24"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">Simple</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Serie</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">options</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">see</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">Series</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">section</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">for</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">more</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">info</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124056r25"></a></span>linesSerie.setStrokeColor("red");&#x00A0;<br /><span class="label"><a 
+ id="x42-124057r26"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">We</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">add</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">serie</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">column</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">plot</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">lines</span><span 
+class="ecti-1000">.</span><span 
+class="ecti-1000">addSerie</span><span 
+class="ecti-1000">(</span><span 
+class="ecti-1000">linesSerie</span><span 
+class="ecti-1000">)</span><span 
+class="ecti-1000">;</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124058r27"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">The</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">plot</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">are</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">added</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">chart</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124059r28"></a></span>chart.addPlot(lines);&#x00A0;<br /><span class="label"><a 
+ id="x42-124060r29"></a></span>chart.addPlot(columns);&#x00A0;<br /><span class="label"><a 
+ id="x42-124061r30"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">The</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">chart</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">will</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">have</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">default</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">X</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Y</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">axis</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124062r31"></a></span>chart.setDefaultXAxis(Axis.simpleXAxis());&#x00A0;<br /><span class="label"><a 
+ id="x42-124063r32"></a></span>chart.setDefaultYAxis(Axis.simpleYAxis());&#x00A0;<br /><span class="label"><a 
+ id="x42-124064r33"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">We</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">override</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">this</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">setting</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">for</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">line</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">plot</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124065r34"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">The</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">getLineXAxis</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">and</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">getLineYAxis</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">are</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">not</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">shown</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124066r35"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">here</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">but</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">will</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">be</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">presented</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">in</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">Axis</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">options</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">section</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124067r36"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">They</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">only</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">return</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">new</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">customized</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">for</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">example</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">axis</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124068r37"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x42-124069r38"></a></span>lines.setXAxis(getLineXAxis());&#x00A0;<br /><span class="label"><a 
+ id="x42-124070r39"></a></span>lines.setYAxis(getLineYAxis());
+   </div>
+                                                                  
+
+                                                                  
+<!--l. 3990--><p class="indent" >   <img 
+src="TatamiUserDocumentation50x.png" alt="PIC" class="graphics" width="467.7475pt" height="459.7175pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation50x.png" src="50C__dev_workspace_docs_images_chartingimages_axes_example1.eps"  
+-->
+                                                                  
+
+                                                                  
+   <!--l. 3993--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu22.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu21.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 3993--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu21.html"></a>  
+</body></html> 

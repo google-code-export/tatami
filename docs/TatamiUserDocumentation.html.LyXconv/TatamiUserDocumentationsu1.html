@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Custom Installation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 119--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse1.html#TatamiUserDocumentationsu1.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">1.1.1   </span> <a 
+ id="x7-40001.1.1"></a>Custom Installation</h4>
+<!--l. 121--><p class="noindent" >The Simple Installation (Tatami module) contains all the scripts used for Tatami,
+including the base Dojo release and Yui. This has two side-effects : If you just use
+Dojo, or YUI, you will have to download both. If you use Dojo, you will use the base
+release, loading all the required dojo modules asynchronously as you need
+it.
+<!--l. 127--><p class="indent" >   That is why Tatami offers the possibility to import only what you want, and use
+an optimized build of dojo if you need it. You can do so importing smaller Tatami
+modules than Tatami itself. These modules are:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">Tatami_Base:</span> </dt><dd 
+class="description">all others modules inherit this one, so you do not have to
+     include it
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Tatami_YUI:</span> </dt><dd 
+class="description">only loads YUI. Use this only if you use YUI widgets (such as
+     Tatami DragAndDropPanel)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Tatami_DojoBase:</span> </dt><dd 
+class="description">only loads dojo core, and then load all other modules
+     asynchronously. This is the recommended module if you do not use Tatami
+     intensively.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Tatami_DojoCharting:</span> </dt><dd 
+class="description">loads  dojo  core  and  an  optimized  build  of  its
+     charting  package,  so  it  does  not  have  to  be  loaded  asynchronously.
+     Recommended if you use Tatami&#8217;s charting facilities
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Tatami_DojoGFX:</span> </dt><dd 
+class="description">same  principle  as  Tatami_DojoCharting,  applied  to
+     GFX package
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Tatami_DojoWidgets:</span> </dt><dd 
+class="description">same principle as Tatami_DojoCharting, applied to
+     the
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">widgets.</span> </dt><dd 
+class="description">Loads all dojo widgets used by Tatami. Recommended if you use most
+     of Tatami Dojo Widgets.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Tatami_DojoAll:</span> </dt><dd 
+class="description">Import DojoGFX, DojoWidgets and DojoCharting at load
+     time.</dd></dl>
+<!--l. 151--><p class="noindent" >For example, if you want to use the DojoWidgets optimization :
+   <!--l. 154-->
+<div class="lstlisting" id="listing-2"><span class="label"><a 
+ id="x7-4001r1"></a></span>&#x003C;module&#x003E;&#x00A0;<br /><span class="label"><a 
+ id="x7-4002r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;inherits&#x00A0;name="com.google.gwt.user.User"/&#x003E;&#x00A0;<br /><span class="label"><a 
+ id="x7-4003r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;inherits&#x00A0;name="com.objetdirect.tatami.Tatami_DojoWidget"/&#x003E;&#x00A0;<br /><span class="label"><a 
+ id="x7-4004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;entry<span 
+class="cmsy-10">-</span>point&#x00A0;class="mymodule.client.Module"/&#x003E;&#x00A0;<br /><span class="label"><a 
+ id="x7-4005r5"></a></span>&#x003C;/module&#x003E;
+   </div>
+<!--l. 163--><p class="indent" >   However, when deploying for a production environment, you should use your
+custom dojo build, including only what you actually need.
+<!--l. 166--><p class="indent" >   Then, you can choose to use another theme for tatami. For now, the three
+official themes from dojo are available : tundra (as the default one), soria and
+nihilo.
+<!--l. 170--><p class="indent" >   To use one or another, just import the corresponding module. For example, if you
+w
+<!--l. 173--><p class="indent" >   ant to use the soria them with the above configuration : <!--l. 174-->
+<div class="lstlisting" id="listing-3"><span class="label"><a 
+ id="x7-4006r1"></a></span>&#x003C;module&#x003E;&#x00A0;<br /><span class="label"><a 
+ id="x7-4007r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;inherits&#x00A0;name="com.google.gwt.user.User"/&#x003E;&#x00A0;<br /><span class="label"><a 
+ id="x7-4008r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;inherits&#x00A0;name="com.objetdirect.tatami.Tatami_DojoWidget"/&#x003E;&#x00A0;<br /><span class="label"><a 
+ id="x7-4009r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;inherits&#x00A0;name="com.objetdirect.tatami.theme.Soria"/&#x003E;&#x00A0;<br /><span class="label"><a 
+ id="x7-4010r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x003C;entry<span 
+class="cmsy-10">-</span>point&#x00A0;class="mymodule.client.Module"/&#x003E;&#x00A0;<br /><span class="label"><a 
+ id="x7-4011r6"></a></span>&#x003C;/module&#x003E;
+   </div>
+                                                                  
+
+                                                                  
+   <!--l. 185--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse1.html#TatamiUserDocumentationsu1.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 185--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu1.html"></a>  
+</body></html> 

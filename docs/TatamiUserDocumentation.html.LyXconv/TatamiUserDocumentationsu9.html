@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>The BasePicker, TimePicker and DatePicker components.</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 1078--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu10.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu8.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu9.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">2.2.7   </span> <a 
+ id="x18-390002.2.7"></a>The BasePicker, TimePicker and DatePicker components.</h4>
+<!--l. 1080--><p class="noindent" >Tatami offers components allowing the selection of dates or time easily. The
+DatePicker allows the selection of date within a calendar, whereas the time picker
+allows the selection of time within a time table. These two components are
+implementations of the abstract class BasePicker which introduces a common API for
+components allowing date or time selection.
+<!--l. 1087--><p class="indent" >   <img 
+src="TatamiUserDocumentation9x.png" alt="PIC" class="graphics" width="545.03624pt" height="301.125pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation9x.png" src="9C__dev_workspace_docs_images_timeAndDatePicker_preview.eps"  
+-->
+<!--l. 1089--><p class="indent" >   As for all components in Tatami, it is the addition in the navigator who allows
+showing components.
+<!--l. 1093--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.7.1   </span> <a 
+ id="x18-400002.2.7.1"></a>Create a TimePicker</h5>
+                                                                  
+
+                                                                  
+<!--l. 1095--><p class="noindent" >To create a TimePicker component, you need to specify 3 parameters. These
+parameters permit to refine the available times that users can select and also the
+format of the time. By default no time is chosen.
+<!--l. 1099--><p class="indent" >   To import the component do this:
+   <!--l. 1102-->
+<div class="lstlisting" id="listing-40"><span class="label"><a 
+ id="x18-40001r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.TimePicker;
+   </div>
+<!--l. 1107--><p class="indent" >   Below you see the details of the parameters which can be passed to the
+constructor.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">startDate:</span> </dt><dd 
+class="description">The &#8220;minimum&#8221; date that a user can select.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">endDate:</span> </dt><dd 
+class="description">The &#8220;maximum&#8221; date that a user can select.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">constraints:</span> </dt><dd 
+class="description">A TimerPickerConstraint to specify the selectable time and the
+     format of the time to select.</dd></dl>
+<!--l. 1117--><p class="noindent" >There are also two others constructor, to simplify the use of the TimePicker
+component.
+<!--l. 1120--><p class="indent" >   A constructor with no parameter, there are no time restriction and the style of
+the TimePicker is like that:
+                                                                  
+
+                                                                  
+<!--l. 1123--><p class="indent" >   <img 
+src="TatamiUserDocumentation10x.png" alt="PIC" class="graphics" width="220.825pt" height="351.3125pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation10x.png" src="10C__dev_workspace_docs_images_timePicker_firstExample.eps"  
+-->
+<!--l. 1125--><p class="indent" >   You see 5 hours and these hours are split every 15 minutes. In the second
+constructor you just specify the constraints.
+<!--l. 1128--><p class="indent" >   The TimerPickerConstraint is a class with four public attributes to determine the
+constraints:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">visibleRange:</span> </dt><dd 
+class="description">ISO-8601 string representing the range of this TimePicker The
+     TimePicker will only display times in this range Example: "T05:00:00"
+     displays 5 hours of options default is "T05:00:00" :
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">clickableIncrement:</span> </dt><dd 
+class="description">ISO-8601 string representing the amount by which every
+     clickable element in the time picker increases Set in non-Zulu time, without
+     a time zone Example: "T00:15:00" creates 15 minute increments. Must
+     divide visibleIncrement evenly default is "T00:15:00".
+     </dd><dt class="description">
+                                                                  
+
+                                                                  
+<span 
+class="ecbx-1000">visibleIncrement:</span> </dt><dd 
+class="description">ISO-8601 string representing the amount by which every
+     element with a visible time in the time picker increases. Set in non Zulu
+     time, without a time zone Example: "T01:00:00" creates text in every 1
+     hour increment default is "T01:00:00",
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">timePattern:</span> </dt><dd 
+class="description">TimePattern see the DOJO explanations : it&#8217;s like in JAVA for
+     the most of principals options default is "HH:mm"</dd></dl>
+<!--l. 1147--><p class="noindent" >The instantiation of a TimePicker is made as follows:
+   <!--l. 1150-->
+<div class="lstlisting" id="listing-41"><span class="label"><a 
+ id="x18-40002r1"></a></span>TimePickerConstraints&#x00A0;constraints=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;TimePickerConstraints();&#x00A0;<br /><span class="label"><a 
+ id="x18-40003r2"></a></span>constraints.clickableIncrement&#x00A0;=&#x00A0;TimePickerConstraints.EVERY_HALF_HOUR;&#x00A0;<br /><span class="label"><a 
+ id="x18-40004r3"></a></span>timePicker&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;TimePicker(constraints);
+   </div>
+<!--l. 1157--><p class="indent" >   As you can see in the code some constants are defined to simplify the use of the
+TimePickerConstraint class.
+<!--l. 1161--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.7.2   </span> <a 
+ id="x18-410002.2.7.2"></a>Create a DatePicker</h5>
+<!--l. 1163--><p class="noindent" >The component DatePicker allows the selection of date, the date to choose can be
+bounded by a lower and an upper limit like the TimePicker. It&#8217;s possible to not
+specify these limits; in that case all possible dates will be effluent. The importation of
+the class this fact in the following way:
+   <!--l. 1170-->
+<div class="lstlisting" id="listing-42"><span class="label"><a 
+ id="x18-41001r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.DatePicker;
+   </div>
+<!--l. 1175--><p class="indent" >   To select a Date without constraints, do this:
+   <!--l. 1178-->
+<div class="lstlisting" id="listing-43"><span class="label"><a 
+ id="x18-41002r1"></a></span>DatePicker&#x00A0;datePicker&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DatePicker();
+   </div>
+<!--l. 1183--><p class="indent" >   To select a Date with constraints do this :
+   <!--l. 1186-->
+<div class="lstlisting" id="listing-44"><span class="label"><a 
+ id="x18-41003r1"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">start2007</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">correspond</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">date</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">01/01/2007</span>&#x00A0;<br /><span class="label"><a 
+ id="x18-41004r2"></a></span><span 
+class="ecti-1000">//</span><span 
+class="ecti-1000">end2008</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">correspond</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">12/31/2008</span>&#x00A0;<br /><span class="label"><a 
+ id="x18-41005r3"></a></span>DatePicker&#x00A0;picker&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DatePicker(start2007,&#x00A0;end2008);
+   </div>
+                                                                  
+
+                                                                  
+<!--l. 1194--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.7.3   </span> <a 
+ id="x18-420002.2.7.3"></a>The API of DatePicker and TimePicker: </h5>
+<!--l. 1196--><p class="noindent" >The API to manipulate a BasePicker consists in choosing a date in most cases and
+recovering this date chosen. The user can choose a date of course by mouse events on
+the component.
+<!--l. 1200--><p class="indent" >   To set the default selected date and get the date selected by a user:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setDate(Date):</span> </dt><dd 
+class="description">sets the default selected date
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Date</span><span 
+class="ecbx-1000">&#x00A0;getDate():</span> </dt><dd 
+class="description">get the currently selected date
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setTime(Date):</span> </dt><dd 
+class="description">sets the default selected time for a TimePicker
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Date</span><span 
+class="ecbx-1000">&#x00A0;getTime():</span> </dt><dd 
+class="description">gets the default selected time for a TimePicker
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;getMinDate():</span> </dt><dd 
+class="description">Returns the minimum available date in the calendar or
+     in the time picker
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;getMaxDate():</span> </dt><dd 
+class="description">Returns the maximum available date in the calendar or
+     in the time picker
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;addChangeListener(ChangeListener):</span> </dt><dd 
+class="description">Adds a ChangeListener when
+     the seletected date value changes.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeChangeListener(ChangeListener):</span> </dt><dd 
+class="description">Removes                   a
+     ChangeListener when the seletected date value changes.</dd></dl>
+<!--l. 1215--><p class="noindent" >We can listen to selection changes, by adding a listener of type
+com.google.gwt.user.client.ui.ChangeListener to the component.
+   <!--l. 1219-->
+<div class="lstlisting" id="listing-45"><span class="label"><a 
+ id="x18-42001r1"></a></span>TimePicker&#x00A0;timer&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;TimePicker();&#x00A0;<br /><span class="label"><a 
+ id="x18-42002r2"></a></span>timer.addChangeListener(<span 
+class="ecbx-1000">new</span>&#x00A0;ChangeListener()&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x18-42003r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onChange(Widget&#x00A0;sender)&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x18-42004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Window.alert("New&#x2423;time&#x2423;:"&#x00A0;+&#x00A0;timer.getTime()&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x18-42005r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x18-42006r6"></a></span>});
+   </div>
+<!--l. 1229--><p class="indent" >   Each times a new time will be selected; an alert will be displayed showing the new
+selection.
+                                                                  
+
+                                                                  
+   <!--l. 1233--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu10.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu8.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu9.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 1233--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu9.html"></a>   
+</body></html> 

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>User Input Widgets</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 328--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse4.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse2.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationch2.html#TatamiUserDocumentationse3.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h3 class="sectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x11-130002.2"></a>User Input Widgets</h3>
+<!--l. 331--><p class="noindent" >
+   <div class="subsectionTOCS">
+   &#x00A0;&#x00A0;<span class="subsectionToc" >2.2.1 <a 
+href="TatamiUserDocumentationsu3.html#x12-140002.2.1">FishEye</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.1.1 <a 
+href="TatamiUserDocumentationsu3.html#x12-150002.2.1.1">Create the FishEye component</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.1.2 <a 
+href="TatamiUserDocumentationsu3.html#x12-160002.2.1.2">Adding and removing icons</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.1.3 <a 
+href="TatamiUserDocumentationsu3.html#x12-170002.2.1.3">API of the FishEye</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >2.2.2 <a 
+href="TatamiUserDocumentationsu4.html#x13-180002.2.2">ColorChooser</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.2.1 <a 
+href="TatamiUserDocumentationsu4.html#x13-190002.2.2.1">Create a ColorChooser.</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.2.2 <a 
+href="TatamiUserDocumentationsu4.html#x13-220002.2.2.2">Get,modify the selected color</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.2.3 <a 
+href="TatamiUserDocumentationsu4.html#x13-250002.2.2.3">Catch a change of the selected color. </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >2.2.3 <a 
+href="TatamiUserDocumentationsu5.html#x14-260002.2.3">The Toaster component.</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.3.1 <a 
+href="TatamiUserDocumentationsu5.html#x14-270002.2.3.1">Create a Toaster. </a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.3.2 <a 
+href="TatamiUserDocumentationsu5.html#x14-280002.2.3.2">Display a notification. </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >2.2.4 <a 
+href="TatamiUserDocumentationsu6.html#x15-290002.2.4">The button component</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.4.1 <a 
+href="TatamiUserDocumentationsu6.html#x15-300002.2.4.1">Create the Button component: </a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.4.2 <a 
+href="TatamiUserDocumentationsu6.html#x15-310002.2.4.2">API of the button component</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >2.2.5 <a 
+href="TatamiUserDocumentationsu7.html#x16-320002.2.5">The NumberSpinner component</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.5.1 <a 
+href="TatamiUserDocumentationsu7.html#x16-330002.2.5.1">Create the NumberSpinner component: </a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.5.2 <a 
+href="TatamiUserDocumentationsu7.html#x16-340002.2.5.2">Constraints </a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.5.3 <a 
+href="TatamiUserDocumentationsu7.html#x16-350002.2.5.3">API of the number spinner component</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >2.2.6 <a 
+href="TatamiUserDocumentationsu8.html#x17-360002.2.6">The clock component.</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.6.1 <a 
+href="TatamiUserDocumentationsu8.html#x17-370002.2.6.1">Create the Clock component: </a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.6.2 <a 
+href="TatamiUserDocumentationsu8.html#x17-380002.2.6.2">API of the clock component </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >2.2.7 <a 
+href="TatamiUserDocumentationsu9.html#x18-390002.2.7">The BasePicker, TimePicker and DatePicker components.</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.7.1 <a 
+href="TatamiUserDocumentationsu9.html#x18-400002.2.7.1">Create a TimePicker</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.7.2 <a 
+href="TatamiUserDocumentationsu9.html#x18-410002.2.7.2">Create a DatePicker</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.7.3 <a 
+href="TatamiUserDocumentationsu9.html#x18-420002.2.7.3">The API of DatePicker and TimePicker: </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >2.2.8 <a 
+href="TatamiUserDocumentationsu10.html#x19-430002.2.8">The DropdownContainer, DropdownDatePicker et DropdownTimePicker
+components. </a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.8.1 <a 
+href="TatamiUserDocumentationsu10.html#x19-440002.2.8.1">Create a DropdownDatePicker.</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.8.2 <a 
+href="TatamiUserDocumentationsu10.html#x19-450002.2.8.2">Create a DropdownTimePicker.</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.8.3 <a 
+href="TatamiUserDocumentationsu10.html#x19-460002.2.8.3">The API of the DropdownTimePicker and DropdownDatePicker.</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >2.2.9 <a 
+href="TatamiUserDocumentationsu11.html#x20-470002.2.9">The Slider component</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.9.1 <a 
+href="TatamiUserDocumentationsu11.html#x20-480002.2.9.1">Create a Slider. </a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.9.2 <a 
+href="TatamiUserDocumentationsu11.html#x20-490002.2.9.2">The API of the Slider component. </a></span>
+                                                                  
+
+                                                                  
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.9.3 <a 
+href="TatamiUserDocumentationsu11.html#x20-500002.2.9.3">Add some rule mark ands and labels.</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >2.2.10 <a 
+href="TatamiUserDocumentationsu12.html#x21-510002.2.10">RuleMark and RuleLabels components</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.10.1 <a 
+href="TatamiUserDocumentationsu12.html#x21-520002.2.10.1">Create a RuleMark component. </a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.10.2 <a 
+href="TatamiUserDocumentationsu12.html#x21-530002.2.10.2">The API of the RuleMak component</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.10.3 <a 
+href="TatamiUserDocumentationsu12.html#x21-540002.2.10.3">Create a RuleLabels Component.</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.10.4 <a 
+href="TatamiUserDocumentationsu12.html#x21-550002.2.10.4">The API of the RuleLabels component</a></span>
+<br />   &#x00A0;&#x00A0;&#x00A0;<span class="subsubsectionToc" >2.2.10.5 <a 
+href="TatamiUserDocumentationsu12.html#x21-560002.2.10.5">An example</a></span>
+   </div>
+
+
+
+
+
+
+
+
+
+                                                                  
+
+                                                                  
+   <!--l. 1705--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse4.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse2.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationch2.html#TatamiUserDocumentationse3.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 1705--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationse3.html"></a>  
+</body></html> 

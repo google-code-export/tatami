@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>BorderContainer</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 195--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse2.html#TatamiUserDocumentationsu2.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">2.1.1   </span> <a 
+ id="x10-70002.1.1"></a>BorderContainer</h4>
+                                                                  
+
+                                                                  
+<!--l. 197--><p class="noindent" >This layout widget provides is designed as an alternative to both SplitPanel and
+DockPanel widgets. It is constituted of ContentPanels layed out in Regions, with or
+without splitters between the center region and the outer ones.
+<!--l. 202--><p class="indent" >   <img 
+src="TatamiUserDocumentation0x.png" alt="PIC" class="graphics" width="233.87375pt" height="226.84749pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation0x.png" src="0C__dev_workspace_docs_images_borderContainer.eps"  
+-->
+<!--l. 205--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.1.1.1   </span> <a 
+ id="x10-80002.1.1.1"></a>Create the BorderContainer layout</h5>
+<!--l. 207--><p class="noindent" >You will need to use to import the following classes :
+   <!--l. 210-->
+<div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x10-8001r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.layout.BorderContainer;&#x00A0;<br /><span class="label"><a 
+ id="x10-8002r2"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.layout.ContentPanel;
+   </div>
+<!--l. 216--><p class="indent" >   Then, all you have to do is to instantiate your BorderContainer, and add
+ContentPanel to it. Only ContentPanels can be added to the BorderContainer, so you
+will have to wrap your widgets into a ContentPanel:
+   <!--l. 221-->
+<div class="lstlisting" id="listing-5"><span class="label"><a 
+ id="x10-8003r1"></a></span>BorderContainer&#x00A0;panel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;BorderContainer();&#x00A0;<br /><span class="label"><a 
+ id="x10-8004r2"></a></span>panel.setSize("300px","300px");&#x00A0;<br /><span class="label"><a 
+ id="x10-8005r3"></a></span>HTML&#x00A0;left&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("left");&#x00A0;<br /><span class="label"><a 
+ id="x10-8006r4"></a></span>HTML&#x00A0;right&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("right");&#x00A0;<br /><span class="label"><a 
+ id="x10-8007r5"></a></span>HTML&#x00A0;top&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("top");&#x00A0;<br /><span class="label"><a 
+ id="x10-8008r6"></a></span>HTML&#x00A0;bottom&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("bottom");&#x00A0;<br /><span class="label"><a 
+ id="x10-8009r7"></a></span>HTML&#x00A0;center&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("center");&#x00A0;<br /><span class="label"><a 
+ id="x10-8010r8"></a></span>panel.add(<span 
+class="ecbx-1000">new</span>&#x00A0;ContentPanel(left),BorderContainer.REGION_LEFT,<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x10-8011r9"></a></span>panel.add(<span 
+class="ecbx-1000">new</span>&#x00A0;ContentPanel(right),BorderContainer.REGION_RIGHT,<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x10-8012r10"></a></span>panel.add(<span 
+class="ecbx-1000">new</span>&#x00A0;ContentPanel(top),BorderContainer.REGION_TOP,<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x10-8013r11"></a></span>panel.add(<span 
+class="ecbx-1000">new</span>&#x00A0;ContentPanel(bottom),BorderContainer.REGION_BOTTOM,<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x10-8014r12"></a></span>panel.add(<span 
+class="ecbx-1000">new</span>&#x00A0;ContentPanel(center),BorderContainer.REGION_CENTER);
+   </div>
+<!--l. 237--><p class="indent" >   To add a widget to the border container panel, use one of the following
+methods:
+   <!--l. 241-->
+<div class="lstlisting" id="listing-6"><span class="label"><a 
+ id="x10-8015r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;add(Widget&#x00A0;child,&#x00A0;String&#x00A0;region);&#x00A0;<br /><span class="label"><a 
+ id="x10-8016r2"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;add(Widget&#x00A0;child,&#x00A0;String&#x00A0;region,<span 
+class="ecbx-1000">boolean</span>&#x00A0;splitter);
+                                                                  
+
+                                                                  
+   </div>
+<!--l. 247--><p class="indent" >   The region argument must be one of the following constants from
+BorderContainer:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">BorderContainer.REGION_CENTER:</span> </dt><dd 
+class="description">the content will be placed in the
+     center area
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">BorderContainer.REGION_TOP:</span> </dt><dd 
+class="description">the content will be placed in the top
+     area
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">BorderContainer.REGION_BOTTOM:</span> </dt><dd 
+class="description">the content will be placed in the
+     bottom area
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">BorderContainer.REGION_LEFT:</span> </dt><dd 
+class="description">the content will be placed in the left
+     area
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">BorderContainer.REGION_RIGHT:</span> </dt><dd 
+class="description">the  content  will  be  placed  in  the
+     right area
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">BorderContainer.REGION_LEADING:</span> </dt><dd 
+class="description">same  as  left  except  it  will  be
+     reversed in a right-to-left environment
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">BorderContainer.REGION_TRAILING:</span> </dt><dd 
+class="description">same as right except it will be
+     reversed in a right-to-left environment</dd></dl>
+<!--l. 264--><p class="noindent" >The splitter argument determines whether a splitter should be placed between this panel
+and the center one. If it is true, then the panel will be resizable. If false, it will not.
+The method public void <!--l. 267-->
+<div class="lstlisting" id="listing-7"><span class="label"><a 
+ id="x10-8017r1"></a></span>add(child,region);
+   </div>
+<!--l. 272--><p class="indent" >   will act exactly like
+   <!--l. 275-->
+<div class="lstlisting" id="listing-8"><span class="label"><a 
+ id="x10-8018r1"></a></span>add(child,region,<span 
+class="ecbx-1000">false</span>);
+   </div>
+                                                                  
+
+                                                                  
+<!--l. 281--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.1.1.2   </span> <a 
+ id="x10-90002.1.1.2"></a>Options</h5>
+<!--l. 283--><p class="noindent" >The border container has mainly two options :
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">liveSplitters:</span> </dt><dd 
+class="description">indicates whether the panel should be resized while the splitter
+     is dragged or only when it is released
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">design</span> </dt><dd 
+class="description">: one of:
+         <ul class="itemize1">
+         <li class="itemize">BorderContainer.DESIGN_HEADLINE if the design is HEADLINE
+         (top and bottom section take the whole width)(defaultValue)
+         </li>
+         <li class="itemize">BorderContainer.DESIGN_SIDEBAR if the design is sidebar (left
+         and right section will take the whole height)<br 
+class="newline" />ex:<br 
+class="newline" /><img 
+src="TatamiUserDocumentation1x.png" alt="PIC" class="graphics" width="233.87375pt" height="224.84pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation1x.png" src="1C__dev_workspace_docs_images_borderContainer_sidebar.eps"  
+--></li></ul>
+     </dd></dl>
+<!--l. 299--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.1.1.3   </span> <a 
+ id="x10-100002.1.1.3"></a>Examples:</h5>
+                                                                  
+
+                                                                  
+<!--l. 302--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x10-110002.1.1.3.1"></a><span 
+class="ecbx-1000">HorizontalSplitPanel</span></span>
+   <!--l. 305-->
+<div class="lstlisting" id="listing-9"><span class="label"><a 
+ id="x10-11001r1"></a></span>BorderContainer&#x00A0;panel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;BorderContainer();&#x00A0;<br /><span class="label"><a 
+ id="x10-11002r2"></a></span>panel.setSize("300px","300px");&#x00A0;<br /><span class="label"><a 
+ id="x10-11003r3"></a></span>panel.add(<span 
+class="ecbx-1000">new</span>&#x00A0;ContentPanel(<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("LEFT&#x2423;SIDE")),BorderContainer.REGION_LEFT,<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x10-11004r4"></a></span>panel.add(<span 
+class="ecbx-1000">new</span>&#x00A0;ContentPanel(<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("RIGHT&#x2423;SIDE")),BorderContainer.REGION_CENTER);
+   </div>
+<!--l. 313--><p class="indent" >   <img 
+src="TatamiUserDocumentation2x.png" alt="PIC" class="graphics" width="241.90375pt" height="223.83624pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation2x.png" src="2C__dev_workspace_docs_images_borderContainer_hsplit.eps"  
+-->
+<!--l. 316--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x10-120002.1.1.3.2"></a><span 
+class="ecbx-1000">VerticalSplitPanel</span></span>
+   <!--l. 319-->
+<div class="lstlisting" id="listing-10"><span class="label"><a 
+ id="x10-12001r1"></a></span>BorderContainer&#x00A0;panel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;BorderContainer();&#x00A0;<br /><span class="label"><a 
+ id="x10-12002r2"></a></span>panel.setSize("300px","300px");&#x00A0;<br /><span class="label"><a 
+ id="x10-12003r3"></a></span>panel.add(<span 
+class="ecbx-1000">new</span>&#x00A0;ContentPanel(<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("TOP&#x2423;SIDE")),BorderContainer.REGION_TOP,<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x10-12004r4"></a></span>panel.add(<span 
+class="ecbx-1000">new</span>&#x00A0;ContentPanel(<span 
+class="ecbx-1000">new</span>&#x00A0;HTML("BOTTOM&#x2423;SIDE")),BorderContainer.REGION_CENTER);
+   </div>
+                                                                  
+
+                                                                  
+   <!--l. 328--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse2.html#TatamiUserDocumentationsu2.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 328--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu2.html"></a>    
+</body></html> 

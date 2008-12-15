@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>PiePlot</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 3751--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu19.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu20.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">4.3.4   </span> <a 
+ id="x40-1200004.3.4"></a>PiePlot</h4>
+<!--l. 3754--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">4.3.4.1   </span> <a 
+ id="x40-1210004.3.4.1"></a>What type of data to use? </h5>
+<!--l. 3756--><p class="noindent" >The PiePlot can be used with series of number or PiePiece. A PiePiece represents
+slice in the Pie Plot, and provides various constructors:
+   <!--l. 3760-->
+<div class="lstlisting" id="listing-128"><span class="label"><a 
+ id="x40-121001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;PiePiece(<span 
+class="ecbx-1000">double</span>&#x00A0;value)&#x00A0;<br /><span class="label"><a 
+ id="x40-121002r2"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;PiePiece(<span 
+class="ecbx-1000">double</span>&#x00A0;value&#x00A0;,&#x00A0;String&#x00A0;<span 
+class="ecbx-1000">label</span>)&#x00A0;<br /><span class="label"><a 
+ id="x40-121003r3"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;PiePiece(<span 
+class="ecbx-1000">double</span>&#x00A0;value&#x00A0;,&#x00A0;String&#x00A0;<span 
+class="ecbx-1000">label</span>,String&#x00A0;color)&#x00A0;<br /><span class="label"><a 
+ id="x40-121004r4"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;PiePiece(<span 
+class="ecbx-1000">double</span>&#x00A0;value&#x00A0;,&#x00A0;String&#x00A0;<span 
+class="ecbx-1000">label</span>,String&#x00A0;color,&#x00A0;String&#x00A0;fontColor);
+   </div>
+<!--l. 3768--><p class="indent" >   where :
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">value:</span> </dt><dd 
+class="description">the PiePiece value
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">label:</span> </dt><dd 
+class="description">the label to be displayed on the Piece
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">color:</span> </dt><dd 
+class="description">the color filling the piece
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">fontColor:</span> </dt><dd 
+class="description">the label font color</dd></dl>
+<!--l. 3776--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">4.3.4.2   </span> <a 
+ id="x40-1220004.3.4.2"></a>Specific options</h5>
+   <!--l. 3779-->
+<div class="lstlisting" id="listing-129"><span class="label"><a 
+ id="x40-122001r1"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122002r2"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@param</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">offset</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">label</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">position</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">from</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">edge</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">of</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">plot</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122003r3"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Negative</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">values</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">will</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">place</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">label</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">outside</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">of</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">plot</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">whereas</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">positive</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">values</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">will</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">place</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">in</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">inside</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122004r4"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122005r5"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setLabelOffset(<span 
+class="ecbx-1000">int</span>&#x00A0;offset)
+   </div>
+   <!--l. 3789-->
+<div class="lstlisting" id="listing-130"><span class="label"><a 
+ id="x40-122006r1"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122007r2"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@param</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">precision</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">precision</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">for</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">percentiles</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122008r3"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122009r4"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setPrecision(<span 
+class="ecbx-1000">int</span>&#x00A0;precision)
+   </div>
+   <!--l. 3798-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-131"><span class="label"><a 
+ id="x40-122010r1"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122011r2"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@param</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">font</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">font</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">be</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">applied</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">on</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">various</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">labels</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122012r3"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122013r4"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setFont(String&#x00A0;font)
+   </div>
+   <!--l. 3807-->
+<div class="lstlisting" id="listing-132"><span class="label"><a 
+ id="x40-122014r1"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122015r2"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@param</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">fontColor</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">default</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">font</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">color</span><span 
+class="ecti-1000">.</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Can</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">be</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">overriden</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">by</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">each</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">PiePiece</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122016r3"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x40-122017r4"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setFontColor(String&#x00A0;fontColor)
+   </div>
+<!--l. 3815--><p class="indent" >   Examples :
+<!--l. 3817--><p class="indent" >   Pie chart from a Number Serie, with internal labels and default Precision
+:
+   <!--l. 3821-->
+<div class="lstlisting" id="listing-133"><span class="label"><a 
+ id="x40-122018r1"></a></span>Chart2D&#x00A0;chart&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Chart2D("300px","300px");&#x00A0;<br /><span class="label"><a 
+ id="x40-122019r2"></a></span>chart.setTheme("PlotKit.blue");&#x00A0;<br /><span class="label"><a 
+ id="x40-122020r3"></a></span>PiePlot&#x003C;Integer&#x003E;&#x00A0;plot&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;PiePlot&#x003C;Integer&#x003E;();&#x00A0;<br /><span class="label"><a 
+ id="x40-122021r4"></a></span>plot.setFont("normal&#x2423;normal&#x2423;bold&#x2423;12pt&#x2423;Tahoma");&#x00A0;<br /><span class="label"><a 
+ id="x40-122022r5"></a></span>plot.setFontColor("white");&#x00A0;<br /><span class="label"><a 
+ id="x40-122023r6"></a></span>plot.setLabelOffset(40);&#x00A0;<br /><span class="label"><a 
+ id="x40-122024r7"></a></span>List&#x003C;Integer&#x003E;&#x00A0;data&#x00A0;=&#x00A0;Arrays.asList((<span 
+class="ecbx-1000">new</span>&#x00A0;Integer[]{4,2,1,1}));&#x00A0;<br /><span class="label"><a 
+ id="x40-122025r8"></a></span>plot.addSerie(<span 
+class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Integer&#x003E;(data));&#x00A0;<br /><span class="label"><a 
+ id="x40-122026r9"></a></span>chart.addPlot(plot);
+   </div>
+<!--l. 3834--><p class="indent" >   <img 
+src="TatamiUserDocumentation48x.png" alt="PIC" class="graphics" width="302.12874pt" height="295.1025pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation48x.png" src="48C__dev_workspace_docs_images_chartingimages_pieplot_example1.eps"  
+-->
+<!--l. 3836--><p class="indent" >   Pie chart from a Number Serie, with external labels and precision = 0
+:
+   <!--l. 3840-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-134"><span class="label"><a 
+ id="x40-122027r1"></a></span>Chart2D&#x00A0;chart&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Chart2D("300px","300px");&#x00A0;<br /><span class="label"><a 
+ id="x40-122028r2"></a></span>chart.setTheme("PlotKit.blue");&#x00A0;<br /><span class="label"><a 
+ id="x40-122029r3"></a></span>PiePlot&#x003C;Integer&#x003E;&#x00A0;plot&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;PiePlot&#x003C;Integer&#x003E;();&#x00A0;<br /><span class="label"><a 
+ id="x40-122030r4"></a></span>plot.setFont("normal&#x2423;normal&#x2423;bold&#x2423;12pt&#x2423;Tahoma");&#x00A0;<br /><span class="label"><a 
+ id="x40-122031r5"></a></span>plot.setFontColor("black");&#x00A0;<br /><span class="label"><a 
+ id="x40-122032r6"></a></span>plot.setLabelOffset(<span 
+class="cmsy-10">-</span>25);&#x00A0;<br /><span class="label"><a 
+ id="x40-122033r7"></a></span>plot.setPrecision(0);&#x00A0;<br /><span class="label"><a 
+ id="x40-122034r8"></a></span>plot.addSerie(<span 
+class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Integer&#x003E;(Arrays.asList(<span 
+class="ecbx-1000">new</span>&#x00A0;Integer[]{4,2,1,1})));&#x00A0;<br /><span class="label"><a 
+ id="x40-122035r9"></a></span>chart.addPlot(plot);
+   </div>
+<!--l. 3853--><p class="indent" >   <img 
+src="TatamiUserDocumentation49x.png" alt="PIC" class="graphics" width="328.22624pt" height="298.11374pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation49x.png" src="49C__dev_workspace_docs_images_chartingimages_pieplot_example2.eps"  
+-->
+                                                                  
+
+                                                                  
+   <!--l. 3856--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu19.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu20.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 3856--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu20.html"></a>   
+</body></html> 

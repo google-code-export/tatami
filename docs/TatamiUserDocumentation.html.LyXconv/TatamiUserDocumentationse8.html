@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>DataStore events</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 3031--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse9.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse7.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse8.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h3 class="sectionHead"><span class="titlemark">3.4   </span> <a 
+ id="x29-960003.4"></a>DataStore events</h3>
+<!--l. 3033--><p class="noindent" >Grid and datastores are connected via DataStore events. There are many events fired
+by the data store. In the previous section , we already saw how the fetch events are
+sourced and consumed.
+<!--l. 3037--><p class="indent" >   Two other interfaces are defined to listen for DataStore events. Those are
+:
+   <!--l. 3041-->
+<div class="lstlisting" id="listing-96"><span class="label"><a 
+ id="x29-96001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">interface</span>&#x00A0;LoadItemListener&#x00A0;{&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onLoad(Item&#x00A0;item);&#x00A0;}
+   </div>
+<!--l. 3046--><p class="indent" >   This interface defines a load item listener : the onLoad item will be called each
+time the datastore &#8220;loadItem&#8221; is called on an (not yet) loaded item. In the current
+implementation, the items are always already loaded , since we use no &#8220;stub&#8221;
+item.
+   <!--l. 3053-->
+<div class="lstlisting" id="listing-97"><span class="label"><a 
+ id="x29-96002r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">interface</span>&#x00A0;DatumChangeListener&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x29-96003r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onDataChange(Item&#x00A0;item&#x00A0;,&#x00A0;String&#x00A0;attributeName&#x00A0;,&#x00A0;Object&#x00A0;oldValue&#x00A0;,&#x00A0;Object&#x00A0;newValue);&#x00A0;<br /><span class="label"><a 
+ id="x29-96004r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onNew(Item&#x00A0;item);&#x00A0;<br /><span class="label"><a 
+ id="x29-96005r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;onDelete(Item&#x00A0;item);&#x00A0;<br /><span class="label"><a 
+ id="x29-96006r5"></a></span>}
+   </div>
+<!--l. 3062--><p class="indent" >   This interface defines a listener for data changes. For example, The grid itself
+implements this interface. onDataChange is called each time an item&#8217;s attribute has
+been modified. onNew is called each time an item has been added to the data
+store. onDelete is called each time an item has been deleted from the data
+store.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">addDatumChangeListener(DatumChangeListener):</span> </dt><dd 
+class="description">Adds                 a
+     DatumChangeListener
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeDatumChangeListener(DatumChangeListener):</span> </dt><dd 
+class="description">Removes       a
+     DatumChangeListener
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addFetchListener(FetchListener):</span> </dt><dd 
+class="description">Adds a FetchListener
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeFetchListener(FetchListener):</span> </dt><dd 
+class="description">Removes a FetchListener
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">addLoadItemListener(LoadItemListener):</span> </dt><dd 
+class="description">Adds a LoadItemListener
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeLoadItemListener(LoadItemListener):</span> </dt><dd 
+class="description">Removes                     a
+     LoadItemListener</dd></dl>
+                                                                  
+
+                                                                  
+   <!--l. 3076--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse9.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse7.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse8.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 3076--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationse8.html"></a>  
+</body></html> 

@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Datastore usage</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 2904--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse7.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse5.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse6.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h3 class="sectionHead"><span class="titlemark">3.2   </span> <a 
+ id="x27-940003.2"></a>Datastore usage</h3>
+<!--l. 2906--><p class="noindent" >The following snippet shows how to build populate a DefaultDataStore :
+   <!--l. 2910-->
+<div class="lstlisting" id="listing-93"><span class="label"><a 
+ id="x27-94001r1"></a></span>DefaultDataStore&#x00A0;store&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DefaultDataStore();&#x00A0;<br /><span class="label"><a 
+ id="x27-94002r2"></a></span>Item&#x00A0;itemJohn&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Item();&#x00A0;<br /><span class="label"><a 
+ id="x27-94003r3"></a></span>itemJohn.setId("14563"&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x27-94004r4"></a></span>itemJohn.setValue("myname",&#x00A0;"John&#x2423;Doe"&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x27-94005r5"></a></span>itemJohn.setValue("number",&#x00A0;"0123456789");&#x00A0;<br /><span class="label"><a 
+ id="x27-94006r6"></a></span>itemJohn.setValue("salary",&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Integer("500"));&#x00A0;<br /><span class="label"><a 
+ id="x27-94007r7"></a></span>itemJohn.setValue("date",&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("03/25/1981"));&#x00A0;<br /><span class="label"><a 
+ id="x27-94008r8"></a></span>itemJohn.setValue("position",&#x00A0;"CEO");&#x00A0;<br /><span class="label"><a 
+ id="x27-94009r9"></a></span>itemJohn.setValue("available",&#x00A0;Boolean.FALSE);&#x00A0;<br /><span class="label"><a 
+ id="x27-94010r10"></a></span>itemJohn.setValue("mySecret",&#x00A0;"!!!");&#x00A0;<br /><span class="label"><a 
+ id="x27-94011r11"></a></span>itemJohn.setValue("description",&#x00A0;"I&#x2423;m&#x2423;John&#x2423;Doe&#x2423;and&#x2423;this&#x2423;is&#x2423;my&#x2423;description"&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x27-94012r12"></a></span>itemJohn.setValue("appreciation",&#x00A0;"Good"&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x27-94013r13"></a></span>itemJohn.setValue("married",&#x00A0;<span 
+class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
+ id="x27-94014r14"></a></span>store.add(itemJohn);&#x00A0;<br /><span class="label"><a 
+ id="x27-94015r15"></a></span>Item&#x00A0;itemJane&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Item();&#x00A0;<br /><span class="label"><a 
+ id="x27-94016r16"></a></span>itemJane.setId("87321"&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x27-94017r17"></a></span>itemJane.setValue("number",&#x00A0;"9876543210");&#x00A0;<br /><span class="label"><a 
+ id="x27-94018r18"></a></span>itemJane.setValue("salary",&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Integer("1200"));&#x00A0;<br /><span class="label"><a 
+ id="x27-94019r19"></a></span>itemJane.setValue("date",&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Date("11/12/1978"));&#x00A0;<br /><span class="label"><a 
+ id="x27-94020r20"></a></span>itemJane.setValue("position",&#x00A0;"Developer");&#x00A0;<br /><span class="label"><a 
+ id="x27-94021r21"></a></span>itemJane.setValue("available",&#x00A0;Boolean.TRUE);&#x00A0;<br /><span class="label"><a 
+ id="x27-94022r22"></a></span>itemJane.setValue("myname",&#x00A0;"Jane&#x2423;Doe"&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x27-94023r23"></a></span>itemJane.setValue("description",&#x00A0;"I&#x2423;m&#x2423;Jane&#x2423;Doe&#x2423;and&#x2423;this&#x2423;is&#x2423;my&#x2423;description"&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x27-94024r24"></a></span>itemJane.setValue("appreciation",&#x00A0;"Awesome"&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x27-94025r25"></a></span>itemJane.setValue("mySecret",&#x00A0;"!!!");&#x00A0;<br /><span class="label"><a 
+ id="x27-94026r26"></a></span>itemJane.setValue("married",&#x00A0;<span 
+class="ecbx-1000">false</span>&#x00A0;);&#x00A0;<br /><span class="label"><a 
+ id="x27-94027r27"></a></span>store.add(itemJane);
+   </div>
+<!--l. 2941--><p class="indent" >   This store can then be used by a grid to populate itself..
+<!--l. 2943--><p class="indent" >   Below is the datastore item manipulation API, which conforms to Dojo data
+APIs.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">addItem(Item):</span> </dt><dd 
+class="description">Adds an item to the datastore. If an item already has the
+     same id, it is overridden.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">removeItem(Item):</span> </dt><dd 
+class="description">Removes an item from the data store
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">getItemByIdentity(Object</span><span 
+class="ecbx-1000">&#x00A0;id):</span> </dt><dd 
+class="description">Returns the item stored with the given id,
+     null if no item within the store has the given attribute
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">isItem(Object):</span> </dt><dd 
+class="description">true if item is an instance of Item and the store contains this
+     item, false otherwise
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">loadItem(Item):</span> </dt><dd 
+class="description">Loads  the  specified  item  if  it  has  not  already  been.  A
+     &#8220;loaded&#8221; item should have all its attributes loaded, while a not-yet-loaded
+     item can be a &#8220;stub&#8221; used for remote lazy loading.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">isItemLoaded(Item):</span> </dt><dd 
+class="description">Returns true if the given Item is in the store AND has
+     been fully loaded.In the DefaultDataStore implementation, always returns
+     true since we always add &#8220;fully loaded&#8221; items (no stubs, or remote lazy
+     loading). (See How to implement your own data store )
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">searchItemsByAttributes(String</span><span 
+class="ecbx-1000">&#x00A0;attr,Object</span><span 
+class="ecbx-1000">&#x00A0;value):</span> </dt><dd 
+class="description">Returns  a  list  of
+     items which given attribute attr has the given value.
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">size():</span> </dt><dd 
+class="description">Returns the number of items in the store.</dd></dl>
+                                                                  
+
+                                                                  
+   <!--l. 2968--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse7.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse5.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse6.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 2968--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationse6.html"></a>  
+</body></html> 

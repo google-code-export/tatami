@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>YUI Drag And Drop</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 4601--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse18.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationch5.html#TatamiUserDocumentationse17.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h3 class="sectionHead"><span class="titlemark">5.1   </span> <a 
+ id="x58-1450005.1"></a>YUI Drag And Drop</h3>
+<!--l. 4603--><p class="noindent" >The drag-and-drop component is a panel in which widgets are allowed to be &#x2026;
+dragged and dropped. Any kind of widget can be used, the panel is entirely
+responsible for adding the drag an drop capability
+                                                                  
+
+                                                                  
+<!--l. 4607--><p class="indent" >   <img 
+src="TatamiUserDocumentation62x.png" alt="PIC" class="graphics" width="803.0pt" height="301.125pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation62x.png" src="62C__dev_workspace_docs_images_dnd_yuiexample.eps"  
+-->.
+<!--l. 4609--><p class="indent" >   The drag-and-drop component relies on the following concepts:
+     <ul class="itemize1">
+     <li class="itemize">The capacity for a widget to be dragged
+     </li>
+     <li class="itemize">The capacity for a widget to be a drop target
+     </li>
+     <li class="itemize">The compatibility between the dragged component and the component on
+     which it is dropped.</li></ul>
+<!--l. 4616--><p class="noindent" >The compatibility tells whether a (dragged) widget can be dropped on another
+one (the target). The first widget has to be declared as a draggable widget
+to the panel for the given compatibility, and the other widget has to be
+declared as a target for the same compatibility. A compatibility is just a
+string.
+<!--l. 4622--><p class="indent" >   A given widget can be draggable and a target at the same time. It can be involved
+in more than one compatibility rule. For instance, a widget w1 could be target for a
+widget w2 according to the compatibility &#8220;comp1&#8221;, and w1 could also be dropped on
+yet another widget w3 according to the compatibility &#8220;comp2&#8221;. The code
+                                                                  
+
+                                                                  
+corresponding to this example is:
+   <!--l. 4630-->
+<div class="lstlisting" id="listing-179"><span class="label"><a 
+ id="x58-145001r1"></a></span>DragAndDropPanel&#x00A0;ddPanel&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;DragAndDropPanel();&#x00A0;<br /><span class="label"><a 
+ id="x58-145002r2"></a></span>Widget&#x00A0;w1&#x00A0;=&#x00A0;(some&#x00A0;widget&#x00A0;creation&#x00A0;code)&#x00A0;<br /><span class="label"><a 
+ id="x58-145003r3"></a></span>Widget&#x00A0;w2&#x00A0;=&#x00A0;(some&#x00A0;widget&#x00A0;creation&#x00A0;code)&#x00A0;<br /><span class="label"><a 
+ id="x58-145004r4"></a></span>Widget&#x00A0;w3&#x00A0;=&#x00A0;(some&#x00A0;widget&#x00A0;creation&#x00A0;code)&#x00A0;<br /><span class="label"><a 
+ id="x58-145005r5"></a></span>ddPanel.addTargetWidget(w1,&#x00A0;50,&#x00A0;50,&#x00A0;"aff1");&#x00A0;<br /><span class="label"><a 
+ id="x58-145006r6"></a></span>ddPanel.addDraggableWidget(w2,&#x00A0;100,&#x00A0;100,&#x00A0;"aff1");&#x00A0;<br /><span class="label"><a 
+ id="x58-145007r7"></a></span>ddPanel.setDraggable(w1,&#x00A0;"aff2");&#x00A0;<br /><span class="label"><a 
+ id="x58-145008r8"></a></span>ddPanel.addTargetWidget(w3,&#x00A0;50,&#x00A0;50,&#x00A0;"aff2");
+   </div>
+<!--l. 4642--><p class="indent" >   If a draggable widget happens to be dropped on a target widget (or on a
+non-target widget, or on nothing) with which it shares no compatibility at all, the
+dragged widget goes back to its original position.
+<!--l. 4646--><p class="indent" >   This system is quite flexible and allows about any combination:
+     <ul class="itemize1">
+     <li class="itemize">A widget can be draggable and target for the same compatibility, or for
+     different compatibilities.
+     </li>
+     <li class="itemize">A widget can be draggable or target of several compatibilities.
+     </li>
+     <li class="itemize">A widget can be added or removed compatibilities dynamically (specifying
+     each time if the compatibility is relative to a draggable capacity or a target
+     capacity).
+     </li>
+     <li class="itemize">A widget for which all compatibilities have been removed will no longer
+     be movable.</li></ul>
+<!--l. 4657--><p class="noindent" >Note that the drag-and-drop panel can contain widgets which are neither targets nor
+draggable.
+<!--l. 4660--><p class="indent" >   Drag and drop operations produce events which can be handled programmatically. It
+is even possible to block a move when compatibility rules are satisfied. Events are
+dispatched to objects implementing DragAndDropListener interface, and registered
+in the panel. The next section of this document presents this interface in
+details.
+<!--l. 4667--><p class="noindent" >
+   <div class="subsectionTOCS">
+   &#x00A0;&#x00A0;<span class="subsectionToc" >5.1.1 <a 
+href="TatamiUserDocumentationsu33.html#x59-1460005.1.1">Building a simple drag-and-drop component</a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >5.1.2 <a 
+href="TatamiUserDocumentationsu34.html#x60-1470005.1.2">Receiving and handling drag and drop events </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >5.1.3 <a 
+href="TatamiUserDocumentationsu35.html#x61-1480005.1.3">Adding and removing compatibilities </a></span>
+<br />   &#x00A0;&#x00A0;<span class="subsectionToc" >5.1.4 <a 
+href="TatamiUserDocumentationsu36.html#x62-1490005.1.4">Getting information from the drag-and-drop panel</a></span>
+   </div>
+
+
+
+                                                                  
+
+                                                                  
+   <!--l. 4983--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse18.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationch5.html#TatamiUserDocumentationse17.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 4983--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationse17.html"></a>  
+</body></html> 

@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>The NumberSpinner component</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 836--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu8.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu6.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu7.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">2.2.5   </span> <a 
+ id="x16-320002.2.5"></a>The NumberSpinner component</h4>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">A</span> </dt><dd 
+class="description">number spinner is a very convenient widget when it comes to manipulating
+     numbers.  Dojo  Spinner  is  wrapped  in  Tatami  by  the  NumberSpinner
+     component. It provides the following features :</dd></dl>
+     <ul class="itemize1">
+     <li class="itemize">Setting a max and min value for the spinner
+     </li>
+     <li class="itemize">Value can be changed using up/down key arrows or by up/down buttons
+     </li>
+     <li class="itemize">Spinning accelerates when you hold down a button
+     </li>
+     <li class="itemize">Displaying a tooltip when the value is out of range, when the value is
+     invalid , or as a hint on what to put in the spinner</li></ul>
+<!--l. 848--><p class="noindent" >To import this widget see below:
+   <!--l. 851-->
+<div class="lstlisting" id="listing-32"><span class="label"><a 
+ id="x16-32001r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.NumberSpinner;
+   </div>
+<!--l. 857--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.5.1   </span> <a 
+ id="x16-330002.2.5.1"></a>Create the NumberSpinner component: </h5>
+<!--l. 859--><p class="noindent" >There are several constructor&#8217;s for the number spinner. Let&#8217;s begin with the simplest
+one.
+   <!--l. 863-->
+<div class="lstlisting" id="listing-33"><span class="label"><a 
+ id="x16-33001r1"></a></span>NumberSpinner&#x00A0;spinner&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;NumberSpinner();
+   </div>
+<!--l. 866--><p class="indent" >   This creates a NumberSpinner with no constraints, with a default value of 0, and
+a delta of 1. This delta is the spinner&#8217;s increment.
+<!--l. 870--><p class="indent" >   A second constructor is quite simple :
+                                                                  
+
+                                                                  
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">initValue:</span> </dt><dd 
+class="description">Spinner&#8217;s default value
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">minValue:</span> </dt><dd 
+class="description">Spinner&#8217;s min value. Any value under minValue will be considered
+     invalid
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">maxValue:</span> </dt><dd 
+class="description">Spinner&#8217;s max value. Any value above maxValue will be considered
+     invalid
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">delta:</span> </dt><dd 
+class="description">Spinner&#8217;s delta. It is the spinner&#8217;s increment when user hit a spinner
+     button</dd></dl>
+<!--l. 880--><p class="noindent" >The below snippet will create a spinner which value can range from 500 to 1500 , with
+an increment of 100 and an init value equals to 1000.
+   <!--l. 885-->
+<div class="lstlisting" id="listing-34"><span class="label"><a 
+ id="x16-33002r1"></a></span>NumberSpinner&#x00A0;spinner&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;NumberSpinner(1000f,&#x00A0;500f,&#x00A0;1500f&#x00A0;,&#x00A0;100f);
+   </div>
+<!--l. 890--><p class="indent" >   The following constructor is the most complete one . Notice the constraints
+object, which is replaced by min and max value in another constructor for more
+convenience. The constraints object maps constraints to be applied to the spinner
+content. Please see the example below.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">defaultTimeout:</span> </dt><dd 
+class="description">Delay until the spinning accelerates
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">invalidMessage</span> </dt><dd 
+class="description">:Message to be displayed in the tooltip when the value is not
+     a number, or doesn&#8217;t satisfy any constraints.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">intermediateChanges:</span> </dt><dd 
+class="description">True : the spinner fires onChange event each time it is
+     incremented False : the spinner only fires onChange event when the value
+     is validated (that is, the spinner loses focus)
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">delta:</span> </dt><dd 
+class="description">Spinner&#8217;s delta. It is the spinner&#8217;s increment when user hit a spinner
+     button
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">promptMessage:</span> </dt><dd 
+class="description">Helping tooltip to be displayed when the spinner doesn&#8217;t
+     contain any value.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">rangeMessage:</span> </dt><dd 
+class="description">Tooltip to be displayed when the value is out of range (that
+     is, above maxvalue or below minvalue)
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">timeoutChangeRate:</span> </dt><dd 
+class="description">This coefficient represents the spinner acceleration. 1.0
+     means that the spinner will not accelerate at all, values below 1.0 means
+     that the spinner&#8217;s will accelerate (default to 0.9). The smaller the value is
+     , the more acceleration the spinner will have.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">trim:</span> </dt><dd 
+class="description">Wether to trim (remove leading and trailing spaces) the number spinner&#8217;s
+     content
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">value:</span> </dt><dd 
+class="description">Spinner&#8217;s default value
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">constraints:</span> </dt><dd 
+class="description">A map containing the spinner&#8217;s constraints</dd></dl>
+<!--l. 917--><p class="noindent" >Below , the code that produces the above spinner :
+   <!--l. 920-->
+<div class="lstlisting" id="listing-35"><span class="label"><a 
+ id="x16-33003r1"></a></span>Map&#x00A0;constraints&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;HashMap();&#x00A0;<br /><span class="label"><a 
+ id="x16-33004r2"></a></span>constraints.put("min",&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Float(500f));&#x00A0;<br /><span class="label"><a 
+ id="x16-33005r3"></a></span>constraints.put("max",&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Float(1500f));&#x00A0;<br /><span class="label"><a 
+ id="x16-33006r4"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">The</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">following</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">key</span><span 
+class="ecti-1000">/</span><span 
+class="ecti-1000">value</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">couple</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">indicates</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">number</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">format</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">pattern</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">,</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">according</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">unicode</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">number</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">format</span>&#x00A0;<br /><span class="label"><a 
+ id="x16-33007r5"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">pattern</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x16-33008r6"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">The</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">following</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">pattern</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">also</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">means</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">that</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">any</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">value</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">with</span>&#x00A0;<br /><span class="label"><a 
+ id="x16-33009r7"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">more</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">than</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">two</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">decimals</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">will</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">be</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">considered</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">invalid</span>&#x00A0;<br /><span class="label"><a 
+ id="x16-33010r8"></a></span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x16-33011r9"></a></span>constraints.put("pattern"&#x00A0;,&#x00A0;"#,##0");&#x00A0;<br /><span class="label"><a 
+ id="x16-33012r10"></a></span>NumberSpinner&#x00A0;spinner&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;NumberSpinner(100,&#x00A0;"Please&#x2423;enter&#x2423;a&#x2423;valid&#x2423;number&#x2423;without&#x2423;any&#x2423;decimal&#x2423;places",&#x00A0;<span 
+class="ecbx-1000">false</span>&#x00A0;,&#x00A0;100f&#x00A0;,"Please&#x2423;enter&#x2423;a&#x2423;value&#x2423;between&#x2423;500&#x2423;and&#x2423;1500"&#x00A0;,&#x00A0;"Value&#x2423;is&#x2423;out&#x2423;of&#x2423;range"&#x00A0;,&#x00A0;0.90f&#x00A0;,&#x00A0;<span 
+class="ecbx-1000">true</span>,&#x00A0;1000,&#x00A0;constraints);
+   </div>
+<!--l. 935--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.5.2   </span> <a 
+ id="x16-340002.2.5.2"></a>Constraints </h5>
+<!--l. 937--><p class="noindent" >The number spinner component can be constrained with some parameters. Those
+are:
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">NumberSpinner.CONSTRAINT_MIN:</span> </dt><dd 
+class="description">Sets  a  minimum  value  for  the
+     spinner.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">NumberSpinner.CONSTRAINT_MAX:</span> </dt><dd 
+class="description">Sets a maximum Value for the
+     spinner.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">NumberSpinner.CONSTRAINT_PATTERN</span> </dt><dd 
+class="description">: Sets the number pattern.
+     See http://www.unicode.org/reports/tr35/#Number_Format_Patterns.
+     For example, with a pattern equal to &#8220;#,##0.##&#8221;, the input numbers
+     will be constrained to 2 decimal places.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">NumberSpinner.CONSTRAINT_TYPE:</span> </dt><dd 
+class="description">Sets  the  value  type  for  the
+     number. It can be either &#8220;percent&#8221; , &#8220;decimal&#8221; or &#8220;currency&#8221;. We advise
+     not to set this constraint after the spinner has been created.
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">NumberSpinner.CONSTRAINT_CURRENCY:</span> </dt><dd 
+class="description">Sets    the    currency
+     symbol for the spinner. It has no effects if the type constraints is not set
+     to &#8220;currency&#8221;.</dd></dl>
+<!--l. 954--><p class="noindent" >To set one of these constraints , just use the following method :
+   <!--l. 957-->
+<div class="lstlisting" id="listing-36"><span class="label"><a 
+ id="x16-34001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;addConstraint(String,&#x00A0;String)&#x00A0;
+   </div>
+<!--l. 962--><p class="indent" >   For example, if you want to set the max value for your spinner to 50 , just use the
+following snippet :
+   <!--l. 966-->
+<div class="lstlisting" id="listing-37"><span class="label"><a 
+ id="x16-34002r1"></a></span>mySpinner.addConstraint(NumberSpinner.CONSTRAINT_MAX&#x00A0;,&#x00A0;"50");
+   </div>
+<!--l. 972--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.5.3   </span> <a 
+ id="x16-350002.2.5.3"></a>API of the number spinner component</h5>
+<!--l. 974--><p class="noindent" >The number spinner supports ChangeListeners. To add a ChangeListener to Tatami
+NumberSpinner component, just use addChangeListener(ChangeListener
+listener).
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getValue():</span> </dt><dd 
+class="description">Gets the spinner&#8217;s value
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;setValue():</span> </dt><dd 
+class="description">Sets the spinner&#8217;s value
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;addConstraint(String,String):</span> </dt><dd 
+class="description">Adds a constraint to the spinner.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeConstraint(String):</span> </dt><dd 
+class="description">Removes a constraint from the spinner.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setConstraints(Map</span><span 
+class="ecbx-1000">&#x00A0;constraint):</span> </dt><dd 
+class="description">Sets the spinner constraints to the
+     given map, filled with constraint names as keys and their parameter as
+     values.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Map</span><span 
+class="ecbx-1000">&#x00A0;getConstraints():</span> </dt><dd 
+class="description">Gets the spinner constraints map
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">setDelta(float):</span> </dt><dd 
+class="description">Sets the spinner increment
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">float</span><span 
+class="ecbx-1000">&#x00A0;getDelta():</span> </dt><dd 
+class="description">Gets the spinner increment
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setIntermediateChanges(boolean):</span> </dt><dd 
+class="description">Sets   wether   an   &#8220;onChange&#8221;
+     event should be fired each time the number spinner is incremented (ie, an
+     arrow is clicked) or only when it loses focus.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">isIntermediateChanges():</span> </dt><dd 
+class="description">Gets wether an &#8220;onChange&#8221;  event is fired each
+     time the number spinner is incremented.
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;addChangeListener(ChangeListener</span><span 
+class="ecbx-1000">&#x00A0;listener):</span> </dt><dd 
+class="description">Adds a listener for
+     the onChange event
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeClickListener(ChangeListener</span><span 
+class="ecbx-1000">&#x00A0;listener):</span> </dt><dd 
+class="description">Removes          a
+     listener for the onChange event</dd></dl>
+                                                                  
+
+                                                                  
+   <!--l. 1001--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu8.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu6.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu7.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 1001--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu7.html"></a>   
+</body></html> 

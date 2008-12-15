@@ -1,0 +1,393 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Plot2D</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 3552--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu18.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu17.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">4.3.1   </span> <a 
+ id="x37-1110004.3.1"></a>Plot2D</h4>
+<!--l. 3554--><p class="noindent" >This class is used to draw several types of two dimensional plots.
+<!--l. 3557--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">4.3.1.1   </span> <a 
+ id="x37-1120004.3.1.1"></a>What type of data to use?</h5>
+<!--l. 3559--><p class="noindent" >This type of plot can be used with series of anything which extends Number, or with
+the Point object. When using numbers, the X coordinate is the position of the
+number in the list. When using Points, both X and Y coordinates must be
+specified.
+<!--l. 3564--><p class="indent" >   Ex :
+   <!--l. 3567-->
+<div class="lstlisting" id="listing-115"><span class="label"><a 
+ id="x37-112001r1"></a></span>Serie&#x003C;Point&#x003E;&#x00A0;serie1&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Point&#x003E;();&#x00A0;<br /><span class="label"><a 
+ id="x37-112002r2"></a></span>serie1.addData(<span 
+class="ecbx-1000">new</span>&#x00A0;Point(3.,2.));
+                                                                  
+
+                                                                  
+   </div>
+<!--l. 3574--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">4.3.1.2   </span> <a 
+ id="x37-1130004.3.1.2"></a>Subtypes </h5>
+<!--l. 3576--><p class="noindent" >The plot type is determined with the constructor:
+   <!--l. 3579-->
+<div class="lstlisting" id="listing-116"><span class="label"><a 
+ id="x37-113001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;Plot2D(String&#x00A0;type)&#x00A0;;
+   </div>
+<!--l. 3584--><p class="indent" >   Where type is one of the following constants :
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">Plot2D.PLOT_TYPE_LINES</span> </dt><dd 
+class="description">Series are drawn as lines Ex:
+     </dd><dt class="description">
+<img 
+src="TatamiUserDocumentation32x.png" alt="PIC" class="graphics" width="401.5pt" height="186.6975pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation32x.png" src="32C__dev_workspace_docs_images_chartingimages_plot2D_typelinesaxample.eps"  
+--> </dt><dd 
+class="description">
+     &#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Plot2D.PLOT_TYPE_AREAS</span> </dt><dd 
+class="description">Series are drawn as lines, and the area
+     under lines is filled. Ex :
+     </dd><dt class="description">
+                                                                  
+
+                                                                  
+<img 
+src="TatamiUserDocumentation33x.png" alt="PIC" class="graphics" width="405.515pt" height="196.73499pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation33x.png" src="33C__dev_workspace_docs_images_chartingimages_plot2D_typeareasaxample.eps"  
+--> </dt><dd 
+class="description">
+     &#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Plot2D.PLOT_TYPE_MARKERS_LINES</span> </dt><dd 
+class="description">Series are drawn as lines,
+     with markers on the actual points Ex:
+     </dd><dt class="description">
+<img 
+src="TatamiUserDocumentation34x.png" alt="PIC" class="graphics" width="402.50374pt" height="89.33374pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation34x.png" src="34C__dev_workspace_docs_images_chartingimages_plot2D_typemarkerlinesaxample.eps"  
+--> </dt><dd 
+class="description">
+     &#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Plot2D.PLOT_TYPE_SCATTER</span> </dt><dd 
+class="description">Series are drawn as points only Ex:
+     </dd><dt class="description">
+<img 
+src="TatamiUserDocumentation35x.png" alt="PIC" class="graphics" width="400.49625pt" height="96.35999pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation35x.png" src="35C__dev_workspace_docs_images_chartingimages_plot2D_typescatterxample.eps"  
+--> </dt><dd 
+class="description">
+     &#x00A0;
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Plot2D.PLOT_TYPE_LINES_STACKED</span> </dt><dd 
+class="description">Series  are  drawn  as  lines
+     and the y positions are additive. Ex:
+     </dd><dt class="description">
+<img 
+src="TatamiUserDocumentation36x.png" alt="PIC" class="graphics" width="197.73874pt" height="188.70499pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation36x.png" src="36C__dev_workspace_docs_images_chartingimages_plot2D_typestackedlinesaxample.eps"  
+--> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Plot2D.PLOT_TYPE_AREAS_STACKED</span> </dt><dd 
+class="description">Series are drawn as lines,
+     the area beneath is filled and the y positions are additive. Ex:
+     </dd><dt class="description">
+<img 
+src="TatamiUserDocumentation37x.png" alt="PIC" class="graphics" width="408.52625pt" height="182.6825pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation37x.png" src="37C__dev_workspace_docs_images_chartingimages_plot2D_typestackedareasaxample.eps"  
+--> </dt><dd 
+class="description">
+     &#x00A0;</dd></dl>
+<!--l. 3604--><p class="noindent" >
+                                                                  
+
+                                                                  
+   <h5 class="subsubsectionHead"><span class="titlemark">4.3.1.3   </span> <a 
+ id="x37-1140004.3.1.3"></a>Specific options </h5>
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">Tension:</span> </dt><dd 
+class="description">It allows you to add some curve to the lines <!--l. 3607-->
+     <div class="lstlisting" id="listing-117"><span class="label"><a 
+ id="x37-114001r1"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setTension(String&#x00A0;tension);
+     
+     </div>
+     <!--l. 3610--><p class="noindent" >Example with tension = 2 : <!--l. 3611-->
+     <div class="lstlisting" id="listing-118"><span class="label"><a 
+ id="x37-114002r1"></a></span>Plot2D&#x00A0;plot&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Plot2D(Plot2D.PLOT_TYPE_MARKERS_LINES);&#x00A0;<br /><span class="label"><a 
+ id="x37-114003r2"></a></span>plot.setTension("2");
+     
+     </div>
+     </dd><dt class="description">
+<img 
+src="TatamiUserDocumentation38x.png" alt="PIC" class="graphics" width="388.45125pt" height="181.67874pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation38x.png" src="38C__dev_workspace_docs_images_chartingimages_plot2D_tensionExample.eps"  
+--> </dt><dd 
+class="description">
+     &#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">Shadow:</span> </dt><dd 
+class="description"><!--l. 3618-->
+     <div class="lstlisting" id="listing-119"><span class="label"><a 
+ id="x37-114004r1"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114005r2"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Creates</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">a</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">shadow</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114006r3"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">bubbles</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114007r4"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@param</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">width</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">shadow</span><span 
+class="ecti-1000">&#8217;</span><span 
+class="ecti-1000">s</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">width</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114008r5"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@param</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">dx</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">shadow</span><span 
+class="ecti-1000">&#8217;</span><span 
+class="ecti-1000">s</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">x</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">position</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">from</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">line</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114009r6"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@param</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">dy</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">shadow</span><span 
+class="ecti-1000">&#8217;</span><span 
+class="ecti-1000">s</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">y</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">position</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">from</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">line</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114010r7"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114011r8"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setShadow(<span 
+class="ecbx-1000">int</span>&#x00A0;width,&#x00A0;<span 
+class="ecbx-1000">int</span>&#x00A0;dx,&#x00A0;<span 
+class="ecbx-1000">int</span>&#x00A0;dy);
+     
+     </div>
+     <!--l. 3628--><p class="noindent" >Example : <!--l. 3629-->
+     <div class="lstlisting" id="listing-120"><span class="label"><a 
+ id="x37-114012r1"></a></span>Plot2D&#x003C;Double&#x003E;&#x00A0;plot&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Plot2D&#x003C;Double&#x003E;(Plot2D.PLOT_TYPE_LINES_STACKED);&#x00A0;<br /><span class="label"><a 
+ id="x37-114013r2"></a></span>plot.setShadow(2,&#x00A0;2,&#x00A0;2);
+     
+     </div>
+                                                                  
+
+                                                                  
+     </dd><dt class="description">
+<img 
+src="TatamiUserDocumentation39x.png" alt="PIC" class="graphics" width="197.73874pt" height="188.70499pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation39x.png" src="39C__dev_workspace_docs_images_chartingimages_plot2D_shadowExample.eps"  
+--> </dt><dd 
+class="description">&#x00A0;
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">ShowMarkers:</span> </dt><dd 
+class="description"><!--l. 3636-->
+     <div class="lstlisting" id="listing-121"><span class="label"><a 
+ id="x37-114014r1"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114015r2"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@param</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">show</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Set</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">wether</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">show</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">markers</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">or</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">not</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114016r3"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Overrides</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">default</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">PLOT_TYPE</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">behavior</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114017r4"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114018r5"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setShowMarkers(<span 
+class="ecbx-1000">boolean</span>&#x00A0;show);
+     
+     </div>
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">ShowLines:</span> </dt><dd 
+class="description"><!--l. 3645-->
+     <div class="lstlisting" id="listing-122"><span class="label"><a 
+ id="x37-114019r1"></a></span><span 
+class="ecti-1000">/</span><span 
+class="cmsy-10">*</span><span 
+class="cmsy-10">*</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114020r2"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">@param</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">show</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">:</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Set</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">wether</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">to</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">show</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">markers</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">or</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">not</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114021r3"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">Overrides</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">the</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">default</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">PLOT_TYPE</span><span 
+class="ecti-1000">"</span><span 
+class="ecti-1000">&#x00A0;</span><span 
+class="ecti-1000">behavior</span><span 
+class="ecti-1000">.</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114022r4"></a></span><span 
+class="cmsy-10">*</span><span 
+class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a 
+ id="x37-114023r5"></a></span><span 
+class="ecbx-1000">public</span>&#x00A0;<span 
+class="ecbx-1000">void</span>&#x00A0;setShowLines(<span 
+class="ecbx-1000">boolean</span>&#x00A0;show);
+     
+     </div>
+     </dd></dl>
+                                                                  
+
+                                                                  
+   <!--l. 3655--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu18.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu17.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 3655--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu17.html"></a>   
+</body></html> 

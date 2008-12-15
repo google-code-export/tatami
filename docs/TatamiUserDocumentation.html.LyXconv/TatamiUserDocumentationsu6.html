@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>The button component</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,4,frames --> 
+<meta name="src" content="TatamiUserDocumentation.tex"> 
+<meta name="date" content="2008-12-11 19:04:00"> 
+<link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
+</head><body 
+>
+   <!--l. 770--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu7.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu5.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu6.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+   <h4 class="subsectionHead"><span class="titlemark">2.2.4   </span> <a 
+ id="x15-290002.2.4"></a>The button component</h4>
+<!--l. 772--><p class="noindent" >While GWT provides a standard button , the Dojo button can be more interesting.
+In Dojo, we define a button appearance by its label and its icon-class. The label is
+the text which will be shown in the button, while the icon-class is the css class used
+to style the icon.
+<!--l. 777--><p class="indent" >   <img 
+src="TatamiUserDocumentation8x.png" alt="PIC" class="graphics" width="225.84375pt" height="47.17624pt" ><!--tex4ht:graphics  
+name="TatamiUserDocumentation8x.png" src="8C__dev_workspace_docs_images_button_preview.eps"  
+-->
+<!--l. 779--><p class="indent" >   For example , the above button&#8217;s label is &#8220;Remove selected employees&#8221; while it&#8217;s
+icon-class is removeEmployeeButtonIcon, which is defined as following in a css file
+:
+   <!--l. 785-->
+<div class="lstlisting" id="listing-29"><span class="label"><a 
+ id="x15-29001r1"></a></span>.removeEmployeeButtonIcon&#x00A0;{&#x00A0;background<span 
+class="cmsy-10">-</span>image:&#x00A0;url("list<span 
+class="cmsy-10">-</span>remove.png");&#x00A0;height:&#x00A0;32px;&#x00A0;width:&#x00A0;32px;&#x00A0;}
+   </div>
+<!--l. 790--><p class="indent" >   To import this widget see below:
+   <!--l. 793-->
+<div class="lstlisting" id="listing-30"><span class="label"><a 
+ id="x15-29002r1"></a></span><span 
+class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.Button&#x00A0;;
+   </div>
+<!--l. 799--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.4.1   </span> <a 
+ id="x15-300002.2.4.1"></a>Create the Button component: </h5>
+<!--l. 801--><p class="noindent" >The Button&#8217;s constructor has two parameters : the first one is it&#8217;s label , the second
+one is it&#8217;s icon-class.
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">label:</span> </dt><dd 
+class="description">The label to be displayed on the button
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">iconClass:</span> </dt><dd 
+class="description">The css class which should be applied to the icon.</dd></dl>
+<!--l. 808--><p class="noindent" >Tatami&#8217;s button component is also extending GWT Button. That means you can also
+use a simple constructor with only the label, or another constructor with a default
+ClickListener.
+   <!--l. 813-->
+                                                                  
+
+                                                                  
+<div class="lstlisting" id="listing-31"><span class="label"><a 
+ id="x15-30001r1"></a></span>Button&#x00A0;button&#x00A0;=&#x00A0;<span 
+class="ecbx-1000">new</span>&#x00A0;Button("Click&#x2423;on&#x2423;me","addEmployeeButton");&#x00A0;<br /><span class="label"><a 
+ id="x15-30002r2"></a></span>RootPanel.get().add(button);
+   </div>
+<!--l. 820--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.4.2   </span> <a 
+ id="x15-310002.2.4.2"></a>API of the button component</h5>
+<!--l. 822--><p class="noindent" >Because it is extending the GWT Button Component, it has the same support for
+ClickListeners. To add a ClickListener to Tatami button component, just use
+addClickListener(ClickListener listener).
+     <dl class="description"><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getText():</span> </dt><dd 
+class="description">Gets the button&#8217;s label
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">String</span><span 
+class="ecbx-1000">&#x00A0;getIconClass():</span> </dt><dd 
+class="description">Gets the button&#8217;s iconClass
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;setText(String</span><span 
+class="ecbx-1000">&#x00A0;label):</span> </dt><dd 
+class="description">Sets the button&#8217;s label
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;addClickListener(ClickListener</span><span 
+class="ecbx-1000">&#x00A0;listener):</span> </dt><dd 
+class="description">Adds  a  listener  for  the
+     onClick event
+     </dd><dt class="description">
+<span 
+class="ecbx-1000">void</span><span 
+class="ecbx-1000">&#x00A0;removeClickListener(ClickListener</span><span 
+class="ecbx-1000">&#x00A0;listener):</span> </dt><dd 
+class="description">Removes  a  listener
+     for the onClick event</dd></dl>
+                                                                  
+
+                                                                  
+   <!--l. 836--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu7.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu5.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu6.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 836--><p class="indent" >   <a 
+ id="tailTatamiUserDocumentationsu6.html"></a>   
+</body></html> 
