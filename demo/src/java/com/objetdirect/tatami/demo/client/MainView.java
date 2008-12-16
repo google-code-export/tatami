@@ -136,7 +136,8 @@ public class MainView extends CompositeView implements TatamiDemoEvent {
 		 addMenuItem("amor.png",TatamiDemo.getMessages().menu_dnd(),TatamiDemo.getMessages().menu_dnd_explain(),SHOW_DND_DEMO);
 		 addMenuItem("blackboard.png",TatamiDemo.getMessages().menu_gfx(),TatamiDemo.getMessages().menu_gfx_explain(),SHOW_GFX_DEMO);
 		 addMenuItem("x_office_spreadsheet.png",TatamiDemo.getMessages().menu_grid(),TatamiDemo.getMessages().menu_grid_explain(),SHOW_GRID_DEMO);
-		 addMenuItem("chartMenuIcon.png",TatamiDemo.getMessages().menu_chart() ,TatamiDemo.getMessages().menu_chart_explain(),SHOW_CHART_DEMO);
+		 addMenuItem("chartMenuIcon.png",TatamiDemo.getMessages().menu_chart_and_layout() ,TatamiDemo.getMessages().menu_chart_and_layout_explain(),SHOW_LAYOUT_AND_CHART_DEMO);
+		 addMenuItem("x-office-drawing.png",TatamiDemo.getMessages().menu_chart() ,TatamiDemo.getMessages().menu_chart_explain(),SHOW_CHART_DEMO);
 	}
 
 

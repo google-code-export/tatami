@@ -11,7 +11,7 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 
 
 	private MVC[] triads;
-	private final int SIZE = 7;
+	private final int SIZE = 8;
 	private final int sliderMVC = 0;
 	private final int dateTimeMVC = 1 ;
 	private final int colorMVC = 2;
@@ -19,6 +19,7 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 	private final int dataGridMVC = 4;
 	private final int dndMVC = 5;
 	private final int layoutAndChartMVC = 6;
+	private final int chartMVC = 7;
 
 
 
@@ -65,6 +66,12 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 			}
 		};
 		
+		ControllerProcessor showChart = new ControllerProcessor() {
+			public void run(Event evt) {
+				showChart();
+			}
+		};
+		
 		ControllerProcessor showHome = new ControllerProcessor() {
 			public void run(Event evt) {
 				fire(new ViewEvent(SHOW_HOME,this));
@@ -77,7 +84,8 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 		register(SHOW_COLOR_DEMO,showColor);
 		register(SHOW_DND_DEMO,showDnd);
 		register(SHOW_GRID_DEMO,showGrid);
-		register(SHOW_CHART_DEMO,showLayoutAndChart);
+		register(SHOW_LAYOUT_AND_CHART_DEMO,showLayoutAndChart);
+		register(SHOW_CHART_DEMO,showChart);
 		register(SHOW_HOME,showHome);
 	}
 
@@ -133,6 +141,13 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 		displayTriad(dataGridMVC);
 	}
 	
+	public void showChart() {
+		if ( triads[chartMVC].getView() == null) {
+			triads[chartMVC].setView(new ChartDemo());
+		}
+		displayTriad(chartMVC);
+	}
+	
 	public void showLayoutAndChart() {
 		if ( triads[layoutAndChartMVC].getView() == null) {
 			LayoutAndChartDemoController layoutAndChartDemoController = new LayoutAndChartDemoController();
@@ -143,7 +158,7 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 			addChild(LayoutAndChartDemoController.CONTROLLER_NAME, layoutAndChartDemoController);
 			demo.init();
 		}else{
-			delegateToChild(LayoutAndChartDemoController.CONTROLLER_NAME,new ViewEvent(SHOW_CHART_DEMO,this));
+			delegateToChild(LayoutAndChartDemoController.CONTROLLER_NAME,new ViewEvent(SHOW_LAYOUT_AND_CHART_DEMO,this));
 		}
 		displayTriad(layoutAndChartMVC);
 	}

@@ -27,7 +27,7 @@ public class LayoutAndChartDemoController extends ControllerImpl implements Tata
 		register(CHART_ADD_SERIE, transmitProcessor);
 		register(CHART_REMOVE_SERIE, transmitProcessor);
 		register(INIT_CHART_GRID,transmitProcessor);
-		register(SHOW_CHART_DEMO,showContentEvent);
+		register(SHOW_LAYOUT_AND_CHART_DEMO,showContentEvent);
 	}
 	
 }
