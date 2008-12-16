@@ -508,8 +508,8 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	
 	@Override
 	protected void onAttach() {
-		super.onAttach();
       	DojoController.getInstance().constructDojoWidget(this, this);
+      	super.onAttach();
 	}
 	
 	@Override

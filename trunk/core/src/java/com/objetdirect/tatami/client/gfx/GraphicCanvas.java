@@ -99,9 +99,9 @@ public class GraphicCanvas extends Widget {
      * Creates the surface when the widget is attached.
      */		
 	public void onAttach() {
-		super.onAttach();
 		surface = initGraphics(getElement(), this, this.getOffsetWidth(), this.getOffsetHeight());
 		attachAllGraphicObjects();
+		super.onAttach();
 	}
 	
 		

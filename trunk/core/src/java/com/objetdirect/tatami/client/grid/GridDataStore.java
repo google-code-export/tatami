@@ -27,13 +27,7 @@
 package com.objetdirect.tatami.client.grid;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.objetdirect.tatami.client.data.AbstractDataStore;
 import com.objetdirect.tatami.client.data.DefaultDataStore;
-import com.objetdirect.tatami.client.data.Item;
-import com.objetdirect.tatami.client.data.Request;
  
 /**
  * This DataStore is specific to the Grid.

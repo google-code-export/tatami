@@ -25,9 +25,6 @@
  */
 package com.objetdirect.tatami.client.grid.editor;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * A grid Date Editor (similar to drop down date picker)
  * 

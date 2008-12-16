@@ -34,6 +34,8 @@ import com.objetdirect.tatami.client.JSHelper;
 
 
 /**
+ * This class represents an axis to draw on a chart
+ * 
  * @author rdunklau
  *
  */
@@ -113,6 +115,17 @@ public class Axis {
 		setPosition(position);
 	}
 	
+	/**
+	 * @param position: an int representing the Axis position.
+	 * It is obtained from int byte to byte OR operation between the following constants :
+	 * 
+	 *  Axis.LEFT
+	 *  Axis.RIGHT
+	 *  Axis.BOTTOM
+	 *  Axis.TOP
+	 *  Axis.VERTICAL
+	 *  Axis.HORIZONTAL
+	 */
 	public void setPosition(int position){
 		if((position - RIGHT) >= 0 ){
 			options.put(leftOption,Boolean.FALSE);
@@ -127,10 +140,16 @@ public class Axis {
 	}
 	
 	
+	/**
+	 * @return this axis options
+	 */
 	public Map<String,?> getOptions() {
 		return options;
 	}
 
+	/**
+	 * @return: the axis id.
+	 */
 	public String getId() {
 		if(name != null){
 			return name;
@@ -153,6 +172,9 @@ public class Axis {
 		return new Axis(LEFT | VERTICAL);
 	}
 
+	/**
+	 * @return where the upper value is fixed
+	 */
 	public String getFixUpper() {
 		return fixUpper;
 	}
@@ -160,16 +182,19 @@ public class Axis {
 	/**
 	 * @param fixUpper : Forces the upper value on the axis to be aligned with the corresponding tick
 	 * Possible value are :
-	 * -none
-	 * -minor
-	 * -major
-	 * -micro
+	 * -Axis.FIX_TYPE_NONE
+	 * -Axis.FIX_TYPE_MINOR
+	 * -Axis.FIX_TYPE_MAJOR
+	 * -Axis.FIX_TYPE_MICRO
 	 */
 	public void setFixUpper(String fixUpper) {
 		this.fixUpper = fixUpper;
 		options.put("fixUpper", fixUpper);
 	}
 
+	/**
+	 * @return where the upper lower is fixed
+	 */
 	public String getFixLower() {
 		return fixLower;
 	}
@@ -177,16 +202,19 @@ public class Axis {
 	/**
 	 * @param fixLower : Forces the lower value on the axis to be aligned with the corresponding tick
 	 * Possible value are :
-	 * -none
-	 * -minor
-	 * -major
-	 * -micro
+	 * -Axis.FIX_TYPE_NONE
+	 * -Axis.FIX_TYPE_MINOR
+	 * -Axis.FIX_TYPE_MAJOR
+	 * -Axis.FIX_TYPE_MICRO
 	 */
 	public void setFixLower(String fixLower) {
 		this.fixLower = fixLower;
 		options.put("fixLower", fixLower);
 	}
 
+	/**
+	 * @return: whether the ticks are forced to be on natural numbers
+	 */
 	public Boolean getNatural() {
 		return natural;
 	}
@@ -199,6 +227,9 @@ public class Axis {
 		options.put("natural", natural);
 	}
 
+	/**
+	 * @return: returns whether the axis is forced to include the zero
+	 */
 	public Boolean getIncludeZero() {
 		return includeZero;
 	}
@@ -211,6 +242,9 @@ public class Axis {
 		options.put("includeZero", includeZero);
 	}
 
+	/**
+	 * @return: fixes the precision on the labels
+	 */
 	public Boolean getFixed() {
 		return fixed;
 	}
@@ -223,13 +257,16 @@ public class Axis {
 		options.put("fixed", fixed);
 	}
 
+	/**
+	 * @return: whether the major labels are displayed
+	 */
 	public Boolean getMajorLabels() {
 		return majorLabels;
 	}
 
 	/**
 	 * @param majorLabels : whether the major ticks should be labeled
-		 */
+	 */
 	public void setMajorLabels(Boolean majorLabels) {
 		this.majorLabels = majorLabels;
 		options.put("majorLabels", majorLabels);

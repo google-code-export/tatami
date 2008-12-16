@@ -119,7 +119,11 @@ public class WidgetDnDController extends IDnDController<WidgetSource, WidgetTarg
 				return @com.objetdirect.tatami.client.dnd.WidgetDnDController::getChildByEvent(Lcom/google/gwt/user/client/Event;)(e);
 			},
 			getItemFromJSNode : function(node){
-				return this.getItem(node.id).data[0];
+				var item;
+				if(node.id){
+					return this.getItem(node.id).data[0];
+				}
+				return null;
 			},
 			onDndSourceOver : function(source){
 				if(this.isDragging){

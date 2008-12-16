@@ -161,7 +161,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * Converts a temporal stamp (day, mounth, year, hours, minutes, second) in parsing a string 
+	 * Converts a temporal stamp (day, month, year, hours, minutes, second) in parsing a string 
 	 * and using a time pattern and a date pattern.
 	 * @param date the temporal stamp.
 	 * @param datePattern see the DOJO explanations : it's like in JAVA for the most of principals options

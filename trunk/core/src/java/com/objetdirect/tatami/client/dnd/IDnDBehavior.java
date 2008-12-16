@@ -28,16 +28,6 @@ package com.objetdirect.tatami.client.dnd;
 
 import java.util.Collection;
 
-
-
-
-
-
-
-
-
-
-
 /**
  * @author rdunklau
  *

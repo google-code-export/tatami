@@ -42,8 +42,9 @@ public interface DataStore extends FetchEventSource , DatumChangeSource , LoadIt
 	/**
 	 * Adds an item to the store, then fire the onNew event
 	 * @param item
+	 * @return TODO
 	 */
-	public void add(Item item);
+	public Item add(Item item);
 	
 	
 	/**

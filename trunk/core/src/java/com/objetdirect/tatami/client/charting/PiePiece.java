@@ -28,6 +28,12 @@ package com.objetdirect.tatami.client.charting;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.ConvertibleToJSObject;
 
+/**
+ * A data object used to represent pie pieces in a pie plot
+ * 
+ * @author rdunklau
+ *
+ */
 public class PiePiece implements ConvertibleToJSObject,HasTooltip{
 
 
@@ -43,77 +49,144 @@ public class PiePiece implements ConvertibleToJSObject,HasTooltip{
 	
 	
 
+	/**
+	 * @param value: this pie's value
+	 */
 	public PiePiece(double value) {
 		this.value = value;
 	}
 
+	/**
+	 * @param value : this pie's value
+	 * @param label : this pie's label
+	 */
 	public PiePiece(double value , String label) {
+		this(value);
 		this.label = label;
-		this.value = value;
 	}
 
 
+	/**
+	 * @param value
+	 * @param label
+	 * @param color
+	 */
 	public PiePiece( double value , String label,String color) {
+		this(value,label);
 		this.color = color;
-		this.label = label;
-		this.value = value;
 	}
 	
 
+	/**
+	 * @param value
+	 * @param label
+	 * @param color
+	 * @param fontColor
+	 */
 	public PiePiece(double value , String label,String color, String fontColor) {
 		this(value, label, color);
 		this.fontColor = fontColor;
 	}
 	
+	/**
+	 * @param value
+	 * @param label
+	 * @param color
+	 * @param fontColor
+	 * @param tooltip
+	 */
 	public PiePiece(double value , String label,String color, String fontColor, String tooltip) {
 		this(value,label,color,fontColor);
 		this.tooltip = tooltip;
 	}
 	
+	/**
+	 * @return: the font color used for this pie piece label
+	 */
 	public String getFontColor() {
 		return fontColor;
 	}
 
+	/**
+	 * @param fontColor: the font color used for this pie piece label
+	 */
 	public void setFontColor(String fontColor) {
 		this.fontColor = fontColor;
 	}
 
+	/**
+	 * @return: returns the filling color
+	 */
 	public String getColor() {
 		return color;
 	}
 
+	/**
+	 * @param color: the filling color
+	 */
 	public void setColor(String color) {
 		this.color = color;
 	}
 	
+	/**
+	 * @return: this pie piece value
+	 */
 	public double getValue() {
 		return value;
 	}
 
+	/**
+	 * @param value: this pie piece value
+	 */
 	public void setValue(double value) {
 		this.value = value;
 	}
 
+	/**
+	 * @return: this pie piece label
+	 */
 	public String getLabel() {
 		return label;
 	}
 
+	/**
+	 * @param label: this pie piece label
+	 */
 	public void setLabel(String label) {
 		this.label = label;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.objetdirect.tatami.client.ConvertibleToJSObject#toJSObject()
+	 */
 	public JavaScriptObject toJSObject() {
 		return getJSPiePiece(value, label, color , fontColor,tooltip);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.objetdirect.tatami.client.charting.HasTooltip#getTooltip()
+	 */
 	public String getTooltip() {
 		return tooltip;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.objetdirect.tatami.client.charting.HasTooltip#setTooltip(java.lang.String)
+	 */
 	public void setTooltip(String tooltip) {
 		this.tooltip = tooltip;
 	}
 	
+	/**
+	 * Convert the java object to a javascript object
+	 * 
+	 * @param value
+	 * @param label
+	 * @param color
+	 * @param fontColor
+	 * @param tooltip
+	 * @return
+	 */
 	private native JavaScriptObject getJSPiePiece(double value, String label , String color , String fontColor, String tooltip)/*-{
 		var pie = {y: value};
 		if(label!=null){

@@ -45,7 +45,7 @@ import com.google.gwt.user.client.ui.SourcesClickEvents;
  * @author rdunklau
  *
  */
-public class Button extends AbstractDojo  implements HasDojo, HasText,SourcesClickEvents  {
+public class Button extends AbstractDojo  implements  HasText,SourcesClickEvents  {
 
 	private ClickListenerCollection listeners;
 	
@@ -230,8 +230,7 @@ public class Button extends AbstractDojo  implements HasDojo, HasText,SourcesCli
 		listeners.remove(listener);
 		}
 	}
-
-	
+		
 
 	public void doAfterCreation() {
 		DojoController.startup(this);

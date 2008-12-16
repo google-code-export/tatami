@@ -28,6 +28,12 @@ package com.objetdirect.tatami.client.charting;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.ConvertibleToJSObject;
 
+/**
+ * A point object, designed to be used with Plot2D
+ * 
+ * @author rdunklau
+ *
+ */
 public class Point implements ConvertibleToJSObject,HasTooltip{
 
 	private double x;

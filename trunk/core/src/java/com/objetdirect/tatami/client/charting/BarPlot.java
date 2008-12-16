@@ -25,6 +25,13 @@
  */
 package com.objetdirect.tatami.client.charting;
 
+/**
+ * A Plot for various bars and columns chart types
+ * 
+ * @author rdunklau
+ *
+ * @param <T>: the type of Series this plot will accept. For bar plot, it must extend Number.
+ */
 public class BarPlot<T extends Number> extends Plot<T> {
 
 	final public static String PLOT_TYPE_BARS = "Bars";

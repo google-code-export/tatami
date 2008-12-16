@@ -31,6 +31,13 @@ import com.objetdirect.tatami.client.charting.Bubble;
 import com.objetdirect.tatami.client.charting.PiePiece;
 import com.objetdirect.tatami.client.charting.Point;
 
+/**
+ * This class defines an EffectEvent, and wraps decorated dojo effects events
+ * 
+ * 
+ * @author rdunklau
+ *
+ */
 public class EffectEvent extends JavaScriptObject{
 
 	final public static String TYPE_ONCLICK = "onclick";
@@ -145,6 +152,16 @@ public class EffectEvent extends JavaScriptObject{
 	
 	private final native JavaScriptObject getJSDataObject()/*-{return this.run.data[this.index];}-*/;
 	public final native String getType()/*-{return this.type;}-*/;
+	/**
+	 * @return: one of the following, according to the graphical element 
+	 * which sourced the event.
+	 * 
+	 * ELEMENT_TYPE_BAR : 
+	 * ELEMENT_TYPE_CIRCLE 
+	 * ELEMENT_TYPE_COLUMN
+	 * ELEMENT_TYPE_MARKER 
+	 * ELEMENT_TYPE_SLICE
+	 */
 	public final native String getElementType()/*-{return this.element;}-*/;
 	private final native void setAssociatedObject(Object object)/*-{this.gwtValue = object;}-*/;
 	private final native Object getAssociatedInternalObject()/*-{return this.gwtValue;}-*/;

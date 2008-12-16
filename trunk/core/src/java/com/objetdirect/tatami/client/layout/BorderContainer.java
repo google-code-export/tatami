@@ -1,10 +1,8 @@
 package com.objetdirect.tatami.client.layout;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
-import com.objetdirect.tatami.client.DojoController;
+import com.objetdirect.tatami.client.HasAdaptiveSize;
 
 /**
  * This Panel replaces both GWT dock panel and GWT splitpanel.
@@ -13,7 +11,7 @@ import com.objetdirect.tatami.client.DojoController;
  * @author rdunklau
  *
  */
-public class BorderContainer extends AbstractDojoComplexPanel {
+public class BorderContainer extends AbstractDojoComplexPanel implements HasAdaptiveSize {
 
 	static public final String REGION_CENTER = "center";
 	static public final String REGION_TOP = "top";
@@ -27,10 +25,14 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	static public final String DESIGN_SIDEBAR = "sidebar";
 	
 	private final String ATTRIBUTE_REGION = "region";
+	private final String ATTRIBUTE_MIN = "minSize";
+	private final String ATTRIBUTE_MAX = "maxSize";
 	private final String ATTRIBUTE_SPLITTER = "splitter";
+	
 	
 	private boolean liveSplitters = true;
 	
+	private boolean gutters = true;
 
 	private String design = DESIGN_HEADLINE;
 	
@@ -45,7 +47,7 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	 * @see com.objetdirect.tatami.client.layout.AbstractDojoComplexPanel#createDojoLayout()
 	 */
 	public JavaScriptObject createDojoLayout() {
-		return createBorderContainer(design,liveSplitters);
+		return createBorderContainer(design,liveSplitters,gutters);
 	}
 	
 	/**
@@ -55,8 +57,8 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	 * 
 	 * @return
 	 */
-	private native JavaScriptObject createBorderContainer(String design, boolean liveSplitters)/*-{
-		return new $wnd.dijit.layout.BorderContainer({style:"width:100%;height:100%;",liveSplitters: liveSplitters, design: design});
+	private native JavaScriptObject createBorderContainer(String design, boolean liveSplitters,boolean gutters)/*-{
+		return new $wnd.dijit.layout.BorderContainer({style:"width:100%;height:100%;",liveSplitters: liveSplitters, design: design , gutters:gutters});
 	}-*/;
 	
 
@@ -67,6 +69,7 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 		return "dijit.layout.BorderContainer";
 	}
 	
+
 	/**
 	 * This method is internally called by every "add" method.
 	 * It validates that the added widget is a ContentPanel, and sets
@@ -78,13 +81,19 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	 * @param splitter: if true, a splitter will be created between the added panel
 	 * and the center panel, allowing the user to resize them.
 	 */
-	private void addPanel(Widget child , String region , boolean splitter){
+	private void addPanel(Widget child , String region , boolean splitter , String minSize, String maxSize){
 		ContentPanel cp = null;
 		if(!(child instanceof ContentPanel)){
 	    	throw new IllegalArgumentException("The Border Container only accepts ContentPanel");
 	    }else{
 	    	cp = (ContentPanel) child;
 	    }
+		if(minSize != null){
+			cp.addProperty(ATTRIBUTE_MIN, minSize);
+		}
+		if(maxSize != null){
+			cp.addProperty(ATTRIBUTE_MAX, maxSize);
+		}
 		cp.addProperty(ATTRIBUTE_REGION, region);
 		if(splitter){
 			cp.addProperty(ATTRIBUTE_SPLITTER, splitter);
@@ -101,7 +110,7 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	 * indicates where the panel should be placed.
 	 */
 	public void add(Widget child, String region){
-		addPanel(child,region, false);
+		addPanel(child,region, false,null,null);
 	}
 	
 	/**
@@ -112,7 +121,11 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	 * and the center panel, allowing the user to resize them.
 	 */
 	public void add(Widget child, String region, boolean hasSplitter){
-		addPanel(child, region,hasSplitter);
+		addPanel(child, region,hasSplitter,null,null);
+	}
+	
+	public void add(Widget child, String region, boolean hasSplitter,String minSize , String maxSize){
+		addPanel(child, region,hasSplitter,minSize,maxSize);
 	}
 	
 	/* (non-Javadoc)
@@ -167,7 +180,29 @@ public class BorderContainer extends AbstractDojoComplexPanel {
 	public void setDesign(String design) {
 		this.design = design;
 		if(getDojoWidget() != null){
-			updateDojoWidget(getDojoWidget(), "desing", design);
+			updateDojoWidget(getDojoWidget(), "design", design);
+		}
+	}
+
+	public boolean isGutters() {
+		return gutters;
+	}
+
+	/**
+	 * @param gutters : 
+	 *	Give each pane a border and margin.
+	 *	When false, only resizable panes have a gutter (i.e. draggable splitter) for resizing.
+	 */
+	public void setGutters(boolean gutters) {
+		this.gutters = gutters;
+		if(getDojoWidget() != null){
+			updateDojoWidget(getDojoWidget(), "gutters", gutters);
+		}
+	}
+	
+	public void adaptSize() {
+		if(getDojoWidget() != null){
+			dojoUpdateSize(getDojoWidget());
 		}
 	}
 

@@ -25,6 +25,12 @@
  */
 package com.objetdirect.tatami.client.charting;
 
+/**
+ * This class contains all the constants corresponding to the dojo themes
+ * 
+ * @author rdunklau
+ *
+ */
 public class Themes {
 
 	final public static String GreySkies = "GreySkies"; 

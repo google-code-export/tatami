@@ -38,7 +38,6 @@ import com.objetdirect.tatami.client.gfx.PointTest;
 import com.objetdirect.tatami.client.gfx.PolyLineTest;
 import com.objetdirect.tatami.client.gfx.RectTest;
 import com.objetdirect.tatami.client.gfx.RectangleTest;
-import com.objetdirect.tatami.client.gfx.TestGraphicObject;
 import com.objetdirect.tatami.client.gfx.TextPathTest;
 import com.objetdirect.tatami.client.gfx.TextTest;
 import com.objetdirect.tatami.client.gfx.VirtualGroupTest;

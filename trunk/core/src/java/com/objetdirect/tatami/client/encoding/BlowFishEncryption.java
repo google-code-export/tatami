@@ -45,7 +45,7 @@ public class BlowFishEncryption {
 	 * Singleton
 	 */
 	private static BlowFishEncryption instance;
-	
+	private boolean init = false;
 	
 	
 	
@@ -71,6 +71,10 @@ public class BlowFishEncryption {
 		return instance;
 	}
 	
+	public void init(){
+		init = true;
+	}
+	
 	
 	/**
 	 * @param outputTypeConstant : an object of type EncodingTypeConstant representing
@@ -81,6 +85,9 @@ public class BlowFishEncryption {
 	 * @return the encrypted text
 	 */
 	public String encrypt(EncodingTypeConstant outputTypeConstant ,String toCrypt , String key){
+		if(!init){
+			throw new IllegalStateException("You must call the init method before");
+		}
 		return dojoEncrypt(outputTypeConstant.getAOObject() , toCrypt, key);
 	}
 	
@@ -95,6 +102,9 @@ public class BlowFishEncryption {
 	 * @return : the decrypted text
 	 */
 	public String decrypt(EncodingTypeConstant inputTypeConstant , String toDecrypt , String key){
+		if(!init){
+			throw new IllegalStateException("You must call the init method before");
+		}
 		return dojoDecrypt(inputTypeConstant.getAOObject(), toDecrypt, key);
 	}
 	

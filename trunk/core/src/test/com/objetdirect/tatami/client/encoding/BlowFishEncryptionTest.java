@@ -4,9 +4,16 @@ import com.objetdirect.tatami.client.DefaultTatamiTest;
 import com.objetdirect.tatami.client.encoding.BlowFishEncryption;
 
 public class BlowFishEncryptionTest extends DefaultTatamiTest{
-
+	
+	BlowFishEncryption cipher;
+	
+	@Override
+	public void gwtSetUp(){
+		cipher = BlowFishEncryption.getInstance();
+		cipher.init();
+	}
+	
 	public void testEncryptionWithHex(){
-		BlowFishEncryption cipher = BlowFishEncryption.getInstance();
 		String text = "Tatami rulezzz";
 		String key = "this is the key";
 		String expectedCiphered = "9677e2a7973edf767343b4f1334cb1ba"; 
@@ -15,7 +22,6 @@ public class BlowFishEncryptionTest extends DefaultTatamiTest{
 	}
 	
 	public void testEncryptionWithBase64(){
-		BlowFishEncryption cipher = BlowFishEncryption.getInstance();
 		String text = "Tatami rulezzz";
 		String key = "this is the key";
 		String expectedCiphered = "lnfip5c+33ZzQ7TxM0yxug==";
@@ -24,7 +30,6 @@ public class BlowFishEncryptionTest extends DefaultTatamiTest{
 	}
 	
 	public void testDecryptionWithHex(){
-		BlowFishEncryption cipher = BlowFishEncryption.getInstance();
 		String expectedText = "Tatami rulezzz";
 		String key = "this is the key";
 		String ciphered = "9677e2a7973edf767343b4f1334cb1ba" ;
@@ -33,7 +38,6 @@ public class BlowFishEncryptionTest extends DefaultTatamiTest{
 	}
 	
 	public void testDecryptionWithBase64(){
-		BlowFishEncryption cipher = BlowFishEncryption.getInstance();
 		String expectedText = "Tatami rulezzz";
 		String key = "this is the key";
 		String ciphered = "lnfip5c+33ZzQ7TxM0yxug==";
@@ -42,7 +46,6 @@ public class BlowFishEncryptionTest extends DefaultTatamiTest{
 	}
 	
 	public void testEncryptDecryptWithARandomWord(){
-		BlowFishEncryption cipher = BlowFishEncryption.getInstance();
 		String key = "groum";
 		String randomString = "�@#�";
 		String ciphered = cipher.encrypt(BlowFishEncryption.Base64OutputType, randomString, key);

@@ -25,6 +25,15 @@
  */
 package com.objetdirect.tatami.client.charting;
 
+
+/**
+ * A plot type for bubble type charts.
+ * A bubble chart shows circles at given x and y coordinates which have 
+ * a given radius
+ * 
+ * @author rdunklau
+ *
+ */
 public class BubblePlot extends Plot2D<Bubble> {
 
 	public BubblePlot() {

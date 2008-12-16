@@ -34,6 +34,13 @@ import com.objetdirect.tatami.client.JSHelper;
 import com.objetdirect.tatami.client.charting.Chart2D;
 import com.objetdirect.tatami.client.charting.Plot;
 
+/**
+ * Abstract class defining the common methods for 
+ * dojo's predefined chart effects.
+ * 
+ * @author rdunklau
+ *
+ */
 public abstract class AbstractJSEffect implements Effect{
 
 	JavaScriptObject jsEffect;
@@ -41,35 +48,64 @@ public abstract class AbstractJSEffect implements Effect{
 	Map<String,Object> options = new HashMap<String, Object>();
 	
 	
+	/**
+	 * Creates an effect with the given duration
+	 * 
+	 * @param duration
+	 */
 	public AbstractJSEffect(int duration){
 		this();
 		setDuration(duration);
 	}
 	
+	/**
+	 * Creates the effect
+	 */
 	public AbstractJSEffect(){
 		DojoController.getInstance().require("dojo.fx");
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.objetdirect.tatami.client.charting.effects.Effect#processEvent(com.objetdirect.tatami.client.charting.effects.EffectEvent)
+	 */
 	public void processEvent(EffectEvent event) {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see com.objetdirect.tatami.client.charting.effects.Effect#destroyEffect()
+	 */
 	public void destroyEffect() {
 		jsDestroy(jsEffect);
 	}
 
+	/**
+	 * @return : the dojo effect class name
+	 */
 	abstract String getEffectName();
 	
+	/* (non-Javadoc)
+	 * @see com.objetdirect.tatami.client.charting.effects.Effect#initEffect(com.objetdirect.tatami.client.charting.Chart2D, com.objetdirect.tatami.client.charting.Plot)
+	 */
 	public void initEffect(Chart2D chart, Plot<?> plot) {
 		jsEffect = createEffect(chart.getDojoWidget(), plot.getName(), getEffectName(),JSHelper.convertObjectToJSObject(options));
 	}
 
+	/**
+	 * Creates the javascript object representing the effect
+	 * 
+	 * @param dojoChart: the dojoChart object
+	 * @param plotName: the plot to which this effect must be applied
+	 * @param effectName: the effect name
+	 * @param options: the effect options
+	 * @return
+	 */
 	private native JavaScriptObject createEffect(JavaScriptObject dojoChart, String plotName , String effectName , JavaScriptObject options)/*-{
 		return new $wnd.dojox.charting.action2d[effectName](dojoChart,plotName,options);
 	}-*/;
 	
 	
-	//XXX : change to effect.destroy as soon as the bug is corrected in dojo
+	//FIXME : change to effect.destroy as soon as the bug is corrected in dojo
 	// See: http://bugs.dojotoolkit.org/ticket/7991
 	protected native void jsDestroy(JavaScriptObject effect)/*-{
 		if(effect.handle){
@@ -83,14 +119,27 @@ public abstract class AbstractJSEffect implements Effect{
 		effect.anim = {};
 	}-*/;
 	
+	/**
+	 * Sets an option to the effect
+	 * 
+	 * @param optionName
+	 * @param option
+	 */
 	public void setOption(String optionName, Object option){
 		options.put(optionName, option);
 	}
 	
+	/**
+	 * Sets the effect duration
+	 * @param duration
+	 */
 	public void setDuration(int duration){
 		options.put("duration",duration);
 	}
 	
+	/**
+	 * @return: the effect duration
+	 */
 	public int getDuration(){
 		return (Integer) options.get("duration");
 	}

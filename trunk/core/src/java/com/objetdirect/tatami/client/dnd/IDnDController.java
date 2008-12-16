@@ -165,7 +165,7 @@ public abstract class IDnDController<T extends IDnDSource<?>,U extends IDnDTarge
 	}
 	
 	/**
-	 * This method is used by the main controller to retrived IDnDElement objects from a javascript array,
+	 * This method is used by the main controller to retrieve IDnDElement objects from a javascript array,
 	 * containing the dojo javascript representations from the elements
 	 * 
 	 * @param source : the source in which the elements should be gotten 
@@ -177,7 +177,10 @@ public abstract class IDnDController<T extends IDnDSource<?>,U extends IDnDTarge
 		Collection<IDnDElement> dndElementList = new ArrayList<IDnDElement>();
 		int length = JSHelper.getArraySize(jsDnDElements);
 		for(int i = 0; i < length ; i++){
-			dndElementList.add(getDndElementAtGivenIndex(i,  source , jsDnDElements));
+			IDnDElement elem = getDndElementAtGivenIndex(i,  source , jsDnDElements);
+			if(elem != null){
+				dndElementList.add(elem);
+			}
 		}
 		return dndElementList;
 	}
