@@ -6,8 +6,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class NumberSpinnerWrapper {
 
-	private HtmlElement elem;
-	
 	private HtmlElement downArrow;
 	
 	private HtmlElement upArrow;
