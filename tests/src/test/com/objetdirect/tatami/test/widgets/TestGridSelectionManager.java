@@ -5,8 +5,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.objetdirect.tatami.client.grid.GridSelectionManager;
 import com.objetdirect.tatami.testpages.client.widgets.TestGridSelectionManagerPage;
-import com.objetdirect.tatami.testpages.client.widgets.TestSimpleGridPage;
-import com.objetdirect.tatami.unit.TatamiTestCase;
 import com.objetdirect.tatami.unit.TestGWT;
 import com.objetdirect.tatami.unit.wrappers.GridWrapper;
 

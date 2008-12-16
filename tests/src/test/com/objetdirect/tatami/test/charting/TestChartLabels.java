@@ -1,7 +1,5 @@
 package com.objetdirect.tatami.test.charting;
 
-import java.io.FileWriter;
-import java.util.Properties;
 import java.util.PropertyResourceBundle;
 
 import com.objetdirect.tatami.testpages.client.charting.TestChartLabelsPage;

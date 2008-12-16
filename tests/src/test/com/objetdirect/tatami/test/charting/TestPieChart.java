@@ -1,11 +1,7 @@
 package com.objetdirect.tatami.test.charting;
 
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.util.Properties;
 import java.util.PropertyResourceBundle;
 
-import com.objetdirect.tatami.testpages.client.charting.TestBasicChartPage;
 import com.objetdirect.tatami.testpages.client.charting.TestPieChartPage;
 
 public class TestPieChart extends AbstractTestChart{

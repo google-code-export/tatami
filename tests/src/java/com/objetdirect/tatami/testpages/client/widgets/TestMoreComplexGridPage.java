@@ -90,8 +90,6 @@ public class TestMoreComplexGridPage extends TestPage{
 	private final String functionAttr = "function";
 	private final String subscriberAttr = "subscriber";
 	
-	private final String[] columnFields = { firstNameAttr , lastNameAttr , birthDateAttr , 
-			salaryAttr , functionAttr , subscriberAttr };
 	
 	private Grid grid;
 	private PersonalInfoPanel personalInfoPanel;
@@ -128,7 +126,7 @@ public class TestMoreComplexGridPage extends TestPage{
 		filterPanel.add(filterTextBox);
 		Button button = new Button("Filter");
 		DOM.setElementAttribute(button.getElement(), "id", "FilterButton");
-		GridDataStore filterStore = new GridDataStore("fieldName");
+		GridDataStore filterStore = new GridDataStore();
 		filterListGrid = new Grid();
 		filterListGrid.setStore(filterStore);
 		filterListGrid.addColumn("Field" , "fieldName");
@@ -416,7 +414,7 @@ public class TestMoreComplexGridPage extends TestPage{
 		view.addCellToLastRow(subscriberCell);
 		String[] firstNames = { "Jean" , "John" , "William" , "Edgar" , "Alex" , "Sabrina" , "Anne" , "Orson" , "Li" , "Jose" , "Ibrahim" , "Emmanuel" , "James" , "Xavier" , "Cory" , "Sarah" , "Curt"};
 		String[] lastNames = { "Poe" , "Doe" , "Turing" , "Scottgard" , "Dupond" , " Dupont" , "Rada" , "Chen" , "Barros" , "Borges" , "Scott" , "Bond" , "Doctorow" , "Hitcher" , "Connor" , "Cobain" , "Russel"};
-		GridDataStore store = new GridDataStore(idAttr); 
+		GridDataStore store = new GridDataStore(); 
 		grid = new Grid(store , view);
 		grid.setRenderGridOnLoad(true);
 		grid.setRowsPerPage(50);

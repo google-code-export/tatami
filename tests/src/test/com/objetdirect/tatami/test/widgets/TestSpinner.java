@@ -2,7 +2,6 @@ package com.objetdirect.tatami.test.widgets;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.objetdirect.tatami.testpages.client.widgets.TestSpinnerPage;
-import com.objetdirect.tatami.unit.TatamiTestCase;
 import com.objetdirect.tatami.unit.TestGWT;
 import com.objetdirect.tatami.unit.wrappers.NumberSpinnerWrapper;
 

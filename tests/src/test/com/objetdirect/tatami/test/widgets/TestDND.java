@@ -1,7 +1,5 @@
 package com.objetdirect.tatami.test.widgets;
 
-import java.util.Iterator;
-
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.objetdirect.tatami.testpages.client.widgets.TestDNDPage;
 import com.objetdirect.tatami.unit.TestGWT;
@@ -12,7 +10,6 @@ public class TestDND extends AbstractTestWidgets {
 
 	private TreeWrapper tree;
 	private HtmlElement targetOnlyPanel;
-	private HtmlElement sourceOnlyPanel;
 	private HtmlElement displayBehavior;
 	
 	@Override
@@ -26,7 +23,6 @@ public class TestDND extends AbstractTestWidgets {
 		tree = new TreeWrapper(page.getHtmlElementById("Tree"));
 		displayBehavior = page.getHtmlElementById("displayLastBehaviorCalled");
 		targetOnlyPanel = page.getHtmlElementById("TargetOnlyPanel");
-		sourceOnlyPanel = page.getHtmlElementById("SourceOnlyPanel");
 		testGwt.waitForBackgroundTasksToComplete(5000);
 	}
 	

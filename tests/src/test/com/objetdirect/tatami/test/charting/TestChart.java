@@ -3,7 +3,6 @@ package com.objetdirect.tatami.test.charting;
 import java.util.ResourceBundle;
 
 import com.objetdirect.tatami.testpages.client.charting.TestBasicChartPage;
-import com.objetdirect.tatami.unit.TatamiTestCase;
 
 public class TestChart extends AbstractTestChart{
 

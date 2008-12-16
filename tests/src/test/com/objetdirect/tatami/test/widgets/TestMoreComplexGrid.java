@@ -4,7 +4,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.objetdirect.tatami.testpages.client.widgets.TestMoreComplexGridPage;
-import com.objetdirect.tatami.unit.TatamiTestCase;
 import com.objetdirect.tatami.unit.TestGWT;
 import com.objetdirect.tatami.unit.wrappers.GridWrapper;
 import com.objetdirect.tatami.unit.wrappers.NumberSpinnerWrapper;
@@ -26,7 +25,6 @@ public class TestMoreComplexGrid extends AbstractTestWidgets {
 	private HtmlElement dateTextBox;
 	private NumberSpinnerWrapper salarySpinner;
 	private HtmlSelect positionElement;
-	private HtmlElement subscriberElement;
 	
 
 	protected String getTestPageId() {
@@ -50,7 +48,6 @@ public class TestMoreComplexGrid extends AbstractTestWidgets {
 		dateTextBox = page.getHtmlElementById("dijit_form_DateTextBox_0");
 		salarySpinner = new NumberSpinnerWrapper(page.getHtmlElementById("SalarySpinner"));
 		positionElement = (HtmlSelect) page.getHtmlElementById("PositionComboBox");
-		subscriberElement = (HtmlElement) page.getHtmlElementById("SubscriberCheckBox");
 	}
 	
 	public void testNextPagePreviousPage(){	
@@ -78,7 +75,6 @@ public class TestMoreComplexGrid extends AbstractTestWidgets {
 		page.tabToNextElement();
 		testGwt.typeOnFocusedElement("Mickey" , true);
 		page.tabToNextElement();
-		HtmlElement focusedElement = page.getFocusedElement();
 		testGwt.typeOnElement(dateTextBox,  "04/09/1982" , true);
 		testGwt.waitForBackgroundTasksToComplete(200);
 		page.tabToNextElement();
