@@ -12,7 +12,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.dnd.AbstractDnDBehavior;
 import com.objetdirect.tatami.client.dnd.DnD;
 import com.objetdirect.tatami.client.dnd.IDnDController;
-import com.objetdirect.tatami.client.dnd.IDnDTarget;
 import com.objetdirect.tatami.client.dnd.WidgetDnDElement;
 import com.objetdirect.tatami.client.dnd.WidgetSource;
 import com.objetdirect.tatami.client.dnd.WidgetTarget;

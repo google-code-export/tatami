@@ -158,8 +158,8 @@ public class TestChartAxesPage extends TestPage{
 	
 	public Chart2D getChart3(){
 		Chart2D chart = new Chart2D("300px","300px");
-		Plot2D<Integer> line = new Plot2D<Integer>(Plot2D.PLOT_TYPE_MARKERS_LINES);
-		line.addSerie(new Serie(Arrays.asList(new Point[]{new Point(-10,5),new Point(-5,3),new Point(0,3),new Point(5,6)})));
+		Plot2D<Point> line = new Plot2D<Point>(Plot2D.PLOT_TYPE_MARKERS_LINES);
+		line.addSerie(new Serie<Point>(Arrays.asList(new Point[]{new Point(-10,5),new Point(-5,3),new Point(0,3),new Point(5,6)})));
 		chart.addPlot(line);
 		chart.setTheme(Themes.Adobebricks);
 		Axis xLinesAxis = new Axis(Axis.BOTTOM | Axis.HORIZONTAL);

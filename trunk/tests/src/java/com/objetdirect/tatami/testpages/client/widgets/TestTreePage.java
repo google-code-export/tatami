@@ -26,11 +26,8 @@
 package com.objetdirect.tatami.testpages.client.widgets;
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.tree.Tree;

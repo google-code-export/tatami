@@ -32,22 +32,13 @@ import java.util.Collection;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.dnd.DnD;
 import com.objetdirect.tatami.client.dnd.DnDDefaultWidgetBehavior;
-import com.objetdirect.tatami.client.dnd.DnDGenericBehavior;
-import com.objetdirect.tatami.client.dnd.DndTreeElement;
-import com.objetdirect.tatami.client.dnd.IDnDController;
-import com.objetdirect.tatami.client.dnd.IDnDElement;
-import com.objetdirect.tatami.client.dnd.IDnDSource;
-import com.objetdirect.tatami.client.dnd.IDnDTarget;
 import com.objetdirect.tatami.client.dnd.WidgetDnDBehavior;
 import com.objetdirect.tatami.client.dnd.DnDBehaviors.BehaviorScopeException;
-import com.objetdirect.tatami.client.tree.Tree;
 import com.objetdirect.tatami.testpages.client.TestPage;
 
 public class TestDNDSimplestPage extends TestPage{
@@ -64,12 +55,16 @@ public class TestDNDSimplestPage extends TestPage{
 		HTML widget2 = new HTML("I can be dragged too");
 		sourcePanel.add(widget1);
 		sourcePanel.add(widget2);
-		
+		VerticalPanel targetPanel = new VerticalPanel();
+		DOM.setElementAttribute(widget1.getElement(),"id","WIDGET1");
+		DOM.setElementAttribute(widget2.getElement(),"id","WIDGET2");
+		DOM.setElementAttribute(sourcePanel.getElement(),"id","SOURCEPANEL");
+		DOM.setElementAttribute(targetPanel.getElement(),"id","TARGETPANEL");
 		DnD.registerSource(sourcePanel);
 		DnD.registerElement(sourcePanel,widget1);
 		DnD.registerElement(sourcePanel,widget2);
 		
-		VerticalPanel targetPanel = new VerticalPanel();
+		
 		HTML widget3 = new HTML("I cannot be dragged");
 		HTML widget4 = new HTML("Me neither"); 
 		targetPanel.add(widget3);

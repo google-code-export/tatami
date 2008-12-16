@@ -40,14 +40,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.data.Item;
 import com.objetdirect.tatami.client.dnd.DnD;
-import com.objetdirect.tatami.client.dnd.DnDDefaultWidgetBehavior;
 import com.objetdirect.tatami.client.dnd.DnDGenericBehavior;
 import com.objetdirect.tatami.client.dnd.DndTreeElement;
-import com.objetdirect.tatami.client.dnd.IDnDController;
-import com.objetdirect.tatami.client.dnd.IDnDElement;
 import com.objetdirect.tatami.client.dnd.IDnDSource;
 import com.objetdirect.tatami.client.dnd.IDnDTarget;
-import com.objetdirect.tatami.client.dnd.WidgetDnDBehavior;
 import com.objetdirect.tatami.client.dnd.WidgetDnDElement;
 import com.objetdirect.tatami.client.dnd.DnDBehaviors.BehaviorScopeException;
 import com.objetdirect.tatami.client.tree.Tree;
@@ -85,13 +81,12 @@ public class TestDNDToTreePage extends TestPage{
 			public boolean onDrop(Collection<DndTreeElement> dndElements,
 					IDnDSource<? super DndTreeElement> source,
 					IDnDTarget target, String targetNodeId, boolean isCopy) {
-				for (Iterator iterator = dndElements.iterator(); iterator
+				for (Iterator<DndTreeElement> iterator = dndElements.iterator(); iterator
 						.hasNext();) {
-					DndTreeElement dndTreeElement = (DndTreeElement) iterator
+					DndTreeElement dndTreeElement =  iterator
 							.next();
 					Item newParent = tree.getStore().getItemByIdentity(targetNodeId);
 					Item oldParent = dndTreeElement.getItem().getParentItem();
-					Item child;
 					if(isCopy){
 						Item dropped = dndTreeElement.getItem();
 						String[] oldAttributes = dropped.getAttributes();
@@ -100,10 +95,8 @@ public class TestDNDToTreePage extends TestPage{
 							String currAttr = oldAttributes[i];
 							newAttributes.put(currAttr,dropped.getValue(currAttr));
 						}
-						child = new Item(newAttributes);
 					}else{
 						oldParent.removeChild(dndTreeElement.getItem());
-						child = dndTreeElement.getItem();
 					}
 					newParent.addChild(dndTreeElement.getItem());
 				}
@@ -115,7 +108,7 @@ public class TestDNDToTreePage extends TestPage{
 			public boolean onDrop(Collection<WidgetDnDElement> dndElements,
 					IDnDSource<? super WidgetDnDElement> source,
 					IDnDTarget target, String targetNodeId, boolean isCopy) {
-				for (Iterator iterator = dndElements.iterator(); iterator
+				for (Iterator<WidgetDnDElement> iterator = dndElements.iterator(); iterator
 						.hasNext();) {
 					WidgetDnDElement dndElement = (WidgetDnDElement) iterator
 							.next();

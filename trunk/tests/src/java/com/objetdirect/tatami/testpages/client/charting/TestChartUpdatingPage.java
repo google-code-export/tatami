@@ -27,8 +27,6 @@ package com.objetdirect.tatami.testpages.client.charting;
 
 
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Random;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;

@@ -1,8 +1,6 @@
 package com.objetdirect.tatami.testpages.client.widgets;
 
 import java.util.Date;
-import java.util.Locale;
-
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -14,14 +12,11 @@ import com.objetdirect.tatami.client.grid.GridDataStore;
 import com.objetdirect.tatami.client.grid.GridLayout;
 import com.objetdirect.tatami.client.grid.GridListener;
 import com.objetdirect.tatami.client.grid.GridView;
-import com.objetdirect.tatami.client.grid.editor.BooleanEditor;
 import com.objetdirect.tatami.client.grid.editor.CheckBoxEditor;
 import com.objetdirect.tatami.client.grid.editor.ComboBoxEditor;
 import com.objetdirect.tatami.client.grid.editor.DateEditor;
 import com.objetdirect.tatami.client.grid.editor.NumberSpinnerEditor;
-import com.objetdirect.tatami.client.grid.editor.RichTextEditor;
 import com.objetdirect.tatami.client.grid.editor.TextEditor;
-import com.objetdirect.tatami.client.grid.formatters.BooleanFormatter;
 import com.objetdirect.tatami.client.grid.formatters.CurrencyFormatter;
 import com.objetdirect.tatami.client.grid.formatters.DateFormatter;
 import com.objetdirect.tatami.testpages.client.TestPage;
@@ -155,7 +150,7 @@ public class TestLayoutGridPage extends TestPage{
 		grid.setRenderGridOnLoad(true);
 		grid.setElasticView(2);
 		grid.updateView();
-		grid.setRowBar(true);
+		grid.setRowSelector("20px");
 		DOM.setElementAttribute(grid.getElement(),"id","GridContainer");
 		grid.setHeight("200px");
 		grid.setSortIndex(0, true);
