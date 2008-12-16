@@ -10,6 +10,7 @@ public interface TatamiDemoEvent {
 	public String SHOW_COLOR_DEMO = "Show_Color";
 	public String SHOW_DND_DEMO = "Show_DND";
 	public String SHOW_GRID_DEMO = "Show_Grid";
+	public String SHOW_LAYOUT_AND_CHART_DEMO = "Show_Layout_And_Chart";
 	public String SHOW_CHART_DEMO = "Show_Chart";
 	
 	public String INIT_GRID = "Init_Grid";

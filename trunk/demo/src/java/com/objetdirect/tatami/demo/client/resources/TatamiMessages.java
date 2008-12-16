@@ -255,7 +255,14 @@ public interface TatamiMessages extends com.google.gwt.i18n.client.Messages {
 	String menu_grid_explain();
 
 
-	@DefaultMessage("Charting Demo")
+	@DefaultMessage("Layout and Charting Demo")
+	String menu_chart_and_layout_explain();
+	
+	@DefaultMessage("Layout and Charting")
+	String menu_chart_and_layout();
+	
+	
+	@DefaultMessage("Chart Demo")
 	String menu_chart_explain();
 	
 	@DefaultMessage("Chart")
