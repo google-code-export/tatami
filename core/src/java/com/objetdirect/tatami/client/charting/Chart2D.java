@@ -429,7 +429,6 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 		for (Iterator<Plot> iterator = plots.iterator(); iterator.hasNext();) {
 			Plot<?> plot =  iterator.next();
 			destroyPlot(plot);
-			iterator.remove();
 		}
 	}
 
