@@ -26,14 +26,21 @@
 package com.objetdirect.tatami.client.charting;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.objetdirect.tatami.client.charting.effects.Effect;
 
+/**
+ * Generic class used for various plot types
+ * 
+ * @author rdunklau
+ *
+ * @param <T>: the data for which the plot is designed
+ */
 public class Plot<T>{
-	
 	
 	
 	public static final String PLOT_TYPE_BUBBLE = "Bubble";
@@ -43,7 +50,7 @@ public class Plot<T>{
 	
 	
 	protected Map<String,Object> options;
-	private List<Serie<T>> series ; 
+	private Map<String,Serie<T>> series ; 
 	private List<Effect> effects;
 	private Axis hAxis ;
 	private Axis vAxis ;
@@ -60,39 +67,33 @@ public class Plot<T>{
 	
 	public Plot(){
 		options = new HashMap<String, Object>();
-		series = new ArrayList<Serie<T>>();
+		series = new HashMap<String,Serie<T>>();
 		effects = new ArrayList<Effect>();
 	}
 
 	/**
 	 * @return the series to draw in this plot
 	 */
-	public List<Serie<T>> getSeries() {
-		return series;
+	public Collection<Serie<T>> getSeries() {
+		return series.values();
 	}
 
 	/**
 	 * @param series the series to draw in this plot
 	 */ 
 	public void setSeries(List<Serie<T>> series) {
-		this.series = series;
+		for(Serie<T> serie : series){
+			this.series.put(serie.getName() , serie);
+		}
 	}
 
 	/**
 	 * @return the plot id used by dojo to identify axis,plots and more.
 	 */
 	public String getName() {
-		if(this.name == null){
-			return toString();
-		}else{
-			return this.name;
-		}
+		return toString();
 	}
 
-	protected void setName(String name) {
-		this.name = name;
-	}
-	
 	/**
 	 * @return the plot options map
 	 */
@@ -104,14 +105,14 @@ public class Plot<T>{
 	 * @param serie : a serie to be drawn on this plot
 	 */
 	public void addSerie(Serie<T> serie){
-		series.add(serie);
+		series.put(serie.getName(),serie);
 	}
 	
 	/**
 	 * @param serie : a serie to be drawn on this plot
 	 */
 	public void removeSerie(Serie<T> serie){
-		series.remove(serie);
+		series.remove(serie.getName());
 	}
 	
 	/**

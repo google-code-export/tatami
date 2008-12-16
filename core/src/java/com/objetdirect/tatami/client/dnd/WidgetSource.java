@@ -31,7 +31,6 @@ import java.util.Map;
 
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
-import com.objetdirect.tatami.client.layout.ContentPanel;
 
 /**
  * Implements a DnDSource for widgets.

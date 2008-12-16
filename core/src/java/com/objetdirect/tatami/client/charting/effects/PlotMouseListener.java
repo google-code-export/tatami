@@ -30,24 +30,50 @@ import com.objetdirect.tatami.client.DojoController;
 import com.objetdirect.tatami.client.charting.Chart2D;
 import com.objetdirect.tatami.client.charting.Plot;
 
+/**
+ * This class represents a custom effect, which you can extend
+ * to provide some behavior to your plots.
+ * 
+ * It reacts to EffectEvents
+ * 
+ * @author rdunklau
+ *
+ */
 public abstract class PlotMouseListener extends AbstractJSEffect implements Effect{
 
 	private JavaScriptObject connectionHandle;
 
+	/**
+	 * Default constructor
+	 */
 	public PlotMouseListener(){
 		DojoController.getInstance().require("dojox.charting.action2d.Base");
 		defineTatamiEffect();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.objetdirect.tatami.client.charting.effects.AbstractJSEffect#initEffect(com.objetdirect.tatami.client.charting.Chart2D, com.objetdirect.tatami.client.charting.Plot)
+	 */
 	@Override
 	public void initEffect(Chart2D chart, Plot<?> plot) {
 		jsEffect = createEffect(this, chart.getDojoWidget(), plot.getName());
 	}
 	
+	/**
+	 * Create the javascript object representing this custom effect
+	 * 
+	 * @param listener
+	 * @param jsChart
+	 * @param plotName
+	 * @return
+	 */
 	private native JavaScriptObject createEffect(PlotMouseListener listener,JavaScriptObject jsChart , String plotName)/*-{
 		return new $wnd.dojox.charting.action2d.TatamiMouseListener(jsChart,plotName,{gwtEffect:listener});
 	}-*/;
 	
+	/* (non-Javadoc)
+	 * @see com.objetdirect.tatami.client.charting.effects.AbstractJSEffect#destroyEffect()
+	 */
 	@Override
 	public void destroyEffect() {
 		super.destroyEffect();
@@ -56,10 +82,16 @@ public abstract class PlotMouseListener extends AbstractJSEffect implements Effe
 
 	public abstract void processEvent(EffectEvent event);
 	
+	/**
+	 * @param dojoEffect: unlink the gwt object from the dojoEffect
+	 */
 	private native void unlinkGWTeffect(JavaScriptObject dojoEffect)/*-{
 		dojoEffect.gwtEffect = null;
 	}-*/;
 	
+	/**
+	 * Defines a dojo class to process such events
+	 */
 	private static native void defineTatamiEffect()/*-{
 		$wnd.dojo.declare("dojox.charting.action2d.TatamiMouseListener", $wnd.dojox.charting.action2d.Base, {
 			overOutEvents: {onmouseover: 1, onmouseout: 1,onclick : 1},
@@ -74,6 +106,9 @@ public abstract class PlotMouseListener extends AbstractJSEffect implements Effe
 		});
 	}-*/;
 
+	/* (non-Javadoc)
+	 * @see com.objetdirect.tatami.client.charting.effects.AbstractJSEffect#getEffectName()
+	 */
 	@Override
 	String getEffectName() {
 		return "PlotMouseListener";

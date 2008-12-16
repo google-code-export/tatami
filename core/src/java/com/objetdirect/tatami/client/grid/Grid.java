@@ -34,13 +34,12 @@ import java.util.List;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.AbstractDojo;
 import com.objetdirect.tatami.client.DojoController;
+import com.objetdirect.tatami.client.HasAdaptiveSize;
 import com.objetdirect.tatami.client.JSHelper;
 import com.objetdirect.tatami.client.data.AbstractDataStore;
-import com.objetdirect.tatami.client.data.DataStore;
 import com.objetdirect.tatami.client.data.DataStorePaginator;
 import com.objetdirect.tatami.client.data.DatumChangeListener;
 import com.objetdirect.tatami.client.data.FetchEventSource;
@@ -60,7 +59,7 @@ import com.objetdirect.tatami.client.grid.formatters.Formatter;
  * @author rdunklau
  *
  */
-public class Grid extends AbstractDojo implements FetchListener , DatumChangeListener{
+public class Grid extends AbstractDojo implements FetchListener , DatumChangeListener, HasAdaptiveSize{
 
 
  
@@ -447,13 +446,14 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	/**
 	 * @param item : the item to insert in the grid
 	 * @param index : the row index where it should be inserted
+	 * @return TODO
 	 */
-	public void addRow(Item item , int index) {
+	public Item addRow(Item item , int index) {
 		//If the dojo grid widget is built, it is responsible for creating a row, adding the item 
 		//to the datastore.
 		//Else, the item is directly added to the datastore, and dojo's grid will 
 		//ask it for items when it loads.
-		store.add(item , makeParentInfo(index));
+		return store.add(item , makeParentInfo(index));
 	}
 	
 	private native JavaScriptObject makeParentInfo(int index)/*-{
@@ -468,8 +468,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param item : the item to insert in the underlying datastore. 
 	 * It creates a new row after the existing ones.
 	 */
-	public void addRow(Item item) {
-		addRow(item , this.count);
+	public Item addRow(Item item) {
+		return addRow(item , this.count);
 	}
 	
 	/**
@@ -572,6 +572,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @see com.objetdirect.tatami.client.HasDojo#createDojoWidget()
 	 */
 	public void createDojoWidget() throws Exception {
+		store.doAfterCreation();
 		JavaScriptObject jsstore = store.getDojoWidget();
 		JavaScriptObject jslayout = this.layout.toJSObject();
 		if(this.rowSelector == null && layout.hasRowBar()){
@@ -729,15 +730,6 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 				this._addItem(item,indexToPut);
 				this.updateRows(indexToPut +1, this.rowCount - indexToPut);
 				this.showMessage();
-			},
- 			_addItem: function(item, index, noUpdate){
-				var idty = this._hasIdentity ? this.store.getIdentity(item) : dojo.toJson(this.query) + ":idx:" + index + ":sort:" + dojo.toJson(this.getSortProps());
-				var o = { idty: idty, item: item };
-				$wnd.dojox.grid.util.arrayInsert(this._by_idx,index,o);
-				this._by_idty[idty] = o;
-				if(!noUpdate){
-					this.updateRow(index);
-				}
 			}
 		});
 	}-*/;
@@ -762,7 +754,6 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	@Override
 	public void doAfterCreation() {
-		this.store.doAfterCreation();
 		DOM.sinkEvents(getElement(),Event.MOUSEEVENTS);
 		DOM.sinkEvents(getElement(),Event.FOCUSEVENTS);
 		DojoController.startup(this);
@@ -1175,6 +1166,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 		store.addDatumChangeListener(this);
 		paginator.setStore(store);
 		paginator.addFetchListener(this);
+		store.doAfterCreation();
 		if(dojoWidget != null){
 			dojoSetStore(store.getDojoWidget());
 		}
@@ -1485,6 +1477,10 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	public void setStyler(RowStyler styler) {
 		this.styler = styler;
+	}
+
+	public void adaptSize() {
+		resizeGrid(dojoWidget);
 	}
 	
 	

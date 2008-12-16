@@ -30,7 +30,6 @@ package com.objetdirect.tatami.client.dnd;
 
 
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**

@@ -29,7 +29,9 @@ import com.objetdirect.tatami.client.DojoController;
 
 public class MD5 {
 
+	
 	private static MD5 instance;
+	private boolean init = false;
 	
 	public static final EncodingTypeConstant Base64OutputType = new EncodingTypeConstant(0);
 	
@@ -41,6 +43,10 @@ public class MD5 {
 		DojoController.getInstance().require("dojox.encoding.digests.MD5");
 	}
 	
+	public void init(){
+		init = true;
+	}
+	
 	public static MD5 getInstance(){
 		if(instance == null){
 			instance = new MD5();
@@ -49,6 +55,9 @@ public class MD5 {
 	}
 	
 	public String encode(String toEncode , EncodingTypeConstant encodingType){
+		if(!init){
+			throw new IllegalStateException("You must call the init method before");
+		}
 		return dojoEncode(toEncode , encodingType.encodingType);
 	}
 	

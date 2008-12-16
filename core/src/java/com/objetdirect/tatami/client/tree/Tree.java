@@ -33,7 +33,6 @@ import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
 import com.objetdirect.tatami.client.AbstractDojo;
 import com.objetdirect.tatami.client.DojoAfterCreationEventsSource;
 import com.objetdirect.tatami.client.DojoAfterCreationListener;
@@ -195,6 +194,7 @@ public class Tree extends AbstractDojo implements FetchListener , DatumChangeLis
 
 
 	public void createDojoWidget() throws Exception {
+		store.doAfterCreation();
 		this.dojoWidget = createDojoTree(store.getDojoWidget() , this , showRoot);
 	}
 	

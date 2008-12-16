@@ -28,10 +28,16 @@ package com.objetdirect.tatami.client.charting.effects;
 import com.objetdirect.tatami.client.charting.Chart2D;
 import com.objetdirect.tatami.client.charting.Plot;
 
+/**
+ * This interface represents a chart effect
+ * 
+ * @author rdunklau
+ *
+ */
 public interface Effect {
 	
 	/**
-	 * @param event
+	 * @param event: the EffectEvent to be processed
 	 */
 	public void processEvent(EffectEvent event);
 	

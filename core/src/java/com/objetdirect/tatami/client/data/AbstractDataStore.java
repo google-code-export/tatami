@@ -36,10 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.DateUtil;
 import com.objetdirect.tatami.client.DojoController;
 import com.objetdirect.tatami.client.HasDojo;
@@ -195,7 +192,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 			 setValue : function(item , attribute , value){
 			 	var javavalue;
 			 	
-			 	//Converting primitivve types to Object type
+			 	//Converting primitive types to Object type
 			 	//(Because GWT just can't convert js number into Number and boolean into Boolean)
 			 	if(typeof value == "boolean"){
 			 		javavalue = @java.lang.Boolean::valueOf(Ljava/lang/String;)(value+"");
@@ -318,7 +315,6 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 			Object oldValue =item.getValue(attribute, null);
 			item.setValue(attribute, value);
 			items.put(getIdentity(item), item);
-			onSet(item, attribute, oldValue, value);
 		}
 	}
 	
@@ -579,19 +575,21 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 * Adds an item to the store, then fire the onNew event
 	 * @param item
 	 */
-	public void add(Item item) {
-		add(item,null);
+	public Item add(Item item) {
+		return add(item,null);
 	}
 	
-	public void add(Item item, JavaScriptObject parentInfo){
+	public Item add(Item item, JavaScriptObject parentInfo){
 		Object id = getIdentity(item);
 		Item oldItem = items.get(id);
 		if(oldItem != null){
+			dojoAdd(item);
 			String[] attributes = oldItem.getAttributes();
 			for (int i = 0; i < attributes.length; i++) {
 				String attr = attributes[i];
-				onSet(item , attr , oldItem.getValue(attr, null) , item.getValue(attr, null));
+				oldItem.setValue(attr, item.getValue(attr));
 			}
+			return oldItem;
 		}else{
 			if(dojoStore != null){
 				//We use the javascript interface to add the item to the datastore,thus
@@ -601,6 +599,7 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 				//We stay purely in the java world, the dojostore not being initialized now.
 				dojoAdd(item);
 			}
+			return item;
 		}
 	}
 	

@@ -25,8 +25,6 @@
  */
 package com.objetdirect.tatami.client.grid.editor;
 
-import java.util.Map;
-
 
 /**
  * A check box grid editor

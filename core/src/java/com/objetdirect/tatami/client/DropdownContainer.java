@@ -294,8 +294,8 @@ public abstract class DropdownContainer extends TextBox implements HasDojo {
 		//that the GWT was attached to the browser in order to 
 		// be sure that the DOM element with the specified id durign the creation is well
 		//in the DOM tree. Because we need this DOM element for construction of the DOJO widget.
-		super.onAttach();
       	DojoController.getInstance().constructDojoWidget(this, this);
+      	super.onAttach();
 	}
 
 	/**

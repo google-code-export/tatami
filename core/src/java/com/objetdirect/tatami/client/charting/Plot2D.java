@@ -28,6 +28,14 @@ package com.objetdirect.tatami.client.charting;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A plot for displaying Bi-dimensional values, either as lines, areas,
+ * markers or any combination of these
+ * 
+ * @author rdunklau
+ *
+ * @param <T>
+ */
 public class Plot2D<T> extends Plot<T>{
 
 	final public static String PLOT_TYPE_LINES = "Lines";

@@ -30,6 +30,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A serie represents data to be plotted on the chart, along with 
+ * representation options
+ * 
+ * @author rdunklau
+ *
+ * @param <T>
+ */
 public class Serie<T> {
 	
 	private String name;

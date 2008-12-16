@@ -222,7 +222,6 @@ public class Clock extends Composite {
 	 * 
 	 */
 	public void onAttach() {
-		super.onAttach();
 		//add(canvas);
 		current_time = new Date();
 		Timer timer = new Timer() {
@@ -234,6 +233,7 @@ public class Clock extends Composite {
 			}
 		};
 		timer.scheduleRepeating(1000);
+		super.onAttach();
 	}
 	
 

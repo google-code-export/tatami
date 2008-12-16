@@ -27,7 +27,7 @@ package com.objetdirect.tatami.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -130,8 +130,8 @@ public abstract class AbstractDojo extends Widget implements HasDojo {
 	 * @see #doAfterCreation()
 	 */
 	protected void onAttach() {
-		super.onAttach();
 		DojoController.getInstance().constructDojoWidget(this,this);
+		super.onAttach();
     }
 
 } // end of class

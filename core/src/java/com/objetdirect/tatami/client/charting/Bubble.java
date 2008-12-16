@@ -28,6 +28,13 @@ package com.objetdirect.tatami.client.charting;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.objetdirect.tatami.client.ConvertibleToJSObject;
 
+
+/**
+ * A data object to fill series for a bubble plot.
+ * 
+ * @author rdunklau
+ *
+ */
 public class Bubble implements ConvertibleToJSObject,HasTooltip{
 
 	private double x;

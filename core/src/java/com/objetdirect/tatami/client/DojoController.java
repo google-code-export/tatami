@@ -123,7 +123,7 @@ public class DojoController {
 	public native void destroy(JavaScriptObject dojoWidget)
 	/*-{
 	   // try {
-	     dojoWidget.destroyRecursive();
+	     dojoWidget.destroy();
        // } catch (e) {
 	     // $wnd.alert("error " + e.toString());
 	    // }

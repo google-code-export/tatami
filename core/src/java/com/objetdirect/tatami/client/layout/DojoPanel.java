@@ -1,7 +1,6 @@
 package com.objetdirect.tatami.client.layout;
 
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.HasDojo;
 
 /**
@@ -19,4 +18,6 @@ public interface DojoPanel extends HasDojo{
 	 * @return the dojopanel as a widget, to avoid unecessary cast operations
 	 */
 	public Panel asPanel();
+	
+	
 }
