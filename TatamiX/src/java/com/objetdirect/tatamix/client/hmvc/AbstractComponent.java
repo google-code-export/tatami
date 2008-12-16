@@ -22,7 +22,6 @@ package com.objetdirect.tatamix.client.hmvc;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * This class implements code reuse between View and Model Adapters
