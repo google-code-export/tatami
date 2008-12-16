@@ -52,7 +52,6 @@ public class GridWrapper {
 		for (HtmlElement htmlElement : views) {
 				HtmlElement a =  htmlElement.getHtmlElementsByTagName("div").get(0);
 				HtmlElement b = a.getHtmlElementsByTagName("div").get(0);
-				List<? extends HtmlElement> childrend = b.getHtmlElementsByTagName("div");
 				HtmlElement c = b.getHtmlElementsByTagName("div").get(0);
 				Iterable<HtmlElement> rows = (Iterable<HtmlElement>) c.getChildElements();
 				int count = 0;
