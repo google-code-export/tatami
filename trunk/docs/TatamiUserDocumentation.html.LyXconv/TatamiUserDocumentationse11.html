@@ -7,45 +7,49 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-18 11:17:00"> 
+<meta name="date" content="2008-12-18 11:35:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 3406--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationse12.html" >next</a>] [<a 
-href="TatamiUserDocumentationse10.html" >prev</a>] [<a 
-href="TatamiUserDocumentationse10.html#tailTatamiUserDocumentationse10.html" >prev-tail</a>] [<a 
-href="#tailTatamiUserDocumentationse11.html">tail</a>] [<a 
-href="TatamiUserDocumentationch4.html#TatamiUserDocumentationse11.html" >up</a>] </p></div>
+   <!--l. 3450--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse12.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse10.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationch4.html#TatamiUserDocumentationse11.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
    <h3 class="sectionHead"><span class="titlemark">4.2   </span> <a 
  id="x35-1090004.2"></a>Getting started </h3>
-<!--l. 3408--><p class="noindent" >To build a chart, you need 3 objects : a Chart, a Plot and a Serie. Chart2D is the
+<!--l. 3452--><p class="noindent" >To build a chart, you need 3 objects : a Chart, a Plot and a Serie. Chart2D is the
 base class for a chart. It acts as a &#8220;container&#8221; in which Plots can be drawn. A plot is
 defined by its type (how are the data represented ?) and has series. A Serie is an
 object representing data to be plotted.
-<!--l. 3414--><p class="indent" >   First, we have to create a chart. A chart must have a defined size, otherwise it will
+<!--l. 3458--><p class="indent" >   First, we have to create a chart. A chart must have a defined size, otherwise it will
 not be able to be rendered.
-   <!--l. 3418-->
+   <!--l. 3462-->
 <div class="lstlisting" id="listing-109"><span class="label"><a 
  id="x35-109001r1"></a></span>Chart2D&#x00A0;chart&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Chart2D("200px",&#x00A0;"200px");
    </div>
-<!--l. 3423--><p class="indent" >   Then, we must define a plot to be drawn on the chart:
-   <!--l. 3426-->
+<!--l. 3467--><p class="indent" >   Then, we must define a plot to be drawn on the chart:
+   <!--l. 3470-->
 <div class="lstlisting" id="listing-110"><span class="label"><a 
  id="x35-109002r1"></a></span>Plot2D&#x00A0;linePlot&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Plot2D(Plot2D.PLOT_TYPE_LINES);&#x00A0;<br /><span class="label"><a 
  id="x35-109003r2"></a></span>chart.addPlot(linePlot);
    </div>
-<!--l. 3432--><p class="indent" >   The plot type is defined in this constructor.
-<!--l. 3434--><p class="indent" >   The possible values are contained in the Plot, Plot2D, BarPlot and PiePlot
+<!--l. 3476--><p class="indent" >   The plot type is defined in this constructor.
+<!--l. 3478--><p class="indent" >   The possible values are contained in the Plot, Plot2D, BarPlot and PiePlot
 classes.
-<!--l. 3437--><p class="indent" >   We will explain this later in the Plot types section.
-<!--l. 3439--><p class="indent" >   Now that we have a plot defined in the chart, we have to feed it with some
+<!--l. 3481--><p class="indent" >   We will explain this later in the Plot types section.
+<!--l. 3483--><p class="indent" >   Now that we have a plot defined in the chart, we have to feed it with some
 data.
-<!--l. 3442--><p class="indent" >   The Serie object acts as a container for data.
-<!--l. 3444--><p class="indent" >   The Serie class has a constructor defined like this :
-   <!--l. 3447-->
+<!--l. 3486--><p class="indent" >   The Serie object acts as a container for data.
+<!--l. 3488--><p class="indent" >   The Serie class has a constructor defined like this :
+   <!--l. 3491-->
 <div class="lstlisting" id="listing-111"><span class="label"><a 
  id="x35-109004r1"></a></span><span 
 class="ecti-1000">/</span><span 
@@ -146,8 +150,8 @@ class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a
  id="x35-109010r7"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;Serie(List&#x003C;T&#x003E;&#x00A0;data)&#x00A0;;
    </div>
-<!--l. 3458--><p class="indent" >   We build a new Serie object and add it to the chart.
-   <!--l. 3461-->
+<!--l. 3502--><p class="indent" >   We build a new Serie object and add it to the chart.
+   <!--l. 3505-->
 <div class="lstlisting" id="listing-112"><span class="label"><a 
  id="x35-109011r1"></a></span>Double[]data3&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Double[]{6.3,&#x00A0;1.8,&#x00A0;3.,&#x00A0;0.5,&#x00A0;4.4,&#x00A0;2.7,&#x00A0;2.};&#x00A0;<br /><span class="label"><a 
@@ -155,38 +159,42 @@ class="ecbx-1000">new</span>&#x00A0;Double[]{6.3,&#x00A0;1.8,&#x00A0;3.,&#x00A0;
 class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Double&#x003E;(Arrays.asList(data1));&#x00A0;<br /><span class="label"><a 
  id="x35-109013r3"></a></span>linePlot.addSerie(mySerie1);
    </div>
-<!--l. 3468--><p class="indent" >   Then, we can add the chart to the page :
-   <!--l. 3471-->
+<!--l. 3512--><p class="indent" >   Then, we can add the chart to the page :
+   <!--l. 3515-->
                                                                   
 
                                                                   
 <div class="lstlisting" id="listing-113"><span class="label"><a 
  id="x35-109014r1"></a></span>RootPanel.get().add(chart);
    </div>
-<!--l. 3476--><p class="indent" >   Please note that attaching the chart to the page automatically calls the
+<!--l. 3520--><p class="indent" >   Please note that attaching the chart to the page automatically calls the
 refreshChart method. You always can refresh the chart by calling
-   <!--l. 3480-->
+   <!--l. 3524-->
 <div class="lstlisting" id="listing-114"><span class="label"><a 
  id="x35-109015r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;refreshChart()
    </div>
-<!--l. 3485--><p class="indent" >   This complete code will output the following chart :
-<!--l. 3487--><p class="indent" >   <img 
+<!--l. 3529--><p class="indent" >   This complete code will output the following chart :
+<!--l. 3531--><p class="indent" >   <img 
 src="TatamiUserDocumentation31x.png" alt="PIC" class="graphics" width="237.88875pt" height="219.82124pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation31x.png" src="3C__dev_workspace_docs_images_chartingimages_gettingstarted_example.eps"  
 -->
-<!--l. 3489--><p class="indent" >   This chart is not very expressive &#x2026; We will see how to customize its appearance,
+<!--l. 3533--><p class="indent" >   This chart is not very expressive &#x2026; We will see how to customize its appearance,
 add axes, legend, effects &#x2026;
                                                                   
 
                                                                   
-   <!--l. 3493--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationse12.html" >next</a>] [<a 
-href="TatamiUserDocumentationse10.html" >prev</a>] [<a 
-href="TatamiUserDocumentationse10.html#tailTatamiUserDocumentationse10.html" >prev-tail</a>] [<a 
-href="TatamiUserDocumentationse11.html" >front</a>] [<a 
-href="TatamiUserDocumentationch4.html#TatamiUserDocumentationse11.html" >up</a>] </p></div>
-<!--l. 3493--><p class="indent" >   <a 
+   <!--l. 3537--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse12.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse10.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationch4.html#TatamiUserDocumentationse11.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 3537--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationse11.html"></a>  
 </body></html> 

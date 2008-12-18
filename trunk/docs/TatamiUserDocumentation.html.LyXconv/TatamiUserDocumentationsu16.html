@@ -7,29 +7,31 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-18 11:17:00"> 
+<meta name="date" content="2008-12-18 11:35:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 3057--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu15.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu15.html#tailTatamiUserDocumentationsu15.html" >prev-tail</a>] [<a 
-href="#tailTatamiUserDocumentationsu16.html">tail</a>] [<a 
-href="TatamiUserDocumentationse9.html#TatamiUserDocumentationsu16.html" >up</a>] </p></div>
+   <!--l. 3101--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu15.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse9.html#TatamiUserDocumentationsu16.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
    <h4 class="subsectionHead"><span class="titlemark">3.5.2   </span> <a 
  id="x32-990003.5.2"></a>Some examples</h4>
-<!--l. 3059--><p class="noindent" >Suppose you would like to connect your grid directly to a relational database.
+<!--l. 3103--><p class="noindent" >Suppose you would like to connect your grid directly to a relational database.
 Suppose also that this database is exposed via a REST-type web-service. The only
 thing you would have to override would be the fetch method. Please see the Fetching
 items section to understand how the items should be fetched.
-<!--l. 3066--><p class="noindent" >
+<!--l. 3110--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">3.5.2.1   </span> <a 
  id="x32-1000003.5.2.1"></a>DefaultDataStore implementation</h5>
-<!--l. 3068--><p class="noindent" >The default datastore implementation stores its items locally in a Map. Each time a
+<!--l. 3112--><p class="noindent" >The default datastore implementation stores its items locally in a Map. Each time a
 request is performed to the datastore, items will be returned directly from the
 datastore.
-<!--l. 3072--><p class="indent" >   First of all, the items are filtered and sorted against the query:
-   <!--l. 3075-->
+<!--l. 3116--><p class="indent" >   First of all, the items are filtered and sorted against the query:
+   <!--l. 3119-->
 <div class="lstlisting" id="listing-98"><span class="label"><a 
  id="x32-100001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -148,11 +150,11 @@ class="ecti-1000">request</span>&#x00A0;<br /><span class="label"><a
  id="x32-100006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;List&#x003C;?&#x003E;&#x00A0;itemsSortedAndMatchingQuery&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">this</span>.executeQuery(items.values()&#x00A0;,&#x00A0;request);
    </div>
-<!--l. 3085--><p class="indent" >   Then, we notify the fetch listeners that the fetch process has begun.This is done
+<!--l. 3129--><p class="indent" >   Then, we notify the fetch listeners that the fetch process has begun.This is done
 with the &#8220;notifyBeginFetchListeners&#8221; request.
-<!--l. 3088--><p class="indent" >   It takes two arguments : the total number of items matching the query, and the
+<!--l. 3132--><p class="indent" >   It takes two arguments : the total number of items matching the query, and the
 request itself.
-   <!--l. 3092-->
+   <!--l. 3136-->
 <div class="lstlisting" id="listing-99"><span class="label"><a 
  id="x32-100007r1"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">int</span>&#x00A0;size&#x00A0;=&#x00A0;itemsSortedAndMatchingQuery.size();&#x00A0;<br /><span class="label"><a 
@@ -192,14 +194,14 @@ class="ecti-1000">performed</span>&#x00A0;<br /><span class="label"><a
  id="x32-100010r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;List&#x003C;Item&#x003E;&#x00A0;result&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;ArrayList&#x003C;Item&#x003E;();
    </div>
-<!--l. 3100--><p class="indent" >   We can process the actual fetched items, and load them accordingly. Here, the
+<!--l. 3144--><p class="indent" >   We can process the actual fetched items, and load them accordingly. Here, the
 load method does nothing, since it is a purely local datastore. Items are
 supposed to be fully loaded as soon as they are added to the datastore.
 The load item is supposed to load the items from an external datasource
 if you want to perform lazy loading. Please see the according example for
 more information. FetchListeners must be notified that a new item has been
 fetched.
-   <!--l. 3109-->
+   <!--l. 3153-->
 <div class="lstlisting" id="listing-100"><span class="label"><a 
  id="x32-100011r1"></a></span><span 
 class="ecti-1000">//</span><span 
@@ -303,9 +305,9 @@ class="cmsy-10">-</span>startItem,item);&#x00A0;<br /><span class="label"><a
 
                                                                   
    </div>
-<!--l. 3127--><p class="indent" >   Finally, we can finish the fetch process by notifying the FetchListeners that the
+<!--l. 3171--><p class="indent" >   Finally, we can finish the fetch process by notifying the FetchListeners that the
 process is complete:
-   <!--l. 3131-->
+   <!--l. 3175-->
 <div class="lstlisting" id="listing-101"><span class="label"><a 
  id="x32-100025r1"></a></span><span 
 class="ecti-1000">//</span><span 
@@ -330,18 +332,18 @@ class="ecti-1000">&#x00A0;</span><span
 class="ecti-1000">listeners</span>&#x00A0;<br /><span class="label"><a 
  id="x32-100026r2"></a></span>notifyCompleteFetchListeners(result&#x00A0;,&#x00A0;request);
    </div>
-<!--l. 3138--><p class="noindent" >
+<!--l. 3182--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">3.5.2.2   </span> <a 
  id="x32-1010003.5.2.2"></a>A datastore connecting to a GWT RPC Backend</h5>
-<!--l. 3140--><p class="noindent" >This section will show an example of a purely remote datastore, which fetch all its
+<!--l. 3184--><p class="noindent" >This section will show an example of a purely remote datastore, which fetch all its
 items from a GWT-RPC Service. This implementation is quite simple, and allows the
 filtering, and sorting operation to be managed on the server.
-<!--l. 3146--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 3190--><p class="noindent" ><span class="paragraphHead"><a 
  id="x32-1020003.5.2.2.1"></a><span 
 class="ecbx-1000">The service</span></span>
    We will begin with defining our GWT-RPC service. This one has nothing special,
 and offers CRUD operation for a small pet store :
-   <!--l. 3152-->
+   <!--l. 3196-->
 <div class="lstlisting" id="listing-102"><span class="label"><a 
  id="x32-102001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -380,12 +382,12 @@ class="ecbx-1000">public</span>&#x00A0;<span
 class="ecbx-1000">void</span>&#x00A0;removePet(Pet&#x00A0;pet);&#x00A0;<br /><span class="label"><a 
  id="x32-102013r13"></a></span>}
    </div>
-<!--l. 3170--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 3214--><p class="noindent" ><span class="paragraphHead"><a 
  id="x32-1030003.5.2.2.2"></a><span 
 class="ecbx-1000">Data</span></span>
    The pet class itself extends Item. The first part of the class simply defines a
 bean:
-   <!--l. 3176-->
+   <!--l. 3220-->
 <div class="lstlisting" id="listing-103"><span class="label"><a 
  id="x32-103001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -453,7 +455,7 @@ class="ecbx-1000">int</span>&#x00A0;tatooNumber)&#x00A0;{&#x00A0;<span
 class="ecbx-1000">this</span>.tatooNumber&#x00A0;=&#x00A0;tatooNumber;&#x00A0;}&#x00A0;<br /><span class="label"><a 
  id="x32-103021r21"></a></span>}
    </div>
-<!--l. 3201--><p class="indent" >   Then, we override the standard items method. The following changes were made,
+<!--l. 3245--><p class="indent" >   Then, we override the standard items method. The following changes were made,
 in order to not to store the attributes in the hashmap but rather using the instance
 fields:
      <dl class="description"><dt class="description">
@@ -471,7 +473,7 @@ class="description">we call the setter corresponding to the attribute being modi
                                                                   
 
                                                                   
-   <!--l. 3212-->
+   <!--l. 3256-->
 <div class="lstlisting" id="listing-104"><span class="label"><a 
  id="x32-103022r1"></a></span>@Override&#x00A0;<br /><span class="label"><a 
  id="x32-103023r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
@@ -547,7 +549,7 @@ class="ecbx-1000">instanceof</span>&#x00A0;String){&#x00A0;<br /><span class="la
 class="ecbx-1000">super</span>.setValue(attributeName,&#x00A0;value);&#x00A0;<br /><span class="label"><a 
  id="x32-103058r37"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
    </div>
-<!--l. 3254--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 3298--><p class="noindent" ><span class="paragraphHead"><a 
  id="x32-1040003.5.2.2.3"></a><span 
 class="ecbx-1000">Datastore Fetch implementation</span></span>
    The datastore implementation, will parse the request to determine wich service
@@ -555,7 +557,7 @@ method should be invoked. Since the GWT-RPC process is asynchronous, we must
 provide an AsyncCallback implementation which will perform the fetch process. As
 you can notice, this implementation only calls the fetchlisteners and stores the
 fetched items:
-   <!--l. 3263-->
+   <!--l. 3307-->
 <div class="lstlisting" id="listing-105"><span class="label"><a 
  id="x32-104001r1"></a></span><span 
 class="ecbx-1000">private</span>&#x00A0;<span 
@@ -585,9 +587,9 @@ class="ecbx-1000">for</span>&#x00A0;(Iterator&#x00A0;iterator&#x00A0;=&#x00A0;pe
  id="x32-104015r15"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
  id="x32-104016r16"></a></span>}
    </div>
-<!--l. 3283--><p class="indent" >   The fetch method itself will determine wich method from the service to
+<!--l. 3327--><p class="indent" >   The fetch method itself will determine wich method from the service to
 call.
-<!--l. 3286--><p class="indent" >   This method can be :
+<!--l. 3330--><p class="indent" >   This method can be :
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">getAllPets:</span> </dt><dd 
@@ -604,7 +606,7 @@ class="description">if a filtering parameter named SPECIE is providedd
 <span 
 class="ecbx-1000">getPetsBySpecieSortedBy:</span> </dt><dd 
 class="description">same as previous, but with a sort parameter</dd></dl>
-   <!--l. 3295-->
+   <!--l. 3339-->
 <div class="lstlisting" id="listing-106"><span class="label"><a 
  id="x32-104017r1"></a></span>@Override&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -648,12 +650,12 @@ class="ecbx-1000">new</span>&#x00A0;DataStoreAsyncCallback(request));&#x00A0;<br
 class="ecbx-1000">new</span>&#x00A0;ArrayList&#x003C;Item&#x003E;(),request);&#x00A0;<br /><span class="label"><a 
  id="x32-104038r22"></a></span>}
    </div>
-<!--l. 3322--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 3366--><p class="noindent" ><span class="paragraphHead"><a 
  id="x32-1050003.5.2.2.4"></a><span 
 class="ecbx-1000">DataStore Creation-Update-Delete implementation</span></span>
    As we want to allow our datastore to create/update/delete items on the server,
 we have to override the corresponding methods:
-   <!--l. 3328-->
+   <!--l. 3372-->
 <div class="lstlisting" id="listing-107"><span class="label"><a 
  id="x32-105001r1"></a></span>@Override&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -686,10 +688,10 @@ class="ecbx-1000">new</span>&#x00A0;DataStoreDoNothingCallBack());&#x00A0;<br />
 
                                                                   
    </div>
-<!--l. 3347--><p class="indent" >   At last, you can use this datastore with a grid, for example, wich will allow you to
+<!--l. 3391--><p class="indent" >   At last, you can use this datastore with a grid, for example, wich will allow you to
 manipulate this datastore through an ui and propagate the modifications back to the
 server:
-   <!--l. 3352-->
+   <!--l. 3396-->
 <div class="lstlisting" id="listing-108"><span class="label"><a 
  id="x32-105016r1"></a></span>grid&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Grid();&#x00A0;<br /><span class="label"><a 
@@ -704,17 +706,19 @@ class="ecbx-1000">new</span>&#x00A0;GridLayout();&#x00A0;<br /><span class="labe
  id="x32-105023r8"></a></span>grid.addColumn("Age",PetSearchService.AGE,<span 
 class="ecbx-1000">new</span>&#x00A0;TextEditor());
    </div>
-<!--l. 3365--><p class="noindent" >
+<!--l. 3409--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">3.5.2.3   </span> <a 
  id="x32-1060003.5.2.3"></a>A datastore for lazy loading child items from a tree</h5>
                                                                   
 
                                                                   
-   <!--l. 3368--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu15.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu15.html#tailTatamiUserDocumentationsu15.html" >prev-tail</a>] [<a 
-href="TatamiUserDocumentationsu16.html" >front</a>] [<a 
-href="TatamiUserDocumentationse9.html#TatamiUserDocumentationsu16.html" >up</a>] </p></div>
-<!--l. 3368--><p class="indent" >   <a 
+   <!--l. 3412--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu15.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse9.html#TatamiUserDocumentationsu16.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 3412--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu16.html"></a>   
 </body></html> 

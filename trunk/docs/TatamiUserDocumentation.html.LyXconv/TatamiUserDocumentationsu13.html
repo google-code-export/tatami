@@ -7,38 +7,41 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-18 11:17:00"> 
+<meta name="date" content="2008-12-18 11:35:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 1666--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu14.html" >next</a>] [<a 
-href="#tailTatamiUserDocumentationsu13.html">tail</a>] [<a 
-href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu13.html" >up</a>] </p></div>
+   <!--l. 1710--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu14.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu13.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
    <h4 class="subsectionHead"><span class="titlemark">2.3.1   </span> <a 
  id="x23-580002.3.1"></a>The Grid component</h4>
-<!--l. 1668--><p class="noindent" >Introduced in Tatami version 1.2 , the grid component provides a rich table, with
+<!--l. 1712--><p class="noindent" >Introduced in Tatami version 1.2 , the grid component provides a rich table, with
 nice features such as client-side sorting, lazy loading , view change , paging , in-cell
 editing, data formatting &#x2026;
                                                                   
 
                                                                   
-<!--l. 1672--><p class="indent" >   <img 
+<!--l. 1716--><p class="indent" >   <img 
 src="TatamiUserDocumentation16x.png" alt="PIC" class="graphics" width="559.08875pt" height="266.9975pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation16x.png" src="50C__dev_workspace_docs_images_grid_preview.eps"  
 -->
-<!--l. 1675--><p class="noindent" >
+<!--l. 1719--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.3.1.1   </span> <a 
  id="x23-590002.3.1.1"></a>Building and manipulating a simple grid : an example</h5>
-<!--l. 1677--><p class="noindent" >This section will introduce the basics about building and manipulating a grid. We
+<!--l. 1721--><p class="noindent" >This section will introduce the basics about building and manipulating a grid. We
 will learn how to create a grid, how to add/remove rows or columns and the basic
 grid settings. For further information, refer to Grid API and Grid MVC
 sections
-<!--l. 1684--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 1728--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-600002.3.1.1.1"></a><span 
 class="ecbx-1000">Building a simple Grid</span><br 
 class="newline" /></span>
-   <!--l. 1687-->
+   <!--l. 1731-->
 <div class="lstlisting" id="listing-60"><span class="label"><a 
  id="x23-60001r1"></a></span>Grid&#x00A0;grid&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Grid();&#x00A0;<br /><span class="label"><a 
@@ -56,19 +59,19 @@ class="ecbx-1000">new</span>&#x00A0;Date("11/12/1978")};&#x00A0;<br /><span clas
  id="x23-60011r11"></a></span>RootPanel.get().add(grid);&#x00A0;<br /><span class="label"><a 
  id="x23-60012r12"></a></span>grid.updateGrid();
    </div>
-<!--l. 1703--><p class="indent" >   The above snippet will produce the following grid :
+<!--l. 1747--><p class="indent" >   The above snippet will produce the following grid :
                                                                   
 
                                                                   
-<!--l. 1705--><p class="indent" >   <img 
+<!--l. 1749--><p class="indent" >   <img 
 src="TatamiUserDocumentation17x.png" alt="PIC" class="graphics" width="271.0125pt" height="198.7425pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation17x.png" src="51C__dev_workspace_docs_images_grid_simpleexample.eps"  
 -->
-<!--l. 1707--><p class="indent" >   Notice that the date is displayed using the standard ISO notation. Please refer to
+<!--l. 1751--><p class="indent" >   Notice that the date is displayed using the standard ISO notation. Please refer to
 Cell editing and formatting section know how to display it properly.
-<!--l. 1711--><p class="indent" >   It&#8217;s default properties make it user sortable, and we can add and remove rows and
+<!--l. 1755--><p class="indent" >   It&#8217;s default properties make it user sortable, and we can add and remove rows and
 columns as we wish.
-<!--l. 1716--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 1760--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-610002.3.1.1.2"></a><span 
 class="ecbx-1000">Settings</span><br 
 class="newline" /></span>
@@ -132,16 +135,16 @@ class="description">Sets wether a row handle should be displayed. A row
      handle is a bar on the left side that allows the user to select a row without
      clicking on a particular cell (and without firing an oncellclick event). The
      given parameter is its size, in css units.</dd></dl>
-<!--l. 1753--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 1797--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-620002.3.1.1.3"></a><span 
 class="ecbx-1000">Adding / removing rows: </span><br 
 class="newline" /></span>
    Tatami Grid provides a simple way to manipulate rows. Once again, please refer
 to Grid MVC section for a more complete way to do that.
-<!--l. 1758--><p class="indent" >   When you add or remove a row , the displayed grid is automatically updated and
+<!--l. 1802--><p class="indent" >   When you add or remove a row , the displayed grid is automatically updated and
 reflects the changes.
-<!--l. 1761--><p class="indent" >   Example :
-   <!--l. 1764-->
+<!--l. 1805--><p class="indent" >   Example :
+   <!--l. 1808-->
 <div class="lstlisting" id="listing-61"><span class="label"><a 
  id="x23-62001r1"></a></span>Object[]&#x00A0;row&#x00A0;=&#x00A0;{"Jane&#x2423;Doe"&#x00A0;,&#x00A0;"9876543210"&#x00A0;,&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Integer("1200")&#x00A0;,&#x00A0;<span 
@@ -187,16 +190,16 @@ class="description">Delegates  method  for  removeItem  in  the  underlying
 <span 
 class="ecbx-1000">getRowCount():</span> </dt><dd 
 class="description">Returns the current row count</dd></dl>
-<!--l. 1789--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 1833--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-630002.3.1.1.4"></a><span 
 class="ecbx-1000">Adding / removing columns</span><br 
 class="newline" /></span>
    Columns can be added or removed at any time during grid lifecycle. To refresh
 the grid view (ie, how the columns are layed out), you must call the updateView()
 method.
-<!--l. 1795--><p class="indent" >   For example, if we want to add a toggle button, to hide/show a column, we can
+<!--l. 1839--><p class="indent" >   For example, if we want to add a toggle button, to hide/show a column, we can
 code it just like that :&#8217;
-   <!--l. 1799-->
+   <!--l. 1843-->
 <div class="lstlisting" id="listing-62"><span class="label"><a 
  id="x23-63001r1"></a></span>Button&#x00A0;button&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Button("Toggle&#x2423;Phone&#x2423;Column");&#x00A0;<br /><span class="label"><a 
@@ -226,14 +229,14 @@ class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a
  id="x23-63015r15"></a></span>});&#x00A0;<br /><span class="label"><a 
  id="x23-63016r16"></a></span>RootPanel.get().add(button);
    </div>
-<!--l. 1819--><p class="indent" >   As we notice , those insertColumn and removeColumn methods take the column
+<!--l. 1863--><p class="indent" >   As we notice , those insertColumn and removeColumn methods take the column
 index as a parameter.
-<!--l. 1822--><p class="indent" >   On the left, before hitting the button
-<!--l. 1824--><p class="indent" >   On the right, after.
+<!--l. 1866--><p class="indent" >   On the left, before hitting the button
+<!--l. 1868--><p class="indent" >   On the right, after.
                                                                   
 
                                                                   
-<!--l. 1826--><p class="indent" >   <img 
+<!--l. 1870--><p class="indent" >   <img 
 src="TatamiUserDocumentation18x.png" alt="PIC" class="graphics" width="552.0625pt" height="234.87749pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation18x.png" src="52C__dev_workspace_docs_images_grid_columnmanipulationexample.eps"  
 -->
@@ -315,66 +318,66 @@ class="description">Removes  the  specifided  cell  as  a  column  in  the
 class="ecbx-1000">updateView():</span> </dt><dd 
 class="description">Forces  the  grid  to  refresh  its  view,  updating  its  columns
      definitions.</dd></dl>
-<!--l. 1860--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 1904--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-640002.3.1.1.5"></a><span 
 class="ecbx-1000">Paging</span><br 
 class="newline" /></span>
    Tatami&#8217;s grid supports two types of paging : the dojo&#8217;s one, which loads the
 grid rows as the user scrolls its grid, and a &#8220;previous page&#8221; / &#8220;next page&#8221;
 pagination.
-<!--l. 1867--><p class="indent" >   This section will present you both, and how you can enable / disable any of
+<!--l. 1911--><p class="indent" >   This section will present you both, and how you can enable / disable any of
 them.
-<!--l. 1873--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 1917--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-650002.3.1.1.5.1"></a><span 
 class="ecbx-1000">Dojo&#8217;s &#8220;OnScroll&#8221; paging</span><br 
 class="newline" /></span>
    To prevent massive requests to the datastore (which can be a remote datastore,
 requesting the server each time a fetch operation is performed), dojo provides an on
 scroll paging mechanism.
-<!--l. 1879--><p class="indent" >   That means the grid will only fetch items that need to be displayed, by set of
+<!--l. 1923--><p class="indent" >   That means the grid will only fetch items that need to be displayed, by set of
 maximumFetchCountAtAtime. When the user scrolls the grid vertically, more rows
 need to be displayed , so the grid will fetch a new set of items.
-<!--l. 1884--><p class="indent" >   This value is 25 by default , but we can specify it for the grid to be more
+<!--l. 1928--><p class="indent" >   This value is 25 by default , but we can specify it for the grid to be more
 efficient.
                                                                   
 
                                                                   
-<!--l. 1887--><p class="indent" >   For example, if we know that we will always display 10 rows , setting the
+<!--l. 1931--><p class="indent" >   For example, if we know that we will always display 10 rows , setting the
 maximumFetchCountAtAtime to 20 will be sufficient to assure a quite reactive
 scrolling: the user will be able to scroll down the 10 next rows without a need for
 re-fetching data from the data store.
-<!--l. 1892--><p class="indent" >   To perform this operation, just use the following method :
-   <!--l. 1895-->
+<!--l. 1936--><p class="indent" >   To perform this operation, just use the following method :
+   <!--l. 1939-->
 <div class="lstlisting" id="listing-63"><span class="label"><a 
  id="x23-65001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setMaximumFetchCountAtAtime(<span 
 class="ecbx-1000">int</span>&#x00A0;maximumFetchCountAtAtime)
    </div>
-<!--l. 1902--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 1946--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-660002.3.1.1.5.2"></a><span 
 class="ecbx-1000">Tatami pagination system</span><br 
 class="newline" /></span>
    While dojo does not offer a &#8220;real&#8221; pagination system, one is built-in tatami&#8217;s grid.
 For using it, we just need to set the rowsPerPage parameter to something different
 from -1.
-<!--l. 1909--><p class="indent" >   Example :
-   <!--l. 1912-->
+<!--l. 1953--><p class="indent" >   Example :
+   <!--l. 1956-->
 <div class="lstlisting" id="listing-64"><span class="label"><a 
  id="x23-66001r1"></a></span>grid.setRowsPerPage(50);
    </div>
-<!--l. 1917--><p class="indent" >   So, the grid will only display the first 50 rows, according to the specified
+<!--l. 1961--><p class="indent" >   So, the grid will only display the first 50 rows, according to the specified
 order/filter.
-<!--l. 1920--><p class="indent" >   Then if we want to turn pages, we just have to usse one of the following methods
+<!--l. 1964--><p class="indent" >   Then if we want to turn pages, we just have to usse one of the following methods
 :
-   <!--l. 1924-->
+   <!--l. 1968-->
 <div class="lstlisting" id="listing-65"><span class="label"><a 
  id="x23-66002r1"></a></span>grid.previousPage();&#x00A0;<br /><span class="label"><a 
  id="x23-66003r2"></a></span>grid.nextPage();&#x00A0;<br /><span class="label"><a 
  id="x23-66004r3"></a></span>grid.goToPage(<span 
 class="ecbx-1000">int</span>&#x00A0;pageIndex);
    </div>
-<!--l. 1932--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 1976--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-670002.3.1.1.5.3"></a><span 
 class="ecbx-1000">Pagination related Grid API</span></span>
      <dl class="description"><dt class="description">
@@ -410,60 +413,60 @@ class="description">Go to next page
 <span 
 class="ecbx-1000">goToPage(int):</span> </dt><dd 
 class="description">Go to the given page index</dd></dl>
-<!--l. 1948--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 1992--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-680002.3.1.1.6"></a><span 
 class="ecbx-1000">Filtering </span><br 
 class="newline" /></span>
    Tatami&#8217;s grid can easily perform filters. For now, it only supports exact-match
 filters but we expect to support regular expressions and simple mathematic operators
 in the future.
-<!--l. 1956--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 2000--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-690002.3.1.1.6.1"></a><span 
 class="ecbx-1000">How to filter a grid</span><br 
 class="newline" /></span>
    To add a filter to the grid , just use :
-   <!--l. 1961-->
+   <!--l. 2005-->
 <div class="lstlisting" id="listing-66"><span class="label"><a 
  id="x23-69001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;addFilter(String&#x00A0;fieldName&#x00A0;,&#x00A0;String&#x00A0;criterium)
    </div>
-<!--l. 1966--><p class="indent" >   where field name is the attribute on which we want to perform filtering, and
+<!--l. 2010--><p class="indent" >   where field name is the attribute on which we want to perform filtering, and
 criterium is the value that attribute has to match.
-<!--l. 1969--><p class="indent" >   For example , it we filter the following grid :
+<!--l. 2013--><p class="indent" >   For example , it we filter the following grid :
                                                                   
 
                                                                   
-<!--l. 1971--><p class="indent" >   <img 
+<!--l. 2015--><p class="indent" >   <img 
 src="TatamiUserDocumentation19x.png" alt="PIC" class="graphics" width="606.265pt" height="265.99374pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation19x.png" src="53C__dev_workspace_docs_images_grid_filteringexample.eps"  
 -->
-<!--l. 1973--><p class="indent" >   with the following filter:
-   <!--l. 1976-->
+<!--l. 2017--><p class="indent" >   with the following filter:
+   <!--l. 2020-->
 <div class="lstlisting" id="listing-67"><span class="label"><a 
  id="x23-69002r1"></a></span>grid.addFilter("firstName","Jose");
    </div>
-<!--l. 1981--><p class="indent" >   It will result in :
-<!--l. 1983--><p class="indent" >   <img 
+<!--l. 2025--><p class="indent" >   It will result in :
+<!--l. 2027--><p class="indent" >   <img 
 src="TatamiUserDocumentation20x.png" alt="PIC" class="graphics" width="510.90874pt" height="66.2475pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation20x.png" src="54C__dev_workspace_docs_images_grid_filteringexample2.eps"  
 -->
-<!--l. 1985--><p class="indent" >   Then , if we want to remove that filter, we can just use :
-   <!--l. 1988-->
+<!--l. 2029--><p class="indent" >   Then , if we want to remove that filter, we can just use :
+   <!--l. 2032-->
 <div class="lstlisting" id="listing-68"><span class="label"><a 
  id="x23-69003r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;removeFilter(String&#x00A0;fieldName)
    </div>
-<!--l. 1993--><p class="indent" >   To remove the previous filter, we would use :
-   <!--l. 1996-->
+<!--l. 2037--><p class="indent" >   To remove the previous filter, we would use :
+   <!--l. 2040-->
                                                                   
 
                                                                   
 <div class="lstlisting" id="listing-69"><span class="label"><a 
  id="x23-69004r1"></a></span>grid.removeFilter("firstName");
    </div>
-<!--l. 2003--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 2047--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-700002.3.1.1.6.2"></a><span 
 class="ecbx-1000">Filtering API</span><br 
 class="newline" /></span>
@@ -476,7 +479,7 @@ class="description">Adds a filter on given attribute which would be
 <span 
 class="ecbx-1000">removeFilter(String):</span> </dt><dd 
 class="description">Removes a filter on given attribute</dd></dl>
-<!--l. 2011--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 2055--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-710002.3.1.1.7"></a><span 
 class="ecbx-1000">Common issues while manipulating columns : introducing the MVC</span>
 <span 
@@ -484,8 +487,8 @@ class="ecbx-1000">model.</span><br
 class="newline" /></span>
    This section is intended to demonstrate some problems with the simplest column
 manipulation API, and to introduce to the solution.
-<!--l. 2016--><p class="indent" >   We will start from the previous column manipulation example :
-   <!--l. 2019-->
+<!--l. 2060--><p class="indent" >   We will start from the previous column manipulation example :
+   <!--l. 2063-->
 <div class="lstlisting" id="listing-70"><span class="label"><a 
  id="x23-71001r1"></a></span>Button&#x00A0;button&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Button("Toggle&#x2423;Phone&#x2423;Column");&#x00A0;<br /><span class="label"><a 
@@ -515,10 +518,10 @@ class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a
  id="x23-71015r15"></a></span>});&#x00A0;<br /><span class="label"><a 
  id="x23-71016r16"></a></span>RootPanel.get().add(button);
    </div>
-<!--l. 2039--><p class="indent" >   Suppose now that we want to insert it AFTER the Birthdate when the user clicks
+<!--l. 2083--><p class="indent" >   Suppose now that we want to insert it AFTER the Birthdate when the user clicks
 on the button again &#x2026; We would probably be tempted to use the following snippet
 :
-   <!--l. 2044-->
+   <!--l. 2088-->
 <div class="lstlisting" id="listing-71"><span class="label"><a 
  id="x23-71017r1"></a></span>}<span 
 class="ecbx-1000">else</span>{&#x00A0;<br /><span class="label"><a 
@@ -528,34 +531,34 @@ class="ecbx-1000">else</span>{&#x00A0;<br /><span class="label"><a
 class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a 
  id="x23-71021r5"></a></span>}
    </div>
-<!--l. 2053--><p class="indent" >   In this case, after the user hit the button a second time , the produced result
+<!--l. 2097--><p class="indent" >   In this case, after the user hit the button a second time , the produced result
 would be :
                                                                   
 
                                                                   
-<!--l. 2056--><p class="indent" >   <img 
+<!--l. 2100--><p class="indent" >   <img 
 src="TatamiUserDocumentation21x.png" alt="PIC" class="graphics" width="263.98624pt" height="201.75374pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation21x.png" src="55C__dev_workspace_docs_images_grid_columnmanipulationtroubleexample.eps"  
 -->
-<!--l. 2058--><p class="indent" >   Why ? That&#8217;s because the only logical link between your data and your columns
+<!--l. 2102--><p class="indent" >   Why ? That&#8217;s because the only logical link between your data and your columns
 is their order &#x2026; Because we specified an index of 2 for our column, it takes for it the
 data at index 2 from our rows, which is precisely the same as the birthdate column.
 We can also notice that the data from birthdate column has not changed :
 that&#8217;s because when it was created, it was told to use the data from field
 &#8220;2&#8221;.
-<!--l. 2066--><p class="indent" >   If we want to solve this problem, we just can use the following method
+<!--l. 2110--><p class="indent" >   If we want to solve this problem, we just can use the following method
 :
-   <!--l. 2070-->
+   <!--l. 2114-->
 <div class="lstlisting" id="listing-72"><span class="label"><a 
  id="x23-71022r1"></a></span>grid.insertColumn("Phone&#x2423;Number"&#x00A0;,&#x00A0;"1",&#x00A0;2);&#x00A0;<br /><span class="label"><a 
  id="x23-71023r2"></a></span>grid.updateView();&#x00A0;<br /><span class="label"><a 
  id="x23-71024r3"></a></span>isShown&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">true</span>;
    </div>
-<!--l. 2075--><p class="indent" >   This method insert a column taking data from the field &#8220;1&#8221; , which was implicitly
+<!--l. 2119--><p class="indent" >   This method insert a column taking data from the field &#8220;1&#8221; , which was implicitly
 generated when you added your columns. To make it a bit cleaner , we will rewrite
 the base code for our grid :
-   <!--l. 2080-->
+   <!--l. 2124-->
 <div class="lstlisting" id="listing-73"><span class="label"><a 
  id="x23-71025r1"></a></span>Grid&#x00A0;grid&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Grid();&#x00A0;<br /><span class="label"><a 
@@ -599,7 +602,7 @@ class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a
  id="x23-71050r26"></a></span>});&#x00A0;<br /><span class="label"><a 
  id="x23-71051r27"></a></span>RootPanel.get().add(button);
    </div>
-<!--l. 2111--><p class="indent" >   Notice the what has changed : we assigned a field name to the columns when we
+<!--l. 2155--><p class="indent" >   Notice the what has changed : we assigned a field name to the columns when we
 created them. Later, when we added our rows, the grid assigned field names to the
 various objects in the row according to the column&#8217;s order. Then , we can assign data
 to a column by its field name. That shows the limits of the simple grid utilisation &#x2026;
@@ -608,10 +611,10 @@ rows.
                                                                   
 
                                                                   
-<!--l. 2120--><p class="noindent" >
+<!--l. 2164--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.3.1.2   </span> <a 
  id="x23-720002.3.1.2"></a>Cell editing and formatting</h5>
-<!--l. 2124--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 2168--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-730002.3.1.2.1"></a><span 
 class="ecbx-1000">Formatting</span><br 
 class="newline" /></span>
@@ -619,13 +622,13 @@ class="newline" /></span>
 package offers only a Date formatter and a Currency formatter , but more are
 expected to come. You can also implement your own, by implementing the Formatter
 interface.
-<!--l. 2133--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 2177--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-740002.3.1.2.1.1"></a><span 
 class="ecbx-1000">How to use the date formatter</span><br 
 class="newline" /></span>
    Example for a Date formatter, using the example from previous section
 :
-   <!--l. 2139-->
+   <!--l. 2183-->
 <div class="lstlisting" id="listing-74"><span class="label"><a 
  id="x23-74001r1"></a></span>grid.addColumn("Name"&#x00A0;,&#x00A0;"name");&#x00A0;<br /><span class="label"><a 
  id="x23-74002r2"></a></span>grid.addColumn("Phone&#x2423;Number"&#x00A0;,&#x00A0;"number");&#x00A0;<br /><span class="label"><a 
@@ -646,12 +649,12 @@ class="ecbx-1000">new</span>&#x00A0;Date("03/25/1981")&#x00A0;};&#x00A0;<br /><s
  id="x23-74009r9"></a></span>Object[]&#x00A0;row2&#x00A0;=&#x00A0;{"Jane&#x2423;Doe"&#x00A0;,&#x00A0;"9876543210"&#x00A0;,&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Date("11/12/1978")};
    </div>
-<!--l. 2152--><p class="indent" >   The above snippet will give the following output :
-<!--l. 2154--><p class="indent" >   <img 
+<!--l. 2196--><p class="indent" >   The above snippet will give the following output :
+<!--l. 2198--><p class="indent" >   <img 
 src="TatamiUserDocumentation22x.png" alt="PIC" class="graphics" width="530.98375pt" height="87.32625pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation22x.png" src="56C__dev_workspace_docs_images_grid_formattingexample.eps"  
 -->
-<!--l. 2158--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 2202--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-750002.3.1.2.1.2"></a><span 
 class="ecbx-1000">Date Formatter constructors: </span><br 
 class="newline" /></span>
@@ -659,7 +662,7 @@ class="newline" /></span>
 DateFormatter.displayTimeOnly , or DateFormatter.displayDateOnly.According to
 the constant, will display in the default locale time representation the date and the
 time, the date only , or the time only.
-<!--l. 2165--><p class="indent" >   DateFormatter(datePattern , timePattern): Create a date formatter using the
+<!--l. 2209--><p class="indent" >   DateFormatter(datePattern , timePattern): Create a date formatter using the
 specified datePattern and timePattern. Date and Time pattern are specified as in
 ISO. <span class="lstinline">formatter&#x00A0;=<span 
 class="ecbx-1000">new</span>&#x00A0;DateFormatter("dd/mm/yyyy",&#x00A0;<span 
@@ -669,15 +672,15 @@ class="ecbx-1000">new</span>&#x00A0;DateFormatter(DateFormatter.displayDateOnly)
                                                                   
 
                                                                   
-<!--l. 2172--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 2216--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-760002.3.1.2.2"></a><span 
 class="ecbx-1000">Editing</span><br 
 class="newline" /></span>
    Tatami offers the same grid edition facility as Dojo Grid. That is, you can easily
 use one of the dojo editor to provide your grid in-place editing feature. User toggle
 editing by double-clicking on a grid cell.
-<!--l. 2179--><p class="indent" >   All editors implement the GridEditor interface.
-<!--l. 2182--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 2223--><p class="indent" >   All editors implement the GridEditor interface.
+<!--l. 2226--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-770002.3.1.2.2.1"></a><span 
 class="ecbx-1000">Available editors :</span></span>
      <dl class="description"><dt class="description">
@@ -703,8 +706,8 @@ class="description">a checkbox for boolean values</dd></dl>
 Please refer to Javadoc for specific information about an editor. For the
 NumberSpinnerEditor, please refer to The NumberSpinner component section to see
 how to create it.
-<!--l. 2194--><p class="indent" >   Sample :
-   <!--l. 2197-->
+<!--l. 2238--><p class="indent" >   Sample :
+   <!--l. 2241-->
 <div class="lstlisting" id="listing-75"><span class="label"><a 
  id="x23-77001r1"></a></span>grid.addColumn("Name"&#x00A0;,&#x00A0;"name"&#x00A0;,&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;TextEditor());&#x00A0;<br /><span class="label"><a 
@@ -727,21 +730,21 @@ class="ecbx-1000">new</span>&#x00A0;Date("03/25/1981")&#x00A0;,&#x00A0;"CEO"&#x0
 class="ecbx-1000">new</span>&#x00A0;Integer("1200")&#x00A0;,&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Date("11/12/1978")&#x00A0;,&#x00A0;"Developer"&#x00A0;,&#x00A0;Boolean.TRUE};
    </div>
-<!--l. 2210--><p class="indent" >   This will give the following results, based on the cell on which you double-clicked:
+<!--l. 2254--><p class="indent" >   This will give the following results, based on the cell on which you double-clicked:
                                                                   
 
                                                                   
-<!--l. 2213--><p class="indent" >   <img 
+<!--l. 2257--><p class="indent" >   <img 
 src="TatamiUserDocumentation23x.png" alt="PIC" class="graphics" width="544.03249pt" height="250.9375pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation23x.png" src="57C__dev_workspace_docs_images_grid_editorsexample.eps"  
 -->
-<!--l. 2216--><p class="noindent" >
+<!--l. 2260--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.3.1.3   </span> <a 
  id="x23-780002.3.1.3"></a>Grid events</h5>
-<!--l. 2218--><p class="noindent" >The grid accepts GridListeners , which are notified when an event occurs on
+<!--l. 2262--><p class="noindent" >The grid accepts GridListeners , which are notified when an event occurs on
 the grid. To observe those events, just implements the following interface
 :
-   <!--l. 2223-->
+   <!--l. 2267-->
 <div class="lstlisting" id="listing-76"><span class="label"><a 
  id="x23-78001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -771,9 +774,9 @@ class="ecbx-1000">void</span>&#x00A0;onDataChange(Grid&#x00A0;grid&#x00A0;,&#x00
                                                                   
 
                                                                   
-<!--l. 2239--><p class="noindent" >For example, let&#8217;s write a simple grid observer to see how we can handle those
+<!--l. 2283--><p class="noindent" >For example, let&#8217;s write a simple grid observer to see how we can handle those
 events:
-   <!--l. 2243-->
+   <!--l. 2287-->
 <div class="lstlisting" id="listing-77"><span class="label"><a 
  id="x23-78006r1"></a></span><span 
 class="ecbx-1000">class</span>&#x00A0;myGridListener&#x00A0;<span 
@@ -1120,19 +1123,19 @@ class="ecbx-1000">new</span>&#x00A0;HTML();&#x00A0;<br /><span class="label"><a
 class="ecbx-1000">new</span>&#x00A0;myGridListener(html));&#x00A0;<br /><span class="label"><a 
  id="x23-78046r41"></a></span>RootPanel.get().add(html);
    </div>
-<!--l. 2288--><p class="indent" >   After modifying the &#8220;John Doe&#8221; row , and selecting both rows (with CTRL +
+<!--l. 2332--><p class="indent" >   After modifying the &#8220;John Doe&#8221; row , and selecting both rows (with CTRL +
 click) :
-<!--l. 2291--><p class="indent" >   <img 
+<!--l. 2335--><p class="indent" >   <img 
 src="TatamiUserDocumentation24x.png" alt="PIC" class="graphics" width="532.99124pt" height="251.94124pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation24x.png" src="58C__dev_workspace_docs_images_grid_listenerexample.eps"  
 -->
-<!--l. 2294--><p class="noindent" >
+<!--l. 2338--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.3.1.4   </span> <a 
  id="x23-790002.3.1.4"></a>Advanced Grid usage</h5>
-<!--l. 2297--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 2341--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-800002.3.1.4.1"></a><span 
 class="ecbx-1000">Datastore usage</span></span>
-<!--l. 2301--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 2345--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-810002.3.1.4.1.1"></a><span 
 class="ecbx-1000">Introduction</span><br 
 class="newline" /></span>
@@ -1142,15 +1145,15 @@ sorting , filtering &#x2026;
                                                                   
 
                                                                   
-<!--l. 2307--><p class="indent" >   Whenever anything changes in the datastore, the grid updates itself according to
+<!--l. 2351--><p class="indent" >   Whenever anything changes in the datastore, the grid updates itself according to
 those needs.
-<!--l. 2310--><p class="indent" >   There are two principles you should be aware of:
+<!--l. 2354--><p class="indent" >   There are two principles you should be aware of:
      <ul class="itemize1">
      <li class="itemize">a row in the grid represents an item in the datastore
      </li>
      <li class="itemize">an item always has a unique identifier</li></ul>
-<!--l. 2315--><p class="noindent" >You should see the DataStore Integration section on how to use it.
-<!--l. 2319--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 2359--><p class="noindent" >You should see the DataStore Integration section on how to use it.
+<!--l. 2363--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-820002.3.1.4.1.2"></a><span 
 class="ecbx-1000">Store-related Grid API</span><br 
 class="newline" /></span>
@@ -1182,7 +1185,7 @@ class="description">&#x00A0;
 <span 
 class="ecbx-1000">addRow(Object[],int)</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 2333--><p class="noindent" >The following methods remove an item from the datastore:
+<!--l. 2377--><p class="noindent" >The following methods remove an item from the datastore:
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">removeRow(int)</span> </dt><dd 
@@ -1198,17 +1201,17 @@ class="description">&#x00A0;</dd></dl>
                                                                   
 
                                                                   
-<!--l. 2341--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 2385--><p class="noindent" ><span class="paragraphHead"><a 
  id="x23-830002.3.1.4.2"></a><span 
 class="ecbx-1000">GridLayout, GridView and Cells</span><br 
 class="newline" /></span>
    In the Adding / removing columns section , we saw how to create/modify a grid
 layout.
-<!--l. 2346--><p class="indent" >   We also saw how this method was limited when we want to add/remove columns
+<!--l. 2390--><p class="indent" >   We also saw how this method was limited when we want to add/remove columns
 from a grid.
-<!--l. 2349--><p class="indent" >   Tatami grid offers the same flexibility as dojo&#8217;s one to define how it should be
+<!--l. 2393--><p class="indent" >   Tatami grid offers the same flexibility as dojo&#8217;s one to define how it should be
 layed out.
-<!--l. 2354--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 2398--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-840002.3.1.4.2.1"></a><span 
 class="ecbx-1000">How the grid layout is defined</span><br 
 class="newline" /></span>
@@ -1216,38 +1219,38 @@ class="newline" /></span>
                                                                   
 
                                                                   
-<!--l. 2358--><p class="indent" >   <img 
+<!--l. 2402--><p class="indent" >   <img 
 src="TatamiUserDocumentation25x.png" alt="PIC" class="graphics" width="701.62125pt" height="557.08124pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation25x.png" src="59C__dev_workspace_docs_images_grid_layoutdefinition.eps"  
 -->
-<!--l. 2360--><p class="indent" >   A layout is composed of one or several views (in red). Those views can be denifed
+<!--l. 2404--><p class="indent" >   A layout is composed of one or several views (in red). Those views can be denifed
 as a set of columns. Each view can have its specific size, and its specific scrollbar(s).
 Of course, the vertical scrollbars are synchronized, since a grid row is defined among
 all views. Defining multiple views allows to have a fixed width view (not scrollable)
 while another view is scrollable. That can be useful to produce grid like this
 :
-<!--l. 2368--><p class="indent" >   <img 
+<!--l. 2412--><p class="indent" >   <img 
 src="TatamiUserDocumentation26x.png" alt="PIC" class="graphics" width="202.75749pt" height="202.75749pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation26x.png" src="60C__dev_workspace_docs_images_grid_multipleviewusage.eps"  
 -->
-<!--l. 2370--><p class="indent" >   The first column (name) is in its own (not scrollable) view, while other columns
+<!--l. 2414--><p class="indent" >   The first column (name) is in its own (not scrollable) view, while other columns
 are grouped in another view. Thus, you can scroll through the columns while keeping
 the &#8220;Name&#8221; column in sight.
-<!--l. 2375--><p class="indent" >   A view itself is composed of one or several rows of cells (in light green). Defining
+<!--l. 2419--><p class="indent" >   A view itself is composed of one or several rows of cells (in light green). Defining
 multiple cell-rows for a view is useful when you want to create sub-rows in the grid
 (look at the description field in the layout schema).
-<!--l. 2380--><p class="indent" >   Those rows are composed of cells (in blue). The cell is the atomic entity of the
+<!--l. 2424--><p class="indent" >   Those rows are composed of cells (in blue). The cell is the atomic entity of the
 layout. A cell is (at least) defined with the field used to fill its values and
 its name. If no field is provided, it will use the &#8220;value&#8221; setting to fill the
 cell.
-<!--l. 2386--><p class="indent" >   Both cell and views have settings you can use to define their appearance and
+<!--l. 2430--><p class="indent" >   Both cell and views have settings you can use to define their appearance and
 behavior.
-<!--l. 2391--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 2435--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-850002.3.1.4.2.2"></a><span 
 class="ecbx-1000">GridLayout usage</span><br 
 class="newline" /></span>
    Below is a simple sample showing how to create a GridLayout.
-   <!--l. 2396-->
+   <!--l. 2440-->
 <div class="lstlisting" id="listing-78"><span class="label"><a 
  id="x23-85001r1"></a></span>GridLayout&#x00A0;layout&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;GridLayout();&#x00A0;<br /><span class="label"><a 
@@ -1759,12 +1762,12 @@ class="ecbx-1000">false</span>);&#x00A0;<br /><span class="label"><a
                                                                   
 
                                                                   
-<!--l. 2458--><p class="indent" >   The above code will produce the following layout :
-<!--l. 2460--><p class="indent" >   <img 
+<!--l. 2502--><p class="indent" >   The above code will produce the following layout :
+<!--l. 2504--><p class="indent" >   <img 
 src="TatamiUserDocumentation27x.png" alt="PIC" class="graphics" width="504.88625pt" height="200.75pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation27x.png" src="61C__dev_workspace_docs_images_grid_layoutexample.eps"  
 -->
-<!--l. 2464--><p class="indent" >   <span class="subparagraphHead"> <a 
+<!--l. 2508--><p class="indent" >   <span class="subparagraphHead"> <a 
  id="x23-860002.3.1.4.2.3"></a><span 
 class="ecbx-1000">GridLayout , GridView and Cell APIs</span><br 
 class="newline" /></span>
@@ -1826,7 +1829,7 @@ class="description">Removes a view from the layout
 <span 
 class="ecbx-1000">removeView(int):</span> </dt><dd 
 class="description">Removes the view at specified index
-     <!--l. 2490--><p class="noindent" ><span 
+     <!--l. 2534--><p class="noindent" ><span 
 class="ecbx-1200">GridView API:</span>
      </dd><dt class="description">
 <span 
@@ -1910,7 +1913,7 @@ class="description">Sets if the view should display scrollbars
 <span 
 class="ecbx-1000">setWidth(String):</span> </dt><dd 
 class="description">Sets the view width (in standard css units)
-     <!--l. 2524--><p class="noindent" ><span 
+     <!--l. 2568--><p class="noindent" ><span 
 class="ecbx-1200">Cell API:</span><br 
 class="newline" />The following methods respectevely get/set the css classes or styles applied
      to a Cell:
@@ -1930,7 +1933,7 @@ class="description">&#x00A0;
 <span 
 class="ecbx-1000">setCellStyles(String)</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 2533--><p class="noindent" >The following methods respectevely get/set the css classes or styles applied to the whole
+<!--l. 2577--><p class="noindent" >The following methods respectevely get/set the css classes or styles applied to the whole
 column (data and header):
      <dl class="description"><dt class="description">
 <span 
@@ -1951,7 +1954,7 @@ class="description">&#x00A0;
 <span 
 class="ecbx-1000">setStyles(String)</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 2541--><p class="noindent" >The following methods respectively get/set the colspan (ie, the number of columns this
+<!--l. 2585--><p class="noindent" >The following methods respectively get/set the colspan (ie, the number of columns this
 cell should occupy)
      <dl class="description"><dt class="description">
 <span 
@@ -1961,7 +1964,7 @@ class="description">&#x00A0;
 <span 
 class="ecbx-1000">setColSpan(Integer)</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 2547--><p class="noindent" >The following methods respectively get/set the rowspan(ie, the number of rows this cell
+<!--l. 2591--><p class="noindent" >The following methods respectively get/set the rowspan(ie, the number of rows this cell
 should occupy)
      <dl class="description"><dt class="description">
 <span 
@@ -1971,7 +1974,7 @@ class="description">&#x00A0;
 <span 
 class="ecbx-1000">setRowSpan(Integer)</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 2553--><p class="noindent" >The following methods respectively get/set the cell default value (ie , the value to be
+<!--l. 2597--><p class="noindent" >The following methods respectively get/set the cell default value (ie , the value to be
 used when no field is assigned or when the underlying item doesn&#8217;t have the given
 field )
      <dl class="description"><dt class="description">
@@ -1982,7 +1985,7 @@ class="description">&#x00A0;
 <span 
 class="ecbx-1000">setDefaultValue()</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 2560--><p class="noindent" >The following methods respectively get/set this cell editor. If the editor is different from
+<!--l. 2604--><p class="noindent" >The following methods respectively get/set this cell editor. If the editor is different from
 null, the cell will be editable.
      <dl class="description"><dt class="description">
 <span 
@@ -1992,7 +1995,7 @@ class="description">&#x00A0;
 <span 
 class="ecbx-1000">setEditor(GridEditor)</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 2566--><p class="noindent" >The following methods respectively get/set the field from which this cell should fill its
+<!--l. 2610--><p class="noindent" >The following methods respectively get/set the field from which this cell should fill its
 content.
      <dl class="description"><dt class="description">
 <span 
@@ -2005,7 +2008,7 @@ class="description">&#x00A0;
 <span 
 class="ecbx-1000">setField(String)</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 2572--><p class="noindent" >The following methods respectively get/set whether this cell should not be resizable. If
+<!--l. 2616--><p class="noindent" >The following methods respectively get/set whether this cell should not be resizable. If
 true, the cell will not be resizable. If false , it will be resizable. Default to
 true.
      <dl class="description"><dt class="description">
@@ -2016,7 +2019,7 @@ class="description">&#x00A0;
 <span 
 class="ecbx-1000">setIsNotResizable(Boolean)</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 2579--><p class="noindent" >The following methods respectively get/set this cell name (ie , what will be displayed on
+<!--l. 2623--><p class="noindent" >The following methods respectively get/set this cell name (ie , what will be displayed on
 the column header)
      <dl class="description"><dt class="description">
 <span 
@@ -2026,7 +2029,7 @@ class="description">&#x00A0;
 <span 
 class="ecbx-1000">setName(String)</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 2585--><p class="noindent" >The following methods respectively get/set the cell&#8217;s width in standard css units
+<!--l. 2629--><p class="noindent" >The following methods respectively get/set the cell&#8217;s width in standard css units
 :
      <dl class="description"><dt class="description">
 <span 
@@ -2039,10 +2042,13 @@ class="description">&#x00A0;</dd></dl>
                                                                   
 
                                                                   
-   <!--l. 2592--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu14.html" >next</a>] [<a 
-href="TatamiUserDocumentationsu13.html" >front</a>] [<a 
-href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu13.html" >up</a>] </p></div>
-<!--l. 2592--><p class="indent" >   <a 
+   <!--l. 2636--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu14.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu13.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 2636--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu13.html"></a>     
 </body></html> 
