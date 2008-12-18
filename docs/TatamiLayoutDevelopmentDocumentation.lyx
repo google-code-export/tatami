@@ -1,0 +1,1383 @@
+#LyX 1.6.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass book
+\begin_preamble
+\definecolor{standardCodeBgColor}{rgb}{0.9,0.9,0.9}
+\end_preamble
+\use_default_options false
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 0
+\use_esint 0
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "backgroundcolor={\color{standardCodeBgColor}},breaklines=true,extendedchars=true,language=Java"
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Tatami: Adapter des 
+\begin_inset Quotes eld
+\end_inset
+
+layout
+\begin_inset Quotes erd
+\end_inset
+
+ dojo
+\end_layout
+
+\begin_layout Author
+Ronan Dunklau
+\end_layout
+
+\begin_layout Date
+Décembre 2008
+\end_layout
+
+\begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Standard
+Le but de ce document est de fournir l'ensemble des informations relatives
+ à l'adaptation des layout dojo en GWT.
+ En premier lieu, lire la documentation technique du projet: 
+\begin_inset CommandInset href
+LatexCommand href
+name "Documentation Tatami"
+target "http://tatami.googlecode.com/files/Tatami_Technical-1.1.doc"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Structure de tatami
+\end_layout
+
+\begin_layout Standard
+Tatami est disponible sur http://code.google.com/p/tatami/.
+ Pour commencer à développer, il faudra récuperer les projets suivants:
+\end_layout
+
+\begin_layout Description
+-tatami-core: https://tatami.googlecode.com/svn/trunk/core
+\begin_inset Newline newline
+\end_inset
+
+Ce projet contient l'ensemble du code GWT de tatami, ainsi que les tests
+ unitaires GWT du projet.
+ Le fichier tatami.ant.xml fournit le nécessaire pour packager l'application.
+\end_layout
+
+\begin_layout Description
+-tatami-JS: https://tatami.googlecode.com/svn/trunk/tatamiJS
+\begin_inset Newline newline
+\end_inset
+
+Ce projet contient l'ensemble des librairies javascript de Tatami.
+ Il contient,notamment, le code source de dojo (dans src/com/objetdirect/tatami/
+public/), ainsi que des tâches ant permettant de compiler, et optimiser
+ celui-ci.
+ Ce fichier de build ant se situe dans le répertoire ant/build.xml, et produit
+ un jar (zip/tatamiJS.jar) devant être placé dans le répertoire lib de tatami-cor
+e.
+ Le fichier ant/dojoprofiles/tatami_all_profile.js définit lui les builds
+ dojo optimisés pour certains usages de Tatami.
+\end_layout
+
+\begin_layout Description
+-tatami-tests: https://tatami.googlecode.com/svn/trunk/tests 
+\begin_inset Newline newline
+\end_inset
+
+Ce projet contient l'ensemble des tests fonctionnels de tatami.
+ Les sources sont séparées en deux parties:
+\end_layout
+
+\begin_deeper
+\begin_layout Description
+src/java/: contient les pages de tests de tatami
+\end_layout
+
+\begin_layout Description
+src/test/: contient les tests HTMLUnit qui seront éxécutés contre les pages
+ précédentes
+\end_layout
+
+\end_deeper
+\begin_layout Description
+-tatami-test-Util: https://tatami.googlecode.com/svn/trunk/testUtil
+\begin_inset Newline newline
+\end_inset
+
+Ce projet contient les wrappers de widgets Tatami en HTMLUnit développés
+ pour faciliter l'écriture de tests fonctionnels, ainsi qu'un helper permettant
+ de réaliser les opérations simples
+\end_layout
+
+\begin_layout Chapter
+Comment adapter un layout ?
+\end_layout
+
+\begin_layout Section
+Inventaire
+\end_layout
+
+\begin_layout Standard
+L'ensemble des classes permettant de développer des layouts se trouvent
+ dans le package 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+com.objetdirect.tatami.client.layout
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+L'interface DojoPanel
+\end_layout
+
+\begin_layout Standard
+Cette interface agit comme un marqueur pour définir un Panel GWT qui wrappe
+ un layout Dojo.
+ Il était souhaitable pour les panels développés d'hériter soit de ComplexPanel,
+ soit de SimplePanel.
+ Il était donc impossible de proposer un ancêtre commun à tout les panels
+ Tatami et uniquement eux.
+ 
+\end_layout
+
+\begin_layout Standard
+Cette interface propose par ailleurs une seule méthode, asPanel(), qui renvoie
+ le DojoPanel sous la forme d'un Panel GWT.
+\end_layout
+
+\begin_layout Subsection
+La classe ContentPanel
+\end_layout
+
+\begin_layout Standard
+Cette classe wrappe le ContentPane dojo.
+ Le ContentPane dojo est un conteneur simple pour une widget ou du contenu
+ en général.
+ L'implémentation tatami hérite de SimplePanel, et permet de wrapper des
+ widgets GWT 
+\begin_inset Quotes eld
+\end_inset
+
+purs
+\begin_inset Quotes erd
+\end_inset
+
+ ou tatami dans un panel Dojo.
+ Cette classe est essentielle, car la majorité des layouts dojo ne peuvent
+ contenir que des contentPanes dojo.
+ Elle présente le fonctionnement 
+\begin_inset Quotes eld
+\end_inset
+
+inverse
+\begin_inset Quotes erd
+\end_inset
+
+ d'une classe Tatami standard, puisqu'elle sert à wrapper des widgets GWT
+ dans des widgets Dojo.
+ Cette classe devra être étendue pour fournir les classes héritant du ContentPan
+el dojo.
+ 
+\end_layout
+
+\begin_layout Subsection
+La classe AbstractDojoComplexPanel
+\end_layout
+
+\begin_layout Standard
+Cette classe fournit un template pour adapter un layout GWT.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public abstract class AbstractDojoComplexPanel extends ComplexPanel implements
+ DojoPanel
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Elle étend donc le ComplexPanel GWT.
+ 
+\end_layout
+
+\begin_layout Standard
+Le principe de cette classe est de décharger GWT de son rôle de création/inserti
+on/suppression de noeuds DOM, en ajoutant directement des widgets Dojo aux
+ layout Dojo, tout en surchargeant le minimum de méthode héritées du ComplexPane
+l GWT.
+ La raison de ce changement de rôle est de pouvoir laisser le layout dojo
+ gérer directement ses widgets filles.
+ Pour cette raison, on ne peut ajouter que des DojoPanel a un AbstractComplexPan
+el GWT.
+ La plupart des layouts dojo n'acceptant que des ContentPanel, il faudra
+ peut être ajouter des vérifications sur le type de widgets ajoutés lorsque
+ l'on sous-classe AbstractDojoComplexPane
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Le cycle de vie est sensiblement le même que celui de AbstractDojo, décrit
+ dans la documentation technique Tatami.
+\end_layout
+
+\begin_layout Description
+-Création: Pas de différence, le widget GWT est créé mais pas le widget
+ Dojo wrappé, qui ne sera créé qu'a l'attachement au document.
+\end_layout
+
+\begin_layout Description
+-Attachement: lorsque le panel est attaché a l'arbre DOM, le comportement
+ est exactement le même que pour un widget Tatami classique.
+ La seule différence provient du fait que l'implémentation de la méthode
+ doAttachChildren est réalisé par la classe GWT ComplexPanel, et attachera
+ l'ensemble des widgets fils du layout.
+ La méthode createDojoWidget est ENSUITE appelée par le DojoController.
+\begin_inset Newline newline
+\end_inset
+
+Celle-ci délègue la création du widget dojo wrappé a la classe étendant
+ AbstractDojoComplexPanel.
+ Cela est fait en appelant la méthode createDojoLayout().
+ Celle-doit renvoyer l'objet javascript représentant la widget dojo.
+ 
+\begin_inset Newline newline
+\end_inset
+
+La méthode doAfterCreation se charge d'ajouter les widgets dojo fils au
+ widget dojo père.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Cela est fait en appelant la méthode dojoAddChild(JavascriptObject pere,JavaScri
+ptObject fils, int index).
+ 
+\end_layout
+
+\begin_layout Description
+-Détachement: de même que pour l'attachement, le détachement est réalisé
+ de la même manière: 
+\begin_inset Newline newline
+\end_inset
+
+La méthode doBeforeDestruction enlève l'ensemble des widgets dojo fils depuis
+ le widget dojo père.
+ Ensuite, le ComplexPanel prend le relais pour détacher un a un les widgets
+ fils, qui détruiront eux memes leurs dojo widgets (s'il y en a), ou leurs
+ propres fils.
+\end_layout
+
+\begin_layout Description
+-Ajout/Suppression/Insertion
+\begin_inset space ~
+\end_inset
+
+de
+\begin_inset space ~
+\end_inset
+
+widgets: les méthodes add(Widget), remove(Widget) et insert(Widget child,
+ Element container, int beforeIndex, boolean domInsert) ont été surchargées
+ afin de déléguer ces méthodes a dojo, tout en assurant la cohérence des
+ autres méthodes (par exemple, toutes celles qui manipulent la WidgetCollection
+ du Panel).
+ 
+\end_layout
+
+\begin_layout Section
+Adaptation
+\end_layout
+
+\begin_layout Standard
+Une fois ce mécanisme compris, il suffit de développer une implémentation
+ particulière de AbstractDojoComplexPanel pour le type de layout considéré.
+\end_layout
+
+\begin_layout Standard
+Il faudra, pour un layout donné, implémenter au moins :
+\end_layout
+
+\begin_layout Itemize
+createDojoLayout: la méthode chargée d'instancier un widget dojo
+\end_layout
+
+\begin_layout Itemize
+getDojoName: renvoie le nom du module dojo nécessaire
+\end_layout
+
+\begin_layout Itemize
+les méthodes permettant de paramètrer le layout sous-jacent
+\end_layout
+
+\begin_layout Standard
+Il sera certainement nécessaire de surcharger:
+\end_layout
+
+\begin_layout Itemize
+addWidget()
+\end_layout
+
+\begin_layout Standard
+Enfin, il faut ajouter au build dojo de tatami_all_profile.js les modules
+ nécessaires à la compilation de tatami_widgets_module.js.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+dependencies = {
+\end_layout
+
+\begin_layout Plain Layout
+
+	//Strip all console.* calls except console.warn and console.error.
+ This is basically a work-around 
+\end_layout
+
+\begin_layout Plain Layout
+
+	//for trac issue: http://bugs.dojotoolkit.org/ticket/6849 where Safari 3's
+ console.debug seems 
+\end_layout
+
+\begin_layout Plain Layout
+
+	//to be flaky to set up (apparently fixed in a webkit nightly).
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+	//But in general for a build, console.warn/error should be the only things
+ to survive anyway.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+	stripConsole: "normal", 
+\end_layout
+
+\begin_layout Plain Layout
+
+	layers: [{
+\end_layout
+
+\begin_layout Plain Layout
+
+			name: "../dojo/tatami_widgets_module.js", 
+\end_layout
+
+\begin_layout Plain Layout
+
+			layerDependencies: [ "dijit/dijit.js" ],
+\end_layout
+
+\begin_layout Plain Layout
+
+			dependencies: [
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dojox.widget.Toaster",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dojo.dnd.Source",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dojox.grid.DataGrid",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dojox.widget.FisheyeList",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.form.Button",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.form.Slider",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.Tree",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dojo.data.api.Identity",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dojo.data.api.Request",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit._tree.dndSource",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.form.NumberSpinner",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.form.ValidationTextBox",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.form.TextBox",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.form.DateTextBox", 
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.form.NumberTextBox",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dojo.date",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dojo.date.locale",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.form._DateTimeTextBox",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dojox.grid.cells.dijit",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.form.TimeTextBox",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.form.ComboBox",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.Toolbar",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.Editor",
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.layout.ContentPane",
+\end_layout
+
+\begin_layout Plain Layout
+
+	//On ajoute  ici le module dojo nécessaire
+\end_layout
+
+\begin_layout Plain Layout
+
+				"dijit.layout.BorderContainer"]
+\end_layout
+
+\begin_layout Plain Layout
+
+			},...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Example du BorderContainer:
+\end_layout
+
+\begin_layout Standard
+Le BorderContainer dojo réunit les fonctionnalités à la fois du DockPanel
+ et des SplitPanel GWT.
+ Il se présent sous la forme suivante:
+\end_layout
+
+\begin_layout Standard
+C'est donc évidemment un ComplexPanel , qui supportera l'ajout de widget
+ dans une région donnée, avec ou sans splitters.
+\end_layout
+
+\begin_layout Standard
+La méthode getDojoName renverra le nom du module dojo à charger:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public String getDojoName() { return "dijit.layout.BorderContainer"; }
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La création du layout dojo est implémentée comme suit:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public JavaScriptObject createDojoLayout() { 
+\end_layout
+
+\begin_layout Plain Layout
+
+	return createBorderContainer(design,liveSplitters,gutters);
+\end_layout
+
+\begin_layout Plain Layout
+
+} 
+\end_layout
+
+\begin_layout Plain Layout
+
+private native JavaScriptObject createBorderContainer(String design, boolean
+ liveSplitters,boolean gutters)/*-{ 	return new $wnd.dijit.layout.BorderContainer({
+\end_layout
+
+\begin_layout Plain Layout
+
+		style:"width:100%;height:100%;",
+\end_layout
+
+\begin_layout Plain Layout
+
+		liveSplitters: liveSplitters,
+\end_layout
+
+\begin_layout Plain Layout
+
+		design: design ,
+\end_layout
+
+\begin_layout Plain Layout
+
+		gutters:gutters
+\end_layout
+
+\begin_layout Plain Layout
+
+	});
+\end_layout
+
+\begin_layout Plain Layout
+
+}-*/;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On remarque que l'on fournit trois arguments par mot-clés au constructeur
+ dojo : le style (afin que le div crée par dojo occupe l'ensemble du div
+ GWT), et trois paramètres spécifiques au BorderContainer
+\end_layout
+
+\begin_layout Standard
+Enfin, les méthodes pour ajouter les widgets sont implémentées:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+private void addPanel(Widget child , String region , boolean splitter ,
+ String minSize, String maxSize){
+\end_layout
+
+\begin_layout Plain Layout
+
+	ContentPanel cp = null;
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(!(child instanceof ContentPanel)){
+\end_layout
+
+\begin_layout Plain Layout
+
+		throw new IllegalArgumentException("The Border Container only accepts
+ ContentPanel");
+\end_layout
+
+\begin_layout Plain Layout
+
+	}else{
+\end_layout
+
+\begin_layout Plain Layout
+
+		cp = (ContentPanel) child;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(minSize != null){
+\end_layout
+
+\begin_layout Plain Layout
+
+		cp.addProperty(ATTRIBUTE_MIN, minSize);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(maxSize != null){
+\end_layout
+
+\begin_layout Plain Layout
+
+		cp.addProperty(ATTRIBUTE_MAX, maxSize);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	cp.addProperty(ATTRIBUTE_REGION, region);
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(splitter){
+\end_layout
+
+\begin_layout Plain Layout
+
+		cp.addProperty(ATTRIBUTE_SPLITTER, splitter);
+\end_layout
+
+\begin_layout Plain Layout
+
+	} 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	super.add(cp);
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+public void add(Widget child, String region, boolean hasSplitter,String
+ minSize , String maxSize){ 
+\end_layout
+
+\begin_layout Plain Layout
+
+	addPanel(child, region,hasSplitter,minSize,maxSize); 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+public void add(Widget child, String region, boolean hasSplitter){
+\end_layout
+
+\begin_layout Plain Layout
+
+	addPanel(child, region,hasSplitter,null,null);
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+public void add(Widget child, String region){ 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	addPanel(child,region, false,null,null); 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+public void add(Widget child){ 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	throw new UnsupportedOperationException("The border container does not
+ support the no-arg add operation.
+ Use add(Widget,String) instead"); 
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Comme on peut le voir , la méthode par défaut est désactivée.
+ Les autres méthodes font toutes appel à la méthode addPanel, qui ajoute
+ les paramètres désirés au ContentPanel.
+ Ceci est dû au fait que le border container dojo utilise des attributs
+ supplémentaires positionnés sur ses ContentPanel, tel que la région, les
+ tailles min et max ...
+\end_layout
+
+\begin_layout Standard
+On ajoute donc les méthodes propres au BorderContainer.
+ Par exemple, la méthode setLiveSplitters, qui permet de changer le comportement
+ de redimensionnement:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public void setLiveSplitters(boolean liveSplitters) {
+\end_layout
+
+\begin_layout Plain Layout
+
+	this.liveSplitters = liveSplitters;
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(getDojoWidget() != null){
+\end_layout
+
+\begin_layout Plain Layout
+
+		updateDojoWidget(getDojoWidget(),"liveSplitters", liveSplitters);
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Où la méthode updateDojoWidget permet de modifier le widget dojo :
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+private native void updateDojoWidget(JavaScriptObject dojoWidget, String
+ property , Object value)/*-{
+\end_layout
+
+\begin_layout Plain Layout
+
+	dojoWidget[property] = value;
+\end_layout
+
+\begin_layout Plain Layout
+
+}-*/;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Comme le border container est un widget qui doit s'auto-adapter à la taille
+ de son conteneur, celui-ci implémente HasAdaptiveSize.
+\end_layout
+
+\begin_layout Standard
+En effet, le ContentPanel Tatami surcharge la méthode resize() du contentPanel
+ dojo afin de transmettre l'opération de redimensionnement dans le monde
+ GWT, si l'enfant implémente HasAdaptiveSize et sait donc s'adapter seul
+ changements de tailles de son conteneur.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public void adaptSize() {
+\end_layout
+
+\begin_layout Plain Layout
+
+	if(getDojoWidget() != null){
+\end_layout
+
+\begin_layout Plain Layout
+
+		dojoUpdateSize(getDojoWidget());
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Tester le widget
+\end_layout
+
+\begin_layout Standard
+Le widget doit être testé unitairement dans GWT.
+ Pour cela, il faut ajouter un TestCase étendant la classe DefaultTatamiTest
+ dans le répertoire src/test du projet tatami-core, et l'ajouter à la 
+\begin_inset Quotes eld
+\end_inset
+
+TatamiTestSuite
+\begin_inset Quotes erd
+\end_inset
+
+ du package com.objetdirect.tatami.
+\end_layout
+
+\begin_layout Standard
+Ces tests doivent vérifier principalement le bon fonctionnement des méthodes
+ standard tu ComplexPanel pour le panel implémenté.
+\end_layout
+
+\begin_layout Standard
+Ensuite, lorsque cela est nécessaire, créer des tests fonctionnels automatisés.
+ Tout test faisant appel à des interactions utilisateurs doit être implémenté
+ suivant le modèle d'une page GWT testée par HTMLUnit.
+\end_layout
+
+\begin_layout Standard
+Pour cela, utiliser le projet tatami-tests et créer une nouvelle TestPage
+ dans le package com.objetdirect.tatami.testpages.client.widgets se trouvant
+ dans le répertoire src/java du projet.
+\end_layout
+
+\begin_layout Standard
+Cette classe doit implémenter la méthode getTestPage, renvoyant un widget
+ qui sera affiché, ainsi qu'un constructeur par défaut appelant le constructeur
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+protected TestPage(String testPageId , String testPageLabel)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+testPageId est l'id XHTML utilisé pour le bouton permettant d'afficher la
+ page, qui sera récupéré par le test HTMLUnit.
+ Usuellement, on utilise le nom de la classe.
+\end_layout
+
+\begin_layout Standard
+testPageLabel est le label affiché sur le bouton.
+\end_layout
+
+\begin_layout Standard
+Example pour le BorderContainer:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class TestBorderContainerPage extends TestPage{
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	protected TestBorderContainerPage() { 
+\end_layout
+
+\begin_layout Plain Layout
+
+		super(TestBorderContainerPage.class.getName(),"Test Border Container");
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	public Widget getTestPage() { 
+\end_layout
+
+\begin_layout Plain Layout
+
+		FlowPanel mainPanel = new FlowPanel();
+\end_layout
+
+\begin_layout Plain Layout
+
+		mainPanel.add(new HTML("Border Container with fixed sizes for all panels"));
+\end_layout
+
+\begin_layout Plain Layout
+
+		mainPanel.add(getContainer1());
+\end_layout
+
+\begin_layout Plain Layout
+
+		mainPanel.add(new HTML("Border Container with relative sizes"));
+\end_layout
+
+\begin_layout Plain Layout
+
+		mainPanel.add(getContainer2());
+\end_layout
+
+\begin_layout Plain Layout
+
+		mainPanel.add(new HTML("Border Container with sizers "));
+\end_layout
+
+\begin_layout Plain Layout
+
+		mainPanel.add(getContainer3());
+\end_layout
+
+\begin_layout Plain Layout
+
+		mainPanel.add(getContainer4());
+\end_layout
+
+\begin_layout Plain Layout
+
+		return mainPanel;
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+	//Viennent ensuite les méthodes getContainer appelées...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cette page doit ensuite être ajoutée dans la classe 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+com.objetdirect.tatami.testpages.client.widgets.TestWidgetsPage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public void onModuleLoad() { 	  
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestDNDEventsPage()); 
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestDNDPage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestDNDToTreePage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestFillingEmptyGridPage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestGridRowStylerBugPage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestGridSelectionManagerPage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestLayoutGridPage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestMoreComplexGridPage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestSimpleGridPage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestSpinnerPage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestTreePage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestChangeDataStorePage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestDNDSimplestPage());
+\end_layout
+
+\begin_layout Plain Layout
+
+	addTestPage(new TestBorderContainerPage());   
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ensuite, il faut créer une classe cliente HTMLUnit.
+\end_layout
+
+\begin_layout Standard
+Celle ci doit étendre 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+com.objetdirect.tatami.test.widgets.AbstractTestWidgets
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+et retourner l'id de la page à tester:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+public class TestBorderContainer extends AbstractTestWidgets{
+\end_layout
+
+\begin_layout Plain Layout
+
+	@Override protected String getTestPageId() { 
+\end_layout
+
+\begin_layout Plain Layout
+
+		return TestBorderContainerPage.class.getName();
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ensuite, on peut ajouter les tests fonctionnels à cette classe.
+ Se réferer aux tests déja implémentés pour les possibilités offertes.
+\end_layout
+
+\begin_layout Chapter
+Layouts à adapter
+\end_layout
+
+\begin_layout Itemize
+dijit.layout.StackContainer: un container qui permet de n'afficher qu'un seul
+ de ses fils a la fois
+\end_layout
+
+\begin_layout Itemize
+dijit.layout.AccordionContainer: un stack container qui agence ses fils en
+ accordéon
+\end_layout
+
+\begin_layout Itemize
+dijit.layout.TabContainer: un container sous forme d'onglets
+\end_layout
+
+\begin_layout Itemize
+dojox.layout.ExpandoPane: un container repliable
+\end_layout
+
+\begin_layout Itemize
+dojox.layout.GridContainer: un container permettant d'agencer des widgets
+ en colonne
+\end_layout
+
+\begin_layout Itemize
+dojox.layout.RotatorContainer: un stack container qui fait défiler automatiquement
+ ses enfants
+\end_layout
+
+\begin_layout Itemize
+dojox.layout.RadioGroup: un stack container animé
+\end_layout
+
+\begin_layout Itemize
+dojox.layout.ScrollPane: un conteneur permettant de scroller par simple mouvement
+ de la souris
+\end_layout
+
+\begin_layout Itemize
+dojox.widget.Wizard: classé dans les widgets, mais une extension de StackContainer
+ pour gérer des Wizard 
+\end_layout
+
+\end_body
+\end_document
