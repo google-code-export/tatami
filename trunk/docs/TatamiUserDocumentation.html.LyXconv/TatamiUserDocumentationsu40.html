@@ -7,25 +7,23 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 5173--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu39.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse18.html#TatamiUserDocumentationsu40.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 5133--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu39.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu39.html#tailTatamiUserDocumentationsu39.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationsu40.html">tail</a>] [<a 
+href="TatamiUserDocumentationse18.html#TatamiUserDocumentationsu40.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">5.2.4   </span> <a 
  id="x67-1570005.2.4"></a>DnDBehavior</h4>
-<!--l. 5175--><p class="noindent" >A DndBehavior is responsible for processing drag and drop events from a set of
+<!--l. 5135--><p class="noindent" >A DndBehavior is responsible for processing drag and drop events from a set of
 sources to a set of target.
-<!--l. 5179--><p class="noindent" >
+<!--l. 5139--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">5.2.4.1   </span> <a 
  id="x67-1580005.2.4.1"></a>IDnDBehavior interface</h5>
-   <!--l. 5182-->
+   <!--l. 5142-->
 <div class="lstlisting" id="listing-213"><span class="label"><a 
  id="x67-158001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -53,11 +51,11 @@ class="ecbx-1000">void</span>&#x00A0;onDndStart(Collection&#x003C;E&#x003E;&#x00
 class="ecbx-1000">boolean</span>&#x00A0;ctrlKey);&#x00A0;<br /><span class="label"><a 
  id="x67-158007r7"></a></span>}
    </div>
-<!--l. 5193--><p class="indent" >   This interface is generic: it can be implemented for a particular type
+<!--l. 5153--><p class="indent" >   This interface is generic: it can be implemented for a particular type
 of DnDElement, a particular type of DnDSource and a particular type of
 Target.
-<!--l. 5197--><p class="indent" >   That means you will be able to implement a behavior for WidgetDnDElement
-<!--l. 5199--><p class="indent" >   Each of those methods are called during the drag and drop process.
+<!--l. 5157--><p class="indent" >   That means you will be able to implement a behavior for WidgetDnDElement
+<!--l. 5159--><p class="indent" >   Each of those methods are called during the drag and drop process.
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">onDnDStart:</span> </dt><dd 
@@ -89,14 +87,14 @@ class="description">it will be called if the onDrop operation returned true.</dd
                                                                   
 
                                                                   
-<!--l. 5218--><p class="noindent" >
+<!--l. 5178--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">5.2.4.2   </span> <a 
  id="x67-1590005.2.4.2"></a>AbstractBehavior &amp; DnDGenericBehavior</h5>
-<!--l. 5220--><p class="noindent" >Tatami provides two abstract class which makes the IDnDBehavior interface more
+<!--l. 5180--><p class="noindent" >Tatami provides two abstract class which makes the IDnDBehavior interface more
 easy to implement
-<!--l. 5223--><p class="indent" >   AbstractDnDBehavior just implements IDnDBehavior with defaults &#8220;do-nothing&#8221;
+<!--l. 5183--><p class="indent" >   AbstractDnDBehavior just implements IDnDBehavior with defaults &#8220;do-nothing&#8221;
 implementations.
-   <!--l. 5227-->
+   <!--l. 5187-->
 <div class="lstlisting" id="listing-214"><span class="label"><a 
  id="x67-159001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -108,9 +106,9 @@ class="ecbx-1000">super</span>&#x00A0;E&#x003E;,T&#x00A0;<span
 class="ecbx-1000">extends</span>&#x00A0;IDnDTarget&#x003E;&#x00A0;<span 
 class="ecbx-1000">implements</span>&#x00A0;IDnDBehavior&#x003C;E,&#x00A0;S,&#x00A0;T&#x003E;
    </div>
-<!--l. 5232--><p class="indent" >   So you can override only the methods you want from the AbstractDnDBehavior.
-<!--l. 5234--><p class="indent" >   Ex:
-   <!--l. 5237-->
+<!--l. 5192--><p class="indent" >   So you can override only the methods you want from the AbstractDnDBehavior.
+<!--l. 5194--><p class="indent" >   Ex:
+   <!--l. 5197-->
 <div class="lstlisting" id="listing-215"><span class="label"><a 
  id="x67-159002r1"></a></span>AbstractDnDBehavior&#x003C;WidgetDnDElement,&#x00A0;WidgetSource,&#x00A0;WidgetTarget&#x003E;&#x00A0;be&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;AbstractDnDBehavior&#x003C;WidgetDnDElement,&#x00A0;WidgetSource,&#x00A0;WidgetTarget&#x003E;(){&#x00A0;<br /><span class="label"><a 
@@ -127,16 +125,16 @@ class="ecbx-1000">true</span>;&#x00A0;<br /><span class="label"><a
  id="x67-159007r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
  id="x67-159008r7"></a></span>};
    </div>
-<!--l. 5248--><p class="indent" >   DnDGenericBehavior provides is another default implementation which is
+<!--l. 5208--><p class="indent" >   DnDGenericBehavior provides is another default implementation which is
 designed to use with a particular type of element, any DnDSource which can handle
 it and any DnDTarget.
-<!--l. 5253--><p class="noindent" >
+<!--l. 5213--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">5.2.4.3   </span> <a 
  id="x67-1600005.2.4.3"></a>DefaultWidgetDnD Behavior</h5>
-<!--l. 5255--><p class="noindent" >The WidgetDnDBehavior class is an abstract class designed to make it easier to
+<!--l. 5215--><p class="noindent" >The WidgetDnDBehavior class is an abstract class designed to make it easier to
 implement DnD behavior for widgets. You just have to override at your convenience
 the following methods:
-   <!--l. 5260-->
+   <!--l. 5220-->
 <div class="lstlisting" id="listing-216"><span class="label"><a 
  id="x67-160001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -170,13 +168,11 @@ class="ecbx-1000">void</span>&#x00A0;dragOver(Widget&#x00A0;target){&#x00A0;<br 
                                                                   
 
                                                                   
-   <!--l. 5274--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu39.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse18.html#TatamiUserDocumentationsu40.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 5274--><p class="indent" >   <a 
+   <!--l. 5234--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu39.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu39.html#tailTatamiUserDocumentationsu39.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationsu40.html" >front</a>] [<a 
+href="TatamiUserDocumentationse18.html#TatamiUserDocumentationsu40.html" >up</a>] </p></div>
+<!--l. 5234--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu40.html"></a>   
 </body></html> 

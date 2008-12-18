@@ -7,25 +7,23 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 3751--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu19.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu20.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 3700--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu19.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu19.html#tailTatamiUserDocumentationsu19.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationsu20.html">tail</a>] [<a 
+href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu20.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">4.3.4   </span> <a 
  id="x40-1200004.3.4"></a>PiePlot</h4>
-<!--l. 3754--><p class="noindent" >
+<!--l. 3703--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">4.3.4.1   </span> <a 
  id="x40-1210004.3.4.1"></a>What type of data to use? </h5>
-<!--l. 3756--><p class="noindent" >The PiePlot can be used with series of number or PiePiece. A PiePiece represents
+<!--l. 3705--><p class="noindent" >The PiePlot can be used with series of number or PiePiece. A PiePiece represents
 slice in the Pie Plot, and provides various constructors:
-   <!--l. 3760-->
+   <!--l. 3709-->
 <div class="lstlisting" id="listing-128"><span class="label"><a 
  id="x40-121001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;PiePiece(<span 
@@ -43,7 +41,7 @@ class="ecbx-1000">public</span>&#x00A0;PiePiece(<span
 class="ecbx-1000">double</span>&#x00A0;value&#x00A0;,&#x00A0;String&#x00A0;<span 
 class="ecbx-1000">label</span>,String&#x00A0;color,&#x00A0;String&#x00A0;fontColor);
    </div>
-<!--l. 3768--><p class="indent" >   where :
+<!--l. 3717--><p class="indent" >   where :
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">value:</span> </dt><dd 
@@ -60,10 +58,10 @@ class="description">the color filling the piece
 <span 
 class="ecbx-1000">fontColor:</span> </dt><dd 
 class="description">the label font color</dd></dl>
-<!--l. 3776--><p class="noindent" >
+<!--l. 3725--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">4.3.4.2   </span> <a 
  id="x40-1220004.3.4.2"></a>Specific options</h5>
-   <!--l. 3779-->
+   <!--l. 3728-->
 <div class="lstlisting" id="listing-129"><span class="label"><a 
  id="x40-122001r1"></a></span><span 
 class="ecti-1000">/</span><span 
@@ -140,7 +138,7 @@ class="ecbx-1000">public</span>&#x00A0;<span
 class="ecbx-1000">void</span>&#x00A0;setLabelOffset(<span 
 class="ecbx-1000">int</span>&#x00A0;offset)
    </div>
-   <!--l. 3789-->
+   <!--l. 3738-->
 <div class="lstlisting" id="listing-130"><span class="label"><a 
  id="x40-122006r1"></a></span><span 
 class="ecti-1000">/</span><span 
@@ -170,7 +168,7 @@ class="ecbx-1000">public</span>&#x00A0;<span
 class="ecbx-1000">void</span>&#x00A0;setPrecision(<span 
 class="ecbx-1000">int</span>&#x00A0;precision)
    </div>
-   <!--l. 3798-->
+   <!--l. 3747-->
                                                                   
 
                                                                   
@@ -210,7 +208,7 @@ class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setFont(String&#x00A0;font)
    </div>
-   <!--l. 3807-->
+   <!--l. 3756-->
 <div class="lstlisting" id="listing-132"><span class="label"><a 
  id="x40-122014r1"></a></span><span 
 class="ecti-1000">/</span><span 
@@ -250,10 +248,10 @@ class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setFontColor(String&#x00A0;fontColor)
    </div>
-<!--l. 3815--><p class="indent" >   Examples :
-<!--l. 3817--><p class="indent" >   Pie chart from a Number Serie, with internal labels and default Precision
+<!--l. 3764--><p class="indent" >   Examples :
+<!--l. 3766--><p class="indent" >   Pie chart from a Number Serie, with internal labels and default Precision
 :
-   <!--l. 3821-->
+   <!--l. 3770-->
 <div class="lstlisting" id="listing-133"><span class="label"><a 
  id="x40-122018r1"></a></span>Chart2D&#x00A0;chart&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Chart2D("300px","300px");&#x00A0;<br /><span class="label"><a 
@@ -269,13 +267,13 @@ class="ecbx-1000">new</span>&#x00A0;Integer[]{4,2,1,1}));&#x00A0;<br /><span cla
 class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Integer&#x003E;(data));&#x00A0;<br /><span class="label"><a 
  id="x40-122026r9"></a></span>chart.addPlot(plot);
    </div>
-<!--l. 3834--><p class="indent" >   <img 
+<!--l. 3783--><p class="indent" >   <img 
 src="TatamiUserDocumentation48x.png" alt="PIC" class="graphics" width="302.12874pt" height="295.1025pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation48x.png" src="48C__dev_workspace_docs_images_chartingimages_pieplot_example1.eps"  
+name="TatamiUserDocumentation48x.png" src="20C__dev_workspace_docs_images_chartingimages_pieplot_example1.eps"  
 -->
-<!--l. 3836--><p class="indent" >   Pie chart from a Number Serie, with external labels and precision = 0
+<!--l. 3785--><p class="indent" >   Pie chart from a Number Serie, with external labels and precision = 0
 :
-   <!--l. 3840-->
+   <!--l. 3789-->
                                                                   
 
                                                                   
@@ -295,20 +293,18 @@ class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Integer&#x003E;(Arrays.asList(<
 class="ecbx-1000">new</span>&#x00A0;Integer[]{4,2,1,1})));&#x00A0;<br /><span class="label"><a 
  id="x40-122035r9"></a></span>chart.addPlot(plot);
    </div>
-<!--l. 3853--><p class="indent" >   <img 
+<!--l. 3802--><p class="indent" >   <img 
 src="TatamiUserDocumentation49x.png" alt="PIC" class="graphics" width="328.22624pt" height="298.11374pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation49x.png" src="49C__dev_workspace_docs_images_chartingimages_pieplot_example2.eps"  
+name="TatamiUserDocumentation49x.png" src="21C__dev_workspace_docs_images_chartingimages_pieplot_example2.eps"  
 -->
                                                                   
 
                                                                   
-   <!--l. 3856--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu19.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu20.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 3856--><p class="indent" >   <a 
+   <!--l. 3805--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu19.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu19.html#tailTatamiUserDocumentationsu19.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationsu20.html" >front</a>] [<a 
+href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu20.html" >up</a>] </p></div>
+<!--l. 3805--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu20.html"></a>   
 </body></html> 

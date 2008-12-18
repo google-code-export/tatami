@@ -7,32 +7,30 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 2634--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu13.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu14.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 2592--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu13.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu13.html#tailTatamiUserDocumentationsu13.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationsu14.html">tail</a>] [<a 
+href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu14.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">2.3.2   </span> <a 
  id="x24-870002.3.2"></a>Tree</h4>
-<!--l. 2636--><p class="noindent" >Like the grid, the tree uses a datastore to store its items
-<!--l. 2639--><p class="noindent" >
+<!--l. 2594--><p class="noindent" >Like the grid, the tree uses a datastore to store its items
+<!--l. 2597--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.3.2.1   </span> <a 
  id="x24-880002.3.2.1"></a>Getting Started</h5>
-<!--l. 2641--><p class="noindent" >To use the tree, you need to import:
-   <!--l. 2644-->
+<!--l. 2599--><p class="noindent" >To use the tree, you need to import:
+   <!--l. 2602-->
 <div class="lstlisting" id="listing-79"><span class="label"><a 
  id="x24-88001r1"></a></span><span 
 class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.tree.Tree;
    </div>
-<!--l. 2649--><p class="indent" >   The tree must be initialized with a root item, either directly in the constructor, or
+<!--l. 2607--><p class="indent" >   The tree must be initialized with a root item, either directly in the constructor, or
 with the setRootItem method:
-   <!--l. 2653-->
+   <!--l. 2611-->
 <div class="lstlisting" id="listing-80"><span class="label"><a 
  id="x24-88002r1"></a></span>Tree&#x00A0;tree&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Tree();&#x00A0;<br /><span class="label"><a 
@@ -46,17 +44,17 @@ class="ecti-1000">:</span>&#x00A0;<br /><span class="label"><a
 class="ecbx-1000">new</span>&#x00A0;Tree(<span 
 class="ecbx-1000">new</span>&#x00A0;Item("Item1","Item1"));
    </div>
-<!--l. 2661--><p class="indent" >   Two other constructors are available if you do not want to use the default
+<!--l. 2619--><p class="indent" >   Two other constructors are available if you do not want to use the default
 datastore:
-   <!--l. 2665-->
+   <!--l. 2623-->
 <div class="lstlisting" id="listing-81"><span class="label"><a 
  id="x24-88006r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;Tree(AbstractDataStore);&#x00A0;<br /><span class="label"><a 
  id="x24-88007r2"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;Tree(Item,&#x00A0;AbstractDataStore);
    </div>
-<!--l. 2671--><p class="indent" >   Now, we will see how to populate such a tree:
-   <!--l. 2674-->
+<!--l. 2629--><p class="indent" >   Now, we will see how to populate such a tree:
+   <!--l. 2632-->
 <div class="lstlisting" id="listing-82"><span class="label"><a 
  id="x24-88008r1"></a></span>Tree&#x00A0;tree&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Tree(<span 
@@ -77,24 +75,24 @@ class="ecbx-1000">new</span>&#x00A0;Item("item1.2.2"&#x00A0;,&#x00A0;"Item&#x242
  id="x24-88017r10"></a></span>tree.getRootItem().addChild(item2);&#x00A0;<br /><span class="label"><a 
  id="x24-88018r11"></a></span>RootPanel.get().add(tree);
    </div>
-<!--l. 2689--><p class="indent" >   <img 
+<!--l. 2647--><p class="indent" >   <img 
 src="TatamiUserDocumentation28x.png" alt="PIC" class="graphics" width="121.45374pt" height="95.35625pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation28x.png" src="28C__dev_workspace_docs_images_tree.eps"  
+name="TatamiUserDocumentation28x.png" src="62C__dev_workspace_docs_images_tree.eps"  
 -->
                                                                   
 
                                                                   
-<!--l. 2692--><p class="noindent" >
+<!--l. 2650--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.3.2.2   </span> <a 
  id="x24-890002.3.2.2"></a>Customizing the tree display</h5>
-<!--l. 2694--><p class="noindent" >The tree offers many customization options.
-<!--l. 2696--><p class="indent" >   <img 
+<!--l. 2652--><p class="noindent" >The tree offers many customization options.
+<!--l. 2654--><p class="indent" >   <img 
 src="TatamiUserDocumentation29x.png" alt="PIC" class="graphics" width="95.35625pt" height="147.55124pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation29x.png" src="29C__dev_workspace_docs_images_treeExampleCustom.eps"  
+name="TatamiUserDocumentation29x.png" src="63C__dev_workspace_docs_images_treeExampleCustom.eps"  
 -->
-<!--l. 2698--><p class="indent" >   As you can see on the above picture, you can customize the icons used for items,
+<!--l. 2656--><p class="indent" >   As you can see on the above picture, you can customize the icons used for items,
 as well as some css styling on the labels.
-<!--l. 2701--><p class="indent" >   Customizing the icons can be done at two levels:
+<!--l. 2659--><p class="indent" >   Customizing the icons can be done at two levels:
      <ul class="itemize1">
      <li class="itemize">setting default icons for the whole tree. This can be achieved by using
      the following methods. Those methods will take a string as an argument,
@@ -113,16 +111,16 @@ class="description">sets the class applied to an opened
 <span 
 class="ecbx-1000">setDefaultLeafClass(String):</span> </dt><dd 
 class="description">sets the class applied to a tree leaf icon
-     <!--l. 2715--><p class="noindent" >The following example show how the icon classes were customized for the
+     <!--l. 2673--><p class="noindent" >The following example show how the icon classes were customized for the
      above tree:
      </dd></dl>
-   <!--l. 2720-->
+   <!--l. 2678-->
 <div class="lstlisting" id="listing-83"><span class="label"><a 
  id="x24-89001r1"></a></span>tree.setDefaultFolderClosedClass("myTreeClosed");&#x00A0;<br /><span class="label"><a 
  id="x24-89002r2"></a></span>tree.setDefaultFolderOpenClass("myTreeOpened");
    </div>
-<!--l. 2726--><p class="indent" >   With the myTreeClosed and myTreeOpened class defined like this:
-   <!--l. 2729-->
+<!--l. 2684--><p class="indent" >   With the myTreeClosed and myTreeOpened class defined like this:
+   <!--l. 2687-->
                                                                   
 
                                                                   
@@ -151,14 +149,14 @@ class="cmsy-10">-</span>position:&#x00A0;top;&#x00A0;<br /><span class="label"><
      <li class="itemize">setting different icons for some items. This can be achieved by setting
      the Tree.folderClosedClassAttribute, Tree.folderOpenedClassAttribute or
      Tree.leafClassAttribute.
-     <!--l. 2752--><p class="noindent" >Example:
-     <!--l. 2755-->
+     <!--l. 2710--><p class="noindent" >Example:
+     <!--l. 2713-->
      <div class="lstlisting" id="listing-85"><span class="label"><a 
  id="x24-89017r1"></a></span>item1.setValue(Tree.folderClosedClassAttribute,"item1");
      
      </div>
-     <!--l. 2760--><p class="noindent" >With the item1 css class defined as:
-     <!--l. 2763-->
+     <!--l. 2718--><p class="noindent" >With the item1 css class defined as:
+     <!--l. 2721-->
      <div class="lstlisting" id="listing-86"><span class="label"><a 
  id="x24-89018r1"></a></span>.item1{&#x00A0;<br /><span class="label"><a 
  id="x24-89019r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;background<span 
@@ -173,21 +171,21 @@ class="cmsy-10">-</span>position:&#x00A0;top;&#x00A0;<br /><span class="label"><
  id="x24-89025r8"></a></span>}
      
      </div>
-     <!--l. 2775--><p class="noindent" >Our item item1 will then have its own class:
-     <!--l. 2777--><p class="noindent" ><img 
+     <!--l. 2733--><p class="noindent" >Our item item1 will then have its own class:
+     <!--l. 2735--><p class="noindent" ><img 
 src="TatamiUserDocumentation30x.png" alt="PIC" class="graphics" width="89.33374pt" height="88.32999pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation30x.png" src="30C__dev_workspace_docs_images_treeExampleCustom2.eps"  
+name="TatamiUserDocumentation30x.png" src="64C__dev_workspace_docs_images_treeExampleCustom2.eps"  
 -->
      </li></ul>
-<!--l. 2780--><p class="noindent" >You can also customize the css styles applied to the label. As you probably noticed,
+<!--l. 2738--><p class="noindent" >You can also customize the css styles applied to the label. As you probably noticed,
 item1 is the only one item which label is red-colored.
-<!--l. 2783--><p class="indent" >   It has been achieved by using the following method:
-   <!--l. 2786-->
+<!--l. 2741--><p class="indent" >   It has been achieved by using the following method:
+   <!--l. 2744-->
 <div class="lstlisting" id="listing-87"><span class="label"><a 
  id="x24-89026r1"></a></span>item1.setValue(Tree.labelClassAttribute,"myLabelClass");
    </div>
-<!--l. 2791--><p class="indent" >   With the corresponding css class:
-   <!--l. 2794-->
+<!--l. 2749--><p class="indent" >   With the corresponding css class:
+   <!--l. 2752-->
 <div class="lstlisting" id="listing-88"><span class="label"><a 
  id="x24-89027r1"></a></span>.myLabelClass{&#x00A0;<br /><span class="label"><a 
  id="x24-89028r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;color:&#x00A0;red;&#x00A0;<br /><span class="label"><a 
@@ -196,12 +194,12 @@ item1 is the only one item which label is red-colored.
 
                                                                   
    </div>
-<!--l. 2802--><p class="noindent" >
+<!--l. 2760--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.3.2.3   </span> <a 
  id="x24-900002.3.2.3"></a>Tree events</h5>
-<!--l. 2804--><p class="noindent" >The Tree accepts tree listeners. A Tree Listener must implement the following
+<!--l. 2762--><p class="noindent" >The Tree accepts tree listeners. A Tree Listener must implement the following
 interface:
-   <!--l. 2808-->
+   <!--l. 2766-->
 <div class="lstlisting" id="listing-89"><span class="label"><a 
  id="x24-90001r1"></a></span><span 
 class="ecbx-1000">package</span>&#x00A0;com.objetdirect.tatami.client.tree;&#x00A0;<br /><span class="label"><a 
@@ -224,18 +222,18 @@ class="ecbx-1000">public</span>&#x00A0;<span
 class="ecbx-1000">void</span>&#x00A0;onDblClick(Item&#x00A0;item);&#x00A0;<br /><span class="label"><a 
  id="x24-90008r8"></a></span>}
    </div>
-<!--l. 2820--><p class="indent" >   Then, you can or remove tree listeners to a tree with the following methods:
-   <!--l. 2824-->
+<!--l. 2778--><p class="indent" >   Then, you can or remove tree listeners to a tree with the following methods:
+   <!--l. 2782-->
 <div class="lstlisting" id="listing-90"><span class="label"><a 
  id="x24-90009r1"></a></span>addTreeListener(TreeListener)&#x00A0;<br /><span class="label"><a 
  id="x24-90010r2"></a></span>removeTreeListener(TreeListener)
    </div>
-<!--l. 2831--><p class="noindent" >
+<!--l. 2789--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.3.2.4   </span> <a 
  id="x24-910002.3.2.4"></a>Example</h5>
-<!--l. 2833--><p class="noindent" >The following example illustrates the tree customization and tree listeners
+<!--l. 2791--><p class="noindent" >The following example illustrates the tree customization and tree listeners
 concepts.
-   <!--l. 2837-->
+   <!--l. 2795-->
 <div class="lstlisting" id="listing-91"><span class="label"><a 
  id="x24-91001r1"></a></span>FlowPanel&#x00A0;panel&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;FlowPanel();&#x00A0;<br /><span class="label"><a 
@@ -306,13 +304,11 @@ class="ecbx-1000">void</span>&#x00A0;onDblClick(Item&#x00A0;item)&#x00A0;{&#x00A
                                                                   
 
                                                                   
-   <!--l. 2881--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu13.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu14.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 2881--><p class="indent" >   <a 
+   <!--l. 2839--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu13.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu13.html#tailTatamiUserDocumentationsu13.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationsu14.html" >front</a>] [<a 
+href="TatamiUserDocumentationse4.html#TatamiUserDocumentationsu14.html" >up</a>] </p></div>
+<!--l. 2839--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu14.html"></a>   
 </body></html> 

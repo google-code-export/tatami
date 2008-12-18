@@ -7,32 +7,28 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 4814--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu35.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationsu33.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse17.html#TatamiUserDocumentationsu34.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 4763--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu35.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu33.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu33.html#tailTatamiUserDocumentationsu33.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationsu34.html">tail</a>] [<a 
+href="TatamiUserDocumentationse17.html#TatamiUserDocumentationsu34.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">5.1.2   </span> <a 
  id="x60-1470005.1.2"></a>Receiving and handling drag and drop events </h4>
-<!--l. 4816--><p class="noindent" >When a drag and drop event has been accepted by the panel, i.e. the compatibilities
+<!--l. 4765--><p class="noindent" >When a drag and drop event has been accepted by the panel, i.e. the compatibilities
 between the source and the target widget are in correspondence, this event can of
 course be intercepted. When the two widgets are not compatible, the dragged
 widget returns back to its original location without any event being triggered.
 A drop event can even be rejected when the panel has already accepted
 it.
-<!--l. 4823--><p class="indent" >   The handling of drag and drop events requires an object which implements
+<!--l. 4772--><p class="indent" >   The handling of drag and drop events requires an object which implements
 the DragAndDropListener interface. The following two methods shall be
 implemented:
-   <!--l. 4828-->
+   <!--l. 4777-->
 <div class="lstlisting" id="listing-190"><span class="label"><a 
  id="x60-147001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -41,15 +37,15 @@ class="ecbx-1000">boolean</span>&#x00A0;acceptDrop(Widget&#x00A0;draggable,&#x00
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;onDrop(Widget&#x00A0;draggable,&#x00A0;Widget&#x00A0;target)&#x00A0;{&#x00A0;&#x00A0;}
    </div>
-<!--l. 4834--><p class="indent" >   The acceptDrop method tells whether the drag and drop operation has been
+<!--l. 4783--><p class="indent" >   The acceptDrop method tells whether the drag and drop operation has been
 agreed for. The onDrop method is called when the drag and drop operation
 has definitely been accepted. This is the method where the event can be
 handled.
-<!--l. 4839--><p class="indent" >   Both methods receive the dragged and the target widget involved in the
+<!--l. 4788--><p class="indent" >   Both methods receive the dragged and the target widget involved in the
 operation. The method addDragDropListener of the panel allows the registering of
 a drag and drop listener. The removing of a listener can be done via the
 removeDragDropListener method.
-   <!--l. 4845-->
+   <!--l. 4794-->
 <div class="lstlisting" id="listing-191"><span class="label"><a 
  id="x60-147003r1"></a></span>DragAndDropListener&#x00A0;listener&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;DragAndDropListener()&#x00A0;{&#x00A0;<br /><span class="label"><a 
@@ -63,21 +59,17 @@ class="ecbx-1000">return</span>&#x00A0;<span
 class="ecbx-1000">true</span>;&#x00A0;}&#x00A0;<br /><span class="label"><a 
  id="x60-147006r4"></a></span>};&#x00A0;<br /><span class="label"><a 
  id="x60-147007r5"></a></span>ddpPanel.addDragDropListener(listener);&#x00A0;<br /><span class="label"><a 
- id="x60-147008r6"></a></span>&#x00A0;ddpPanel.removeDragDropListener(listener);
+ id="x60-147008r6"></a></span>ddpPanel.removeDragDropListener(listener);
    </div>
                                                                   
 
                                                                   
-   <!--l. 4856--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu35.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationsu33.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse17.html#TatamiUserDocumentationsu34.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 4856--><p class="indent" >   <a 
+   <!--l. 4805--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu35.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu33.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu33.html#tailTatamiUserDocumentationsu33.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationsu34.html" >front</a>] [<a 
+href="TatamiUserDocumentationse17.html#TatamiUserDocumentationsu34.html" >up</a>] </p></div>
+<!--l. 4805--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu34.html"></a>  
 </body></html> 

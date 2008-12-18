@@ -7,26 +7,22 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 4199--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu25.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationsu23.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse14.html#TatamiUserDocumentationsu24.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 4148--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu25.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu23.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu23.html#tailTatamiUserDocumentationsu23.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationsu24.html">tail</a>] [<a 
+href="TatamiUserDocumentationse14.html#TatamiUserDocumentationsu24.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">4.5.2   </span> <a 
  id="x46-1310004.5.2"></a>Series and data</h4>
-<!--l. 4201--><p class="noindent" >This section will explain how to add data to a Serie. First, you need to create
+<!--l. 4150--><p class="noindent" >This section will explain how to add data to a Serie. First, you need to create
 a Serie. Serie is a generic type, parametrized with the type of data it can
 contain.
-<!--l. 4205--><p class="indent" >   There are three constructors available for Series : <!--l. 4206-->
+<!--l. 4154--><p class="indent" >   There are three constructors available for Series : <!--l. 4155-->
 <div class="lstlisting" id="listing-153"><span class="label"><a 
  id="x46-131001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;Serie();&#x00A0;<br /><span class="label"><a 
@@ -37,10 +33,10 @@ class="ecbx-1000">public</span>&#x00A0;Serie(List&#x003C;T&#x003E;&#x00A0;data);
  id="x46-131004r4"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;Serie(List&#x003C;T&#x003E;&#x00A0;data,&#x00A0;String&#x00A0;name);
    </div>
-<!--l. 4214--><p class="indent" >   The data argument is used to initialize the Serie. Else, it will be empty and you
+<!--l. 4163--><p class="indent" >   The data argument is used to initialize the Serie. Else, it will be empty and you
 will have to add data manually. The name argument is used when building a Legend.
 See the Legend widget documentation.
-   <!--l. 4219-->
+   <!--l. 4168-->
 <div class="lstlisting" id="listing-154"><span class="label"><a 
  id="x46-131005r1"></a></span>Serie&#x003C;Integer&#x003E;&#x00A0;serie1&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Integer&#x003E;();&#x00A0;<br /><span class="label"><a 
@@ -49,7 +45,7 @@ class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Double&#x003E;(myListOfDouble);
  id="x46-131007r3"></a></span>Serie&#x003C;Double&#x003E;&#x00A0;serie3&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Point&#x003E;(myListOfPoint,&#8217;Gross&#x2423;Profit&#8217;);
    </div>
-<!--l. 4224--><p class="indent" >   The types used for data depends on the type of Plot.
+<!--l. 4173--><p class="indent" >   The types used for data depends on the type of Plot.
      <ul class="itemize1">
      <li class="itemize">Number can be used for Plot2D, BarPlot, PiePlot
      </li>
@@ -58,15 +54,15 @@ class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Point&#x003E;(myListOfPoint,&#8
      <li class="itemize">Point can be used for Plot2D
      </li>
      <li class="itemize">Bubble can be used for BubblePlot</li></ul>
-<!--l. 4231--><p class="noindent" >The data is stored in a List in the Serie object. If you want to add data to the Serie, you
+<!--l. 4180--><p class="noindent" >The data is stored in a List in the Serie object. If you want to add data to the Serie, you
 have to get this list with the following method :
-   <!--l. 4236-->
+   <!--l. 4185-->
 <div class="lstlisting" id="listing-155"><span class="label"><a 
  id="x46-131008r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;List&#x003C;T&#x003E;&#x00A0;getData()
    </div>
-<!--l. 4241--><p class="indent" >   Alternatively, you can use the delegate methods :
-   <!--l. 4244-->
+<!--l. 4190--><p class="indent" >   Alternatively, you can use the delegate methods :
+   <!--l. 4193-->
                                                                   
 
                                                                   
@@ -89,16 +85,12 @@ class="ecbx-1000">int</span>&#x00A0;index)
                                                                   
 
                                                                   
-   <!--l. 4253--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu25.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationsu23.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse14.html#TatamiUserDocumentationsu24.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 4253--><p class="indent" >   <a 
+   <!--l. 4202--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu25.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu23.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu23.html#tailTatamiUserDocumentationsu23.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationsu24.html" >front</a>] [<a 
+href="TatamiUserDocumentationse14.html#TatamiUserDocumentationsu24.html" >up</a>] </p></div>
+<!--l. 4202--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu24.html"></a>  
 </body></html> 

@@ -7,41 +7,37 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 1001--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu9.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationsu7.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu8.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 959--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu9.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu7.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu7.html#tailTatamiUserDocumentationsu7.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationsu8.html">tail</a>] [<a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu8.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">2.2.6   </span> <a 
  id="x17-360002.2.6"></a>The clock component.</h4>
-<!--l. 1003--><p class="noindent" >It can be useful to show a clock in a module, on one hand for informal reasons (know
+<!--l. 961--><p class="noindent" >It can be useful to show a clock in a module, on one hand for informal reasons (know
 the hour), and on the other hand for the aesthetic aspect of module. The component
 Clock shows the common hour in a graphic container. The shown clock is a clock
 with needles.
-<!--l. 1008--><p class="indent" >   The clock since Tatami 1.1 has some new features through its GFX package.
+<!--l. 966--><p class="indent" >   The clock since Tatami 1.1 has some new features through its GFX package.
 Indeed the clock is not supported in Dojo 1.0 release, but the Dojo Team decided to
 create a new Clock component using its GFX package. So the Clock component
 doesn&#8217;t wrap a Dojo widget directly and so doesn&#8217;t implement the HasDojo interface.
 Now, you can change the background image, the size, colors of the needles&#x2026; To
 import this widget see below:
-   <!--l. 1017-->
+   <!--l. 975-->
 <div class="lstlisting" id="listing-38"><span class="label"><a 
  id="x17-36001r1"></a></span><span 
 class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.Clock&#x00A0;;
    </div>
-<!--l. 1023--><p class="noindent" >
+<!--l. 981--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.6.1   </span> <a 
  id="x17-370002.2.6.1"></a>Create the Clock component: </h5>
-<!--l. 1025--><p class="noindent" >The constructor of clock has two parameters:
+<!--l. 983--><p class="noindent" >The constructor of clock has two parameters:
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">url:</span> </dt><dd 
@@ -52,10 +48,10 @@ class="description">An URL of an image to use for the background. If null is giv
 class="ecbx-1000">width:</span> </dt><dd 
 class="description">The width for the background image, and so the width for the clock
      itself.</dd></dl>
-<!--l. 1032--><p class="noindent" >A constructor with no parameter is also available. It means that the clock will be an
+<!--l. 990--><p class="noindent" >A constructor with no parameter is also available. It means that the clock will be an
 URL set to null and a width of 192 pixels.
-<!--l. 1035--><p class="indent" >   Below a concrete example:
-   <!--l. 1038-->
+<!--l. 993--><p class="indent" >   Below a concrete example:
+   <!--l. 996-->
 <div class="lstlisting" id="listing-39"><span class="label"><a 
  id="x17-37001r1"></a></span>Clock&#x00A0;clock&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Clock("clock_face.jpg",385);&#x00A0;<br /><span class="label"><a 
@@ -64,10 +60,10 @@ class="ecbx-1000">new</span>&#x00A0;Clock("clock_face.jpg",385);&#x00A0;<br /><s
                                                                   
 
                                                                   
-<!--l. 1045--><p class="noindent" >
+<!--l. 1003--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.6.2   </span> <a 
  id="x17-380002.2.6.2"></a>API of the clock component </h5>
-<!--l. 1047--><p class="noindent" >Below, these are the methods to custom the clock component.
+<!--l. 1005--><p class="noindent" >Below, these are the methods to custom the clock component.
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">Date</span><span 
@@ -84,7 +80,7 @@ class="description">Returns  background  image  of  the  clock  or  null,  if  n
 class="ecbx-1000">int</span><span 
 class="ecbx-1000">&#x00A0;getWidth():</span> </dt><dd 
 class="description">Returns the width of the clock</dd></dl>
-<!--l. 1054--><p class="noindent" >The following methods set or get the fill color, stroke color or the width of the stroke of a
+<!--l. 1012--><p class="noindent" >The following methods set or get the fill color, stroke color or the width of the stroke of a
 respective needle. (hours, seconds and minutes) :
      <dl class="description"><dt class="description">
 <span 
@@ -182,16 +178,12 @@ class="description">&#x00A0;</dd></dl>
                                                                   
 
                                                                   
-   <!--l. 1078--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu9.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationsu7.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu8.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 1078--><p class="indent" >   <a 
+   <!--l. 1036--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu9.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu7.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu7.html#tailTatamiUserDocumentationsu7.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationsu8.html" >front</a>] [<a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu8.html" >up</a>] </p></div>
+<!--l. 1036--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu8.html"></a>   
 </body></html> 

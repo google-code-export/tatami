@@ -7,31 +7,29 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 3099--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu15.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse9.html#TatamiUserDocumentationsu16.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 3057--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu15.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu15.html#tailTatamiUserDocumentationsu15.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationsu16.html">tail</a>] [<a 
+href="TatamiUserDocumentationse9.html#TatamiUserDocumentationsu16.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">3.5.2   </span> <a 
  id="x32-990003.5.2"></a>Some examples</h4>
-<!--l. 3101--><p class="noindent" >Suppose you would like to connect your grid directly to a relational database.
+<!--l. 3059--><p class="noindent" >Suppose you would like to connect your grid directly to a relational database.
 Suppose also that this database is exposed via a REST-type web-service. The only
 thing you would have to override would be the fetch method. Please see the Fetching
 items section to understand how the items should be fetched.
-<!--l. 3108--><p class="noindent" >
+<!--l. 3066--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">3.5.2.1   </span> <a 
  id="x32-1000003.5.2.1"></a>DefaultDataStore implementation</h5>
-<!--l. 3110--><p class="noindent" >The default datastore implementation stores its items locally in a Map. Each time a
+<!--l. 3068--><p class="noindent" >The default datastore implementation stores its items locally in a Map. Each time a
 request is performed to the datastore, items will be returned directly from the
 datastore.
-<!--l. 3114--><p class="indent" >   First of all, the items are filtered and sorted against the query:
-   <!--l. 3117-->
+<!--l. 3072--><p class="indent" >   First of all, the items are filtered and sorted against the query:
+   <!--l. 3075-->
 <div class="lstlisting" id="listing-98"><span class="label"><a 
  id="x32-100001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -150,11 +148,11 @@ class="ecti-1000">request</span>&#x00A0;<br /><span class="label"><a
  id="x32-100006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;List&#x003C;?&#x003E;&#x00A0;itemsSortedAndMatchingQuery&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">this</span>.executeQuery(items.values()&#x00A0;,&#x00A0;request);
    </div>
-<!--l. 3127--><p class="indent" >   Then, we notify the fetch listeners that the fetch process has begun.This is done
+<!--l. 3085--><p class="indent" >   Then, we notify the fetch listeners that the fetch process has begun.This is done
 with the &#8220;notifyBeginFetchListeners&#8221; request.
-<!--l. 3130--><p class="indent" >   It takes two arguments : the total number of items matching the query, and the
+<!--l. 3088--><p class="indent" >   It takes two arguments : the total number of items matching the query, and the
 request itself.
-   <!--l. 3134-->
+   <!--l. 3092-->
 <div class="lstlisting" id="listing-99"><span class="label"><a 
  id="x32-100007r1"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">int</span>&#x00A0;size&#x00A0;=&#x00A0;itemsSortedAndMatchingQuery.size();&#x00A0;<br /><span class="label"><a 
@@ -194,14 +192,14 @@ class="ecti-1000">performed</span>&#x00A0;<br /><span class="label"><a
  id="x32-100010r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;List&#x003C;Item&#x003E;&#x00A0;result&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;ArrayList&#x003C;Item&#x003E;();
    </div>
-<!--l. 3142--><p class="indent" >   We can process the actual fetched items, and load them accordingly. Here, the
+<!--l. 3100--><p class="indent" >   We can process the actual fetched items, and load them accordingly. Here, the
 load method does nothing, since it is a purely local datastore. Items are
 supposed to be fully loaded as soon as they are added to the datastore.
 The load item is supposed to load the items from an external datasource
 if you want to perform lazy loading. Please see the according example for
 more information. FetchListeners must be notified that a new item has been
 fetched.
-   <!--l. 3151-->
+   <!--l. 3109-->
 <div class="lstlisting" id="listing-100"><span class="label"><a 
  id="x32-100011r1"></a></span><span 
 class="ecti-1000">//</span><span 
@@ -305,9 +303,9 @@ class="cmsy-10">-</span>startItem,item);&#x00A0;<br /><span class="label"><a
 
                                                                   
    </div>
-<!--l. 3169--><p class="indent" >   Finally, we can finish the fetch process by notifying the FetchListeners that the
+<!--l. 3127--><p class="indent" >   Finally, we can finish the fetch process by notifying the FetchListeners that the
 process is complete:
-   <!--l. 3173-->
+   <!--l. 3131-->
 <div class="lstlisting" id="listing-101"><span class="label"><a 
  id="x32-100025r1"></a></span><span 
 class="ecti-1000">//</span><span 
@@ -332,64 +330,62 @@ class="ecti-1000">&#x00A0;</span><span
 class="ecti-1000">listeners</span>&#x00A0;<br /><span class="label"><a 
  id="x32-100026r2"></a></span>notifyCompleteFetchListeners(result&#x00A0;,&#x00A0;request);
    </div>
-<!--l. 3180--><p class="noindent" >
+<!--l. 3138--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">3.5.2.2   </span> <a 
  id="x32-1010003.5.2.2"></a>A datastore connecting to a GWT RPC Backend</h5>
-<!--l. 3182--><p class="noindent" >This section will show an example of a purely remote datastore, which fetch all its
+<!--l. 3140--><p class="noindent" >This section will show an example of a purely remote datastore, which fetch all its
 items from a GWT-RPC Service. This implementation is quite simple, and allows the
 filtering, and sorting operation to be managed on the server.
-<!--l. 3188--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 3146--><p class="noindent" ><span class="paragraphHead"><a 
  id="x32-1020003.5.2.2.1"></a><span 
 class="ecbx-1000">The service</span></span>
    We will begin with defining our GWT-RPC service. This one has nothing special,
 and offers CRUD operation for a small pet store :
-   <!--l. 3194-->
+   <!--l. 3152-->
 <div class="lstlisting" id="listing-102"><span class="label"><a 
  id="x32-102001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">interface</span>&#x00A0;PetSearchService&#x00A0;<span 
 class="ecbx-1000">extends</span>&#x00A0;RemoteService{&#x00A0;<br /><span class="label"><a 
- id="x32-102002r2"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-102003r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102002r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">final</span>&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;String&#x00A0;SPECIE&#x00A0;=&#x00A0;"Specie";&#x00A0;<br /><span class="label"><a 
- id="x32-102004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102003r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">final</span>&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;String&#x00A0;NAME&#x00A0;=&#x00A0;"Name";&#x00A0;<br /><span class="label"><a 
- id="x32-102005r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102004r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">final</span>&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;String&#x00A0;AGE&#x00A0;=&#x00A0;"Age";&#x00A0;<br /><span class="label"><a 
- id="x32-102006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102005r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">final</span>&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;String&#x00A0;TATOONUMBER&#x00A0;=&#x00A0;"TatooNumber";&#x00A0;<br /><span class="label"><a 
- id="x32-102007r7"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-102008r8"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102006r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;List&#x003C;Pet&#x003E;&#x00A0;getAllPets();&#x00A0;<br /><span class="label"><a 
- id="x32-102009r9"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102007r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;List&#x003C;Pet&#x003E;&#x00A0;getAllPetsSortedBy(String&#x00A0;sortCriteria&#x00A0;,<span 
 class="ecbx-1000">boolean</span>&#x00A0;ascending);&#x00A0;<br /><span class="label"><a 
- id="x32-102010r10"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102008r8"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;List&#x003C;Pet&#x003E;&#x00A0;getPetsBySpecie(String&#x00A0;specie);&#x00A0;<br /><span class="label"><a 
- id="x32-102011r11"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102009r9"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;List&#x003C;Pet&#x003E;&#x00A0;getPetsBySpecieSortedBy(String&#x00A0;specie&#x00A0;,&#x00A0;String&#x00A0;sortCriteria&#x00A0;,<span 
 class="ecbx-1000">boolean</span>&#x00A0;ascending);&#x00A0;<br /><span class="label"><a 
- id="x32-102012r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102010r10"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;updatePet(Pet&#x00A0;pet);&#x00A0;<br /><span class="label"><a 
- id="x32-102013r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102011r11"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;addPet(Pet&#x00A0;pet);&#x00A0;<br /><span class="label"><a 
- id="x32-102014r14"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-102012r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;removePet(Pet&#x00A0;pet);&#x00A0;<br /><span class="label"><a 
- id="x32-102015r15"></a></span>}
+ id="x32-102013r13"></a></span>}
    </div>
-<!--l. 3214--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 3170--><p class="noindent" ><span class="paragraphHead"><a 
  id="x32-1030003.5.2.2.2"></a><span 
 class="ecbx-1000">Data</span></span>
    The pet class itself extends Item. The first part of the class simply defines a
 bean:
-   <!--l. 3220-->
+   <!--l. 3176-->
 <div class="lstlisting" id="listing-103"><span class="label"><a 
  id="x32-103001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -425,44 +421,39 @@ class="ecbx-1000">public</span>&#x00A0;<span
 class="ecbx-1000">void</span>&#x00A0;setAge(<span 
 class="ecbx-1000">int</span>&#x00A0;age)&#x00A0;{<span 
 class="ecbx-1000">this</span>.age&#x00A0;=&#x00A0;age;}&#x00A0;<br /><span class="label"><a 
- id="x32-103012r12"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-103013r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103012r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">private</span>&#x00A0;String&#x00A0;name;&#x00A0;<br /><span class="label"><a 
- id="x32-103014r14"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103013r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;String&#x00A0;getName()&#x00A0;{&#x00A0;<span 
 class="ecbx-1000">return</span>&#x00A0;name;&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103015r15"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103014r14"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setName(String&#x00A0;name)&#x00A0;{&#x00A0;<span 
 class="ecbx-1000">this</span>.name&#x00A0;=&#x00A0;name;&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103016r16"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-103017r17"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103015r15"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">private</span>&#x00A0;String&#x00A0;specie;&#x00A0;<br /><span class="label"><a 
- id="x32-103018r18"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103016r16"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;String&#x00A0;getSpecie()&#x00A0;{&#x00A0;<span 
 class="ecbx-1000">return</span>&#x00A0;specie;&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103019r19"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103017r17"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setSpecie(String&#x00A0;specie)&#x00A0;{&#x00A0;<span 
 class="ecbx-1000">this</span>.specie&#x00A0;=&#x00A0;specie;&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103020r20"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-103021r21"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103018r18"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">private</span>&#x00A0;<span 
 class="ecbx-1000">int</span>&#x00A0;tatooNumber;&#x00A0;<br /><span class="label"><a 
- id="x32-103022r22"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103019r19"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">int</span>&#x00A0;getTatooNumber()&#x00A0;{&#x00A0;<span 
 class="ecbx-1000">return</span>&#x00A0;tatooNumber;&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103023r23"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103020r20"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setTatooNumber(<span 
 class="ecbx-1000">int</span>&#x00A0;tatooNumber)&#x00A0;{&#x00A0;<span 
 class="ecbx-1000">this</span>.tatooNumber&#x00A0;=&#x00A0;tatooNumber;&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103024r24"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-103025r25"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-103026r26"></a></span>}
+ id="x32-103021r21"></a></span>}
    </div>
-<!--l. 3250--><p class="indent" >   Then, we override the standard items method. The following changes were made,
+<!--l. 3201--><p class="indent" >   Then, we override the standard items method. The following changes were made,
 in order to not to store the attributes in the hashmap but rather using the instance
 fields:
      <dl class="description"><dt class="description">
@@ -480,85 +471,83 @@ class="description">we call the setter corresponding to the attribute being modi
                                                                   
 
                                                                   
-   <!--l. 3261-->
+   <!--l. 3212-->
 <div class="lstlisting" id="listing-104"><span class="label"><a 
- id="x32-103027r1"></a></span>@Override&#x00A0;<br /><span class="label"><a 
- id="x32-103028r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103022r1"></a></span>@Override&#x00A0;<br /><span class="label"><a 
+ id="x32-103023r2"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;Object&#x00A0;getId()&#x00A0;{&#x00A0;<span 
 class="ecbx-1000">return</span>&#x00A0;getTatooNumber();&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103029r3"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-103030r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override&#x00A0;<br /><span class="label"><a 
- id="x32-103031r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
-class="ecbx-1000">public</span>&#x00A0;String[]&#x00A0;getAttributes()&#x00A0;{&#x00A0;<span 
-class="ecbx-1000">return</span>&#x00A0;&#x00A0;{PetSearchService.SPECIE,PetSearchService.NAME,PetSearchService.AGE,PetSearchService.TATOONUMBER};&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103032r6"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-103033r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override&#x00A0;<span 
+ id="x32-103024r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override&#x00A0;<br /><span class="label"><a 
+ id="x32-103025r4"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">public</span>String[]&#x00A0;getAttributes()&#x00A0;{&#x00A0;<br /><span class="label"><a 
+ id="x32-103026r5"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+class="ecbx-1000">return</span>&#x00A0;&#x00A0;{PetSearchService.SPECIE,PetSearchService.NAME,PetSearchService.AGE,PetSearchService.TATOONUMBER};&#x00A0;<br /><span class="label"><a 
+ id="x32-103027r6"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x32-103028r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;Object&#x00A0;getValue(String&#x00A0;attributeName,&#x00A0;Object&#x00A0;defaultValue)&#x00A0;{&#x00A0;<br /><span class="label"><a 
- id="x32-103034r8"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103029r8"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">return</span>&#x00A0;getValue(attributeName)&#x00A0;==&#x00A0;<span 
 class="ecbx-1000">null</span>&#x00A0;?&#x00A0;defaultValue&#x00A0;:&#x00A0;getValue(attributeName);&#x00A0;<br /><span class="label"><a 
- id="x32-103035r9"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103036r10"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-103037r11"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override&#x00A0;<span 
+ id="x32-103030r9"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x32-103031r10"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;Object&#x00A0;getValue(String&#x00A0;attributeName)&#x00A0;{&#x00A0;<br /><span class="label"><a 
- id="x32-103038r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103032r11"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">if</span>(attributeName.equals(PetSearchService.AGE)){&#x00A0;<br /><span class="label"><a 
- id="x32-103039r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103033r12"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">return</span>&#x00A0;getAge();&#x00A0;<br /><span class="label"><a 
- id="x32-103040r14"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+ id="x32-103034r13"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
 class="ecbx-1000">else</span>&#x00A0;<span 
 class="ecbx-1000">if</span>(attributeName.equals(PetSearchService.NAME)){&#x00A0;<br /><span class="label"><a 
- id="x32-103041r15"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103035r14"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">return</span>&#x00A0;getName();&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103042r16"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103036r15"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">else</span>&#x00A0;<span 
 class="ecbx-1000">if</span>(attributeName.equals(PetSearchService.SPECIE)){&#x00A0;<br /><span class="label"><a 
- id="x32-103043r17"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103037r16"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">return</span>&#x00A0;getSpecie();&#x00A0;<br /><span class="label"><a 
- id="x32-103044r18"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+ id="x32-103038r17"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
 class="ecbx-1000">else</span>&#x00A0;<span 
 class="ecbx-1000">if</span>(attributeName.equals(PetSearchService.TATOONUMBER)){&#x00A0;<br /><span class="label"><a 
- id="x32-103045r19"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103039r18"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">return</span>&#x00A0;getTatooNumber();&#x00A0;<br /><span class="label"><a 
- id="x32-103046r20"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+ id="x32-103040r19"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
 class="ecbx-1000">else</span>&#x00A0;<span 
 class="ecbx-1000">return</span>&#x00A0;<span 
 class="ecbx-1000">null</span>;&#x00A0;<br /><span class="label"><a 
- id="x32-103047r21"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103048r22"></a></span>&#x00A0;<br /><span class="label"><a 
- id="x32-103049r23"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override&#x00A0;<span 
+ id="x32-103041r20"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x32-103042r21"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;@Override&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setValue(String&#x00A0;attributeName,&#x00A0;Object&#x00A0;value)&#x00A0;{&#x00A0;<br /><span class="label"><a 
- id="x32-103050r24"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103043r22"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">if</span>(attributeName.equals(PetSearchService.AGE)){&#x00A0;<br /><span class="label"><a 
- id="x32-103051r25"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103044r23"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">if</span>(value&#x00A0;<span 
 class="ecbx-1000">instanceof</span>&#x00A0;String){&#x00A0;<br /><span class="label"><a 
- id="x32-103052r26"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;value&#x00A0;=&#x00A0;Integer.parseInt((String)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
- id="x32-103053r27"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103054r28"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;setAge((Integer)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
- id="x32-103055r29"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+ id="x32-103045r24"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;value&#x00A0;=&#x00A0;Integer.parseInt((String)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
+ id="x32-103046r25"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x32-103047r26"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;setAge((Integer)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
+ id="x32-103048r27"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
 class="ecbx-1000">else</span>&#x00A0;<span 
 class="ecbx-1000">if</span>(attributeName.equals(PetSearchService.NAME)){&#x00A0;<br /><span class="label"><a 
- id="x32-103056r30"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;setName((String)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
- id="x32-103057r31"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+ id="x32-103049r28"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;setName((String)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
+ id="x32-103050r29"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
 class="ecbx-1000">else</span>&#x00A0;<span 
 class="ecbx-1000">if</span>(attributeName.equals(PetSearchService.SPECIE)){&#x00A0;<br /><span class="label"><a 
- id="x32-103058r32"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;setSpecie((String)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
- id="x32-103059r33"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
+ id="x32-103051r30"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;setSpecie((String)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
+ id="x32-103052r31"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}<span 
 class="ecbx-1000">else</span>&#x00A0;<span 
 class="ecbx-1000">if</span>(attributeName.equals(PetSearchService.TATOONUMBER)){&#x00A0;<br /><span class="label"><a 
- id="x32-103060r34"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
+ id="x32-103053r32"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;<span 
 class="ecbx-1000">if</span>(value&#x00A0;<span 
 class="ecbx-1000">instanceof</span>&#x00A0;String){&#x00A0;<br /><span class="label"><a 
- id="x32-103061r35"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;value&#x00A0;=&#x00A0;Integer.parseInt((String)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
- id="x32-103062r36"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
- id="x32-103063r37"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;setTatooNumber((Integer)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
- id="x32-103064r38"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<span 
+ id="x32-103054r33"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;value&#x00A0;=&#x00A0;Integer.parseInt((String)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
+ id="x32-103055r34"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
+ id="x32-103056r35"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;setTatooNumber((Integer)&#x00A0;value);&#x00A0;<br /><span class="label"><a 
+ id="x32-103057r36"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<span 
 class="ecbx-1000">super</span>.setValue(attributeName,&#x00A0;value);&#x00A0;<br /><span class="label"><a 
- id="x32-103065r39"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
+ id="x32-103058r37"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}
    </div>
-<!--l. 3305--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 3254--><p class="noindent" ><span class="paragraphHead"><a 
  id="x32-1040003.5.2.2.3"></a><span 
 class="ecbx-1000">Datastore Fetch implementation</span></span>
    The datastore implementation, will parse the request to determine wich service
@@ -566,7 +555,7 @@ method should be invoked. Since the GWT-RPC process is asynchronous, we must
 provide an AsyncCallback implementation which will perform the fetch process. As
 you can notice, this implementation only calls the fetchlisteners and stores the
 fetched items:
-   <!--l. 3314-->
+   <!--l. 3263-->
 <div class="lstlisting" id="listing-105"><span class="label"><a 
  id="x32-104001r1"></a></span><span 
 class="ecbx-1000">private</span>&#x00A0;<span 
@@ -596,9 +585,9 @@ class="ecbx-1000">for</span>&#x00A0;(Iterator&#x00A0;iterator&#x00A0;=&#x00A0;pe
  id="x32-104015r15"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
  id="x32-104016r16"></a></span>}
    </div>
-<!--l. 3334--><p class="indent" >   The fetch method itself will determine wich method from the service to
+<!--l. 3283--><p class="indent" >   The fetch method itself will determine wich method from the service to
 call.
-<!--l. 3337--><p class="indent" >   This method can be :
+<!--l. 3286--><p class="indent" >   This method can be :
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">getAllPets:</span> </dt><dd 
@@ -615,7 +604,7 @@ class="description">if a filtering parameter named SPECIE is providedd
 <span 
 class="ecbx-1000">getPetsBySpecieSortedBy:</span> </dt><dd 
 class="description">same as previous, but with a sort parameter</dd></dl>
-   <!--l. 3346-->
+   <!--l. 3295-->
 <div class="lstlisting" id="listing-106"><span class="label"><a 
  id="x32-104017r1"></a></span>@Override&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -659,12 +648,12 @@ class="ecbx-1000">new</span>&#x00A0;DataStoreAsyncCallback(request));&#x00A0;<br
 class="ecbx-1000">new</span>&#x00A0;ArrayList&#x003C;Item&#x003E;(),request);&#x00A0;<br /><span class="label"><a 
  id="x32-104038r22"></a></span>}
    </div>
-<!--l. 3373--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 3322--><p class="noindent" ><span class="paragraphHead"><a 
  id="x32-1050003.5.2.2.4"></a><span 
 class="ecbx-1000">DataStore Creation-Update-Delete implementation</span></span>
    As we want to allow our datastore to create/update/delete items on the server,
 we have to override the corresponding methods:
-   <!--l. 3379-->
+   <!--l. 3328-->
 <div class="lstlisting" id="listing-107"><span class="label"><a 
  id="x32-105001r1"></a></span>@Override&#x00A0;<span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -697,10 +686,10 @@ class="ecbx-1000">new</span>&#x00A0;DataStoreDoNothingCallBack());&#x00A0;<br />
 
                                                                   
    </div>
-<!--l. 3398--><p class="indent" >   At last, you can use this datastore with a grid, for example, wich will allow you to
+<!--l. 3347--><p class="indent" >   At last, you can use this datastore with a grid, for example, wich will allow you to
 manipulate this datastore through an ui and propagate the modifications back to the
 server:
-   <!--l. 3403-->
+   <!--l. 3352-->
 <div class="lstlisting" id="listing-108"><span class="label"><a 
  id="x32-105016r1"></a></span>grid&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Grid();&#x00A0;<br /><span class="label"><a 
@@ -715,19 +704,17 @@ class="ecbx-1000">new</span>&#x00A0;GridLayout();&#x00A0;<br /><span class="labe
  id="x32-105023r8"></a></span>grid.addColumn("Age",PetSearchService.AGE,<span 
 class="ecbx-1000">new</span>&#x00A0;TextEditor());
    </div>
-<!--l. 3416--><p class="noindent" >
+<!--l. 3365--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">3.5.2.3   </span> <a 
  id="x32-1060003.5.2.3"></a>A datastore for lazy loading child items from a tree</h5>
                                                                   
 
                                                                   
-   <!--l. 3419--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu15.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse9.html#TatamiUserDocumentationsu16.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 3419--><p class="indent" >   <a 
+   <!--l. 3368--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu15.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu15.html#tailTatamiUserDocumentationsu15.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationsu16.html" >front</a>] [<a 
+href="TatamiUserDocumentationse9.html#TatamiUserDocumentationsu16.html" >up</a>] </p></div>
+<!--l. 3368--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu16.html"></a>   
 </body></html> 

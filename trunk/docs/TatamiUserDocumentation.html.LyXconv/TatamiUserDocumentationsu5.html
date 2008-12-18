@@ -7,43 +7,39 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 623--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu6.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationsu4.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu5.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 581--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu6.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu4.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu4.html#tailTatamiUserDocumentationsu4.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationsu5.html">tail</a>] [<a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu5.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">2.2.3   </span> <a 
  id="x14-260002.2.3"></a>The Toaster component.</h4>
-<!--l. 625--><p class="noindent" >The Toaster class aims to display notifications to the users like the mailers
+<!--l. 583--><p class="noindent" >The Toaster class aims to display notifications to the users like the mailers
 application. These notifications are like tooltip appearing in one of the corners of a
 graphic container and disappearing with a fader effect (become more and more
 transparent) according to a timeout (1 second by example). The toaster can contain
 HTML code or simply a non formatted string. It&#8217;s necessary to note that
 the Toaster component is invisible for the user. It displays only the wished
 messages.
-<!--l. 634--><p class="indent" >   <img 
+<!--l. 592--><p class="indent" >   <img 
 src="TatamiUserDocumentation7x.png" alt="PIC" class="graphics" width="345.29pt" height="83.31125pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation7x.png" src="7C__dev_workspace_docs_images_toaster_preview.eps"  
+name="TatamiUserDocumentation7x.png" src="41C__dev_workspace_docs_images_toaster_preview.eps"  
 -->
-<!--l. 637--><p class="noindent" >
+<!--l. 595--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.3.1   </span> <a 
  id="x14-270002.2.3.1"></a>Create a Toaster. </h5>
-<!--l. 639--><p class="noindent" >All object needs to be imported before to be instantiated:
-   <!--l. 642-->
+<!--l. 597--><p class="noindent" >All object needs to be imported before to be instantiated:
+   <!--l. 600-->
 <div class="lstlisting" id="listing-25"><span class="label"><a 
  id="x14-27001r1"></a></span><span 
 class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.Toaster&#x00A0;;
    </div>
-<!--l. 645--><p class="indent" >   To create an instance of a Toaster we need to know principally 2 points. On the
+<!--l. 603--><p class="indent" >   To create an instance of a Toaster we need to know principally 2 points. On the
 one hand is the topic for the component and on the other hand the position where
 the toaster appears on the graphical container. In fact, the second point,
 doesn&#8217;t concern only the position, but also the movement for the Toaster.
@@ -93,32 +89,32 @@ class="description">Position  in  the  left  upper  corner,  the
 class="ecbx-1000">Toaster.TOP_LEFT_RIGHT:</span> </dt><dd 
 class="description">Position  in  the  left  upper  corner,  the
      message goes from the left to the right.</dd></dl>
-<!--l. 670--><p class="noindent" >The topic of messages of the created Toaster is a string to define. Its usefulness will take
+<!--l. 628--><p class="noindent" >The topic of messages of the created Toaster is a string to define. Its usefulness will take
 a sense during the display of a message. There are 2 ways to create a Toaster. One of
 them is to specify the position and the topic:
-   <!--l. 676-->
+   <!--l. 634-->
 <div class="lstlisting" id="listing-26"><span class="label"><a 
  id="x14-27002r1"></a></span>Toaster&#x00A0;toaster&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Toaster("notification",Toaster.TOP_RIGHT_DOWN);
    </div>
-<!--l. 681--><p class="indent" >   An other is to only specify the topic, the position will be then
+<!--l. 639--><p class="indent" >   An other is to only specify the topic, the position will be then
 Toaster.BOTTOM_RIGHT_UP
-   <!--l. 684-->
+   <!--l. 642-->
 <div class="lstlisting" id="listing-27"><span class="label"><a 
  id="x14-27003r1"></a></span>Toaster&#x00A0;toaster&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Toaster("notification");
    </div>
-<!--l. 690--><p class="noindent" >
+<!--l. 648--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.3.2   </span> <a 
  id="x14-280002.2.3.2"></a>Display a notification. </h5>
-<!--l. 692--><p class="noindent" >Once an instance of a Toaster is created, we can throw some notifications. It&#8217;s at this
+<!--l. 650--><p class="noindent" >Once an instance of a Toaster is created, we can throw some notifications. It&#8217;s at this
 level that the given topic during creation takes its sense. The Toaster component has
 4 notifications available: error message, plain message, warning message and fatal
 message.
                                                                   
 
                                                                   
-<!--l. 697--><p class="indent" >   These types are represented by static constants of the Toaster class.
+<!--l. 655--><p class="indent" >   These types are represented by static constants of the Toaster class.
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">Toaster.ERROR_MESSAGE:</span> </dt><dd 
@@ -135,12 +131,12 @@ class="description">Use for fatal messages.
 <span 
 class="ecbx-1000">Toaster.PLAIN_MESSAGE:</span> </dt><dd 
 class="description">Use for standard messages.</dd></dl>
-<!--l. 704--><p class="noindent" >The component has 4 methods for displaying the notifications. One of them is generic;
+<!--l. 662--><p class="noindent" >The component has 4 methods for displaying the notifications. One of them is generic;
 the others use this generic method in order to simplify the passage of the parameters.
 The signature of the generic method is:
-<!--l. 709--><p class="indent" >   public static void publish(String topic, String message, String type,int
+<!--l. 667--><p class="indent" >   public static void publish(String topic, String message, String type,int
 delay);
-<!--l. 712--><p class="indent" >   As we can see, the method is static for the class Toaster, that&#8217;s why we need the
+<!--l. 670--><p class="indent" >   As we can see, the method is static for the class Toaster, that&#8217;s why we need the
 parameter «&#x00A0;topic&#x00A0;» to get the instance of the Toaster to use for the positioning of
 the message. The parameter «&#x00A0;message&#x00A0;» will be the content displayed during the
 notification; it can be a simple string or some HTML code as we had already noted
@@ -162,9 +158,9 @@ class="description">String): Display a warning message.
 <span 
 class="ecbx-1000">publishError(String,String):</span> </dt><dd 
 class="description">Display an error message.</dd></dl>
-<!--l. 728--><p class="noindent" >The example below illustrates a use of the Toaster component. It is drawn from the
+<!--l. 686--><p class="noindent" >The example below illustrates a use of the Toaster component. It is drawn from the
 GWT TatamiDemo module, module demonstrating the Tatami components.
-   <!--l. 733-->
+   <!--l. 691-->
 <div class="lstlisting" id="listing-28"><span class="label"><a 
  id="x14-28001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -200,17 +196,17 @@ class="ecbx-1000">implements</span>&#x00A0;Command&#x00A0;{&#x00A0;<br /><span c
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;execute()&#x00A0;{&#x00A0;Toaster.publishMessage("message",getMessage(icon));&#x00A0;setPage(page);&#x00A0;}
    </div>
-<!--l. 754--><p class="indent" >   So, this code displays a notification each time that a user clicks on an
+<!--l. 712--><p class="indent" >   So, this code displays a notification each time that a user clicks on an
 item of the FishEye component. The notification will be displayed in the
 right lower corner and, will go from the bottom to the top with a delay of 1
 second.
                                                                   
 
                                                                   
-<!--l. 759--><p class="indent" >   There is a second way to display a message in the toaster : it can be
+<!--l. 717--><p class="indent" >   There is a second way to display a message in the toaster : it can be
 achieved by setting a message in the toaster and then manually show/hide
 it.
-<!--l. 763--><p class="indent" >   Below are the methods used to achieve this goal :
+<!--l. 721--><p class="indent" >   Below are the methods used to achieve this goal :
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">publishMessage(String,</span><span 
@@ -229,16 +225,12 @@ class="description">Display an error message.</dd></dl>
                                                                   
 
                                                                   
-   <!--l. 770--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu6.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationsu4.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu5.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 770--><p class="indent" >   <a 
+   <!--l. 728--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu6.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu4.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu4.html#tailTatamiUserDocumentationsu4.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationsu5.html" >front</a>] [<a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu5.html" >up</a>] </p></div>
+<!--l. 728--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu5.html"></a>   
 </body></html> 
