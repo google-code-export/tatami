@@ -2,27 +2,108 @@
 <html>
 	<head>
 		<title>Tatami Jamendo Player</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<style type="text/css">
-			#splashscreen{
-				background-image: url('./icons/splashscreen.png');
-				width: 400px;
-				height: 300px;
-				z-index: 10000;
-				position: absolute;
-				top: 30%;
-				left: 30%;
-			}
-			.loadingtext{
-				position: relative;
-				bottom: 0px;
-				right: 0px;	
-			}
-		</style>
-	</head>
-	<body>
-		<script language='javascript' src='com.objetdirect.tatami.jamendoplayer.TatamiPlayer.nocache.js'></script>
-    	<div id="splashscreen">
-    			<p class="loadingtext">Loading Tatami Jamendo Player ...</p>
-    	</div>
+#loading-container {
+    position:relative;
+    top:-8px;
+    left:-8px;
+	margin:3px;
+	padding: 0px;
+	z-index: 20001;
+	height: auto;
+
+ }	
+
+#loading-message {
+  padding-left:10px;
+  background-color: #F5F5F5;
+  height:auto;
+  border: 1px solid #FF6600;
+  font: bold 13px tahoma, arial, helvetica;
+}
+
+  #loading-content {
+
+    background-image:url(images/loading.gif);
+    background-repeat:no-repeat;
+    background-position:left ;
+ 	color: #999;
+	padding: 42px;
+	margin: 0px 0px 0px 0px;
+	height: auto;
+  }
+
+
+	#loading-content span {
+		font-weight: normal;
+	}
+
+
+
+
+#splashscreen {
+   position: absolute;
+   left: 35%;
+   top: 30%;
+   background-color:#aaa;
+   height:auto;
+   width:35%;
+   height:30%;
+}
+
+#didYouKnow{
+	color: black;
+	font-size: 2em;
+	font-style: italic;
+}
+
+#didYouKnowContent{
+	color: gray;
+	font-size: 1em;
+	font-style: italic;
+}
+
+</style>
+
+</head>
+
+<body>
+    <div id="splashscreen">
+  	<div id="loading-container">
+       <div id="loading-message">
+	    <div id="loading-content">
+	    	Tatami Jamendo Player<br/>
+	        <span>Loading...</span>
+       	</div>
+       <p id="didYouKnow">Did you know ... ?</p>
+	        <p id="didYouKnowContent"></p>
+	       	<script type="text/javascript">
+	       		var splashScreenTexts = [
+	       		   'Tatami is now licensed under three OSI licenses: Apache 2, BSD and LGPL',
+	       		   'Tatami is developed by Objet Direct and France Télécom',
+	       		   'This demo only presents a small subset of Tatami !  Visit '+ 
+	       		   		'<a href="http://tatami.googlecode.com/svn/trunk/site/samples/TatamiDemo1.3/com.objetdirect.tatami.demo.TatamiDemo/index.html">'+
+	       		   		'the showcase</a> to see more!'];
+	       		   var firstTextIdx = Math.floor(Math.random()*(splashScreenTexts.length));
+				   var isLoaded = false;
+				   displayText = function(){
+						if(!isLoaded){
+							document.getElementById("didYouKnowContent").innerHTML = splashScreenTexts[firstTextIdx];
+							firstTextIdx = (firstTextIdx+1)%splashScreenTexts.length;
+							setTimeout(displayText,5000);
+						}else{
+							isLoaded = null;
+							firstTextIdx = null;
+							splashScreenTexts = null;
+							displayText = null;
+						}
+				   }
+				   displayText();
+			</script>
+       </div>
+	</div>
+	</div>
+		<script type='text/javascript' src='com.objetdirect.tatami.jamendoplayer.TatamiPlayer.nocache.js'></script>
     </body>
 </html>
