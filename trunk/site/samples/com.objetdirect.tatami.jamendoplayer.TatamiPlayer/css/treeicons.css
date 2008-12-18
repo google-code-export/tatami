@@ -1,0 +1,105 @@
+/*Class applied to the icon of an item indicating that some nodes are being loaded */
+.loadingTreeItem{
+	background-image: url('../icons/treeExpand_loading.gif');
+	background-repeat: no-repeat;
+}
+ /*Class applied to the label of an item indicating that some nodes are being loaded */
+.loadingTreeItemLabel{
+	color: red;
+	font-size: 15px !important;
+}
+ /*Class applied to the icon of an item representing a track */
+.musicTreeItem{
+}
+
+/*Class applied to the label of an item representing a track (leaves)*/
+.musicTreeItemLabel{
+	font-style: italic;
+}
+/*Class applied to the icon of an item representing a Genre*/
+.genreTreeItem{
+	background-image: url('../icons/audio-x-generic.png');
+	background-repeat: no-repeat;
+	height: 16px !important;
+	width : 16px !important;	
+}
+/*Class applied to the icon of an item representing a Genre when it is unfold*/
+.genreTreeItemOpen{
+	background-image: url('../icons/audio-x-generic-big.png');
+	background-repeat: no-repeat;
+	height: 32px !important;
+	width : 32px !important;
+}
+
+/*Class applied to the icon of an item representing a Album when it is unfold*/
+.albumTreeItemOpen{
+	background-image: url('../icons/media-optical-big.png');
+	background-repeat: no-repeat;
+	height: 32px !important;
+	width : 32px !important;
+}
+/*Class applied to the icon of an item representing a Album */
+.albumTreeItem{
+	background-image: url('../icons/media-optical.png');
+	background-repeat: no-repeat;
+	height: 16px !important;
+	width : 16px !important;
+}
+/*Class applied to the label of an item representing a Album */
+.albumTreeItemLabel{
+	
+}
+
+/*Class applied to the label of an item representing an Artist */
+.artistTreeItem{
+	background-image: url('../icons/system-users.png');
+	background-repeat: no-repeat;
+	height: 16px !important;
+	width : 16px !important;
+}
+/*Class applied to the icon of an item representing an Album when it is unfold */
+.artistTreeItemOpen{
+	background-image: url('../icons/system-users-big.png');
+	background-repeat: no-repeat;
+	height: 32px !important;
+	width : 32px !important;
+}
+
+/*Class applied to the label of an item representing an Album*/
+.artistTreeItemLabel{
+	
+}
+
+/*Class applied to the label of an item representing a Letter*/
+.letterItemLabel{
+	font-size: 16px;
+	color: green;
+}
+
+/*Class applied to the icon of an item representing a Letter when it is unfold */
+.letterItemOpen{
+	
+}
+
+/*Class applied to the icon of an item representing a Letter */
+.letterItem{
+
+}
+
+/*Class applied to the tree root node icon*/
+.collection{
+	background-image: url('../icons/start-here-big.png');
+	background-repeat: no-repeat;
+	height: 32px !important;
+	width : 32px !important;	
+}
+
+/*Class applied to the tree root node icon when its unfold*/
+.collectionOpen{
+	background-image: url('../icons/start-here-big.png');
+	background-repeat: no-repeat;
+	height: 32px !important;
+	width : 32px !important;
+}
+
+                          

@@ -1,0 +1,25 @@
+/*General context info panel positioning*/
+
+/*Current album Cover*/
+.contextInfoCover{
+	float: right;
+	clear: right;
+	height: 60px;
+	width: 60px;
+}
+
+/*The Div containing the contextInfo Text*/
+.contextInfoTextDiv{
+	float: left;
+	clear: left;
+}
+
+.contextInfoCurrentArtist{
+}
+
+.contextInfoCurrentAlbum{
+}
+
+.contextInfoCurrentTitle{
+}
+

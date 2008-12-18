@@ -1,0 +1,35 @@
+html, body, #mainPanel {
+  width: 100%;	/* make the body expand to fill the visible window */
+  height: 100%;
+  overflow: hidden;	/* erase window level scrollbars */
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+.contextInfoPanel{
+	display: inline;
+	width: 100%;
+	height: 100%;
+}
+
+.textInfoPanel{
+	float: left;
+}
+
+.textInfoPanel h1{ 
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+.currentAlbumCover{
+	float: right;
+	width: 60px;
+	height: 60px;
+}
+
+.currentAlbumCover img{
+	width: 60px;
+	height: 60px;
+}
+
+
