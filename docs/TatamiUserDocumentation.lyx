@@ -31,7 +31,7 @@
 \use_bibtopic false
 \paperorientation portrait
 \branch HTML
-\selected 1
+\selected 0
 \color #faf0e6
 \end_branch
 \branch PDF
@@ -57,7 +57,7 @@
 
 \begin_layout Standard
 \begin_inset Branch HTML
-status open
+status collapsed
 
 \begin_layout Standard
 \begin_inset ERT
@@ -796,12 +796,17 @@ Options
 \end_layout
 
 \begin_layout Standard
-The border container has mainly two options :
+The border container has some options :
 \end_layout
 
 \begin_layout Description
 liveSplitters: indicates whether the panel should be resized while the splitter
  is dragged or only when it is released
+\end_layout
+
+\begin_layout Description
+gutters: indicates whether each content pane should be separated by a margin,
+ a padding and a border (like on the picture below)
 \end_layout
 
 \begin_layout Description
@@ -9002,11 +9007,6 @@ public interface PetSearchService extends RemoteService{
 
 \begin_layout Plain Layout
 
-	
-\end_layout
-
-\begin_layout Plain Layout
-
 	final public String SPECIE = "Specie"; 
 \end_layout
 
@@ -9023,10 +9023,6 @@ public interface PetSearchService extends RemoteService{
 \begin_layout Plain Layout
 
 	final public String TATOONUMBER = "TatooNumber";
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -9148,10 +9144,6 @@ public class PetItem extends Item implements Pet,Serializable{
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
 	private String name; 
 \end_layout
 
@@ -9163,10 +9155,6 @@ public class PetItem extends Item implements Pet,Serializable{
 \begin_layout Plain Layout
 
 	public void setName(String name) { this.name = name; }
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -9186,10 +9174,6 @@ public class PetItem extends Item implements Pet,Serializable{
 
 \begin_layout Plain Layout
 
-\end_layout
-
-\begin_layout Plain Layout
-
 	private int tatooNumber;
 \end_layout
 
@@ -9202,15 +9186,6 @@ public class PetItem extends Item implements Pet,Serializable{
 
 	public void setTatooNumber(int tatooNumber) { this.tatooNumber = tatooNumber;
  }
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-	
 \end_layout
 
 \begin_layout Plain Layout
@@ -9258,22 +9233,23 @@ status open
 
 \begin_layout Plain Layout
 
-	
-\end_layout
-
-\begin_layout Plain Layout
-
 	@Override
 \end_layout
 
 \begin_layout Plain Layout
 
-	public String[] getAttributes() { return  {PetSearchService.SPECIE,PetSearchServ
-ice.NAME,PetSearchService.AGE,PetSearchService.TATOONUMBER}; }
+	public	String[] getAttributes() {
 \end_layout
 
 \begin_layout Plain Layout
 
+		return  {PetSearchService.SPECIE,PetSearchService.NAME,PetSearchService.AGE,PetSe
+archService.TATOONUMBER};
+\end_layout
+
+\begin_layout Plain Layout
+
+	}
 \end_layout
 
 \begin_layout Plain Layout
@@ -9291,10 +9267,6 @@ ice.NAME,PetSearchService.AGE,PetSearchService.TATOONUMBER}; }
 \begin_layout Plain Layout
 
 	}
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -9350,11 +9322,6 @@ ice.NAME,PetSearchService.AGE,PetSearchService.TATOONUMBER}; }
 \begin_layout Plain Layout
 
 	}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
 \end_layout
 
 \begin_layout Plain Layout
@@ -13935,12 +13902,12 @@ status open
 
 \begin_layout Plain Layout
 
-public boolean acceptDrop(Widget draggable, Widget target) { … } 
+public boolean acceptDrop(Widget draggable, Widget target) {  } 
 \end_layout
 
 \begin_layout Plain Layout
 
-public void onDrop(Widget draggable, Widget target) { … }
+public void onDrop(Widget draggable, Widget target) {  }
 \end_layout
 
 \end_inset
@@ -13975,7 +13942,7 @@ DragAndDropListener listener = new DragAndDropListener() {
 
 \begin_layout Plain Layout
 
-	public void onDrop(Widget draggable, Widget target) { … }
+	public void onDrop(Widget draggable, Widget target) {  }
 \end_layout
 
 \begin_layout Plain Layout
@@ -13996,7 +13963,7 @@ ddpPanel.addDragDropListener(listener);
 
 \begin_layout Plain Layout
 
-… ddpPanel.removeDragDropListener(listener);
+ddpPanel.removeDragDropListener(listener);
 \end_layout
 
 \end_inset
@@ -14421,6 +14388,16 @@ We are now able to move widget1 and widget2 across the screen, but nobody
  is there to accept them.
 \end_layout
 
+\begin_layout Standard
+
+\emph on
+WARNING: If you set a DOM id to your widget element, be sure to assign your
+ id BEFORE registering this element, since dojo uses the dom id as a dnd
+ id.
+ Assigning an ID to a DnDElement after it has been registered will make
+ your element unavailable in your behavior.
+\end_layout
+
 \begin_layout Subsubsection
 Defining the Target
 \end_layout
@@ -14611,7 +14588,9 @@ Now, we are able to drag a widget from the source panel to the target:
 \end_layout
 
 \begin_layout Standard
-You may also drag both draggable items by clicking them s
+You may also drag multiple draggable items by clicking them one after the
+ other, holding the shift key inbetween.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -14703,6 +14682,16 @@ DnD.registerTreeSource(Tree);
 \begin_layout Standard
 You do not have to register any DndElement for a tree, since all TreeItems
  are necessarily DnDElement in a tree registered as a tree source.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+WARNING: If you set a DOM id to your widget element, be sure to assign your
+ id BEFORE registering this element, since dojo uses the dom id as a dnd
+ id.
+ Assigning an ID to a DnDElement after it has been registered will make
+ your element unavailable in your behavior.
 \end_layout
 
 \begin_layout Subsection
