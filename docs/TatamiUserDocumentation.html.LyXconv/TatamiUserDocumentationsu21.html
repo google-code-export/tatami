@@ -7,24 +7,21 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 3861--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu22.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu21.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 3810--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu22.html" >next</a>] [<a 
+href="#tailTatamiUserDocumentationsu21.html">tail</a>] [<a 
+href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu21.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">4.4.1   </span> <a 
  id="x42-1240004.4.1"></a>Setting axis </h4>
-<!--l. 3863--><p class="noindent" >Axis can be set at the chart or at the plot level. Axis set at the chart level will be
+<!--l. 3812--><p class="noindent" >Axis can be set at the chart or at the plot level. Axis set at the chart level will be
 used by all plots which don&#8217;t have any specific axis.
-<!--l. 3867--><p class="indent" >   To set the default X and Y axis, use the following methods from the Chart2D
+<!--l. 3816--><p class="indent" >   To set the default X and Y axis, use the following methods from the Chart2D
 class :
-   <!--l. 3871-->
+   <!--l. 3820-->
 <div class="lstlisting" id="listing-135"><span class="label"><a 
  id="x42-124001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -33,8 +30,8 @@ class="ecbx-1000">void</span>&#x00A0;setDefaultXAxis(Axis&#x00A0;axis);&#x00A0;<
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setDefaultYAxis(Axis&#x00A0;axis);
    </div>
-<!--l. 3877--><p class="indent" >   The Axis class provides two constructors :
-   <!--l. 3880-->
+<!--l. 3826--><p class="indent" >   The Axis class provides two constructors :
+   <!--l. 3829-->
 <div class="lstlisting" id="listing-136"><span class="label"><a 
  id="x42-124003r1"></a></span><span 
 class="ecti-1000">/</span><span 
@@ -161,18 +158,18 @@ class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a
 class="ecbx-1000">public</span>&#x00A0;Axis(<span 
 class="ecbx-1000">int</span>&#x00A0;position)&#x00A0;;
    </div>
-<!--l. 3900--><p class="indent" >   For example, a right vertical axis would be created as :
-   <!--l. 3903-->
+<!--l. 3849--><p class="indent" >   For example, a right vertical axis would be created as :
+   <!--l. 3852-->
 <div class="lstlisting" id="listing-137"><span class="label"><a 
  id="x42-124019r1"></a></span><span 
 class="ecbx-1000">new</span>&#x00A0;Axis(Axis.RIGHT&#x00A0;|&#x00A0;Axis.VERTICAL);
    </div>
-<!--l. 3908--><p class="indent" >   The Axis class also proposes two helper methods to get a bottom X axis and a
+<!--l. 3857--><p class="indent" >   The Axis class also proposes two helper methods to get a bottom X axis and a
 left Y Axis :
                                                                   
 
                                                                   
-   <!--l. 3912-->
+   <!--l. 3861-->
 <div class="lstlisting" id="listing-138"><span class="label"><a 
  id="x42-124020r1"></a></span><span 
 class="ecti-1000">/</span><span 
@@ -223,15 +220,15 @@ class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">static</span>&#x00A0;Axis&#x00A0;simpleYAxis()
    </div>
-<!--l. 3924--><p class="indent" >   The following snippet can then be used to provide simple axes to your charts
+<!--l. 3873--><p class="indent" >   The following snippet can then be used to provide simple axes to your charts
 :
-   <!--l. 3928-->
+   <!--l. 3877-->
 <div class="lstlisting" id="listing-139"><span class="label"><a 
  id="x42-124028r1"></a></span>chart.setDefaultXAxis(Axis.simpleXAxis());&#x00A0;<br /><span class="label"><a 
  id="x42-124029r2"></a></span>chart.setDefaultYAxis(Axis.simpleYAxis());
    </div>
-<!--l. 3934--><p class="indent" >   To set axes for a specific plot, you can use the Plot methods
-   <!--l. 3937-->
+<!--l. 3883--><p class="indent" >   To set axes for a specific plot, you can use the Plot methods
+   <!--l. 3886-->
 <div class="lstlisting" id="listing-140"><span class="label"><a 
  id="x42-124030r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -240,9 +237,9 @@ class="ecbx-1000">void</span>&#x00A0;setXAxis(Axis&#x00A0;axis);&#x00A0;<br /><s
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setYAxis(Axis&#x00A0;axis);
    </div>
-<!--l. 3943--><p class="indent" >   Below is an example of two plots on the same chart with different axes
+<!--l. 3892--><p class="indent" >   Below is an example of two plots on the same chart with different axes
 :
-   <!--l. 3947-->
+   <!--l. 3896-->
 <div class="lstlisting" id="listing-141"><span class="label"><a 
  id="x42-124032r1"></a></span>Chart2D&#x00A0;chart&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Chart2D("500px","500px");&#x00A0;<br /><span class="label"><a 
@@ -529,20 +526,17 @@ class="ecti-1000">/</span>&#x00A0;<br /><span class="label"><a
                                                                   
 
                                                                   
-<!--l. 3990--><p class="indent" >   <img 
+<!--l. 3939--><p class="indent" >   <img 
 src="TatamiUserDocumentation50x.png" alt="PIC" class="graphics" width="467.7475pt" height="459.7175pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation50x.png" src="50C__dev_workspace_docs_images_chartingimages_axes_example1.eps"  
+name="TatamiUserDocumentation50x.png" src="22C__dev_workspace_docs_images_chartingimages_axes_example1.eps"  
 -->
                                                                   
 
                                                                   
-   <!--l. 3993--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu22.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu21.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 3993--><p class="indent" >   <a 
+   <!--l. 3942--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu22.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu21.html" >front</a>] [<a 
+href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu21.html" >up</a>] </p></div>
+<!--l. 3942--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu21.html"></a>  
 </body></html> 

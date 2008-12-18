@@ -7,27 +7,25 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 3993--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu21.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu22.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 3942--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu21.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu21.html#tailTatamiUserDocumentationsu21.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationsu22.html">tail</a>] [<a 
+href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu22.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">4.4.2   </span> <a 
  id="x43-1250004.4.2"></a>Axis Options</h4>
-<!--l. 3995--><p class="noindent" >The precedent example shows how axis can be customized. There are a lot of options
+<!--l. 3944--><p class="noindent" >The precedent example shows how axis can be customized. There are a lot of options
 for Axis &#x2026;
-<!--l. 3999--><p class="noindent" >
+<!--l. 3948--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">4.4.2.1   </span> <a 
  id="x43-1260004.4.2.1"></a>Ticks Options</h5>
-<!--l. 4001--><p class="noindent" >Axes can show up to 3 different kinds of ticks: major minor, and micro. You can
+<!--l. 3950--><p class="noindent" >Axes can show up to 3 different kinds of ticks: major minor, and micro. You can
 enable/disable them with the corresponding methods :
-   <!--l. 4005-->
+   <!--l. 3954-->
 <div class="lstlisting" id="listing-142"><span class="label"><a 
  id="x43-126001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -39,7 +37,7 @@ class="ecbx-1000">void</span>&#x00A0;setMajorTicks(Boolean&#x00A0;majorTicks);&#
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setMajorTicks(Boolean&#x00A0;microTicks);
    </div>
-<!--l. 4012--><p class="indent" >   Each of these ticks types have different options:
+<!--l. 3961--><p class="indent" >   Each of these ticks types have different options:
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">length:</span> </dt><dd 
@@ -52,8 +50,8 @@ class="description">the color of the ticks
 <span 
 class="ecbx-1000">step:</span> </dt><dd 
 class="description">the step between the ticks</dd></dl>
-<!--l. 4018--><p class="noindent" >The corresponding methods names are pretty straightforward:
-   <!--l. 4021-->
+<!--l. 3967--><p class="noindent" >The corresponding methods names are pretty straightforward:
+   <!--l. 3970-->
 <div class="lstlisting" id="listing-143"><span class="label"><a 
  id="x43-126004r1"></a></span>setMajorTicksColor(String)&#x00A0;<br /><span class="label"><a 
  id="x43-126005r2"></a></span>setMajorTicksLength(<span 
@@ -71,15 +69,15 @@ class="ecbx-1000">double</span>)&#x00A0;<br /><span class="label"><a
  id="x43-126012r9"></a></span>setMicroTickStep(<span 
 class="ecbx-1000">double</span>)
    </div>
-<!--l. 4032--><p class="indent" >   Minor and Major ticks can also show labels :
-   <!--l. 4035-->
+<!--l. 3981--><p class="indent" >   Minor and Major ticks can also show labels :
+   <!--l. 3984-->
 <div class="lstlisting" id="listing-144"><span class="label"><a 
  id="x43-126013r1"></a></span>setMajorLabels(Boolean)&#x00A0;<br /><span class="label"><a 
  id="x43-126014r2"></a></span>setMinorLabels(Boolean)
    </div>
-<!--l. 4041--><p class="indent" >   Example :
-<!--l. 4043--><p class="indent" >   The following example demonstrates the use of ticks options.
-   <!--l. 4046-->
+<!--l. 3990--><p class="indent" >   Example :
+<!--l. 3992--><p class="indent" >   The following example demonstrates the use of ticks options.
+   <!--l. 3995-->
                                                                   
 
                                                                   
@@ -100,10 +98,10 @@ class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a
  id="x43-126025r11"></a></span>xLinesAxis.setMicroTicksLength(5);&#x00A0;<br /><span class="label"><a 
  id="x43-126026r12"></a></span>xLinesAxis.setMicroTicksColor("green");
    </div>
-<!--l. 4063--><p class="noindent" >
+<!--l. 4012--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">4.4.2.2   </span> <a 
  id="x43-1270004.4.2.2"></a>Miscellaneous options</h5>
-<!--l. 4065--><p class="noindent" >This set of options allow you to customize some axis properties such as its minimum
+<!--l. 4014--><p class="noindent" >This set of options allow you to customize some axis properties such as its minimum
 and maximum, if it should be aligned on ticks etc...
      <dl class="description"><dt class="description">
 <span 
@@ -144,8 +142,8 @@ class="description">forces          the          lower          axis          bo
 <span 
 class="ecbx-1000">setFixUpper(String)</span> </dt><dd 
 class="description">: same as setFixLower, but for the upper bound.</dd></dl>
-<!--l. 4083--><p class="noindent" >Example :
-   <!--l. 4086-->
+<!--l. 4032--><p class="noindent" >Example :
+   <!--l. 4035-->
 <div class="lstlisting" id="listing-146"><span class="label"><a 
  id="x43-127001r1"></a></span>xLinesAxis.setFixed(<span 
 class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a 
@@ -157,26 +155,26 @@ class="ecbx-1000">true</span>);&#x00A0;<br /><span class="label"><a
                                                                   
 
                                                                   
-<!--l. 4095--><p class="indent" >   <img 
+<!--l. 4044--><p class="indent" >   <img 
 src="TatamiUserDocumentation51x.png" alt="PIC" class="graphics" width="475.7775pt" height="96.35999pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation51x.png" src="51C__dev_workspace_docs_images_chartingimages_axes_options_example2.eps"  
+name="TatamiUserDocumentation51x.png" src="23C__dev_workspace_docs_images_chartingimages_axes_options_example2.eps"  
 -->
-<!--l. 4097--><p class="indent" >   Notice the upper value is aligned on a micro tick, the lower one is aligned on a
+<!--l. 4046--><p class="indent" >   Notice the upper value is aligned on a micro tick, the lower one is aligned on a
 major tick.
-<!--l. 4101--><p class="noindent" >
+<!--l. 4050--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">4.4.2.3   </span> <a 
  id="x43-1280004.4.2.3"></a>Labels</h5>
-<!--l. 4103--><p class="noindent" >The Axis class provides default labels : they correspond to the actual value on the
+<!--l. 4052--><p class="noindent" >The Axis class provides default labels : they correspond to the actual value on the
 axis. But you can also provide your own labels.
-   <!--l. 4107-->
+   <!--l. 4056-->
 <div class="lstlisting" id="listing-147"><span class="label"><a 
  id="x43-128001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;addLabel(<span 
 class="ecbx-1000">double</span>&#x00A0;forValue,&#x00A0;String&#x00A0;text)
    </div>
-<!--l. 4112--><p class="indent" >   This method customizes the label for the given forValue. Example :
-   <!--l. 4115-->
+<!--l. 4061--><p class="indent" >   This method customizes the label for the given forValue. Example :
+   <!--l. 4064-->
 <div class="lstlisting" id="listing-148"><span class="label"><a 
  id="x43-128002r1"></a></span>String[]&#x00A0;labels&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};&#x00A0;<br /><span class="label"><a 
@@ -186,36 +184,36 @@ class="ecbx-1000">int</span>&#x00A0;i&#x00A0;=&#x00A0;0;&#x00A0;i&#x00A0;&#x003C
  id="x43-128004r3"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;xColumnsAxis.addLabel(i+1,labels[i]);&#x00A0;<br /><span class="label"><a 
  id="x43-128005r4"></a></span>}
    </div>
-<!--l. 4123--><p class="indent" >   For each integer value on the X axis, we set the label to the corresponding
+<!--l. 4072--><p class="indent" >   For each integer value on the X axis, we set the label to the corresponding
 month.
                                                                   
 
                                                                   
-<!--l. 4126--><p class="indent" >   <img 
+<!--l. 4075--><p class="indent" >   <img 
 src="TatamiUserDocumentation52x.png" alt="PIC" class="graphics" width="869.2475pt" height="301.125pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation52x.png" src="52C__dev_workspace_docs_images_chartingimages_axes_labelsexample1.eps"  
+name="TatamiUserDocumentation52x.png" src="24C__dev_workspace_docs_images_chartingimages_axes_labelsexample1.eps"  
 -->
-<!--l. 4128--><p class="indent" >   We could have done it as easily with the following method, which only adds labels
+<!--l. 4077--><p class="indent" >   We could have done it as easily with the following method, which only adds labels
 for integer values, in the given order.
-   <!--l. 4132-->
+   <!--l. 4081-->
 <div class="lstlisting" id="listing-149"><span class="label"><a 
  id="x43-128006r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;addLabels(String[]&#x00A0;labels)
    </div>
-<!--l. 4137--><p class="indent" >   Example :
-   <!--l. 4140-->
+<!--l. 4086--><p class="indent" >   Example :
+   <!--l. 4089-->
 <div class="lstlisting" id="listing-150"><span class="label"><a 
  id="x43-128007r1"></a></span>String[]&#x00A0;labels&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};&#x00A0;<br /><span class="label"><a 
  id="x43-128008r2"></a></span>xColumnsAxis.addLabels(labels);
    </div>
-<!--l. 4146--><p class="indent" >   The above example will have exactly the same effect as the previous
+<!--l. 4095--><p class="indent" >   The above example will have exactly the same effect as the previous
 one.
-<!--l. 4149--><p class="indent" >   These methods only converts the given value/label couple into an AxisLabel
+<!--l. 4098--><p class="indent" >   These methods only converts the given value/label couple into an AxisLabel
 object.
-<!--l. 4152--><p class="indent" >   You can also use the AxisLabel object directly:
-   <!--l. 4155-->
+<!--l. 4101--><p class="indent" >   You can also use the AxisLabel object directly:
+   <!--l. 4104-->
                                                                   
 
                                                                   
@@ -236,20 +234,18 @@ class="ecbx-1000">return</span>&#x00A0;labels;&#x00A0;<br /><span class="label">
  id="x43-128015r7"></a></span>}&#x00A0;<br /><span class="label"><a 
  id="x43-128016r8"></a></span>xLinesAxis.addLabels(getDiscreteLabels());
    </div>
-<!--l. 4167--><p class="indent" >   <img 
+<!--l. 4116--><p class="indent" >   <img 
 src="TatamiUserDocumentation53x.png" alt="PIC" class="graphics" width="315.17749pt" height="312.16624pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation53x.png" src="53C__dev_workspace_docs_images_chartingimages_axes_labelsexample2.eps"  
+name="TatamiUserDocumentation53x.png" src="25C__dev_workspace_docs_images_chartingimages_axes_labelsexample2.eps"  
 -->
                                                                   
 
                                                                   
-   <!--l. 4170--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu21.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu22.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 4170--><p class="indent" >   <a 
+   <!--l. 4119--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu21.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu21.html#tailTatamiUserDocumentationsu21.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationsu22.html" >front</a>] [<a 
+href="TatamiUserDocumentationse13.html#TatamiUserDocumentationsu22.html" >up</a>] </p></div>
+<!--l. 4119--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu22.html"></a>   
 </body></html> 

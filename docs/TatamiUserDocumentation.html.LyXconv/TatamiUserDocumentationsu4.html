@@ -7,38 +7,34 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 493--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu5.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationsu3.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu4.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 451--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu5.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu3.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu3.html#tailTatamiUserDocumentationsu3.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationsu4.html">tail</a>] [<a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu4.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">2.2.2   </span> <a 
  id="x13-180002.2.2"></a>ColorChooser</h4>
-<!--l. 495--><p class="noindent" >The ColorChooser class provides to the user a palette of colors to choose from with
+<!--l. 453--><p class="noindent" >The ColorChooser class provides to the user a palette of colors to choose from with
 the mouse. The ColoChooser component can be laid anywhere on the GWT
 module, it means that there are no constraints with the choice of a container of
 widgets.
-<!--l. 500--><p class="indent" >   <img 
+<!--l. 458--><p class="indent" >   <img 
 src="TatamiUserDocumentation6x.png" alt="PIC" class="graphics" width="226.84749pt" height="292.09125pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation6x.png" src="6C__dev_workspace_docs_images_color_chooser_preview.eps"  
+name="TatamiUserDocumentation6x.png" src="40C__dev_workspace_docs_images_color_chooser_preview.eps"  
 -->
-<!--l. 503--><p class="noindent" >
+<!--l. 461--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.2.1   </span> <a 
  id="x13-190002.2.2.1"></a>Create a ColorChooser.</h5>
-<!--l. 505--><p class="noindent" >The palette proposes a choice of 12 colors or 70 colors. There are two ways to create
+<!--l. 463--><p class="noindent" >The palette proposes a choice of 12 colors or 70 colors. There are two ways to create
 a palette&#x00A0;of colors.&#x00A0; One without parameter, the easiest and an other with a
 parameter staying simple despite everything. First of all, we need to import the class
 like this:
-   <!--l. 511-->
+   <!--l. 469-->
                                                                   
 
                                                                   
@@ -46,21 +42,21 @@ like this:
  id="x13-19001r1"></a></span><span 
 class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.ColorChooser&#x00A0;;
    </div>
-<!--l. 517--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 475--><p class="noindent" ><span class="paragraphHead"><a 
  id="x13-200002.2.2.1.1"></a><span 
 class="ecbx-1000">Without parameter:</span></span>
    The palette of colors will have 70 colors by default.
-   <!--l. 522-->
+   <!--l. 480-->
 <div class="lstlisting" id="listing-19"><span class="label"><a 
  id="x13-20001r1"></a></span>ColorChooser&#x00A0;palette&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;ColorChooser();
    </div>
-<!--l. 528--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 486--><p class="noindent" ><span class="paragraphHead"><a 
  id="x13-210002.2.2.1.2"></a><span 
 class="ecbx-1000">With parameter:</span></span>
    The parameter specifies the number of colors wanted for the palette. There are 2
 static constant of the class ColorChooser.
-<!--l. 533--><p class="indent" >   The possible values are :
+<!--l. 491--><p class="indent" >   The possible values are :
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">ColorChooser.SEVENTY_COLORS:</span> </dt><dd 
@@ -69,25 +65,25 @@ class="description">For a palette with 70 colors.
 <span 
 class="ecbx-1000">ColorChooser.TWELVE_COLORS:</span> </dt><dd 
 class="description">For a palette with 12 colors.</dd></dl>
-<!--l. 538--><p class="noindent" >What gives us concretely:
-   <!--l. 541-->
+<!--l. 496--><p class="noindent" >What gives us concretely:
+   <!--l. 499-->
 <div class="lstlisting" id="listing-20"><span class="label"><a 
  id="x13-21001r1"></a></span>ColorChooser&#x00A0;12Colors&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;ColorChooser(ColorChooser.TWELVE_COLORS);&#x00A0;<br /><span class="label"><a 
  id="x13-21002r2"></a></span>ColorChooser&#x00A0;70Colors&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;ColorChooser(ColorChooser.SEVENTY_COLORS);
    </div>
-<!--l. 548--><p class="noindent" >
+<!--l. 506--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.2.2   </span> <a 
  id="x13-220002.2.2.2"></a>Get,modify the selected color</h5>
-<!--l. 550--><p class="noindent" >. The ColorChooser class doesn&#8217;t handle really colors i.e. object modelling a color like
+<!--l. 508--><p class="noindent" >. The ColorChooser class doesn&#8217;t handle really colors i.e. object modelling a color like
 java.awt.color by example. The ColorChooser class uses the hexadecimal
 representation format of a color. By default the selected value for each palette (12 or
 70 colos) is: #000000 which is the black color.
                                                                   
 
                                                                   
-<!--l. 557--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 515--><p class="noindent" ><span class="paragraphHead"><a 
  id="x13-230002.2.2.2.1"></a><span 
 class="ecbx-1000">Modify the selected color:</span></span>
    The modification of the current color can be done by 2 ways. One by specifying
@@ -95,15 +91,15 @@ the color that we want to select, or by a mouse click event on the palette, in t
 it will have to be attached on the browser in order that events are taken into
 account. The signature of the method to modify the selected color is the
 following:
-   <!--l. 566-->
+   <!--l. 524-->
 <div class="lstlisting" id="listing-21"><span class="label"><a 
  id="x13-23001r1"></a></span>ColorChooser#setColor(String)
    </div>
-<!--l. 571--><p class="indent" >   The method takes in parameter a string. This string has to correspond to a
+<!--l. 529--><p class="indent" >   The method takes in parameter a string. This string has to correspond to a
 color in its hexadecimal representation format as we said it before. Warning
 in this first version of this component there is not checking on the given
 string.
-   <!--l. 577-->
+   <!--l. 535-->
 <div class="lstlisting" id="listing-22"><span class="label"><a 
  id="x13-23002r1"></a></span>ColorChooser&#x00A0;palette&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;ColorChooser();&#x00A0;<br /><span class="label"><a 
@@ -117,23 +113,23 @@ class="ecti-1000">color</span><span
 class="cmsy-10">*</span><span 
 class="ecti-1000">/</span>
    </div>
-<!--l. 584--><p class="noindent" ><span class="paragraphHead"><a 
+<!--l. 542--><p class="noindent" ><span class="paragraphHead"><a 
  id="x13-240002.2.2.2.2"></a><span 
 class="ecbx-1000">Get the selected color. </span></span>
    To get the selected color from the palette, use this simple method below:
-   <!--l. 590-->
+   <!--l. 548-->
 <div class="lstlisting" id="listing-23"><span class="label"><a 
  id="x13-24001r1"></a></span>String&#x00A0;color&#x00A0;=&#x00A0;palette.getColor();
    </div>
-<!--l. 595--><p class="indent" >   The method getColor() returns the hexadecimal representation format of the
+<!--l. 553--><p class="indent" >   The method getColor() returns the hexadecimal representation format of the
 color.
-<!--l. 599--><p class="noindent" >
+<!--l. 557--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.2.3   </span> <a 
  id="x13-250002.2.2.3"></a>Catch a change of the selected color. </h5>
-<!--l. 601--><p class="noindent" >The ColorChooser component has the property to notify a change of the
+<!--l. 559--><p class="noindent" >The ColorChooser component has the property to notify a change of the
 selected color. To use this property, you just need to add a listener with a type
 com.google.gwt.user.client.ui.ChangeListener.
-   <!--l. 606-->
+   <!--l. 564-->
 <div class="lstlisting" id="listing-24"><span class="label"><a 
  id="x13-25001r1"></a></span>ColorChooser&#x00A0;palette&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;ColorChooser();&#x00A0;<span 
@@ -152,22 +148,18 @@ class="ecbx-1000">label</span>.getElement(),&#x00A0;"color",&#x00A0;color);&#x00
  id="x13-25007r7"></a></span>&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;}&#x00A0;<br /><span class="label"><a 
  id="x13-25008r8"></a></span>});
    </div>
-<!--l. 618--><p class="indent" >   So, each time a new color will be selected, the text of the label will display the
+<!--l. 576--><p class="indent" >   So, each time a new color will be selected, the text of the label will display the
 hexadecimal code of the color and, the text will have the color of the selected
 color.
                                                                   
 
                                                                   
-   <!--l. 623--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu5.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationsu3.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu4.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 623--><p class="indent" >   <a 
+   <!--l. 581--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu5.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu3.html" >prev</a>] [<a 
+href="TatamiUserDocumentationsu3.html#tailTatamiUserDocumentationsu3.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationsu4.html" >front</a>] [<a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu4.html" >up</a>] </p></div>
+<!--l. 581--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu4.html"></a>   
 </body></html> 

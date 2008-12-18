@@ -7,37 +7,33 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 2968--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationse8.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationse6.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse7.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 2926--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationse8.html" >next</a>] [<a 
+href="TatamiUserDocumentationse6.html" >prev</a>] [<a 
+href="TatamiUserDocumentationse6.html#tailTatamiUserDocumentationse6.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationse7.html">tail</a>] [<a 
+href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse7.html" >up</a>] </p></div>
    <h3 class="sectionHead"><span class="titlemark">3.3   </span> <a 
  id="x28-950003.3"></a>Fetching items</h3>
-<!--l. 2970--><p class="noindent" >The core method of the datastore is the &#8220;fetch&#8221; function. The fetch function performs
+<!--l. 2928--><p class="noindent" >The core method of the datastore is the &#8220;fetch&#8221; function. The fetch function performs
 a query , represented by the &#8220;Request&#8221; object.
-<!--l. 2974--><p class="indent" >   The fetch method signature :
-   <!--l. 2977-->
+<!--l. 2932--><p class="indent" >   The fetch method signature :
+   <!--l. 2935-->
 <div class="lstlisting" id="listing-94"><span class="label"><a 
  id="x28-95001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;fetch(Request&#x00A0;request)
    </div>
-<!--l. 2982--><p class="indent" >   This method performs a Request , and notifies the FetchListeners during the
+<!--l. 2940--><p class="indent" >   This method performs a Request , and notifies the FetchListeners during the
 whole fetch process.
-<!--l. 2985--><p class="indent" >   Below stands the Fetch Listener interface. The grid itself implements the
+<!--l. 2943--><p class="indent" >   Below stands the Fetch Listener interface. The grid itself implements the
 FetchListener interface, but we can implement our own fetch listener to be aware of
 all the Fetch Process.
-   <!--l. 2990-->
+   <!--l. 2948-->
 <div class="lstlisting" id="listing-95"><span class="label"><a 
  id="x28-95002r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -57,18 +53,18 @@ class="ecbx-1000">public</span>&#x00A0;<span
 class="ecbx-1000">void</span>&#x00A0;onError(FetchEventSource&#x00A0;source);&#x00A0;<br /><span class="label"><a 
  id="x28-95007r6"></a></span>}
    </div>
-<!--l. 3000--><p class="indent" >   The main method is onComplete : it is called once the fetch is done. Items is a
+<!--l. 2958--><p class="indent" >   The main method is onComplete : it is called once the fetch is done. Items is a
 List containing all the fetched items, while request is the (possibly modified) request
 performed.
-<!--l. 3004--><p class="indent" >   onBegin is called before the actual fetch. &#8220;Size&#8221; is the total number of items
+<!--l. 2962--><p class="indent" >   onBegin is called before the actual fetch. &#8220;Size&#8221; is the total number of items
 matching the request (or the page size when using paging), while request is the
 (possibly modified) request performed.
-<!--l. 3009--><p class="indent" >   onItem is called each time an Item has been fetched, that is , it will be present in
+<!--l. 2967--><p class="indent" >   onItem is called each time an Item has been fetched, that is , it will be present in
 the list passed to onComplete.
-<!--l. 3012--><p class="indent" >   onError is called when an error occurs during the fetch.
-<!--l. 3014--><p class="indent" >   The request object owns a certain amount of parameters, used to search items in
+<!--l. 2970--><p class="indent" >   onError is called when an error occurs during the fetch.
+<!--l. 2972--><p class="indent" >   The request object owns a certain amount of parameters, used to search items in
 the store.
-<!--l. 3017--><p class="indent" >   These parameters are :
+<!--l. 2975--><p class="indent" >   These parameters are :
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">nbItemToReturn:</span> </dt><dd 
@@ -97,16 +93,12 @@ class="description">A  list  of  SortField.  A  SortField  is  a  simple  object
                                                                   
 
                                                                   
-   <!--l. 3031--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationse8.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationse6.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse7.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 3031--><p class="indent" >   <a 
+   <!--l. 2989--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationse8.html" >next</a>] [<a 
+href="TatamiUserDocumentationse6.html" >prev</a>] [<a 
+href="TatamiUserDocumentationse6.html#tailTatamiUserDocumentationse6.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationse7.html" >front</a>] [<a 
+href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse7.html" >up</a>] </p></div>
+<!--l. 2989--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationse7.html"></a>  
 </body></html> 

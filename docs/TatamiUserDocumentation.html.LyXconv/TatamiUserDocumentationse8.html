@@ -7,28 +7,24 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 3031--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationse9.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationse7.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse8.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 2989--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationse9.html" >next</a>] [<a 
+href="TatamiUserDocumentationse7.html" >prev</a>] [<a 
+href="TatamiUserDocumentationse7.html#tailTatamiUserDocumentationse7.html" >prev-tail</a>] [<a 
+href="#tailTatamiUserDocumentationse8.html">tail</a>] [<a 
+href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse8.html" >up</a>] </p></div>
    <h3 class="sectionHead"><span class="titlemark">3.4   </span> <a 
  id="x29-960003.4"></a>DataStore events</h3>
-<!--l. 3033--><p class="noindent" >Grid and datastores are connected via DataStore events. There are many events fired
+<!--l. 2991--><p class="noindent" >Grid and datastores are connected via DataStore events. There are many events fired
 by the data store. In the previous section , we already saw how the fetch events are
 sourced and consumed.
-<!--l. 3037--><p class="indent" >   Two other interfaces are defined to listen for DataStore events. Those are
+<!--l. 2995--><p class="indent" >   Two other interfaces are defined to listen for DataStore events. Those are
 :
-   <!--l. 3041-->
+   <!--l. 2999-->
 <div class="lstlisting" id="listing-96"><span class="label"><a 
  id="x29-96001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -36,11 +32,11 @@ class="ecbx-1000">interface</span>&#x00A0;LoadItemListener&#x00A0;{&#x00A0;<span
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;onLoad(Item&#x00A0;item);&#x00A0;}
    </div>
-<!--l. 3046--><p class="indent" >   This interface defines a load item listener : the onLoad item will be called each
+<!--l. 3004--><p class="indent" >   This interface defines a load item listener : the onLoad item will be called each
 time the datastore &#8220;loadItem&#8221; is called on an (not yet) loaded item. In the current
 implementation, the items are always already loaded , since we use no &#8220;stub&#8221;
 item.
-   <!--l. 3053-->
+   <!--l. 3011-->
 <div class="lstlisting" id="listing-97"><span class="label"><a 
  id="x29-96002r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
@@ -56,7 +52,7 @@ class="ecbx-1000">public</span>&#x00A0;<span
 class="ecbx-1000">void</span>&#x00A0;onDelete(Item&#x00A0;item);&#x00A0;<br /><span class="label"><a 
  id="x29-96006r5"></a></span>}
    </div>
-<!--l. 3062--><p class="indent" >   This interface defines a listener for data changes. For example, The grid itself
+<!--l. 3020--><p class="indent" >   This interface defines a listener for data changes. For example, The grid itself
 implements this interface. onDataChange is called each time an item&#8217;s attribute has
 been modified. onNew is called each time an item has been added to the data
 store. onDelete is called each time an item has been deleted from the data
@@ -94,16 +90,12 @@ class="description">Removes                     a
                                                                   
 
                                                                   
-   <!--l. 3076--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationse9.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationse7.html" ><img 
-src="cssimages/go-previous.png" alt="previous"  
-class="previousarrow"></a><a 
-href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse8.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 3076--><p class="indent" >   <a 
+   <!--l. 3034--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationse9.html" >next</a>] [<a 
+href="TatamiUserDocumentationse7.html" >prev</a>] [<a 
+href="TatamiUserDocumentationse7.html#tailTatamiUserDocumentationse7.html" >prev-tail</a>] [<a 
+href="TatamiUserDocumentationse8.html" >front</a>] [<a 
+href="TatamiUserDocumentationch3.html#TatamiUserDocumentationse8.html" >up</a>] </p></div>
+<!--l. 3034--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationse8.html"></a>  
 </body></html> 

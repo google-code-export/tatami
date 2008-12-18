@@ -7,29 +7,26 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 3552--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu18.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu17.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 3501--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu18.html" >next</a>] [<a 
+href="#tailTatamiUserDocumentationsu17.html">tail</a>] [<a 
+href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu17.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">4.3.1   </span> <a 
  id="x37-1110004.3.1"></a>Plot2D</h4>
-<!--l. 3554--><p class="noindent" >This class is used to draw several types of two dimensional plots.
-<!--l. 3557--><p class="noindent" >
+<!--l. 3503--><p class="noindent" >This class is used to draw several types of two dimensional plots.
+<!--l. 3506--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">4.3.1.1   </span> <a 
  id="x37-1120004.3.1.1"></a>What type of data to use?</h5>
-<!--l. 3559--><p class="noindent" >This type of plot can be used with series of anything which extends Number, or with
+<!--l. 3508--><p class="noindent" >This type of plot can be used with series of anything which extends Number, or with
 the Point object. When using numbers, the X coordinate is the position of the
 number in the list. When using Points, both X and Y coordinates must be
 specified.
-<!--l. 3564--><p class="indent" >   Ex :
-   <!--l. 3567-->
+<!--l. 3513--><p class="indent" >   Ex :
+   <!--l. 3516-->
 <div class="lstlisting" id="listing-115"><span class="label"><a 
  id="x37-112001r1"></a></span>Serie&#x003C;Point&#x003E;&#x00A0;serie1&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Serie&#x003C;Point&#x003E;();&#x00A0;<br /><span class="label"><a 
@@ -39,16 +36,16 @@ class="ecbx-1000">new</span>&#x00A0;Point(3.,2.));
 
                                                                   
    </div>
-<!--l. 3574--><p class="noindent" >
+<!--l. 3523--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">4.3.1.2   </span> <a 
  id="x37-1130004.3.1.2"></a>Subtypes </h5>
-<!--l. 3576--><p class="noindent" >The plot type is determined with the constructor:
-   <!--l. 3579-->
+<!--l. 3525--><p class="noindent" >The plot type is determined with the constructor:
+   <!--l. 3528-->
 <div class="lstlisting" id="listing-116"><span class="label"><a 
  id="x37-113001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;Plot2D(String&#x00A0;type)&#x00A0;;
    </div>
-<!--l. 3584--><p class="indent" >   Where type is one of the following constants :
+<!--l. 3533--><p class="indent" >   Where type is one of the following constants :
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">Plot2D.PLOT_TYPE_LINES</span> </dt><dd 
@@ -56,7 +53,7 @@ class="description">Series are drawn as lines Ex:
      </dd><dt class="description">
 <img 
 src="TatamiUserDocumentation32x.png" alt="PIC" class="graphics" width="401.5pt" height="186.6975pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation32x.png" src="32C__dev_workspace_docs_images_chartingimages_plot2D_typelinesaxample.eps"  
+name="TatamiUserDocumentation32x.png" src="4C__dev_workspace_docs_images_chartingimages_plot2D_typelinesaxample.eps"  
 --> </dt><dd 
 class="description">
      &#x00A0;
@@ -71,7 +68,7 @@ class="description">Series are drawn as lines, and the area
                                                                   
 <img 
 src="TatamiUserDocumentation33x.png" alt="PIC" class="graphics" width="405.515pt" height="196.73499pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation33x.png" src="33C__dev_workspace_docs_images_chartingimages_plot2D_typeareasaxample.eps"  
+name="TatamiUserDocumentation33x.png" src="5C__dev_workspace_docs_images_chartingimages_plot2D_typeareasaxample.eps"  
 --> </dt><dd 
 class="description">
      &#x00A0;
@@ -83,7 +80,7 @@ class="description">Series are drawn as lines,
      </dd><dt class="description">
 <img 
 src="TatamiUserDocumentation34x.png" alt="PIC" class="graphics" width="402.50374pt" height="89.33374pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation34x.png" src="34C__dev_workspace_docs_images_chartingimages_plot2D_typemarkerlinesaxample.eps"  
+name="TatamiUserDocumentation34x.png" src="6C__dev_workspace_docs_images_chartingimages_plot2D_typemarkerlinesaxample.eps"  
 --> </dt><dd 
 class="description">
      &#x00A0;
@@ -94,7 +91,7 @@ class="description">Series are drawn as points only Ex:
      </dd><dt class="description">
 <img 
 src="TatamiUserDocumentation35x.png" alt="PIC" class="graphics" width="400.49625pt" height="96.35999pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation35x.png" src="35C__dev_workspace_docs_images_chartingimages_plot2D_typescatterxample.eps"  
+name="TatamiUserDocumentation35x.png" src="7C__dev_workspace_docs_images_chartingimages_plot2D_typescatterxample.eps"  
 --> </dt><dd 
 class="description">
      &#x00A0;
@@ -109,7 +106,7 @@ class="description">Series  are  drawn  as  lines
      </dd><dt class="description">
 <img 
 src="TatamiUserDocumentation36x.png" alt="PIC" class="graphics" width="197.73874pt" height="188.70499pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation36x.png" src="36C__dev_workspace_docs_images_chartingimages_plot2D_typestackedlinesaxample.eps"  
+name="TatamiUserDocumentation36x.png" src="8C__dev_workspace_docs_images_chartingimages_plot2D_typestackedlinesaxample.eps"  
 --> </dt><dd 
 class="description">&#x00A0;
      </dd><dt class="description">
@@ -120,11 +117,11 @@ class="description">Series are drawn as lines,
      </dd><dt class="description">
 <img 
 src="TatamiUserDocumentation37x.png" alt="PIC" class="graphics" width="408.52625pt" height="182.6825pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation37x.png" src="37C__dev_workspace_docs_images_chartingimages_plot2D_typestackedareasaxample.eps"  
+name="TatamiUserDocumentation37x.png" src="9C__dev_workspace_docs_images_chartingimages_plot2D_typestackedareasaxample.eps"  
 --> </dt><dd 
 class="description">
      &#x00A0;</dd></dl>
-<!--l. 3604--><p class="noindent" >
+<!--l. 3553--><p class="noindent" >
                                                                   
 
                                                                   
@@ -133,14 +130,14 @@ class="description">
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">Tension:</span> </dt><dd 
-class="description">It allows you to add some curve to the lines <!--l. 3607-->
+class="description">It allows you to add some curve to the lines <!--l. 3556-->
      <div class="lstlisting" id="listing-117"><span class="label"><a 
  id="x37-114001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;setTension(String&#x00A0;tension);
      
      </div>
-     <!--l. 3610--><p class="noindent" >Example with tension = 2 : <!--l. 3611-->
+     <!--l. 3559--><p class="noindent" >Example with tension = 2 : <!--l. 3560-->
      <div class="lstlisting" id="listing-118"><span class="label"><a 
  id="x37-114002r1"></a></span>Plot2D&#x00A0;plot&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Plot2D(Plot2D.PLOT_TYPE_MARKERS_LINES);&#x00A0;<br /><span class="label"><a 
@@ -150,14 +147,14 @@ class="ecbx-1000">new</span>&#x00A0;Plot2D(Plot2D.PLOT_TYPE_MARKERS_LINES);&#x00
      </dd><dt class="description">
 <img 
 src="TatamiUserDocumentation38x.png" alt="PIC" class="graphics" width="388.45125pt" height="181.67874pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation38x.png" src="38C__dev_workspace_docs_images_chartingimages_plot2D_tensionExample.eps"  
+name="TatamiUserDocumentation38x.png" src="10C__dev_workspace_docs_images_chartingimages_plot2D_tensionExample.eps"  
 --> </dt><dd 
 class="description">
      &#x00A0;
      </dd><dt class="description">
 <span 
 class="ecbx-1000">Shadow:</span> </dt><dd 
-class="description"><!--l. 3618-->
+class="description"><!--l. 3567-->
      <div class="lstlisting" id="listing-119"><span class="label"><a 
  id="x37-114004r1"></a></span><span 
 class="ecti-1000">/</span><span 
@@ -245,7 +242,7 @@ class="ecbx-1000">int</span>&#x00A0;dx,&#x00A0;<span
 class="ecbx-1000">int</span>&#x00A0;dy);
      
      </div>
-     <!--l. 3628--><p class="noindent" >Example : <!--l. 3629-->
+     <!--l. 3577--><p class="noindent" >Example : <!--l. 3578-->
      <div class="lstlisting" id="listing-120"><span class="label"><a 
  id="x37-114012r1"></a></span>Plot2D&#x003C;Double&#x003E;&#x00A0;plot&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Plot2D&#x003C;Double&#x003E;(Plot2D.PLOT_TYPE_LINES_STACKED);&#x00A0;<br /><span class="label"><a 
@@ -258,13 +255,13 @@ class="ecbx-1000">new</span>&#x00A0;Plot2D&#x003C;Double&#x003E;(Plot2D.PLOT_TYP
      </dd><dt class="description">
 <img 
 src="TatamiUserDocumentation39x.png" alt="PIC" class="graphics" width="197.73874pt" height="188.70499pt" ><!--tex4ht:graphics  
-name="TatamiUserDocumentation39x.png" src="39C__dev_workspace_docs_images_chartingimages_plot2D_shadowExample.eps"  
+name="TatamiUserDocumentation39x.png" src="11C__dev_workspace_docs_images_chartingimages_plot2D_shadowExample.eps"  
 --> </dt><dd 
 class="description">&#x00A0;
      </dd><dt class="description">
 <span 
 class="ecbx-1000">ShowMarkers:</span> </dt><dd 
-class="description"><!--l. 3636-->
+class="description"><!--l. 3585-->
      <div class="lstlisting" id="listing-121"><span class="label"><a 
  id="x37-114014r1"></a></span><span 
 class="ecti-1000">/</span><span 
@@ -322,7 +319,7 @@ class="ecbx-1000">boolean</span>&#x00A0;show);
      </dd><dt class="description">
 <span 
 class="ecbx-1000">ShowLines:</span> </dt><dd 
-class="description"><!--l. 3645-->
+class="description"><!--l. 3594-->
      <div class="lstlisting" id="listing-122"><span class="label"><a 
  id="x37-114019r1"></a></span><span 
 class="ecti-1000">/</span><span 
@@ -381,13 +378,10 @@ class="ecbx-1000">boolean</span>&#x00A0;show);
                                                                   
 
                                                                   
-   <!--l. 3655--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu18.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu17.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 3655--><p class="indent" >   <a 
+   <!--l. 3604--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu18.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu17.html" >front</a>] [<a 
+href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu17.html" >up</a>] </p></div>
+<!--l. 3604--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu17.html"></a>   
 </body></html> 

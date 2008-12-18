@@ -7,64 +7,61 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-15 11:08:00"> 
+<meta name="date" content="2008-12-18 11:17:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 4667--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu34.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationse17.html#TatamiUserDocumentationsu33.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
+   <!--l. 4616--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu34.html" >next</a>] [<a 
+href="#tailTatamiUserDocumentationsu33.html">tail</a>] [<a 
+href="TatamiUserDocumentationse17.html#TatamiUserDocumentationsu33.html" >up</a>] </p></div>
    <h4 class="subsectionHead"><span class="titlemark">5.1.1   </span> <a 
  id="x59-1460005.1.1"></a>Building a simple drag-and-drop component</h4>
                                                                   
 
                                                                   
-<!--l. 4669--><p class="noindent" >This part is a mini tutorial on main APIs available for the drag-and-drop component.
+<!--l. 4618--><p class="noindent" >This part is a mini tutorial on main APIs available for the drag-and-drop component.
 Let&#8217;s begin with the instantiation of a drag-and-drop panel:
-   <!--l. 4674-->
+   <!--l. 4623-->
 <div class="lstlisting" id="listing-180"><span class="label"><a 
  id="x59-146001r1"></a></span><span 
 class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.DragAndDropPanel;&#x00A0;<br /><span class="label"><a 
  id="x59-146002r2"></a></span>DragAndDropPanel&#x00A0;ddPanel&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;DragAndDropPanel();
    </div>
-<!--l. 4680--><p class="indent" >   This panel can then be resized to the required space for drag and drop operations,
+<!--l. 4629--><p class="indent" >   This panel can then be resized to the required space for drag and drop operations,
 and attached somewhere in the GWT component tree:
-   <!--l. 4684-->
+   <!--l. 4633-->
 <div class="lstlisting" id="listing-181"><span class="label"><a 
  id="x59-146003r1"></a></span>ddPanel.setSize("500px",&#x00A0;"400px");&#x00A0;<br /><span class="label"><a 
  id="x59-146004r2"></a></span>RootPanel.get().add(ddPanel,&#x00A0;0,&#x00A0;0);
    </div>
-<!--l. 4690--><p class="indent" >   A draggable widget can be added via the addDraggableWidget method as
+<!--l. 4639--><p class="indent" >   A draggable widget can be added via the addDraggableWidget method as
 illustrated:
-   <!--l. 4694-->
+   <!--l. 4643-->
 <div class="lstlisting" id="listing-182"><span class="label"><a 
  id="x59-146005r1"></a></span>Image&#x00A0;romeo&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Image("romeo.png");&#x00A0;<br /><span class="label"><a 
  id="x59-146006r2"></a></span>ddPanel.addDraggableWidget(romeo,&#x00A0;50,&#x00A0;50,&#x00A0;"romeo&amp;juliet");
    </div>
-<!--l. 4700--><p class="indent" >   The upper left border of the Romeo picture is at position 50, 50. Romeo is
+<!--l. 4649--><p class="indent" >   The upper left border of the Romeo picture is at position 50, 50. Romeo is
 compatible with &#8220;romeo&amp;Juliet&#8221;.
-<!--l. 4703--><p class="indent" >   The Romeo widget can be moved, but any drop leads to a return to its
+<!--l. 4652--><p class="indent" >   The Romeo widget can be moved, but any drop leads to a return to its
 original position for there are no compatible target with &#8220;romeo&amp;Juliet&#8221; so
 far.
-<!--l. 4707--><p class="indent" >   Let&#8217;s create the Juliet widget and declare it as a possible target for Romeo. The
+<!--l. 4656--><p class="indent" >   Let&#8217;s create the Juliet widget and declare it as a possible target for Romeo. The
 method addTargetWidget&#x00A0;should be used for that purpose:
-   <!--l. 4712-->
+   <!--l. 4661-->
 <div class="lstlisting" id="listing-183"><span class="label"><a 
  id="x59-146007r1"></a></span>Image&#x00A0;juliet&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Image("juliet.png");&#x00A0;<br /><span class="label"><a 
  id="x59-146008r2"></a></span>ddPanel.addTargetWidget(juliet,&#x00A0;250,&#x00A0;50,&#x00A0;"romeo&amp;juliet");
    </div>
-<!--l. 4718--><p class="indent" >   Now you can try to move Romeo onto Juliet: this time Romeo will not return
+<!--l. 4667--><p class="indent" >   Now you can try to move Romeo onto Juliet: this time Romeo will not return
 back to its original position. It stays with Juliet. However, Juliet does not move at
 all.
-<!--l. 4722--><p class="indent" >   Let&#8217;s try now with two new pictures of Tristan and Iseult:
-   <!--l. 4726-->
+<!--l. 4671--><p class="indent" >   Let&#8217;s try now with two new pictures of Tristan and Iseult:
+   <!--l. 4675-->
 <div class="lstlisting" id="listing-184"><span class="label"><a 
  id="x59-146009r1"></a></span>Image&#x00A0;tristan&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Image("tristan.png");&#x00A0;<br /><span class="label"><a 
@@ -73,46 +70,46 @@ class="ecbx-1000">new</span>&#x00A0;Image("tristan.png");&#x00A0;<br /><span cla
 class="ecbx-1000">new</span>&#x00A0;Image("iseult.png");&#x00A0;<br /><span class="label"><a 
  id="x59-146012r4"></a></span>ddPanel.addTargetWidget(iseult,&#x00A0;250,&#x00A0;250,&#x00A0;"tristan&amp;iseult");
    </div>
-<!--l. 4734--><p class="indent" >   Now, Romeo can still be dropped on Juliet, but not on Iseult, and conversely for
+<!--l. 4683--><p class="indent" >   Now, Romeo can still be dropped on Juliet, but not on Iseult, and conversely for
 Tristan.
                                                                   
 
                                                                   
-<!--l. 4737--><p class="indent" >   We are going to create a new picture, named Dom Juan, which is able to join any
+<!--l. 4686--><p class="indent" >   We are going to create a new picture, named Dom Juan, which is able to join any
 &#8220;feminine&#8221; widget. Therefore it is a draggable widget, compatible with both
 &#8220;romeo&amp;Juliet&#8221; and "tristan&amp;iseult". The method addDraggableWidget will be used
 for declaring Dom Juan compatible with &#8220;romeo&amp;Juliet&#8221; and add it to the panel. The
 next step consists in invoking setDraggable&#x00A0;to provide Dom Juan with the
 "tristan&amp;iseult" compatibility:
-<!--l. 4746--><p class="indent" >   I <!--l. 4747-->
+<!--l. 4695--><p class="indent" >   I <!--l. 4696-->
 <div class="lstlisting" id="listing-185"><span class="label"><a 
  id="x59-146013r1"></a></span>mage&#x00A0;domjuan&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Image("domjuan.png");&#x00A0;<br /><span class="label"><a 
  id="x59-146014r2"></a></span>ddPanel.addDraggableWidget(domjuan,&#x00A0;50,&#x00A0;450,&#x00A0;"romeo&amp;juliet");&#x00A0;<br /><span class="label"><a 
  id="x59-146015r3"></a></span>ddPanel.setDraggable(domjuan,&#x00A0;"tristan&amp;iseult");
    </div>
-<!--l. 4754--><p class="indent" >   Now Dom Juan can be dropped either on Juliet as well as on Iseult. However,
+<!--l. 4703--><p class="indent" >   Now Dom Juan can be dropped either on Juliet as well as on Iseult. However,
 Dom Juan would not accept to be dropped on Romeo nor Tristant, as those widgets
 are not declared as targets.
-<!--l. 4758--><p class="indent" >   Unfortunately, Iseult and Juliet can not by themselves join their lovers. We are
+<!--l. 4707--><p class="indent" >   Unfortunately, Iseult and Juliet can not by themselves join their lovers. We are
 going to improve this by declaring Romeo and Tristan as target widgets, and Juliet
 and Iseult as draggable widgets.
-<!--l. 4762--><p class="indent" >   For that purpose, the setDraggable&#x00A0;method (we already know) will be used and
+<!--l. 4711--><p class="indent" >   For that purpose, the setDraggable&#x00A0;method (we already know) will be used and
 its target analogous, setTarget. Those methods can provide both capacities
 (draggable and target) to the same widget:
-   <!--l. 4767-->
+   <!--l. 4716-->
 <div class="lstlisting" id="listing-186"><span class="label"><a 
  id="x59-146016r1"></a></span>ddPanel.setDraggable(juliet,&#x00A0;"romeo&amp;juliet");&#x00A0;<br /><span class="label"><a 
  id="x59-146017r2"></a></span>ddPanel.setDraggable(iseult,&#x00A0;"tristan&amp;iseult");&#x00A0;<br /><span class="label"><a 
  id="x59-146018r3"></a></span>ddPanel.setTarget(romeo,&#x00A0;"romeo&amp;juliet");&#x00A0;<br /><span class="label"><a 
  id="x59-146019r4"></a></span>ddPanel.setTarget(tristan,&#x00A0;"tristan&amp;iseult");
    </div>
-<!--l. 4775--><p class="indent" >   Moreover, the setTarget method can be used to add more than one target
+<!--l. 4724--><p class="indent" >   Moreover, the setTarget method can be used to add more than one target
 compatibility to the same widget. For the purpose of illustration, and simplifying at
 the same time Dom Juan coding, we will add the &#8220;woman&#8221; compatibility to all
 female widgets. Then Dom Juan will just have to be draggable for that
 compatibility:
-   <!--l. 4783-->
+   <!--l. 4732-->
 <div class="lstlisting" id="listing-187"><span class="label"><a 
  id="x59-146020r1"></a></span>ddPanel.setTarget(juliet,&#x00A0;"woman");&#x00A0;<br /><span class="label"><a 
  id="x59-146021r2"></a></span>ddPanel.setTarget(iseult,&#x00A0;"woman");&#x00A0;<br /><span class="label"><a 
@@ -120,37 +117,34 @@ compatibility:
 class="ecbx-1000">new</span>&#x00A0;Image("domjuan.png");&#x00A0;<br /><span class="label"><a 
  id="x59-146023r4"></a></span>ddPanel.addDraggableWidget(domjuan,&#x00A0;50,&#x00A0;450,&#x00A0;"woman");
    </div>
-<!--l. 4791--><p class="indent" >   Now let&#8217;s see it is possible to add widgets which are neither draggable nor
+<!--l. 4740--><p class="indent" >   Now let&#8217;s see it is possible to add widgets which are neither draggable nor
 targets:
-   <!--l. 4795-->
+   <!--l. 4744-->
 <div class="lstlisting" id="listing-188"><span class="label"><a 
  id="x59-146024r1"></a></span>Image&#x00A0;tintin&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Image("tintin.png");&#x00A0;<br /><span class="label"><a 
  id="x59-146025r2"></a></span>ddPanel.add(tintin,&#x00A0;450,&#x00A0;450);
    </div>
-<!--l. 4801--><p class="indent" >   A widget, whatever its status with respect to the Drag-and-drop capabilities, can
+<!--l. 4750--><p class="indent" >   A widget, whatever its status with respect to the Drag-and-drop capabilities, can
 always be moved with the method setWidgetPosition. In that case, the compatibility
 is not checked and the move is done in any case.
-   <!--l. 4806-->
+   <!--l. 4755-->
                                                                   
 
                                                                   
 <div class="lstlisting" id="listing-189"><span class="label"><a 
  id="x59-146026r1"></a></span>ddPanel.setWidgetPosition(tintin,&#x00A0;500,&#x00A0;500);
    </div>
-<!--l. 4809--><p class="indent" >   Actually, the DragAndDropPanel is a subclass of AbsolutePanel, and as such
+<!--l. 4758--><p class="indent" >   Actually, the DragAndDropPanel is a subclass of AbsolutePanel, and as such
 all methods available on the latter class are also available for the former
 safely.
                                                                   
 
                                                                   
-   <!--l. 4814--><div class="crosslinks"><p class="noindent"><a 
-href="TatamiUserDocumentationsu34.html" ><img 
-src="cssimages/go-next.png" alt="next"  
-class="nextarrow"></a><a 
-href="TatamiUserDocumentationse17.html#TatamiUserDocumentationsu33.html" ><img 
-src="cssimages/go-top.png" alt="up"  
-class="uparrow"></a></p></div>
-<!--l. 4814--><p class="indent" >   <a 
+   <!--l. 4763--><div class="crosslinks"><p class="noindent">[<a 
+href="TatamiUserDocumentationsu34.html" >next</a>] [<a 
+href="TatamiUserDocumentationsu33.html" >front</a>] [<a 
+href="TatamiUserDocumentationse17.html#TatamiUserDocumentationsu33.html" >up</a>] </p></div>
+<!--l. 4763--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu33.html"></a>  
 </body></html> 
