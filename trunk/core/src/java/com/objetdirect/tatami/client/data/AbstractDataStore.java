@@ -1020,8 +1020,9 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	
 	public void clearDataStore(){
 		Collection<Item> collec = items.values();
-		for (Item item : collec) {
-			remove(item);
+		for (Iterator iterator = collec.iterator(); iterator.hasNext();) {
+			iterator.next();
+			iterator.remove();
 		}
 	}
 	
@@ -1035,7 +1036,6 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 	 */
 	public List<Item> executeQuery(Collection<?> items , Request request){
 		List<Item> itemsMatchingAndSorted = new ArrayList<Item>();
-		ItemComparator comparator = new ItemComparator(request.getSortFields());
 		for (Iterator<?> iterator = items.iterator(); iterator
 				.hasNext();) {
 			Item item = (Item) iterator.next();
@@ -1043,7 +1043,10 @@ public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,Dat
 				itemsMatchingAndSorted.add(item);
 			}
 		}
-		Collections.sort(itemsMatchingAndSorted , comparator);
+		if(request.getSortFields().size() > 0){
+			ItemComparator comparator = new ItemComparator(request.getSortFields());
+			Collections.sort(itemsMatchingAndSorted , comparator);
+		}
 		return itemsMatchingAndSorted;
 	}
 	
