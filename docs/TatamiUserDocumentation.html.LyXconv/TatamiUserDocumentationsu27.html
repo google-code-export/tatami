@@ -7,33 +7,37 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-18 11:17:00"> 
+<meta name="date" content="2008-12-18 11:35:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 4302--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu28.html" >next</a>] [<a 
-href="TatamiUserDocumentationsu26.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu26.html#tailTatamiUserDocumentationsu26.html" >prev-tail</a>] [<a 
-href="#tailTatamiUserDocumentationsu27.html">tail</a>] [<a 
-href="TatamiUserDocumentationse16.html#TatamiUserDocumentationsu27.html" >up</a>] </p></div>
+   <!--l. 4346--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu28.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu26.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse16.html#TatamiUserDocumentationsu27.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
    <h4 class="subsectionHead"><span class="titlemark">4.7.2   </span> <a 
  id="x51-1360004.7.2"></a>EffectTooltip </h4>
-<!--l. 4304--><p class="noindent" >The corresponding class is <!--l. 4305-->
+<!--l. 4348--><p class="noindent" >The corresponding class is <!--l. 4349-->
 <div class="lstlisting" id="listing-163"><span class="label"><a 
  id="x51-136001r1"></a></span>com.objetdirect.tatami.client.charting.effects.EffectTooltip
    </div>
-<!--l. 4310--><p class="indent" >   The basic Tooltip effect will show the point (or slice/bar/column/bubble...) value
+<!--l. 4354--><p class="indent" >   The basic Tooltip effect will show the point (or slice/bar/column/bubble...) value
 in a tooltip.
-<!--l. 4313--><p class="indent" >   Example :
-   <!--l. 4316-->
+<!--l. 4357--><p class="indent" >   Example :
+   <!--l. 4360-->
 <div class="lstlisting" id="listing-164"><span class="label"><a 
  id="x51-136002r1"></a></span>plot.addEffect(<span 
 class="ecbx-1000">new</span>&#x00A0;EffectTooltip());
    </div>
-<!--l. 4321--><p class="indent" >   But the Point, Bubble and PiePiece data objects each offer a way to give a
+<!--l. 4365--><p class="indent" >   But the Point, Bubble and PiePiece data objects each offer a way to give a
 custom tooltip to the data. They implement the HasTooltip interface:
-   <!--l. 4325-->
+   <!--l. 4369-->
 <div class="lstlisting" id="listing-165"><span class="label"><a 
  id="x51-136003r1"></a></span><span 
 class="ecbx-1000">package</span>&#x00A0;com.objetdirect.tatami.client.charting;&#x00A0;<br /><span class="label"><a 
@@ -47,9 +51,9 @@ class="ecbx-1000">public</span>&#x00A0;<span
 class="ecbx-1000">void</span>&#x00A0;setTooltip(String&#x00A0;tooltip);&#x00A0;<br /><span class="label"><a 
  id="x51-136007r5"></a></span>}
    </div>
-<!--l. 4334--><p class="indent" >   Moreover, they each have a constructor taking this tooltip into account
+<!--l. 4378--><p class="indent" >   Moreover, they each have a constructor taking this tooltip into account
 :
-   <!--l. 4338-->
+   <!--l. 4382-->
 <div class="lstlisting" id="listing-166"><span class="label"><a 
  id="x51-136008r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;Bubble(<span 
@@ -65,8 +69,8 @@ class="ecbx-1000">public</span>&#x00A0;PiePiece(<span
 class="ecbx-1000">double</span>&#x00A0;value&#x00A0;,&#x00A0;String&#x00A0;<span 
 class="ecbx-1000">label</span>,String&#x00A0;color,&#x00A0;String&#x00A0;fontColor,&#x00A0;String&#x00A0;tooltip)
    </div>
-<!--l. 4345--><p class="indent" >   Example :
-   <!--l. 4348-->
+<!--l. 4389--><p class="indent" >   Example :
+   <!--l. 4392-->
 <div class="lstlisting" id="listing-167"><span class="label"><a 
  id="x51-136011r1"></a></span>Point[]&#x00A0;points&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Point[]{<span 
@@ -82,19 +86,23 @@ class="ecbx-1000">new</span>&#x00A0;EffectTooltip());
                                                                   
 
                                                                   
-<!--l. 4356--><p class="indent" >   <img 
+<!--l. 4400--><p class="indent" >   <img 
 src="TatamiUserDocumentation57x.png" alt="PIC" class="graphics" width="423.58249pt" height="190.7125pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation57x.png" src="29C__dev_workspace_docs_images_chartingimages_effects_tooltip.eps"  
 -->
                                                                   
 
                                                                   
-   <!--l. 4359--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu28.html" >next</a>] [<a 
-href="TatamiUserDocumentationsu26.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu26.html#tailTatamiUserDocumentationsu26.html" >prev-tail</a>] [<a 
-href="TatamiUserDocumentationsu27.html" >front</a>] [<a 
-href="TatamiUserDocumentationse16.html#TatamiUserDocumentationsu27.html" >up</a>] </p></div>
-<!--l. 4359--><p class="indent" >   <a 
+   <!--l. 4403--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu28.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu26.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse16.html#TatamiUserDocumentationsu27.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 4403--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu27.html"></a>  
 </body></html> 

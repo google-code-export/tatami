@@ -7,16 +7,20 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-18 11:17:00"> 
+<meta name="date" content="2008-12-18 11:35:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 794--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu8.html" >next</a>] [<a 
-href="TatamiUserDocumentationsu6.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu6.html#tailTatamiUserDocumentationsu6.html" >prev-tail</a>] [<a 
-href="#tailTatamiUserDocumentationsu7.html">tail</a>] [<a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu7.html" >up</a>] </p></div>
+   <!--l. 838--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu8.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu6.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu7.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
    <h4 class="subsectionHead"><span class="titlemark">2.2.5   </span> <a 
  id="x16-320002.2.5"></a>The NumberSpinner component</h4>
      <dl class="description"><dt class="description">
@@ -34,25 +38,25 @@ class="description">number spinner is a very convenient widget when it comes to 
      </li>
      <li class="itemize">Displaying a tooltip when the value is out of range, when the value is
      invalid , or as a hint on what to put in the spinner</li></ul>
-<!--l. 806--><p class="noindent" >To import this widget see below:
-   <!--l. 809-->
+<!--l. 850--><p class="noindent" >To import this widget see below:
+   <!--l. 853-->
 <div class="lstlisting" id="listing-32"><span class="label"><a 
  id="x16-32001r1"></a></span><span 
 class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.NumberSpinner;
    </div>
-<!--l. 815--><p class="noindent" >
+<!--l. 859--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.5.1   </span> <a 
  id="x16-330002.2.5.1"></a>Create the NumberSpinner component: </h5>
-<!--l. 817--><p class="noindent" >There are several constructor&#8217;s for the number spinner. Let&#8217;s begin with the simplest
+<!--l. 861--><p class="noindent" >There are several constructor&#8217;s for the number spinner. Let&#8217;s begin with the simplest
 one.
-   <!--l. 821-->
+   <!--l. 865-->
 <div class="lstlisting" id="listing-33"><span class="label"><a 
  id="x16-33001r1"></a></span>NumberSpinner&#x00A0;spinner&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;NumberSpinner();
    </div>
-<!--l. 824--><p class="indent" >   This creates a NumberSpinner with no constraints, with a default value of 0, and
+<!--l. 868--><p class="indent" >   This creates a NumberSpinner with no constraints, with a default value of 0, and
 a delta of 1. This delta is the spinner&#8217;s increment.
-<!--l. 828--><p class="indent" >   A second constructor is quite simple :
+<!--l. 872--><p class="indent" >   A second constructor is quite simple :
                                                                   
 
                                                                   
@@ -75,14 +79,14 @@ class="description">Spinner&#8217;s max value. Any value above maxValue will be 
 class="ecbx-1000">delta:</span> </dt><dd 
 class="description">Spinner&#8217;s delta. It is the spinner&#8217;s increment when user hit a spinner
      button</dd></dl>
-<!--l. 838--><p class="noindent" >The below snippet will create a spinner which value can range from 500 to 1500 , with
+<!--l. 882--><p class="noindent" >The below snippet will create a spinner which value can range from 500 to 1500 , with
 an increment of 100 and an init value equals to 1000.
-   <!--l. 843-->
+   <!--l. 887-->
 <div class="lstlisting" id="listing-34"><span class="label"><a 
  id="x16-33002r1"></a></span>NumberSpinner&#x00A0;spinner&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;NumberSpinner(1000f,&#x00A0;500f,&#x00A0;1500f&#x00A0;,&#x00A0;100f);
    </div>
-<!--l. 848--><p class="indent" >   The following constructor is the most complete one . Notice the constraints
+<!--l. 892--><p class="indent" >   The following constructor is the most complete one . Notice the constraints
 object, which is replaced by min and max value in another constructor for more
 convenience. The constraints object maps constraints to be applied to the spinner
 content. Please see the example below.
@@ -139,8 +143,8 @@ class="description">Spinner&#8217;s default value
 <span 
 class="ecbx-1000">constraints:</span> </dt><dd 
 class="description">A map containing the spinner&#8217;s constraints</dd></dl>
-<!--l. 875--><p class="noindent" >Below , the code that produces the above spinner :
-   <!--l. 878-->
+<!--l. 919--><p class="noindent" >Below , the code that produces the above spinner :
+   <!--l. 922-->
 <div class="lstlisting" id="listing-35"><span class="label"><a 
  id="x16-33003r1"></a></span>Map&#x00A0;constraints&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;HashMap();&#x00A0;<br /><span class="label"><a 
@@ -241,10 +245,10 @@ class="ecbx-1000">new</span>&#x00A0;NumberSpinner(100,&#x00A0;"Please&#x2423;ent
 class="ecbx-1000">false</span>&#x00A0;,&#x00A0;100f&#x00A0;,"Please&#x2423;enter&#x2423;a&#x2423;value&#x2423;between&#x2423;500&#x2423;and&#x2423;1500"&#x00A0;,&#x00A0;"Value&#x2423;is&#x2423;out&#x2423;of&#x2423;range"&#x00A0;,&#x00A0;0.90f&#x00A0;,&#x00A0;<span 
 class="ecbx-1000">true</span>,&#x00A0;1000,&#x00A0;constraints);
    </div>
-<!--l. 893--><p class="noindent" >
+<!--l. 937--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.5.2   </span> <a 
  id="x16-340002.2.5.2"></a>Constraints </h5>
-<!--l. 895--><p class="noindent" >The number spinner component can be constrained with some parameters. Those
+<!--l. 939--><p class="noindent" >The number spinner component can be constrained with some parameters. Those
 are:
      <dl class="description"><dt class="description">
 <span 
@@ -278,23 +282,23 @@ class="ecbx-1000">NumberSpinner.CONSTRAINT_CURRENCY:</span> </dt><dd
 class="description">Sets    the    currency
      symbol for the spinner. It has no effects if the type constraints is not set
      to &#8220;currency&#8221;.</dd></dl>
-<!--l. 912--><p class="noindent" >To set one of these constraints , just use the following method :
-   <!--l. 915-->
+<!--l. 956--><p class="noindent" >To set one of these constraints , just use the following method :
+   <!--l. 959-->
 <div class="lstlisting" id="listing-36"><span class="label"><a 
  id="x16-34001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;<span 
 class="ecbx-1000">void</span>&#x00A0;addConstraint(String,&#x00A0;String)&#x00A0;
    </div>
-<!--l. 920--><p class="indent" >   For example, if you want to set the max value for your spinner to 50 , just use the
+<!--l. 964--><p class="indent" >   For example, if you want to set the max value for your spinner to 50 , just use the
 following snippet :
-   <!--l. 924-->
+   <!--l. 968-->
 <div class="lstlisting" id="listing-37"><span class="label"><a 
  id="x16-34002r1"></a></span>mySpinner.addConstraint(NumberSpinner.CONSTRAINT_MAX&#x00A0;,&#x00A0;"50");
    </div>
-<!--l. 930--><p class="noindent" >
+<!--l. 974--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.5.3   </span> <a 
  id="x16-350002.2.5.3"></a>API of the number spinner component</h5>
-<!--l. 932--><p class="noindent" >The number spinner supports ChangeListeners. To add a ChangeListener to Tatami
+<!--l. 976--><p class="noindent" >The number spinner supports ChangeListeners. To add a ChangeListener to Tatami
 NumberSpinner component, just use addChangeListener(ChangeListener
 listener).
      <dl class="description"><dt class="description">
@@ -371,12 +375,16 @@ class="description">Removes          a
                                                                   
 
                                                                   
-   <!--l. 959--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu8.html" >next</a>] [<a 
-href="TatamiUserDocumentationsu6.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu6.html#tailTatamiUserDocumentationsu6.html" >prev-tail</a>] [<a 
-href="TatamiUserDocumentationsu7.html" >front</a>] [<a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu7.html" >up</a>] </p></div>
-<!--l. 959--><p class="indent" >   <a 
+   <!--l. 1003--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu8.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu6.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu7.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 1003--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu7.html"></a>   
 </body></html> 

@@ -7,68 +7,71 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-18 11:17:00"> 
+<meta name="date" content="2008-12-18 11:35:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 289--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu4.html" >next</a>] [<a 
-href="#tailTatamiUserDocumentationsu3.html">tail</a>] [<a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu3.html" >up</a>] </p></div>
+   <!--l. 333--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu4.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu3.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
    <h4 class="subsectionHead"><span class="titlemark">2.2.1   </span> <a 
  id="x12-140002.2.1"></a>FishEye</h4>
-<!--l. 291--><p class="noindent" >The FishEye is a dynamic tool bar. The size of icons on the tool bar varies according
+<!--l. 335--><p class="noindent" >The FishEye is a dynamic tool bar. The size of icons on the tool bar varies according
 to the mouse position with respect to the icon. The icons are active ones, in a sense
 they can be associated with a command which will be triggered when the icon is
 activated.
-<!--l. 296--><p class="indent" >   <img 
+<!--l. 340--><p class="indent" >   <img 
 src="TatamiUserDocumentation3x.png" alt="PIC" class="graphics" width="330.23375pt" height="66.2475pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation3x.png" src="37C__dev_workspace_docs_images_fisheye_preview.eps"  
 -->
-<!--l. 299--><p class="noindent" >
+<!--l. 343--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.1.1   </span> <a 
  id="x12-150002.2.1.1"></a>Create the FishEye component</h5>
-<!--l. 301--><p class="noindent" >Before being able to create a FishEye instance, the appropriate import declaration
+<!--l. 345--><p class="noindent" >Before being able to create a FishEye instance, the appropriate import declaration
 should be added to the class:
-   <!--l. 305-->
+   <!--l. 349-->
 <div class="lstlisting" id="listing-11"><span class="label"><a 
  id="x12-15001r1"></a></span><span 
 class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.FishEye;
    </div>
-<!--l. 310--><p class="indent" >   It is then possible to create an instance of the FishEye. The simplest and most
+<!--l. 354--><p class="indent" >   It is then possible to create an instance of the FishEye. The simplest and most
 common way is to use the default constructor:
-   <!--l. 314-->
+   <!--l. 358-->
 <div class="lstlisting" id="listing-12"><span class="label"><a 
  id="x12-15002r1"></a></span>FishEye&#x00A0;fe&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;FishEye();
    </div>
-<!--l. 319--><p class="indent" >   This will create a FishEye component with the default behavior: the icon sizes
+<!--l. 363--><p class="indent" >   This will create a FishEye component with the default behavior: the icon sizes
 will vary between 50 and 200 pixels, and they will be laid out horizontally. When the
 icons are magnified by the mouse proximity, they stay centered on the FishEye. The
 icon title appears just below the icon.
                                                                   
 
                                                                   
-<!--l. 325--><p class="indent" >   This behavior can be differentiated by using one of the two remaining
+<!--l. 369--><p class="indent" >   This behavior can be differentiated by using one of the two remaining
 constructors with parameters.
-<!--l. 328--><p class="indent" >   The first constructor has only the most frequently used parameters: the minimum
+<!--l. 372--><p class="indent" >   The first constructor has only the most frequently used parameters: the minimum
 and maximum icon sizes as well as the component orientation. For instance, here is
 the creation of a vertical FishEye with icon sizes varying from 40x40 pixels to
 400x200 pixels:
-   <!--l. 334-->
+   <!--l. 378-->
 <div class="lstlisting" id="listing-13"><span class="label"><a 
  id="x12-15003r1"></a></span>FishEye&#x00A0;fe&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;FishEye(40,&#x00A0;40,&#x00A0;400,&#x00A0;200,&#x00A0;FishEye.VERTICAL);
    </div>
-<!--l. 339--><p class="indent" >   And the corresponding result:
-<!--l. 341--><p class="indent" >   <img 
+<!--l. 383--><p class="indent" >   And the corresponding result:
+<!--l. 385--><p class="indent" >   <img 
 src="TatamiUserDocumentation4x.png" alt="PIC" class="graphics" width="68.25499pt" height="306.14374pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation4x.png" src="38C__dev_workspace_docs_images_fisheye_first_example.eps"  
 -->
-<!--l. 343--><p class="indent" >   The last constructor allows the specification of all available Dojo parameters. It is
+<!--l. 387--><p class="indent" >   The last constructor allows the specification of all available Dojo parameters. It is
 therefore slightly more complex to use, some parameters are even not completely
 understood by the Tatami team!
-<!--l. 347--><p class="indent" >   Those parameters are (in order):
+<!--l. 391--><p class="indent" >   Those parameters are (in order):
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">itemWidth:</span> </dt><dd 
@@ -125,38 +128,38 @@ class="ecbx-1000">conservativeTrigger</span> </dt><dd
 class="description">:if true, don&#8217;t start enlarging menu items until mouse is
      over an image; if false, start enlarging menu items as the mouse moves
      near them.</dd></dl>
-<!--l. 373--><p class="noindent" >Here is an example of the use of this constructor:
-   <!--l. 376-->
+<!--l. 417--><p class="noindent" >Here is an example of the use of this constructor:
+   <!--l. 420-->
 <div class="lstlisting" id="listing-14"><span class="label"><a 
  id="x12-15004r1"></a></span>FishEye&#x00A0;fe&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;FishEye(40,&#x00A0;40,&#x00A0;200,&#x00A0;400,&#x00A0;FishEye.HORIZONTAL,&#x00A0;1,&#x00A0;0,&#x00A0;FishEye.TOP,&#x00A0;FishEye.RIGHT,&#x00A0;<span 
 class="ecbx-1000">true</span>);
    </div>
-<!--l. 381--><p class="indent" >   And here is the corresponding result:
+<!--l. 425--><p class="indent" >   And here is the corresponding result:
                                                                   
 
                                                                   
-<!--l. 383--><p class="indent" >   <img 
+<!--l. 427--><p class="indent" >   <img 
 src="TatamiUserDocumentation5x.png" alt="PIC" class="graphics" width="271.0125pt" height="183.68625pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation5x.png" src="39C__dev_workspace_docs_images_fisheye_second_example.eps"  
 -->
-<!--l. 385--><p class="indent" >   Instantiating the FishEye is not enough by itself to have it displayed. It has to be
+<!--l. 429--><p class="indent" >   Instantiating the FishEye is not enough by itself to have it displayed. It has to be
 hanged in the GWT widget tree.
-<!--l. 388--><p class="indent" >   For a FishEye positioned on the upper left corner of the page body, you should
+<!--l. 432--><p class="indent" >   For a FishEye positioned on the upper left corner of the page body, you should
 write:
-   <!--l. 392-->
+   <!--l. 436-->
 <div class="lstlisting" id="listing-15"><span class="label"><a 
  id="x12-15005r1"></a></span>RootPanel&#x00A0;rootPanel&#x00A0;=&#x00A0;RootPanel.get();&#x00A0;rootPanel.add(fe,&#x00A0;50,&#x00A0;50);
    </div>
-<!--l. 397--><p class="indent" >   Take attention to have some margin around the FishEye (50 pixels in both
+<!--l. 441--><p class="indent" >   Take attention to have some margin around the FishEye (50 pixels in both
 dimensions in the example), otherwise the icons could appear partly outside the
 page.
-<!--l. 402--><p class="noindent" >
+<!--l. 446--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.1.2   </span> <a 
  id="x12-160002.2.1.2"></a>Adding and removing icons</h5>
-<!--l. 404--><p class="noindent" >A FishEye with no icon is useless. The add method can be used to add new icons to
+<!--l. 448--><p class="noindent" >A FishEye with no icon is useless. The add method can be used to add new icons to
 the component.
-   <!--l. 408-->
+   <!--l. 452-->
 <div class="lstlisting" id="listing-16"><span class="label"><a 
  id="x12-16001r1"></a></span>Command&#x00A0;cmd&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Command()&#x00A0;{&#x00A0;<br /><span class="label"><a 
@@ -166,7 +169,7 @@ class="ecbx-1000">void</span>&#x00A0;execute()&#x00A0;{};&#x00A0;<br /><span cla
  id="x12-16003r3"></a></span>}&#x00A0;<br /><span class="label"><a 
  id="x12-16004r4"></a></span>fe.add("amor.png",&#x00A0;"drap&#8217;n&#8217;drop",&#x00A0;cmd);
    </div>
-<!--l. 414--><p class="indent" >   This method requires three parameters:
+<!--l. 458--><p class="indent" >   This method requires three parameters:
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">icon:</span> </dt><dd 
@@ -184,18 +187,18 @@ class="ecbx-1000">command:</span> </dt><dd
 class="description">
      A command implementation (com.google.gwt.user.client.Command) that
      will be activated when the icon will be selected. .</dd></dl>
-<!--l. 421--><p class="noindent" >The remove method, as the reader will have easily guessed, can be used to remove an
+<!--l. 465--><p class="noindent" >The remove method, as the reader will have easily guessed, can be used to remove an
 icon from the FishEye, given its URL:
-   <!--l. 425-->
+   <!--l. 469-->
 <div class="lstlisting" id="listing-17"><span class="label"><a 
  id="x12-16005r1"></a></span>fe.remove("amor.png");
    </div>
-<!--l. 428--><p class="indent" >   It is possible to add and remove icons dynamically, that is while the FishEye is
+<!--l. 472--><p class="indent" >   It is possible to add and remove icons dynamically, that is while the FishEye is
 displayed.
-<!--l. 432--><p class="noindent" >
+<!--l. 476--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.1.3   </span> <a 
  id="x12-170002.2.1.3"></a>API of the FishEye</h5>
-<!--l. 434--><p class="noindent" >We saw how to add or remove icons from the menu. These two methods are the most
+<!--l. 478--><p class="noindent" >We saw how to add or remove icons from the menu. These two methods are the most
 important; however the FishEye class provides some other method which can be
 useful: get the added icons, the command associated&#x2026;
      <dl class="description"><dt class="description">
@@ -234,10 +237,13 @@ class="description">Returns the URL of the icon at the index position.</dd></dl>
                                                                   
 
                                                                   
-   <!--l. 451--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu4.html" >next</a>] [<a 
-href="TatamiUserDocumentationsu3.html" >front</a>] [<a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu3.html" >up</a>] </p></div>
-<!--l. 451--><p class="indent" >   <a 
+   <!--l. 495--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu4.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu3.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 495--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu3.html"></a>   
 </body></html> 

@@ -7,21 +7,24 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-18 11:17:00"> 
+<meta name="date" content="2008-12-18 11:35:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 5240--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationse20.html" >next</a>] [<a 
-href="#tailTatamiUserDocumentationse19.html">tail</a>] [<a 
-href="TatamiUserDocumentationch6.html#TatamiUserDocumentationse19.html" >up</a>] </p></div>
+   <!--l. 5284--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse20.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationch6.html#TatamiUserDocumentationse19.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
    <h3 class="sectionHead"><span class="titlemark">6.1   </span> <a 
  id="x69-1620006.1"></a>BlowFish encryption</h3>
-<!--l. 5242--><p class="noindent" >BlowFish is a symmetric cipher algorithm, relying on a private key that must be
+<!--l. 5286--><p class="noindent" >BlowFish is a symmetric cipher algorithm, relying on a private key that must be
 shared amongst people wanting to communicates ciphered data.
-<!--l. 5246--><p class="indent" >   Tatami provides a simple API to use the BlowFish algorithm in GWT.
-<!--l. 5248--><p class="indent" >   Sample :
-   <!--l. 5251-->
+<!--l. 5290--><p class="indent" >   Tatami provides a simple API to use the BlowFish algorithm in GWT.
+<!--l. 5292--><p class="indent" >   Sample :
+   <!--l. 5295-->
 <div class="lstlisting" id="listing-217"><span class="label"><a 
  id="x69-162001r1"></a></span>BlowFishEncryption&#x00A0;cipher&#x00A0;=&#x00A0;BlowFishEncryption.getInstance();&#x00A0;<br /><span class="label"><a 
  id="x69-162002r2"></a></span>String&#x00A0;key&#x00A0;=&#x00A0;"the&#x2423;secret&#x2423;key";&#x00A0;<br /><span class="label"><a 
@@ -29,17 +32,17 @@ shared amongst people wanting to communicates ciphered data.
  id="x69-162004r4"></a></span>String&#x00A0;ciphered&#x00A0;=&#x00A0;cipher.encrypt(BlowFishEncryption.Base64OutputType,&#x00A0;randomString,&#x00A0;key);&#x00A0;<br /><span class="label"><a 
  id="x69-162005r5"></a></span>String&#x00A0;deciphered&#x00A0;=&#x00A0;ciher.decrypt(BlowFishEncryption.Base64OutputType,&#x00A0;ciphered,&#x00A0;key);
    </div>
-<!--l. 5260--><p class="indent" >   In the above sample, we use a secret key (&#8220;the secret key&#8221;) to encrypt a text.
+<!--l. 5304--><p class="indent" >   In the above sample, we use a secret key (&#8220;the secret key&#8221;) to encrypt a text.
 Tatami currently support two output-types/input types for the ciphering/deciphering
 process.
-<!--l. 5264--><p class="indent" >   Those are :
+<!--l. 5308--><p class="indent" >   Those are :
      <ul class="itemize1">
      <li class="itemize">Base64 : the output will be encoded in Base64 format.
      </li>
      <li class="itemize">Hex : the output will be encoded in Hex format</li></ul>
-<!--l. 5269--><p class="noindent" >Those formats are defined as constants in the BlowFishEncryption class (respectively
+<!--l. 5313--><p class="noindent" >Those formats are defined as constants in the BlowFishEncryption class (respectively
 BlowFishEncryption.Base64OutputType and BlowFishEncryption. HexOutputType)
-<!--l. 5273--><p class="indent" >   While using the BlowFish encryption , you should assure which output format
+<!--l. 5317--><p class="indent" >   While using the BlowFish encryption , you should assure which output format
 comes from the cipher, and which format waits the decipher.
      <dl class="description"><dt class="description">
 <span 
@@ -70,10 +73,13 @@ class="description">
                                                                   
 
                                                                   
-   <!--l. 5287--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationse20.html" >next</a>] [<a 
-href="TatamiUserDocumentationse19.html" >front</a>] [<a 
-href="TatamiUserDocumentationch6.html#TatamiUserDocumentationse19.html" >up</a>] </p></div>
-<!--l. 5287--><p class="indent" >   <a 
+   <!--l. 5331--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationse20.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationch6.html#TatamiUserDocumentationse19.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 5331--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationse19.html"></a>  
 </body></html> 

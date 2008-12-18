@@ -7,36 +7,40 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-18 11:17:00"> 
+<meta name="date" content="2008-12-18 11:35:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 1404--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu12.html" >next</a>] [<a 
-href="TatamiUserDocumentationsu10.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu10.html#tailTatamiUserDocumentationsu10.html" >prev-tail</a>] [<a 
-href="#tailTatamiUserDocumentationsu11.html">tail</a>] [<a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu11.html" >up</a>] </p></div>
+   <!--l. 1448--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu12.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu10.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu11.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
    <h4 class="subsectionHead"><span class="titlemark">2.2.9   </span> <a 
  id="x20-470002.2.9"></a>The Slider component</h4>
-<!--l. 1406--><p class="noindent" >The Slider component permits to modify the position of a cursor. At this position, is
+<!--l. 1450--><p class="noindent" >The Slider component permits to modify the position of a cursor. At this position, is
 associated a value. The value is bounded by a maximum and a minimum value. The
 slider has two positions: vertical and horizontal.
-<!--l. 1410--><p class="indent" >   <img 
+<!--l. 1454--><p class="indent" >   <img 
 src="TatamiUserDocumentation14x.png" alt="PIC" class="graphics" width="283.0575pt" height="247.92624pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation14x.png" src="48C__dev_workspace_docs_images_slidersPreview.eps"  
 -->
-<!--l. 1413--><p class="noindent" >
+<!--l. 1457--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.9.1   </span> <a 
  id="x20-480002.2.9.1"></a>Create a Slider. </h5>
-<!--l. 1415--><p class="noindent" >To import the Slider class:
-   <!--l. 1418-->
+<!--l. 1459--><p class="noindent" >To import the Slider class:
+   <!--l. 1462-->
 <div class="lstlisting" id="listing-54"><span class="label"><a 
  id="x20-48001r1"></a></span><span 
 class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.Slider;
    </div>
-<!--l. 1423--><p class="indent" >   To create a Slider, we need 5 parameters:
-<!--l. 1425--><p class="indent" >   position: Slider.HORIZONTAL or Slider.VERTICAL determines the position for
+<!--l. 1467--><p class="indent" >   To create a Slider, we need 5 parameters:
+<!--l. 1469--><p class="indent" >   position: Slider.HORIZONTAL or Slider.VERTICAL determines the position for
 the slider.
                                                                   
 
@@ -58,8 +62,8 @@ class="description">determines the initial cursor&#8217;s position.
 class="ecbx-1000">showButtons:</span> </dt><dd 
 class="description">Boolean permitting to show or hide the button to increment or
      decrement the position of the cursor.</dd></dl>
-<!--l. 1434--><p class="noindent" >Example of using the Slider constructor :
-   <!--l. 1437-->
+<!--l. 1478--><p class="noindent" >Example of using the Slider constructor :
+   <!--l. 1481-->
 <div class="lstlisting" id="listing-55"><span class="label"><a 
  id="x20-48002r1"></a></span><span 
 class="ecti-1000">//</span><span 
@@ -113,10 +117,10 @@ class="ecti-1000">shown</span>&#x00A0;<br /><span class="label"><a
 class="ecbx-1000">new</span>&#x00A0;Slider(Slider.HORIZONTAL,&#x00A0;0,100,50,<span 
 class="ecbx-1000">false</span>);
    </div>
-<!--l. 1447--><p class="noindent" >
+<!--l. 1491--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.9.2   </span> <a 
  id="x20-490002.2.9.2"></a>The API of the Slider component. </h5>
-<!--l. 1449--><p class="noindent" >Principal methods from the Slider component :
+<!--l. 1493--><p class="noindent" >Principal methods from the Slider component :
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">void</span><span 
@@ -144,7 +148,7 @@ class="description">setEnabled(boolean): enables or disables the slider
 <span 
 class="ecbx-1000">Boolean</span> </dt><dd 
 class="description">isEnabled() : returns whether the slider is enabled or not</dd></dl>
-<!--l. 1459--><p class="noindent" >The following methods are used to add or remove rule marks at different positions on the
+<!--l. 1503--><p class="noindent" >The following methods are used to add or remove rule marks at different positions on the
 slider. The first parameter sets the number of ticks, and the second one their size in
 any standard css unit (&#8220;px&#8221;,&#8221;em&#8221; etc...).
      <dl class="description"><dt class="description">
@@ -190,7 +194,7 @@ class="description">&#x00A0;
 class="ecbx-1000">void</span><span 
 class="ecbx-1000">&#x00A0;removeRuleMarkRight()</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 1473--><p class="noindent" >The following methods are used to add or remove labels on each rule mark set. The first
+<!--l. 1517--><p class="noindent" >The following methods are used to add or remove labels on each rule mark set. The first
 argument is an array containing the labels, the second one is the css style applied to
 this label.
      <dl class="description"><dt class="description">
@@ -233,7 +237,7 @@ class="description">&#x00A0;
 class="ecbx-1000">void</span><span 
 class="ecbx-1000">&#x00A0;removeLabelsRight()</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 1486--><p class="noindent" >The following methods return the labels on a specific position. If there are no labels,
+<!--l. 1530--><p class="noindent" >The following methods return the labels on a specific position. If there are no labels,
 they return null.
                                                                   
 
@@ -258,7 +262,7 @@ class="description">&#x00A0;
 class="ecbx-1000">String[]</span><span 
 class="ecbx-1000">&#x00A0;getLabelsTop()</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 1494--><p class="noindent" >The following methods return the labels style for a specific position:
+<!--l. 1538--><p class="noindent" >The following methods return the labels style for a specific position:
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">String</span><span 
@@ -279,7 +283,7 @@ class="description">&#x00A0;
 class="ecbx-1000">String</span><span 
 class="ecbx-1000">&#x00A0;getLabelsLeftStyle()</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 1501--><p class="noindent" >The following methods return the number of mark at the specified position:
+<!--l. 1545--><p class="noindent" >The following methods return the number of mark at the specified position:
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">int</span><span 
@@ -300,7 +304,7 @@ class="description">&#x00A0;
 class="ecbx-1000">int</span><span 
 class="ecbx-1000">&#x00A0;countRuleMarkRight()</span> </dt><dd 
 class="description">&#x00A0;</dd></dl>
-<!--l. 1508--><p class="noindent" >The following methods return the mark size at the specified position
+<!--l. 1552--><p class="noindent" >The following methods return the mark size at the specified position
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">String</span><span 
@@ -324,10 +328,10 @@ class="description">&#x00A0;</dd></dl>
                                                                   
 
                                                                   
-<!--l. 1516--><p class="noindent" >
+<!--l. 1560--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.9.3   </span> <a 
  id="x20-500002.2.9.3"></a>Add some rule mark ands and labels.</h5>
-<!--l. 1518--><p class="noindent" >Below stands an example of how to add some rule mark and labels on a Slider
+<!--l. 1562--><p class="noindent" >Below stands an example of how to add some rule mark and labels on a Slider
 component. See also the project TatamiDemo-1.1. You can add a rule mark at the
 right, left, top, bottom of the slider, it depends of the position (vertical or horizontal)
 of the slider. But if you add a rule mark at the right position while the slider has a
@@ -336,7 +340,7 @@ rule mark, you need to know how many marks you want and their size. For the labe
 it&#8217;s the same thing, but instead of giving a number you give an array of
 String corresponding to each label. Moreover you can specify the labels css
 style.
-   <!--l. 1530-->
+   <!--l. 1574-->
 <div class="lstlisting" id="listing-56"><span class="label"><a 
  id="x20-50001r1"></a></span>Slider&#x00A0;verticalSlider&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Slider(Slider.VERTICAL,&#x00A0;0,&#x00A0;100,&#x00A0;100,<span 
@@ -358,12 +362,16 @@ class="cmsy-10">-</span>3.5em&#x2423;0px;color:gray");
                                                                   
 
                                                                   
-   <!--l. 1543--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu12.html" >next</a>] [<a 
-href="TatamiUserDocumentationsu10.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu10.html#tailTatamiUserDocumentationsu10.html" >prev-tail</a>] [<a 
-href="TatamiUserDocumentationsu11.html" >front</a>] [<a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu11.html" >up</a>] </p></div>
-<!--l. 1543--><p class="indent" >   <a 
+   <!--l. 1587--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu12.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu10.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu11.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 1587--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu11.html"></a>   
 </body></html> 

@@ -7,35 +7,39 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-18 11:17:00"> 
+<meta name="date" content="2008-12-18 11:35:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 3630--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu20.html" >next</a>] [<a 
-href="TatamiUserDocumentationsu18.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu18.html#tailTatamiUserDocumentationsu18.html" >prev-tail</a>] [<a 
-href="#tailTatamiUserDocumentationsu19.html">tail</a>] [<a 
-href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu19.html" >up</a>] </p></div>
+   <!--l. 3674--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu20.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu18.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu19.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
    <h4 class="subsectionHead"><span class="titlemark">4.3.3   </span> <a 
  id="x39-1160004.3.3"></a>BarPlot</h4>
-<!--l. 3632--><p class="noindent" >This class is used to draw several types of Bar and Columbs plots
-<!--l. 3635--><p class="noindent" >
+<!--l. 3676--><p class="noindent" >This class is used to draw several types of Bar and Columbs plots
+<!--l. 3679--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">4.3.3.1   </span> <a 
  id="x39-1170004.3.3.1"></a>What type of data to use?</h5>
-<!--l. 3637--><p class="noindent" >This type of plot can be used with series of anything wich extends Number. The y
+<!--l. 3681--><p class="noindent" >This type of plot can be used with series of anything wich extends Number. The y
 coordinate is the number, where the x coordinate is the data&#8217;s position in the
 Serie.
-<!--l. 3642--><p class="noindent" >
+<!--l. 3686--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">4.3.3.2   </span> <a 
  id="x39-1180004.3.3.2"></a>Subtypes</h5>
-<!--l. 3644--><p class="noindent" >. The plot type is determined with the constructor:
-   <!--l. 3647-->
+<!--l. 3688--><p class="noindent" >. The plot type is determined with the constructor:
+   <!--l. 3691-->
 <div class="lstlisting" id="listing-125"><span class="label"><a 
  id="x39-118001r1"></a></span><span 
 class="ecbx-1000">public</span>&#x00A0;BarPlot(String&#x00A0;type)&#x00A0;;
    </div>
-<!--l. 3652--><p class="indent" >   Where type is one of the following constants :
+<!--l. 3696--><p class="indent" >   Where type is one of the following constants :
      <dl class="description"><dt class="description">
 <span 
 class="ecbx-1000">BarPlot.PLOT_TYPE_BARS:</span> </dt><dd 
@@ -116,10 +120,10 @@ name="TatamiUserDocumentation46x.png" src="18C__dev_workspace_docs_images_charti
 --> </dt><dd 
 class="description">
      &#x00A0;</dd></dl>
-<!--l. 3675--><p class="noindent" >
+<!--l. 3719--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">4.3.3.3   </span> <a 
  id="x39-1190004.3.3.3"></a>Specific options</h5>
-   <!--l. 3678-->
+   <!--l. 3722-->
 <div class="lstlisting" id="listing-126"><span class="label"><a 
  id="x39-119001r1"></a></span><span 
 class="ecti-1000">/</span><span 
@@ -153,8 +157,8 @@ class="ecbx-1000">public</span>&#x00A0;<span
 class="ecbx-1000">void</span>&#x00A0;setGap(<span 
 class="ecbx-1000">int</span>&#x00A0;gap);
    </div>
-<!--l. 3686--><p class="indent" >   ex: Clustered Columns with gap = 10 :
-   <!--l. 3689-->
+<!--l. 3730--><p class="indent" >   ex: Clustered Columns with gap = 10 :
+   <!--l. 3733-->
 <div class="lstlisting" id="listing-127"><span class="label"><a 
  id="x39-119005r1"></a></span>Chart2D&#x00A0;chart&#x00A0;=&#x00A0;<span 
 class="ecbx-1000">new</span>&#x00A0;Chart2D("400px",&#x00A0;"200px");&#x00A0;<br /><span class="label"><a 
@@ -166,19 +170,23 @@ class="ecbx-1000">new</span>&#x00A0;BarPlot(BarPlot.PLOT_TYPE_COLUMNS_CLUSTERED)
                                                                   
 
                                                                   
-<!--l. 3697--><p class="indent" >   <img 
+<!--l. 3741--><p class="indent" >   <img 
 src="TatamiUserDocumentation47x.png" alt="PIC" class="graphics" width="411.53749pt" height="183.68625pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation47x.png" src="19C__dev_workspace_docs_images_chartingimages_bar_gapexample.eps"  
 -->
                                                                   
 
                                                                   
-   <!--l. 3700--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu20.html" >next</a>] [<a 
-href="TatamiUserDocumentationsu18.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu18.html#tailTatamiUserDocumentationsu18.html" >prev-tail</a>] [<a 
-href="TatamiUserDocumentationsu19.html" >front</a>] [<a 
-href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu19.html" >up</a>] </p></div>
-<!--l. 3700--><p class="indent" >   <a 
+   <!--l. 3744--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu20.html" ><img 
+src="cssimages/go-next.png" alt="next"  
+class="nextarrow"></a><a 
+href="TatamiUserDocumentationsu18.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse12.html#TatamiUserDocumentationsu19.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 3744--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu19.html"></a>   
 </body></html> 

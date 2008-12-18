@@ -7,41 +7,43 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
 <!-- html,4,frames --> 
 <meta name="src" content="TatamiUserDocumentation.tex"> 
-<meta name="date" content="2008-12-18 11:17:00"> 
+<meta name="date" content="2008-12-18 11:35:00"> 
 <link rel="stylesheet" type="text/css" href="TatamiUserDocumentation.css"> 
 </head><body 
 >
-   <!--l. 1543--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu11.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu11.html#tailTatamiUserDocumentationsu11.html" >prev-tail</a>] [<a 
-href="#tailTatamiUserDocumentationsu12.html">tail</a>] [<a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu12.html" >up</a>] </p></div>
+   <!--l. 1587--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu11.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu12.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
    <h4 class="subsectionHead"><span class="titlemark">2.2.10   </span> <a 
  id="x21-510002.2.10"></a>RuleMark and RuleLabels components</h4>
-<!--l. 1545--><p class="noindent" >RuleMark and RuleLabels permit to create some mark or some labels in a vertical or
+<!--l. 1589--><p class="noindent" >RuleMark and RuleLabels permit to create some mark or some labels in a vertical or
 horizontal position. The distance between each marks or labels is based on the size of
 the component (RuleMark or RuleLabels). These components are used in the Slider
 component; see the documentation of this component to understand how RuleMark
 and RuleLabels are created. Below, this is an example of RuleMark and
 RuleLabels components to create a rule for a graphic canvas or an editor for
 example.
-<!--l. 1553--><p class="indent" >   <img 
+<!--l. 1597--><p class="indent" >   <img 
 src="TatamiUserDocumentation15x.png" alt="PIC" class="graphics" width="421.575pt" height="301.125pt" ><!--tex4ht:graphics  
 name="TatamiUserDocumentation15x.png" src="49C__dev_workspace_docs_images_ruleMarks_preview.eps"  
 -->
-<!--l. 1556--><p class="noindent" >
+<!--l. 1600--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.10.1   </span> <a 
  id="x21-520002.2.10.1"></a>Create a RuleMark component. </h5>
-<!--l. 1558--><p class="noindent" >To import the RuleMark class, just do this:
+<!--l. 1602--><p class="noindent" >To import the RuleMark class, just do this:
                                                                   
 
                                                                   
-   <!--l. 1561-->
+   <!--l. 1605-->
 <div class="lstlisting" id="listing-57"><span class="label"><a 
  id="x21-52001r1"></a></span><span 
 class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.RuleMark;
    </div>
-<!--l. 1566--><p class="indent" >   To create a RuleMark component you need specify 4 parameters. One
+<!--l. 1610--><p class="indent" >   To create a RuleMark component you need specify 4 parameters. One
 parameter is optional; the others are required and cannot be have a default
 value.
      <dl class="description"><dt class="description">
@@ -64,7 +66,7 @@ class="description">The position to use for the RuleMark in the parent container
      the RuleMark on the Slider left, top, bottom, right. In fact if this RuleMark
      is a child of a dojo widget, this RuleMark will be connected to its parent
      node by the position. The default position is &#8220;containerNode&#8221;.</dd></dl>
-<!--l. 1582--><p class="noindent" >
+<!--l. 1626--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.10.2   </span> <a 
  id="x21-530002.2.10.2"></a>The API of the RuleMak component</h5>
      <dl class="description"><dt class="description">
@@ -83,13 +85,13 @@ class="ecbx-1000">String</span><span
 class="ecbx-1000">&#x00A0;getPosition():</span> </dt><dd 
 class="description">Returns  the  position  of  the  RuleMark,  default  is
      containerNode</dd></dl>
-<!--l. 1591--><p class="noindent" >
+<!--l. 1635--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.10.3   </span> <a 
  id="x21-540002.2.10.3"></a>Create a RuleLabels Component.</h5>
-<!--l. 1593--><p class="noindent" >A RuleLabels component extends the RuleMark component, but instead
+<!--l. 1637--><p class="noindent" >A RuleLabels component extends the RuleMark component, but instead
 of writing some marks, some labels are displayed. To import the class do
 this:
-   <!--l. 1598-->
+   <!--l. 1642-->
                                                                   
 
                                                                   
@@ -97,7 +99,7 @@ this:
  id="x21-54001r1"></a></span><span 
 class="ecbx-1000">import</span>&#x00A0;com.objetdirect.tatami.client.RuleLabels;
    </div>
-<!--l. 1603--><p class="indent" >   Like the RuleMark, the RuleLabels needs 4 parameters but instead of specifying
+<!--l. 1647--><p class="indent" >   Like the RuleMark, the RuleLabels needs 4 parameters but instead of specifying
 the number of marks, we specify an array of labels where labels are just string
 characters. So the number of labels is calculated by the length of the array. Also, we
 specify the style for the labels and not the size. The style is exactly the same than a
@@ -118,7 +120,7 @@ class="description">The style for the labels (color, font, margin etc&#x2026;) U
 <span 
 class="ecbx-1000">position:</span> </dt><dd 
 class="description">The same that the RuleMark class.</dd></dl>
-<!--l. 1618--><p class="noindent" >
+<!--l. 1662--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.10.4   </span> <a 
  id="x21-550002.2.10.4"></a>The API of the RuleLabels component</h5>
      <dl class="description"><dt class="description">
@@ -142,14 +144,14 @@ class="ecbx-1000">String</span><span
 class="ecbx-1000">&#x00A0;getPosition():</span> </dt><dd 
 class="description">Returns  the  position  of  the  RuleLabels,  default  is
      containerNode</dd></dl>
-<!--l. 1627--><p class="noindent" >
+<!--l. 1671--><p class="noindent" >
    <h5 class="subsubsectionHead"><span class="titlemark">2.2.10.5   </span> <a 
  id="x21-560002.2.10.5"></a>An example</h5>
-<!--l. 1629--><p class="noindent" >Below stands an example, which demonstrates how to create the rule presented in the
+<!--l. 1673--><p class="noindent" >Below stands an example, which demonstrates how to create the rule presented in the
 screenshot at the beginning of this chapter. Note that in the project TatamiDemo
 there are no example. The use of RuleMark and RuleLabels is hidden by the Slider
 component in the SliderDemo class.
-   <!--l. 1636-->
+   <!--l. 1680-->
                                                                   
 
                                                                   
@@ -194,11 +196,13 @@ class="cmsy-10">-</span>15,&#x00A0;rule.getAbsoluteTop());
                                                                   
 
                                                                   
-   <!--l. 1663--><div class="crosslinks"><p class="noindent">[<a 
-href="TatamiUserDocumentationsu11.html" >prev</a>] [<a 
-href="TatamiUserDocumentationsu11.html#tailTatamiUserDocumentationsu11.html" >prev-tail</a>] [<a 
-href="TatamiUserDocumentationsu12.html" >front</a>] [<a 
-href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu12.html" >up</a>] </p></div>
-<!--l. 1663--><p class="indent" >   <a 
+   <!--l. 1707--><div class="crosslinks"><p class="noindent"><a 
+href="TatamiUserDocumentationsu11.html" ><img 
+src="cssimages/go-previous.png" alt="previous"  
+class="previousarrow"></a><a 
+href="TatamiUserDocumentationse3.html#TatamiUserDocumentationsu12.html" ><img 
+src="cssimages/go-top.png" alt="up"  
+class="uparrow"></a></p></div>
+<!--l. 1707--><p class="indent" >   <a 
  id="tailTatamiUserDocumentationsu12.html"></a>   
 </body></html> 
