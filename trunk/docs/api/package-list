@@ -1,0 +1,15 @@
+com.google.gwt.user.client.ui
+com.objetdirect.tatami.client
+com.objetdirect.tatami.client.charting
+com.objetdirect.tatami.client.charting.effects
+com.objetdirect.tatami.client.data
+com.objetdirect.tatami.client.dnd
+com.objetdirect.tatami.client.encoding
+com.objetdirect.tatami.client.gfx
+com.objetdirect.tatami.client.grid
+com.objetdirect.tatami.client.grid.editor
+com.objetdirect.tatami.client.grid.formatters
+com.objetdirect.tatami.client.layout
+com.objetdirect.tatami.client.test
+com.objetdirect.tatami.client.tree
+com.objetdirect.tatami.theme.client
