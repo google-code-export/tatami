@@ -1,0 +1,132 @@
+.buttonPanel{
+	display: inline;
+}
+
+.button-previous{
+	display: inline;
+	vertical-align: middle;
+}
+
+.button-icon-previous{
+	background-image: url('../icons/media-skip-backward.png');
+	height: 16px;
+	width: 16px;
+}
+
+.button-next{
+	display: inline;
+	vertical-align: middle;	
+}
+
+.button-icon-next{
+	background-image: url('../icons/media-skip-forward.png');
+	height: 16px;
+	width: 16px;
+}
+
+.button-stop{
+	display: inline;
+	vertical-align: middle;
+}
+.button-icon-stop{
+	background-image: url('../icons/media-playback-stop.png');
+	height: 16px;
+	width: 16px;
+}
+
+.button-pause{
+	display: inline;
+	vertical-align: middle;
+}
+.button-icon-pause{
+	background-image: url('../icons/media-playback-pause.png');
+	height: 16px;
+	width: 16px;
+}
+
+.button-play{
+	display: inline;
+	vertical-align: middle;	
+}
+.button-icon-play{
+	background-image: url('../icons/media-playback-start.png');
+	height: 16px;
+	width: 16px;
+}
+
+.volumeSlider{
+	display: inline;
+	vertical-align: middle;
+	height: 30px;
+}
+
+.positionSlider{
+	display: inline;
+}
+
+.volumePanel{
+	display: inline;
+}
+.positionPanel{
+	display: inline;
+}
+
+.tundra .volumeSlider .dijitSliderIncrementIconH{
+	background : transparent url('../icons/audio-volume-high.png') no-repeat scroll;
+	height: 16px;
+	width: 16px;
+}
+
+.tundra .volumeSlider .dijitSliderDecrementIconH{
+	background : transparent url('../icons/audio-volume-low.png') no-repeat scroll;
+	height: 16px;
+	width: 16px;	
+}
+
+.tundra .positionSlider .dijitSliderIncrementIconH{
+	background : transparent url('../icons/media-seek-forward.png') no-repeat scroll;
+	height: 16px;
+	width: 16px;
+}
+
+.tundra .positionSlider .dijitSliderDecrementIconH{
+	background : transparent url('../icons/media-seek-backward.png') no-repeat scroll;
+	height: 16px;
+	width: 16px;	
+}
+
+.clearPlaylistIcon{
+	height: 16px;
+	width: 16px;
+	background-image: url('../icons/edit-clear.png');
+}
+
+.loadPlaylistIcon{
+	height: 16px;
+	width: 16px;
+	background-image: url('../icons/document-open.png');
+}
+
+.savePlaylistIcon{
+	height: 16px;
+	width: 16px;
+	background-image: url('../icons/document-save.png');
+}
+
+.savePlaylistButton{
+	display: inline;
+}
+.loadPlaylistButton{
+	display: inline;
+}
+.clearPlaylistButton{
+	display: inline;
+}
+
+.savePlaylistPopup{
+	background-color: gray;	
+}
+
+.loadPlaylistPopup{
+	background-color: gray;
+}
