@@ -2,12 +2,13 @@ package com.objetdirect.tatamix.client.hmvc.rpc;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.objetdirect.tatamix.client.hmvc.MVCComponent;
+import com.objetdirect.tatamix.client.hmvc.Model;
 import com.objetdirect.tatamix.client.hmvc.ModelEvent;
-import com.objetdirect.tatamix.client.hmvc.ModelImpl;
 
 public class ModelCallback<T> implements AsyncCallback<T> {
 
-	private ModelImpl model;
+	private MVCComponent model;
 	private String name="model";
 	private String errorMessage = null;
 	private String successEvent = null;
@@ -17,7 +18,10 @@ public class ModelCallback<T> implements AsyncCallback<T> {
 	 * Creates a <code>ModelAsyncCallback</code>
 	 * @param model <code>ModelImpl</code>
 	 */
-	public ModelCallback(ModelImpl model) {
+	public ModelCallback(MVCComponent model) {
+		if ( !(model instanceof Model)) {
+			throw new IllegalArgumentException("The MVCComponent must be implements the Model interface !!");
+		}
 		this.model = model;
 
 	}
