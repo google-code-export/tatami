@@ -80,7 +80,9 @@ public class LayoutAndChartDemo extends CompositeView implements TatamiDemoEvent
 		};
 		ControllerProcessor resetChartProcessor = new ControllerProcessor(){
 			public void run(Event event) {
+				if ( chartAndLegendCP != null) {
 				layout.remove(chartAndLegendCP);
+				}
 				chart = null;
 				plot = null;
 				legend = null;
