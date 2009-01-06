@@ -931,7 +931,10 @@ dojo.declare("dojox.gfx.Surface", dojox.gfx.shape.Surface, {
 			bs = this.bgNode.style;
 		cs.width  = width;
 		cs.height = height;
-		cs.clip = "rect(0px " + width + "px " + height + "px 0px)";
+        //fixed the bug under IE see dojo trac 11432 , but objects in the surface can have an incorrect position. Some objects are 
+		//centered 
+		//cs.clip = "rect(0px " + width + "px " + height + "px 0px)";
+		cs.clip = "rect(0 " + width + " " + height + " 0)";
 		rs.width = width;
 		rs.height = height;
 		r.coordsize = width + " " + height;
