@@ -132,6 +132,15 @@ abstract public class TestGraphicObject extends DefaultTatamiTest {
 	  assertEquals(Color.RED,component.getFillColor());
   }
   
+  public void testOpacity() {
+	  initGraphics();
+	  component.setOpacity(50);
+	  assertEquals(127,component.getFillColor().getAlpha());
+	  assertEquals(50,component.getOpacity());
+	  component.setFillColor(Color.FUCHSIA);
+	  assertEquals(127,component.getFillColor().getAlpha());
+  }
+  
   /**
    * Tests the method to set the stroke of a <code>GraphicObject</code>
    *

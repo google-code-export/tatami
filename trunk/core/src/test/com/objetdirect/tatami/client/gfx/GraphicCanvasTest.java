@@ -48,7 +48,7 @@ public class GraphicCanvasTest extends DefaultTatamiTest implements GraphicObjec
 		  
 	  }
 	  RootPanel.get().add(canvas,10,10);
-	  canvas.setSize("300px","300px");
+	 // canvas.setSize("300px","300px");
 	  return canvas;
   }
 
@@ -71,6 +71,18 @@ public class GraphicCanvasTest extends DefaultTatamiTest implements GraphicObjec
 	   assertEquals(0,canvas.countGraphicObject());
   }
   
+  
+  public void testSetDimensions() {
+	  Circle circle = new Circle(50);
+	  Rect rect = new Rect(15,30);
+	  canvas = getCanvas();
+	  canvas.add(circle, 50, 50);
+	  canvas.add(rect, 80, 80);
+	  canvas.setDimensions(300,300);
+	  assertEquals(canvas.getWidth(),300);
+	  assertEquals(canvas.getHeight(),300);
+	  
+  }
   
   public void gwtTearDown() throws Exception{
 	  canvas = null;
