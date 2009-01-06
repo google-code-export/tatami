@@ -153,7 +153,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	public Grid(){
 		this( new GridDataStore() , new GridView());
-		this.setWidth("200px");
+		this.setWidth("100%");
 		this.setHeight("200px");
 	}
 	
@@ -572,7 +572,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @see com.objetdirect.tatami.client.HasDojo#createDojoWidget()
 	 */
 	public void createDojoWidget() throws Exception {
-		store.doAfterCreation();
+        store.doAfterCreation();
 		JavaScriptObject jsstore = store.getDojoWidget();
 		JavaScriptObject jslayout = this.layout.toJSObject();
 		if(this.rowSelector == null && layout.hasRowBar()){
@@ -1479,7 +1479,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	public void setStyler(RowStyler styler) {
 		this.styler = styler;
 	}
-
+	
 	public void adaptSize() {
 		if(dojoWidget != null){
 			resizeGrid(dojoWidget);
