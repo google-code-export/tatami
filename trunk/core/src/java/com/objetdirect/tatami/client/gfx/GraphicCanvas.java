@@ -33,15 +33,18 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
+import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.DojoController;
 
 /**
- * TODO fix the bug when the original size of the canvas is set to zero. 
- * And if we add some GraphicObject and we change the size of the canvas
+ *  
+ * Class that drawing graphical objects. 
  * @author Vianney
  *
  */
@@ -71,43 +74,129 @@ public class GraphicCanvas extends Widget {
 	private Map<JavaScriptObject, GraphicObject> graphicObjects = new HashMap<JavaScriptObject, GraphicObject>();
 	
 	/**
-	 * Creates a canvas
+	 * Creates a canvas with a default size of 500 X 500 pixels.
 	 * @param el DOM element according to the GWT widget
-	 *
 	 */
 	public GraphicCanvas(Element el) {
 		super();
 		setElement(el);
+		setSize("500px","500px");
 	    DojoController controller = DojoController.getInstance();
 	    controller.require("dojox.gfx");
 	    //to catch mouse events
 	    this.sinkEvents(Event.ONCLICK);
 	    this.sinkEvents(Event.ONDBLCLICK);
 	    this.sinkEvents(Event.MOUSEEVENTS);
+
+	    
 	 }
 
 	/**
-	 * Creates a canvas, the DOM element of thf GWT widget
-	 * will be a DIV
-	 *
+	 * Creates a canvas. The DOM element which will wrap 
+	 * the Dojo gfx surface will be a DIV element.
 	 */
 	public GraphicCanvas() {
-		this(DOM.createDiv());
+		this(Document.get().createDivElement());
 	}
 	
     /**
-     * Creates the surface when the widget is attached.
+     * Creates the Dojo surface when the widget is attached.
      */		
 	public void onAttach() {
-		surface = initGraphics(getElement(), this, this.getOffsetWidth(), this.getOffsetHeight());
-		attachAllGraphicObjects();
 		super.onAttach();
+		int width = this.getOffsetWidth();
+		int height = this.getOffsetHeight();
+		surface = initGraphics(getElement(), this, width,height );
+		attachAllGraphicObjects();
+	}
+	
+	/**
+	 * Returns the width in pixels of this canvas
+	 * @return the width in pixels of this canvas
+	 */
+	public int getWidth() {
+		int result = getOffsetWidth();
+		if ( surface != null) {
+			result = getWidth(surface);
+		}
+		return result;
+	}
+	
+	/**
+	 * Returns the height in pixels of the canvas
+	 * @return the height in pixels of the canvas
+	 */
+	public int getHeight() {
+		int result = getOffsetHeight();
+		if ( surface != null) {
+			result = getHeight(surface);
+		}
+		return result;
+	}
+
+	
+	private native int getWidth(JavaScriptObject surface)/*-{
+	  var dim = surface.getDimensions();
+	  return dim.width;
+	}-*/;
+	
+	private native int getHeight(JavaScriptObject surface)/*-{
+	  var dim = surface.getDimensions();
+	  return dim.height;
+	}-*/;
+	
+	/**
+	 * Sets the dimensions of the canvas. 
+	 * @param width a width in pixels 
+	 * @param height a height in pixels
+	 */
+	public void setDimensions(int width,int height) {
+		setPixelSize(width,height);
+	}
+	
+	
+	/**
+	 * Sets the size of the Element that wrapping the Dojo surface. 
+	 * Sets also the Dojo surface dimensions. 
+	 */
+	public void setPixelSize(int width,int height) {
+		super.setPixelSize(width, height);
+		 if ( surface != null) {
+				setDimensions(surface,String.valueOf(width),String.valueOf(height));
+			}
+	}
+	
+	/**
+	 * Nota :  due to a bug under IE, you should use the 
+	 * <code>setDimensions(int,int)</code> method instead. 
+	 * Only pixel values without the "px" suffix are 
+	 * permitted for IE e.g. : <code>canvas.setSize("500","500")</code>  
+	 */
+	public void setSize(String width,String height) {
+		super.setSize(width, height);
+		if ( surface != null) {
+			setDimensions(surface,width,height);
+		}
+		
 	}
 	
 		
 	/**
+	 * Sets the dimensions of a Dojo surface.
+	 * @param surface the Dojo surface.
+	 * @param width the default width of the surface in pixels.
+	 * @param height the default height of the surface in pixels.
+	 */
+	private native void setDimensions(JavaScriptObject surface,String width,String height) /*-{
+           surface.setDimensions(width,height);		
+	}-*/;
+	
+	
+	
+	
+	/**
 	 * Releases the surface and the graphic components
-	 * when the widget is detached from the browser
+	 * when the widget is detached from the browser.
 	 */
 	public void onDetach() {
 		detachAllGraphicObjects();
@@ -116,7 +205,7 @@ public class GraphicCanvas extends Widget {
 	}
 
 	/**
-	 * Shows all the <code>GraphicObject</code> in the surface
+	 * Shows all the <code>GraphicObject</code> in the surface.
 	 *
 	 */
 	private void attachAllGraphicObjects() {
@@ -130,8 +219,8 @@ public class GraphicCanvas extends Widget {
 	}
 	
 	/**
-	 * Returns the DOJO GFX canvas
-	 * @return the DOJO GFX canvas
+	 * Returns the DOJO GFX canvas.
+	 * @return the DOJO GFX canvas.
 	 */
 	protected JavaScriptObject getDojoCanvas() {
 		return this.surface;
@@ -139,15 +228,15 @@ public class GraphicCanvas extends Widget {
 	
 	/**
 	 * Returns all the <code>GraphicObject</code> containing by this
-	 * <code>GraphicCanvas</code>
-	 * @return a collection of <code>GraphicObject</code>
+	 * <code>GraphicCanvas</code>.
+	 * @return a collection of <code>GraphicObject</code>.
 	 */
 	public Collection<GraphicObject> getGraphicObjects() {
 		return this.objects;
 	}
 	
 	/**
-	 * Hides all the <code>GraphicObject</code> from the surface 
+	 * Hides all the <code>GraphicObject</code> from the surface.
 	 *
 	 */
 	private void detachAllGraphicObjects() {
@@ -160,10 +249,10 @@ public class GraphicCanvas extends Widget {
 	
 	/**
 	 * Adds a <code>GraphicObject</code> to the canvas at the specified 
-	 * position
-	 * @param graphicObject
-	 * @param x the x coordinate
-	 * @param y the y coordinate
+	 * position.
+	 * @param graphicObject the <code>GraphicObject</code> to add.
+	 * @param x the x coordinate for the object in the canvas. 
+	 * @param y the y coordinate for the object in the canvas. 
 	 */
 	public void add(GraphicObject graphicObject, int x, int y) {
 		if (objects.add(graphicObject)) {
@@ -176,8 +265,8 @@ public class GraphicCanvas extends Widget {
 	}
 	
 	/**
-	 * Removes the <code>GraphicObject</code> from the canvas
-	 * @param graphicObject the <code>GraphicObject</code> to remove
+	 * Removes the <code>GraphicObject</code> from the canvas.
+	 * @param graphicObject the <code>GraphicObject</code> to remove.
 	 * @see #clear()
 	 */
 	public void remove(GraphicObject graphicObject) {
@@ -188,7 +277,7 @@ public class GraphicCanvas extends Widget {
 	
 	/**
 	 * Removes all the <code>GraphicObject</code> in this 
-	 * <code>GraphicCanvas</code>
+	 * <code>GraphicCanvas</code>.
 	 * @see #remove(GraphicObject)
 	 *
 	 */
@@ -206,9 +295,9 @@ public class GraphicCanvas extends Widget {
 	
 	
 	/**
-	 * Returns the nth <code>GraphicObject</code> in this <code>GraphicCanvas</code>
+	 * Returns the nth <code>GraphicObject</code> in this <code>GraphicCanvas</code>.
 	 * @param n the index of the component to get.
-	 * @return the nth component in this <code>GraphicCanvas</code>
+	 * @return the nth component in this <code>GraphicCanvas</code>.
 	 */
 	public GraphicObject getGraphicObject(int n) {
 		return (GraphicObject)this.objects.get(n);
@@ -216,29 +305,31 @@ public class GraphicCanvas extends Widget {
 	
 	
 	/**
-	 * Shows a <code>GraphicObject</code> to the surface
-	 * @param graphicObject the <code>GraphicObject</code> to show
+	 * Shows a <code>GraphicObject</code> to the surface.
+	 * @param graphicObject the <code>GraphicObject</code> to show.
 	 */
 	private void attachGraphicObject(GraphicObject graphicObject) {
 		graphicObject.show(this);
-		Collection<?> shapes = graphicObject.getShapes();
+		//Collection<?> shapes = graphicObject.getShapes();
 		putEventSource(graphicObject.getShape(),graphicObject);
 		//graphicObjects.put(getEventSource(graphicObject.getShape()), graphicObject);
 	}
 	
 	
 	/**
-	 * Associates the event source of a DOJO GFX shape to a <code>GraphicObject</code>
-	 * @param shape a DOJO gfx shape of a <code>GraphicObject</code>
-	 * @param graphicObject a <code>GraphicObject</code>
+	 * Associates the event source of a DOJO GFX shape to a <code>GraphicObject</code>.
+	 * @param shape a DOJO gfx shape of a <code>GraphicObject</code>.
+	 * @param graphicObject a <code>GraphicObject</code>.
 	 */
 	protected void putEventSource(JavaScriptObject shape,GraphicObject graphicObject) {
 		graphicObjects.put(getEventSource(shape), graphicObject);		
 	}
 	
 	/**
-	 * Associates a the events sources of a collection of shapes (DOJO GFX shape) width a <code>GraphicalObject</code>.
-	 * @param shapes the collection of <code>JavaScriptObject</code> corresponding to a collection of DOJO GFX shape
+	 * Associates a the events sources of a collection of shapes 
+	 * (DOJO GFX shape) width a <code>GraphicalObject</code>.
+	 * @param shapes the collection of <code>JavaScriptObject</code> 
+	 *        corresponding to a collection of DOJO GFX shape.
 	 * @param graphicObject the <code>GraphicObject</code>  to associates the event sources
 	 */
 	protected void putEventSource(Collection<?> shapes,GraphicObject graphicObject) {
@@ -253,8 +344,8 @@ public class GraphicCanvas extends Widget {
 	
 	
 	/**
-	 * Hides a <code>GraphicObject</code> to the surface
-	 * @param graphicObject the <code>GraphicObject</code> to hide and remove
+	 * Hides a <code>GraphicObject</code> to the surface.
+	 * @param graphicObject the <code>GraphicObject</code> to hide and remove.
 	 */
 	private void detachGraphicObject(GraphicObject graphicObject) {
 		graphicObject.hide();
@@ -266,14 +357,12 @@ public class GraphicCanvas extends Widget {
 				  graphicObjects.remove(getEventSource(shape));
 				}
 		}
-		
-		
 	}
 
 	/**
-	 * Performs a click event
-	 * @param evtSource the JavaScriptObject source of the event
-	 * @param evt the event itself
+	 * Performs a click event.
+	 * @param evtSource the JavaScriptObject source of the event.
+	 * @param evt the event itself.
 	 */
 	protected void doClick(JavaScriptObject evtSource, Event evt) {
 		GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
@@ -286,9 +375,9 @@ public class GraphicCanvas extends Widget {
 	
 	
 	/**
-	 * Performs a double click event
-	 * @param evtSource the JavaScriptObject source of the event
-	 * @param evt the event itself
+	 * Performs a double click event.
+	 * @param evtSource the JavaScriptObject source of the event.
+	 * @param evt the event itself.
 	 */
 	protected void doDoubleClick(JavaScriptObject evtSource, Event evt) {
 		GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
@@ -300,9 +389,9 @@ public class GraphicCanvas extends Widget {
 		}
 	}
 	/**
-	 * Performs a mouse down event
-	 * @param evtSource the JavaScriptObject source of the event
-	 * @param evt the event itself
+	 * Performs a mouse down event.
+	 * @param evtSource the JavaScriptObject source of the event.
+	 * @param evt the event itself.
 	 */
 	protected void doMouseDown(JavaScriptObject evtSource, Event evt) {
 		GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
@@ -314,9 +403,9 @@ public class GraphicCanvas extends Widget {
 	}
 
 	/**
-	 * Performs a mouse move event
-	 * @param evtSource the JavaScriptObject source of the event
-	 * @param evt the event itself
+	 * Performs a mouse move event.
+	 * @param evtSource the JavaScriptObject source of the event.
+	 * @param evt the event itself.
 	 */
 	protected void doMouseMove(JavaScriptObject evtSource, Event evt) {
 		final GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
@@ -328,9 +417,9 @@ public class GraphicCanvas extends Widget {
 	}
 
 	/**
-	 * Performs a mouse released event
-	 * @param evtSource the JavaScriptObject source of the event
-	 * @param evt the event itself
+	 * Performs a mouse released event.
+	 * @param evtSource the JavaScriptObject source of the event.
+	 * @param evt the event itself.
 	 */
 	protected void doMouseUp(JavaScriptObject evtSource,  Event evt) {
 		final GraphicObject graphicObject = (GraphicObject)graphicObjects.get(evtSource);
@@ -345,9 +434,9 @@ public class GraphicCanvas extends Widget {
 	
 	
 	/**
-	 * Returns the current listeners, 
-	 * If there are no listeners, a new list (empty) is created
-	 * @return a list of <code>GraphicObjectListener</code>, can be empty
+	 * Returns the current listeners.
+	 * If there are no listeners, a new list (empty) is created.
+	 * @return a list of <code>GraphicObjectListener</code>, can be empty.
 	 */
 	private List<GraphicObjectListener> getCurrentListeners() {
 		if (currentListeners==null) {
@@ -357,8 +446,8 @@ public class GraphicCanvas extends Widget {
 	}
 	
 	/**
-	 * Adds a <code>GraphicObjectListener</code> to the listeners 
-	 * @param listener the <code>GraphicObjectListener</code> to add
+	 * Adds a <code>GraphicObjectListener</code> to the listeners. 
+	 * @param listener the <code>GraphicObjectListener</code> to add.
 	 */
 	public void addGraphicObjectListener(GraphicObjectListener listener) {
 		listeners.add(listener);
@@ -367,7 +456,7 @@ public class GraphicCanvas extends Widget {
 	
 	/**
 	 * Removes the <code>GraphicObjectListener</code>.
-	 * @param listener the <code>GraphicObjectListener</code> to remove
+	 * @param listener the <code>GraphicObjectListener</code> to remove.
 	 */
 	public void removeGraphicObjectListener(GraphicObjectListener listener) {
 		listeners.remove(listener);
@@ -376,7 +465,7 @@ public class GraphicCanvas extends Widget {
 	
 	
 	/**
-	 *Manages the event from the browser  
+	 *Manages the event from the browser.
 	 *@param event
 	 */
 	public void onBrowserEvent(Event event) {
@@ -402,20 +491,20 @@ public class GraphicCanvas extends Widget {
 	
 	/**
 	 * Returns the number of <code>GraphicObject</code>
-	 * in this <code> GraphicCanvas</code>
+	 * in this <code> GraphicCanvas</code>.
 	 * @return Returns the number of <code>GraphicObject</code>
-	 * in this <code> GraphicCanvas</code>
+	 * 		   in this <code> GraphicCanvas</code>.
 	 */
 	public int countGraphicObject() {
 		return this.objects.size();
 	}
 	/**
-	 * Creates the DOJO surface for the canvas
-	 * @param node the DOM Node 
-	 * @param canvas the GWT canvas
-	 * @param width the width of the surface
-	 * @param height the height of the surface
-	 * @return the DOJO surface
+	 * Creates the DOJO surface for the canvas.
+	 * @param node the DOM Node. 
+	 * @param canvas the GWT canvas.
+	 * @param width the width of the surface.
+	 * @param height the height of the surface.
+	 * @return the DOJO surface.
 	 */
 	private static native JavaScriptObject initGraphics(Element node, GraphicCanvas canvas, int width, int height) /*-{
 		var surface = $wnd.dojox.gfx.createSurface(node, width, height);
@@ -427,32 +516,37 @@ public class GraphicCanvas extends Widget {
 	}-*/;
 	
 	/**
-	 * returns the source of the event of the graphicObject
-	 * @param graphicObject the graphicObject
-	 * @return the source of the event
+	 * Returns the source of the event of the graphicObject.
+	 * @param graphicObject the graphicObject.
+	 * @return the source of the event.
 	 */
 	protected static native JavaScriptObject getEventSource(JavaScriptObject graphicObject) /*-{
 		return graphicObject.getEventSource();
 	}-*/;
 	
 	/**
-	 * Removes the DOM element from the given elemet and release the canvas
-	 * @param e
+	 * Removes the DOM element from the given element and release the canvas.
+	 * @param element
 	 * @param surface
 	 * @see #releaseCanvas(JavaScriptObject)
 	 */
 	private static void releaseGraphics(Element element, JavaScriptObject surface) {
-		final int c = DOM.getChildCount(element);
-		for (int i=0; i<c; i++) {
-			DOM.removeChild(element, DOM.getChild(element, 0));
+		NodeList<Node> childs = element.getChildNodes();
+		
+		//final int c = DOM.getChildCount(element);
+		
+		for (int i=0; i< childs.getLength(); i++) {
+			Node nodeToRemove = childs.getItem(i); 
+			element.removeChild(nodeToRemove);
+			//DOM.removeChild(element, DOM.getChild(element, 0));
 		}
 		releaseCanvas(surface);
 	}
 	
 	
 	/**
-	 * Releases the GWT canvas in the DOJO surface 
-	 * @param s
+	 * Releases the GWT canvas in the DOJO surface. 
+	 * @param surface
 	 */
 	private static native void releaseCanvas(JavaScriptObject surface) /*-{
 		$wnd.dojo.disconnect(surface.handleDragStart);
