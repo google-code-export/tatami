@@ -91,6 +91,7 @@ public abstract class GraphicObject {
 	/** Style for the stroke  a suite of a long dash follow by 2 dots */
 	public static final String LONGDASHDOTDOT ="LongDashDotDot";
 	
+	private int opacity = 100;
 	
 	/**
 	 * The position of this <code>GraphicalObject</code>
@@ -185,6 +186,13 @@ public abstract class GraphicObject {
 		return this.parent;
 	}
 	
+	/**
+	 * Returns the opacity level used for the fill color. 
+	 * @return the opacity level used for the fill color, a value between 0-100.
+	 */
+	public int getOpacity() {
+		return this.opacity;
+	}
 	
 	/**
 	 *Returns all the shapes of this <code>GraphicObject</code>
@@ -311,7 +319,9 @@ public abstract class GraphicObject {
 	 * @return the <code>GraphicObject</code> itself
 	 */
 	public GraphicObject setFillColor(Color color) {
-		fillColor = color;
+		Color newColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),calculateAlpha(opacity));
+		fillColor = newColor;
+		
 		if (shape!=null) {
 			configureFill();
 		}
@@ -697,8 +707,32 @@ public abstract class GraphicObject {
 		return this.bounds;
 	}
 
+	/**
+	 * Sets the opacity of the fill color of this <code>GraphicObject</code>.
+	 * If the value is out of the range, the opacity will be set to 100, 
+	 * that it means no transparency.
+	 * @param opacity a value between 0-100.
+	 */
+	public void setOpacity(int opacity) {
+		if ( opacity >= 0 && opacity <=100) {
+			this.opacity = opacity;
+		} else {
+			this.opacity = 100;
+		}
+			setFillColor(getFillColor());
+	}
 	
-	
+	/**
+	 * Calculate the alpha component of a color from the given level of opacity.
+	 * @param opacity a value between 0-100. The value is never negative or greater than 100.
+	 * @return the alpha component of a color from the given level of opacity.
+	 */
+	private int calculateAlpha(int opacity) {
+		
+		float factor = (opacity/100f);
+	    return (int)(255 * factor);
+	 	
+	}
 	
 	
 	 /**

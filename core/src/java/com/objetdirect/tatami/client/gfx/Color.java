@@ -133,6 +133,23 @@ public class Color {
 		return blue;
 	}
 	
+	
+	
+	public boolean equals(Object obj) {
+		boolean result = false;
+		if ( obj instanceof Color) {
+			Color color = (Color)obj;
+			result = color.getAlpha() == getAlpha() && 
+			         color.getBlue() == getBlue() && 
+			         color.getGreen() == getGreen() &&
+			         color.getRed() == getRed();
+		} else {
+			result= toString().equals(obj.toString());
+		}
+		return result;
+	}
+	
+	
 	/**
 	 * Sets the blue component of the Color
 	 * @param blue the green component in range 0-255
