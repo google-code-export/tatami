@@ -250,7 +250,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 
 		buttonPanel.add(gridTransform);
 
-		opacity = new Slider(Slider.HORIZONTAL, 0, 255, 255, true);
+		opacity = new Slider(Slider.HORIZONTAL, 0, 100, 100, true);
 		opacity.addChangeListener(this);
 
 		circleButton = addToGrid(gridShape, 0, 0, "Circle", "gfx/circle.gif");
@@ -334,10 +334,8 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 		if (sender.equals(opacity)) {
 			if (current != null) {
 				int value = opacity.getValue();
-				final Color color = current.getFillColor();
-				Color newColor = new Color(color.getRed(), color.getGreen(),
-						color.getBlue(), value);
-				current.setFillColor(newColor);
+				
+				current.setOpacity(value);
 			}
 
 		}
@@ -441,7 +439,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 		} else if (sender.equals(rotateButton)) {
 			showPopupRotate();
 		} else if (sender.equals(imageButton)) {
-			ImageGfx img = new ImageGfx("od-logo.jpg", 105, 52);
+			ImageGfx img = new ImageGfx(TatamiDemo.getIconURL("od-logo.jpg"), 105, 52);
 			showGraphicObject(img, 300, 300);
 
 		} else if (sender.equals(ellipseButton)) {
@@ -718,7 +716,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 					currentFillColor = colorSelected;
 					DOM.setStyleAttribute(fill.getElement(), "backgroundColor",
 							color);
-					currentFillColor.setAlpha(opacity.getValue());
+					//currentFillColor.setAlpha(opacity.getValue());
 					if (current != null) {
 						current.setFillColor(currentFillColor);
 					}
@@ -901,7 +899,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 		current.setStroke(Color.RED, 2);
 
 		opacity.removeChangeListener(this);
-        opacity.setValue(current.getFillColor().getAlpha());
+        opacity.setValue(current.getOpacity());
         opacity.addChangeListener(this);
 
 
