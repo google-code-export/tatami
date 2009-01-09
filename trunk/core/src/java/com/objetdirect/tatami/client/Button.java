@@ -234,9 +234,15 @@ public class Button extends AbstractDojo  implements  HasText,SourcesClickEvents
 
 	public void doAfterCreation() {
 		DojoController.startup(this);
-		setEnabled(enabled);
+		
 	}
 
+	
+	public void onAttach() {
+		super.onAttach();
+		setEnabled(getDojoWidget(),enabled);
+	}
+	
 	
 	public boolean isEnabled() {
 		return this.enabled;
