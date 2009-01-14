@@ -421,6 +421,15 @@ public interface TatamiMessages extends com.google.gwt.i18n.client.Messages {
   String menu_slider_explain();
 
   /**
+   * Translated "<p>The <strong>GFX</strong> package permits to draw some graphic components. You can draw circles, rectangles, ellipses... You can also apply some affine transformation like translation, rotation... on these graphic components.<p>Click on an icon to create a graphic component in the canvas.</p>".
+   * 
+   * @return translated "<p>The <strong>GFX</strong> package permits to draw some graphic components. You can draw circles, rectangles, ellipses... You can also apply some affine transformation like translation, rotation... on these graphic components.<p>Click on an icon to create a graphic component in the canvas.</p>"
+   */
+  @DefaultMessage("<p>The <strong>GFX</strong> package permits to draw some graphic components. You can draw circles, rectangles, ellipses... You can also apply some affine transformation like translation, rotation... on these graphic components.<p>Click on an icon to create a graphic component in the canvas.</p>")
+  @Key("paragraph.gfx")
+  String paragraph_gfx();
+
+  /**
    * Translated "The project aims to integrate the Google Web Toolkit (GWT) and the DOJO framework. Indeed the DOJO framework is very rich in term of widgets and utilities (fisheye, slider, drag and drop functionality) and the main interest is to take benefits of the huge work which has been already done by the DOJO community. In other words, it means: <b>the DOJO widgets become GWT widgets, the DOJO utilities become GWT helper.</b>".
    * 
    * @return translated "The project aims to integrate the Google Web Toolkit (GWT) and the DOJO framework. Indeed the DOJO framework is very rich in term of widgets and utilities (fisheye, slider, drag and drop functionality) and the main interest is to take benefits of the huge work which has been already done by the DOJO community. In other words, it means: <b>the DOJO widgets become GWT widgets, the DOJO utilities become GWT helper.</b>"

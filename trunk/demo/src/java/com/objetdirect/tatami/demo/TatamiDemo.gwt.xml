@@ -29,6 +29,7 @@
 	<!-- Inherit the core Web Toolkit stuff.                  -->
 
 	<inherits name="com.objetdirect.tatami.Tatami_DojoALL"/>
+	<inherits name="com.google.gwt.user.theme.chrome.Chrome"/>
 	<inherits name="com.objetdirect.tatami.Tatami_YUI"/>
 	<inherits name="com.objetdirect.tatami.theme.Tundra"/>
 	<inherits name="com.objetdirect.tatamix.Tatamix"/>
