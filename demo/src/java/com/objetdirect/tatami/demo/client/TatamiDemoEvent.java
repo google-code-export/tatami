@@ -24,5 +24,25 @@ public interface TatamiDemoEvent {
 	public String CHART_ADD_SERIE = "Add Serie";
 	public String CHART_REMOVE_SERIE = "Remove Serie";
 	public String CHART_DATASTORE_FULLUPDATE = "Update_ChartGridDataStore";
+	public String SHOW_BUG = "SHOW_BUG";
+	public String DEBUG = "DEBUG";
+	
+	//events for GFX Demo : 
+	
+	public String DRAW_GRAPHIC_OBJECT ="DRAW_GRAPHIC_OBJECT";
+	public String DRAW_POLYLINE = "DRAW_POLYLINE";
+	public String DRAW_LINE = "DRAW_LINE";
+	public String DRAW_RECT = "DRAW_RECT";
+	public String DRAW_ELLIPSE = "DRAW_ELLIPSE";
+	public String DRAW_TEXT = "DRAW_TEXT";
+	public String DRAW_TEXT_PATH = "DRAW_TEXT_PATH";
+	public String DRAW_VIRTUAL_GROUP = "DRAW_VIRTUAL_GROUP";
+	public String DRAW_CIRCLE = "DRAW_CIRCLE";
+	public String DRAW_PATH = "DRAW_PATH";
+	public String DRAW_IMAGE = "DRAW_IMAGE";
+	public String DELETE_GRAPHIC = "DELETE_GRAPHIC";
+	
+	
+	
 
 }

@@ -1,17 +1,21 @@
 package com.objetdirect.tatami.demo.client;
 
+import com.objetdirect.tatamix.client.hmvc.Controller;
 import com.objetdirect.tatamix.client.hmvc.ControllerImpl;
 import com.objetdirect.tatamix.client.hmvc.ControllerProcessor;
 import com.objetdirect.tatamix.client.hmvc.Event;
 import com.objetdirect.tatamix.client.hmvc.MVC;
 import com.objetdirect.tatamix.client.hmvc.MVCImpl;
+import com.objetdirect.tatamix.client.hmvc.Model;
+import com.objetdirect.tatamix.client.hmvc.View;
 import com.objetdirect.tatamix.client.hmvc.ViewEvent;
 
 public class MainController extends ControllerImpl implements TatamiDemoEvent {
 
 
 	private MVC[] triads;
-	private final int SIZE = 8;
+	private final int SIZE = 9;
+	
 	private final int sliderMVC = 0;
 	private final int dateTimeMVC = 1 ;
 	private final int colorMVC = 2;
@@ -20,7 +24,7 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 	private final int dndMVC = 5;
 	private final int layoutAndChartMVC = 6;
 	private final int chartMVC = 7;
-
+	private final int showBug = 8;
 
 
 	public  MainController() {
@@ -78,6 +82,13 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 			}
 		};
 		
+		ControllerProcessor showBug = new ControllerProcessor() {
+			public void run(Event event) {
+				showBug();
+			}
+		};
+		
+		
 		register(SHOW_SLIDER_DEMO,showSlider);
 		register(SHOW_DATE_TIME_DEMO,showDateTime);
 		register(SHOW_GFX_DEMO,showGfx);
@@ -87,6 +98,7 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 		register(SHOW_LAYOUT_AND_CHART_DEMO,showLayoutAndChart);
 		register(SHOW_CHART_DEMO,showChart);
 		register(SHOW_HOME,showHome);
+		register(SHOW_BUG,showBug);
 	}
 
 
@@ -114,7 +126,12 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 
 	public void showGfx() {
 		if ( triads[gfxMVC].getView() == null) {
+			Controller controller = new GFXController();
+			Model model = new GFXModel();
 			triads[gfxMVC].setView(new GfxDemo());
+			triads[gfxMVC].setModel(model);
+			triads[gfxMVC].setController(controller);
+			addChild("GFX",controller);
 		}
 		displayTriad(gfxMVC);
 	}
@@ -169,6 +186,20 @@ public class MainController extends ControllerImpl implements TatamiDemoEvent {
 	}
 
 
+	private void showBug() {
+		if ( triads[showBug].getView() == null) {
+			View view = new BugView();
+			triads[showBug].setView(view);
+		}
+		displayTriad(showBug);
+	} 
+	
+	public void init(boolean debug) {
+		if ( debug) {
+			fire(new ViewEvent(DEBUG,this));
+			
+		}
+	}
 
 	private void displayTriad(int index) {
 		fire(new ViewEvent(UPDATE_CONTENT,this,triads[index].getView()));

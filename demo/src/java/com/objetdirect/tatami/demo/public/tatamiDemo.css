@@ -334,11 +334,50 @@ a:visited {
 }
 
 
+.GfxDemo-palette {
+float:left;
+width:150px;
+}
+
+.GfxDemo-palette .fillProperty {
+width:25px;
+height:25px;
+border:1px thin #000;
+margin:2px;
+}
+
+.GfxDemo-palette .strokeProperty {
+width:32px;
+height:8px;
+
+}
+
+.GfxDemo-palette img {
+width:29px;
+height:29px;
+margin:3px;
+}
+
+.pattern {
+width:32px;
+height:32px;
+margin:5px;
+}
+
+
+.tatami-Button {
+display:inline;
+}
+
+.BugContent {
+border:1px solid #000;
+}
 
 
 .GfxDemo-canvas {
   border : solid 1px;
-
+  margin-left:160px;
+  cursor:default;
 }
 
 
@@ -348,69 +387,3 @@ SliderDemo-vSlider {
 }
 
 
-.gwt-HorizontalSplitPanel {
-	border: 2px ridge #bbbbbd;
-    background-color:#ffffff;
-    background-image: url(images/gray_gradient.gif);
-    background-position:top left;
-    background-repeat:repeat-x;
-}
-
-.gwt-HorizontalSplitPanel .hsplitter {
- 	border-left: 2px ridge #bbbbbd;
-   	border-right: 2px ridge #bbbbbd;
-	background-color:#bbbbbd;
-	cursor: move;
-	height: 8px;
-}
-
-
-.gwt-VerticalSplitPanel {
-  	border: 2px ridge #bbbbbd;
-    background-color:#ffffff;
-    background-image: url(images/gray_gradient.gif);
-    background-position:top left;
-    background-repeat:repeat-x;
-
-}
-
-.gwt-VerticalSplitPanel .vsplitter {
-   	border-top: 2px ridge #bbbbbd;
-   	border-bottom: 2px ridge #bbbbbd;
-   	background-color:#bbbbbd;
-	cursor: move;
-	height: 8px;
-}
-
-
-.gwt-TabBar .gwt-TabBarFirst {
-	height: 100%;
-	border-bottom: 1px solid #87b3ff;
-	border-right: 1px solid #87b3ff;
-	padding-left: 3px;
-}
-
-.gwt-TabBar .gwt-TabBarRest {
-	border-bottom: 1px solid #87b3ff;
-	padding-right: 3px;
-}
-
-.gwt-TabBar .gwt-TabBarItem {
-	border-top: 1px solid #87b3ff;
-	border-bottom: 1px solid #87b3ff;
-	padding: 2px;
-	cursor: hand;
-	white-space: nowrap;
-	border-right: 1px solid #87b3ff;
-}
-
-.gwt-TabBar .gwt-TabBarItem-selected {
-	font-weight: bold;
-	background-color: #e8eef7;
-	border-top: 1px solid #87b3ff;
-	border-right: 1px solid #87b3ff;
-	border-bottom: 1px solid #e8eef7;
-	padding: 2px;
-	cursor: default;
-	white-space: nowrap;
-}

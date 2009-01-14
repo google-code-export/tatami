@@ -25,7 +25,10 @@
  */
 package com.objetdirect.tatami.demo.client;
 
-import com.google.gwt.core.client.GWT;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
@@ -34,36 +37,27 @@ import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.DockPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.SourcesClickEvents;
 import com.google.gwt.user.client.ui.TabPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.ColorChooser;
 import com.objetdirect.tatami.client.Slider;
-import com.objetdirect.tatami.client.gfx.Circle;
 import com.objetdirect.tatami.client.gfx.Color;
-import com.objetdirect.tatami.client.gfx.Ellipse;
-import com.objetdirect.tatami.client.gfx.Font;
 import com.objetdirect.tatami.client.gfx.GraphicCanvas;
 import com.objetdirect.tatami.client.gfx.GraphicObject;
 import com.objetdirect.tatami.client.gfx.GraphicObjectListener;
-import com.objetdirect.tatami.client.gfx.ImageGfx;
-import com.objetdirect.tatami.client.gfx.Line;
-import com.objetdirect.tatami.client.gfx.Path;
 import com.objetdirect.tatami.client.gfx.Pattern;
-import com.objetdirect.tatami.client.gfx.Point;
-import com.objetdirect.tatami.client.gfx.Polyline;
-import com.objetdirect.tatami.client.gfx.Rect;
-import com.objetdirect.tatami.client.gfx.Text;
-import com.objetdirect.tatami.client.gfx.TextPath;
-import com.objetdirect.tatami.client.gfx.VirtualGroup;
-import com.objetdirect.tatamix.client.hmvc.CompositeView;
+import com.objetdirect.tatamix.client.hmvc.DefaultView;
+import com.objetdirect.tatamix.client.hmvc.Processor;
+import com.objetdirect.tatamix.client.hmvc.ViewEvent;
+import com.objetdirect.tatamix.client.widget.ImageLink;
 
 
 /**
@@ -71,108 +65,40 @@ import com.objetdirect.tatamix.client.hmvc.CompositeView;
  * @author Vianney
  *
  */
-public class GfxDemo extends CompositeView implements GraphicObjectListener,
-		ClickListener, ChangeListener {
+public class GfxDemo extends DefaultView implements GraphicObjectListener,	ClickListener, ChangeListener, TatamiDemoEvent {
 
+	private enum ACTION { SCALE, ROTATE,APPLY_COLOR, APPLY_PATTERN,GO_BACK,GO_FRONT,
+		                  DRAW_LINE,DRAW_RECT,DRAW_TEXT, DRAW_POLYLINE, DRAW_PATH, DRAW_ELLIPSE,
+		                  DRAW_CIRCLE,DRAW_VIRTUAL_GROUP,DRAW_TEXT_PATH,DRAW_IMAGE,
+		                  SHOW_PROPERTIES,DELETE,STROKE_1, STROKE_2,STROKE_3,STROKE_4
+		              
+		                  };
+	private Map<SourcesClickEvents,ACTION> actionMap;
+	
 	/** factor for scaling */
 	float scaleFactor = 1;
 
 	int rotateDegree = 0;
 
-	/** The main panel */
-	private DockPanel panel;
 
 	/** the last position of the last widget which had been moved */
 	private int[] lastPosition = { 0, 0 };
 
-	private Grid gridShape;
+	private FlowPanel gridShape;
 
-	private Grid gridTransform;
+	private FlowPanel gridTransform;
 
 	/** the canvas */
 	private GraphicCanvas canvas;
 
 	/** The buttons panel */
-	private VerticalPanel buttonPanel;
+	private FlowPanel palette;
 
 	/**
 	 * flag to indicate if a graphical object is movable
 	 */
 	private boolean movable = false;
-
-	/**
-	 * for creating a circle
-	 */
-	private Image circleButton;
-
-	/**
-	 * for creating a rectangle
-	 */
-	private Image rectButton;
-
-	/**
-	 * for creating some text
-	 */
-	private Image textButton;
-
-	/**
-	 * for creating a GFX image
-	 */
-	private Image imageButton;
-
-	/**
-	 * for creating lineButton
-	 */
-	private Image lineButton;
-
-	private Image polylineButton;
-
-	/**
-	 * for creating an Ellipse
-	 */
-	private Image ellipseButton;
-
-	/**
-	 * for creating a graphical object
-	 */
-	private Image scaleButton;
-
-	/** for moving an object to the back */
-	private Image backButton;
-
-	/**
-	 * for moving an object to the front
-	 */
-	private Image frontButton;
-
-	/** to create a path */
-	private Image pathButton;
-
-	/** to create a path */
-	private Image textPathButton;
-
-	/**
-	 * for creating a rotation of an object
-	 */
-	private Image rotateButton;
-
-	private Image virtualButton;
-
-	/**
-	 * To delete an object
-	 */
-	private Image deleteButton;
-
-	/**
-	 * To change color
-	 */
-	private Image colorButton;
-
-	/**
-	 * The popup panels
-	 */
-
-	private Image propertiesButton;
+		
 
 	private PopupPanel popup = new PopupPanel(true);
 
@@ -201,8 +127,17 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 	 * Creates the GFXDemo
 	 */
 	public GfxDemo() {
+		this.actionMap = new HashMap<SourcesClickEvents,ACTION>();
 		initComponents();
-		this.initWidget(panel);
+		
+		Processor drawGraphicalObject = new Processor() {
+			public void run(com.objetdirect.tatamix.client.hmvc.Event event) {
+				if ( event.getData() instanceof GraphicObject) {
+					showGraphicObject((GraphicObject)event.getData(),100,100);
+				}
+			}
+		};
+		register(DRAW_GRAPHIC_OBJECT,drawGraphicalObject);
 	}
 
 	/**
@@ -212,99 +147,99 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 	 *
 	 */
 	private void initComponents() {
-		panel = new DockPanel();
+		
+		palette = new FlowPanel();
+		palette.setStylePrimaryName("GfxDemo-palette");
 		canvas = new GraphicCanvas();
-		canvas.setStyleName("GfxDemo-canvas");
-		buttonPanel = new VerticalPanel();
-		buttonPanel.setSpacing(10);
+		canvas.setStylePrimaryName("GfxDemo-canvas");
+		canvas.setDimensions(600, 600);
 		popup.add(html);
 
-		gridShape = new Grid(6, 2);
-		gridShape.setCellSpacing(5);
-		gridShape.setCellPadding(5);
-		gridTransform = new Grid(3, 2);
-		gridTransform.setCellSpacing(5);
-		gridTransform.setCellPadding(5);
-
-		canvas.setPixelSize(600, 600);
+		gridShape = new FlowPanel();
+		gridShape.setStylePrimaryName("shapeButtons");
+		gridTransform = new FlowPanel();
+		gridTransform.setStylePrimaryName("transformButtons");
+		
+		
 
 		fill = new HTML("&nbsp;&nbsp;&nbsp;");
-		DOM.setStyleAttribute(fill.getElement(), "backgroundColor",
-				this.currentFillColor.toHex());
-		DOM.setStyleAttribute(fill.getElement(), "border", "solid");
-		DOM.setStyleAttribute(fill.getElement(), "borderWidth", "thin");
-		DOM.setStyleAttribute(fill.getElement(), "borderColor",
-				this.currentStrokeColor.toHex());
-		fill.setSize("25px", "25px");
-		fill.addClickListener(this);
-		buttonPanel.add(gridShape);
-		buttonPanel.add(fill);
-		buttonPanel
-				.setCellHorizontalAlignment(fill, VerticalPanel.ALIGN_CENTER);
-
+		fill.setStylePrimaryName("fillProperty");
+		Style fillStyle = fill.getElement().getStyle();
+		fillStyle.setProperty("backgroundColor", currentFillColor.toHex());
+		fillStyle.setProperty("border", "solid");
+		fillStyle.setProperty("borderWidth", "thin");
+		fillStyle.setProperty("borderColor",currentStrokeColor.toHex());
+		
+		addAction(fill,ACTION.APPLY_COLOR);
+		
+		
+		palette.add(gridShape);
+		palette.add(fill);
+		
 		strokeSize = new HTML[4];
-		strokeSize[0] = this.createSrokeSize(1);
-		strokeSize[1] = this.createSrokeSize(2);
-		strokeSize[2] = this.createSrokeSize(3);
-		strokeSize[3] = this.createSrokeSize(5);
+		strokeSize[0] = this.createSrokeSize(1,ACTION.STROKE_1);
+		strokeSize[1] = this.createSrokeSize(2,ACTION.STROKE_2);
+		strokeSize[2] = this.createSrokeSize(3,ACTION.STROKE_3);
+		strokeSize[3] = this.createSrokeSize(5,ACTION.STROKE_4);
 
-		buttonPanel.add(gridTransform);
+		palette.add(gridTransform);
 
 		opacity = new Slider(Slider.HORIZONTAL, 0, 100, 100, true);
 		opacity.addChangeListener(this);
 
-		circleButton = addToGrid(gridShape, 0, 0, "Circle", "gfx/circle.gif");
-		ellipseButton = addToGrid(gridShape, 0, 1, "Ellipse", "gfx/ellipse.gif");
-		rectButton = addToGrid(gridShape, 1, 0, "Rect", "gfx/rect.gif");
-		lineButton = addToGrid(gridShape, 1, 1, "Line", "gfx/line.gif");
-		polylineButton = addToGrid(gridShape, 2, 0, "Polyline",
-				"gfx/polyline.gif");
-		textButton = addToGrid(gridShape, 2, 1, "Text", "gfx/text.gif");
+		addAction(gridShape,"Circle", "gfx/circle.gif",ACTION.DRAW_CIRCLE);
+		addAction(gridShape, "Ellipse", "gfx/ellipse.gif",ACTION.DRAW_ELLIPSE);
+		addAction(gridShape, "Rect", "gfx/rect.gif",ACTION.DRAW_RECT);
+		addAction(gridShape, "Line", "gfx/line.gif",ACTION.DRAW_LINE);
+		addAction(gridShape,"Polyline","gfx/polyline.gif",ACTION.DRAW_POLYLINE);
+		addAction(gridShape, "Text", "gfx/text.gif",ACTION.DRAW_TEXT);
+		addAction(gridShape, "Image", "gfx/image.gif",ACTION.DRAW_IMAGE);
+		addAction(gridShape,"Path", "gfx/path.GIF",ACTION.DRAW_PATH);
+		addAction(gridShape, "Text Path","gfx/textpath.gif",ACTION.DRAW_TEXT_PATH);
+		addAction(gridShape,  "Virtual", "gfx/group.gif",ACTION.DRAW_VIRTUAL_GROUP);
+		addAction(gridShape, "Delete", "gfx/delete.gif",ACTION.DELETE);
+		addAction(gridTransform, "set color","gfx/color.gif",ACTION.APPLY_COLOR);
+		addAction(gridTransform, "Scale", "gfx/scale.gif",ACTION.SCALE);
+		addAction(gridTransform,"Rotate","gfx/rotate.gif",ACTION.ROTATE);
+		addAction(gridTransform, "Move to back","gfx/back.gif",ACTION.GO_BACK);
+		addAction(gridTransform, "Move to front","gfx/front.gif",ACTION.GO_FRONT);
+		addAction(gridTransform,"Properties","gfx/properties.gif",ACTION.SHOW_PROPERTIES);
 
-		imageButton = addToGrid(gridShape, 3, 0, "Image", "gfx/image.gif");
-		pathButton = addToGrid(gridShape, 3, 1, "Path", "gfx/path.GIF");
-		textPathButton = addToGrid(gridShape, 4, 0, "Text Path",
-				"gfx/textpath.gif");
-		virtualButton = addToGrid(gridShape, 4, 1, "Virtual", "gfx/group.gif");
-		deleteButton = addToGrid(gridShape, 5, 0, "Delete", "gfx/delete.gif");
-
-		colorButton = addToGrid(gridTransform, 0, 0, "set color",
-				"gfx/color.gif");
-		scaleButton = addToGrid(gridTransform, 0, 1, "Scale", "gfx/scale.gif");
-		rotateButton = addToGrid(gridTransform, 1, 0, "Rotate",
-				"gfx/rotate.gif");
-		backButton = addToGrid(gridTransform, 1, 1, "Move to back",
-				"gfx/back.gif");
-		frontButton = addToGrid(gridTransform, 2, 0, "Move to front",
-				"gfx/front.gif");
-		propertiesButton = addToGrid(gridTransform, 2, 1, "Properties",
-				"gfx/properties.gif");
-
-		HTML html = new HTML("<p>The <b>GFX</b> package permits to draw some graphic components. You can draw circles, rectangles, ellipses... You can also apply some affine transformation like translation, rotation... on these graphic components.<b>Click on an icon to create a graphic component in the canvas.</p>");
-		panel.add(html, DockPanel.NORTH);
-		panel.add(canvas, DockPanel.CENTER);
-		panel.add(buttonPanel, DockPanel.WEST);
+	
+		add(new HTML(TatamiDemo.getMessages().paragraph_gfx()));
+		
+		add(palette);
+		add(canvas);
 		canvas.addGraphicObjectListener(this);
 
 	}
+	
+	
+	
+	
+	private void addAction(SourcesClickEvents widget,ACTION action) {
+		actionMap.put(widget,action);
+		widget.addClickListener(this);
+	}
+	
+	
+	
 
 	/**
 	 *
 	 * @param size
 	 * @return
 	 */
-	private HTML createSrokeSize(int size) {
+	private HTML createSrokeSize(int size,ACTION action) {
 		HTML strokeSize = new HTML("&nbsp;&nbsp;&nbsp;");
-		strokeSize.setSize("32px", "8px");
+		strokeSize.setStylePrimaryName("strokeProperty");
 		strokeSize.setTitle("Size of stroke " + size);
-		DOM.setStyleAttribute(strokeSize.getElement(), "borderTop", "solid");
-		DOM
-				.setStyleAttribute(strokeSize.getElement(), "borderWidth", ""
-						+ size);
-		buttonPanel.add(strokeSize);
-		buttonPanel.setCellHorizontalAlignment(strokeSize,
-				VerticalPanel.ALIGN_CENTER);
-		strokeSize.addClickListener(this);
+		Style style = strokeSize.getElement().getStyle();
+		style.setProperty("borderTop", "solid");
+		style.setPropertyPx("borderWidth", size);
+		palette.add(strokeSize);
+		this.addAction(strokeSize, action);
+		
 		return strokeSize;
 	}
 
@@ -315,13 +250,14 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 	 */
 	private void chooseStrokeSize(int index, int size) {
 		for (int i = 0; i < strokeSize.length; i++) {
+			Style style = strokeSize[i].getElement().getStyle();
 			if (i == index) {
-				DOM.setStyleAttribute(strokeSize[i].getElement(),
-						"borderColor", "red");
+				
+				style.setProperty("borderColor", "red");
 				currentStrokeSize = size;
 			} else {
-				DOM.setStyleAttribute(strokeSize[i].getElement(),
-						"borderColor", "black");
+				style.setProperty("borderColor", "black");
+				
 			}
 		}
 	}
@@ -347,13 +283,15 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 	 * @param icon the image (url) to load.
 	 * @return a clickable <code>Image</code>.
 	 */
-	private Image addToGrid(Grid grid, int row, int col, String title,
-			String icon) {
-		Image button = new Image(GWT.getModuleBaseURL() + "images/"+icon);
+	private ImageLink addAction(FlowPanel panel,String title,String icon,ACTION action) {
+		ImageLink button = new ImageLink();
+		
+		button.setImageSrc(TatamiDemo.getIconURL(icon));
+		button.setAlt(title);
 		button.setTitle(title);
-		button.setSize("29px", "29px");
-		grid.setWidget(row, col, button);
-		button.addClickListener(this);
+		
+		panel.add(button);
+		addAction(button,action);
 		return button;
 	}
 
@@ -416,125 +354,133 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 		}
 
 	}
+	
+	
+	private void manageAction(ACTION action,Widget sender) {
+		switch (action ) {
+		 default: {
+			 Window.alert("Not implemented");
+			 break;
+		 }
+		 case ROTATE : {
+			 showPopupRotate(sender);
+			 break;
+		 }
+		 case SCALE : {
+			 showPopupScaler(sender);
+			 break;
+		 }
+		 case DRAW_RECT : {
+			 fire(new ViewEvent(DRAW_RECT,this));
+			 break;
+		 }
+		 
+		 case DRAW_POLYLINE : {
+			 fire(new ViewEvent(DRAW_POLYLINE,this));
+			 break;
+		 }
+		 case DRAW_CIRCLE : {
+			 fire(new ViewEvent(DRAW_CIRCLE,this));
+			 break;
+		 }
+		 case DRAW_LINE : {
+			 fire(new ViewEvent(DRAW_LINE,this));
+			 break;
+		 }
+		 case DRAW_TEXT: {
+			 fire(new ViewEvent(DRAW_TEXT,this));
+			 break;
+		 }
+		 case DRAW_TEXT_PATH: {
+			 fire(new ViewEvent(DRAW_TEXT_PATH,this));
+			 break;
+		 }
+		 case DRAW_VIRTUAL_GROUP: {
+			 fire(new ViewEvent(DRAW_VIRTUAL_GROUP,this));
+			 break;
+		 }
+		 case DRAW_IMAGE : {
+			 fire(new ViewEvent(DRAW_IMAGE,this));
+			 break;
+		 }
+		 case DRAW_PATH : {
+			 fire(new ViewEvent(DRAW_PATH,this));
+			 break;
+		 }
+		 case DRAW_ELLIPSE : {
+			 fire(new ViewEvent(DRAW_ELLIPSE,this));
+			 break;
+		 }
+		 case STROKE_1 : {
+			 chooseStrokeSize(0, 1);
+			 break; 
+		 }
+		 case STROKE_2 : {
+			 chooseStrokeSize(1, 2);	
+			 break; 
+			 }
+		 case STROKE_3 : {
+			 chooseStrokeSize(2, 3);	
+			 break; 
+			 }
+		 case STROKE_4 : {
+			 chooseStrokeSize(3, 5);	
+			 break; 
+			 }
+		 case SHOW_PROPERTIES : {
+			 if ( current != null) {
+			 showProperties(current);
+			 }
+			 break;
+		 }
+		 case GO_FRONT : {
+			 if ( current != null) {
+				 current.moveToFront();
+			 }
+			 break;
+		 }
+		 case GO_BACK : {
+             if ( current != null) {
+            	 current.moveToBack();
+			 }
+			 break;
+		 }
+		 case DELETE : {
+			 if ( current != null) {
+				 if ( current.getGroup() != null) {
+						canvas.remove(current.getGroup());
+					} else {
+					   canvas.remove(current);
+					} 
+			 }
+			 break;
+		 }
+		 case APPLY_COLOR: {
+			 showPopupColor(sender);
+			 break;
+			 
+		 }
+		}
+	}
+	
+	
 
 	/**
 	 * Performs some action when a click event is fired.
 	 * @param sender the widget which fired a click event
 	 */
 	public void onClick(Widget sender) {
-		if (sender.equals(rectButton)) {
-			Rect rect = new Rect(300, 100);
-			showGraphicObject(rect, 300, 300);
-			rect.setWidth(100);
-
-		} else if (sender.equals(circleButton)) {
-			showGraphicObject(new Circle(50), 300, 300);
-		} else if (sender.equals(colorButton)) {
-			showPopupColor();
-		} else if (sender.equals(textButton)) {
-			showText();
-
-		} else if (sender.equals(scaleButton)) {
-			this.showPopupScaler();
-		} else if (sender.equals(rotateButton)) {
-			showPopupRotate();
-		} else if (sender.equals(imageButton)) {
-			ImageGfx img = new ImageGfx(TatamiDemo.getIconURL("od-logo.jpg"), 105, 52);
-			showGraphicObject(img, 300, 300);
-
-		} else if (sender.equals(ellipseButton)) {
-			showGraphicObject(new Ellipse(200, 100), 300, 300);
-		} else if (sender.equals(strokeSize[0])) {
-			this.chooseStrokeSize(0, 1);
-		} else if (sender.equals(strokeSize[1])) {
-			this.chooseStrokeSize(1, 2);
-		} else if (sender.equals(strokeSize[2])) {
-			this.chooseStrokeSize(2, 3);
-		} else if (sender.equals(strokeSize[3])) {
-			this.chooseStrokeSize(3, 5);
-		} else if (sender.equals(propertiesButton) && current != null) {
-			showProperties(current);
-		} else if (sender.equals(frontButton) && current != null) {
-			this.current.moveToFront();
-		} else if (sender.equals(backButton) && current != null) {
-			this.current.moveToBack();
-		} else if (sender.equals(deleteButton) && current != null) {
-			if ( current.getGroup() != null) {
-				canvas.remove(current.getGroup());
-			} else {
-			   canvas.remove(current);
-			}
-		} else if (sender.equals(lineButton)) {
-			final Point pointA = new Point(50, 50);
-			final Point pointB = new Point(200, 360);
-			Line line = new Line(pointA, pointB);
-			line.setStrokeStyle(Line.LONGDASH);
-			showGraphicObject(line, 300, 300);
-		} else if (sender.equals(pathButton)) {
-			showPath();
-		} else if (sender.equals(virtualButton)) {
-			this.showVirtual();
-
-		} else if (sender.equals(textPathButton)) {
-			this.showTextPath();
-		} else if (sender.equals(polylineButton)) {
-			showPolyline();
-
+		ACTION action = actionMap.get((SourcesClickEvents)sender);
+		if ( action != null) {
+			manageAction(action,sender);
+			
 		}
 	}
 
-	/**
-	 * Shows an example of a <code>Polyline</code> object
-	 *
-	 */
-	private void showPolyline() {
-
-		Point[] arrow = new Point[8];
-		arrow[0] = new Point(-2, 15);
-		arrow[1] = new Point(2, 15);
-		arrow[2] = new Point(2, -105);
-		arrow[3] = new Point(6, -105);
-		arrow[4] = new Point(0, -116);
-		arrow[5] = new Point(-6, -105);
-		arrow[6] = new Point(-2, -105);
-		arrow[7] = new Point(-2, 15);
-
-		Polyline poly = new Polyline(arrow);
-		this.showGraphicObject(poly, 300, 300);
-	}
+	
 
 
-	/**
-	 * Shows an example of a <code>Path</code> object
-	 *
-	 */
-	private void showPath() {
-		// start point
-		Point p1 = new Point(50, 50);
-		Point p2 = new Point(80, 50);
-		Point p3 = new Point(50, 100);
-		Point p4 = new Point(80, 100);
-
-		Path t = new Path();
-		t.setFillColor(currentFillColor);
-		t.setStroke(currentStrokeColor, currentStrokeSize);
-
-		t.moveTo(p1);
-		t.lineTo(p2);
-		t.lineTo(p3);
-		t.lineTo(p4);
-		t.lineTo(p1);
-		t.moveTo((p1.getX() + p4.getX()) / 2, (p1.getY() + p4.getY()) / 2);
-		t.lineTo((p2.getX() + p3.getX()) / 2, (p2.getY() + p3.getY()) / 2);
-		t.moveTo((p1.getX() + p2.getX()) / 2, (p1.getY() + p2.getY()) / 2);
-
-		t.arcTo(20, 30, 35, true, true, p3);
-		t.lineTo((p3.getX() + p4.getX()) / 2, (p3.getY() + p4.getY()) / 2);
-		canvas.add(t, 60, 100);
-		canvas.setPixelSize(600, 600);
-	}
-
-
+	
 	/**
 	 * Show some properties about a <code>GraphicObjectw</code>
 	 * @param object the <code>GraphicObject</code> to show the properties
@@ -542,6 +488,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 	 */
 	private void showProperties(GraphicObject object) {
 		final DialogBox dialog = new DialogBox(false);
+		dialog.setText("Properties");
 		Grid panel = new Grid(5, 4);
 		panel.setCellPadding(5);
 		panel.setCellSpacing(10);
@@ -586,7 +533,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 	/**
 	 * shows a popup to scale a graphical Object
 	 **/
-	private void showPopupScaler() {
+	private void showPopupScaler(Widget sender) {
 		if (current != null) {
 			scaleFactor = 1;
 			final PopupPanel popupScaler = new PopupPanel(true);
@@ -635,8 +582,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 			};
 			scaler.addChangeListener(scaleChange);
 			popupScaler.add(scalePanel);
-			popupScaler.setPopupPosition(scaleButton.getAbsoluteLeft(),
-					scaleButton.getAbsoluteTop());
+			popupScaler.setPopupPosition(sender.getAbsoluteLeft(),	sender.getAbsoluteTop());
 			popupScaler.show();
 		}
 	}
@@ -646,7 +592,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 	 * perform some rotation of the current <code>GraphicObject</code>
 	 *
 	 */
-	private void showPopupRotate() {
+	private void showPopupRotate(Widget sender) {
 		if (current != null) {
 			rotateDegree = 0;
 			final PopupPanel popupRotate = new PopupPanel(true);
@@ -679,8 +625,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 			};
 			rotate.addChangeListener(rotateChange);
 			popupRotate.add(rotatePanel);
-			popupRotate.setPopupPosition(rotateButton.getAbsoluteLeft(),
-					rotateButton.getAbsoluteTop());
+			popupRotate.setPopupPosition(sender.getAbsoluteLeft(),sender.getAbsoluteTop());
 			popupRotate.show();
 		}
 	}
@@ -691,13 +636,13 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 	 *  a <code>Slider</code> to change the opacity of the <code>Color</code>,
 	 *  some <code>Pattern</code> to apply
 	 */
-	private void showPopupColor() {
+	private void showPopupColor(Widget sender) {
 
 		final PopupPanel popupColor = new PopupPanel(true);
 		popupColor.addStyleName("GfxDemo-popupColor");
 		TabPanel tabPanel = new TabPanel();
-		VerticalPanel colPanel = new VerticalPanel();
-		colPanel.setSpacing(5);
+		FlowPanel colPanel = new FlowPanel();
+		
 		final CheckBox checkFill = new CheckBox("Background");
 		checkFill.setChecked(true);
 		colPanel.add(checkFill);
@@ -714,8 +659,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 				Color colorSelected = Color.getColor(color);
 				if (checkFill.isChecked()) {
 					currentFillColor = colorSelected;
-					DOM.setStyleAttribute(fill.getElement(), "backgroundColor",
-							color);
+					DOM.setStyleAttribute(fill.getElement(), "backgroundColor",color);
 					//currentFillColor.setAlpha(opacity.getValue());
 					if (current != null) {
 						current.setFillColor(currentFillColor);
@@ -726,7 +670,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 					DOM.setStyleAttribute(fill.getElement(), "borderColor",
 							color);
 					if (current != null) {
-						System.out.println(currentStrokeColor);
+					
 						current.setStroke(currentStrokeColor, 1);
 					}
 				}
@@ -734,23 +678,22 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 		};
 		colorChooser.addChangeListener(colorChange);
 
-		Grid grid = new Grid(2, 3);
-		grid.setCellSpacing(10);
-		grid.setCellPadding(10);
-		grid.setWidget(0, 0, createImagePattern("gfx/none.gif"));
-		grid.setWidget(0, 1, createImagePattern("littleNero.png"));
-		grid.setWidget(0, 2, createImagePattern("littleTrajan.png"));
-		grid.setWidget(1, 0, createImagePattern("cubic.jpg"));
-		grid.setWidget(1, 1, createImagePattern("logo_ft.gif"));
-		grid.setWidget(1, 2, createImagePattern("od-logo.jpg"));
-		tabPanel.add(grid, new Label("Pattern"));
-
+		FlowPanel patternContainer = new FlowPanel();
+		
+		
+		
+		patternContainer.add(createImagePattern("gfx/none.gif"));
+		patternContainer.add(createImagePattern("littleNero.png"));
+		patternContainer.add(createImagePattern("littleTrajan.png"));
+		patternContainer.add(createImagePattern("cubic.jpg"));
+		patternContainer.add(createImagePattern("logo_ft.gif"));
+		patternContainer.add(createImagePattern("od-logo.jpg"));
+		tabPanel.add(patternContainer, new Label("Pattern"));
 		tabPanel.add(this.opacity, new Label("Opacity"));
 
 		tabPanel.selectTab(0);
 		popupColor.add(tabPanel);
-		popupColor.setPopupPosition(colorButton.getAbsoluteLeft(), colorButton
-				.getAbsoluteTop());
+		popupColor.setPopupPosition(sender.getAbsoluteLeft(), sender.getAbsoluteTop());
 		popupColor.show();
 	}
 
@@ -761,8 +704,8 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 	 * @return the <code>Image</code> created
 	 */
 	private Image createImagePattern(final String url) {
-		final Image image = new Image(url);
-		image.setSize("32px", "32px");
+		final Image image = new Image(TatamiDemo.getIconURL(url));
+		image.setStylePrimaryName("pattern");
 		image.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
 				if (current != null) {
@@ -770,7 +713,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 					if (url == "gfx/none.gif") {
 						pattern = Pattern.DEFAULT_PATTERN;
 					} else {
-						pattern = new Pattern(new Image(url), 0, 0);
+						pattern = new Pattern(new Image(TatamiDemo.getIconURL(url)), 0, 0);
 					}
 					current.applyPattern(pattern);
 				}
@@ -779,74 +722,7 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 		return image;
 	}
 
-	/**
-	 * Shows an example of a <code>Text</code> object
-	 */
-	private void showText() {
-		Text text = new Text("Tatami GFX,\n default font");
-
-		//it seems that to set a font bug in FF
-//		Font font = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
-//				Font.NORMAL);
-//		Text text2 = new Text("Tatami GFX, courier bolder 10");
-//		Font font2 = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
-//				Font.BOLDER);
-//		Text text3 = new Text("Tatami GFX, courier lighter 10");
-//		Font font3 = new Font("Courier", 10, Font.NORMAL, Font.NORMAL,
-//				Font.LIGHTER);
-//		Text text4 = new Text("Tatami GFX Arial 24 Bold");
-		Font font4 = new Font("Arial", 24, Font.ITALIC, Font.NORMAL, Font.LIGHTER);
-
-		//text.setFont(font);
-//		text3.setFont(font3);
-		text.setFont(font4);
-		showGraphicObject(text, 10, 20);
-
-//		showGraphicObject(text2, 10, 40);
-//		showGraphicObject(text3, 10, 60);
-//		showGraphicObject(text4, 10, 100);
-//		text4.setFont(font4);
-
-	}
-
-	/**
-	 * Shows an example of a <code>TextPath</code> object
-	 *
-	 */
-	private void showTextPath() {
-		TextPath textPath = new TextPath(
-				"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent erat.In malesuada ultricies velit. Vestibulum tempor odio vitae diam. Morbi arcu lectus, laoreet eget, nonummy at, elementum a, quam.");
-		this.showGraphicObject(textPath, 10, 10);
-		int CPD = 30;
-		Font times = new Font("times", 12, Font.NORMAL, Font.NORMAL,
-				Font.NORMAL);
-		textPath.setFont(times);
-		textPath.moveTo(0, 100);
-		textPath.setAbsoluteMode(false);
-		textPath.curveTo(CPD, 0, 100 - CPD, 300, 100, 300);
-		textPath.curveTo(CPD, 0, 100 - CPD, -300, 100, -300);
-		textPath.curveTo(CPD, 0, 100 - CPD, 300, 100, 300);
-		textPath.curveTo(CPD, 0, 100 - CPD, -300, 100, -300);
-		textPath.curveTo(CPD, 0, 100 - CPD, 300, 100, 300);
-
-	}
-
-
-	/**
-	 * Shows an example of a <code>VirtualGroup</code> object
-	 *
-	 */
-	private void showVirtual() {
-		VirtualGroup virtual = new VirtualGroup();
-		Rect r = new Rect(100, 20);
-		Circle c = new Circle(20);
-		c.translate(0, 15);
-		r.translate(0, 25);
-		virtual.add(c);
-		virtual.add(r);
-		this.showGraphicObject(virtual, 300, 300);
-
-	}
+	
 
 	/**
 	 * Adds a <code>GraphicObject</code> to the <code>GraphicCanvas</code>
@@ -856,7 +732,6 @@ public class GfxDemo extends CompositeView implements GraphicObjectListener,
 	 *
 	 */
 	private void showGraphicObject(GraphicObject object, int x, int y) {
-		// this.canvas.removeAllGraphics();
 		object.setFillColor(currentFillColor);
 		object.setStroke(currentStrokeColor, currentStrokeSize);
 		this.canvas.add(object, x, y);
