@@ -9,7 +9,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PopupListener;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -65,7 +65,7 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 	 * Initializes the components
 	 */
 	protected void initComponents() {
-		Label label = new Label();
+		HTML label = new HTML();
 		
 		label.setText(message);
 		label.setStylePrimaryName("label");
