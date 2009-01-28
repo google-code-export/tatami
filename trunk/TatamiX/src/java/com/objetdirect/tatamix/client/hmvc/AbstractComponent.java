@@ -28,10 +28,10 @@ import java.util.List;
  */
 public abstract class AbstractComponent extends AbstractProcessor implements 	MVCComponent {
 	
-//	protected Map registered_ = null;
+
 	protected List<MVCComponent> listeners = null;
 
-	//protected MVCComponent defaultNotifier_ = this;
+
 
 	/**
 	 *
