@@ -63,8 +63,9 @@ public abstract class Event extends EventObject {
 	 *
 	 * @return java.lang.Object
 	 */
-	public Object getData() {
-		return data;
+	@SuppressWarnings("unchecked")
+	public <T>T getData() {
+		return (T)data;
 	}
 
 	/**
