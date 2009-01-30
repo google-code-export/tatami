@@ -8,7 +8,7 @@ public abstract class BaseEditor implements GridEditor {
 	private Map<String, Object> attributes = new HashMap<String, Object>();
 
 	public BaseEditor(){
-		
+		   
 	}
 	
 	public Map<String,Object> getAttributes() {
