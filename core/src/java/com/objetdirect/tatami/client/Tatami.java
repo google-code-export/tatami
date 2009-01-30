@@ -26,8 +26,7 @@
  */
 package com.objetdirect.tatami.client;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.objetdirect.tatami.theme.client.Theme;
 
 /**
  * Helper class for tatami. 
@@ -38,49 +37,8 @@ import com.google.gwt.user.client.ui.RootPanel;
  * @author vgrassaud
  *
  */
-public class Tatami {
+public class Tatami extends Theme {
 
-   /**
-    * Use this constant for the theme soria
-    */
-	static public final String SORIA_THEME = "soria";
-	
-	/**
-	 * Use this constant for the theme tundra
-	 */
-	static public final String TUNDRA_THEME = "tundra";
   
-   /**
-	* Use this constant for the theme nihilo
-	*/
-	static public final String NIHILO_THEME = "nihilo";
-	
-	/**
-	 * Applies a Tatami theme to the module. 
-	 * @param theme the name of the theme to apply. use <code>SORIA_THEME | TUNDRA_THEME | NIHILO_THEME </code>
-	 * @param erase <code>true</code> to only apply the given theme, if a theme is already use it will be lost
-	 */
-	public static void applyTheme(String theme, boolean erase) {
-		Element body = RootPanel.getBodyElement();
-		String classValue = body.getClassName();
-		if ( (classValue == null) || !classValue.contains(theme)) {
-			
-			if ( erase) {
-				body.setClassName(theme);
-			} else {
-				body.setClassName(classValue + " " + theme);
-			}
-			
-		}
-	}
-	
-	/**
-	 * Applies the default theme of Tatami which is the Tundra theme. 
-	 */
-	public static void applyDefaultTheme() {
-		applyTheme(TUNDRA_THEME,false);
-	}
-	
-
 	
 }//end of class
