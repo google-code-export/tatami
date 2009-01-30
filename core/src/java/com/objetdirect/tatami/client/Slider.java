@@ -103,7 +103,7 @@ public class Slider extends AbstractDojoFocus {
 	 * Creates a Slider cursor
 	 * 
 	 * @param type  the position of the cursor : VERTICAL, HORIZONTAL
-	 * @parma minimum the min value for the cursor
+	 * @param minimum the min value for the cursor
 	 * @param maximum  the max value for the cursor
 	 * @param initialValue the initial value
 	 * @param showButtons  Show increment/decrement buttons at the ends of the slider
@@ -294,7 +294,7 @@ public class Slider extends AbstractDojoFocus {
 
 	protected void onLoad() {
 		setEventCallback(getDojoWidget());
-		setEnabled(isEnabled());
+		
 		setValue(getValue()); // 
 		applySize();
 	
@@ -302,7 +302,7 @@ public class Slider extends AbstractDojoFocus {
 		buildRuleMark(sliderRuleBottom);
 		buildRuleMark(labelTop);
 		buildRuleMark(labelBottom);
-
+		setEnabled(isEnabled());
 	}
 
 	/**
