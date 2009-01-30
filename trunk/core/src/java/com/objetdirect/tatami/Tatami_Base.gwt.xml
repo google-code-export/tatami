@@ -27,5 +27,6 @@
 
 <module>
 	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.objetdirect.tatami.theme.Theme" />
 	<stylesheet src="tatami.css"/>
 </module>
