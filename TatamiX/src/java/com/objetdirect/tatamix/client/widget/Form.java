@@ -102,6 +102,10 @@ public abstract class Form extends Composite  {
 	}
 	
 	
+	public abstract void reset();
+		
+	
+	
 	
 	/**
 	 * 
@@ -115,7 +119,7 @@ public abstract class Form extends Composite  {
 	private class InnerClickListener implements ClickListener {
 		public void onClick(Widget sender ) {
 			removeErrors();
-			if ( sender == validator && formListeners != null && validate()) {
+			if ( sender == validator && validate() && formListeners != null ) {
 				
 				fireHandlersOnSubmit();
 			}
