@@ -61,6 +61,10 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 	}
 	
 	
+	public void reset() {
+		
+	}
+	
 	/**
 	 * Initializes the components
 	 */
