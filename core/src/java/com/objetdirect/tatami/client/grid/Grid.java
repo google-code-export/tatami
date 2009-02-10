@@ -144,7 +144,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	
 	private boolean renderGridOnLoad = true;
 	
-	private RowStyler styler;
+	  private RowStyler styler;
 	
 
 	/**
@@ -154,7 +154,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	public Grid(){
 		this( new GridDataStore() , new GridView());
 		this.setWidth("100%");
-		this.setHeight("200px");
+		//this.setHeight("200px");
 	}
 	
 	/**
@@ -193,6 +193,18 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 		this.paginator = new DataStorePaginator(store);
 		setStore(store);
 		this.layout = layout;
+		DOM.sinkEvents(getElement(),Event.MOUSEEVENTS);
+		DOM.sinkEvents(getElement(),Event.FOCUSEVENTS);
+	
+	}
+	
+	
+	
+	public void onAttach() {
+		super.onAttach();
+		setAutoWidth(this.autoWidth);
+		setAutoHeight(this.autoHeight);
+		this.setUserSortable(userSortable);
 	}
 	
 	/**
@@ -459,7 +471,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	private native JavaScriptObject makeParentInfo(int index)/*-{
 		var toReturn = {index: index}; 
 		if(index < 0){
-			return null;
+			toReturn =  null;
 		}
 		return toReturn;
 	}-*/;
@@ -478,7 +490,9 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	public void removeRow(int index){
 		Item toRemove = getItemFromRow(index);
+		if ( toRemove != null) {
 		removeRow(toRemove);
+		}
 	}
 	
 	
@@ -514,9 +528,9 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param item
 	 * @param index
 	 */
-	private native void dojoAddRow(Item item , int index)/*-{
-		var grid = this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget;
-		grid.addRow(item , index);
+	private native void dojoAddRow(JavaScriptObject dojoWidget,Item item , int index)/*-{
+		dojoWidget.addRow(item , index);
+		
 	}-*/;
 	
 	
@@ -529,11 +543,11 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @return
 	 */
 	public Item getItemFromRow(int rowNumber){
+		Item result = null;
 		if(dojoWidget != null){
-			return dojoGetItemFromRow(rowNumber);
-		}else{
-			return null;
+			result= dojoGetItemFromRow(getDojoWidget(),rowNumber);
 		}
+		return result;
 	}
 	
 	/**
@@ -541,8 +555,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param rowNumber
 	 * @return
 	 */
-	private native Item dojoGetItemFromRow(int rowNumber)/*-{
-		return this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.getItem(rowNumber);
+	private native Item dojoGetItemFromRow(JavaScriptObject dojoWidget,int rowNumber) /*-{
+		return dojoWidget.getItem(rowNumber);
 	}-*/;
 	
 	/**
@@ -550,7 +564,11 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @return item's row index
 	 */
 	public int getRowFromItem(Item item){
-		return dojoGetRowFromItem(item);
+		int result = -1;
+		if ( dojoWidget != null) {
+			result = dojoGetRowFromItem(getDojoWidget(),item);
+		}
+		return result;
 	}
 	
 	/**
@@ -559,8 +577,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param item 
 	 * @return
 	 */
-	private native int dojoGetRowFromItem(Item item)/*-{
-		return this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.getItemIndex(item);
+	private native int dojoGetRowFromItem(JavaScriptObject dojoWidget,Item item)/*-{
+		return dojoWidget.getItemIndex(item);
 	}-*/;
 	
 	
@@ -755,8 +773,6 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	@Override
 	public void doAfterCreation() {
-		DOM.sinkEvents(getElement(),Event.MOUSEEVENTS);
-		DOM.sinkEvents(getElement(),Event.FOCUSEVENTS);
 		DojoController.startup(this);
 	}
 
@@ -864,7 +880,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	public void updateGrid(){
 		if(dojoWidget != null){
-			dojoUpdateGrid();
+			dojoUpdateGrid(getDojoWidget());
 		}else{
 			renderGridOnLoad = true;
 		}
@@ -874,9 +890,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	/**
 	 * Internal method used to update the grid
 	 */
-	private native void dojoUpdateGrid()/*-{
-		var grid = this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget;
-		grid.render();
+	private native void dojoUpdateGrid(JavaScriptObject dojoWidget)/*-{
+		dojoWidget.render();
 	}-*/;
 	
 	/**
@@ -884,7 +899,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 */
 	public void updateView(){
 		if(dojoWidget != null){
-			dojoUpdateView(JSHelper.convertObjectToJSObject(layout));
+			dojoUpdateView(getDojoWidget(),JSHelper.convertObjectToJSObject(layout));
 		}
 	}
 	
@@ -892,9 +907,10 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * Internal method used to update grid layout
 	 * @param layout
 	 */
-	private native void dojoUpdateView(JavaScriptObject layout)/*-{
-		var grid = this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget;
-		grid.setStructure(layout);
+	private native void dojoUpdateView(JavaScriptObject dojoWidget,JavaScriptObject layout)/*-{
+		
+		dojoWidget.setStructure(layout);
+		
 	}-*/;
 	
 
@@ -912,7 +928,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	public void setAutoHeight(boolean autoHeight) {
 		this.autoHeight = autoHeight;
 		if(dojoWidget != null){
-			dojoSetAutoHeight(autoHeight);
+			dojoSetAutoHeight(getDojoWidget(),autoHeight);
 		}
 	}
 
@@ -920,9 +936,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * Internal method used to set autoheight in dojo
 	 * @param autoHeight
 	 */
-	private native void dojoSetAutoHeight(boolean autoHeight)/*-{
-		var grid = this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget;
-		grid.autoWidth = autoHeight;
+	private native void dojoSetAutoHeight(JavaScriptObject dojoWidget,boolean autoHeight)/*-{
+			dojoWidget.autoHeight = autoHeight;
 	}-*/;
 	
 	/**
@@ -939,7 +954,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	public void setAutoWidth(boolean autoWidth) {
 		this.autoWidth = autoWidth;
 		if(dojoWidget != null){
-			dojoSetAutoWidth(autoWidth);
+			dojoSetAutoWidth(getDojoWidget(),autoWidth);
 		}
 	}
 
@@ -947,11 +962,11 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * Internal method used to set autoWidth in dojo
 	 * @param autoWidth
 	 */
-	private native void dojoSetAutoWidth(boolean autoWidth)/*-{
-		var grid = this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget;
-		grid.autoWidth = autoWidth;
+	private native void dojoSetAutoWidth(JavaScriptObject dojoWidget,boolean autoWidth)/*-{
+			dojoWidget.autoWidth = autoWidth;
 	}-*/;
 
+	
 	/* (non-Javadoc)
 	 * @see com.objetdirect.tatami.client.data.DatumChangeListener#onDataChange(com.objetdirect.tatami.client.data.Item, java.lang.String, java.lang.Object, java.lang.Object)
 	 */
@@ -1025,7 +1040,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 		this.sortIndex = sortIndex;
 		this.isSortAsc = ascending;
 		if(dojoWidget != null){
-			dojoSetSortIndex(sortIndex, ascending);
+			dojoSetSortIndex(getDojoWidget(),sortIndex, ascending);
 		}
 	}
 	
@@ -1035,9 +1050,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * @param sortIndex : the column index which should be used to sort
 	 * @param ascending : wether the sort should be performed in ascending or descending order
 	 */
-	private native void dojoSetSortIndex(int sortIndex , boolean ascending)/*-{
-		var grid = this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget;
-		grid.setSortIndex(sortIndex , ascending);
+	private native void dojoSetSortIndex(JavaScriptObject dojoWidget,int sortIndex , boolean ascending)/*-{
+				dojoWidget.setSortIndex(sortIndex , ascending);
 	}-*/;
 	
 	/**
@@ -1169,7 +1183,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 		paginator.addFetchListener(this);
 		store.doAfterCreation();
 		if(dojoWidget != null){
-			dojoSetStore(store.getDojoWidget());
+			dojoSetStore(getDojoWidget(),store.getDojoWidget());
 		}
 	}
 	
@@ -1178,8 +1192,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * 
 	 * @param store
 	 */
-	private native void dojoSetStore(JavaScriptObject store)/*-{
-		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.setStore(store);
+	private native void dojoSetStore(JavaScriptObject dojoWidget, JavaScriptObject store)/*-{
+		dojoWidget.setStore(store);
 	}-*/;
 	
 	
@@ -1306,7 +1320,7 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	public void setMaximumFetchCountAtAtime(int maximumFetchCountAtAtime) {
 		this.maximumFetchCountAtAtime = maximumFetchCountAtAtime;
 		if(dojoWidget != null){
-			setDojoMaximumFetchCountAtATime(maximumFetchCountAtAtime);
+			setDojoMaximumFetchCountAtATime(getDojoWidget(),maximumFetchCountAtAtime);
 		}
 	}
 	
@@ -1315,8 +1329,8 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * 
 	 * @param maximumFetchCountAtAtime
 	 */
-	private native void setDojoMaximumFetchCountAtATime(int maximumFetchCountAtAtime)/*-{
-		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.rowsPerPage = maximumFetchCountAtAtime;
+	private native void setDojoMaximumFetchCountAtATime(JavaScriptObject dojoWidget,int maximumFetchCountAtAtime)/*-{
+		dojoWidget.rowsPerPage = maximumFetchCountAtAtime;
 	}-*/;
 	
 	
@@ -1324,14 +1338,16 @@ public class Grid extends AbstractDojo implements FetchListener , DatumChangeLis
 	 * Remove currently selected rows
 	 */
 	public void removeSelectedRows(){
-		dojoRemoveSelectedRows();
+		if ( getDojoWidget() != null) {
+		  dojoRemoveSelectedRows(getDojoWidget());
+		}
 	}
 	
 	/**
 	 * Internal method which removes selected rows in dojo.
 	 */
-	private native void dojoRemoveSelectedRows()/*-{
-		this.@com.objetdirect.tatami.client.AbstractDojo::dojoWidget.removeSelectedRows();
+	private native void dojoRemoveSelectedRows(JavaScriptObject dojoWidget)/*-{
+		dojoWidget.removeSelectedRows();
 	}-*/;
 
 	/**
