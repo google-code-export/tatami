@@ -1,6 +1,10 @@
 package com.objetdirect.tatamix.client.hmvc.rpc;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.objetdirect.tatamix.client.hmvc.MVCComponent;
 import com.objetdirect.tatamix.client.hmvc.Model;
@@ -10,6 +14,9 @@ public class ModelCallback<T> implements AsyncCallback<T> {
 
 	private MVCComponent model;
 	private String name="model";
+	
+	private Map<Class< ? extends Throwable>,String> errorMessages;
+	
 	private String errorMessage = null;
 	private String successEvent = null;
 	private String errorEvent = null;
@@ -23,23 +30,43 @@ public class ModelCallback<T> implements AsyncCallback<T> {
 			throw new IllegalArgumentException("The MVCComponent must be implements the Model interface !!");
 		}
 		this.model = model;
+		errorMessages = new HashMap<Class< ? extends Throwable>,String>();
 
 	}
 
+	
+	public void setErrorMessage(Class<? extends Throwable> class_,String message) {
+		errorMessages.put(class_, message);
+	}
+
 	/**
-	 * Sets the error Message on failure
-	 * @param error
+	 * Sets the error Message on failure.
+	 * Use the {@link Method} {@link #setErrorMessage(Class, String)} instead
+	 * @param error message the message related to a basic error
+	 * @deprecated
 	 */
-	public void setErrorMessage(String error) {
-		this.errorMessage = error;
+	public void setErrorMessage(String message) {
+		errorMessage = message;
 	}
-
+	
+	
+	
 	/**
-	 * Returns the error message used on failure
-	 * @return the error message used on failure could be <code>null</code>
+	 * Returns the error message used on failure.
+	 * @return the error message used on failure could be <code>null</code>.
+	 * @deprecated use the method {@link #getErrorMessage(Class)} instead.
 	 */
 	public String getErrorMessage() {
 		return this.errorMessage;
+	}
+	
+	/**
+	 * 
+	 * @param class_
+	 * @return
+	 */
+	public String getErrorMessage(Class< ? extends Throwable> class_) {
+		return this.errorMessages.get(class_);
 	}
 
 	public void setName(String name) {
@@ -55,11 +82,16 @@ public class ModelCallback<T> implements AsyncCallback<T> {
 	 * @see com.google.gwt.user.client.rpc.AsyncCallback#onFailure(java.lang.Throwable)
 	 */
 	public void onFailure(Throwable error) {
-		if ( errorMessage == null) {
-			errorMessage = error.getMessage();
+		
+		String message = getErrorMessage(error.getClass());
+		
+		if ( message == null ) {
+			message = error.getMessage();
+			
 		}
+		errorMessage = message;
 		GWT.log("ERROR:" + name,error);
-		model.fire(new ModelEvent(getErrorEvent(), model, errorMessage));
+		model.fire(new ModelEvent(getErrorEvent(), model, message));
 
 	}
 
