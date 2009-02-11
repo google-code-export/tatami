@@ -71,7 +71,7 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 	protected void initComponents() {
 		HTML label = new HTML();
 		
-		label.setText(message);
+		label.setHTML(message);
 		label.setStylePrimaryName("label");
 		layout.add(label);
 		yesButton = new com.objetdirect.tatami.client.Button();
