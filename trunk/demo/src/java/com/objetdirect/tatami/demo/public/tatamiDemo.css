@@ -382,8 +382,14 @@ border:1px solid #000;
 
 
 
-SliderDemo-vSlider {
+.SliderDemo-vSlider {
   margin-left:10px;
 }
 
+.gwt-DialogBox td {
+ text-align: right;
+ width:auto;
+ 
+ 
+}
 
