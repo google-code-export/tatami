@@ -12,13 +12,13 @@ import com.google.gwt.user.client.ui.Widget;
 public interface TableCellRenderer {
 
 	/**
-	 * Renvoie le rendu d'une cellulue pour la table donnée. 
+	 * Renvoie le rendu d'une cellulue pour la table donnee. 
 	 * @param table <code>Table</code> table contenant la cellule
 	 * @param value valeur de la cellule
-	 * @param isSelected precise si la cellule est selectionnée. 
+	 * @param isSelected precise si la cellule est selectionnee. 
 	 * @param row numero de ligne de la celule
 	 * @param column numéro de colonne de la cellule
-	 * @return un <code>Widget<code> ne doit pas être <code>null</code>
+	 * @return un <code>Widget<code> ne doit pas etre <code>null</code>
 	 */
 	public Widget getTableCellRendererWidget(Table table, Object value, boolean isSelected, int row, int column);
 		
