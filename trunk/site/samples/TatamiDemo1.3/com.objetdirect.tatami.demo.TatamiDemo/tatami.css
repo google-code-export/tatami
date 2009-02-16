@@ -1,5 +1,5 @@
 @import "./dojo/resources/dojo.css";
-@import "./dijit/themes/dijit.css";
+/*@import "./dijit/themes/dijit.css";*/
 @import "./dojox/widget/FisheyeList/FisheyeList.css";
 @import "./dojox/widget/Toaster/Toaster.css";
 @import "./dojox/widget/ColorPicker/ColorPicker.css";
