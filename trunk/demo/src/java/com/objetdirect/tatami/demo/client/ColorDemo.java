@@ -36,7 +36,7 @@ import com.objetdirect.tatamix.client.widget.Paragraph;
 import com.objetdirect.tatamix.client.widget.RoundedContainer;
 
 public class ColorDemo extends CompositeView {
-
+   
 	private ColorEditor small;
 	private ColorEditor big;
 	private ColorPicker picker;

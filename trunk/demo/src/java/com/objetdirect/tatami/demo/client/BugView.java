@@ -118,7 +118,21 @@ public class BugView extends DefaultView implements TatamiDemoEvent, ClickListen
 	
 	/**
 	 * Test the bug with <code>GraphicalCanvas</code> displayed in 
-	 * GWT <code>DialogBox</code>
+	 * GWT <code>DialogBox</code>.
+	 * In fact this is not a Tatami or Dojo bug. It's a problem with CSS and 
+	 * Internet Explorer. 
+	 * If we set a CSS style like this : 
+	 * <pre>
+	 * .gwt-DialogBox td {
+     *  text-align: right;
+     *  }
+	 * </pre>
+	 * The canvas won't be displayed, because the canvas takes the property
+	 *  position with the absolute value. 
+	 * Here there is an article which explains how IE manage the layout : 
+	 * 
+	 *  <a href="http://www.satzansatz.de/cssd/onhavinglayoutrev04-20050824.html">http://www.satzansatz.de/cssd/onhavinglayoutrev04-20050824.html (en)</a><br>
+	 *  <a href="http://www.test.blog-and-blues.org/haslayout/index.html"> http://www.test.blog-and-blues.org/haslayout/index.html(fr)</a>
 	 */
 	public void testBugGXFOnDialog() {
 		DialogBox dialog = new DialogBox(true);
