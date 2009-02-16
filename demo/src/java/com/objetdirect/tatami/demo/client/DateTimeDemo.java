@@ -175,9 +175,9 @@ public class DateTimeDemo extends CompositeView implements KeyboardListener {
   /**
 	 * Creates a link between a <code>DropdownContainer</code> and
 	 * <code>BasePicker</code> with a <code>ChangeListener</code>.
-	 * So if the container is modify, it will update (if it's necessary) the picker and
-	 * si le container est modifié, il mettra à jour si nécessaire le picker et
-	 * vice versa.
+	 * So if the container is modify, it will update (if it's necessary) 
+	 * the picker 	 * and  si le container est modifié, il mettra 
+	 * à jour si nécessaire le picker et vice versa.
 	 * @param container DropdownContainer to link
 	 * @param picker BasePicker to link
 	 */
@@ -240,7 +240,7 @@ public class DateTimeDemo extends CompositeView implements KeyboardListener {
 
 
 	/**
-	 * Checks if two object are equals
+	 * Checks if two object are equals.
 	 * @param o1
 	 * @param o2
 	 * @return

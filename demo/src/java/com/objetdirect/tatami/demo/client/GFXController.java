@@ -6,7 +6,7 @@ import com.objetdirect.tatamix.client.hmvc.Event;
 
 public class GFXController extends ControllerImpl implements TatamiDemoEvent {
 
-	
+	@SuppressWarnings("PMD")
 	public GFXController() {
 		
 		ControllerProcessor forward = new ControllerProcessor() {

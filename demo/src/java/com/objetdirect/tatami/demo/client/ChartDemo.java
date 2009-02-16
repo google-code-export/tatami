@@ -2,7 +2,6 @@ package com.objetdirect.tatami.demo.client;
 
 import java.util.Arrays;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.charting.Axis;
@@ -25,7 +24,7 @@ import com.objetdirect.tatamix.client.hmvc.CompositeView;
 
 public class ChartDemo extends CompositeView{
 
-	private FlowPanel layout;
+	  private FlowPanel layout;
 	
 	private class MyFlowPanel extends FlowPanel{
 

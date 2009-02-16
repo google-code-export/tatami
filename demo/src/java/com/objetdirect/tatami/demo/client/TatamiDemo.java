@@ -29,16 +29,10 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.objetdirect.tatami.client.Tatami;
-import com.objetdirect.tatami.client.gfx.Color;
-import com.objetdirect.tatami.client.gfx.GraphicCanvas;
-import com.objetdirect.tatami.client.gfx.Rect;
-import com.objetdirect.tatami.client.gfx.VirtualGroup;
 import com.objetdirect.tatami.demo.client.resources.TatamiMessages;
 import com.objetdirect.tatamix.client.hmvc.MVCImpl;
-import com.objetdirect.tatamix.client.hmvc.ViewEvent;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -55,7 +49,9 @@ import com.objetdirect.tatamix.client.hmvc.ViewEvent;
 public class TatamiDemo implements EntryPoint {
 
 
-	private final boolean DEBUG_ON = true;
+	private final boolean DEBUG_ON = false;
+	
+	
 	private static TatamiMessages messages = null;
 
 	/**
@@ -79,6 +75,7 @@ public class TatamiDemo implements EntryPoint {
 	public void onModuleLoad() {
         
 		Tatami.applyDefaultTheme();
+		Tatami.applyTheme(Tatami.NIHILO_THEME,false);
 		MainController controller = new MainController();
 		MainView view = new MainView();
 		MVCImpl.createTriad(null,view,controller);
