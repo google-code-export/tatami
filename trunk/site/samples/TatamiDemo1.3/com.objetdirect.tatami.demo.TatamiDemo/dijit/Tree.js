@@ -64,6 +64,13 @@ dojo.declare(
 		this._setExpando(false);	
 	},
 
+	_setStyleText : function(inNode, inStyleText){
+		if(inNode.style.cssText == undefined){
+			inNode.setAttribute("style", inStyleText);
+		}else{
+			inNode.style.cssText = inStyleText;
+		}
+	},
 	_updateItemClasses: function(item){
 		// summary: set appropriate CSS classes for icon and label dom node (used to allow for item updates to change respective CSS)
 		var tree = this.tree, model = tree.model;
@@ -73,6 +80,8 @@ dojo.declare(
 		}
 		this.iconNode.className = "dijitTreeIcon " + tree.getIconClass(item, this.isExpanded);
 		this.labelNode.className = "dijitTreeLabel " + tree.getLabelClass(item, this.isExpanded);
+		this._setStyleText(this.labelNode , tree.getLabelStyle(item, this.isExpanded) + (this.labelNode._style||''));
+		this._setStyleText(this.iconNode , tree.getIconStyle(item, this.isExpanded)  + (this.iconNode._style||''));
 	},
 
 	_updateLayout: function(){
@@ -489,6 +498,14 @@ dojo.declare(
 
 	getLabelClass: function(/*dojo.data.Item*/ item, /*Boolean*/ opened){
 		// summary: user overridable function to return CSS class name to display label
+	},
+	
+	getIconStyle: function(/*dojo.data.Item*/ item, /*Boolean*/ opened){
+		// summary: user overridable function to return CSS styles to display icon
+	},
+
+	getLabelStyle: function(/*dojo.data.Item*/ item, /*Boolean*/ opened){
+		// summary: user overridable function to return CSS styles to display label
 	},
 
 	/////////// Keyboard and Mouse handlers ////////////////////
