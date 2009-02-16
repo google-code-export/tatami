@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dev.asm.commons.Method;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.objetdirect.tatamix.client.hmvc.MVCComponent;
 import com.objetdirect.tatamix.client.hmvc.Model;
@@ -41,7 +40,7 @@ public class ModelCallback<T> implements AsyncCallback<T> {
 
 	/**
 	 * Sets the error Message on failure.
-	 * Use the {@link Method} {@link #setErrorMessage(Class, String)} instead
+	 * Use the {@link #setErrorMessage(Class, String)} instead
 	 * @param error message the message related to a basic error
 	 * @deprecated
 	 */
