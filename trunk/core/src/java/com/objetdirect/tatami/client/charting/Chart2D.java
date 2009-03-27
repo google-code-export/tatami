@@ -607,7 +607,7 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 	 */
 	@Override
 	public void setWidth(String width) {
-		this.setHeight(width,true);
+		this.setWidth(width,true);
 	}
 	
 	/**
