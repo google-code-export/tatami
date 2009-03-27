@@ -317,7 +317,7 @@ public class Axis {
 	 */
 	public void setMajorTicks(Boolean majorTicks) {
 		this.majorTicks = majorTicks;
-		options.put("majorTicks", microTicks);	
+		options.put("majorTicks", majorTicks);	
 	}
 
 	public Boolean getHtmlLabels() {
