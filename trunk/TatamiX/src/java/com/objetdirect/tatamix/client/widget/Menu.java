@@ -32,14 +32,30 @@ public class Menu extends Composite {
 
    private List<ListSelectionListener> listeners;
 
+   /**
+    * The menu to add the item
+    */
    private HTMLList menu;
 
+   /**
+    * The last widget that is set active
+    */
    private Widget lastActive;
 
+   /**
+    * The listener of the click event used by each item
+    */
    private ClickListener itemListener;
 
+   /**
+    * Map to associate item and Command
+    */
    private Map<Hyperlink, Command> actionMap;
 
+   /**
+    * Map to determinate if an item is selectable.
+    * An item selectable fire the ListSelectioneListener
+    */
    private Map<Hyperlink, Boolean> selectMap;
 
    /**
@@ -53,6 +69,7 @@ public class Menu extends Composite {
 
       initWidget(menu);
       setStylePrimaryName("tatamix-Menu");
+      //creates the clickListener for each item
       itemListener = new ClickListener() {
 
          public void onClick(Widget sender) {
@@ -72,10 +89,9 @@ public class Menu extends Composite {
                   activeItem(lastActive, false);
                   lastActive = sender;
                   activeItem(lastActive, true);
-
                   fireListSelectionListeners(index);
                }
-
+               //event the item is not selectable we execute the command. 
                if (cmd != null) {
 
                   cmd.execute();
@@ -88,6 +104,11 @@ public class Menu extends Composite {
 
    }
 
+   /**
+    * Returns if the given sender is selectable or not.
+    * @param sender the widget that receive a click event.
+    * @return <code>true</code> if the widget is selectable, <code>false</code> otherwise.
+    */
    private boolean isSelectable(Widget sender) {
       boolean result = false;
       if (selectMap.containsKey(sender)) {
@@ -96,21 +117,24 @@ public class Menu extends Composite {
       return result;
    }
 
+   /**
+    * Fires the SelectionListener at the giv index
+    * @param index the index of the widget that received the click event.
+    */
    protected void fireListSelectionListeners(int index) {
 
       if (listeners != null) {
          ListSelectionEvent event = new ListSelectionEvent(this, index);
-
-         Iterator<ListSelectionListener> ite = listeners.iterator();
-
-         while (ite.hasNext()) {
-            ListSelectionListener listener = ite.next();
+         for (ListSelectionListener listener : listeners) {
             listener.valueChanged(event);
          }
-
       }
    }
 
+   /**
+    * Adds a <code>ListSelectionListener</code> to this menu.
+    * @param listener the listener to add.
+    */
    public void addListSelectionListener(ListSelectionListener listener) {
       if (listeners == null) {
          listeners = new ArrayList<ListSelectionListener>();
@@ -119,6 +143,10 @@ public class Menu extends Composite {
 
    }
 
+   /**
+    * Removes the <code>ListSelectionListener</code> from this menu.
+    * @param listener the listener to remove.
+    */
    public void removeListSelectionListener(ListSelectionListener listener) {
       if (listeners != null) {
          listeners.remove(listener);
@@ -126,6 +154,9 @@ public class Menu extends Composite {
 
    }
 
+   /**
+    * Unselects the items of this menu. 
+    */
    public void unSelectAllItem() {
       lastActive = null;
       Iterator<Hyperlink> ite = actionMap.keySet().iterator();
@@ -135,6 +166,12 @@ public class Menu extends Composite {
       }
    }
 
+   /**
+    * Active or not the item corresponding to the given widget.
+    * @param sender the widget of the item to activate or not.
+    * @param active <code>true</code> to set the item active, the CSS class will
+    *               be modified adding or removing the active CSS class "active".
+    */
    private void activeItem(Widget sender, boolean active) {
       if (sender != null) {
          Element el = sender.getElement();
@@ -158,6 +195,10 @@ public class Menu extends Composite {
 
    }
 
+   /**
+    * Selects the specified item.
+    * @param index the index of the item to select.
+    */
    public void selectItem(int index) {
       Widget sender = menu.getWidget(index);
       if (sender != null) {
@@ -342,6 +383,11 @@ public class Menu extends Composite {
       return (Hyperlink) menu.getWidget(index);
    }
 
+   /**
+    * sets the CSS style at the specified index of the menu.
+    * @param index the index in the menu.
+    * @param styleName the CSS class name.
+    */
    public void setStyleAt(int index, String styleName) {
       menu.setStyleAt(index, styleName);
 
