@@ -379,7 +379,7 @@ public class Path extends GraphicObject {
 		com.addDouble(y1);
 		com.addDouble(x);
 		com.addDouble(y);
-		
+                register(com);	
 
 	}
 	
