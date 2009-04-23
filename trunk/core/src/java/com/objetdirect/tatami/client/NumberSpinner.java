@@ -463,7 +463,7 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	/**
 	 * @return the current value of the spinner
 	 */
-	public Number getValue(){
+	public Number getSpinnerValue(){
 		if(this.dojoWidget != null){
 			this.value = dojoGetValue(dojoWidget);
 		}
@@ -480,7 +480,7 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	/**
 	 * @param value : the value to set the spinner to
 	 */
-	public void setValue(Number value){
+	public void setSpinnerValue(Number value){
 		this.value = value.floatValue();
 		if(dojoWidget != null){
 			dojoSetValue(dojoWidget, value.floatValue());
