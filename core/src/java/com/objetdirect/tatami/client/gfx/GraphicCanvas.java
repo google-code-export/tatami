@@ -322,7 +322,9 @@ public class GraphicCanvas extends Widget {
 	 * @param graphicObject a <code>GraphicObject</code>.
 	 */
 	protected void putEventSource(JavaScriptObject shape,GraphicObject graphicObject) {
-		graphicObjects.put(getEventSource(shape), graphicObject);		
+		if(!graphicObject.getClass().equals(VirtualGroup.class)) {
+		    graphicObjects.put(getEventSource(shape), graphicObject);
+		}
 	}
 	
 	/**
