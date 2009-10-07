@@ -26,7 +26,11 @@
 package com.objetdirect.tatami.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.HasValue;
 
 
 /**
@@ -44,7 +48,7 @@ import com.google.gwt.user.client.DOM;
  * 
  
  */
-public class ColorChooser extends AbstractDojoFocus {
+public class ColorChooser extends AbstractDojoFocus implements HasValue<String> {
  
     /** 
      *   a palette with 12 color : 3x4
@@ -152,17 +156,32 @@ public class ColorChooser extends AbstractDojoFocus {
 		return color;
 	}
 	
+	
+	
 	/**
 	 * Sets the selected color. The GWT widget notify a value changement if the color is different. 
 	 * @param the new color to select with a hexadecimal representation format.
 	 */
 	public void setColor(String color) {
+		setColor(color,true);
+	}
+	
+	
+	/**
+	 * Sets the selected color. The GWT widget notify a value changement if the color is different. 
+	 * @param the new color to select with a hexadecimal representation format.
+	 * @param fire 
+	 */
+	private void setColor(String color,boolean fire) {
 		if (this.color==null && color!=null || 
 			this.color!=null && color==null ||
 			this.color!=null && !this.color.equals(color)) 
 		{
 			this.color = color;
-		    if (changeListeners != null) {
+		    if ( fire) {
+			ValueChangeEvent.fire(this, color);
+		    }
+			if (changeListeners != null) {
 		        changeListeners.fireChange(this);
 		    }
 		}
@@ -176,6 +195,44 @@ public class ColorChooser extends AbstractDojoFocus {
 	 */
 	public void onValueChanged(String color) {
 		setColor(color);
+	}
+
+	@Override
+	/**
+	 * Returns the selected color. 
+	 * @return the selected color. 
+	 * @see #getColor()
+	 */
+	public String getValue() {
+
+		return getColor();
+	}
+
+	@Override
+	/**
+	 * Sets the color. 
+	 * @param color the color to set
+	 */
+	public void setValue(String color) {
+		setColor(color);
+		
+	}
+
+	@Override
+	/**
+	 * sets the color.
+	 * @param color the color to set
+	 * @param fire <code>false</code> to cancel the event if the color is not the same than the actual 
+	 */
+	public void setValue(String color, boolean fire) {
+		setColor(color,fire);
+		
+	}
+
+	@Override
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
+		
+		return addHandler(handler, ValueChangeEvent.getType());
 	}
 	
 

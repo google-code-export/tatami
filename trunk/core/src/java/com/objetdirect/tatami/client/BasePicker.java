@@ -28,22 +28,28 @@ package com.objetdirect.tatami.client;
 import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HasValue;
 
 /**
  * 
  * <p>
- * Class of widgets that permit to choose a temporal information 
- * (date, hour,...) from a Dojo widget represented by a selector. This is the basic class
- * for the <code>DatePicker,TimePicker</code> components. 
- * Note that the widgets which associate an input and a small popup for selection.   
+ * Class of widgets that permit to choose a temporal information (date,
+ * hour,...) from a Dojo widget represented by a selector. This is the basic
+ * class for the <code>DatePicker,TimePicker</code> components. Note that the
+ * widgets which associate an input and a small popup for selection.
  * (DropdownDatePicker and DropdownTimePicker) use another basic class.
  * </p>
  * <p>
- * This component is an encapsulation GWT of Dojo components. Warning the widget exist under 3 faces : 
+ * This component is an encapsulation GWT of Dojo components. Warning the widget
+ * exist under 3 faces :
  * <ul>
  * <li>a GWT widget (this!)</li>
  * <li>a Dojo widget (which play the role of 'this' for GWT)</li>
- * <li>a structur of DOM elements, the only exploitable presentation by the navigator.</li>
+ * <li>a structur of DOM elements, the only exploitable presentation by the
+ * navigator.</li>
  * </ul>
  * </p>
  * 
@@ -51,12 +57,14 @@ import com.google.gwt.core.client.JavaScriptObject;
  * 
  * @author Henry, Vianney
  */
-public abstract class BasePicker extends AbstractDojoFocus {
+public abstract class BasePicker extends AbstractDojoFocus implements
+		HasValue<Date> {
 	/**
 	 * temporal information displayed and edited.
 	 */
 	private Date date;
 
+	private boolean fire = true;
 	/**
 	 * The minimum selectable date
 	 */
@@ -66,19 +74,17 @@ public abstract class BasePicker extends AbstractDojoFocus {
 	 * The maximum selectable date
 	 */
 	private Date max;
-	
-	
-	
+
 	/**
-	
-	 * Creates the temporal information selector. Note that its principal element 
-	 * is not an object from DOJO. It's a 'DIV' created by GWT. The elements coming 
-	 * from DOJO will be inserted into this 'DIV'. This permits to manage more easily
-	 * for GWT the standard mouse events ( onmouseover, click,...)
 	 * 
-	
+	 * Creates the temporal information selector. Note that its principal
+	 * element is not an object from DOJO. It's a 'DIV' created by GWT. The
+	 * elements coming from DOJO will be inserted into this 'DIV'. This permits
+	 * to manage more easily for GWT the standard mouse events ( onmouseover,
+	 * click,...)
+	 * 
 	 */
-	protected BasePicker(Date startDate,Date endDate) {
+	protected BasePicker(Date startDate, Date endDate) {
 		super();
 		this.min = startDate;
 		this.max = endDate;
@@ -86,63 +92,69 @@ public abstract class BasePicker extends AbstractDojoFocus {
 
 	/**
 	 * Returns the minimum date selectable
+	 * 
 	 * @return the minimum date selectable, null if not defined
 	 */
 	public Date getMinDate() {
 		return this.min;
 	}
-	
+
 	/**
 	 * Returns the maximal date selectable
+	 * 
 	 * @return the maximal date selectable, null if not defined
 	 */
 	public Date getMaxDate() {
 		return this.max;
 	}
-	
-	
+
 	/**
 	 * Returns the minimum date in a JavaScript Date object
-	 * @return the minimum date in a JavaScript Date object, null if no minimum date was set
+	 * 
+	 * @return the minimum date in a JavaScript Date object, null if no minimum
+	 *         date was set
 	 */
 	protected JavaScriptObject getMinJavaScriptDate() {
 		return min == null ? null : DateUtil.getJSDate(min);
-    }
+	}
 
 	/**
 	 * Returns the maximum date in a JavaScript Date object
-	 * @return the maximum date in a JavaScript Date object, null if no maximum date was set
+	 * 
+	 * @return the maximum date in a JavaScript Date object, null if no maximum
+	 *         date was set
 	 */
 
 	protected JavaScriptObject getMaxJavaScriptDate() {
-		return  max == null ? null : DateUtil.getJSDate(max);
-	
+		return max == null ? null : DateUtil.getJSDate(max);
+
 	}
-	
-	
+
 	/**
-	 * ask Dojo to take into account an updating of information 
-	 * introduced and edited by the selector of date.
-	 * @param date the date that the selector has to display
+	 * ask Dojo to take into account an updating of information introduced and
+	 * edited by the selector of date.
+	 * 
+	 * @param date
+	 *            the date that the selector has to display
 	 */
-	private native void setDojoDate(JavaScriptObject dojoWidget, JavaScriptObject date)
+	private native void setDojoDate(JavaScriptObject dojoWidget,
+			JavaScriptObject date)
 	/*-{
 	 dojoWidget.setValue(date);
 	 }-*/;
-	
-	
+
 	/**
-	
-	 * Adds a callback method to the DOJO widget in order that this one recalls 
-	 * the method <code>onValueChanged</code> of the GWT widget when the associated value 
-	 * to the selector will be modified.
 	 * 
-	
+	 * Adds a callback method to the DOJO widget in order that this one recalls
+	 * the method <code>onValueChanged</code> of the GWT widget when the
+	 * associated value to the selector will be modified.
+	 * 
 	 */
-	abstract protected  void setEventCallback(JavaScriptObject dojoWidget);
-	
+	abstract protected void setEventCallback(JavaScriptObject dojoWidget);
+
 	/**
-	 * Arms the callbacks after that the Dojo widget is created and re-select the last date selected on the selector.
+	 * Arms the callbacks after that the Dojo widget is created and re-select
+	 * the last date selected on the selector.
 	 */
 	public void doAfterCreation() {
 		setEventCallback(getDojoWidget());
@@ -151,10 +163,9 @@ public abstract class BasePicker extends AbstractDojoFocus {
 		}
 	}
 
-	
-	
 	/**
 	 * Returns the temporal information displayed and edited by the selector.
+	 * 
 	 * @return temporal information selected by the selector.
 	 */
 	public Date getDate() {
@@ -162,57 +173,125 @@ public abstract class BasePicker extends AbstractDojoFocus {
 	}
 
 	/**
-	 * Instanciates or replaces the temporal information displayed and editer by the selector.
-	 * This method assume that this information is  used by the graphic representation of the selector 
-	 * (so by the Dojo widget). It's also this method which notifies the modification at the listeners. 
-	 * @param date  temporal information that the selector has to display.
+	 * Returns the selected date.
+	 * 
+	 * @return the selected date of <code>null</code> if no date was selected.
+	 * @see #getDate()
+	 */
+	public Date getValue() {
+		return getDate();
+	}
+
+	/**
+	 * Instantiates or replaces the temporal information displayed and edited by
+	 * the selector. This method assume that this information is used by the
+	 * graphic representation of the selector (so by the Dojo widget). It's also
+	 * this method which notifies the modification at the listeners.
+	 * 
+	 * @param date
+	 *            temporal information that the selector has to display.
 	 */
 	public void setDate(Date date) {
-		if (this.date == null && date != null || this.date != null
-				&& date == null || this.date != null && !this.date.equals(date)) {
-			this.date = date;
-			if (isAttached()) {
-				setDateOnPicker(DateUtil.getJSDate(date));
-			}
+
+		setDate(date, true);
+	}
+
+	private boolean isNotSameDate(Date date) {
+		return this.date == null && date != null || this.date != null
+				&& date == null || this.date != null && !this.date.equals(date);
+	}
+
+	private void setDate(Date date, boolean fire) {
+        this.fire = fire;
+		boolean isNotSame = isNotSameDate(date);
+		if (isNotSame && isAttached()) {
+			setDateOnPicker(DateUtil.getJSDate(date));
+		}
+		this.date = date;
+
+		if (fire && isNotSame && !isAttached()) {
+			ValueChangeEvent.fire(this, this.date);
 			if (changeListeners != null) {
 				changeListeners.fireChange(this);
 			}
 		}
+		this.fire = true;
+	}
+
+	/**
+	 * Sets the value. Just call the method <code>setDate(Date)</code>
+	 * 
+	 * @see #setDate(Date)
+	 */
+	public void setValue(Date date) {
+		setDate(date);
+	}
+
+	/**
+	 * Just call the method <code>setDate(Date)</code>
+	 * 
+	 * @param fire
+	 *            if <code>false</code> and event if the date is not the same,
+	 *            no event will be fired
+	 * @see #setDate(Date)
+	 */
+	public void setValue(Date date, boolean fire) {
+		setDate(date, fire);
+
 	}
 
 	/**
 	 * Asks to DOJO to take care of a temporal information updated.
-	 * @param date temporal information that the selector has to displayed.
+	 * 
+	 * @param date
+	 *            temporal information that the selector has to displayed.
 	 */
-		
+
 	protected void setDateOnPicker(JavaScriptObject date) {
 		setDojoDate(getDojoWidget(), date);
 	}
-	
 
 	/**
-
-	 * Cleans the given date from the DOJO widget. This method is necessary
-	 * to chunk that it seems to be a bug from DOJO : the returned information 
-	 * is construted from the current date/hour. So, this information contains   
-     * "invisible" datas to the screen.( the current hour for a date, or the date of the day for an hour
-     * while the edited information is an hour)  
-	 * @param date temporal information returned by the DOJO widget.
+	 * 
+	 * Cleans the given date from the DOJO widget. This method is necessary to
+	 * chunk that it seems to be a bug from DOJO : the returned information is
+	 * construted from the current date/hour. So, this information contains
+	 * "invisible" datas to the screen.( the current hour for a date, or the
+	 * date of the day for an hour while the edited information is an hour)
+	 * 
+	 * @param date
+	 *            temporal information returned by the DOJO widget.
 	 * @return the date cleaned.
-	 *  
-	
+	 * 
 	 */
 	protected abstract Date adjust(Date date);
 
 	/**
-	 * Callback method used by DOJO in order that the GWT widget take count of the 
-	 * selected value by the user.
-	 * @param jsDate temporal information (not cleaned) returned by the Dojo widget.
+	 * Callback method used by DOJO in order that the GWT widget take count of
+	 * the selected value by the user.
+	 * 
+	 * @param jsDate
+	 *            temporal information (not cleaned) returned by the Dojo
+	 *            widget.
 	 */
 	public void onValueChanged(JavaScriptObject jsDate) {
 		Date theDate = adjust(DateUtil.getJavaDate(jsDate));
-		setDate(theDate);
+		this.date = theDate;
+		if (fire) {
+			ValueChangeEvent.fire(this, this.date);
+		}
+		if (changeListeners != null) {
+			changeListeners.fireChange(this);
+		}
 
 	}
 
-}//end of class
+	/**
+	 * Adds the value change handler
+	 */
+	public HandlerRegistration addValueChangeHandler(
+			ValueChangeHandler<Date> handler) {
+		return addHandler(handler, ValueChangeEvent.getType());
+	}
+
+}// end of class

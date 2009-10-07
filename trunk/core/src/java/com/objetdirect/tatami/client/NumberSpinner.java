@@ -29,12 +29,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ChangeListenerCollection;
-import com.google.gwt.user.client.ui.Helper;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.HasValue;
 
 
 
@@ -45,9 +48,8 @@ import com.google.gwt.user.client.ui.TextBox;
  * @author rdunklau
  *
  */
-public class NumberSpinner extends TextBox implements HasDojo {
+public class NumberSpinner extends AbstractDojoFocus implements HasValue<Number> {
 
-	private JavaScriptObject dojoWidget;
 	
 	/**
 	 * Constant used to specify the spinner minimum value
@@ -92,6 +94,9 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	 */
 	public static final String CONSTRAINT_CURRENCY = "currency";
 	
+	/**
+	 * @deprecated
+	 */
 	protected ChangeListenerCollection changeListeners;
 	
 	/**
@@ -123,7 +128,7 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	 * if false : onChange events are fired only when the spinner loses focus
 	 * 
 	 */
-	private boolean intermediateChanges = false;
+	private boolean intermediateChanges = true;
 	
 	/**
 	 * Increment which is used when the user click on the spinner arrows (or up/down keys) 
@@ -213,11 +218,11 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	 * @param value
 	 * @param constraints
 	 */
-	public NumberSpinner(int defaultTimeout, String invalidMessage,
-			boolean intermediateChanges, float delta, 
+	public NumberSpinner(int defaultTimeout, String invalidMessage,	boolean intermediateChanges, float delta, 
 			String promptMessage, String rangeMessage,
 			float timeoutChangeRate, boolean trim , float value , Map<String,Object> constraints) {
-		this(DOM.createDiv());
+		
+		this();
 		this.defaultTimeout = defaultTimeout;
 		this.invalidMessage = invalidMessage;
 		this.intermediateChanges = intermediateChanges;
@@ -230,11 +235,26 @@ public class NumberSpinner extends TextBox implements HasDojo {
 		this.constraints = constraints;
 	}
 	
+	/**
+	 * 
+	 * @param defaultTimeout
+	 * @param invalidMessage
+	 * @param intermediateChanges
+	 * @param smallDelta
+	 * @param largeDelta
+	 * @param promptMessage
+	 * @param rangeMessage
+	 * @param timeoutChangeRate
+	 * @param trim
+	 * @param value
+	 * @param minValue
+	 * @param maxValue
+	 */
 	public NumberSpinner(int defaultTimeout, String invalidMessage,
 			boolean intermediateChanges, float smallDelta, float largeDelta,
 			String promptMessage, String rangeMessage,
 			float timeoutChangeRate, boolean trim , float value , float minValue , float maxValue) {
-		this(DOM.createDiv());
+		this();
 		this.defaultTimeout = defaultTimeout;
 		this.invalidMessage = invalidMessage;
 		this.intermediateChanges = intermediateChanges;
@@ -249,8 +269,17 @@ public class NumberSpinner extends TextBox implements HasDojo {
 		constraints.put("max",new Float(maxValue));
 	}
 	
+	/**
+	 * 
+	 * @param invalidMessage
+	 * @param smallDelta
+	 * @param promptMessage
+	 * @param rangeMessage
+	 * @param value
+	 * @param constraints
+	 */
 	public NumberSpinner(String invalidMessage , float smallDelta , String promptMessage , String rangeMessage ,float value ,  Map<String,Object> constraints){
-		this(DOM.createDiv());
+		this();
 		this.promptMessage = promptMessage;
 		this.rangeMessage = rangeMessage;
 		this.invalidMessage = invalidMessage;
@@ -261,9 +290,9 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	
 	
 	public NumberSpinner(float initValue , float minValue , float maxValue , float delta){
-		this(DOM.createDiv());
-		constraints.put("min",new Float(minValue));
-		constraints.put("max",new Float(maxValue));
+		this();
+		constraints.put("min",minValue);
+		constraints.put("max",maxValue);
 		this.smallDelta = delta ;  
 		this.value = initValue;
 	}
@@ -275,21 +304,16 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	 * 
 	 */
 	public NumberSpinner(Element element){
-		super();
-		setElement(element);
-		DojoController.getInstance().loadDojoWidget(this);
+		super(Document.get().createDivElement());
 		changeListeners = new ChangeListenerCollection();
 		constraints = new HashMap<String, Object>();
 	}
 	
 	public NumberSpinner(){
-		this(DOM.createDiv());
+		this(Document.get().createDivElement());
 	}
 	
-	@Override
-	protected void setElement(Element elem) {
-		Helper.replaceElement(this, elem);
-	}
+	
 
 	private native void dojoSetConstraints(JavaScriptObject constraints , JavaScriptObject dojoWidget)/*-{
 		dojoWidget.constraints = constraints;
@@ -379,9 +403,10 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	 */
 	private native void defineTatamiNumberSpinner()/*-{
 		$wnd.dojo.declare("dojox.form.TatamiNumberSpinner", $wnd.dijit.form.NumberSpinner , {
-	 onChange:function (e) {
-	 	this.gwtWidget.@com.objetdirect.tatami.client.NumberSpinner::notifyChangeListeners()();
-	 }});
+	     onChange:function (e) {
+	 		   this.gwtWidget.@com.objetdirect.tatami.client.NumberSpinner::notifyChange()();
+	
+	    }});
 	}-*/;
 	
 	
@@ -445,30 +470,33 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	 *  This method is called when the dojo widget raises an "onChange" event.
 	 *  It notifies the ChangeListeners
 	 */
-	private void notifyChangeListeners(){
+	private void notifyChange(){
 		this.value = dojoGetValue(dojoWidget);
-		changeListeners.fireChange(this);
+		ValueChangeEvent.fire(this,value);
+		if ( this.changeListeners != null) {
+			changeListeners.fireChange(this);
+		}
+		
 	}
 	
 	@Override
+	
+	/**
+	 * @deprecated
+	 */
 	public void addChangeListener(ChangeListener listener) {
 		changeListeners.add(listener);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	@Override
 	public void removeChangeListener(ChangeListener listener) {
 		changeListeners.remove(listener);
 	}
 
-	/**
-	 * @return the current value of the spinner
-	 */
-	public Number getSpinnerValue(){
-		if(this.dojoWidget != null){
-			this.value = dojoGetValue(dojoWidget);
-		}
-		return new Float(this.value);
-	}
+	
 	
 	private native float dojoGetValue(JavaScriptObject dojoWidget)
 	/*-{
@@ -477,15 +505,7 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	;
 	
 	
-	/**
-	 * @param value : the value to set the spinner to
-	 */
-	public void setSpinnerValue(Number value){
-		this.value = value.floatValue();
-		if(dojoWidget != null){
-			dojoSetValue(dojoWidget, value.floatValue());
-		}
-	}
+	
 	
 	private native void dojoSetValue(JavaScriptObject dojoWidget , float value)
 	/*-{
@@ -506,21 +526,11 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	}
 
 	
-	@Override
-	protected void onAttach() {
-      	DojoController.getInstance().constructDojoWidget(this, this);
-      	super.onAttach();
-	}
 	
-	@Override
-	protected void onDetach() {
-		DojoController.getInstance().destroyDojoWidget(this, this);
-		super.onDetach();
-	}
 
 	public void doAfterCreation() {
 		DojoController.startup(this);
-		setBrowserEventCallback(getDojoWidget());
+	//	setBrowserEventCallback(getDojoWidget());
 	}
 
 	public void doBeforeDestruction() {
@@ -535,9 +545,6 @@ public class NumberSpinner extends TextBox implements HasDojo {
 		dojoWidget.destroy();
 	}-*/;
 	
-	public JavaScriptObject getDojoWidget() {
-		return dojoWidget;
-	}
 	
 	/**
 	 * This method arms some callback
@@ -572,5 +579,35 @@ public class NumberSpinner extends TextBox implements HasDojo {
 	private native void setIntermediateChanges(boolean intermediateChanges , JavaScriptObject dojoWidget)/*-{
 		dojoWidget.intermediateChanges = intermediateChanges;
 	}-*/;
+
+	@Override
+	public Number getValue() {
+	    if(this.dojoWidget != null){
+			this.value = dojoGetValue(dojoWidget);
+		}
+		return this.value;
+	}
+
+	@Override
+	public void setValue(Number number) {
+		this.value = number.floatValue();
+		if(dojoWidget != null){
+			dojoSetValue(dojoWidget,this.value);
+		}
+		
+	}
+
+	@Override
+	public void setValue(Number number, boolean fire) {
+	 setValue(number);
+	 notifyChange();
+		
+	}
+
+	@Override
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Number> handler) {
+		
+		return addHandler(handler,ValueChangeEvent.getType());
+	}
 	
 }

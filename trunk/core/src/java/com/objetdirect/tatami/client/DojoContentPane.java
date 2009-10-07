@@ -43,7 +43,7 @@ import com.google.gwt.user.client.Element;
  * </p>
 
  * 
- * @author Henry, Vianney
+ * @author Henri, Vianney
  */
 public class DojoContentPane extends AbstractDojoComplexPane {
 

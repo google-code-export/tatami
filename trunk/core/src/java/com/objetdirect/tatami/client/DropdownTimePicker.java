@@ -97,6 +97,7 @@ public class DropdownTimePicker extends DropdownContainer {
 	protected void onValueChanged(JavaScriptObject date) {
 		Date javaDate = adjust(DateUtil.getJavaDate(date));
   	    setInternDate(javaDate);
+  	    notifyDateChanged(true);
 
 	}
 	
@@ -166,13 +167,14 @@ public class DropdownTimePicker extends DropdownContainer {
 	 */
 	protected Date adjust(Date date) {
 		Date originalDate = getDate();
-        if (originalDate != null) {
+        Date result = date;
+		if (originalDate != null) {
             Date newDate = new Date(originalDate.getTime());
             newDate.setHours(date.getHours());
             newDate.setMinutes(date.getMinutes());
-            date = newDate;    
+            result = newDate;    
         }
-        return  date;
+        return  result;
 		
 	}
 

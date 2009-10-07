@@ -26,8 +26,11 @@
 package com.objetdirect.tatami.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -74,6 +77,10 @@ public abstract class AbstractDojo extends Widget implements HasDojo {
 	}
 
 	
+	public void onBrowserEvent(Event event) {
+		
+	}
+	
 	
 	/**
 	 * Returns the Dojo widget integrated in the GWT widget. 
@@ -92,7 +99,12 @@ public abstract class AbstractDojo extends Widget implements HasDojo {
 		this.dojoWidget = null;
 	}
 	
-	
+	protected NativeEvent createClickEvent(int detail,int screenX,int screenY,int clientX,int clientY, boolean ctrlKey,       boolean altKey,
+            boolean shiftKey,
+            boolean metaKey) {
+		Document document = Document.get();
+		return document.createClickEvent(detail, screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey);
+	}
 	
 	/**
 	 * When the GWT widget is detached from the browser, the link between it and the Dojo widget is drawn. 

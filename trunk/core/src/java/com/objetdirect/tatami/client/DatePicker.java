@@ -66,7 +66,7 @@ public class DatePicker extends BasePicker {
 	protected native void setEventCallback(JavaScriptObject dojoWidget)
 	/*-{
 	 dojoWidget.onChange = function(date) {
-	 dojoWidget.gwtWidget.@com.objetdirect.tatami.client.BasePicker::onValueChanged(Lcom/google/gwt/core/client/JavaScriptObject;)(date);
+	    dojoWidget.gwtWidget.@com.objetdirect.tatami.client.BasePicker::onValueChanged(Lcom/google/gwt/core/client/JavaScriptObject;)(date);
 	 };
 	 }-*/;
 	
