@@ -4,7 +4,7 @@
 	<property name="jar.name" value="tatamiJS.jar"/>
 	<property name="dist.dir" location="${basedir}/dist"/>
 	<property name="build.dir" location="${basedir}/build"/>
-	<property name="version" value="tatami-1.3"/>
+	<property name="version" value="tatami-1.4"/>
 	
 	<target name="help" description="Shows task list">
 		<echo message="Available tasks : clean,build-dojo,copyjsfiles,package,all"/>
