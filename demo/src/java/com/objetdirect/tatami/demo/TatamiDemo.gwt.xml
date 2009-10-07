@@ -35,5 +35,5 @@
 	<inherits name="com.objetdirect.tatamix.Tatamix"/>
    	<!-- Specify the app entry point class.                   -->
 	<entry-point class="com.objetdirect.tatami.demo.client.TatamiDemo"/>
-    <stylesheet src="tatamiDemo.css"/> 
+    
 </module>

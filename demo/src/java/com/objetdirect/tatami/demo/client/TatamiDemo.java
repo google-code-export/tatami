@@ -49,7 +49,7 @@ import com.objetdirect.tatamix.client.hmvc.MVCImpl;
 public class TatamiDemo implements EntryPoint {
 
 
-	private final boolean DEBUG_ON = false;
+	private final boolean DEBUG_ON = true;
 	
 	
 	private static TatamiMessages messages = null;
@@ -67,7 +67,7 @@ public class TatamiDemo implements EntryPoint {
 
 
 	public static String getIconURL(String iconName) {
-		return GWT.getModuleBaseURL() + "images/" + iconName;
+		return GWT.getHostPageBaseURL() + "images/" + iconName;
 	}
 
 
