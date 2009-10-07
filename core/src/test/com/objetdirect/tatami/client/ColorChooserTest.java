@@ -25,16 +25,19 @@
  */
 package com.objetdirect.tatami.client;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.test.Task;
 import com.objetdirect.tatami.client.test.TestUtil;
 
 public class ColorChooserTest extends DefaultTatamiTest {
 
 	private boolean clicked = false;
+	private boolean changed = false;
 	private ColorChooser chooser;
 	
 
@@ -103,8 +106,8 @@ public class ColorChooserTest extends DefaultTatamiTest {
 	            	size = ColorChooser.TWELVE_COLORS;
 	        }
 			chooser = new ColorChooser(size);	
-		    chooser.addClickListener(new ClickListener() {
-				public void onClick(Widget sender) {
+		    chooser.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
 					clicked = true;
 				}
 			});
@@ -115,8 +118,41 @@ public class ColorChooserTest extends DefaultTatamiTest {
 	}
 	
 	
+	public void testChangeValue() {
+		chooser = getColorChooser(false);
+		final String color = "#FFFFFF";
+		chooser.setColor(color);
+		chooser.addValueChangeHandler(new ValueChangeHandler<String>() {
+			public void onValueChange(ValueChangeEvent<String> event) {
+                assertFalse(color.equals(chooser.getValue()));
+                assertNotNull(chooser.getValue());
+                changed = true;
+			}
+		});
+		chooser.setColor("#FF00FF");
+		assertEquals("#FF00FF",chooser.getValue());
+		assertTrue(changed);
+	}
+	
+	public void testNotChangeValue() {
+		chooser = getColorChooser(false);
+		final String color = "#FFFFFF";
+		chooser.setColor(color);
+		chooser.addValueChangeHandler(new ValueChangeHandler<String>() {
+			public void onValueChange(ValueChangeEvent<String> event) {
+                assertFalse(color.equals(chooser.getValue()));
+                assertNotNull(chooser.getValue());
+                changed = true;
+			}
+		});
+		chooser.setColor("#FFFFFF");
+		assertEquals(color,chooser.getValue());
+		assertFalse(changed);
+	}
+	
 	public void gwtTearDown() throws Exception{
 		this.clicked = false;
+		changed = false;
 		chooser = null;
 		super.gwtTearDown();
 	}

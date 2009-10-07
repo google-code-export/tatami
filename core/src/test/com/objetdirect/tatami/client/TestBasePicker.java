@@ -27,10 +27,10 @@ package com.objetdirect.tatami.client;
 
 import java.util.Date;
 
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.test.Task;
 import com.objetdirect.tatami.client.test.TestUtil;
 
@@ -65,8 +65,8 @@ public abstract class  TestBasePicker extends DefaultTatamiTest {
 	public BasePicker getBasePicker() {
 		if (basePicker == null) {
 			this.basePicker = createInstance(null,null);
-			basePicker.addChangeListener(new ChangeListener() {
-				public void onChange(Widget sender) {
+			basePicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
+				public void onValueChange(ValueChangeEvent<Date> event) {
 					clicked = true;
 				}
 			});
@@ -110,19 +110,26 @@ public abstract class  TestBasePicker extends DefaultTatamiTest {
 		basePicker = getBasePicker();
 		
 		final Date firstDate = basePicker.getDate();
-		basePicker.addChangeListener(new ChangeListener() {
-			public void onChange(Widget sender) {
-				assertNotSame(firstDate,((BasePicker)sender).getDate());
+		final Date aDate = new Date();
+		
+		basePicker.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				assertNotSame(firstDate,event.getValue());
                 //for a strange reason, the code below fails because 
 				//basePicker is null, however, in debug mode (with eclipse) the variable is well not null !!!
 				//so is it a bug or not ? 
-				//assertNotNull(basePicker.getDate());
+				assertNotNull(basePicker.getDate());
+			    
 			
 			}
 		});
-
-		basePicker.setDate(new Date());
+        
+		basePicker.setValue(aDate);
+		assertEquals(aDate,basePicker.getValue());
 	}
+	
+	
+	
 
   /**
 	* 
