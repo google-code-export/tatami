@@ -13,10 +13,7 @@ public class TestChartCustomEffect extends AbstractTestChart{
 		return TestChartCustomEffectPage.class.getName();
 	}
 	
-	public void setUp() throws Exception{
-		super.setUp();
-		testGwt.waitForBackgroundTasksToComplete(5000);
-	}
+	
 	
 	public void testChart1() throws Exception{
 		ChartWrapper chart1 = new ChartWrapper(page.getHtmlElementById("chart1"));
@@ -34,7 +31,7 @@ public class TestChartCustomEffect extends AbstractTestChart{
 				break;
 			}
 		}
-		testGwt.waitForBackgroundTasksToComplete(2000);
+		//testGwt.waitForBackgroundTasksToComplete(2000);
 		assertEquals("Mouse Over : Africa", page.getHtmlElementById("chart1MouseOver").getTextContent());
 		assertEquals("Clicked on : Africa", page.getHtmlElementById("chart1MouseClick").getTextContent());
 		assertEquals("Mouse Out : Africa", page.getHtmlElementById("chart1MouseOut").getTextContent());
@@ -48,7 +45,7 @@ public class TestChartCustomEffect extends AbstractTestChart{
 		myMarker.mouseOver();
 		testGwt.mouseClick(myMarker);
 		myMarker.mouseOut();
-		testGwt.waitForBackgroundTasksToComplete(2000);
+	//	testGwt.waitForBackgroundTasksToComplete(2000);
 		assertEquals("Mouse Over : X : 1.5 Y : 1.5 X From Point object : 1.5 Y From Point Object : 1.5Tooltip : SecondPoint", page.getHtmlElementById("chart2MouseOver").getTextContent());
 		assertEquals("Clicked on : X : 1.5 Y : 1.5 X From Point object : 1.5 Y From Point Object : 1.5Tooltip : SecondPoint", page.getHtmlElementById("chart2MouseClick").getTextContent());
 		assertEquals("Mouse Out : X : 1.5 Y : 1.5 X From Point object : 1.5 Y From Point Object : 1.5Tooltip : SecondPoint", page.getHtmlElementById("chart2MouseOut").getTextContent());
@@ -62,7 +59,7 @@ public class TestChartCustomEffect extends AbstractTestChart{
 		myMarker.mouseOver();
 		testGwt.mouseClick(myMarker);
 		myMarker.mouseOut();
-		testGwt.waitForBackgroundTasksToComplete(2000);
+	//	testGwt.waitForBackgroundTasksToComplete(2000);
 		assertEquals("Mouse Over : Value From Bar = 3", page.getHtmlElementById("chart3MouseOver").getTextContent());
 		assertEquals("Clicked on : Value From Bar = 3", page.getHtmlElementById("chart3MouseClick").getTextContent());
 		assertEquals("Mouse Out : Value From Bar = 3", page.getHtmlElementById("chart3MouseOut").getTextContent());
@@ -76,7 +73,7 @@ public class TestChartCustomEffect extends AbstractTestChart{
 		myMarker.mouseOver();
 		testGwt.mouseClick(myMarker);
 		myMarker.mouseOut();
-		testGwt.waitForBackgroundTasksToComplete(2000);
+	//	testGwt.waitForBackgroundTasksToComplete(2000);
 		assertEquals("Mouse Over : Size = 4.5X = 1.5Y = 1.5Tooltip = Big Bubble !!", page.getHtmlElementById("chart4MouseOver").getTextContent());
 		assertEquals("Clicked on : Size = 4.5X = 1.5Y = 1.5Tooltip = Big Bubble !!", page.getHtmlElementById("chart4MouseClick").getTextContent());
 		assertEquals("Mouse Out : Size = 4.5X = 1.5Y = 1.5Tooltip = Big Bubble !!", page.getHtmlElementById("chart4MouseOut").getTextContent());

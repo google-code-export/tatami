@@ -11,10 +11,7 @@ public class TestChart extends AbstractTestChart{
 	}
 	
 	
-	public void setUp() throws Exception{
-		super.setUp();
-		testGwt.waitForBackgroundTasksToComplete(5000);
-	}
+	
 	
 	public void testChart1() throws Exception{
 		ResourceBundle resource = ResourceBundle.getBundle("com.objetdirect.tatami.test.charting.testChartsSVG");

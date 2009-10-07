@@ -17,7 +17,7 @@ public class TestChangeDataStore extends AbstractTestWidgets{
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		testGwt.waitForBackgroundTasksToComplete(5000);
+	//	testGwt.waitForBackgroundTasksToComplete(5000);
 		grid =  new GridWrapper(page , "Grid");
 		changeDataStoreButton = (HtmlElement) page.getElementById("ChangeDataStoreButton");
 	}
