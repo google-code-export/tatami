@@ -29,9 +29,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.ChangeListener;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -51,21 +53,22 @@ public class TestSpinnerPage extends TestPage{
 		Map<String, Object> constraints = new HashMap<String, Object>();
 		constraints.put("min",new Integer(-10));
 		constraints.put("max",new Integer(10));
-		final Boolean intermediateChanges = Boolean.FALSE;
-		final NumberSpinner spinner = new NumberSpinner(300 , "Grou" , intermediateChanges.booleanValue() , 1 , "" , "" , 0.90f , true , 0 , constraints);
+		final boolean intermediateChanges =true;
+		final NumberSpinner spinner = new NumberSpinner(300 , "Grou" , intermediateChanges , 1 , "" , "" , 0.90f , true , 0 , constraints);
+		
 		final HTML value = new HTML("" + spinner.getValue());
-		spinner.addChangeListener(new ChangeListener(){
-			public void onChange(Widget sender) {
-				value.setText("" + ((NumberSpinner) sender).getValue().intValue());
+		spinner.addValueChangeHandler(new ValueChangeHandler<Number>(){
+			public void onValueChange(ValueChangeEvent<Number> event) {
+				value.setText("" + event.getValue().intValue());
 			}
 		});
 		
 		final Button toggleIntermediateChangeButton = new Button("Toggle Intermediate Changes");
-		toggleIntermediateChangeButton.addClickListener(new ClickListener(){
+		toggleIntermediateChangeButton.addClickHandler(new ClickHandler(){
 			
-			boolean iChanges = intermediateChanges.booleanValue();
+			boolean iChanges = intermediateChanges;
 			
-			public void onClick(Widget sender) {
+			public void onClick(ClickEvent event) {
 				iChanges = !iChanges;
 				GWT.log("INTERMEDIATE CHANGES SET TO " + iChanges, null);
 				System.out.println("INTERMEDIATE CHANGES SET TO " + iChanges);
@@ -91,9 +94,10 @@ public class TestSpinnerPage extends TestPage{
 		panel.add(setSpinnerDeltaBox);
 		
 		
-		final Button applyConstraintsChange = new Button("Apply" , new ClickListener() {
+		final Button applyConstraintsChange = new Button("Apply");
+		applyConstraintsChange.addClickHandler(new ClickHandler() {
 		
-			public void onClick(Widget sender) {
+			public void onClick(ClickEvent event) {
 				spinner.addConstraint(NumberSpinner.CONSTRAINT_MIN, setSpinnerMinValueBox.getText());
 				spinner.addConstraint(NumberSpinner.CONSTRAINT_MAX, setSpinnerMaxValueBox.getText());
 				spinner.addConstraint(NumberSpinner.CONSTRAINT_PATTERN, setSpinnerPatternBox.getText());

@@ -13,10 +13,7 @@ public class TestChartUpdating extends AbstractTestChart{
 	
 
 	
-	public void setUp() throws Exception{
-		super.setUp();
-		testGwt.waitForBackgroundTasksToComplete(5000);
-	}
+	
 	
 	public void testChart1() throws Exception{
 		ResourceBundle resource = ResourceBundle.getBundle("com.objetdirect.tatami.test.charting.testChartsUpdatingSVG");
@@ -29,21 +26,21 @@ public class TestChartUpdating extends AbstractTestChart{
 			assertEquals(expected, actual);
 			HtmlElement button = page.getHtmlElementById("button");
 			testGwt.mouseClick(button);
-			testGwt.waitForBackgroundTasksToComplete(5000);
+		//	testGwt.waitForBackgroundTasksToComplete(5000);
 			previous = actual;
 			expected = resource.getString("chartUpdated1time");
 			actual = page.getHtmlElementById("chart").getHtmlElementsByTagName("svg").get(0).asXml();
 			assertEquals(expected, actual);
 			assertFalse(actual.compareTo(previous) == 0);
 			testGwt.mouseClick(button);
-			testGwt.waitForBackgroundTasksToComplete(5000);
+			//testGwt.waitForBackgroundTasksToComplete(5000);
 			previous = actual;
 			expected = resource.getString("chartUpdated2time");
 			actual = page.getHtmlElementById("chart").getHtmlElementsByTagName("svg").get(0).asXml();
 			assertEquals(expected, actual);
 			assertFalse(actual.compareTo(previous) == 0);
 			testGwt.mouseClick(button);
-			testGwt.waitForBackgroundTasksToComplete(5000);
+		//	testGwt.waitForBackgroundTasksToComplete(5000);
 			previous = actual;
 			expected = resource.getString("chartUpdated3time");
 			actual = page.getHtmlElementById("chart").getHtmlElementsByTagName("svg").get(0).asXml();

@@ -19,18 +19,18 @@ public class TestDND extends AbstractTestWidgets {
 
 	public void setUp() throws Exception{
 		super.setUp();
-		testGwt.waitForBackgroundTasksToComplete(5000);
+		//testGwt.waitForBackgroundTasksToComplete(5000);
 		tree = new TreeWrapper(page.getHtmlElementById("Tree"));
 		displayBehavior = page.getHtmlElementById("displayLastBehaviorCalled");
 		targetOnlyPanel = page.getHtmlElementById("TargetOnlyPanel");
-		testGwt.waitForBackgroundTasksToComplete(5000);
+		//testGwt.waitForBackgroundTasksToComplete(5000);
 	}
 	
 	public void testWidgetSourceToWidgetTargetDND(){
 		testGwt.toggleJSAlertLogging(true);
 		HtmlElement widget4 = page.getHtmlElementById("widget4");
 		testGwt.dragElementTo(widget4,targetOnlyPanel, false);
-		testGwt.waitForBackgroundTasksToComplete(1000);
+	//	testGwt.waitForBackgroundTasksToComplete(1000);
 		assertTrue(targetOnlyPanel.hasHtmlElementWithId("widget4"));
 	}
 	

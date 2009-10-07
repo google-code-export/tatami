@@ -7,7 +7,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.objetdirect.tatami.testpages.client.widgets.TestLayoutGridPage;
 import com.objetdirect.tatami.unit.wrappers.GridWrapper;
 import com.objetdirect.tatami.unit.wrappers.NumberSpinnerWrapper;
-
+   
 public class TestLayoutGrid extends AbstractTestWidgets{
 	
 	private GridWrapper grid;

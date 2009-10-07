@@ -17,7 +17,7 @@ public class TestAddingSameItemToGrid extends AbstractTestWidgets{
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		testGwt.waitForBackgroundTasksToComplete(5000);
+	//	testGwt.waitForBackgroundTasksToComplete(5000);
 		grid =  new GridWrapper(page , "GridContainer");
 		addRowButton = (HtmlElement) page.getElementById("AddRowButton");
 	}
