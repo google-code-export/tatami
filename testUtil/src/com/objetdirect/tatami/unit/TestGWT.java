@@ -91,7 +91,7 @@ final private WebWindow window;
 	public void mouseMove(HtmlElement elem , int button ,  boolean altKey , boolean shiftKey , boolean ctrlKey){
 		MouseEvent event = new MouseEvent(elem , MouseEvent.TYPE_MOUSE_MOVE , shiftKey ,ctrlKey, altKey, button );
 		elem.fireEvent(event);
-	}
+	}  
 	
 	public void dragElementTo(HtmlElement toDrag , HtmlElement toDropOn , boolean ctrlKey ){
 		HtmlElement fromNeighbor = getParentDnDSource(toDrag);
@@ -101,7 +101,7 @@ final private WebWindow window;
 		toDrag.mouseOver(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
 		toDrag.mouseDown(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
 		toDrag.mouseMove(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
-		waitForBackgroundTasksToComplete(500);
+	//	waitForBackgroundTasksToComplete(500);
 		fromNeighbor.mouseOver(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
 		fromNeighbor.mouseMove(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
 		fromNeighbor.mouseOut(false, ctrlKey, false, MouseEvent.BUTTON_LEFT);
@@ -132,9 +132,13 @@ final private WebWindow window;
 		}
 	}
 	
+//	public void waitForBackgroundTasksToComplete(int timeout){
+//		window.getThreadManager().joinAll(timeout);
+//	}
+	
 	public void waitForBackgroundTasksToComplete(int timeout){
-		window.getThreadManager().joinAll(timeout);
-	}
+         //do nothing
+   }
 	
 	public void typeOnFocusedElement(String toType , boolean clearItBefore){
 		typeOnElement(getFocusedElement() , toType , clearItBefore);
@@ -143,7 +147,7 @@ final private WebWindow window;
 	public void typeOnElement(HtmlElement elem , String toType , boolean clearItBefore){
 		if(clearItBefore){
 			elem.setAttribute("value","");
-			waitForBackgroundTasksToComplete(200);
+			//waitForBackgroundTasksToComplete(200);
 		}
 		try {
 			elem.type(toType);

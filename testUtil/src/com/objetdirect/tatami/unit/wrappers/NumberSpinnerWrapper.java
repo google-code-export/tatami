@@ -18,9 +18,9 @@ public class NumberSpinnerWrapper {
 	
 	public NumberSpinnerWrapper(HtmlElement elem) throws Exception{
 		try{
-			this.downArrow = elem.getHtmlElementsByAttribute("div" , "statemodifier", "DownArrow").get(0);
-			this.upArrow = elem.getHtmlElementsByAttribute("div" , "statemodifier", "UpArrow").get(0);
-			this.input = elem.getHtmlElementsByAttribute("input" , "wairole", "spinbutton").get(0);
+			this.downArrow = elem.getElementsByAttribute("div" , "statemodifier", "DownArrow").get(0);
+			this.upArrow = elem.getElementsByAttribute("div" , "statemodifier", "UpArrow").get(0);
+			this.input = elem.getElementsByAttribute("input" , "wairole", "spinbutton").get(0);
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new Exception("Given element is not a valid spinner");
@@ -41,5 +41,5 @@ public class NumberSpinnerWrapper {
 	
 	public String getValue(){
 		return ((HtmlInput) input).getValueAttribute();
-	}
+	} 
 }

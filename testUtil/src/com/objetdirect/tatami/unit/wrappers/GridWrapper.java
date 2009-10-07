@@ -37,7 +37,7 @@ public class GridWrapper {
 	
 	public int getRowCount(){
 		int count = 0;
-		Iterable<HtmlElement> rows = gridBaseElement.getHtmlElementById("dojox_grid_TatamiGrid_0-page-0").getChildElements();
+		Iterable<HtmlElement> rows = gridBaseElement.getElementById("dojox_grid_TatamiGrid_0-page-0").getChildElements();
 		for(Iterator<HtmlElement> iterator = rows.iterator() ; iterator.hasNext();){
 			iterator.next();
 			count +=1;
@@ -48,7 +48,7 @@ public class GridWrapper {
 	public HtmlElement getCell(int row , int col){
 		HtmlElement masterView = gridBaseElement.getOneHtmlElementByAttribute("div", "class", "dojoxGridMasterView");
 		HtmlElement cell = null;
-		List<? extends HtmlElement> views = masterView.getHtmlElementsByAttribute("div", "class", "dojoxGridView");
+		List<? extends HtmlElement> views = masterView.getElementsByAttribute("div", "class", "dojoxGridView");
 		for (HtmlElement htmlElement : views) {
 				HtmlElement a =  htmlElement.getHtmlElementsByTagName("div").get(0);
 				HtmlElement b = a.getHtmlElementsByTagName("div").get(0);
@@ -71,7 +71,7 @@ public class GridWrapper {
 	}
 	
 	private HtmlElement getCellInRow(HtmlElement row , int cellIndex){
-		List<HtmlElement> cell = (List<HtmlElement>) row.getHtmlElementsByAttribute("td", "idx", "" + cellIndex);
+		List<HtmlElement> cell = (List<HtmlElement>) row.getElementsByAttribute("td", "idx", "" + cellIndex);
 		if(cell.size() == 1 ){
 			HtmlElement elem =  cell.get(0);
 			return elem;
@@ -83,7 +83,7 @@ public class GridWrapper {
 	public HtmlElement getCellHeader(int index){
 		HtmlElement  headerMaster = gridBaseElement.getOneHtmlElementByAttribute("div", "class", "dojoxGridMasterHeader");
 		List<HtmlElement> matchingHeader = new ArrayList<HtmlElement>();
-		matchingHeader.addAll(headerMaster.getHtmlElementsByAttribute("th", "idx", "" + index));
+		matchingHeader.addAll(headerMaster.getElementsByAttribute("th", "idx", "" + index));
 		if(matchingHeader.size() == 1){
 			return matchingHeader.get(0);
 		}else{
@@ -94,7 +94,7 @@ public class GridWrapper {
 	
 	public HtmlElement getView(int index){
 		HtmlElement masterView = gridBaseElement.getOneHtmlElementByAttribute("div", "class", "dojoxGridMasterView");
-		return gridBaseElement.getHtmlElementsByAttribute("div", "class", "dojoxGridView").get(index);
+		return gridBaseElement.getElementsByAttribute("div", "class", "dojoxGridView").get(index);
 	}
 	
 	

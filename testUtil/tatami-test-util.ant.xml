@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<project name="Tatami" default="compile" basedir=".">
-	<property file="env.properties"/>
+<project name="Tatami-TestUtils" default="compile" basedir=".">
+	<property file="${basedir}/../tatami-common/env.properties"/>
 	<property name="build.dir" value="bin"/>
 	<property name="dist.dir" value="dist"/>
 	
@@ -12,7 +12,7 @@
   <!-- set classpath -->
   <path id="project.class.path">
     <pathelement path="${java.class.path}/"/>
-  	<pathelement path="${gwt.user.lib}/"/>
+  	<pathelement path="${gwt.sdk}/gwt-user.jar"/>
     <!-- Additional dependencies (such as junit) go here -->
   	<fileset dir="${htmlunit.libdir}" includes="*.jar">
   	</fileset>
