@@ -44,7 +44,7 @@ import com.objetdirect.tatami.client.JSHelper;
 
 public abstract class AbstractDataStore  implements HasDojo,FetchEventSource,DataStore {
 
-	/**
+	/**    
 	 * LastRequest performed. Used to keep parameters when we use pagination
 	 * 
 	 */

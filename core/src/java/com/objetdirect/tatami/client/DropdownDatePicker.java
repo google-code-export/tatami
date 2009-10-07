@@ -28,6 +28,7 @@ package com.objetdirect.tatami.client;
 import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 /**
  * A form input for entering dates with a pop-up DatePicker to aid in selection
@@ -164,8 +165,11 @@ public class DropdownDatePicker extends DropdownContainer {
 	 */
 	protected void onValueChanged(JavaScriptObject date) {
 		Date theDate = adjust(DateUtil.getJavaDate(date));
+		//the method setDate doesn't call the notifyDateChanged is the widget is attached
 		setDate(theDate);
-
+		if ( isAttached()) {
+			notifyDateChanged(true);
+		}
 	}
 
 }// end of class

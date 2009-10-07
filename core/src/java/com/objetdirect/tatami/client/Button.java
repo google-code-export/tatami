@@ -28,6 +28,11 @@ package com.objetdirect.tatami.client;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DomEvent;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.ClickListenerCollection;
@@ -42,11 +47,14 @@ import com.google.gwt.user.client.ui.SourcesClickEvents;
  * It implements SourcesClickEvents to dispatch the onClick events received
  * from dojo.  
  *  
- * @author rdunklau
+ * @author rdunklau, vgrassaud
  *
  */
-public class Button extends AbstractDojo  implements  HasText,SourcesClickEvents  {
+public class Button extends AbstractDojo  implements  HasText,HasClickHandlers, SourcesClickEvents{
 
+	/**
+	 * @deprecated
+	 */
 	private ClickListenerCollection listeners;
 	
 	private final static String dojoName = "dijit.form.Button" ;
@@ -60,12 +68,17 @@ public class Button extends AbstractDojo  implements  HasText,SourcesClickEvents
 	private boolean enabled = true;
 
 	private JavaScriptObject dojoWidget;
+
 	
 	
+	/**
+	 * Creates the button
+	 */
 	public Button() {
 		this(Document.get().createDivElement() , null , null);
 	}
 
+	@Deprecated
 	public Button(String html, ClickListener listener) {
 		this(html);
 		addClickListener(listener);
@@ -107,11 +120,19 @@ public class Button extends AbstractDojo  implements  HasText,SourcesClickEvents
 	
 
 	
-	
+	/**
+	 * Sets the command for this button. The command will be executed 
+	 * if a user click on this button. 
+	 * @param command
+	 */
 	public void setCommand(Command command) {
 		this.command = command;
 	}
 	
+	/**
+	 * returns the command of this button.
+	 * @return the command of this button, can return <code>null</code>
+	 */
 	public Command getCommand() {
 		return this.command;
 	}
@@ -160,11 +181,26 @@ public class Button extends AbstractDojo  implements  HasText,SourcesClickEvents
 	private native void defineTatamiButton()
 	/*-{
 	 $wnd.dojo.declare("dojox.form.TatamiButton", $wnd.dijit.form.Button, {
-	 onClick:function (e) {
-	 	this.gwtWidget.@com.objetdirect.tatami.client.Button::onClick()();
+	   onClick:function (e) {
+	    this.gwtWidget.@com.objetdirect.tatami.client.Button::handle(IIIIIZZZZ)(
+	    1,//one click (this property is undefined on dojo event
+	    e.screenX,
+	    e.screenY,
+	    e.clientX,
+	    e.clientY,
+	    e.ctrlKey,
+	    e.altKey,
+	    e.shiftKey,
+	    false //this property is undefined on dojo event
+	    );
+	    this.gwtWidget.@com.objetdirect.tatami.client.Button::onClick()();
+	   
 	 }});
 	  
 	 }-*/;
+	
+	
+	
 	
 	
 	/**
@@ -204,19 +240,34 @@ public class Button extends AbstractDojo  implements  HasText,SourcesClickEvents
 	
 	/**
 	 * This method is called back by dojo when it catches a onClick event. 
-	 * It notifies the registered clickListeners that a click occured
-	 * 
+	 * It notifies the registered clickListeners that a click occurred
+	 * @deprecated use the handle method instead
 	 */
 	public void onClick(){
-		if ( command != null ) {
-			command.execute();
-		}
+	
 		if (listeners != null) {
-		listeners.fireClick(this);
+		  listeners.fireClick(this);
 		}
 	}
 	
 	
+	
+	
+	
+	/**
+	 * Handle the click events
+	 */
+	protected void handle(int detail,int screenX,int screenY,int clientX,int clientY, boolean ctrlKey,boolean altKey, boolean shiftKey, boolean metaKey) { 
+		if ( command != null) {
+			command.execute();
+		}
+		DomEvent.fireNativeEvent(createClickEvent(detail, screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey),this,this.getElement());
+	}
+	
+	/**
+	 * @deprecated
+	 * @param listener
+	 */
 	public void addClickListener(ClickListener listener) {
 		if ( listeners == null) {
 			listeners = new ClickListenerCollection();
@@ -225,6 +276,10 @@ public class Button extends AbstractDojo  implements  HasText,SourcesClickEvents
 	}
 
 
+	/**
+	 * @deprecated
+	 * @param listener
+	 */
 	public void removeClickListener(ClickListener listener) {
 		if ( listeners != null) {
 		listeners.remove(listener);
@@ -273,7 +328,7 @@ public class Button extends AbstractDojo  implements  HasText,SourcesClickEvents
 	public void setLabel(String text) {
 		this.label = text;
 		if ( isAttached()) {
-		dojoSetLabel(text , dojoWidget);
+	     	dojoSetLabel(text , dojoWidget);
 		}
 	}
 	
@@ -283,6 +338,11 @@ public class Button extends AbstractDojo  implements  HasText,SourcesClickEvents
 
 	public String getText() {
 		return getLabel();
+	}
+
+	@Override
+	public HandlerRegistration addClickHandler(ClickHandler handler) {
+		return this.addDomHandler(handler, ClickEvent.getType());
 	}
 
 

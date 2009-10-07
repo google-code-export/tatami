@@ -26,11 +26,13 @@
 package com.objetdirect.tatami.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.ChangeListenerCollection;
 import com.google.gwt.user.client.ui.FocusWidget;
+import com.google.gwt.user.client.ui.Widget;
 
 
 /**
@@ -50,7 +52,7 @@ import com.google.gwt.user.client.ui.FocusWidget;
  * The class has a container of <code>ChangeListener</code>, notifying a value changement displayed and  edited of the widget.
  * @author Vianney
  */
-public abstract class AbstractDojoFocus extends FocusWidget implements HasDojo {
+public abstract class AbstractDojoFocus extends FocusWidget implements HasDojo  {
 
 	/**
 	 * The Widget DOJO for the HasDojo interface
@@ -59,6 +61,7 @@ public abstract class AbstractDojoFocus extends FocusWidget implements HasDojo {
 
 	/**
 	 * Collection for the listener notfiying change values.
+	 * @deprecated
 	 */
 	protected ChangeListenerCollection changeListeners;
 
@@ -130,6 +133,7 @@ public abstract class AbstractDojoFocus extends FocusWidget implements HasDojo {
 	/**
 	 * Adds a listener interface to receive change values events.
 	 * @param listener the listener interface to add
+	 * @deprecated
 	 */
 	public void addChangeListener(ChangeListener listener) {
 		if (changeListeners == null) {
@@ -156,6 +160,7 @@ public abstract class AbstractDojoFocus extends FocusWidget implements HasDojo {
 	/**
 	 * Removes a previously added listener interface.
 	 * @param listener the listener interface to remove
+	 * @deprecated
 	 */
 	public void removeChangeListener(ChangeListener listener) {
 		if (changeListeners != null) {
