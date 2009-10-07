@@ -32,8 +32,8 @@ public class NumberSpinnerTest extends DefaultTatamiTest {
 	public void testGetSetValue(){
 		NumberSpinner spinner = getNumberSpinner();
 		float newValue = 56f;
-		spinner.setSpinnerValue(new Float(newValue));
-		assertEquals(newValue, spinner.getSpinnerValue().floatValue(), 0.1f);
+		spinner.setValue(newValue);
+		assertEquals(newValue, spinner.getValue().floatValue(), 0.1f);
 	}
 	
 	public void testChangePropagation(){
@@ -48,7 +48,7 @@ public class NumberSpinnerTest extends DefaultTatamiTest {
 		
 		Timer timer = new Timer() {
 			public void run(){
-				assertEquals(7.4f , spinner.getSpinnerValue().floatValue() ,0.1f);
+				assertEquals(7.4f , spinner.getValue().floatValue() ,0.1f);
 				assertEquals(true, changed);
 				changed = false;
 				spinner.removeChangeListener(listener);
@@ -57,7 +57,7 @@ public class NumberSpinnerTest extends DefaultTatamiTest {
 		};
 		
 		spinner.addChangeListener(listener);
-		spinner.setSpinnerValue(new Float(7.4f));
+		spinner.setValue(new Float(7.4f));
 		timer.schedule(100);
 		delayTestFinish(500);
 	}
