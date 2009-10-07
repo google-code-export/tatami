@@ -3,10 +3,11 @@ package com.objetdirect.tatami.demo.client;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.Button;
 import com.objetdirect.tatami.client.gfx.Color;
 import com.objetdirect.tatami.client.gfx.GraphicCanvas;
@@ -22,7 +23,7 @@ import com.objetdirect.tatamix.client.hmvc.ViewEvent;
  * @author vgrassaud
  *
  */
-public class BugView extends DefaultView implements TatamiDemoEvent, ClickListener {
+public class BugView extends DefaultView implements TatamiDemoEvent, ClickHandler {
 
 	//the bugs
 	private  enum  BUG {
@@ -71,7 +72,7 @@ public class BugView extends DefaultView implements TatamiDemoEvent, ClickListen
 		Button button = new Button();
 		button.setLabel(label);
 		button.setTitle(title);
-		button.addClickListener(this);
+		button.addClickHandler(this);
 		buttonsMap.put(button,bug);
 		add(button);
 		return button;
@@ -146,8 +147,9 @@ public class BugView extends DefaultView implements TatamiDemoEvent, ClickListen
 	}
 	
 	
-	public void onClick(Widget sender) {
-		BUG bug = this.buttonsMap.get(sender);
+	public void onClick(ClickEvent event) {
+		Window.alert("hello");
+		BUG bug = this.buttonsMap.get(event.getSource());
 		if ( bug !=null) {
 			manageButton(bug);
 		}

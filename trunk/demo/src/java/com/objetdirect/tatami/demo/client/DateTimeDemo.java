@@ -27,10 +27,10 @@ package com.objetdirect.tatami.demo.client;
 
 import java.util.Date;
 
-import com.google.gwt.user.client.ui.ChangeListener;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.KeyboardListener;
-import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.BasePicker;
 import com.objetdirect.tatami.client.Clock;
 import com.objetdirect.tatami.client.DatePicker;
@@ -49,7 +49,7 @@ import com.objetdirect.tatamix.client.widget.Title;
  * are presented.
  *
  */
-public class DateTimeDemo extends CompositeView implements KeyboardListener {
+public class DateTimeDemo extends CompositeView {
 
   private DatePicker datePicker;
   private TimePicker timePicker;
@@ -111,7 +111,7 @@ public class DateTimeDemo extends CompositeView implements KeyboardListener {
 
 
 	  inputDate = new DropdownDatePicker();
-	  inputDate.addKeyboardListener(this);
+	  
 	  inputDate.setInvalidMessage(TatamiDemo.getMessages().date_invalid());
 
 	  datePicker = new DatePicker();
@@ -167,6 +167,12 @@ public class DateTimeDemo extends CompositeView implements KeyboardListener {
 	  clockPanel.add(clock);
 
 	  layout.add(clockPanel);
+	  inputTime.setDate(new Date());
+	  inputTime.addValueChangeHandler(new ValueChangeHandler<Date>() {
+	     public void onValueChange(ValueChangeEvent<Date> event) {
+	    	 Window.alert("date changed " + event.getValue());
+	     } 
+	  });
 
   }
 
@@ -183,8 +189,8 @@ public class DateTimeDemo extends CompositeView implements KeyboardListener {
 	 */
 	private void linkDropdownAndPicker(final DropdownContainer container,
 			final BasePicker picker) {
-		container.addChangeListener(new ChangeListener() {
-			public void onChange(Widget sender) {
+		container.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
 				if (!equalsObj(picker.getDate(), container.getDate())) {
 					picker.setDate(container.getDate());
 				}
@@ -192,13 +198,13 @@ public class DateTimeDemo extends CompositeView implements KeyboardListener {
 			}
 		});
 
-		picker.addChangeListener(new ChangeListener() {
-			public void onChange(Widget sender) {
+		picker.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
 
 				if (!equalsObj(container.getDate(), picker.getDate())) {
 
 					container.setDate(picker.getDate());
-					container.selectAll();
+					//container.selectAll();
 
 				}
 			}
@@ -210,8 +216,8 @@ public class DateTimeDemo extends CompositeView implements KeyboardListener {
 
 	private void linkDropdown(final DropdownContainer container1,
 	    final DropdownContainer container2) {
-		container1.addChangeListener(new ChangeListener() {
-			public void onChange(Widget sender) {
+		container1.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
 				if (!equalsObj(container2.getDate(), container1.getDate())) {
 
 					container2.setDate(container1.getDate());
@@ -220,10 +226,10 @@ public class DateTimeDemo extends CompositeView implements KeyboardListener {
 			}
 		});
 
-		container2.addChangeListener(new ChangeListener() {
-			public void onChange(Widget sender) {
+		container2.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
 
-				if (!equalsObj(container1.getDate(), container2.getDate())) {
+				if (container1.getDate() != null && !equalsObj(container1.getDate(), container2.getDate())) {
 					Date newDate = new Date(container1.getDate().getTime());
 					newDate.setHours(container2.getDate().getHours());
 					newDate.setMinutes(container2.getDate().getMinutes());
@@ -256,24 +262,6 @@ public class DateTimeDemo extends CompositeView implements KeyboardListener {
 	}
 
 
-	public void onKeyDown(Widget sender, char keyCode, int modifiers) {
-
-
-	}
-
-
-	public void onKeyPress(Widget sender, char keyCode, int modifiers) {
-
-
-	}
-
-
-	public void onKeyUp(Widget sender, char keyCode, int modifiers) {
-         if ( keyCode == KEY_ENTER) {
-        	 //Window.alert("The Key enter was up");
-         }
-
-	}
 
 
 
