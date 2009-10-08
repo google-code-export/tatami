@@ -60,14 +60,14 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 	/**
 	 * The plots which must be drawn on this chart
 	 */
-	private List<Plot> plots = new ArrayList<Plot>();
+	private List<Plot<?>> plots = new ArrayList<Plot<?>>();
 	
 	/**
 	 * Axes : the axes 
 	 */
 	private List<Axis> axes = new ArrayList<Axis>();
 	
-	private Map<String,Serie> series = new HashMap<String,Serie>();
+	private Map<String,Serie<?>> series = new HashMap<String,Serie<?>>();
 	
 	private JavaScriptObject dojoWidget;
 	
@@ -246,14 +246,14 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 	/**
 	 * @return the plots to draw on this chart
 	 */
-	public List<Plot> getPlots(){
+	public List<Plot<?>> getPlots(){
 		return plots;
 	}
 	
 	/**
 	 * @param plots: the plots to draw on this chart
 	 */
-	public void setPlots(List<Plot> plots) {
+	public void setPlots(List<Plot<?>> plots) {
 		this.plots = plots;
 	}
 	
@@ -334,7 +334,7 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 	public void refreshChart(){
 		if(dojoWidget != null){
 			//Initializing a newSeries map, in order to "clean" the old series
-			Map<String,Serie> newSeries = new HashMap<String,Serie>();
+			Map<String,Serie<?>> newSeries = new HashMap<String,Serie<?>>();
 			for (Plot<?> plot : plots) {
 				//Since we do not want to add twice the same plot to the
 				//dojo chart,the plot is first removed from the dojo chart. 
@@ -375,7 +375,7 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 			//Adding the new series 
 			Set<String> newKeys = newSeries.keySet();
 			for(String key : newKeys){
-				Serie serie = newSeries.get(key);
+				Serie<?> serie = newSeries.get(key);
 				addDojoSerie(serie.getName(),JSHelper.convertObjectToJSObject(serie.getData()),JSHelper.convertObjectToJSObject(serie.getOptions()),dojoWidget);
 			}
 			//Adding the axis to the chart
@@ -426,7 +426,7 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 	 * @see com.objetdirect.tatami.client.HasDojo#free()
 	 */
 	public void free() {
-		for (Iterator<Plot> iterator = plots.iterator(); iterator.hasNext();) {
+		for (Iterator<Plot<?>> iterator = plots.iterator(); iterator.hasNext();) {
 			Plot<?> plot =  iterator.next();
 			destroyPlot(plot);
 		}
@@ -512,7 +512,7 @@ public class Chart2D extends Widget implements HasDojo, DojoAfterCreationEventsS
 	 * Updates an array of series at one time.
 	 * @param seriesToUpdate
 	 */
-	public void updateSeries(Serie[] seriesToUpdate){
+	public void updateSeries(Serie<?>[] seriesToUpdate){
 		for (Serie<?> serie : seriesToUpdate) {
 			updateDojoSeries(serie.getName(),JSHelper.convertObjectToJSObject(serie.getData()),dojoWidget);
 		}

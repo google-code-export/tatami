@@ -72,7 +72,7 @@ public class EffectEvent extends JavaScriptObject{
 	
 	
 	private final void initAssociatedObject(){
-		String elementType = getElementType();
+	
 		if(getElementType().equals(ELEMENT_TYPE_SLICE)){
 			JavaScriptObject data = getJSDataObject();
 			Double value = getY();
@@ -83,7 +83,7 @@ public class EffectEvent extends JavaScriptObject{
 			setAssociatedObject(new PiePiece(value,text,color,fontColor,tooltip));
 		}else
 		if(getElementType().equals(ELEMENT_TYPE_MARKER)){
-			JavaScriptObject data = getJSDataObject();
+			
 			Double y = getY();
 			Double x = getX();
 			String tooltip = getTooltip();

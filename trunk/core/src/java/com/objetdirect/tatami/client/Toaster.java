@@ -107,7 +107,7 @@ public class Toaster extends AbstractDojo {
 
 	private String typeMessage;
 
-	private SimplePanel container;
+	
 	
 	/**
 	 * Creates the Toatser specifying the topic of the messages. The message
