@@ -54,7 +54,7 @@ public class Plot<T>{
 	private List<Effect> effects;
 	private Axis hAxis ;
 	private Axis vAxis ;
-	private String name;
+
 	
 	/**
 	 * @param type : One of Plot.PLOT_TYPE_* constants.
