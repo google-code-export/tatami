@@ -25,9 +25,9 @@
  */
 package com.objetdirect.tatami.client;
 
-import com.google.gwt.user.client.ui.ChangeListener;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class SliderTest extends DefaultTatamiTest {
 
@@ -46,10 +46,10 @@ public class SliderTest extends DefaultTatamiTest {
 		
 		final int defaultValue = 10;
 		
-		slider.addChangeListener(new ChangeListener() {
+		slider.addValueChangeHandler(new ValueChangeHandler<Integer>() {
 		
-			public void onChange(Widget sender) {
-				//System.out.println(slider.getValue());
+			public void onValueChange(ValueChangeEvent<Integer> event) {
+				//
 				assertTrue(defaultValue == slider.getValue());
 			}
 		});
