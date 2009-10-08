@@ -25,10 +25,10 @@
  */
 package com.objetdirect.tatami.demo.client;
 
-import com.google.gwt.user.client.ui.ChangeListener;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatami.client.Slider;
 import com.objetdirect.tatamix.client.hmvc.CompositeView;
 import com.objetdirect.tatamix.client.widget.Paragraph;
@@ -39,7 +39,7 @@ import com.objetdirect.tatamix.client.widget.Paragraph;
  *
  */
 
-public class SliderDemo extends CompositeView implements ChangeListener{
+public class SliderDemo extends CompositeView implements ValueChangeHandler<Integer>{
 
 	 private Slider horizontalSlider;
 	 private Slider verticalSlider;
@@ -95,12 +95,12 @@ public class SliderDemo extends CompositeView implements ChangeListener{
 		 horizontalSlider.setLabelsTop(labels,"margin:  -0.5em 0px 2em 0px;color:gray");
 		 
 
-		 horizontalSlider.addChangeListener(this);
+		 horizontalSlider.addValueChangeHandler(this);
 		 wrapper.add(horizontalSlider);
 
          layout.add(wrapper);
          
-         verticalSlider.addChangeListener(this);
+         verticalSlider.addValueChangeHandler(this);
 		 verticalSlider.setValue(100);
 
 
@@ -109,10 +109,10 @@ public class SliderDemo extends CompositeView implements ChangeListener{
 	 /**
 	  * Changes the size image when a <code>Slider</code> fired a change value.
 	  */
-	 public void onChange(Widget sender) {
-		 if (sender.equals(verticalSlider) &&  verticalSlider.getValue() != -1) {
+	 public void onValueChange(ValueChangeEvent<Integer> event) {
+		 if (event.getSource().equals(verticalSlider) &&  verticalSlider.getValue() != -1) {
 				cubicImage.setHeight((verticalSlider.getValue()*2) + "px");
-		 } else if ( sender.equals(horizontalSlider) && horizontalSlider.getValue() != -1 ) {
+		 } else if ( event.getSource().equals(horizontalSlider) && horizontalSlider.getValue() != -1 ) {
 			 cubicImage.setWidth((horizontalSlider.getValue()*2) + "px");
 		 }
 	 }
