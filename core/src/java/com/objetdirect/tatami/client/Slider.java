@@ -27,8 +27,12 @@ package com.objetdirect.tatami.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HasValue;
+
   
 /**
  * Class for widgets with a cursor that permit to choose an integer value
@@ -46,7 +50,7 @@ import com.google.gwt.user.client.Element;
  * </ul>
  * </p>
  */
-public class Slider extends AbstractDojoFocus {
+public class Slider extends AbstractDojoFocus implements HasValue<Integer>{
 
 	/** The cursor is in a HORIZONTAL position */
 	static public final String HORIZONTAL = "horizontal";
@@ -115,11 +119,9 @@ public class Slider extends AbstractDojoFocus {
 		this.value = initialValue;
 		this.showButtons = showButtons;
 		setType(type);
-		//Helper.replaceElement(this, getElement());
+		
 	}
 
-	
-	
 	
 	
 	/**
@@ -141,8 +143,9 @@ public class Slider extends AbstractDojoFocus {
 	private void applySize() {
 		if (isAttached()) {
 			Element element = DojoController.getInstance().getDomNode(this);
-			DOM.setStyleAttribute(element, "width", width);
-			DOM.setStyleAttribute(element, "height", height);
+			element.getStyle().setProperty("width", width);
+			element.getStyle().setProperty("height", height);
+			
 		}
 	}
 
@@ -346,8 +349,12 @@ public class Slider extends AbstractDojoFocus {
 	 * 
 	 * @return an integer
 	 */
-	public int getValue() {
+	public Integer getValue() {
 		return value;
+	}
+	
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Integer> handler) {
+		return addHandler(handler,ValueChangeEvent.getType());
 	}
 
 	/**
@@ -356,7 +363,26 @@ public class Slider extends AbstractDojoFocus {
 	 * 
 	 */
 	public void setValue(int value) {
-		changeValue(value);
+		setValue(value,true);
+	}
+	
+	
+	/**
+	 * Sets the value for the cursor.
+	 * @param value the new value to choose.
+	 * 
+	 */
+	public void setValue(Integer value) {
+		setValue(value,true);
+	}
+	
+	/**
+	 * Sets the value for the cursor.
+	 * @param value the new value to choose.
+	 * 
+	 */
+	public void setValue(Integer value,boolean fire) {
+		changeValue(value,fire);
 		if (isAttached()) {
 			try {
 				doSetValue(getDojoWidget(), getValue());
@@ -365,6 +391,8 @@ public class Slider extends AbstractDojoFocus {
 			}
 		}
 	}
+	
+	
 
 	/**
 	 * Tries to set the last value of the cursor after that the DOJO widget is
@@ -639,9 +667,13 @@ public class Slider extends AbstractDojoFocus {
 	 * value then a notification of a chaning state is thrown.
 	 * @param value the new value.
 	 */
-	private void changeValue(int value) {
+	private void changeValue(int value, boolean fire) {
 		if (this.value != value) {
 			this.value = value;
+			if ( fire) {
+				ValueChangeEvent.fire(this, this.value);
+			}
+			
 			if (changeListeners != null) {
 				changeListeners.fireChange(this);
 			}
@@ -656,7 +688,7 @@ public class Slider extends AbstractDojoFocus {
 	 * 
 	 */
 	public void onValueChanged(double value) {
-		changeValue((int) value);
+		changeValue((int) value,true);
 	}
 		
 
