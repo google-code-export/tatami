@@ -29,11 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowResizeListener;
 
 /**
  * Menu similar to the fish eye menu on the Mac OS.
@@ -56,7 +57,7 @@ import com.google.gwt.user.client.WindowResizeListener;
  *
  * @author Henry
  */
-public class FishEye extends AbstractDojo implements WindowResizeListener {
+public class FishEye extends AbstractDojo implements ResizeHandler {
 
 	/**
 	 * Horizontal orientation for the menu
@@ -167,7 +168,7 @@ public class FishEye extends AbstractDojo implements WindowResizeListener {
 	 * @param itemMaxHeight       height of menu item (in pixels) in it's fully enlarged state (when the mouse is directly over it)
 	 * @param orientation         orientation of the menu, either HORIZONTAL or VERTICAL
 	 * @param effectUnits         controls how much reaction the menu makes, relative to the distance of the mouse from the menu
-	 * @param itemPadding         padding (in pixels) betweeen each menu item
+	 * @param itemPadding         padding (in pixels) between each menu item
 	 * @param attachEdge          controls the border that the menu items don't expand past;
 		                          for example, if set to "top", then the menu items will drop downwards as they expand.
 		                          Possible values are : CENTER, TOP, BOTTOM, LEFT, RIGHT
@@ -352,7 +353,8 @@ public class FishEye extends AbstractDojo implements WindowResizeListener {
 	 * the GWT widget is detached from the browser.
 	 */
     public void doBeforeDestruction() {
-    	Window.removeWindowResizeListener(this);
+    	Window.addResizeHandler(this);
+    	
     	removeItems();
 
 	}
@@ -526,7 +528,7 @@ public class FishEye extends AbstractDojo implements WindowResizeListener {
 	 */
 	public void doAfterCreation() {
 		buildItems();
-		Window.addWindowResizeListener(this);
+		Window.addResizeHandler(this);
 	}
 
 
@@ -631,7 +633,7 @@ public class FishEye extends AbstractDojo implements WindowResizeListener {
 
 
 
-	public void onWindowResized(int width, int height) {
+	public void onResize(ResizeEvent event ) {
 		if ( getDojoWidget() != null) {
 			resetLocation(getDojoWidget());
 		}
