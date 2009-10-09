@@ -67,7 +67,7 @@ public class TatamiDemo implements EntryPoint {
 
 
 	public static String getIconURL(String iconName) {
-		return GWT.getHostPageBaseURL() + "images/" + iconName;
+		return GWT.getModuleBaseURL() + "images/" + iconName;
 	}
 
 

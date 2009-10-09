@@ -148,7 +148,7 @@ public class BugView extends DefaultView implements TatamiDemoEvent, ClickHandle
 	
 	
 	public void onClick(ClickEvent event) {
-		Window.alert("hello");
+		
 		BUG bug = this.buttonsMap.get(event.getSource());
 		if ( bug !=null) {
 			manageButton(bug);

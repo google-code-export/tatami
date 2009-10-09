@@ -29,7 +29,6 @@ import java.util.Date;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.objetdirect.tatami.client.BasePicker;
 import com.objetdirect.tatami.client.Clock;
@@ -167,12 +166,8 @@ public class DateTimeDemo extends CompositeView {
 	  clockPanel.add(clock);
 
 	  layout.add(clockPanel);
-	  inputTime.setDate(new Date());
-	  inputTime.addValueChangeHandler(new ValueChangeHandler<Date>() {
-	     public void onValueChange(ValueChangeEvent<Date> event) {
-	    	 Window.alert("date changed " + event.getValue());
-	     } 
-	  });
+	  
+	  
 
   }
 
