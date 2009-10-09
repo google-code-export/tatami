@@ -1,6 +1,13 @@
 package com.objetdirect.tatamix.client.widget;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.NativeEvent;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.DomEvent;
+import com.google.gwt.event.dom.client.HasChangeHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ChangeListener;
@@ -13,7 +20,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 
 
-  public class PaginationBar extends Composite implements Enablable {
+  public class PaginationBar extends Composite implements Enablable, HasChangeHandlers {
     //UI components
 	private FlowPanel layout;
 	private SpanPanel pagesPanel;
@@ -26,6 +33,9 @@ import com.google.gwt.user.client.ui.Widget;
 	private int currentPage;
     private int size;
     private boolean enabled;
+    /**
+     * @deprecated
+     */
     private ChangeListenerCollection changeListeners;
     private String separator = ", ";
 
@@ -53,6 +63,13 @@ import com.google.gwt.user.client.ui.Widget;
 		initActions();
 	}
 
+	
+	
+	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
+		return  addHandler(handler, ChangeEvent.getType());
+	}
+	
+	
 	/**
 	 * Inits the UI components
 	 *
@@ -156,6 +173,7 @@ import com.google.gwt.user.client.ui.Widget;
 	/**
 	 * Adds a change listener.
 	 * @param listener
+	 * @deprecated use {@link #addChangeHandler(ChangeHandler)} instead
 	 */
 	public void addChangelistener(ChangeListener listener) {
 		if ( changeListeners == null) {
@@ -167,6 +185,7 @@ import com.google.gwt.user.client.ui.Widget;
     /**
      * Removes the given change listener
      * @param listener
+     * @deprecated
      */
 	public void removeChangeListener(ChangeListener listener) {
 		if ( changeListeners != null) {
@@ -190,6 +209,11 @@ import com.google.gwt.user.client.ui.Widget;
         if ( newPage > 0 && newPage <= size) {
         	currentPage = newPage;
         	generatePages();
+        	if ( enabled)  {
+        		NativeEvent event = Document.get().createChangeEvent();
+        		DomEvent.fireNativeEvent(event, this);
+        	}
+        	
         	if ( enabled && changeListeners != null) {
         	  changeListeners.fireChange(this);
         	}

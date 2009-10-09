@@ -44,7 +44,7 @@ import com.google.gwt.user.client.ui.Widget;
  *
  *
  * @author Vianney Grassaud
- *
+ *@deprecated used the datagrid of tatami instead
  */
 public class Table extends FocusWidget implements SourcesTableEvents,  HasText, HasHTML {
 

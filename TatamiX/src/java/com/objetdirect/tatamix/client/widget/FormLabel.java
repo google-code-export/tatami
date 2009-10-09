@@ -1,19 +1,20 @@
 package com.objetdirect.tatamix.client.widget;
 
-import com.google.gwt.user.client.DOM;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasHTML;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
-public class FormLabel extends Widget implements HasText, HasHTML {
+public class FormLabel extends FocusWidget implements HasText, HasHTML {
 
 	/**
 	 * Creates a LABEL HTML element
 	 *
 	 */
 	public FormLabel() {
-		super();
-		setElement(DOM.createLabel());
+		super(Document.get().createLabelElement());
+		
 	}
 
 	/**
@@ -21,7 +22,7 @@ public class FormLabel extends Widget implements HasText, HasHTML {
 	 * @return HTML text
 	 */
 	public String getHTML() {
-		return DOM.getInnerHTML(getElement());
+		return getElement().getInnerHTML();
 	}
 
 	/**
@@ -29,7 +30,7 @@ public class FormLabel extends Widget implements HasText, HasHTML {
 	 * @param html the HTML content 
 	 */
 	public void setHTML(String html) {
-		DOM.setInnerHTML(getElement(),html);
+		getElement().setInnerHTML(html);
 		
 	}
 
@@ -39,7 +40,7 @@ public class FormLabel extends Widget implements HasText, HasHTML {
 	 */
 	public String getText() {
 	
-		return DOM.getInnerText(getElement());
+		return getElement().getInnerText();
 	}
 
 	/**
@@ -47,7 +48,7 @@ public class FormLabel extends Widget implements HasText, HasHTML {
 	 * @param html the text content 
 	 */
 	public void setText(String text) {
-		DOM.setInnerText(getElement(),text);
+		getElement().setInnerText(text);
 		
 	}
 
@@ -59,8 +60,9 @@ public class FormLabel extends Widget implements HasText, HasHTML {
 	 *@param Widget a widget should be an input widget like <code>TextBox</code>... 
 	 **/
 	public void setFor(String id, Widget widget) {
-		DOM.setElementProperty(getElement(),"htmlFor",id);
-		DOM.setElementProperty(widget.getElement(),"id",id);
+		getElement().getStyle().setProperty("htmlFor",id);
+		widget.getElement().getStyle().setProperty("id",id);
+		
 	}
 
 	/**
@@ -69,7 +71,7 @@ public class FormLabel extends Widget implements HasText, HasHTML {
 	 * @return return an id or <code>null</code> if no association was set.
 	 */
    public String getFor() {
-	   return DOM.getElementProperty(getElement(), "for");
+	   return getElement().getStyle().getProperty("for");
    }
 
 

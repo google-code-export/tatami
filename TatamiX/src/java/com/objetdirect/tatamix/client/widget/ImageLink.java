@@ -3,16 +3,14 @@ package com.objetdirect.tatamix.client.widget;
 import com.google.gwt.dom.client.AnchorElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.MouseListener;
-import com.google.gwt.user.client.ui.MouseListenerCollection;
-import com.google.gwt.user.client.ui.Widget;
 
 public class ImageLink extends FocusWidget implements Enablable {
 
@@ -23,7 +21,7 @@ public class ImageLink extends FocusWidget implements Enablable {
     private AnchorElement anchorElem;
     private String targetHistoryToken;
     private Command command;
-    private MouseListenerCollection listenerCollection;
+    
 
     /**
      * Creates an empty <code>ImageLink</code>.
@@ -39,16 +37,16 @@ public class ImageLink extends FocusWidget implements Enablable {
         //add the image to the anchor element
         anchorElem.appendChild(image);
 
-        addClickListener(new ClickListener() {
+        addClickHandler(new ClickHandler() {
 
-            public void onClick(Widget sender) {
+            public void onClick(ClickEvent event) {
                 if (command != null && isEnabled()) {
                     command.execute();
                 }
             }
         });
 
-        sinkEvents(Event.MOUSEEVENTS);
+        
     }
 
     /**
@@ -73,19 +71,7 @@ public class ImageLink extends FocusWidget implements Enablable {
         this(img.getUrl(), alt);
     }
 
-    public void addMouseListener(MouseListener listener) {
-        if (listenerCollection == null) {
-            listenerCollection = new MouseListenerCollection();
-        }
-        listenerCollection.add(listener);
-    }
-
-    public void removeMouseListener(MouseListener listener) {
-        if (listenerCollection != null) {
-            listenerCollection.remove(listener);
-        }
-    }
-
+   
     /**
      * Returns the URL of the image.
      * @return the URL of the image
@@ -142,30 +128,7 @@ public class ImageLink extends FocusWidget implements Enablable {
             }
         }
 
-        if (listenerCollection != null) {
-            switch (DOM.eventGetType(event)) {
-                case Event.ONMOUSEDOWN: {
-                    listenerCollection.fireMouseDown(this, DOM.eventGetClientX(event), DOM.eventGetClientY(event));
-                    break;
-                }
-                case Event.ONMOUSEUP: {
-                    listenerCollection.fireMouseUp(this, DOM.eventGetClientX(event), DOM.eventGetClientY(event));
-                    break;
-                }
-                case Event.ONMOUSEOVER: {
-                    listenerCollection.fireMouseEnter(this);
-                    break;
-                }
-                case Event.ONMOUSEOUT: {
-                    listenerCollection.fireMouseLeave(this);
-                    break;
-                }
-                case Event.MOUSEEVENTS: {
-                    listenerCollection.fireMouseEvent(this, event);
-                    break;
-                }
-            }
-        }
+      
         super.onBrowserEvent(event);
     }
 

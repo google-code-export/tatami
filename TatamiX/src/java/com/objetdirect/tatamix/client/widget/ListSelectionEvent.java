@@ -10,6 +10,12 @@ import java.util.EventObject;
  */
 public class ListSelectionEvent extends EventObject {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	private int index;
 	
 	

@@ -54,7 +54,7 @@ public class RoundedContainer extends Composite {
 
 
 
-	public Iterator iterator() {
+	public Iterator<Widget> iterator() {
 		return content.iterator();
 	}
 

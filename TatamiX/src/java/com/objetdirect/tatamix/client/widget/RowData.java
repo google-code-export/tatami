@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Widget;
  * Don't use directly this class. 
  * This class is use by the object <code>Table</code>
  * @author Vianney Grassaud
- *
+  *@deprecated use the datagrif widget of Tatami instead
  */
 public class RowData extends Widget {
 

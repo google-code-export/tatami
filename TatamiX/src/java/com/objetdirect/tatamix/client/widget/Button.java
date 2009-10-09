@@ -1,16 +1,15 @@
 package com.objetdirect.tatamix.client.widget;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Command;
-
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * This class aims to associate a <code>Command</code> to a <code>Button</code>
  * If a command is set to the button then when a click event is fired the command will be the
  * first executed before the other cliklistener.
  * @author Vianney Grassaud
- *
+ * @deprecated use the Tatami Button instead
  */
 public class Button extends com.google.gwt.user.client.ui.Button implements Enablable {
 
@@ -23,8 +22,8 @@ public class Button extends com.google.gwt.user.client.ui.Button implements Enab
 	public Button() {
 		super();
 
-		addClickListener(new ClickListener() {
-			public void onClick(Widget sender) {
+		addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
 			   if ( command != null) {
 				   command.execute();
 			   }
@@ -63,4 +62,4 @@ public class Button extends com.google.gwt.user.client.ui.Button implements Enab
 	}
 
 
-}//fin de la classe
+}

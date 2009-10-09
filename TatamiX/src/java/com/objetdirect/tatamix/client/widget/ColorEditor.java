@@ -1,10 +1,12 @@
 package com.objetdirect.tatamix.client.widget;
 
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.ChangeListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.FocusListener;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
@@ -19,7 +21,7 @@ import com.objetdirect.tatami.client.ColorChooser;
  * @author Vianney Grassaud
  *
  */
-public class ColorEditor extends Composite implements ChangeListener, FocusListener {
+public class ColorEditor extends Composite implements ValueChangeHandler<String>, FocusHandler {
 
 	//layout to display textbox and colorChooser
 	private FlowPanel layout;
@@ -58,10 +60,10 @@ public class ColorEditor extends Composite implements ChangeListener, FocusListe
 	 */
 	private void initComponents(String size) {
 		colorChooser = new ColorChooser(size);
-		colorChooser.addChangeListener(this);
+		colorChooser.addValueChangeHandler(this);
 		colorText = new TextBox();
 
-		colorText.addFocusListener(this);
+		colorText.addFocusHandler(this);
 		layout.add(colorText);
 
 	}
@@ -86,7 +88,7 @@ public class ColorEditor extends Composite implements ChangeListener, FocusListe
     /**
      * Changes the value of the <code>TextBox</code> when a color is selected in the color chooser
      */
-	public void onChange(Widget sender) {
+	public void onValueChange(ValueChangeEvent<String> event) {
 		String color = colorChooser.getColor();
 		colorText.setText(color);
 		if ( popup != null) {
@@ -103,18 +105,12 @@ public class ColorEditor extends Composite implements ChangeListener, FocusListe
 	/**
 	 * Displays the color chooser when the widget takes the focus
 	 */
-	public void onFocus(Widget sender) {
-		showPopup(sender);
+	public void onFocus(FocusEvent event) {
+		showPopup((Widget)event.getSource());
 
 	}
 
-	/**
-	 * Do nothing
-	 */
-	public void onLostFocus(Widget sender) {
-
-		//popup.hide();
-	}
+	
 
 	/**
 	 * Inits the popup panel which displays the color chooser

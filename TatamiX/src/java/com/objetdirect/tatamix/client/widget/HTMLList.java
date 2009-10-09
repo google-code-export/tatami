@@ -2,19 +2,23 @@ package com.objetdirect.tatamix.client.widget;
 
 import java.util.Iterator;
 
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.ClickListener;
-import com.google.gwt.user.client.ui.ClickListenerCollection;
-import com.google.gwt.user.client.ui.MouseListener;
-import com.google.gwt.user.client.ui.MouseListenerCollection;
-import com.google.gwt.user.client.ui.MouseWheelListener;
-import com.google.gwt.user.client.ui.MouseWheelListenerCollection;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Node;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.dom.client.HasMouseOutHandlers;
+import com.google.gwt.event.dom.client.HasMouseOverHandlers;
+import com.google.gwt.event.dom.client.HasMouseWheelHandlers;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.event.dom.client.MouseWheelEvent;
+import com.google.gwt.event.dom.client.MouseWheelHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.SourcesClickEvents;
-import com.google.gwt.user.client.ui.SourcesMouseEvents;
-import com.google.gwt.user.client.ui.SourcesMouseWheelEvents;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.WidgetCollection;
 
@@ -31,17 +35,12 @@ import com.google.gwt.user.client.ui.WidgetCollection;
  * @author Vianney Grassaud
  *
  */
-public class HTMLList extends Panel implements SourcesClickEvents, SourcesMouseEvents, SourcesMouseWheelEvents {
+public class HTMLList extends Panel implements HasClickHandlers, HasMouseOutHandlers,HasMouseOverHandlers, HasMouseWheelHandlers {
 
 	/** the widgets contained by the list*/
 	private WidgetCollection items;
 
-	private ClickListenerCollection clickListeners;
-
-	private MouseListenerCollection mouseListeners;
-
-	private MouseWheelListenerCollection mouseWheelListeners;
-
+	
 	/**
 	 * Creates an empty list.
 	 *
@@ -49,52 +48,19 @@ public class HTMLList extends Panel implements SourcesClickEvents, SourcesMouseE
 	 */
 	public HTMLList() {
 		items = new WidgetCollection(this);
-		setElement(DOM.createElement("ul"));
-		sinkEvents(Event.ONCLICK);
-		sinkEvents(Event.ONMOUSEWHEEL | Event.MOUSEEVENTS);
+
 
 	}
 
 
-	/**
-	 * Manage events
-	 */
-	public void onBrowserEvent(Event event) {
-		super.onBrowserEvent(event);
-		switch (DOM.eventGetType(event)) {
-
-		case Event.ONCLICK: {
-			if ( clickListeners != null) {
-				clickListeners.fireClick(this);
-			}
-			break;
-		}
-		case Event.ONMOUSEDOWN:
-		case Event.ONMOUSEUP:
-		case Event.ONMOUSEMOVE:
-		case Event.ONMOUSEOVER:
-		case Event.ONMOUSEOUT: {
-			if (mouseListeners != null) {
-				mouseListeners.fireMouseEvent(this, event);
-			}
-			break;
-		}
-		case Event.ONMOUSEWHEEL: {
-			if (mouseWheelListeners != null) {
-				mouseWheelListeners.fireMouseWheelEvent(this, event);
-			}
-			break;
-		}
-
-		}
-	}
+	
 
 
 	/*
 	 * (non-Javadoc)
 	 * @see com.google.gwt.user.client.ui.HasWidgets#iterator()
 	 */
-	public Iterator iterator() {
+	public Iterator<Widget> iterator() {
 		return items.iterator();
 	}
 
@@ -103,9 +69,10 @@ public class HTMLList extends Panel implements SourcesClickEvents, SourcesMouseE
 	 * @param w the widget to add
 	 */
 	public void add(Widget w) {
-		Element li = DOM.createElement("li");
-		DOM.appendChild(li,w.getElement());
-		DOM.appendChild(getElement(),li);
+		Element li = Document.get().createLIElement();
+		li.appendChild(w.getElement());
+		getElement().appendChild(li);
+		
 		items.add(w);
 		adopt(w);
 	}
@@ -139,9 +106,8 @@ public class HTMLList extends Panel implements SourcesClickEvents, SourcesMouseE
 		if ( index < items.size() && index >= 0) {
 			Widget w = (Widget)items.get(index);
 			orphan(w);
-
-			Element li = DOM.getChild(getElement(), index);
-			DOM.removeChild(getElement(),li);
+			Node li = getElement().getChildNodes().getItem(index);
+    		getElement().removeChild(li);
 			items.remove(index);
 			result = true;
 		}
@@ -179,51 +145,35 @@ public class HTMLList extends Panel implements SourcesClickEvents, SourcesMouseE
         Widget w = this.getWidget(index);
         if ( w != null) {
         	Element el = w.getElement();
-            Element li = DOM.getParent(el);
-            DOM.setElementProperty(li,"className",style);
+            Element li = el.getParentElement();
+            li.getStyle().setProperty("className",style);
+            
         }
 
 	}
 
-	public void addClickListener(ClickListener listener) {
-		if ( clickListeners == null) {
-			clickListeners = new ClickListenerCollection();
-		}
-		clickListeners.add(listener);
+	public HandlerRegistration addClickHandler(ClickHandler handler) {
+		return this.addDomHandler(handler, ClickEvent.getType());
 	}
 
 
-	public void removeClickListener(ClickListener listener) {
-		if ( clickListeners != null) {
-			clickListeners.remove(listener);
-		}
-	}
-
-	public void addMouseListener(MouseListener listener) {
-		if ( mouseListeners == null) {
-			mouseListeners = new MouseListenerCollection();
-		}
-		mouseListeners.add(listener);
-	}
-
-	public void removeMouseListener(MouseListener listener) {
-		if ( mouseListeners != null) {
-			mouseListeners.remove(listener);
-		}
-	}
-
-	public void addMouseWheelListener(MouseWheelListener listener) {
-		if ( mouseWheelListeners == null) {
-			mouseWheelListeners = new MouseWheelListenerCollection();
-		}
-		mouseWheelListeners.add(listener);
+	
+	public HandlerRegistration addMouseWheelHandler(MouseWheelHandler handler) {
+		return this.addDomHandler(handler, MouseWheelEvent.getType());
 	}
 
 
-	public void removeMouseWheelListener(MouseWheelListener listener) {
-		if (mouseWheelListeners != null ) {
-			mouseWheelListeners.remove(listener);
-		}
+	@Override
+	public HandlerRegistration addMouseOutHandler(MouseOutHandler handler) {
+	 
+		return addDomHandler(handler, MouseOutEvent.getType());
 	}
+
+
+	@Override
+	public HandlerRegistration addMouseOverHandler(MouseOverHandler handler) {
+		return addDomHandler(handler, MouseOverEvent.getType());
+	}
+	
 
 }//end of class

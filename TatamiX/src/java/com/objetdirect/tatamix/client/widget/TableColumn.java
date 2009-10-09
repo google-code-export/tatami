@@ -5,6 +5,11 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.HasHTML;
 import com.google.gwt.user.client.ui.Widget;
 
+/**
+ * 
+ * @deprecated used the datagrid of tatami instead
+ *
+ */
 public class TableColumn extends Widget implements HasHTML {
 
 	private TableCellRenderer renderer;
