@@ -163,14 +163,14 @@ public class HTMLList extends Panel implements HasClickHandlers, HasMouseOutHand
 	}
 
 
-	@Override
+	
 	public HandlerRegistration addMouseOutHandler(MouseOutHandler handler) {
 	 
 		return addDomHandler(handler, MouseOutEvent.getType());
 	}
 
 
-	@Override
+	
 	public HandlerRegistration addMouseOverHandler(MouseOverHandler handler) {
 		return addDomHandler(handler, MouseOverEvent.getType());
 	}
