@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.Widget;
  * Le <code>Widget</code> ainsi cree represente la valeur passee en parametre
  *  
  * @author Vianney
- *
+ *@deprecated used the datagrid of tatami instead
  */
 public interface TableCellRenderer {
 

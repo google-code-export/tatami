@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Widget;
@@ -45,7 +46,7 @@ public class Menu extends Composite {
    /**
     * The listener of the click event used by each item
     */
-   private ClickListener itemListener;
+   private ClickHandler itemListener;
 
    /**
     * Map to associate item and Command
@@ -57,6 +58,8 @@ public class Menu extends Composite {
     * An item selectable fire the ListSelectioneListener
     */
    private Map<Hyperlink, Boolean> selectMap;
+   
+   private Map<Hyperlink,HandlerRegistration> itemRegistration;
 
    /**
     * Creates an empty menu
@@ -66,42 +69,50 @@ public class Menu extends Composite {
       menu = new HTMLList();
       actionMap = new HashMap<Hyperlink, Command>();
       selectMap = new HashMap<Hyperlink, Boolean>();
+      itemRegistration = new HashMap<Hyperlink, HandlerRegistration>();
 
       initWidget(menu);
       setStylePrimaryName("tatamix-Menu");
       //creates the clickListener for each item
-      itemListener = new ClickListener() {
+      itemListener = new ClickHandler() {
 
-         public void onClick(Widget sender) {
-
-            Command cmd = (Command) actionMap.get(sender);
-            boolean enabled = true;
-            // si la command est une action
-            // on verifie si elle est enabled pour executer l'action
-            if (cmd instanceof AbstractAction) {
-               enabled = ((AbstractAction) cmd).isEnabled();
-            }
-
-            if (enabled) {
-               int index = menu.indexOf(sender);
-
-               if (index != -1 && isSelectable(sender)) {
-                  activeItem(lastActive, false);
-                  lastActive = sender;
-                  activeItem(lastActive, true);
-                  fireListSelectionListeners(index);
-               }
-               //event the item is not selectable we execute the command. 
-               if (cmd != null) {
-
-                  cmd.execute();
-               }
-
-            }
+         public void onClick(ClickEvent event) {
+        	 doClick((Widget)event.getSource());
+           
          }
 
       };
 
+   }
+   
+   
+   
+   
+   private void doClick(Widget item) {
+	   Command cmd = (Command) actionMap.get(item);
+       boolean enabled = true;
+       // si la command est une action
+       // on verifie si elle est enabled pour executer l'action
+       if (cmd instanceof AbstractAction) {
+          enabled = ((AbstractAction) cmd).isEnabled();
+       }
+
+       if (enabled) {
+          int index = menu.indexOf(item);
+
+          if (index != -1 && isSelectable(item)) {
+             activeItem(lastActive, false);
+             lastActive = item;
+             activeItem(lastActive, true);
+             fireListSelectionListeners(index);
+          }
+          //event the item is not selectable we execute the command. 
+          if (cmd != null) {
+
+             cmd.execute();
+          }
+
+       }
    }
 
    /**
@@ -202,8 +213,7 @@ public class Menu extends Composite {
    public void selectItem(int index) {
       Widget sender = menu.getWidget(index);
       if (sender != null) {
-
-         itemListener.onClick(sender);
+          doClick(sender);
       }
    }
 
@@ -247,7 +257,7 @@ public class Menu extends Composite {
 
       actionMap.put(item, cmd);
       selectMap.put(item, selectable);
-      item.addClickListener(itemListener);
+      itemRegistration.put(item,item.addClickHandler(itemListener));
       menu.add(item);
 
    }
@@ -260,9 +270,12 @@ public class Menu extends Composite {
     */
    public void remove(int index) {
       Hyperlink item = getLinkAt(index);
-      if (item != null) {
-         item.removeClickListener(itemListener);
-         menu.remove(index);
+      HandlerRegistration hr = itemRegistration.get(item);
+      if (hr != null) {
+    	  hr.removeHandler();
+      }
+      if ( item != null) {
+    	  menu.remove(index);
       }
    }
 
@@ -281,10 +294,14 @@ public class Menu extends Composite {
     * 
     */
    public void clear() {
-      Iterator ite = menu.iterator();
+      Iterator<Widget> ite = menu.iterator();
       while (ite.hasNext()) {
          Hyperlink item = (Hyperlink) ite.next();
-         item.removeClickListener(itemListener);
+         HandlerRegistration hr = itemRegistration.get(item);
+         if ( hr != null) {
+        	 hr.removeHandler();
+         }
+         
          ite.remove();
       }
 

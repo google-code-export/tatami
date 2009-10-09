@@ -24,12 +24,12 @@ public abstract class AbstractAction implements Command,Enablable {
 	 * Properties of this action
 	 *
 	 */
-	private Map properties;
+	private Map<String,Object> properties;
 
 	private boolean enabled;
 
 
-	private List enablables;
+	private List<Enablable> enablables;
 
 	/**
 	 * Use this property to set the name of an action
@@ -52,8 +52,8 @@ public abstract class AbstractAction implements Command,Enablable {
 	 *
 	 */
 	public AbstractAction() {
-		properties = new HashMap();
-		enablables = new ArrayList();
+		properties = new HashMap<String,Object>();
+		enablables = new ArrayList<Enablable>();
 		enabled = true;
 	}
 
@@ -93,11 +93,9 @@ public abstract class AbstractAction implements Command,Enablable {
 	 */
 	public void setEnabled(boolean b) {
 		this.enabled = b;
-		for ( Iterator ite =enablables.iterator(); ite.hasNext();) {
-			Object object = ite.next();
-			if ( object instanceof Enablable ) {
-			  ((Enablable)object).setEnabled(enabled );
-			}
+		for ( Iterator<Enablable> ite =enablables.iterator(); ite.hasNext();) {
+			ite.next().setEnabled(enabled );
+			
 		}
 	}
 

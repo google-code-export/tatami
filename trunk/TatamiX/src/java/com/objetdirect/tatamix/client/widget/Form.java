@@ -3,11 +3,12 @@ package com.objetdirect.tatamix.client.widget;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.SourcesClickEvents;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -15,11 +16,18 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public abstract class Form extends Composite  {
 
-	protected SourcesClickEvents validator ;
-	protected SourcesClickEvents cancel ;
+	protected HasClickHandlers validator ;
+	protected HasClickHandlers cancel ;
+	
+	
 	private InnerClickListener clickListener;
+	
 	private List<FormListener> formListeners;
+	
 	private List<Widget> errors;
+	
+	private HandlerRegistration validatorRegistration;
+	private HandlerRegistration cancelRegistration;
 	
 	/**
 	 * 
@@ -30,12 +38,12 @@ public abstract class Form extends Composite  {
 		errors = new ArrayList<Widget>();
 	}
 	
-	public void setValidator(SourcesClickEvents sources) {
-		if ( validator != null) {
-			validator.removeClickListener(clickListener);
+	public void setValidator(HasClickHandlers sources) {
+		if (  validatorRegistration != null) {
+			validatorRegistration.removeHandler();
 		}
 		validator = sources;
-		validator.addClickListener(clickListener);
+		validatorRegistration = validator.addClickHandler(clickListener);
 		
 	}
 	
@@ -76,12 +84,12 @@ public abstract class Form extends Composite  {
     }
     
 	
-	public void setCancel(SourcesClickEvents sources) {
-		if ( cancel != null) {
-			cancel.removeClickListener(clickListener);
+	public void setCancel(HasClickHandlers sources) {
+		if (  cancelRegistration != null) {
+			cancelRegistration.removeHandler();
 		}
 		cancel = sources;
-		cancel.addClickListener(clickListener);
+		cancelRegistration = cancel.addClickHandler(clickListener);
 	
 		
 	}
@@ -116,14 +124,14 @@ public abstract class Form extends Composite  {
 	}
 	
 		
-	private class InnerClickListener implements ClickListener {
-		public void onClick(Widget sender ) {
+	private class InnerClickListener implements ClickHandler {
+		public void onClick(ClickEvent event ) {
 			removeErrors();
-			if ( sender == validator && validate() && formListeners != null ) {
+			if ( event.getSource() == validator && validate() && formListeners != null ) {
 				
 				fireHandlersOnSubmit();
 			}
-			if ( sender == cancel && formListeners != null) {
+			if ( event.getSource() == cancel && formListeners != null) {
 				fireHandlersOnCancel();
 			}
 		}

@@ -7,12 +7,15 @@ import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
-import com.google.gwt.user.client.ui.PopupListener;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -24,7 +27,7 @@ import com.google.gwt.user.client.ui.Widget;
  * 
  *
  */
-public class GlassDialog extends DialogBox implements WindowResizeListener,PopupListener {
+public class GlassDialog extends DialogBox implements ResizeHandler,CloseHandler<PopupPanel> {
 
 	/** the glass panel */
 	private DivElement mask;
@@ -32,6 +35,8 @@ public class GlassDialog extends DialogBox implements WindowResizeListener,Popup
 	private FocusPanel widget;
 	//layout for the widget
 	private FlowPanel layout;
+	
+	private HandlerRegistration resizeRegistration;
 	
 	
 	//the default zIndex
@@ -65,11 +70,11 @@ public class GlassDialog extends DialogBox implements WindowResizeListener,Popup
 		style.setProperty("visibility", "visible");
 			
 		
-		addPopupListener(this);
+		addCloseHandler(this);
 		layout = new FlowPanel();
 		widget = new FocusPanel();
 	    
-   	layout.add(widget);
+    	layout.add(widget);
       
 		super.setWidget(layout);
   }
@@ -133,7 +138,8 @@ public class GlassDialog extends DialogBox implements WindowResizeListener,Popup
 		
 		super.show();
 
-		Window.addWindowResizeListener(this);
+		resizeRegistration = Window.addResizeHandler(this);
+		
 		this.widget.setFocus(true);
 
 	}
@@ -167,7 +173,7 @@ public class GlassDialog extends DialogBox implements WindowResizeListener,Popup
     /**
      * Resizes the mask. Note the given argument are not used	
      */
-	public void onWindowResized(int arg0, int arg1) {
+	public void onResize(ResizeEvent event) {
 		Style style = mask.getStyle();
 		style.setPropertyPx("width",getMaxWidth());
 		style.setPropertyPx("height",getMaxHeight());
@@ -177,14 +183,17 @@ public class GlassDialog extends DialogBox implements WindowResizeListener,Popup
 	 * Removes the mask when the dialog is closed.
 	 * 
 	 */
-	public void onPopupClosed(PopupPanel sender, boolean autoClosed) {
+	public void onClose(CloseEvent<PopupPanel> event) {
 		 BodyElement body = Document.get().getBody();
 	        if ( body.isOrHasChild(mask)) {
 	        	body.removeChild(mask);
 	        }
 			
 			//remove the window resize listener
-	        Window.removeWindowResizeListener(this);
+	        if ( resizeRegistration != null) {
+	        	resizeRegistration.removeHandler();
+	        }
+	        
 		}
 	
 

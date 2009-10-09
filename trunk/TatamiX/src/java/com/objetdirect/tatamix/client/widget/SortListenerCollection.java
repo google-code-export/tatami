@@ -12,14 +12,14 @@ import java.util.List;
  */
 public class SortListenerCollection {
 
-	private List list;
+	private List<SortListener> list;
 	
 	/**
 	 * Create the class
 	 *
 	 */
 	public SortListenerCollection() {
-		list = new ArrayList();
+		list = new ArrayList<SortListener>();
 	}
 	
 	/**
@@ -44,9 +44,9 @@ public class SortListenerCollection {
 	 * @param colIndex the index of the column which was sorted
 	 */
 	public void fireSort(boolean asc,int colIndex) {
-		Iterator ite = list.iterator();
+		Iterator<SortListener> ite = list.iterator();
 		while (ite.hasNext()) {
-			((SortListener)ite.next()).onSort(asc,colIndex);
+			ite.next().onSort(asc,colIndex);
 		}
 	}
 }//end of class

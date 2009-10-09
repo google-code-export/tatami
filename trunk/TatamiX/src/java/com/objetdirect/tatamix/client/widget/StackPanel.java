@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.google.gwt.user.client.ui.ClickListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -14,9 +16,10 @@ public class StackPanel extends Composite  {
 	private FlowPanel layout;
 	public static final String CSS_ITEM = "item";
 	public static final String CSS = "MyStackPanel";
-	private Map map;
+	private Map<Title,Widget> map;
 	private Title selectedItem;
-	private ClickListener titleListener;
+	private ClickHandler titleListener;
+	private Map<Title,HandlerRegistration> titleRegistration;
 
 	/**
 	 *Creates an empty <code>MyStackPanel</code>
@@ -24,11 +27,12 @@ public class StackPanel extends Composite  {
 	public StackPanel() {
 		super();
 		layout  = new FlowPanel();
-		map = new HashMap();
-		titleListener = new ClickListener() {
-			public void onClick(Widget sender) {
+		map = new HashMap<Title,Widget>();
+		titleRegistration = new HashMap<Title,HandlerRegistration>();
+		titleListener = new ClickHandler() {
+			public void onClick(ClickEvent event) {
 
-				selectTitle((Title)sender);
+				selectTitle((Title)event.getSource());
 			}
 
 		};
@@ -45,10 +49,10 @@ public class StackPanel extends Composite  {
 	 * @param title the <code>Title</code> to select
 	 */
 	private void selectTitle(Title title) {
-		Iterator ite = map.keySet().iterator();
+		Iterator<Title> ite = map.keySet().iterator();
 		while ( ite.hasNext()) {
-			Title key = (Title)ite.next();
-			Widget w = (Widget)map.get(key);
+			Title key = ite.next();
+			Widget w = map.get(key);
 			boolean selected =  key.equals(title);
 			if ( w != null) {
 				w.setVisible(selected);
@@ -92,7 +96,9 @@ public class StackPanel extends Composite  {
     	}
     	map.put(title,widget);
     	title.setStylePrimaryName(CSS_ITEM);
-    	title.addClickListener(titleListener);
+    	HandlerRegistration hr = 	title.addClickHandler(titleListener);
+    	titleRegistration.put(title, hr);
+    
     	selectTitle(title);
     	FlowPanel item = new FlowPanel();
     	item.add(title);
@@ -128,7 +134,12 @@ public class StackPanel extends Composite  {
      */
     private void removeItem(FlowPanel item) {
     	Title t = (Title)item.getWidget(0);
-        t.removeClickListener(titleListener);
+        HandlerRegistration hr = titleRegistration.get(t);
+    	if ( hr != null) {
+    		hr.removeHandler();
+    		titleRegistration.remove(t);
+    	} 
+        
     	map.remove(t);
     	layout.remove(item);
     }

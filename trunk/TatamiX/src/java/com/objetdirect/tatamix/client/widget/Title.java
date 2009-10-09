@@ -1,15 +1,12 @@
 package com.objetdirect.tatamix.client.widget;
 
+import com.google.gwt.event.dom.client.HasMouseOutHandlers;
+import com.google.gwt.event.dom.client.HasMouseOverHandlers;
+import com.google.gwt.event.dom.client.HasMouseWheelHandlers;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasHTML;
-import com.google.gwt.user.client.ui.MouseListener;
-import com.google.gwt.user.client.ui.MouseListenerCollection;
-import com.google.gwt.user.client.ui.MouseWheelListener;
-import com.google.gwt.user.client.ui.MouseWheelListenerCollection;
-import com.google.gwt.user.client.ui.SourcesMouseEvents;
-import com.google.gwt.user.client.ui.SourcesMouseWheelEvents;
 
 /**
  * This class permits to generate some title in your application. It means that
@@ -19,7 +16,7 @@ import com.google.gwt.user.client.ui.SourcesMouseWheelEvents;
  * @author Vianney Grassaud
  *
  */
-public class Title extends FocusWidget implements HasHTML, SourcesMouseEvents, SourcesMouseWheelEvents {
+public class Title extends FocusWidget implements HasHTML  {
 
     /** level to create H1 element */
     public static final int H1 = 1;
@@ -39,9 +36,7 @@ public class Title extends FocusWidget implements HasHTML, SourcesMouseEvents, S
      */
     private int level = 1;
     private boolean asHTML = false;
-    /** listens mouse event as mouseout, mouseover ect... */
-    private MouseListenerCollection mouseListeners;
-    private MouseWheelListenerCollection mouseWheelListeners;
+    
 
     /**
      * Create an empty title with the level to 1 (h1)
@@ -129,29 +124,7 @@ public class Title extends FocusWidget implements HasHTML, SourcesMouseEvents, S
         return this.level;
     }
 
-    /**
-     * Adds a mouse listener to this <code>Title</code>
-     *
-     * @param listener
-     */
-    public void addMouseListener(MouseListener listener) {
-        if (mouseListeners == null) {
-            mouseListeners = new MouseListenerCollection();
-        }
-        mouseListeners.add(listener);
-    }
-
-    /**
-     * Adds a mouse wheel listener to this <code>Title</code>
-     *
-     * @param listener
-     */
-    public void addMouseWheelListener(MouseWheelListener listener) {
-        if (mouseWheelListeners == null) {
-            mouseWheelListeners = new MouseWheelListenerCollection();
-        }
-        mouseWheelListeners.add(listener);
-    }
+   
 
     /**
      * Returns the text specified for this <code>Title</code>
@@ -197,49 +170,7 @@ public class Title extends FocusWidget implements HasHTML, SourcesMouseEvents, S
 
     }
 
-    /**
-     * Manage events
-     */
-    public void onBrowserEvent(Event event) {
-        super.onBrowserEvent(event);
-        switch (DOM.eventGetType(event)) {
+  
 
-
-            case Event.ONMOUSEDOWN:
-            case Event.ONMOUSEUP:
-            case Event.ONMOUSEMOVE:
-            case Event.ONMOUSEOVER:
-            case Event.ONMOUSEOUT: {
-                if (mouseListeners != null) {
-                    mouseListeners.fireMouseEvent(this, event);
-                }
-                break;
-            }
-            case Event.ONMOUSEWHEEL: {
-                if (mouseWheelListeners != null) {
-                    mouseWheelListeners.fireMouseWheelEvent(this, event);
-                }
-                break;
-            }
-
-        }
-    }
-
-    /**
-     *  Removes a <code>MouseListener</code>
-     */
-    public void removeMouseListener(MouseListener listener) {
-        if (mouseListeners != null) {
-            mouseListeners.remove(listener);
-        }
-    }
-
-    /**
-     * Removes a <code>MouseWheelListener</code>
-     */
-    public void removeMouseWheelListener(MouseWheelListener listener) {
-        if (mouseWheelListeners != null) {
-            mouseWheelListeners.remove(listener);
-        }
-    }
+    
 }//end of class

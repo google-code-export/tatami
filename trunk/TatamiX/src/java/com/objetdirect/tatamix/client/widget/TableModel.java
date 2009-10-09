@@ -4,7 +4,7 @@ package com.objetdirect.tatamix.client.widget;
  * This is the model expected by the <code>Table</code> widget to present some data. 
  * 
  * @author Vianney 
- *
+ *@deprecated used the datagrid of tatami instead
  */
 public interface TableModel {
 

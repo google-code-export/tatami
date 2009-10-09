@@ -6,10 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatamix.client.widget.renderer.ListRenderer;
 /**<p>
  * This widget aims to list some elements.
@@ -47,7 +47,7 @@ public class ListChecker<T> extends Composite   {
 	private ListRenderer renderer;
 	private Map<CheckBox,T> model;
     private List<T> selected;
-    private ClickListener listener;
+    private ClickHandler listener;
 
     /**
      * Creates  widget with an empty list.
@@ -60,11 +60,11 @@ public class ListChecker<T> extends Composite   {
 		setStylePrimaryName("listChecker");
 		selected = new ArrayList<T>();
 		model = new HashMap<CheckBox,T>();
-		listener = new ClickListener() {
-			public void onClick(Widget sender) {
-				CheckBox cb = (CheckBox)sender;
+		listener = new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				CheckBox cb = (CheckBox)event.getSource();
 				T item = model.get(cb);
-				if (cb.isChecked()) {
+				if (cb.getValue()) {
 					selected.add(item);
 					cb.addStyleDependentName("selected");
 				} else {
@@ -107,7 +107,7 @@ public class ListChecker<T> extends Composite   {
     public void addItem(T item) {
     	int index = list.countItems();
     	CheckBox cb = new CheckBox();
-    	cb.addClickListener(listener);
+    	cb.addClickHandler(listener);
     	String text = item.toString();
     	if ( renderer != null) {
     	  text = renderer.getCellRendererValue(item,index);
@@ -173,7 +173,9 @@ public class ListChecker<T> extends Composite   {
     * Returns the items which were selected in the list.
     * @return the items which were selected in the list, an empty array is returned if there are
     *         item selected.
+    *         
     */
+   @SuppressWarnings("unchecked")
    public T[] getItemsSelected() {
         T[] selection = (T[])new Object[selected.size()];
 	    Iterator<T> ite = selected.iterator();
