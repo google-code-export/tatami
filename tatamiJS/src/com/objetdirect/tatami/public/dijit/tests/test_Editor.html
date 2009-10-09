@@ -40,7 +40,7 @@
 				dijit.byId('automated').document.execCommand('selectall', false, false);
 				document.getElementById('onChangeOKnow').checked=true;
 				dijit.byId('automated').document.execCommand('underline', false, false);
-				setTimeout(function(){dijit.byId('editor1').focus();}, 0);
+				setTimeout(dojo.hitch(dijit.byId('editor0'),"focus",0));
 			}
 		</script
 		><script type='dojo/method' event='onBlur'>
@@ -69,22 +69,29 @@
 	<br>
 
 	<h1 class="testTitle"><label for="editor1">Editor + Plugins Test</label></h1>
+
+	<h2>No plugins, initially empty</h2>
+	<div style="border: 1px solid black;">
+		<div dojoType="dijit.Editor" id="editor0" height="100" plugins="[]"></div>
+	</div>
+
 	<h2>Created from div</h2>
 	<div style="border: 1px solid black;">
-		<div dojoType="dijit.Editor" id="editor1"
+		<div dojoType="dijit.Editor" id="editor1" disableSpellCheck="true"
 			onChange="console.log('editor1 onChange handler: ' + arguments[0])"
 		><p>This instance is created from a div directly with default toolbar and plugins</p>
 		The following HTML should appear as source: &lt;INPUT TYPE="IMAGE" SRC="javascript:alert('no scripting attacks')"&gt;
 		</div>
 	</div>
 	<button onClick="dijit.byId('editor1').destroy()">destroy</button>
-	<button onclick="console.log(dijit.byId('editor1').getValue().length)">getValue</button>
+	<button onClick="dijit.byId('editor1').attr('disableSpellCheck', !dijit.byId('editor1').attr('disableSpellCheck'))">toggle spell check</button>
+	<button onclick="console.log(dijit.byId('editor1').attr('value'))">getValue</button>
 	<hr/>
 
 	<h2>Created from div, auto-expanding</h2>
 	<div style="border: 1px dotted black;">
 		<h3><label for="thud">thud - from div</label></h3>
-		<div dojoType="dijit.Editor" height=""
+		<div dojoType="dijit.Editor" height="" minHeight="75px"
 			onChange="console.log('thud onChange handler: ' + arguments[0])"
 			extraPlugins="['dijit._editor.plugins.AlwaysShowToolbar']"
 			styleSheets="../../dojo/resources/dojo.css" id="thud">
@@ -127,7 +134,7 @@
 			<br>
 		</div>
 		<h3>..after</h3>
-		<button onclick="alert(dijit.byId('blah').getValue());">getValue</button>
+		<button onclick="alert(dijit.byId('blah').attr('value'));">getValue</button>
 	</div>
 	<hr/>
 

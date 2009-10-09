@@ -1,5 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-	"http://www.w3.org/TR/html4/strict.dtd">
+                "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
 		<title>Dojo Slider Widget Demo</title>
@@ -29,7 +29,14 @@
 
 		<script type="text/javascript">
 				dojo.require("dijit.dijit"); // optimize: load dijit layer
-				dojo.require("dijit.form.Slider");
+
+				dojo.require("dijit.form.HorizontalSlider");
+				dojo.require("dijit.form.VerticalSlider");
+				dojo.require("dijit.form.HorizontalRule");
+				dojo.require("dijit.form.VerticalRule");
+				dojo.require("dijit.form.HorizontalRuleLabels");
+				dojo.require("dijit.form.VerticalRuleLabels");
+
 				dojo.require("dijit.form.Button");
 				dojo.require("dojo.parser"); // scan page for widgets
 
@@ -97,7 +104,7 @@
 			showButtons="true"
 			intermediateChanges="true"
 			slideDuration="500"
-			style="width:50%; height: 20px;"
+			style="width:500px; height: 20px;"
 			id="slider1">
 				<ol dojoType="dijit.form.HorizontalRuleLabels" container="topDecoration" style="height:1.2em;font-size:75%;" count="6" numericMargin="1"></ol>
 				<div dojoType="dijit.form.HorizontalRule" container="topDecoration" count=6 style="height:5px;"></div>
@@ -196,20 +203,21 @@
 		Programmatic Value:<input readonly id="sliderProgInput" size="5" value="1400">
 
 		        <script>
-                		function displayData() {
-        		                var f = document.getElementById("form1");
-		                        var s = "";
-                        		for (var i = 0; i < f.elements.length; i++) {
-                		                var elem = f.elements[i];
-        		                        if (elem.name == "button")  { continue; }
-		                                s += elem.name + ": " + elem.value + "\n";
-                        		}
-                		        alert(s);
-        		        }
+				// so robot can get to it easily
+				document.displayData=function() {
+					var f = document.getElementById("form1");
+					var s = "";
+					for (var i = 0; i < f.elements.length; i++) {
+						var elem = f.elements[i];
+						if (elem.nodeName.toLowerCase() == "button" || elem.type=="submit" || elem.type=="button")  { continue; }
+						s += elem.name + ": " + elem.value + "\n";
+					}
+					return s;
+				}
 		        </script>
 
 		        <div>
-                		<button name="button" onclick="displayData(); return false;">view data</button>
+                		<button name="button" onclick="alert(displayData()); return false;">view data</button>
         		        <input type="submit" name="submit" />
 		        </div>
 

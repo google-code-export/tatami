@@ -26,6 +26,7 @@
 	</style>
 	<script type="text/javascript" src="../../../dojo/dojo.js" djConfig="isDebug:false, parseOnLoad: true"></script>
 	<script type="text/javascript">
+		dojo.require("dijit.dijit");
 		dojo.require("dojox.grid._Grid");
 		dojo.require("dojo.parser");
 	</script>
@@ -98,7 +99,7 @@
 		toggleStructure = function() {
 			l2 = !l2;
 			grid.scrollToRow(0);
-			grid.setStructure(l2 ? structure2 : structure);
+			grid.attr('structure', l2 ? structure2 : structure);
 		}
 </script>
 </head>

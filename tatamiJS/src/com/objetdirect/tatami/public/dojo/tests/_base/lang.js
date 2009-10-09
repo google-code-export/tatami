@@ -3,6 +3,9 @@ dojo.provide("tests._base.lang");
 tests.register("tests._base.lang", 
 	[
 		function mixin(t){
+			t.assertEqual("object", typeof dojo.mixin());
+			t.assertEqual("object", typeof dojo.mixin(undefined));
+			t.assertEqual("object", typeof dojo.mixin(null));
 			var src = {
 				foo: function(){
 					t.debug("foo");
@@ -27,6 +30,14 @@ tests.register("tests._base.lang",
 			var test = new dest();
 			t.assertEqual("function", typeof test["foo"]);
 			t.assertEqual("string", typeof test["bar"]);
+		},
+
+		function isFunction(t){
+			t.assertTrue(dojo.isFunction(new Function()));
+			t.assertTrue(dojo.isFunction(isFunction));
+			if(dojo.isBrowser){ // test the Safari workaround for NodeList
+				t.assertFalse(dojo.isFunction(dojo.doc.getElementsByName("html")));
+			}
 		},
 
 		function isObject(t){

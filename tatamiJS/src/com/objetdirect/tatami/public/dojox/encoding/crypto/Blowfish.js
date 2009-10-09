@@ -278,7 +278,7 @@ dojox.encoding.crypto.Blowfish = new function(){
 		switch(out){
 			case dojox.encoding.crypto.outputTypes.Hex:{
 				return dojo.map(iv, function(item){
-					return item.toString(16);
+					return (item<=0xf?'0':'')+item.toString(16);
 				}).join("");			//	string
 			}
 			case dojox.encoding.crypto.outputTypes.String:{
@@ -331,7 +331,7 @@ dojox.encoding.crypto.Blowfish = new function(){
 		//	summary
 		//	encrypts plaintext using key; allows user to specify output type and cipher mode via keyword object "ao"
 		var out=dojox.encoding.crypto.outputTypes.Base64;
-		var mode=dojox.encoding.crypto.cipherModes.EBC;
+		var mode=dojox.encoding.crypto.cipherModes.ECB;
 		if (ao){
 			if (ao.outputType) out=ao.outputType;
 			if (ao.cipherMode) mode=ao.cipherMode;
@@ -343,14 +343,14 @@ dojox.encoding.crypto.Blowfish = new function(){
 		var cipher=[], count=plaintext.length >> 3, pos=0, o={}, isCBC=(mode==dojox.encoding.crypto.cipherModes.CBC);
 		var vector={left:iv.left||null, right:iv.right||null};
 		for(var i=0; i<count; i++){
-			o.left=(plaintext.charCodeAt(pos) % 256)*POW24 
-				|(plaintext.charCodeAt(pos+1) % 256)*POW16
-				|(plaintext.charCodeAt(pos+2) % 256)*POW8
-				|(plaintext.charCodeAt(pos+3) % 256);
-			o.right=(plaintext.charCodeAt(pos+4) % 256)*POW24
-				|(plaintext.charCodeAt(pos+5) % 256)*POW16
-				|(plaintext.charCodeAt(pos+6) % 256)*POW8
-				|(plaintext.charCodeAt(pos+7) % 256);
+			o.left=plaintext.charCodeAt(pos)*POW24
+				|plaintext.charCodeAt(pos+1)*POW16
+				|plaintext.charCodeAt(pos+2)*POW8
+				|plaintext.charCodeAt(pos+3);
+			o.right=plaintext.charCodeAt(pos+4)*POW24
+				|plaintext.charCodeAt(pos+5)*POW16
+				|plaintext.charCodeAt(pos+6)*POW8
+				|plaintext.charCodeAt(pos+7);
 
 			if(isCBC){
 				o.left=(((o.left>>0x10)^(vector.left>>0x10))<<0x10)|(((o.left&0xffff)^(vector.left&0xffff))&0xffff);
@@ -378,7 +378,7 @@ dojox.encoding.crypto.Blowfish = new function(){
 		switch(out){
 			case dojox.encoding.crypto.outputTypes.Hex:{
 				return dojo.map(cipher, function(item){
-					return item.toString(16);
+					return (item<=0xf?'0':'')+item.toString(16);
 				}).join("");	//	string
 			}
 			case dojox.encoding.crypto.outputTypes.String:{
@@ -397,7 +397,7 @@ dojox.encoding.crypto.Blowfish = new function(){
 		//	summary
 		//	decrypts ciphertext using key; allows specification of how ciphertext is encoded via ao.
 		var ip=dojox.encoding.crypto.outputTypes.Base64;
-		var mode=dojox.encoding.crypto.cipherModes.EBC;
+		var mode=dojox.encoding.crypto.cipherModes.ECB;
 		if (ao){
 			if (ao.outputType) ip=ao.outputType;
 			if (ao.cipherMode) mode=ao.cipherMode;
@@ -469,9 +469,6 @@ dojox.encoding.crypto.Blowfish = new function(){
 
 		//	convert to string
 		return dojo.map(pt, function(item){
-			if(item > 127){
-				item = 65536 - 256 + item;		
-			}
 			return String.fromCharCode(item);
 		}).join("");	//	string
 	};

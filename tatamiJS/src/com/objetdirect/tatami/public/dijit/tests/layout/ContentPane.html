@@ -26,6 +26,7 @@
 		dojo.require("dijit.layout.ContentPane");
 		dojo.require("dojo.data.ItemFileReadStore");
 		dojo.require("dijit._Container");
+		dojo.require("dijit.layout._LayoutWidget");
 		dojo.require("dijit._Templated");
 		dojo.require("dijit.layout.StackContainer");
 
@@ -465,13 +466,15 @@
 				]
 			);
 
-			var pane3, st, tmp;
+			var st,		// stack container
+				pane3, pane3UnloadCnt=0, pane3LoadCnt=0,	// second child of stack container (initially hidden)
+				tmp;
 
 			doh.registerGroup("child_to_StackContainer",
 				[
 					{
-						// TODO: this test should be moved to registerGroup setUp when #3504 is fixed
-						//		We actually dont need to test anything here, just setUp
+						// TODO: this test should be moved to registerGroup setUp now that #3504 is fixed
+						//		We actually don't need to test anything here, just setUp
 						name: "setUp_StackContainer",
 						setUp:function(t){
 							// create a StackContainer
@@ -486,7 +489,9 @@
 							// the second child *won't* be shown until selected
 							pane3 = new dijit.layout.ContentPane({
 								href:'getResponse.php?delay=300&message=Loaded!',
-								preventCache: true
+								preventCache: true,
+								onLoad: function(){ pane3LoadCnt++; },
+								onUnload: function(){ pane3UnloadCnt++; }
 							}, dojo.doc.createElement('div'));
 							st.addChild(pane3);
 
@@ -506,16 +511,28 @@
 						}
 					},
 					{
-						name: "startLoad when selected",
+						name: "unload event not called initially",
+						runTest: function(t){
+							t.assertEqual(0, pane3UnloadCnt);
+						}
+					},
+					{
+						name: "load event fired when pane is shown",
 						timeout: 2100,
 						runTest: function(t){
+							t.assertEqual(0, pane3LoadCnt, "onload hasn't been called yet");
 							st.selectChild(pane3);
+							t.assertEqual(0, pane3UnloadCnt,
+								"unload shouldn't have been called b/c no initial contents (#1)");
 
 							var d = new t.Deferred();
 							setTimeout(d.getTestCallback(
 								function(){
 									t.assertTrue(pane3.isLoaded);
+									t.assertEqual(1, pane3LoadCnt, "onload was called");
 									t.assertEqual('Loaded!', pane3.domNode.innerHTML);
+									t.assertEqual(0, pane3UnloadCnt,
+										"unload shouldn't have been called b/c no initial contents (#2)");
 								}
 							), 1800);
 
@@ -523,34 +540,34 @@
 						}
 					},
 					{
-						name: "refreshOnShow",
+						name: "refreshOnShow parameter works",
 						timeout: 2100,
 						setUp: function(t){
 							tmp = {
 								onUnload: function(){ this._unload_fired = 1; },
 								onLoad: function(){ this._load_fired = 1; }
 							};
-							tmp.unload = dojo.connect(pane3, 'onUnload', tmp, 'onUnload');
-							tmp.load = dojo.connect(pane3, 'onLoad', tmp, 'onLoad');
+							tmp.unloadHandle = dojo.connect(pane3, 'onUnload', tmp, 'onUnload');
+							tmp.loadHandle = dojo.connect(pane3, 'onLoad', tmp, 'onLoad');
 
 							pane3.refreshOnShow = true;
 						},
 						runTest: function(t){
 							var d = new t.Deferred();
 							st.back();
-							st.forward();
+							st.forward();	// show pane #3
 
 							setTimeout(d.getTestCallback(function(){
-								t.assertTrue(tmp._unload_fired);
-								t.assertTrue(tmp._load_fired);
+								t.assertTrue(tmp._unload_fired, "unload was fired");
+								t.assertTrue(tmp._load_fired, "load was fired");
 								t.assertEqual('Loaded!', pane3.domNode.innerHTML);
 							}), 1800);
 
 							return d;
 						},
 						tearDown: function(){
-							dojo.disconnect(tmp.unload);
-							dojo.disconnect(tmp.load);
+							dojo.disconnect(tmp.unloadHandle);
+							dojo.disconnect(tmp.loadHandle);
 							pane3.refreshOnShow = pane3.constructor.prototype.refreshOnShow;
 						}
 					},
@@ -679,6 +696,133 @@
 				]
 			);
 
+			dojo.declare("dijit.TestContained",
+				[dijit.layout._LayoutWidget], {
+					startup: function(){
+						this.inherited(arguments);
+						this._started = true;
+					},
+					resize: function(){
+						this.inherited(arguments);
+						this._resized = true;
+					}
+				}
+			);
+
+			var container;
+			doh.register("ContentPane as _Container-like widget",
+				[
+					{
+						name: "creation",
+						runTest: function(t){
+							container = new dijit.layout.ContentPane();
+							container.placeAt(dojo.body(), "last");
+							container.startup();
+							t.is(0, container.getChildren().length, "number of children before attr('content', ...)");
+							container.attr('content',
+								'<span>plain non-widget content</span>' +
+								'<div><span>' +
+									'<div id="zero" dojoType="dijit.TestContained"></div>' +
+									'<div id="one" dojoType="dijit.TestContained"></div>' +
+								'</span></div>' +
+								'<div id="two" dojoType="dijit.TestContained"></div>' +
+								'<div id="three" dojoType="dijit._Widget"></div>'
+							);
+
+							// Since ContentPane is a container it should call startup
+							// on it's children
+							t.t(dijit.byId('two')._started, "started");
+
+							// Also, Layout widgets expect resize() to be
+							// called by their parent
+							t.t(dijit.byId('two')._resized, "resized");
+						}
+					},
+					{
+						name: "getChildren",
+						runTest: function(t){
+							var children = container.getChildren();
+							t.is(4, children.length, "number of children");
+							t.is("zero", children[0].id);
+							t.is("one", children[1].id);
+							t.is("two", children[2].id);
+							t.is("three", children[3].id);
+						}
+					},
+
+					{
+						name: "deferred resize",
+						runTest: function(t){
+							// This tests that startup isn't called on the child widgets
+							// until the contentpane is made visible
+
+							var hiddenCP = new dijit.layout.ContentPane({style: {display: "none"}});
+							hiddenCP.placeAt(dojo.body(), "last");
+							hiddenCP.startup();
+
+							t.is(0, hiddenCP.getChildren().length, "number of children before attr('content', ...)");
+							hiddenCP.attr('content',
+								'<span>plain non-widget content</span>' +
+								'<div><span>' +
+									'<div id="deferredZero" dojoType="dijit.TestContained"></div>' +
+									'<div id="deferredOne" dojoType="dijit.TestContained"></div>' +
+								'</span></div>' +
+								'<div id="deferredTwo" dojoType="dijit.TestContained"></div>' +
+								'<div id="deferredThree" dojoType="dijit._Widget"></div>'
+							);
+
+							t.f(dijit.byId('deferredTwo')._resized, "not resized yet");
+							
+							hiddenCP.attr("style", {display: "block"});
+							hiddenCP._onShow();
+
+							t.t(dijit.byId('deferredTwo')._resized, "resized");
+						}
+					}
+
+/***
+					,
+					{
+						name: "addChild",
+						runTest: function(t){
+							var afterTwo = new dijit.TestContained({id: "twoPointFive"});
+							container.addChild(afterTwo, 3);
+
+							// Make sure child was added and is in order
+							var children = container.getChildren();
+							t.is(5, children.length);
+							t.is("zero", children[0].id);
+							t.is("one", children[1].id);
+							t.is("two", children[2].id);
+							t.is("twoPointFive", children[3].id);
+							t.is("three", children[4].id);
+
+							// Since ContentPane is a container it should call startup
+							// on it's children
+							t.t(afterTwo._started, "started");
+
+							// Also, Layout widgets expect resize() to be
+							// called by their parent
+							t.t(afterTwo._resized, "resized");
+						}
+					},
+					{
+						name: "removeChild",
+						runTest: function(t){
+							var children = container.getChildren();
+							t.is(5, children.length);
+							container.removeChild(dijit.byId("zero"));
+							container.removeChild(1); // should remove "two" - because zero is already removed
+							children = container.getChildren();
+							t.is(3, children.length);
+							t.is("one", children[0].id);
+							t.is("three", children[2].id);						
+						}
+					}
+****/
+				]
+			);
+
 			doh.run();
 		});
 	</script>
@@ -693,7 +837,7 @@
 	</div>
 	<br/><h3>Testing ContentPane</h3>
 	<div id='pane2' class='box'>
-		Even tough the entire page isn't scanned for widgets,
+		Even though the entire page isn't scanned for widgets,
 		any sub widgets of a ContentPane will be created when a ContentPane is created<br/>
 		<span id="zero" dojoType='dijit.TestWidget'>This should have a backgroundcolor and a border</span>
 		<div id="one" dojoType="dijit._Widget"></div>
@@ -703,5 +847,16 @@
 	<br/><br/>
 	<div id='stackcontainer'></div>
 	<div id="pane5"></div>
+
+	<!-- for container tests -->
+	<div id="container" dojoType="dijit.layout.ContentPane">
+		<div id="zero" dojoType="dijit.TestContained"></div>
+		<div id="one" dojoType="dijit.TestContained"></div>
+		<div id="two" dojoType="dijit.TestContained"></div>
+		<div id="three" dojoType="dijit._Widget"></div>		
+	</div>
+	<div id="outside" dojoType="dijit._Widget"></div>
+	<div id="outsideCont" dojoType="dijit.TestContained"></div>
+
 </body>
 </html>

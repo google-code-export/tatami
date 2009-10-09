@@ -24,7 +24,7 @@ tests.data.readOnlyItemFileTestTemplates.registerTestsForDatastore = function(/*
 		test.runTest = makeNewTestFunction(testTemplate);
 		testsForDatastore.push(test);
 	}
-	var testGroupName = "tests.data.readOnlyItemFileTestTemplates, with datastore " + datastoreClassName;
+	var testGroupName = "IFSCommonTests: " + datastoreClassName;
 	doh.register(testGroupName, testsForDatastore);
 };
 
@@ -498,6 +498,46 @@ tests.data.readOnlyItemFileTestTemplates.testTemplates = [
 			//Get everything...
 			store.fetch({ onComplete: completedAll, onError: error});
 			return d;
+		}
+	},
+	{
+		name: "Read API: fetch() abort",
+ 		runTest: function(datastore, t){
+			//	summary: 
+			//		Simple test of a basic fetch abort on ItemFileReadStore.
+			//	description:
+			//		Simple test of a basic fetch abort on ItemFileReadStore.
+			//Can only async abort in a browser, so disable this test from rhino
+			if(dojo.isBrowser){
+				var store = new datastore(tests.data.readOnlyItemFileTestTemplates.getTestData("countries"));
+			
+				var d = new doh.Deferred();
+				var abortCalled = false;
+				function completedAll(items, request){
+					t.is(7, items.length);
+					if(abortCalled){
+						console.log("Made it to complete callback and abort was called.  Problem.");
+						d.errback(new Error("Should not be here."));
+					}else{
+						//We beat out calling abort, so this is okay.  Timing.
+						console.log("in onComplete and abort has not been called.  Timing.  This is okay.");
+						d.callback(true);
+					}
+				}
+				function error(errData, request){
+					//An abort should throw a cancel error, so we should
+					//reach this.
+					t.assertTrue(true);
+					d.callback(true);
+				}
+
+				//Get everything...
+				var req = store.fetch({ onComplete: completedAll, onError: error});
+				abortCalled=true;
+				console.log("Calling abort.");
+				req.abort();
+				return d;
+			}
 		}
 	},
 	{

@@ -1,5 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-		"http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- IE8 beta 2 incorrectly sets TEXTAREA scrollHeight when using strict DTD -->
 <html>
 	<head>
 		<title>Dojo Textarea Widget Demo</title>
@@ -22,6 +22,8 @@
 		<script type="text/javascript">
 			dojo.require("dijit.dijit"); // optimize: load dijit layer
 			dojo.require("dijit.form.Textarea");
+			dojo.require("dijit.layout.ContentPane");
+			dojo.require("dijit.layout.TabContainer");
 			dojo.require("dojo.parser");
 		</script>
 
@@ -32,24 +34,33 @@
 
 		<!--    to test form submission, you'll need to create an action handler similar to
 		        http://www.utexas.edu/teamweb/cgi-bin/generic.cgi -->
-		<form id="form1" action="" name="example" method="post">
-		<label for="plain">HTML textarea: </label><textarea name="plainTextArea" id="plain" rows=5>
+		<form id="form1" action="" name="example" method="">
+		<label for="plain">HTML textarea: </label><textarea name="plainTextArea" id="plain" rows="3">
 			this is a plain text area
 			for comparison
 		</textarea>
-		<br><label for="programmatic">programmatically created:</label> <textarea id="programmatic"></textarea>
+		<div dojoType="dijit.layout.TabContainer" persist="true" tabStrip="true" style="width: 100%; height: 20em;">
+			<div dojoType="dijit.layout.ContentPane" title="Tab 1">
+				<label for="programmatic">programmatically created:</label><br>
+				<textarea id="programmatic"></textarea>
+			</div>
+			<div dojoType="dijit.layout.ContentPane" title="Tab 2">
+				<input type="button" onclick="programmaticTextarea.attr('value', 'new value for programmatic textarea\nmore text for testing\nmore\neven more\nvery last line');" value="change value">
+			</div>
+		</div>
 		<script type="text/javascript">
 			// See if we can make a widget in script
 			dojo.addOnLoad(function(){
-				var w = new dijit.form.Textarea({
+				programmaticTextarea = new dijit.form.Textarea({
+					id: "programmatic",
 					name: "programmaticTextArea",
-					style: "width:400px;",
-					value: "test value"
+					cols: "60",
+					value: "we created this one programatically",
+					style: "border:13px solid red;padding:11px;margin:7px;"
 				}, "programmatic");
-				w.attr('value', 'we created this one programatically');
 			});
 		</script>
-		<br><label for="simple">Inline:</label><div name="simpleTextArea" dojoType="dijit.form.Textarea" id="simple" style="width:33%;border:20px solid red;"
+		<br><label for="simple">Inline with maxLength=50:</label><div name="simpleTextArea" maxLength="50" dojoType="dijit.form.Textarea" id="simple" style="width:33%;border:20px solid red;padding:10px;"
          		onChange="dojo.byId('ocSimple').value=arguments[0]"
          		onFocus="console.log('user focus handler')"
          		onBlur="console.log('user blur handler')"
@@ -66,7 +77,13 @@
 		<input type="button" onclick="setAttr('disabled', true);" value="Disable">
 		<input type="button" onclick="setAttr('disabled', false);" value="Enable">
 		<br>
-		<textarea dojoType="dijit.form.Textarea" name="largeTextArea">
+		<br>
+		<label for="blank">Blank:</label>
+		<textarea dojoType="dijit.form.Textarea" id="blank"></textarea>
+		<br>
+		<br>
+		<label for="largeTextArea">Large textarea:</label>
+		<textarea dojoType="dijit.form.Textarea" name="largeTextArea" id="largeTextArea">
 this is a textarea with a LOT of content
 
 
@@ -97,7 +114,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
 
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-		</textarea>
+		(this is the end)</textarea>
 			<script type="text/javascript">
 				function displayData() {
 					var f = dojo.byId("form1");
@@ -114,7 +131,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh 
 				<button name="button" onclick="displayData(); return false;">view data</button>
 				<input type="submit" name="submit" />
 			</div>
-
+			<input type=submit value=submit>
 		</form>
 	</body>
 </html>

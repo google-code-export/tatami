@@ -26,13 +26,28 @@
 				dojo.query("body")[0].scrollTop = 50;
 				dojo.query("div").forEach("item.scrollTop = 50;");
 				dojo.query("button").attr("onclick", onButtonClick);
+				
+				/***
+					benchmark code
+				var buttons = dojo.query("button");
+				var start = new Date();
+				for(var i=0; i<100; i++){
+					for(var j=0; j<buttons.length; j++) dojo.coords(buttons[j]);
+				}
+				alert("benchmark: "  + (new Date() - start));
+				****/
 			});
 		</script>
 		<style type="text/css">
-			html, body {
+			html {
+				padding: 3px;
+				margin: 3px;
+				border: 7px solid yellow;
+			}
+			body {
 				padding: 10px;
 				margin: 20px;
-				border: 5px;
+				border: 9px solid blue;
 			}
 
 			.marker {

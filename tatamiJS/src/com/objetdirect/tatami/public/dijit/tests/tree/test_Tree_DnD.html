@@ -25,6 +25,7 @@
 		dojo.require("dijit.dijit"); // optimize: load dijit layer
 		dojo.require("dojo.data.ItemFileWriteStore");
 		dojo.require("dijit.Tree");
+		dojo.require("dijit.tree.TreeStoreModel");
 		dojo.require("dijit._tree.dndSource");
 		dojo.require("dijit.Menu");
 		dojo.require("dijit.form.Button");
@@ -89,6 +90,14 @@
 		function itemTreeCheckItemAcceptance(node,source) {
 			var item = dijit.getEnclosingWidget(node).item;
 			if (item && (item.root || catStore.hasAttribute(item,"numberOfItems"))){
+				return true;
+			}
+			return false;
+		}
+
+		//on collection tree, only accept itself as the source tree
+		function collectionTreeCheckItemAcceptance(node,source,position) {
+			if(source.tree && source.tree.id == "collectionsTree"){
 				return true;
 			}
 			return false;
@@ -168,17 +177,20 @@
 	<tr>
 		<td>
 			<h2>Collection Count Summary</h2>
-			<p>You can't drop items onto this tree.</p>
+			<p>
+				You can't drop items onto this tree, but you can reorder categories. The between threshold
+				is set to 5, so if you are near the top or bottom of a node the drop will be above or below it.
+			</p>
 			<div dojoType="dijit.tree.TreeStoreModel" jsId="catModel"
 				store="catStore" query="{id: '0'}"></div>
 			<div class="container" dojoType="dijit.Tree" id="collectionsTree" model="catModel"
-				getLabel="catTreeCustomLabel"  dndController="dijit._tree.dndSource"
-				checkAcceptance="dndAccept" getIconClass="getIcon"></div>
+				getLabel="catTreeCustomLabel"  dndController="dijit._tree.dndSource" betweenThreshold="5"
+				checkAcceptance="dndAccept" checkItemAcceptance="collectionTreeCheckItemAcceptance" getIconClass="getIcon"></div>
 		</td>
 		<td>
 			<h2>Collection</h2>
 			<p>
-				Drop items onto this tree, but only onto categories; should fail to let you drop on other items.
+				Drop items from above list onto this tree, but only on to categories; should fail to let you drop on other items.
 				Can also move items within this tree. The drag threshold is set to 8, so you have a few pixels
 				of buffer before drag operations start.
 			</p>

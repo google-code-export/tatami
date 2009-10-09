@@ -41,6 +41,19 @@
 			},"codeMade");
 			thinger.startup();
 			
+			// programatic with content: 
+			var thing2 = new dojox.widget.Dialog({
+				content:"<p>I am teh inner content</p>"
+			});
+			thing2.startup();
+			// a button to show it (though the error is from before showing)
+			new dijit.form.Button({
+				onClick:function(){
+					thing2.show()
+				},
+				label:"show prog."
+			}).placeAt("testholder");
+			
 			// make the "stock" buttons dijit Buttons, but skip the 
 			// dojoType="" for the purists.
 			dojo.query("button")
@@ -59,7 +72,7 @@
 	
 	<p>This is the DojoX version of the dijit.Dialog. It's very different.</p>
 
-	<div class="tests">
+	<div id='testholder' class="tests">
 		<button onclick="dijit.byId('firstTest').show()">Defaults only</button>
 		
 		<div id="firstTest" dojoType="dojox.widget.Dialog" title="A Dialog Thinger">
@@ -78,7 +91,7 @@
 	
 		<button onclick="dijit.byId('secondTest').show()">Size to viewport, default padding (35)</button>
 	
-		<div id="secondTest" dojoType="dojox.widget.Dialog" fixedSize="true" title="A Dialog Thinger">
+		<div id="secondTest" dojoType="dojox.widget.Dialog" sizeToViewport="true" title="A Dialog Thinger">
 			<p style="margin-top:0">Vestibulum convallis eros ac justo. Proin dolor. Etiam aliquam. Nam
 			ornare elit vel augue. Suspendisse potenti. Etiam sed mauris eu neque
 			nonummy mollis. Vestibulum vel purus ac pede semper accumsan. Vivamus
@@ -94,7 +107,7 @@
 
 		<button onclick="dijit.byId('thirdTest').show()">Size to viewport + 100 padding</button>
 	
-		<div id="thirdTest" dojoType="dojox.widget.Dialog" fixedSize="true" viewportPadding="100" title="A Dialog Thinger">
+		<div id="thirdTest" dojoType="dojox.widget.Dialog" sizeToViewport="true" viewportPadding="100" title="A Dialog Thinger">
 			<p style="margin-top:0">Vestibulum convallis eros ac justo. Proin dolor. Etiam aliquam. Nam
 			ornare elit vel augue. Suspendisse potenti. Etiam sed mauris eu neque
 			nonummy mollis. Vestibulum vel purus ac pede semper accumsan. Vivamus
@@ -124,7 +137,7 @@
 		</div>
 
 		<button onclick="dijit.byId('anotherTest').show()">sizeDuration and easing</button>	
-		<div id="anotherTest" dojoType="dojox.widget.Dialog" fixedSize="true" 
+		<div id="anotherTest" dojoType="dojox.widget.Dialog" sizeToViewport="true" 
 			viewportPadding="150" easing="dojo.fx.easing.backOut" sizeDuration="1400" 
 			title="A Dialog Thinger"
 		>
@@ -196,6 +209,24 @@
 	
 		<button onclick="dijit.byId('codeMade').show()">programatic</button>
 		<div id="codeMade"><h2 style="margin-top:0">Wow!</h2><p>A small dialog</p></div>
+
+		<button onclick="dijit.byId('modaltest').show()">modal:true</button>	
+		<div id="modaltest" dojoType="dojox.widget.Dialog" modal="true"
+		 	easing="dojo.fx.easing.bounceOut" sizeDuration="600">
+			<h2 style="margin-top:0">Wow!</h2>
+			<p style="margin-top:0">Vestibulum convallis eros ac justo. Proin dolor. Etiam aliquam. Nam
+			ornare elit vel augue. Suspendisse potenti. Etiam sed mauris eu neque
+			nonummy mollis. Vestibulum vel purus ac pede semper accumsan. Vivamus
+			lobortis, sem vitae nonummy lacinia, nisl est gravida magna, non cursus
+			est quam sed urna. Phasellus adipiscing justo in ipsum. Duis sagittis
+			dolor sit amet magna. Suspendisse suscipit, neque eu dictum auctor,
+			nisi augue tincidunt arcu, non lacinia magna purus nec magna. Praesent
+			pretium sollicitudin sapien. Suspendisse imperdiet. Class aptent taciti
+			sociosqu ad litora torquent per conubia nostra, per inceptos
+			hymenaeos.
+			</p>
+		</div>
+
 	
 	</div>
 
