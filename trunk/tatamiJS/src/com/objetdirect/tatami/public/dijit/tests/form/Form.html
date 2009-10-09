@@ -53,6 +53,10 @@
 			console.log(dijit.byId('myForm').validate());
 		}
 
+		function defaultSubmitHandler(values){
+			console.log('actual submitted values: ' + dojo.toJson(values));
+		}
+		submittedValues = defaultSubmitHandler;
 		// make dojo.toJson() print dates correctly (this feels a bit dirty)
 		Date.prototype.json = function(){ return dojo.date.stamp.toISOString(this, {selector: 'date'});};
 
@@ -71,8 +75,7 @@
 							st1: "simple line 1\nsimple line 2",
 							richtext: "<h1>original</h1><p>This is the default content</p>",
 							filename: "",
-							readOnlyWidget: "Should be returned",
-							"submitButton":"Submit"
+							readOnlyWidget: "Should be returned"
 						};
 
 		// we change the form to these values
@@ -88,8 +91,7 @@
 							st1: "new simple line 1\nnew simple line 2",
 							richtext: "<h1>changed</h1><p>This is the changed content set by attr('value', ...')</p>",
 							filename: "",
-							readOnlyWidget: "Should be returned",
-							"submitButton":"Submit"
+							readOnlyWidget: "Should be returned"
 						};
 		var particalchanged = {
 							foo: {bar: {baz: {quux: d("2006-01-01")} } },
@@ -110,15 +112,30 @@
 							st1: "simple line 1\nsimple line 2",
 							richtext: "<h1>changed</h1><p>This is the changed content set by attr('value', ...')</p>", // not a form element, so not reset
 							filename: "",
-							readOnlyWidget: "Should be returned",
-							"submitButton":"Submit"
+							readOnlyWidget: "Should be returned"
 						};
 
 		dojo.addOnLoad(function(){
 			var resetready=false;
+			var formWidget = dijit.byId("myForm");
+			var testSubmittedValues = function(deferred, testValues, formValues){
+				deferred.getTestCallback(function(){
+					doh.is(testValues.foo.bar.baz.quux.json(), formValues['foo.bar.baz.quux']);
+					doh.is(testValues.available.from.json(), formValues['available.from']);
+					doh.is(testValues.available.to.json(), formValues['available.to']);
+					doh.is(testValues.plop.combo, formValues['plop.combo']);
+					doh.is(testValues.cb2, formValues.cb2);
+					doh.is(testValues.r2, formValues.r2);
+					doh.is(testValues.ms1, formValues.ms1);
+					doh.is(testValues.h1, formValues.h1);
+					doh.is(testValues.t1, formValues.t1);
+					doh.is(testValues.st1, formValues.st1);
+					doh.is(testValues.filename, formValues.filename || '');
+					doh.is(testValues.readOnlyWidget, formValues.readOnlyWidget);
+				})();
+			};
 			doh.register("dijit.form.Form",
 				[
-				
 					function setUp(){
 						var d=new doh.Deferred();
 
@@ -134,9 +151,8 @@
 						setTimeout(defer,100);
 						return d;
 					},
-
 					function getValues(){
-						var values = dijit.byId("myForm").attr('value');
+						var values = formWidget.attr('value');
 						
 						// FF3 sticks in some tabs and newlines that mess up the equality check
 						// Need better way to compare two HTML trees but for now do this.
@@ -144,28 +160,51 @@
 
 						doh.is( dojo.toJson(original), dojo.toJson(values) );
 					},
+					{
+						name:"testSubmit",
+					        timeout:10000,
+					        runTest:function(){
+							var d=new doh.Deferred();
+							submittedValues = function(values){
+								testSubmittedValues(d, original, values);
+								submittedValues = defaultSubmitHandler;
+							};
+							formWidget.containerNode.submit();
+							return d;
+						}
+					},
 					function setValues(){
-						var f=dijit.byId("myForm");
+						formWidget.attr('value', changed);
+						doh.is( dojo.toJson(changed), dojo.toJson(formWidget.attr('value')) );
 
-						f.attr('value', changed);
-						doh.is( dojo.toJson(changed), dojo.toJson(f.attr('value')) );
-
-						f.attr('value', particalchanged);
-						doh.is( dojo.toJson(dojo.mixin(changed,particalchanged)), dojo.toJson(f.attr('value')) );
+						formWidget.attr('value', particalchanged);
+						doh.is( dojo.toJson(dojo.mixin(changed,particalchanged)), dojo.toJson(formWidget.attr('value')) );
 					},
 					function nameAttributeSurvived(){  // ticket:4753
-						var radios = dojo.query(".RadioButton", dijit.byId("radio-cells")).forEach(
+						var radios = dojo.query("INPUT[type=radio]", "radio-cells").forEach(
 							function(r) {
-								doh.is( r.inputNode.name, "r2" );
+								doh.is( r.name, "r2" );
 							});
-						
+					},
+					{
+					        name:"postSubmit",
+					        timeout:10000,
+					        runTest:function(){
+							var d=new doh.Deferred();
+							submittedValues = function(values){
+								testSubmittedValues(d, dojo.mixin(changed,particalchanged), values);
+								submittedValues = defaultSubmitHandler;
+							};
+							formWidget.containerNode.submit();
+							return d;
+						}
 					},
 					function resetTest(){
-								dijit.byId("myForm").reset();
-						doh.is( dojo.toJson(reset), dojo.toJson(dijit.byId("myForm").attr('value')) );
+						formWidget.reset();
+						doh.is( dojo.toJson(reset), dojo.toJson(formWidget.attr('value')) );
 					},
 					function testValidate(){
-						doh.is(dijit.byId("myForm").validate(), true);
+						doh.is(formWidget.validate(), true);
 					}
 				]
 			);
@@ -185,7 +224,7 @@
 			http://www.utexas.edu/teamweb/cgi-bin/generic.cgi 
 		http://www.tipjar.com/cgi-bin/test -->
 	<form dojoType="dijit.form.Form" id="myForm" 
-		encType="multipart/form-data" action="" method="">
+		encType="multipart/form-data" action="../formAction.html" method="" target="_formSubmitIframe">
 		<script type="dojo/method" event="onReset">
 			return confirm('Press OK to reset widget values');
 		</script>
@@ -200,9 +239,6 @@
 				return false;
 			}
 			return true;
-		</script>
-		<script type="dojo/method" event="onReset">
-			return confirm('reset Form?');
 		</script>
 		<p>Just HTML text</p>
 		<table style="border: 1px solid #9f9f9f;" cellspacing="10">
@@ -327,6 +363,7 @@
 				<input dojoType="dijit.form.RadioButton" type="radio" name="r2" value="2" checked="checked" /> 2
 				<input dojoType="dijit.form.RadioButton" type="radio" name="r2" value="3"/> 3
 				<input dojoType="dijit.form.RadioButton" type="radio" name="r2" value="4" /> 4
+				<input type="button" onclick="dojo.query('INPUT[type=radio]','radio-cells').forEach(function(n){dijit.getEnclosingWidget(n).attr('checked',false);});return true;" value="Unset all radio buttons"/>
 				</td>
 				</tr>
 
@@ -417,9 +454,12 @@ simple line 2</textarea>
 		<button dojoType="dijit.form.Button" onClick="getValues();">Get Values from form!</button>
 		<button dojoType="dijit.form.Button" onClick="setValues();">Set Values to form!</button>
 		<button dojoType="dijit.form.Button" onClick="validate();">Validate form!</button>
-		<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Submit</button>
+		<button dojoType="dijit.form.Button" type="submit" value="Submit">Submit</button>
 		<button dojoType="dijit.form.Button" type="reset">Reset</button>
 	</form>
+<button dojoType="dijit.form.Button" type="button" 
+onclick="dijit.byId('myForm').submit()">Submit programmatically</button>
 
+<iframe name="_formSubmitIframe" src="about:blank" onload="if(this.values)submittedValues(this.values)" style="display:none;"></iframe>
 </body>
 </html>

@@ -22,14 +22,14 @@
 				}
 			</style>
 	    <script type="text/javascript">
-					dojo.require("dojox.dtl._HtmlTemplated");
+					dojo.require("dojox.dtl._DomTemplated");
 					dojo.require("dojox.dtl.tag.logic");
 					dojo.require("dojox.dtl.tag.loop");
 					dojo.require("dojox.dtl.filter.lists");
 
-					dojo.declare("demo.Table", [dijit._Widget, dojox.dtl._HtmlTemplated], {
+					dojo.declare("demo.Table", [dijit._Widget, dojox.dtl._DomTemplated], {
 						pos: 0,
-						postCreate: function(){
+						postMixInProperties: function(){
 							this.ths = dojo.query("th", this.domNode).map(function(item){
 								return item.innerHTML;
 							});
@@ -38,9 +38,10 @@
 									return item.innerHTML;
 								});
 							});
-							console.time("render1");
-							this.render();
-							console.timeEnd("render1");
+						},
+						postCreate: function(){
+							//unset display to show it (this is copied from the original node)
+							this.domNode.style.display="";
 						},
 						sortColumn: function(e){
 							this.pos = dojo.indexOf(this.ths, e.target.innerHTML);

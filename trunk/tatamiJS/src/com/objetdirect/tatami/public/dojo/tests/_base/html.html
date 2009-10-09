@@ -179,33 +179,33 @@
 						function testClassFunctions(t){
 							var node = dojo.byId("sq100");
 							dojo.addClass(node, "a");
-							doh.is("a", node.className);
+							doh.is("a", node.className, "class is a");
 							dojo.removeClass(node, "c");
-							doh.is("a", node.className);
-							t.assertTrue(dojo.hasClass(node, "a"));
-							t.assertFalse(dojo.hasClass(node, "b"));
+							doh.is("a", node.className, "class is still a");
+							t.assertTrue(dojo.hasClass(node, "a"), "class is a, test for a");
+							t.assertFalse(dojo.hasClass(node, "b"), "class is a, test for b");
 							dojo.addClass(node, "b");
-							doh.is("a b", node.className);
-							t.assertTrue(dojo.hasClass(node, "a"));
-							t.assertTrue(dojo.hasClass(node, "b"));
+							doh.is("a b", node.className, "class is a b");
+							t.assertTrue(dojo.hasClass(node, "a"), "class is a b, test for a");
+							t.assertTrue(dojo.hasClass(node, "b"), "class is a b, test for b");
 							dojo.removeClass(node, "a");
-							doh.is("b", node.className);
-							t.assertFalse(dojo.hasClass(node, "a"));
-							t.assertTrue(dojo.hasClass(node, "b"));
+							doh.is("b", node.className, "class is b");
+							t.assertFalse(dojo.hasClass(node, "a"), "class is b, test for a");
+							t.assertTrue(dojo.hasClass(node, "b"), "class is b, test for b");
 							dojo.toggleClass(node, "a");
-							doh.is("b a", node.className);
-							t.assertTrue(dojo.hasClass(node, "a"));
-							t.assertTrue(dojo.hasClass(node, "b"));
+							doh.is("b a", node.className, "class is b a");
+							t.assertTrue(dojo.hasClass(node, "a"), "class is b a, test for a");
+							t.assertTrue(dojo.hasClass(node, "b"), "class is b a, test for b");
 							dojo.toggleClass(node, "a");
-							doh.is("b", node.className);
-							t.assertFalse(dojo.hasClass(node, "a"));
-							t.assertTrue(dojo.hasClass(node, "b"));
+							doh.is("b", node.className, "class is b (again)");
+							t.assertFalse(dojo.hasClass(node, "a"), "class is b (again), test for a");
+							t.assertTrue(dojo.hasClass(node, "b"), "class is b (again), test for b");
 							dojo.toggleClass(node, "b");
-							doh.is("", node.className);
-							t.assertFalse(dojo.hasClass(node, "a"));
-							t.assertFalse(dojo.hasClass(node, "b"));
+							doh.is("", node.className, "class is blank");
+							t.assertFalse(dojo.hasClass(node, "a"), "class is blank, test for a");
+							t.assertFalse(dojo.hasClass(node, "b"), "class is blank, test for b");
 							dojo.removeClass(node, "c");
-							t.assertTrue(!node.className);
+							t.assertTrue(!node.className, "no class");
 						},
 						function getTypeInput(t){
 							doh.f(dojo.hasAttr(dojo.byId("input-no-type"), "type"));
@@ -296,6 +296,14 @@
 							dojo.removeAttr(input, "tabindex");
 							doh.is(null, dojo.attr(input, "tabindex"));
 						},
+						function setReadonlyInput(t){
+							var input = document.createElement("input");
+							doh.f(dojo.attr(input, "readonly"));
+							dojo.attr(input, "readonly", true);
+							doh.is(true, dojo.attr(input, "readonly"));
+							dojo.attr(input, "readonly", false);
+							doh.is(false, dojo.attr(input, "readonly"));
+						},
 						function attr_map(t){
 							var input = document.createElement("input");
 							var ctr= 0;
@@ -308,19 +316,19 @@
 								}
 							});
 							dojo.body().appendChild(input);
-							doh.is(1, dojo.attr(input, "tabindex"));
-							doh.is("text", dojo.attr(input, "type"));
-							doh.is(0, ctr);
-							doh.t(dojo.hasClass(input, "thinger"));
-							doh.t(dojo.hasClass(input, "blah"));
+							doh.is(1, dojo.attr(input, "tabindex"), "tabindex");
+							doh.is("text", dojo.attr(input, "type"), "type");
+							doh.is(0, ctr, "onfocus ctr == 0");
+							doh.t(dojo.hasClass(input, "thinger"), "hasClass of thinger");
+							doh.t(dojo.hasClass(input, "blah"), "hasClass of blah");
 							var def = new doh.Deferred();
 							input.focus();
 							setTimeout(function(){
-								doh.is(1, ctr);
+								doh.is(1, ctr, "onfocus ctr == 1");
 								input.blur();
 								input.focus();
 								setTimeout(function(){
-									doh.is(2, ctr);
+									doh.is(2, ctr, "onfocus ctr == 2");
 									def.callback(true);
 								}, 10);
 							}, 10);
@@ -366,11 +374,12 @@
 								innerHTML: "howdy!"
 							});
 							doh.is("howdy!", node.innerHTML);
-							dojo.attr(node, {
-								innerHTML: "<span>howdy!</span>"
-							});
+							doh.is("howdy!", dojo.attr(node, "innerHTML"));
+							dojo.attr(node, "innerHTML", "<span>howdy!</span>");
 							doh.is(1, node.firstChild.nodeType);
 							doh.is("span", node.firstChild.nodeName.toLowerCase());
+							doh.is("<span>howdy!</span>", node.innerHTML.toLowerCase());
+							doh.is("<span>howdy!</span>", dojo.attr(node, "innerHTML").toLowerCase());
 						},
 						function testLabelForAttr(t){
 							// create label with no for attribute make sure requesting
@@ -402,6 +411,21 @@
 							// when markup include for attrib make sure can retrieve using for or htmlFor
 							doh.is("input-with-label", dojo.attr(labelWithFor, "for"));
 							doh.is("input-with-label", dojo.attr(labelWithFor, "htmlFor"));						
+						},
+						function attrInnerHtmlDiv(t){
+							var n = dojo.create("div", {
+									innerHTML: "1<em>2</em>3"
+								}, dojo.body());
+							doh.is("1<em>2</em>3", n.innerHTML.toLowerCase());
+							dojo.destroy(n);
+						},
+						function attrInnerHtmlTable(t){
+							var n = dojo.create("table", {
+									innerHTML: "<thead><tr><th>1st!</th></tr></thead><tbody></tbody>"
+								}, dojo.body());
+							doh.is("<thead><tr><th>1st!</th></tr></thead><tbody></tbody>",
+								n.innerHTML.toLowerCase().replace(/\s+/g, ""));
+							dojo.destroy(n);
 						}
 					]
 				);

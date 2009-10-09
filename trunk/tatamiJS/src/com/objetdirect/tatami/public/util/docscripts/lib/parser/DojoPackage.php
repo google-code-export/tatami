@@ -20,6 +20,19 @@ class DojoPackage
     $this->dojo = $dojo;
     $this->setFile($file);
   }
+
+  public function destroy() {
+    array_walk($this->declarations, 'destroy_all');
+    unset($this->declarations);
+    array_walk($this->executions, 'destroy_all');
+    unset($this->executions);
+    array_walk($this->calls, 'destroy_all');
+    unset($this->calls);
+    array_walk($this->objects, 'destroy_all');
+    unset($this->objects);
+    array_walk($this->aliases, 'destroy_all');
+    unset($this->aliases);
+  }
   
   public function getFile(){
     return $this->file;
@@ -69,7 +82,7 @@ class DojoPackage
         continue;
       }
 
-      if (preg_match('%(?:([a-zA-Z_.$][\w.$]*)\s*=\s*)?(?:new\s*)?\(\s*function\s*\(\s*\)\s*{%', $line, $match)) {
+      if (preg_match('%(?:([a-zA-Z_.$][\w.$]*)\s*=\s*)?(?:new\s*)?\(\s*function\s*\([^)]*\)\s*{%', $line, $match)) {
         $execution = new DojoExecutedFunction($this);
         $execution->setAnonymous(true);
         if ($match[1]) {
@@ -79,6 +92,7 @@ class DojoPackage
         $end = $execution->build();
         if ($end) {
           $last_line = $end[0];
+          $callee = $lines[$end[0]];
           $this->executions[] = $execution;
         }
       }
@@ -96,7 +110,7 @@ class DojoPackage
     if ($this->calls[$name]) {
       return $this->calls[$name];
     }
-    
+
     $this->calls[$name] = array();
     $lines = $this->getCode();
     $lines = preg_grep('%\b' . preg_quote($name) . '\s*\(%', $lines);
@@ -140,6 +154,7 @@ class DojoPackage
         }
       }
     }
+    
     return $lines;
   }
   
@@ -452,8 +467,22 @@ class DojoPackage
   public function getPackageName(){
     $name = '';
 
-    if(file_exists('modules/' . $this->dojo->namespace . '.module')){
-      include_once('modules/' . $this->dojo->namespace . '.module');
+    if (!function_exists($this->dojo->namespace . '_package_name')) {
+      if (file_exists('modules/' . $this->dojo->namespace . '.module')){
+        include_once('modules/' . $this->dojo->namespace . '.module');
+      }
+      else {
+        $parts = explode('/', $this->file);
+        $file_parts = explode('.', array_pop($parts));
+        if (in_array('tests', $parts)) return;
+        array_pop($file_parts);
+        array_push($parts, implode('.', $file_parts));
+        array_unshift($parts, $this->dojo->namespace);
+        $name = implode('.', $parts);
+      }
+    }
+
+    if (function_exists($this->dojo->namespace . '_package_name')) {
       $name = call_user_func($this->dojo->namespace . '_package_name', $this->dojo->namespace, $this->file);
     }
 
@@ -464,8 +493,16 @@ class DojoPackage
   public function getResourceName(){
     $name = '';
 
-    if(file_exists('modules/' . $this->dojo->namespace . '.module')){
-      include_once('modules/' . $this->dojo->namespace . '.module');
+    if (!function_exists($this->dojo->namespace . '_resource_name')) {
+      if (file_exists('modules/' . $this->dojo->namespace . '.module')) {
+        include_once('modules/' . $this->dojo->namespace . '.module');
+      }
+      else {
+        $name = $this->file;
+      }
+    }
+
+    if (function_exists($this->dojo->namespace . '_resource_name')) {
       $name = call_user_func($this->dojo->namespace . '_resource_name', $this->dojo->namespace, $this->file);
     }
 

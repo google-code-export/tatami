@@ -33,7 +33,7 @@ dojox.json.tests.testData= {
 			{ 
 				"category":"fiction",
 				"author":"J. R. R. Tolkien",
-				"title":"The Lord of the Rings",
+				"title":"The Lord of the\nRings",
 				"isbn":"0-395-19395-8",
 				"price":22.99
 			}
@@ -71,7 +71,7 @@ doh.register("dojox.json.tests.query",
 			name: "$.store.*",
 			runTest: function(t) {
 				var result = dojo.toJson(dojox.json.query(this.name,dojox.json.tests.testData));
-				var success = '[[{"category":"reference","author":"Nigel Rees","title":"Sayings of the Century","price":8.95},{"category":"fiction","author":"Evelyn Waugh","title":"Sword of Honour","price":12.99},{"category":"fiction","author":"Herman Melville","title":"Moby Dick","isbn":"0-553-21311-3","price":8.99},{"category":"fiction","author":"J. R. R. Tolkien","title":"The Lord of the Rings","isbn":"0-395-19395-8","price":22.99}],{"color":"red","price":19.95}]';
+				var success = '[[{"category":"reference","author":"Nigel Rees","title":"Sayings of the Century","price":8.95},{"category":"fiction","author":"Evelyn Waugh","title":"Sword of Honour","price":12.99},{"category":"fiction","author":"Herman Melville","title":"Moby Dick","isbn":"0-553-21311-3","price":8.99},{"category":"fiction","author":"J. R. R. Tolkien","title":"The Lord of the\\nRings","isbn":"0-395-19395-8","price":22.99}],{"color":"red","price":19.95}]';
 				doh.assertEqual(success,result);
 			}
 		},
@@ -87,7 +87,7 @@ doh.register("dojox.json.tests.query",
 			name: "$..book[0]?price=22.99",
 			runTest: function(t) {
 				var result = dojo.toJson(dojox.json.query(this.name,dojox.json.tests.testData));
-				var success =  '[{"category":"fiction","author":"J. R. R. Tolkien","title":"The Lord of the Rings","isbn":"0-395-19395-8","price":22.99}]';
+				var success =  '[{"category":"fiction","author":"J. R. R. Tolkien","title":"The Lord of the\\nRings","isbn":"0-395-19395-8","price":22.99}]';
 				doh.assertEqual(success,result);
 			}
 		},
@@ -95,7 +95,7 @@ doh.register("dojox.json.tests.query",
 			name: "$..book[0][-1:]",
 			runTest: function(t) {
 				var result = dojo.toJson(dojox.json.query(this.name,dojox.json.tests.testData));
-				var success =  '[{"category":"fiction","author":"J. R. R. Tolkien","title":"The Lord of the Rings","isbn":"0-395-19395-8","price":22.99}]';
+				var success =  '[{"category":"fiction","author":"J. R. R. Tolkien","title":"The Lord of the\\nRings","isbn":"0-395-19395-8","price":22.99}]';
 				doh.assertEqual(success,result);
 			}
 		},
@@ -116,10 +116,42 @@ doh.register("dojox.json.tests.query",
 			}
 		},
 		{
+			name: "$.store.book[=category][^?true]",
+			runTest: function(t) {
+				var result = dojo.toJson(dojox.json.query(this.name,dojox.json.tests.testData));
+				var success =  '["reference","fiction"]';
+				doh.assertEqual(success,result);
+			}
+		},
+		{
+			name: "$..[^?author~'herman melville']",
+			runTest: function(t) {
+				var result = dojo.toJson(dojox.json.query(this.name,[dojox.json.tests.testData,dojox.json.tests.testData]));
+				var success =  '[{"category":"fiction","author":"Herman Melville","title":"Moby Dick","isbn":"0-553-21311-3","price":8.99}]';
+				doh.assertEqual(success,result);
+			}
+		},
+		{
+			name: "$..[^?author='Herman*']",
+			runTest: function(t) {
+				var result = dojo.toJson(dojox.json.query(this.name,[dojox.json.tests.testData,dojox.json.tests.testData]));
+				var success =  '[{"category":"fiction","author":"Herman Melville","title":"Moby Dick","isbn":"0-553-21311-3","price":8.99}]';
+				doh.assertEqual(success,result);
+			}
+		},
+		{
+			name: "$..[^?@['author']='Herman*']",
+			runTest: function(t) {
+				var result = dojo.toJson(dojox.json.query(this.name,[dojox.json.tests.testData,dojox.json.tests.testData]));
+				var success =  '[{"category":"fiction","author":"Herman Melville","title":"Moby Dick","isbn":"0-553-21311-3","price":8.99}]';
+				doh.assertEqual(success,result);
+			}
+		},
+		{
 			name: "$..book[0][?(@.isbn)]",
 			runTest: function(t) {
 				var result = dojo.toJson(dojox.json.query(this.name,dojox.json.tests.testData));
-				var success =  '[{"category":"fiction","author":"Herman Melville","title":"Moby Dick","isbn":"0-553-21311-3","price":8.99},{"category":"fiction","author":"J. R. R. Tolkien","title":"The Lord of the Rings","isbn":"0-395-19395-8","price":22.99}]';
+				var success =  '[{"category":"fiction","author":"Herman Melville","title":"Moby Dick","isbn":"0-553-21311-3","price":8.99},{"category":"fiction","author":"J. R. R. Tolkien","title":"The Lord of the\\nRings","isbn":"0-395-19395-8","price":22.99}]';
 				doh.assertEqual(success,result);
 			}
 		},
@@ -167,7 +199,17 @@ doh.register("dojox.json.tests.query",
 			}
 		},
 		{
-			name: "$.store.book[/price][=price]",
+			name: "$.store..[?price<10]",
+			runTest: function(t) {
+				var query = dojox.json.query(this.name);
+				console.log("recursive object search",query.toString());
+				var result = dojo.toJson(query(dojox.json.tests.testData));
+				var success =  '[{"category":"reference","author":"Nigel Rees","title":"Sayings of the Century","price":8.95},{"category":"fiction","author":"Herman Melville","title":"Moby Dick","isbn":"0-553-21311-3","price":8.99}]';
+				doh.assertEqual(success,result);
+			}
+		},
+		{
+			name: "$.store.book[/category][/price][=price]",
 			runTest: function(t) {
 				var result = dojo.toJson(dojox.json.query(this.name,dojox.json.tests.testData));
 				var success =  '[8.95,8.99,12.99,22.99]';
@@ -186,7 +228,7 @@ doh.register("dojox.json.tests.query",
 			name: "$.store.book?title='*of the*'",
 			runTest: function(t) {
 				var result = dojo.toJson(dojox.json.query(this.name,dojox.json.tests.testData));
-				var success =  '[{"category":"reference","author":"Nigel Rees","title":"Sayings of the Century","price":8.95},{"category":"fiction","author":"J. R. R. Tolkien","title":"The Lord of the Rings","isbn":"0-395-19395-8","price":22.99}]';
+				var success =  '[{"category":"reference","author":"Nigel Rees","title":"Sayings of the Century","price":8.95},{"category":"fiction","author":"J. R. R. Tolkien","title":"The Lord of the\\nRings","isbn":"0-395-19395-8","price":22.99}]';
 				doh.assertEqual(success,result);
 			}
 		},

@@ -68,7 +68,10 @@
 					var w = dojo.marginBox(progressNode).w - 12; //slider width * 2
 					var p = time/dur;
 					var x = p*w
-					dojo.style(sliderNode, "left", x+"px");
+					if(x){
+						dojo.style(sliderNode, "left", x+"px");	
+					}
+					
 				}
 			};
 			
@@ -101,7 +104,6 @@
 			dojo.connect(w, "onLoad", function(){
 				volDim = dojo.coords(volumeNode);
 				var v = w.volume(); // returns 0 - 1
-				console.log("init vol:", volDim.w, v, volDim.w*v);
 				dojo.style(volsliderNode, "left", volDim.w*v+"px");
 			});
 			
@@ -125,6 +127,7 @@
 				endVolDrag();
 				endSeek();
 			});
+			console.log("init'd")
 		});
 		
 		
@@ -184,19 +187,18 @@
     <td style="text-align:right;"><input id="dur" type="text" /></td>
   </tr>
   <tr>
-   <tr>
     <td colspan="2">
         <div id="progress"><div id="slider"></div></div>
-        </td>
-     </tr>
-  	<td>
-        
+    </td>
+  </tr>
+  <tr>
+    <td>
         <button onclick="toggle();">Play/Pause</button>
         <button onclick="w.play('video/Grog.flv');">Play Grog</button>
         <button onclick="w.play('video/OldMan.flv');">Play Old Man</button>
     </td>
     <td style="text-align:right;">
-    <div id="volume"><div id="volslider"></div></div>
+        <div id="volume"><div id="volslider"></div></div>
     </td>
   </tr>
 </table>

@@ -34,16 +34,16 @@
 		        }
 		}
 		dojo.require("dojo.data.ItemFileReadStore");
+		dojo.require("dijit.tests._data.SlowStore");
 		dojo.require("dijit.dijit"); // optimize: load dijit layer
 		dojo.require(testWidget);
 		dojo.require("dojo.parser");	// scan page for widgets and instantiate them
 
-		function setVal1(val){
-			dojo.byId('value1').value=val;
-		}
 		function setVal2(val){
 			dojo.byId('value2').value=val;
-			console.debug("Value changed to ["+val+"] in second box (#1652)");
+			var w = dijit.byId('datatest');
+			var item = w.item;
+			console.debug("Value changed to ["+val+"] in second box (#1652): datastore item label = " + (item?w.store.getLabel(item):'no item'));
 		}
 		function setVal3(val){
 			dojo.byId('value3').value=val;
@@ -64,28 +64,28 @@
 		function init(){
 			var testClass = dojo.getObject(testWidget);
 			// substitute testWidget for each dojoType=$testWidget
-			dojo.query('[dojoType=$testWidget]').forEach(function(node){
+			dojo.query('[dojoType="$testWidget"]').forEach(function(node){
 				node.setAttribute('dojoType', testWidget);
 			});
 			// substitute value=$-id-val by locating <select id="id"><option value="val">val</option></select>
-			dojo.query('*[value|=$]').forEach(function(node){
+			dojo.query('*[value|="$"]').forEach(function(node){
 				var attrs = node.getAttribute('value').split("-");
 				var id = attrs[1];
 				var val = attrs[2];
 				if(testWidget == "dijit.form.ComboBox"){
-					val = dojo.query("> option[value="+val+"]", id)[0].innerHTML;
+					val = dojo.query("> option[value='"+val+"']", id)[0].innerHTML;
 				}
 				node.setAttribute('value', val);
 			});
 			dojo.parser.parse(dojo.body());
-			var store = new dojo.data.ItemFileReadStore({url: dojo.moduleUrl("dijit.tests._data", "states.json")});
+			store = new dojo.data.ItemFileReadStore({url: dojo.moduleUrl("dijit.tests._data", "states.json")});
 			combo = new testClass({
 				name:"prog",
 				autoComplete:false,
 				store: store,
 				searchAttr:"name"
 			}, dojo.byId("progCombo"));
-			var store2 = new dojo.data.ItemFileReadStore({url: dojo.moduleUrl("dijit.tests._data", "countries.json")});
+			store2 = new dojo.data.ItemFileReadStore({url: dojo.moduleUrl("dijit.tests._data", "countries.json")});
 			combo = new testClass({
 				name:"prog2",
 				autoComplete:false,
@@ -203,6 +203,8 @@
 
 		<div dojoType="dojo.data.ItemFileReadStore" jsId="stateStore"
 			url="../_data/states.json"></div>
+		<div dojoType="dijit.tests._data.SlowStore" jsId="slowStateStore"
+			url="../_data/states.json"></div>
 
 		<div dojoType="dojo.data.ItemFileReadStore" jsId="dijitStore"
 			url="../_data/dijits.json"></div>
@@ -220,6 +222,19 @@
 		>
 		<br>onChange:<input id="value2" disabled value="not fired yet!" autocomplete="off">
 		<hr>
+		<p>Artificially slowed-down data store, autoComplete=true:</p>
+		<label for="datatest">US State test slow</label>: 
+		<input dojoType="$testWidget"
+				value="$-setvaluetest-CA"
+				store="slowStateStore"
+				searchAttr="name"
+				name="stateSlow"
+				onChange="dojo.byId('ocSlow').value=arguments[0]"
+				id="slow"
+		>
+		<br>onChange:<input id="ocSlow" disabled value="not fired yet!" autocomplete="off">
+		<hr>
+
 		<label for="datatestDijit">Dijit List test #1</label> (150% font): 
 		<input dojoType="$testWidget"
 				value="dijit.Editor"
@@ -382,16 +397,16 @@
 		</select>
 		<hr>
 		<p>Japanese</p>
-		<p>Try typing &#x6771;、&#x897F;、&#x5317;、&#x5357;  (north, south, east west) and a few choices will pop up.</p>
+		<p>Try typing &#x6771;&#x533A; (East), &#x897F;&#x533A; (West), &#x5317;&#x533A; (North), &#x5357;&#x533A; (South) and a few choices will pop up.</p>
 		<label for="japanese">Japanese list:</label>
 		<select name="japanese" id="japanese" dojoType="$testWidget" style="width: 300px;" autoComplete="true">
-			<option value="nanboku">&#x5357;&#x5317;</option>
-			<option value="touzai">&#x6771;&#x897F;</option>
-			<option value="toukyou">&#x6771;&#x4EAC;</option>
-			<option value="higashiku">&#x6771;&#x533A;</option>
-			<option value="nishiku">&#x897F;&#x533A;</option>
-			<option value="minamiku">&#x5357;&#x533A;</option>
-			<option value="kitaku">&#x5317;&#x533A;</option>
+			<option value="nanboku">&#x5357;&#x5317; (Nanboku)</option>
+			<option value="touzai">&#x6771;&#x897F; (Touzai)</option>
+			<option value="toukyou">&#x6771;&#x4EAC; (Tokyo)</option>
+			<option value="higashiku">&#x6771;&#x533A; (East)</option>
+			<option value="nishiku">&#x897F;&#x533A; (West)</option>
+			<option value="minamiku">&#x5357;&#x533A; (South)</option>
+			<option value="kitaku">&#x5317;&#x533A; (North)</option>
 		</select>
 		<hr>
 		<p>Custom labelFunc (value in textbox should be lower case when onChange is called), autoComplete=true:</p>
@@ -410,7 +425,7 @@
 				invalidMessage="Invalid state name."
 		>
 		<hr>
-		<input type="button" value="Create one in a window" onclick="var win=window.open(window.location);"></input>
+		<input type="button" value="Create one in a window" onclick="var win=window.open(window.location);">
 		<input type="submit">
 		<script>
 			// so robot can get to it easily
