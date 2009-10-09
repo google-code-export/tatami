@@ -1,7 +1,6 @@
 package com.objetdirect.tatamix.client.widget;
 
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasHTML;
 
