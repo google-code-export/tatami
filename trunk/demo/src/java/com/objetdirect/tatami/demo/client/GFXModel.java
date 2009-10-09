@@ -56,7 +56,12 @@ public class GFXModel extends ModelImpl implements TatamiDemoEvent {
 		
 		Processor drawImage = new Processor() {
 			public void run(Event event) {
-				fire(new ModelEvent(DRAW_GRAPHIC_OBJECT,this,new ImageGfx(TatamiDemo.getIconURL("od-logo.jpg"), 105, 52)));
+				
+				ImageGfx image = new ImageGfx(TatamiDemo.getIconURL("od-logo.jpg"),105, 52);
+				VirtualGroup virtual = new VirtualGroup();
+				virtual.add(image);
+				
+				fire(new ModelEvent(DRAW_GRAPHIC_OBJECT,this,virtual));
 			}
 		};
 		

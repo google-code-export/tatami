@@ -33,6 +33,7 @@
 	<inherits name="com.objetdirect.tatami.Tatami_YUI"/>
 	<inherits name="com.objetdirect.tatami.theme.Tundra"/>
 	<inherits name="com.objetdirect.tatamix.Tatamix"/>
+   	<stylesheet src="tatamiDemo.css"/>
    	<!-- Specify the app entry point class.                   -->
 	<entry-point class="com.objetdirect.tatami.demo.client.TatamiDemo"/>
     
