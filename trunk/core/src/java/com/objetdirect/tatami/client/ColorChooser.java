@@ -197,7 +197,7 @@ public class ColorChooser extends AbstractDojoFocus implements HasValue<String> 
 		setColor(color);
 	}
 
-	@Override
+	
 	/**
 	 * Returns the selected color. 
 	 * @return the selected color. 
@@ -208,7 +208,7 @@ public class ColorChooser extends AbstractDojoFocus implements HasValue<String> 
 		return getColor();
 	}
 
-	@Override
+	
 	/**
 	 * Sets the color. 
 	 * @param color the color to set
@@ -218,7 +218,7 @@ public class ColorChooser extends AbstractDojoFocus implements HasValue<String> 
 		
 	}
 
-	@Override
+	
 	/**
 	 * sets the color.
 	 * @param color the color to set
@@ -229,7 +229,7 @@ public class ColorChooser extends AbstractDojoFocus implements HasValue<String> 
 		
 	}
 
-	@Override
+	
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
 		
 		return addHandler(handler, ValueChangeEvent.getType());

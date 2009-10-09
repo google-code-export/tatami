@@ -580,7 +580,7 @@ public class NumberSpinner extends AbstractDojoFocus implements HasValue<Number>
 		dojoWidget.intermediateChanges = intermediateChanges;
 	}-*/;
 
-	@Override
+	
 	public Number getValue() {
 	    if(this.dojoWidget != null){
 			this.value = dojoGetValue(dojoWidget);
@@ -588,7 +588,7 @@ public class NumberSpinner extends AbstractDojoFocus implements HasValue<Number>
 		return this.value;
 	}
 
-	@Override
+	
 	public void setValue(Number number) {
 		this.value = number.floatValue();
 		if(dojoWidget != null){
@@ -597,14 +597,14 @@ public class NumberSpinner extends AbstractDojoFocus implements HasValue<Number>
 		
 	}
 
-	@Override
+	
 	public void setValue(Number number, boolean fire) {
 	 setValue(number);
 	 notifyChange();
 		
 	}
 
-	@Override
+	
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Number> handler) {
 		
 		return addHandler(handler,ValueChangeEvent.getType());

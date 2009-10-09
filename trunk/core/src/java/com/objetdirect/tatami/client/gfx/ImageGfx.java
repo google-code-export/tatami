@@ -50,7 +50,7 @@ public class ImageGfx extends RectangularShape {
 	public ImageGfx(String url,double width, double height) {
 		super(width,height);
 		this.url = url;
-		
+		this.setFillColor(Color.WHITE);
 		
 	}
 	

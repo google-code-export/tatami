@@ -340,7 +340,7 @@ public class Button extends AbstractDojo  implements  HasText,HasClickHandlers, 
 		return getLabel();
 	}
 
-	@Override
+	
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return this.addDomHandler(handler, ClickEvent.getType());
 	}
