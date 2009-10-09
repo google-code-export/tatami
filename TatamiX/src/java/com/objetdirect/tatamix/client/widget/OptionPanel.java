@@ -5,18 +5,21 @@ import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowResizeListener;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.PopupListener;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.objetdirect.tatamix.client.widget.resources.OptionPanelString;
 
-public  class OptionPanel extends Form implements ClickListener, WindowResizeListener,PopupListener{
+public  class OptionPanel extends Form implements ClickHandler, ResizeHandler, CloseHandler<PopupPanel> {
 
 	public  static final boolean YES_OPTION = true;
 	public  static final boolean NO_OPTION = false;
@@ -39,6 +42,8 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 	
 	private OptionPanelString strings;
 	private int zIndex = 100;
+	
+	private HandlerRegistration resizeRegistration;
 	
 	private static DivElement mask = Document.get().createDivElement();
 	
@@ -75,7 +80,7 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 		label.setStylePrimaryName("label");
 		layout.add(label);
 		yesButton = new com.objetdirect.tatami.client.Button();
-		yesButton.addClickListener(this);
+		yesButton.addClickHandler(this);
 		setValidator(yesButton);
 		layout.add(yesButton);
 	
@@ -83,7 +88,7 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 		   default : {
 			   yesButton.setText(strings.yes());
 			   noButton = new com.objetdirect.tatami.client.Button();
-			   noButton.addClickListener(this);
+			   noButton.addClickHandler(this);
 			   noButton.setText(strings.no());
 			   layout.add(noButton);
 			   setCancel(noButton);
@@ -154,11 +159,11 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 	/**
 	 * set the value to return is the use click on the yes or no button
 	 */
-	public void onClick(Widget sender) {
-		if ( sender.equals(yesButton)) {
+	public void onClick(ClickEvent event) {
+		if ( event.getSource().equals(yesButton)) {
 			value = YES_OPTION;
 			
-		} else if ( sender.equals(noButton)) {
+		} else if ( event.getSource().equals(noButton)) {
 			value = NO_OPTION;
 		
 		} 
@@ -213,6 +218,13 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 	}
 	
 	
+	
+	protected void setResizeRegistration(HandlerRegistration hr) {
+		this.resizeRegistration = hr;
+		
+	}
+	
+	
 	/**
 	 * Displays the <code>OptionPanel</code> in a PopupPanel.
 	 * The popup is model, we use a mask to do it. 
@@ -242,13 +254,14 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 				
 
 
-				Window.addWindowResizeListener(panel);
+				HandlerRegistration hr = Window.addResizeHandler(panel);
+				panel.setResizeRegistration(hr);
 				
 			
 			}
 			
 		};
-		popup.addPopupListener(panel);
+		popup.addCloseHandler(panel);
 		
 		FormListener listener = new FormListener() {
 			public void onSubmit(Form form) {
@@ -283,7 +296,7 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 	 /**
      * Resizes the mask. Note the given argument are not used	
      */
-	public void onWindowResized(int arg0, int arg1) {
+	public void onResize(ResizeEvent event) {
     	Style style = mask.getStyle();
 		style.setPropertyPx("width",getMaxWidth());
 		style.setPropertyPx("height",getMaxHeight());
@@ -294,7 +307,7 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
 	 * Removes the mask when the dialog is closed.
 	 * 
 	 */
-	public void onPopupClosed(PopupPanel sender, boolean autoClosed) {
+	public void onClose(CloseEvent<PopupPanel> event) {
 		
         BodyElement body = Document.get().getBody();
         if ( body.isOrHasChild(mask)) {
@@ -302,7 +315,10 @@ public  class OptionPanel extends Form implements ClickListener, WindowResizeLis
         }
 		
 		//remove the window resize listener
-        Window.removeWindowResizeListener(this);
+        if ( resizeRegistration != null) {
+        	resizeRegistration.removeHandler();
+        }
+        
 	}
 	
 }//end of class

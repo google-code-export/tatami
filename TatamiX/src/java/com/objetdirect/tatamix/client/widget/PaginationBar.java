@@ -5,14 +5,13 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.ChangeListener;
-import com.google.gwt.user.client.ui.ChangeListenerCollection;
-import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusWidget;
@@ -33,10 +32,7 @@ import com.google.gwt.user.client.ui.Widget;
 	private int currentPage;
     private int size;
     private boolean enabled;
-    /**
-     * @deprecated
-     */
-    private ChangeListenerCollection changeListeners;
+  
     private String separator = ", ";
 
     //actions
@@ -170,28 +166,6 @@ import com.google.gwt.user.client.ui.Widget;
 	}
 
 
-	/**
-	 * Adds a change listener.
-	 * @param listener
-	 * @deprecated use {@link #addChangeHandler(ChangeHandler)} instead
-	 */
-	public void addChangelistener(ChangeListener listener) {
-		if ( changeListeners == null) {
-			changeListeners = new ChangeListenerCollection();
-		}
-		changeListeners.add(listener);
-	}
-
-    /**
-     * Removes the given change listener
-     * @param listener
-     * @deprecated
-     */
-	public void removeChangeListener(ChangeListener listener) {
-		if ( changeListeners != null) {
-			changeListeners.remove(listener);
-		}
-	}
 
 	/**
 	 * Returns the current page
@@ -214,9 +188,7 @@ import com.google.gwt.user.client.ui.Widget;
         		DomEvent.fireNativeEvent(event, this);
         	}
         	
-        	if ( enabled && changeListeners != null) {
-        	  changeListeners.fireChange(this);
-        	}
+        	
         }
 	}
 
@@ -326,11 +298,12 @@ import com.google.gwt.user.client.ui.Widget;
 
     	public Page(int number ) {
     		this.page = number;
-    		setElement(DOM.createAnchor());
-    		DOM.setElementProperty(getElement(), "href", "#");
-            DOM.setInnerText(getElement(),String.valueOf(page));
-            addClickListener(new ClickListener() {
-            	public void onClick(Widget sender) {
+    		setElement(Document.get().createAnchorElement());
+    		
+    		getElement().setAttribute("href", "#");
+    		getElement().setInnerText(String.valueOf(page));
+            addClickHandler(new ClickHandler() {
+            	public void onClick(ClickEvent event) {
             		setCurrentPage(page);
             	}
             });
@@ -347,15 +320,15 @@ import com.google.gwt.user.client.ui.Widget;
 
     private class Separator extends Widget {
     	public Separator() {
-    		setElement(DOM.createSpan());
-            DOM.setInnerText(getElement(),separator);
+    		setElement(Document.get().createSpanElement());
+            getElement().setInnerText(separator);
     	}
     }
 
     private class CurrentPage extends Widget {
     	public CurrentPage() {
-    		setElement(DOM.createElement("strong"));
-    		DOM.setInnerText(getElement(),String.valueOf(currentPage));
+    		setElement(Document.get().createElement("strong"));
+    		getElement().setInnerText(String.valueOf(currentPage));
     	}
     }
 
