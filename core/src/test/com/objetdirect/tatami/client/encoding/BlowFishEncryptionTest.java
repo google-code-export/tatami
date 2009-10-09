@@ -47,10 +47,11 @@ public class BlowFishEncryptionTest extends DefaultTatamiTest{
 	
 	public void testEncryptDecryptWithARandomWord(){
 		String key = "groum";
-		String randomString = "�@#�";
+		//String randomString = "�@#�";
+		String randomString ="blallzuetehg";
 		String ciphered = cipher.encrypt(BlowFishEncryption.Base64OutputType, randomString, key);
 		String deciphered = cipher.decrypt(BlowFishEncryption.Base64OutputType, ciphered, key);
-		assertTrue(randomString.equals(deciphered));
+		assertEquals(randomString,deciphered);
 		String ciphered2 = cipher.encrypt(BlowFishEncryption.HexOutputType, randomString, key);
 		String deciphered2 = cipher.decrypt(BlowFishEncryption.HexOutputType, ciphered2, key);
 		assertTrue(randomString.equals(deciphered2));
